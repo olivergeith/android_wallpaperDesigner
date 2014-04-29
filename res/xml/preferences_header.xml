@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<preference-headers
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header android:fragment="de.geithonline.wallpaperdesigner.BattPreferencesFragment"
+            android:icon="@drawable/icon"
+            android:title="@string/header_title_battery"
+            android:summary="@string/header_summary_battery" />
+
+
+    <header android:fragment="de.geithonline.wallpaperdesigner.AboutFragment"
+            android:icon="@drawable/about"
+            android:title="@string/header_about_options"
+            android:summary="@string/header_about_options_summary"
+            />
+    
+    
+</preference-headers>

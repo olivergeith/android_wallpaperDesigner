@@ -1,0 +1,8 @@
+[COLOR="blue"]2014-04-23 : V1.3[/COLOR]
+2014-04-23 : V1.3
+- brightness auf grayscaled background now configurable (Premium Version only)
+- change hue of logo- image
+- even more masks to shape the logo-image
+- option to have pointer only on non-transparent parts of the logo
+- many things I forgot
+

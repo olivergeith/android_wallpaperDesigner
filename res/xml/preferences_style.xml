@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:stylelistpreference="http://schemas.android.com/apk/res/de.geithonline.logolwp"
+    xmlns:imagelistpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences.imagelistpreference">
+ 
+    <PreferenceCategory 
+        android:title="@string/category_style"
+        android:summary="@string/category_style_summary">
+
+     
+    </PreferenceCategory>
+
+    <PreferenceCategory 
+        android:title="@string/category_logo_options"
+        android:summary="@string/category_logo_options_summary">
+        
+        
+        <CheckBoxPreference 
+            android:key="customLogo"
+            android:title="@string/customLogo"
+            android:defaultValue="false"
+            />
+
+        <Preference
+	        android:key="logoPicker"
+	        android:summary="@string/logoPicker_summary"
+	        android:title="@string/logoPicker"
+	        android:dependency="customLogo"
+	        />
+        
+        <de.geithonline.android.basics.preferences.SliderPreference
+    		android:key="logo_hue"
+		    android:title="@string/logo_hue"
+	        android:summary="@string/logo_hue_summary"
+		    android:defaultValue="0.5"
+		    android:dialogMessage="@string/logo_hue" />
+        
+        <de.geithonline.android.basics.preferences.SliderPreference
+    		android:key="logo_background_brightness"
+		    android:title="@string/logo_background_brightness"
+	        android:summary="@string/logo_background_brightness_summary"
+		    android:defaultValue="1.0"
+		    android:dialogMessage="@string/logo_background_brightness" />
+        
+        <ListPreference
+			android:key="maskList"
+            android:title="@string/maskList"
+			android:summary="@string/maskList_summary"
+			android:entries="@array/maskNames"
+			android:entryValues="@array/maskValues"
+		/>
+
+        
+        
+ 	    <Preference 
+		    android:key="howtoLogoLink"
+	        android:title="Howto use Logo"
+	        android:icon="@drawable/about"
+	        >
+	        <intent android:action="android.intent.action.VIEW"
+	            android:data="http://goo.gl/ZDMpmj" />
+	    </Preference>
+        
+        
+    </PreferenceCategory>
+    
+    
+    <PreferenceCategory 
+        android:title="@string/category_style_options"
+        android:summary="@string/category_style_options_summary">
+        
+        
+        <CheckBoxPreference 
+            android:key="show_zeiger"
+            android:title="@string/show_zeiger"
+            android:defaultValue="true"
+            />
+        
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:key="color_zeiger"
+            android:title="@string/color_zeiger" 
+            android:summary="@string/color_zeiger_summary"
+            android:defaultValue="@integer/COLOR_WHITE"
+		    android:dependency="show_zeiger"
+            />
+        
+        <CheckBoxPreference 
+            android:key="zeiger_srcin"
+            android:title="@string/zeiger_srcin"
+            android:summary="@string/zeiger_srcin_summary"
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+		    android:dependency="show_zeiger"
+            />
+        <de.geithonline.android.basics.preferences.SliderPreference
+    		android:key="zeiger_length"
+		    android:title="@string/zeiger_length"
+		    android:defaultValue="1.0"
+		    android:dialogMessage="@string/zeiger_length" 
+		    android:dependency="zeiger_srcin"
+		    />
+        
+        <CheckBoxPreference 
+            android:key="show_rand"
+            android:title="@string/show_rand"
+            android:defaultValue="true"
+            />
+
+        <CheckBoxPreference 
+            android:key="flip"
+            android:title="@string/flip"
+            android:summary="@string/flip_summary"
+            android:defaultValue="false"
+            />
+
+    </PreferenceCategory>
+        
+        
+</PreferenceScreen>
