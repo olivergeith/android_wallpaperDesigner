@@ -4,36 +4,6 @@
     <PreferenceCategory android:title="@string/app_name">
     
 	    <Preference 
-	        android:title="The LogoBatteryLWP on Google Play" 
-	        android:icon="@drawable/googleplay"
-	        >
-	        <intent android:action="android.intent.action.VIEW"
-	            android:data="https://play.google.com/store/apps/details?id=de.geithonline.logolwp" />
-	    </Preference>
-	    <Preference 
-	        android:title="The BatteryLWP on Google Play" 
-	        android:icon="@drawable/googleplay"
-	        >
-	        <intent android:action="android.intent.action.VIEW"
-	            android:data="https://play.google.com/store/apps/details?id=de.geithonline.systemlwp" />
-	    </Preference>
-	    <Preference 
-	        android:title="The LogoBatteryLWP on Google+" 
-	        android:icon="@drawable/googleplus"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://plus.google.com/u/0/communities/102647653092301648632" />
-        </Preference>
-	    	    
-	    <Preference 
-		    android:key="applink"
-	        android:title="The BatteryLWP on XDA"
-	        android:icon="@drawable/xda"
-	        >
-	        <intent android:action="android.intent.action.VIEW"
-	            android:data="http://forum.xda-developers.com/showthread.php?t=2682604" />
-	    </Preference>
-	    <Preference 
 	        android:title="The Rom Fumbler on XDA" 
 	        android:summary="My other Tool on XDA..."
 	        android:icon="@drawable/xda"
@@ -76,17 +46,13 @@
 		    android:key="debug"
     		android:defaultValue="false"
 		    android:title="Debugging" 
-		    android:summary="Enables Debugging within the LWP. This will cost lots of performance! Do not enable unless you know what you do!!!"
             />
 	    <CheckBoxPreference 
 		    android:key="debug2"
     		android:defaultValue="false"
 		    android:title="DebuggingMessages" 
-		    android:summary="Enables DebuggMessages"
             />
 	    
     </PreferenceCategory>
 
-    
-    
 </PreferenceScreen>

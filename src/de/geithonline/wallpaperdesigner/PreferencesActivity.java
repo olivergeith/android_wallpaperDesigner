@@ -24,7 +24,7 @@ public class PreferencesActivity extends PreferenceActivity {
 		Log.i("GEITH", "isValidFragment Called for " + fragmentName);
 
 		return AboutFragment.class.getName().equals(fragmentName) //
-				|| BattPreferencesFragment.class.getName().equals(fragmentName);
+				|| ColorPreferencesFragment.class.getName().equals(fragmentName);
 	}
 
 	@Override

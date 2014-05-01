@@ -4,4 +4,5 @@
     <color name="COLOR_BLACK_TRANSPARENT_170">#AA000000</color>
 	<color name="COLOR_BLACK_TRANSPARENT_192">#C0000000</color>
 	<color name="COLOR_BLACK_TRANSPARENT_128">#80000000</color>
+	<color name="COLOR_BLACK_NOTTRANSPARENT">#FF000000</color>
 </resources>
