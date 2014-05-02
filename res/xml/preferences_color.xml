@@ -22,7 +22,23 @@
 
     <PreferenceCategory 
         android:title="@string/category_overlays">
-    	
+
+        <CheckBoxPreference 
+            android:key="randomizeColor"
+            android:title="@string/randomizeColor"
+            android:defaultValue="false"
+            />
+        <ListPreference
+	        android:key="randomizeColorRange"
+	        android:title="@string/randomizeColorRange" 
+	        android:dialogTitle="randomizeColorRange"
+	        android:defaultValue="64"
+	        android:entries="@array/randColorRange"
+	        android:entryValues="@array/randColorRangeValues"
+	        android:dependency="randomizeColor"
+	        />
+        
+        	
     	<CheckBoxPreference 
             android:key="randomizeAlpha"
             android:title="@string/randomizeAlpha"
@@ -34,7 +50,21 @@
             android:title="@string/dropShadow"
             android:defaultValue="true"
             />
-    	
+    	<CheckBoxPreference 
+            android:key="randomizeDropShadowColor"
+            android:title="@string/randomizeDropShadowColor"
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+	        android:dependency="dropShadow"
+            />
+    		    
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="colorDropShadow"
+	        android:title="@string/colorDropShadow" 
+	        android:defaultValue="@integer/COLOR_BLACK"
+	        android:dependency="randomizeDropShadowColor"
+	        />
+    		
     
     </PreferenceCategory>
     	

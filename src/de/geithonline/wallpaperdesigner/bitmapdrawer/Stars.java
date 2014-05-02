@@ -29,7 +29,14 @@ public class Stars extends Drawer {
 		bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth, bHeight));
 
 		// initializing some values depending on BitmapSize
-		final int maxRadius = Math.round(bWidth * 0.04f);
+		int maxRadius = Math.round(bWidth * 0.04f);
+		if (maxRadius < 30) {
+			maxRadius = 30;
+		}
+		int dropShadowRadius = Math.round(bWidth * 0.01f);
+		if (dropShadowRadius < 10) {
+			dropShadowRadius = 10;
+		}
 
 		// Zeichnen
 		for (int i = 0; i < 1000; i++) {
@@ -38,7 +45,11 @@ public class Stars extends Drawer {
 			final int x = getRandomInt(0, bWidth - 1);
 			final int y = getRandomInt(0, bHeight - 1);
 			// davon die aktuelle Farbe
-			final int pcolor = bitmap.getPixel(x, y);
+			int pcolor = bitmap.getPixel(x, y);
+
+			if (Settings.isRandomizeColors()) {
+				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
+			}
 
 			final Paint paint = new Paint();
 			paint.setAntiAlias(true);
@@ -55,10 +66,14 @@ public class Stars extends Drawer {
 				paint.setStyle(Style.FILL);
 			}
 			if (Settings.isDropShadow()) {
-				final int sx = getRandomInt(0, bWidth - 1);
-				final int sy = getRandomInt(0, bHeight - 1);
-				final int scolor = bitmap.getPixel(sx, sy);
-				paint.setShadowLayer(15, 0, 0, scolor);
+				if (Settings.isRandomizeDropShadowColors()) {
+					final int sx = getRandomInt(0, bWidth - 1);
+					final int sy = getRandomInt(0, bHeight - 1);
+					final int scolor = bitmap.getPixel(sx, sy);
+					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
+				} else {
+					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
+				}
 			}
 			// bitmapCanvas.drawCircle(x, y, radius, paint);
 			final int radius = getRandomInt(maxRadius / 10, maxRadius);

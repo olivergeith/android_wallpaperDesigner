@@ -33,11 +33,15 @@
     <string name="generate">Generate</string>
     <string name="save">Save</string>
     <string name="randomizeAlpha">Randomize Alpha</string>
+    <string name="randomizeColor">Randomize Color</string>
+    <string name="randomizeDropShadowColor">Randomize DropShadowColor</string>
+    <string name="randomizeColorRange">Randomize Color Range</string>
     <string name="dropShadow">Drop Shadow</string>
     <string name="bWidth">Wallpaper Width</string>
     <string name="bHeight">Wallpaper Height</string>
     <string name="sizeSelection">Wallpaper Size</string>
     <string name="sizeSelection_summary">Choose a size</string>
+    <string name="colorDropShadow">DropShadowColor</string>
     
 
 </resources>

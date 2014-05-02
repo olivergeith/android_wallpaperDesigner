@@ -9,8 +9,6 @@
         <item >1024x768</item>
         <item >960x800</item>
         <item >640x480</item>
-        
-        
     </string-array>
     
     <string-array name="sizesValues">
@@ -24,5 +22,29 @@
         <item >640x480</item>
      </string-array>
 
+
+     <string-array name="randColorRange">
+        <item >32</item>
+        <item >64</item>
+        <item >96</item>
+        <item >128</item>
+        <item >160</item>
+        <item >192</item>
+        <item >224</item>
+        <item >255</item>
+    </string-array>
+    
+    <string-array name="randColorRangeValues">
+        <item >32</item>
+        <item >64</item>
+        <item >96</item>
+        <item >128</item>
+        <item >160</item>
+        <item >192</item>
+        <item >224</item>
+        <item >255</item>
+     </string-array>
+    
+    
     
 </resources>

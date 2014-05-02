@@ -25,11 +25,40 @@ public class Settings {
 		return prefs.getBoolean("dropShadow", true);
 	}
 
+	public static boolean isRandomizeDropShadowColors() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean("randomizeDropShadowColor", true);
+	}
+
+	public static int getDropShadowColor() {
+		if (prefs == null) {
+			return R.integer.COLOR_BLACK;
+		}
+		final int col = prefs.getInt("colorDropShadow", R.integer.COLOR_BLACK);
+		return col;
+	}
+
 	public static boolean isRandomizeAlpha() {
 		if (prefs == null) {
 			return true;
 		}
 		return prefs.getBoolean("randomizeAlpha", true);
+	}
+
+	public static boolean isRandomizeColors() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean("randomizeColor", false);
+	}
+
+	public static int getRandomizeColorRange() {
+		if (prefs == null) {
+			return 64;
+		}
+		return Integer.valueOf(prefs.getString("randomizeColorRange", "64"));
 	}
 
 	// ###################################################################
@@ -171,4 +200,5 @@ public class Settings {
 			prefs.edit().putInt("color2_plain_bgrnd", Color.YELLOW).commit();
 		}
 	}
+
 }

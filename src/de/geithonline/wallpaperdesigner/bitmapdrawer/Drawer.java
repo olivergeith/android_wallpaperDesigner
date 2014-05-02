@@ -21,19 +21,6 @@ public abstract class Drawer extends ColorProvider implements IDrawer {
 	@Override
 	public abstract Bitmap drawBitmap();
 
-	public static int getRandomInt(final int min, final int max) {
-		final int mRandom = min + (int) Math.ceil(Math.random() * (max - min));
-		return mRandom;
-	}
-
-	public static boolean getRandomBoolean() {
-		final int mRandom = (int) Math.round(Math.random() * 1);
-		if (mRandom == 1) {
-			return true;
-		}
-		return false;
-	}
-
 	@SuppressLint("SimpleDateFormat")
 	@Override
 	public void save(final Context context) {
