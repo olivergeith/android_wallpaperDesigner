@@ -13,6 +13,8 @@
     <string name="the_logo">The Logo</string>
     <string name="color">Color</string>
     
+    <string name="header_size">Wallpaper Size</string>
+    <string name="header_size_summary">Size of Wallpaper...</string>
     <string name="header_colors">Colors</string>
     <string name="header_colors_summary">Colors and stuff...</string>
     <string name="header_about_options">About</string>

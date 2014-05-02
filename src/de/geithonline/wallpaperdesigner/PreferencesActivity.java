@@ -16,7 +16,6 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 public class PreferencesActivity extends PreferenceActivity {
 
 	private BillingManager billingManager;
-	private static final int REQUEST = 999;
 	public static SharedPreferences prefs;
 
 	@Override
@@ -24,6 +23,7 @@ public class PreferencesActivity extends PreferenceActivity {
 		Log.i("GEITH", "isValidFragment Called for " + fragmentName);
 
 		return AboutFragment.class.getName().equals(fragmentName) //
+				|| SizePreferencesFragment.class.getName().equals(fragmentName) //
 				|| ColorPreferencesFragment.class.getName().equals(fragmentName);
 	}
 

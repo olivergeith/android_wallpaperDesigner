@@ -31,14 +31,15 @@ public class Stars extends Drawer {
 		// initializing some values depending on BitmapSize
 		final int maxRadius = Math.round(bWidth * 0.04f);
 
+		// Zeichnen
 		for (int i = 0; i < 1000; i++) {
+
+			// random koordinate an der gemalt werden soll
 			final int x = getRandomInt(0, bWidth - 1);
 			final int y = getRandomInt(0, bHeight - 1);
-			// Log.i("Geith", "x=" + x);
-			// Log.i("Geith", "y=" + y);
+			// davon die aktuelle Farbe
 			final int pcolor = bitmap.getPixel(x, y);
 
-			final int radius = getRandomInt(maxRadius / 10, maxRadius);
 			final Paint paint = new Paint();
 			paint.setAntiAlias(true);
 			paint.setColor(pcolor);
@@ -60,12 +61,12 @@ public class Stars extends Drawer {
 				paint.setShadowLayer(15, 0, 0, scolor);
 			}
 			// bitmapCanvas.drawCircle(x, y, radius, paint);
+			final int radius = getRandomInt(maxRadius / 10, maxRadius);
 			if (getRandomBoolean()) {
 				bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2), paint);
 			} else {
 				bitmapCanvas.drawPath(new StarPathInvert(5, new Point(x, y), radius, radius / 2), paint);
 			}
-
 		}
 
 		return bitmap;

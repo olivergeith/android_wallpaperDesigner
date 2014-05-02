@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+    <PreferenceCategory 
+        android:title="@string/category_size">
+
+        <ListPreference
+	        android:defaultValue="2560x1600"
+	        android:title="@string/sizeSelection" 
+            android:summary="@string/sizeSelection_summary" 
+	        android:dialogTitle="@string/sizeSelection"
+	        android:entries="@array/sizes"
+	        android:entryValues="@array/sizesValues"
+	        android:key="sizeSelection"
+	        />
+ 
+        <EditTextPreference
+		    android:key="bWidth"
+    		android:defaultValue="2560"
+		    android:title="@string/bWidth" 
+    		android:dialogTitle="@string/bWidth"
+		    android:inputType="number"
+         	/>
+        <EditTextPreference
+		    android:key="bHeight"
+    		android:defaultValue="1600"
+		    android:title="@string/bHeight" 
+    		android:dialogTitle="@string/bHeight"
+		    android:inputType="number"
+         	/>
+        
+        
+    </PreferenceCategory>
+    
+    	
+</PreferenceScreen>
