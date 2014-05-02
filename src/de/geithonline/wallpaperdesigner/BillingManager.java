@@ -11,12 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import de.geithonline.android.basics.utils.Toaster;
 import de.geithonline.vending.billinghelper.IabHelper;
 import de.geithonline.vending.billinghelper.IabResult;
 import de.geithonline.vending.billinghelper.Inventory;
 import de.geithonline.vending.billinghelper.Purchase;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 /**
  * @author geith

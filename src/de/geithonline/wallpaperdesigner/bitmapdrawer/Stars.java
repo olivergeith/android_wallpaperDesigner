@@ -3,27 +3,28 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.Rect;
-import de.geithonline.android.basics.grafics.shapes.StarPath;
-import de.geithonline.android.basics.grafics.shapes.StarPathInvert;
+import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.StarPath;
+import de.geithonline.wallpaperdesigner.shapes.StarPathInvert;
+import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 
 public class Stars extends Drawer {
 
 	protected int bWidth = 2560;
 	protected int bHeight = 1600;
+	private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	@Override
-	public Bitmap drawBitmap() {
+	public synchronized Bitmap drawBitmap() {
 		bWidth = Settings.getWidth();
 		bHeight = Settings.getHeight();
 		final Rect sizesRect = new Rect(0, 0, bWidth, bHeight);
 
-		if (bitmap != null) {
-			bitmap.recycle();
-		}
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
 		bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth, bHeight));
@@ -76,12 +77,48 @@ public class Stars extends Drawer {
 					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
 				}
 			}
-			// bitmapCanvas.drawCircle(x, y, radius, paint);
 			final int radius = getRandomInt(maxRadius / 10, maxRadius);
-			if (getRandomBoolean()) {
-				bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2), paint);
-			} else {
-				bitmapCanvas.drawPath(new StarPathInvert(5, new Point(x, y), radius, radius / 2), paint);
+			switch (Settings.getSelectedDrawer()) {
+			default:
+				// case "Text":
+				// paint.setTextSize(radius * 4);
+				// paint.setTextAlign(Align.CENTER);
+				// bitmapCanvas.drawText("Emmylou", x, y, paint);
+				// break;
+			case "Letters":
+				final int letterindex = getRandomInt(0, letters.length() - 1);
+				final char c = letters.charAt(letterindex);
+				if (getRandomBoolean()) {
+					paint.setTypeface(Typeface.DEFAULT_BOLD);
+				} else {
+					paint.setTypeface(Typeface.DEFAULT);
+				}
+
+				paint.setTextSize(radius * 3);
+				paint.setTextAlign(Align.CENTER);
+				bitmapCanvas.drawText("" + c, x, y, paint);
+				break;
+			case "5-Stars":
+				if (getRandomBoolean()) {
+					bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2), paint);
+				} else {
+					bitmapCanvas.drawPath(new StarPathInvert(5, new Point(x, y), radius, radius / 2), paint);
+				}
+				break;
+			case "Stars":
+				final int zacken = getRandomInt(5, 10);
+				if (getRandomBoolean()) {
+					bitmapCanvas.drawPath(new StarPath(zacken, new Point(x, y), radius, radius / 2), paint);
+				} else {
+					bitmapCanvas.drawPath(new StarPathInvert(zacken, new Point(x, y), radius, radius / 2), paint);
+				}
+				break;
+			case "XEck":
+				bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius), paint);
+				break;
+			case "Bubbles":
+				bitmapCanvas.drawCircle(x, y, radius, paint);
+				break;
 			}
 		}
 

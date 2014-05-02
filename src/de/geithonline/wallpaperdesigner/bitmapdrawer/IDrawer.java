@@ -9,4 +9,6 @@ public interface IDrawer {
 
 	public void save(Context context);
 
+	public void recycleBitmap();
+
 }

@@ -7,22 +7,41 @@
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
 	        android:key="color_plain_bgrnd"
 	        android:title="@string/color" 
-	        android:summary="Use plain color instad of Image"
+	        android:summary="1. Color"
 	        android:defaultValue="@integer/COLOR_RED"
 	        />
 	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
 	        android:key="color2_plain_bgrnd"
 	        android:title="@string/color" 
-	        android:summary="Second Color for gradient Background"
+	        android:summary="2. Color"
 	        android:defaultValue="@integer/COLOR_ORANGE"
 	        />
         
+        <ListPreference
+	        android:key="gradientDirection"
+	        android:title="@string/gradientDirection" 
+	        android:dialogTitle="@string/gradientDirection"
+	        android:defaultValue="Stars"
+	        android:entries="@array/directions"
+	        android:entryValues="@array/directionsValues"
+	        />
         
+	    
     </PreferenceCategory>
 
     <PreferenceCategory 
         android:title="@string/category_overlays">
 
+        <ListPreference
+	        android:key="drawerPicker"
+	        android:title="@string/drawerPicker" 
+	        android:dialogTitle="@string/drawerPicker"
+	        android:defaultValue="Stars"
+	        android:entries="@array/drawer"
+	        android:entryValues="@array/drawerValues"
+	        />
+        
+        
         <CheckBoxPreference 
             android:key="randomizeColor"
             android:title="@string/randomizeColor"
@@ -31,7 +50,7 @@
         <ListPreference
 	        android:key="randomizeColorRange"
 	        android:title="@string/randomizeColorRange" 
-	        android:dialogTitle="randomizeColorRange"
+	        android:dialogTitle="@string/randomizeColorRange"
 	        android:defaultValue="64"
 	        android:entries="@array/randColorRange"
 	        android:entryValues="@array/randColorRangeValues"

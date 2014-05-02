@@ -12,8 +12,8 @@ import android.graphics.Paint.Align;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.util.Log;
-import de.geithonline.android.basics.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
 public abstract class Drawer extends ColorProvider implements IDrawer {
 
@@ -25,7 +25,7 @@ public abstract class Drawer extends ColorProvider implements IDrawer {
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
-	public void save(final Context context) {
+	public synchronized void save(final Context context) {
 		final Date date = new Date();
 		final SimpleDateFormat dt = new SimpleDateFormat("yyyymmdd_hhmmss");
 		final String timeStamp = dt.format(date);
@@ -36,6 +36,13 @@ public abstract class Drawer extends ColorProvider implements IDrawer {
 				Log.i("FILESAVE", "Scanned " + path);
 			}
 		});
+	}
+
+	@Override
+	public void recycleBitmap() {
+		if (bitmap != null) {
+			bitmap.recycle();
+		}
 	}
 
 	protected void drawNonPremiumText(final Canvas canvas, final int fontSize) {

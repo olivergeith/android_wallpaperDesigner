@@ -42,6 +42,8 @@
     <string name="sizeSelection">Wallpaper Size</string>
     <string name="sizeSelection_summary">Choose a size</string>
     <string name="colorDropShadow">DropShadowColor</string>
+    <string name="drawerPicker">Pattern</string>
+    <string name="gradientDirection">Direction of Color Gradient</string>
     
 
 </resources>

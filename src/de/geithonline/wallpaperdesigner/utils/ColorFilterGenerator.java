@@ -1,4 +1,4 @@
-package de.geithonline.android.basics.utils;
+package de.geithonline.wallpaperdesigner.utils;
 
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;

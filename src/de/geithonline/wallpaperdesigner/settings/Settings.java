@@ -18,6 +18,13 @@ public class Settings {
 	// ###################################################################
 	// Options
 
+	public static String getSelectedDrawer() {
+		if (prefs == null) {
+			return "Stars";
+		}
+		return prefs.getString("drawerPicker", "Stars");
+	}
+
 	public static boolean isDropShadow() {
 		if (prefs == null) {
 			return true;
@@ -132,6 +139,12 @@ public class Settings {
 
 	// ###################################################################
 	// Background Color
+	public static String getGradientDirection() {
+		if (prefs == null) {
+			return "top-bottom";
+		}
+		return prefs.getString("gradientDirection", "top-bottom");
+	}
 
 	private static int getBackgroundColor1() {
 		if (prefs == null) {
@@ -152,7 +165,28 @@ public class Settings {
 	public static Paint getBackgroundPaint(final int width, final int height) {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
-		paint.setShader(new LinearGradient(0, 0, 0, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
+
+		switch (getGradientDirection()) {
+		default:
+		case "top-bottom":
+			paint.setShader(new LinearGradient(0, 0, 0, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
+			break;
+		case "left-right":
+			paint.setShader(new LinearGradient(0, 0, width, 0, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
+			break;
+		case "topleft-bottomright":
+			paint.setShader(new LinearGradient(0, 0, width, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
+			break;
+		case "topright-bottomleft":
+			paint.setShader(new LinearGradient(width, 0, 0, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
+			break;
+		}
+
+		// final LinearGradient lg = new LinearGradient(0, 0, width, 0, //
+		// new int[] { getBackgroundColor1(), Color.GREEN, getBackgroundColor2()
+		// }, //
+		// new float[] { 0, 0.5f, 1 }, Shader.TileMode.REPEAT);
+		// paint.setShader(lg);
 		return paint;
 	}
 

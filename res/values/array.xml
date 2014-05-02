@@ -24,6 +24,9 @@
 
 
      <string-array name="randColorRange">
+        <item >8</item>
+        <item >16</item>
+        <item >24</item>
         <item >32</item>
         <item >64</item>
         <item >96</item>
@@ -35,6 +38,9 @@
     </string-array>
     
     <string-array name="randColorRangeValues">
+        <item >8</item>
+        <item >16</item>
+        <item >24</item>
         <item >32</item>
         <item >64</item>
         <item >96</item>
@@ -44,6 +50,38 @@
         <item >224</item>
         <item >255</item>
      </string-array>
+    
+
+    <string-array name="drawer">
+        <item >5-Stars</item>
+        <item >Stars</item>
+        <item >Bubbles</item>
+        <item >XEck</item>
+        <item >Letters</item>
+        </string-array>
+    
+    <string-array name="drawerValues">
+        <item >5-Stars</item>
+        <item >Stars</item>
+        <item >Bubbles</item>
+        <item >XEck</item>
+        <item >Letters</item>
+        </string-array>
+    
+    <string-array name="directions">
+        <item >top-bottom</item>
+        <item >left-right</item>
+        <item >topleft-bottomright</item>
+        <item >topright-bottomleft</item>
+        </string-array>
+    
+    <string-array name="directionsValues">
+        <item >top-bottom</item>
+        <item >left-right</item>
+        <item >topleft-bottomright</item>
+        <item >topright-bottomleft</item>
+        </string-array>
+    
     
     
     

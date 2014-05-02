@@ -3,7 +3,8 @@
  
     <PreferenceCategory android:title="@string/app_name">
     
-	    <Preference 
+<!-- 
+        <Preference 
 	        android:title="The Rom Fumbler on XDA" 
 	        android:summary="My other Tool on XDA..."
 	        android:icon="@drawable/xda"
@@ -19,7 +20,7 @@
             <intent android:action="android.intent.action.VIEW"
                 android:data="https://plus.google.com/u/0/communities/102052013997299900088" />
         </Preference>
-	    
+	  -->   
 	    <Preference 
 	        android:title="Visit me on Twitter" 
 	        android:icon="@drawable/twitter"

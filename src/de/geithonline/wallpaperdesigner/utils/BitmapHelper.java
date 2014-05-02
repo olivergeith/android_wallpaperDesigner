@@ -1,4 +1,4 @@
-package de.geithonline.android.basics.utils;
+package de.geithonline.wallpaperdesigner.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

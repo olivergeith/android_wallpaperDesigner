@@ -1,16 +1,16 @@
-package de.geithonline.android.basics.grafics.shapes;
+package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
 
-public class StarPathInvert extends Path {
+public class XEckPath extends Path {
 
-	public StarPathInvert(final int arms, final Point center, final float rOuter, final float rInner) {
+	public XEckPath(final int ecken, final Point center, final float rOuter) {
 		super();
-		final float angle = (float) (Math.PI / arms);
+		final float angle = (float) (Math.PI / ecken) * 2;
 
-		for (int i = 0; i <= 2 * arms; i++) {
-			final float r = (i & 1) == 0 ? rInner : rOuter;
+		for (int i = 0; i <= ecken; i++) {
+			final float r = rOuter;
 			// final float r = rInner;
 
 			final Point p = new Point();
