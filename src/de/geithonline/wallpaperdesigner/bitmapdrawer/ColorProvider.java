@@ -1,6 +1,9 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.graphics.Typeface;
 
 public class ColorProvider {
 
@@ -38,6 +41,23 @@ public class ColorProvider {
 			col = 255;
 		}
 		return col;
+	}
+
+	public Paint getTextPaint(final int fontSize, final Align align, final boolean bold) {
+		final Paint paint = new Paint();
+		paint.setAntiAlias(true);
+		paint.setColor(Color.BLACK);
+		paint.setAlpha(255);
+		paint.setAntiAlias(true);
+		paint.setTextSize(fontSize);
+		paint.setFakeBoldText(true);
+		if (bold) {
+			paint.setTypeface(Typeface.DEFAULT_BOLD);
+		} else {
+			paint.setTypeface(Typeface.DEFAULT);
+		}
+		paint.setTextAlign(align);
+		return paint;
 	}
 
 }

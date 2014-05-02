@@ -29,6 +29,7 @@ public class Stars extends Drawer {
 		bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth, bHeight));
 
 		// initializing some values depending on BitmapSize
+		final int fontSize = Math.round(bWidth * 0.02f);
 		int maxRadius = Math.round(bWidth * 0.04f);
 		if (maxRadius < 30) {
 			maxRadius = 30;
@@ -84,6 +85,7 @@ public class Stars extends Drawer {
 			}
 		}
 
+		drawNonPremiumText(bitmapCanvas, fontSize);
 		return bitmap;
 	}
 

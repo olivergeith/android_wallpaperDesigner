@@ -8,10 +8,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint.Align;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.util.Log;
 import de.geithonline.android.basics.utils.BitmapHelper;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public abstract class Drawer extends ColorProvider implements IDrawer {
 
@@ -34,6 +36,13 @@ public abstract class Drawer extends ColorProvider implements IDrawer {
 				Log.i("FILESAVE", "Scanned " + path);
 			}
 		});
+	}
+
+	protected void drawNonPremiumText(final Canvas canvas, final int fontSize) {
+		if (!Settings.isPremium()) {
+			canvas.drawText("Created with the Wallpaper Designer...go get the Premium Version to get rid of this Text :-)", 10, 3 + fontSize,
+					getTextPaint(fontSize, Align.LEFT, true));
+		}
 	}
 
 }
