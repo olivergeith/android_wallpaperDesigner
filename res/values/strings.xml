@@ -20,6 +20,7 @@
 
     <string name="category_background">Background</string>
     <string name="category_overlays">Overlays</string>
+    <string name="category_size">Wallpaper Size</string>
     
     <string name="enable_gradient_background">Enable Gradient Background</string>
     
@@ -31,6 +32,10 @@
     <string name="save">Save</string>
     <string name="randomizeAlpha">Randomize Alpha</string>
     <string name="dropShadow">Drop Shadow</string>
+    <string name="bWidth">Wallpaper Width</string>
+    <string name="bHeight">Wallpaper Height</string>
+    <string name="sizeSelection">Wallpaper Size</string>
+    <string name="sizeSelection_summary">Choose a size</string>
     
 
 </resources>

@@ -1,245 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="opacities">
-        <item name="0">Opacity 0</item>
-        <item name="32">Opacity 32</item>
-        <item name="64">Opacity 64</item>
-        <item name="96">Opacity 96</item>
-        <item name="128">Opacity 128</item>
-        <item name="192">Opacity 192</item>
-        <item name="255">Opacity 255</item>
+    <string-array name="sizes">
+        <item >customSize</item>
+        <item >2560x1600</item>
+        <item >1920x1200</item>
+        <item >1920x1080</item>
+        <item >1280x720</item>
+        <item >1024x768</item>
+        <item >960x800</item>
+        <item >640x480</item>
+        
+        
     </string-array>
     
-    <string-array name="opacitiesValues">
-        <item name="0">0</item>
-        <item name="32">32</item>
-        <item name="64">64</item>
-        <item name="96">96</item>
-        <item name="128">128</item>
-        <item name="192">192</item>
-        <item name="255">255</item>
-    </string-array>
+    <string-array name="sizesValues">
+        <item >customSize</item>
+        <item >2560x1600</item>
+        <item >1920x1200</item>
+        <item >1920x1080</item>
+        <item >1280x720</item>
+        <item >1024x768</item>
+        <item >960x800</item>
+        <item >640x480</item>
+     </string-array>
 
-    <string-array name="battStatusStyle">
-        <item name="0">Temperatur, Voltage, Health</item>
-        <item name="1">Temperatur, Voltage</item>
-        <item name="2">Temperatur</item>
-        <item name="3">Voltage</item>
-        </string-array>
-    
-    <string-array name="battStatusStyleValues">
-        <item name="0">0</item>
-        <item name="1">1</item>
-        <item name="2">2</item>
-        <item name="3">3</item>
-        </string-array>
-    
-
-    <string-array name="resize">
-        <item name="100">100%</item>
-        <item name="95">95%</item>
-        <item name="90">90%</item>
-        <item name="85">85%</item>
-        <item name="80">80%</item>
-        <item name="75">75%</item>
-        <item name="70">70%</item>
-        <item name="65">65%</item>
-        <item name="60">60%</item>
-        <item name="55">55%</item>
-        <item name="50">50%</item>
-        <item name="45">45%</item>
-        <item name="40">40%</item>
-        <item name="35">35%</item>
-        <item name="30">30%</item>
-        <item name="25">25%</item>
-        <item name="20">20%</item>
-        <item name="15">15%</item>
-        <item name="10">10%</item>
-   </string-array>
-    
-    <string-array name="resizeValues">
-        <item name="100">100</item>
-        <item name="95">95</item>
-        <item name="90">90</item>
-        <item name="85">85</item>
-        <item name="80">80</item>
-        <item name="75">75</item>
-        <item name="70">70</item>
-        <item name="65">65</item>
-        <item name="60">60</item>
-        <item name="55">55</item>
-        <item name="50">50</item>
-        <item name="45">45</item>
-        <item name="40">40</item>
-        <item name="35">35</item>
-        <item name="30">30</item>
-        <item name="25">25</item>
-        <item name="20">20</item>
-        <item name="15">15</item>
-        <item name="10">10</item>
-   </string-array>
-    
-    
-    
-    
-    <string-array name="fontsize">
-        <item name="150">150%</item>
-        <item name="140">140%</item>
-        <item name="130">130%</item>
-        <item name="120">120%</item>
-        <item name="110">110%</item>
-        <item name="100">100%</item>
-        <item name="95">95%</item>
-        <item name="90">90%</item>
-        <item name="85">85%</item>
-        <item name="80">80%</item>
-        <item name="75">75%</item>
-    </string-array>
-    
-    <string-array name="fontsizeValues">
-        <item name="150">150</item>
-        <item name="140">140</item>
-        <item name="130">130</item>
-        <item name="120">120</item>
-        <item name="110">110</item>
-        <item name="100">100</item>
-        <item name="95">95</item>
-        <item name="90">90</item>
-        <item name="85">85</item>
-        <item name="80">80</item>
-        <item name="75">75</item>
-    </string-array>
-    
-    
-    <string-array name="fontsize100">
-        <item name="100">100%</item>
-        <item name="95">95%</item>
-        <item name="90">90%</item>
-        <item name="85">85%</item>
-        <item name="80">80%</item>
-        <item name="75">75%</item>
-    </string-array>
-    
-    <string-array name="fontsize100Values">
-        <item name="100">100</item>
-        <item name="95">95</item>
-        <item name="90">90</item>
-        <item name="85">85</item>
-        <item name="80">80</item>
-        <item name="75">75</item>
-    </string-array>
-    
-    
-    
-
-    <string-array name="styl_booleans">
-        <item name="110">true</item>
-        <item name="111">true</item>
-        </string-array>
-    
-    <string-array name="prostyl">
-        <item name="110">LogoV1</item>
-        <item name="111">LogoV2</item>
-        </string-array>
-    
-    <string-array name="prostylValues">
-        <item name="110">LogoV1</item>
-        <item name="111">LogoV2</item>
-        </string-array>
-    
-    <string-array name="animation_styl">
-        <item name="1">0 to 100 percent</item>
-        <item name="2">0 to current Battery Level</item>
-        </string-array>
-    
-    <string-array name="animation_stylValues">
-        <item name="1">1</item>
-        <item name="2">2</item>
-        </string-array>
-    
-    
-    <string-array name="maskNames">
-		<item>"No Mask"</item>
-        <item>"Battery 1"</item>
-		<item>"Battery 2"</item>
-		<item>"Battery 3"</item>
-		<item>"Battery 4"</item>
-		<item>"Star"</item>
-		<item>"Rounded Square"</item>
-		<item>"Cicle"</item>
-		<item>"Flower"</item>
-		<item>"Flower 2"</item>
-		<item>"Flower 3"</item>
-		<item>"Gear 1"</item>
-		<item>"Gear 2"</item>
-		<item>"Gear 3"</item>
-		<item>"Gear 4"</item>
-		<item>"Saw"</item>
-		<item>"Saw 2"</item>
-		<item>"Saw 3"</item>
-		<item>"Splash"</item>
-		<item>"Square 1"</item>
-		<item>"Square 2"</item>
-		<item>"Sun 1"</item>
-		<item>"Sun 2"</item>
-		<item>"Sun 3"</item>
-		<item>"Ring 1"</item>
-		<item>"Ring 2"</item>
-		<item>"Ring 3"</item>
-		<item>"Wheel"</item>
-		<item>"Heart"</item>
-		<item>"Heart filled"</item>
-		<item>"Puzzle"</item>
-		<item>"Rom Omni"</item>
-		<item>"Rom CyanogenMOD"</item>
-		<item>"Rom Pacman"</item>
-		<item>"Rom AOKP"</item>
-		<item>"Easter-Egg"</item>
-																		
-	</string-array>
-	
-	<string-array name="maskValues">
-		<item>"No Mask"</item>
-        <item>"Battery 1"</item>
-		<item>"Battery 2"</item>
-		<item>"Battery 3"</item>
-		<item>"Battery 4"</item>
-		<item>"Star"</item>
-		<item>"Rounded Square"</item>
-		<item>"Cicle"</item>
-		<item>"Flower"</item>
-		<item>"Flower 2"</item>
-		<item>"Flower 3"</item>
-		<item>"Gear 1"</item>
-		<item>"Gear 2"</item>
-		<item>"Gear 3"</item>
-		<item>"Gear 4"</item>
-		<item>"Saw"</item>
-		<item>"Saw 2"</item>
-		<item>"Saw 3"</item>
-		<item>"Splash"</item>
-		<item>"Square 1"</item>
-		<item>"Square 2"</item>
-		<item>"Sun 1"</item>
-		<item>"Sun 2"</item>
-		<item>"Sun 3"</item>
-		<item>"Ring 1"</item>
-		<item>"Ring 2"</item>
-		<item>"Ring 3"</item>
-		<item>"Wheel"</item>
-		<item>"Heart"</item>
-		<item>"Heart filled"</item>
-		<item>"Puzzle"</item>
-		<item>"Rom Omni"</item>
-		<item>"Rom CyanogenMOD"</item>
-		<item>"Rom Pacman"</item>
-		<item>"Rom AOKP"</item>
-		<item>"Easter-Egg"</item>
-																
-	</string-array>
-		
-	
-	
-	
     
 </resources>

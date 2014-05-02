@@ -10,24 +10,10 @@
         android:id="@+id/wallpaperview"
         android:layout_width="wrap_content"
         android:layout_height="422dp"
-        android:layout_above="@+id/generatebutton"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/background" />
-
-    <Button
-        android:id="@+id/generatebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/generate" />
-
-    <Button
-        android:id="@+id/savebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/save" />
+        android:layout_alignParentTop="true"
+        android:src="@drawable/about" />
 
 </RelativeLayout>

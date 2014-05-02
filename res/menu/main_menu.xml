@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="de.geithonline.wallpaperdesigner.MainActivity" >
+    
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/save"
+        android:icon="@android:drawable/ic_menu_save"
+        />
+    
+    <item
+        android:id="@+id/action_generate"
+        android:orderInCategory="101"
+        android:showAsAction="always"
+        android:title="@string/generate"
+        android:icon="@android:drawable/ic_media_play"
+        />
+    
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="102"
+        android:showAsAction="always"
+        android:title="@string/settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        />
+    
+    
+</menu>

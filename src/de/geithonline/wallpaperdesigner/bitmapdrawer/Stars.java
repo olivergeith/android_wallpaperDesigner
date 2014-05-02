@@ -10,20 +10,26 @@ import de.geithonline.android.basics.grafics.shapes.StarPath;
 import de.geithonline.android.basics.grafics.shapes.StarPathInvert;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
-public class Bubbles extends Drawer {
+public class Stars extends Drawer {
 
 	protected int bWidth = 2560;
 	protected int bHeight = 1600;
-	protected Rect sizesRect = new Rect(0, 0, bWidth, bHeight);
 
 	@Override
 	public Bitmap drawBitmap() {
+		bWidth = Settings.getWidth();
+		bHeight = Settings.getHeight();
+		final Rect sizesRect = new Rect(0, 0, bWidth, bHeight);
+
 		if (bitmap != null) {
 			bitmap.recycle();
 		}
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
-		bitmapCanvas.drawRect(sizesRect, Settings.getWallpaperBackgroundPaint(bWidth, bHeight));
+		bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth, bHeight));
+
+		// initializing some values depending on BitmapSize
+		final int maxRadius = Math.round(bWidth * 0.04f);
 
 		for (int i = 0; i < 1000; i++) {
 			final int x = getRandomInt(0, bWidth - 1);
@@ -32,7 +38,7 @@ public class Bubbles extends Drawer {
 			// Log.i("Geith", "y=" + y);
 			final int pcolor = bitmap.getPixel(x, y);
 
-			final int radius = getRandomInt(10, 100);
+			final int radius = getRandomInt(maxRadius / 10, maxRadius);
 			final Paint paint = new Paint();
 			paint.setAntiAlias(true);
 			paint.setColor(pcolor);
