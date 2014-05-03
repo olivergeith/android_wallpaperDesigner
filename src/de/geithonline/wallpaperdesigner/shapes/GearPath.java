@@ -16,10 +16,14 @@ public class GearPath extends Path {
 				switch (j) {
 				default:
 				case 0:
+					r = rOuter;
+					break;
 				case 1:
 					r = rOuter;
 					break;
 				case 2:
+					r = rInner;
+					break;
 				case 3:
 					r = rInner;
 					break;

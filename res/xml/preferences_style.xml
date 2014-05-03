@@ -52,7 +52,17 @@
             android:title="@string/randomizeAlpha"
             android:defaultValue="true"
             />
-
+        
+        <ListPreference
+	        android:key="randomizeAlphaRange"
+	        android:title="@string/randomizeAlphaRange" 
+	        android:dialogTitle="@string/randomizeAlphaRange"
+	        android:defaultValue="128"
+	        android:entries="@array/randAlphaRange"
+	        android:entryValues="@array/randAlphaRangeValues"
+	        android:dependency="randomizeAlpha"
+	        />
+    	
     	<CheckBoxPreference 
             android:key="dropShadow"
             android:title="@string/dropShadow"

@@ -50,6 +50,28 @@
         <item >224</item>
         <item >255</item>
      </string-array>
+
+    <string-array name="randAlphaRange">
+        <item >32</item>
+        <item >64</item>
+        <item >96</item>
+        <item >128</item>
+        <item >160</item>
+        <item >192</item>
+        <item >224</item>
+        <item >255</item>
+    </string-array>
+    
+    <string-array name="randAlphaRangeValues">
+        <item >32</item>
+        <item >64</item>
+        <item >96</item>
+        <item >128</item>
+        <item >160</item>
+        <item >192</item>
+        <item >224</item>
+        <item >255</item>
+     </string-array>
     
 
     <string-array name="style">
@@ -83,17 +105,19 @@
     
     
     <string-array name="directions">
-        <item >top-bottom</item>
-        <item >left-right</item>
-        <item >topleft-bottomright</item>
-        <item >topright-bottomleft</item>
+        <item >Linear Gradient top-bottom</item>
+        <item >Linear Gradient left-right</item>
+        <item >Linear Gradient topleft-bottomright</item>
+        <item >Linear Gradient topright-bottomleft</item>
+        <item >4-Color Gradient from corners</item>
         </string-array>
     
     <string-array name="directionsValues">
-        <item >top-bottom</item>
-        <item >left-right</item>
-        <item >topleft-bottomright</item>
-        <item >topright-bottomleft</item>
+        <item >Linear Gradient top-bottom</item>
+        <item >Linear Gradient left-right</item>
+        <item >Linear Gradient topleft-bottomright</item>
+        <item >Linear Gradient topright-bottomleft</item>
+        <item >4-Color Gradient from corners</item>
         </string-array>
     
     

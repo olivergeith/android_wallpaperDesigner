@@ -15,10 +15,10 @@
     
     <string name="header_size">Wallpaper Size</string>
     <string name="header_size_summary">Size of Wallpaper...</string>
-    <string name="header_colors">Colors</string>
-    <string name="header_colors_summary">Colors and stuff...</string>
+    <string name="header_colors">Colors-Scheme</string>
+    <string name="header_colors_summary">Overall Colors and Stuff...</string>
     <string name="header_style">Wallpaper Style</string>
-    <string name="header_style_summary">Style-Selection and special options for Style....</string>
+    <string name="header_style_summary">Style-Selection and special Options for Style....</string>
     <string name="header_about_options">About</string>
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
 
@@ -30,9 +30,6 @@
     
     <string name="enable_gradient_background">Enable Gradient Background</string>
     
-    
-    
-    
     <string name="settings">Settings</string>
     <string name="generate">Generate</string>
     <string name="save">Save</string>
@@ -40,6 +37,7 @@
     <string name="randomizeColor">Randomize Color</string>
     <string name="randomizeDropShadowColor">Randomize DropShadowColor</string>
     <string name="randomizeColorRange">Randomize Color Range</string>
+    <string name="randomizeAlphaRange">Randomize Alpha Range</string>
     <string name="dropShadow">Drop Shadow</string>
     <string name="bWidth">Wallpaper Width</string>
     <string name="bHeight">Wallpaper Height</string>
@@ -48,7 +46,7 @@
     <string name="colorDropShadow">DropShadowColor</string>
     <string name="patternPicker">Pattern</string>
     <string name="stylePicker">Style</string>
-    <string name="gradientDirection">Direction of Color Gradient</string>
+    <string name="gradientDirection">Color Gradient</string>
     <string name="dynamicColoring">Dynamic Coloring</string>
     
 

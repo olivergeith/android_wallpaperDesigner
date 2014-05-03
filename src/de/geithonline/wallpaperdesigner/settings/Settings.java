@@ -3,9 +3,6 @@ package de.geithonline.wallpaperdesigner.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.Shader;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -60,6 +57,15 @@ public class Settings {
 		}
 		return prefs.getBoolean("randomizeAlpha", true);
 	}
+
+	public static int getRandomizeAlphaRange() {
+		if (prefs == null) {
+			return 128;
+		}
+		return Integer.valueOf(prefs.getString("randomizeAlphaRange", "128"));
+	}
+
+	// ###################################################################
 
 	public static boolean isRandomizeColors() {
 		if (prefs == null) {
@@ -153,7 +159,15 @@ public class Settings {
 		return prefs.getString("gradientDirection", "top-bottom");
 	}
 
-	private static int getBackgroundColor1() {
+	// Background Color
+	public static boolean is4ColorGradient(final String test) {
+		if (prefs == null) {
+			return false;
+		}
+		return test.equalsIgnoreCase("4-Color Gradient from corners");
+	}
+
+	public static int getBackgroundColor1() {
 		if (prefs == null) {
 			return R.integer.COLOR_BLACK;
 		}
@@ -161,7 +175,7 @@ public class Settings {
 		return col;
 	}
 
-	private static int getBackgroundColor2() {
+	public static int getBackgroundColor2() {
 		if (prefs == null) {
 			return R.integer.COLOR_WHITE;
 		}
@@ -169,32 +183,20 @@ public class Settings {
 		return col;
 	}
 
-	public static Paint getBackgroundPaint(final int width, final int height) {
-		final Paint paint = new Paint();
-		paint.setAntiAlias(true);
-
-		switch (getGradientDirection()) {
-		default:
-		case "top-bottom":
-			paint.setShader(new LinearGradient(0, 0, 0, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
-		case "left-right":
-			paint.setShader(new LinearGradient(0, 0, width, 0, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
-		case "topleft-bottomright":
-			paint.setShader(new LinearGradient(0, 0, width, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
-		case "topright-bottomleft":
-			paint.setShader(new LinearGradient(width, 0, 0, height, getBackgroundColor1(), getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
+	public static int getBackgroundColor3() {
+		if (prefs == null) {
+			return Color.BLUE;
 		}
+		final int col = prefs.getInt("color3_plain_bgrnd", Color.BLUE);
+		return col;
+	}
 
-		// final LinearGradient lg = new LinearGradient(0, 0, width, 0, //
-		// new int[] { getBackgroundColor1(), Color.GREEN, getBackgroundColor2()
-		// }, //
-		// new float[] { 0, 0.5f, 1 }, Shader.TileMode.REPEAT);
-		// paint.setShader(lg);
-		return paint;
+	public static int getBackgroundColor4() {
+		if (prefs == null) {
+			return Color.YELLOW;
+		}
+		final int col = prefs.getInt("color4_plain_bgrnd", Color.YELLOW);
+		return col;
 	}
 
 	public static boolean isDynamicColoring() {
@@ -246,6 +248,8 @@ public class Settings {
 			// init colors
 			prefs.edit().putInt("color_plain_bgrnd", Color.RED).commit();
 			prefs.edit().putInt("color2_plain_bgrnd", Color.YELLOW).commit();
+			prefs.edit().putInt("color3_plain_bgrnd", Color.GREEN).commit();
+			prefs.edit().putInt("color4_plain_bgrnd", Color.BLUE).commit();
 		}
 	}
 

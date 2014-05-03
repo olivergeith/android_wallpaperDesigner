@@ -18,6 +18,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference styleSelection;
 	private ListPreference patternSelection;
 	private ListPreference randomizeColorRange;
+	private ListPreference randomizeAlphaRange;
 
 	private PreferenceScreen patternScreen;
 	private PreferenceScreen squaresScreen;
@@ -57,6 +58,16 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				randomizeColorRange.setSummary((String) newValue);
+				return true;
+			}
+		});
+		randomizeAlphaRange = (ListPreference) findPreference("randomizeAlphaRange");
+		randomizeAlphaRange.setSummary("" + Settings.getRandomizeAlphaRange());
+		randomizeAlphaRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				randomizeAlphaRange.setSummary((String) newValue);
 				return true;
 			}
 		});

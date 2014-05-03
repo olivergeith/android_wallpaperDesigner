@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -24,15 +23,18 @@ public class WPStylePatterns extends WPStyle {
 	public synchronized Bitmap drawBitmap() {
 		bWidth = Settings.getWidth();
 		bHeight = Settings.getHeight();
-		final Rect sizesRect = new Rect(0, 0, bWidth, bHeight);
 
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
-		bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth, bHeight));
+		BackgroundDrawer.drawBackground(bitmapCanvas);
+		// bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth,
+		// bHeight));
 
 		final Bitmap refbitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		final Canvas refbitmapCanvas = new Canvas(refbitmap);
-		refbitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth, bHeight));
+		BackgroundDrawer.drawBackground(refbitmapCanvas);
+		// refbitmapCanvas.drawRect(sizesRect,
+		// Settings.getBackgroundPaint(bWidth, bHeight));
 
 		// initializing some values depending on BitmapSize
 		final int fontSize = Math.round(bWidth * 0.02f);
@@ -62,7 +64,7 @@ public class WPStylePatterns extends WPStyle {
 			paint.setAntiAlias(true);
 			paint.setColor(pcolor);
 			if (Settings.isRandomizeAlpha()) {
-				paint.setAlpha(getRandomInt(0, 255));
+				paint.setAlpha(getRandomInt(255 - Settings.getRandomizeAlphaRange(), 255));
 			} else {
 				paint.setAlpha(255);
 			}
@@ -128,7 +130,7 @@ public class WPStylePatterns extends WPStyle {
 			}
 			break;
 		case "Gears":
-			final int zaehne = getRandomInt(15, 30);
+			final int zaehne = getRandomInt(12, 20);
 			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, Math.round(radius * 5 / 6)), paint);
 			break;
 		case "XEck":

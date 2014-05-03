@@ -15,25 +15,36 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 public class ColorPreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	private ListPreference gradientDirection;
+	private Preference color3;
+	private Preference color4;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
-
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+
+		color3 = findPreference("color3_plain_bgrnd");
+		color4 = findPreference("color4_plain_bgrnd");
+
 		gradientDirection = (ListPreference) findPreference("gradientDirection");
-		gradientDirection.setSummary(Settings.getGradientDirection());
+		handleGradientSelection(Settings.getGradientDirection());
 		gradientDirection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				gradientDirection.setSummary((String) newValue);
+				handleGradientSelection((String) newValue);
 				return true;
 			}
 		});
 
 		enableProFeatures();
+	}
+
+	private void handleGradientSelection(final String selection) {
+		gradientDirection.setSummary(selection);
+		color3.setEnabled(Settings.is4ColorGradient(selection));
+		color4.setEnabled(Settings.is4ColorGradient(selection));
 	}
 
 	private void enableProFeatures() {

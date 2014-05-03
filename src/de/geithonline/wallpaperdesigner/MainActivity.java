@@ -130,8 +130,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = StyleManager.getDrawer("Patterns");
+			drawer = StyleManager.getDrawer(Settings.getSelectedStyle());
 			// drawer.recycleBitmap();
+			Log.i("Geith", "Drawing " + Settings.getSelectedStyle());
 			final Bitmap bitmap = drawer.drawBitmap();
 			return bitmap;
 		}

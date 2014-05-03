@@ -4,6 +4,15 @@
     <PreferenceCategory 
         android:title="@string/category_background">
 
+        <ListPreference
+	        android:key="gradientDirection"
+	        android:title="@string/gradientDirection" 
+	        android:dialogTitle="@string/gradientDirection"
+	        android:defaultValue="Stars"
+	        android:entries="@array/directions"
+	        android:entryValues="@array/directionsValues"
+	        />
+        
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
 	        android:key="color_plain_bgrnd"
 	        android:title="@string/color" 
@@ -16,20 +25,24 @@
 	        android:summary="2. Color"
 	        android:defaultValue="@integer/COLOR_ORANGE"
 	        />
-        
-        <ListPreference
-	        android:key="gradientDirection"
-	        android:title="@string/gradientDirection" 
-	        android:dialogTitle="@string/gradientDirection"
-	        android:defaultValue="Stars"
-	        android:entries="@array/directions"
-	        android:entryValues="@array/directionsValues"
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="color3_plain_bgrnd"
+	        android:title="@string/color" 
+	        android:summary="3. Color"
+	        android:defaultValue="@integer/COLOR_GREEN"
 	        />
-        
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="color4_plain_bgrnd"
+	        android:title="@string/color" 
+	        android:summary="4. Color"
+	        android:defaultValue="@integer/COLOR_BLACK"
+	        />
+	    
         <CheckBoxPreference 
             android:key="dynamicColoring"
             android:title="@string/dynamicColoring"
-            android:defaultValue="true"
+            android:summary="Hard to explain, what this does...check it out and try to see the difference...if checked, the colors are mixed a little bit more! "
+            android:defaultValue="false"
             />
         
         
