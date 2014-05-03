@@ -3,7 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-public interface IDrawer {
+public interface IWPStyle {
 
 	public Bitmap drawBitmap();
 

@@ -15,8 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.DrawerManager;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.IDrawer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.StyleManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	private static final int REQUEST_CODE_PREFERENCES = 1;
 	private ProgressDialog dialog;
 	private ImageView wallpaperView;
-	private IDrawer drawer;
+	private IWPStyle drawer;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -58,15 +58,19 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	public synchronized void generate() {
 		final BitmapWorkerTask task = new BitmapWorkerTask(wallpaperView);
 		task.execute();
-		dialog.setMessage("Rendering...");
-		dialog.show();
+		if (dialog != null) {
+			dialog.setMessage("Rendering...");
+			dialog.show();
+		}
 	}
 
 	public synchronized void save() {
 		final BitmapSaverTask task = new BitmapSaverTask();
 		task.execute();
-		dialog.setMessage("Saving...");
-		dialog.show();
+		if (dialog != null) {
+			dialog.setMessage("Saving...");
+			dialog.show();
+		}
 	}
 
 	@Override
@@ -126,7 +130,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = DrawerManager.getDrawer("Stars");
+			drawer = StyleManager.getDrawer("Patterns");
 			// drawer.recycleBitmap();
 			final Bitmap bitmap = drawer.drawBitmap();
 			return bitmap;

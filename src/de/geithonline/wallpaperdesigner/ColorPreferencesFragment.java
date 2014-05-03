@@ -15,8 +15,6 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 public class ColorPreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	private ListPreference gradientDirection;
-	private ListPreference patternSelection;
-	private ListPreference randomizeColorRange;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -31,26 +29,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				gradientDirection.setSummary((String) newValue);
-				return true;
-			}
-		});
-		patternSelection = (ListPreference) findPreference("drawerPicker");
-		patternSelection.setSummary(Settings.getSelectedDrawer());
-		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				patternSelection.setSummary((String) newValue);
-				return true;
-			}
-		});
-		randomizeColorRange = (ListPreference) findPreference("randomizeColorRange");
-		randomizeColorRange.setSummary("" + Settings.getRandomizeColorRange());
-		randomizeColorRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				randomizeColorRange.setSummary((String) newValue);
 				return true;
 			}
 		});

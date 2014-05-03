@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+    <PreferenceCategory 
+        android:title="@string/category_background">
+
+        <ListPreference
+	        android:key="stylePicker"
+	        android:title="@string/stylePicker" 
+	        android:dialogTitle="@string/stylePicker"
+	        android:defaultValue="Patterns"
+	        android:entries="@array/style"
+	        android:entryValues="@array/styleValues"
+	        />
+	    
+    </PreferenceCategory>
+
+    <PreferenceCategory 
+        android:title="Settings">
+    <PreferenceScreen 
+        android:key="patternsScreen"
+        android:title="@string/category_patterns"
+        >
+
+        <ListPreference
+	        android:key="patternPicker"
+	        android:title="@string/patternPicker" 
+	        android:dialogTitle="@string/patternPicker"
+	        android:defaultValue="5-Stars"
+	        android:entries="@array/pattern"
+	        android:entryValues="@array/patternValues"
+	        />
+        
+        <CheckBoxPreference 
+            android:key="randomizeColor"
+            android:title="@string/randomizeColor"
+            android:defaultValue="false"
+            />
+        <ListPreference
+	        android:key="randomizeColorRange"
+	        android:title="@string/randomizeColorRange" 
+	        android:dialogTitle="@string/randomizeColorRange"
+	        android:defaultValue="64"
+	        android:entries="@array/randColorRange"
+	        android:entryValues="@array/randColorRangeValues"
+	        android:dependency="randomizeColor"
+	        />
+        
+        	
+    	<CheckBoxPreference 
+            android:key="randomizeAlpha"
+            android:title="@string/randomizeAlpha"
+            android:defaultValue="true"
+            />
+
+    	<CheckBoxPreference 
+            android:key="dropShadow"
+            android:title="@string/dropShadow"
+            android:defaultValue="true"
+            />
+    	<CheckBoxPreference 
+            android:key="randomizeDropShadowColor"
+            android:title="@string/randomizeDropShadowColor"
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+	        android:dependency="dropShadow"
+            />
+    		    
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="colorDropShadow"
+	        android:title="@string/colorDropShadow" 
+	        android:defaultValue="@integer/COLOR_BLACK"
+	        android:dependency="randomizeDropShadowColor"
+	        />
+    </PreferenceScreen>
+    
+    <PreferenceScreen 
+        android:key="squaresScreen"
+        android:title="@string/category_squares"
+        >
+
+        
+        <CheckBoxPreference 
+            android:key="randomizeColor"
+            android:title="@string/randomizeColor"
+            android:defaultValue="false"
+            />
+    </PreferenceScreen>
+    
+    
+    </PreferenceCategory>
+    	
+</PreferenceScreen>

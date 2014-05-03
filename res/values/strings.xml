@@ -17,12 +17,16 @@
     <string name="header_size_summary">Size of Wallpaper...</string>
     <string name="header_colors">Colors</string>
     <string name="header_colors_summary">Colors and stuff...</string>
+    <string name="header_style">Wallpaper Style</string>
+    <string name="header_style_summary">Style-Selection and special options for Style....</string>
     <string name="header_about_options">About</string>
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
 
     <string name="category_background">Background</string>
-    <string name="category_overlays">Overlays</string>
     <string name="category_size">Wallpaper Size</string>
+    
+    <string name="category_patterns">Special Settings - Patterns-Style</string>
+    <string name="category_squares">Special Settings - Squares-Style</string>
     
     <string name="enable_gradient_background">Enable Gradient Background</string>
     
@@ -42,8 +46,10 @@
     <string name="sizeSelection">Wallpaper Size</string>
     <string name="sizeSelection_summary">Choose a size</string>
     <string name="colorDropShadow">DropShadowColor</string>
-    <string name="drawerPicker">Pattern</string>
+    <string name="patternPicker">Pattern</string>
+    <string name="stylePicker">Style</string>
     <string name="gradientDirection">Direction of Color Gradient</string>
+    <string name="dynamicColoring">Dynamic Coloring</string>
     
 
 </resources>

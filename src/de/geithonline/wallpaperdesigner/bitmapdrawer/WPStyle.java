@@ -15,7 +15,7 @@ import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
-public abstract class Drawer extends ColorProvider implements IDrawer {
+public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 	protected Canvas bitmapCanvas;
 	protected Bitmap bitmap;

@@ -52,21 +52,35 @@
      </string-array>
     
 
-    <string-array name="drawer">
-        <item >5-Stars</item>
-        <item >Stars</item>
-        <item >Bubbles</item>
-        <item >XEck</item>
-        <item >Letters</item>
+    <string-array name="style">
+        <item >Patterns</item>
+        <item >Squares</item>
         </string-array>
     
-    <string-array name="drawerValues">
+    <string-array name="styleValues">
+        <item >Patterns</item>
+        <item >Squares</item>
+        </string-array>
+
+    <string-array name="pattern">
         <item >5-Stars</item>
         <item >Stars</item>
         <item >Bubbles</item>
         <item >XEck</item>
         <item >Letters</item>
+        <item >Gears</item>
         </string-array>
+    
+    <string-array name="patternValues">
+        <item >5-Stars</item>
+        <item >Stars</item>
+        <item >Bubbles</item>
+        <item >XEck</item>
+        <item >Letters</item>
+        <item >Gears</item>
+        </string-array>
+    
+    
     
     <string-array name="directions">
         <item >top-bottom</item>

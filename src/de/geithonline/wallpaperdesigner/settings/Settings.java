@@ -18,11 +18,18 @@ public class Settings {
 	// ###################################################################
 	// Options
 
-	public static String getSelectedDrawer() {
+	public static String getSelectedStyle() {
 		if (prefs == null) {
-			return "Stars";
+			return "Patterns";
 		}
-		return prefs.getString("drawerPicker", "Stars");
+		return prefs.getString("stylePicker", "Patterns");
+	}
+
+	public static String getSelectedPattern() {
+		if (prefs == null) {
+			return "5-Stars";
+		}
+		return prefs.getString("patternPicker", "5-Stars");
 	}
 
 	public static boolean isDropShadow() {
@@ -188,6 +195,13 @@ public class Settings {
 		// new float[] { 0, 0.5f, 1 }, Shader.TileMode.REPEAT);
 		// paint.setShader(lg);
 		return paint;
+	}
+
+	public static boolean isDynamicColoring() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean("dynamicColoring", true);
 	}
 
 	public static DisplayMetrics getDisplayMetrics() {

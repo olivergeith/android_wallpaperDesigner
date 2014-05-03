@@ -13,7 +13,7 @@ import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPathInvert;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 
-public class Stars extends Drawer {
+public class WPStyleSquares extends WPStyle {
 
 	protected int bWidth = 2560;
 	protected int bHeight = 1600;
@@ -78,7 +78,7 @@ public class Stars extends Drawer {
 				}
 			}
 			final int radius = getRandomInt(maxRadius / 10, maxRadius);
-			switch (Settings.getSelectedDrawer()) {
+			switch (Settings.getSelectedPattern()) {
 			default:
 				// case "Text":
 				// paint.setTextSize(radius * 4);
