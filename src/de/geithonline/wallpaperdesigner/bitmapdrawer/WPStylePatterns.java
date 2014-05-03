@@ -9,8 +9,8 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
+import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
-import de.geithonline.wallpaperdesigner.shapes.StarPathInvert;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 
 public class WPStylePatterns extends WPStyle {
@@ -84,7 +84,7 @@ public class WPStylePatterns extends WPStyle {
 					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
 				}
 			}
-			final int radius = getRandomInt(maxRadius / 10, maxRadius);
+			final int radius = getRandomInt(10, maxRadius);
 			drawPattern(x, y, paint, radius);
 		}
 
@@ -114,26 +114,40 @@ public class WPStylePatterns extends WPStyle {
 			paint.setTextAlign(Align.CENTER);
 			bitmapCanvas.drawText("" + c, x, y, paint);
 			break;
-		case "5-Stars":
-			if (getRandomBoolean()) {
-				bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2), paint);
-			} else {
-				bitmapCanvas.drawPath(new StarPathInvert(5, new Point(x, y), radius, radius / 2), paint);
-			}
+		case "Saw":
+			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, false, getRandomBoolean()), paint);
+			break;
+		case "Saw filled":
+			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, true, getRandomBoolean()), paint);
+			break;
+		case "Saw mixed":
+			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
 			break;
 		case "Stars":
-			final int zacken = getRandomInt(5, 10);
-			if (getRandomBoolean()) {
-				bitmapCanvas.drawPath(new StarPath(zacken, new Point(x, y), radius, radius / 2), paint);
-			} else {
-				bitmapCanvas.drawPath(new StarPathInvert(zacken, new Point(x, y), radius, radius / 2), paint);
-			}
+			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, false, getRandomBoolean()), paint);
+			break;
+		case "Stars filled":
+			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, getRandomBoolean()), paint);
+			break;
+		case "Stars mixed":
+			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, getRandomBoolean(), getRandomBoolean()), paint);
 			break;
 		case "Gears":
-			final int zaehne = getRandomInt(12, 20);
-			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, Math.round(radius * 5 / 6)), paint);
+			final int zaehne = 15;
+			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, false), paint);
 			break;
-		case "XEck":
+		case "Gears filled":
+			final int zf = getRandomInt(12, 20);
+			bitmapCanvas.drawPath(new GearPath(zf, new Point(x, y), radius, true), paint);
+			break;
+		case "Gears mixed":
+			final int zm = getRandomInt(12, 20);
+			bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
+			break;
+		case "Pentagon":
+			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius), paint);
+			break;
+		case "Hexagon":
 			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius), paint);
 			break;
 		case "Bubbles":

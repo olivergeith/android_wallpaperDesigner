@@ -5,8 +5,11 @@ import android.graphics.Point;
 
 public class GearPath extends Path {
 
-	public GearPath(final int arms, final Point center, final float rOuter, final float rInner) {
+	public GearPath(final int arms, final Point center, final float radius, final boolean filled) {
 		super();
+
+		final float rInner = radius * 0.8f;
+		final float rInner2 = radius * 0.6f;
 		final float angle = (float) (2 * Math.PI / (arms * 4));
 
 		int c = 0;
@@ -16,10 +19,10 @@ public class GearPath extends Path {
 				switch (j) {
 				default:
 				case 0:
-					r = rOuter;
+					r = radius;
 					break;
 				case 1:
-					r = rOuter;
+					r = radius;
 					break;
 				case 2:
 					r = rInner;
@@ -38,10 +41,12 @@ public class GearPath extends Path {
 					// addCircle(p.x, p.y, 10, Direction.CCW);
 				} else {
 					lineTo(p.x, p.y);
-					// addCircle(p.x, p.y, 5, Direction.CCW);
 				}
 				c++;
 			}
+		}
+		if (!filled) {
+			addCircle(center.x, center.y, rInner2, Direction.CCW);
 		}
 		close();
 	}

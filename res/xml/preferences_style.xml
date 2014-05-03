@@ -26,7 +26,7 @@
 	        android:key="patternPicker"
 	        android:title="@string/patternPicker" 
 	        android:dialogTitle="@string/patternPicker"
-	        android:defaultValue="5-Stars"
+	        android:defaultValue="Stars"
 	        android:entries="@array/pattern"
 	        android:entryValues="@array/patternValues"
 	        />

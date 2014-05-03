@@ -85,21 +85,35 @@
         </string-array>
 
     <string-array name="pattern">
-        <item >5-Stars</item>
         <item >Stars</item>
+        <item >Stars filled</item>
+        <item >Stars mixed</item>
+        <item >Saw</item>
+        <item >Saw filled</item>
+        <item >Saw mixed</item>
         <item >Bubbles</item>
-        <item >XEck</item>
+        <item >Pentagon</item>
+        <item >Hexagon</item>
         <item >Letters</item>
         <item >Gears</item>
+        <item >Gears filled</item>
+        <item >Gears mixed</item>
         </string-array>
     
     <string-array name="patternValues">
-        <item >5-Stars</item>
         <item >Stars</item>
+        <item >Stars filled</item>
+        <item >Stars mixed</item>
+        <item >Saw</item>
+        <item >Saw filled</item>
+        <item >Saw mixed</item>
         <item >Bubbles</item>
-        <item >XEck</item>
+        <item >Pentagon</item>
+        <item >Hexagon</item>
         <item >Letters</item>
         <item >Gears</item>
+        <item >Gears filled</item>
+        <item >Gears mixed</item>
         </string-array>
     
     

@@ -24,9 +24,9 @@ public class Settings {
 
 	public static String getSelectedPattern() {
 		if (prefs == null) {
-			return "5-Stars";
+			return "Stars";
 		}
-		return prefs.getString("patternPicker", "5-Stars");
+		return prefs.getString("patternPicker", "Stars");
 	}
 
 	public static boolean isDropShadow() {
