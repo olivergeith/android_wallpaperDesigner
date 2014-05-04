@@ -99,6 +99,7 @@
         <item >Gears filled</item>
         <item >Gears mixed</item>
         <item >Hearts</item>
+        <item >Spirals</item>
         </string-array>
     
     <string-array name="patternValues">
@@ -116,6 +117,7 @@
         <item >Gears filled</item>
         <item >Gears mixed</item>
         <item >Hearts</item>
+        <item >Spirals</item>
         </string-array>
     
     

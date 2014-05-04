@@ -11,6 +11,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
+import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 
@@ -148,6 +149,11 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Hearts":
 			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), getRandomFloat(1f, 5f)), paint);
+			break;
+		case "Spirals":
+			paint.setStyle(Style.STROKE);
+			paint.setStrokeWidth(radius / 10);
+			bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius), paint);
 			break;
 		}
 	}
