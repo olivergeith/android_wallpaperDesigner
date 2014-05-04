@@ -6,7 +6,7 @@
     tools:context="de.geithonline.wallpaperdesigner.MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <ImageView
+    <de.geithonline.wallpaperdesigner.TouchImageView
         android:id="@+id/wallpaperview"
         android:layout_width="wrap_content"
         android:layout_height="422dp"
@@ -14,6 +14,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/about" />
+        android:src="@drawable/about" 
+        
+        />
 
 </RelativeLayout>

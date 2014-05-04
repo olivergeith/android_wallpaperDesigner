@@ -16,7 +16,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.StyleManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
@@ -30,7 +29,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	// Konstanten
 	private static final int REQUEST_CODE_PREFERENCES = 1;
 	private ProgressDialog dialog;
-	private ImageView wallpaperView;
+	private TouchImageView wallpaperView;
 	private IWPStyle drawer;
 
 	@Override
@@ -40,7 +39,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext());
 		prefs.registerOnSharedPreferenceChangeListener(this);
-		wallpaperView = (ImageView) findViewById(R.id.wallpaperview);
+		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
@@ -125,12 +124,12 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	 * @author Oliver Worker Task for generating images
 	 */
 	class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
-		private final WeakReference<ImageView> imageViewReference;
+		private final WeakReference<TouchImageView> imageViewReference;
 
-		public BitmapWorkerTask(final ImageView imageView) {
+		public BitmapWorkerTask(final TouchImageView imageView) {
 			// Use a WeakReference to ensure the ImageView can be garbage
 			// collected
-			imageViewReference = new WeakReference<ImageView>(imageView);
+			imageViewReference = new WeakReference<TouchImageView>(imageView);
 		}
 
 		// Decode image in background.
@@ -147,9 +146,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		@Override
 		protected void onPostExecute(final Bitmap bitmap) {
 			if (imageViewReference != null && bitmap != null) {
-				final ImageView imageView = imageViewReference.get();
+				final TouchImageView imageView = imageViewReference.get();
 				if (imageView != null) {
 					imageView.setImageBitmap(bitmap);
+					imageView.fit2Screen();
 				}
 			}
 			if (dialog != null) {
