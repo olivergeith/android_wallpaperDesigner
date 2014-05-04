@@ -7,8 +7,8 @@ public interface IWPStyle {
 
 	public Bitmap drawBitmap();
 
-	public void save(Context context);
-
 	public void recycleBitmap();
+
+	public void save(Context context);
 
 }

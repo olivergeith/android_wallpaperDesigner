@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
+import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
@@ -33,11 +34,8 @@ public class WPStylePatterns extends WPStyle {
 		final Bitmap refbitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		final Canvas refbitmapCanvas = new Canvas(refbitmap);
 		BackgroundDrawer.drawBackground(refbitmapCanvas);
-		// refbitmapCanvas.drawRect(sizesRect,
-		// Settings.getBackgroundPaint(bWidth, bHeight));
 
 		// initializing some values depending on BitmapSize
-		final int fontSize = Math.round(bWidth * 0.02f);
 		int maxRadius = Math.round(bWidth * 0.04f);
 		if (maxRadius < 30) {
 			maxRadius = 30;
@@ -48,7 +46,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 
 		// Zeichnen
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < Settings.getAnzahlPatterns(); i++) {
 
 			// random koordinate an der gemalt werden soll
 			final int x = getRandomInt(0, bWidth - 1);
@@ -68,12 +66,7 @@ public class WPStylePatterns extends WPStyle {
 			} else {
 				paint.setAlpha(255);
 			}
-			if (getRandomBoolean()) {
-				paint.setStyle(Style.FILL_AND_STROKE);
-				paint.setStrokeWidth(5);
-			} else {
-				paint.setStyle(Style.FILL);
-			}
+			paint.setStyle(Style.FILL);
 			if (Settings.isDropShadow()) {
 				if (Settings.isRandomizeDropShadowColors()) {
 					final int sx = getRandomInt(0, bWidth - 1);
@@ -88,7 +81,7 @@ public class WPStylePatterns extends WPStyle {
 			drawPattern(x, y, paint, radius);
 		}
 
-		drawNonPremiumText(bitmapCanvas, fontSize);
+		drawNonPremiumText(bitmapCanvas);
 		refbitmap.recycle();
 		return bitmap;
 	}
@@ -152,6 +145,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Bubbles":
 			bitmapCanvas.drawCircle(x, y, radius, paint);
+			break;
+		case "Hearts":
+			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), getRandomFloat(1f, 5f)), paint);
 			break;
 		}
 	}

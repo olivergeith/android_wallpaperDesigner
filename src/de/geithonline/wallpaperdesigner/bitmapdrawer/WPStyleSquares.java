@@ -18,8 +18,11 @@ public class WPStyleSquares extends WPStyle {
 		bitmapCanvas = new Canvas(bitmap);
 		BackgroundDrawer.drawBackground(bitmapCanvas);
 
+		final Bitmap refbitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
+		final Canvas refbitmapCanvas = new Canvas(refbitmap);
+		BackgroundDrawer.drawBackground(refbitmapCanvas);
+
 		// initializing some values depending on BitmapSize
-		final int fontSize = Math.round(bWidth * 0.02f);
 		int maxRadius = Math.round(bWidth * 0.04f);
 		if (maxRadius < 30) {
 			maxRadius = 30;
@@ -29,7 +32,8 @@ public class WPStyleSquares extends WPStyle {
 			dropShadowRadius = 10;
 		}
 
-		drawNonPremiumText(bitmapCanvas, fontSize);
+		drawNonPremiumText(bitmapCanvas);
+		refbitmap.recycle();
 		return bitmap;
 	}
 

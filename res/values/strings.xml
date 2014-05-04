@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_version">0.1</string>
-    <string name="app_name">Wallpaper Designer V0.1</string>
-    <string name="wallpaper_description">Wallpaper Designer V0.1</string>
+    <string name="app_version">1.1</string>
+    <string name="app_name">The Wallpaper Designer V1.1</string>
+    <string name="wallpaper_description">The Wallpaper Designer V1.1</string>
     <string name="premium_only">Premium Version only</string>
     <string name="about">About</string>
     <string name="Copyright">Copyright by Oliver Geith</string>
@@ -45,6 +45,7 @@
     <string name="sizeSelection_summary">Choose a size</string>
     <string name="colorDropShadow">DropShadowColor</string>
     <string name="patternPicker">Pattern</string>
+    <string name="pattern_anzahlPatterns">Number of Patterns to draw</string>
     <string name="stylePicker">Style</string>
     <string name="gradientDirection">Color Gradient</string>
     <string name="dynamicColoring">Dynamic Coloring</string>

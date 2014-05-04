@@ -23,12 +23,21 @@
         >
 
         <ListPreference
-	        android:key="patternPicker"
+	        android:key="pattern_patternPicker"
 	        android:title="@string/patternPicker" 
 	        android:dialogTitle="@string/patternPicker"
 	        android:defaultValue="Stars"
 	        android:entries="@array/pattern"
 	        android:entryValues="@array/patternValues"
+	        />
+
+        <ListPreference
+	        android:key="pattern_anzahlPatterns"
+	        android:title="@string/pattern_anzahlPatterns" 
+	        android:dialogTitle="@string/pattern_anzahlPatterns"
+	        android:defaultValue="1000"
+	        android:entries="@array/anzahlPatterns"
+	        android:entryValues="@array/anzahlPatternsValues"
 	        />
         
         <CheckBoxPreference 

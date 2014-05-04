@@ -7,6 +7,11 @@ import android.graphics.Typeface;
 
 public class ColorProvider {
 
+	public static float getRandomFloat(final float min, final float max) {
+		final float mRandom = (float) (min + Math.random() * (max - min));
+		return mRandom;
+	}
+
 	public static int getRandomInt(final int min, final int max) {
 		final int mRandom = min + (int) Math.ceil(Math.random() * (max - min));
 		return mRandom;

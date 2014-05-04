@@ -19,6 +19,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference patternSelection;
 	private ListPreference randomizeColorRange;
 	private ListPreference randomizeAlphaRange;
+	private ListPreference anzahlPatterns;
 
 	private PreferenceScreen patternScreen;
 	private PreferenceScreen squaresScreen;
@@ -29,7 +30,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
-		patternSelection = (ListPreference) findPreference("patternPicker");
+		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
 		patternSelection.setSummary(Settings.getSelectedPattern());
 		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -39,6 +40,17 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 		});
+		anzahlPatterns = (ListPreference) findPreference(Settings.PATTERN_ANZAHL_PATTERNS);
+		anzahlPatterns.setSummary("" + Settings.getAnzahlPatterns());
+		anzahlPatterns.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				anzahlPatterns.setSummary((String) newValue);
+				return true;
+			}
+		});
+
 		styleSelection = (ListPreference) findPreference("stylePicker");
 		styleSelection.setSummary(Settings.getSelectedStyle());
 		styleSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {

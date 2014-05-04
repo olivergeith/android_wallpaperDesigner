@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class BackgroundDrawer {
@@ -73,7 +72,6 @@ public class BackgroundDrawer {
 		final float sqW = (float) cWidth / (float) levels;
 		final float sqH = (float) cHeight / (float) levels;
 		for (int x = 0; x < levels; x++) {
-			Log.i("Geith", "x=" + x);
 			final int colXOben = getRadiantColor(c1, c2, x, 0, levels - 1);
 			final int colXUnten = getRadiantColor(c3, c4, x, 0, levels - 1);
 			for (int y = 0; y < levels; y++) {

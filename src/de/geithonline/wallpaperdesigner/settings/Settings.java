@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
+	public static final String PATTERN_ANZAHL_PATTERNS = "pattern_anzahlPatterns";
 	public static SharedPreferences prefs;
 	private static Context context;
 
@@ -26,7 +28,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Stars";
 		}
-		return prefs.getString("patternPicker", "Stars");
+		return prefs.getString(PATTERN_PATTERN_PICKER, "Stars");
 	}
 
 	public static boolean isDropShadow() {
@@ -79,6 +81,13 @@ public class Settings {
 			return 64;
 		}
 		return Integer.valueOf(prefs.getString("randomizeColorRange", "64"));
+	}
+
+	public static int getAnzahlPatterns() {
+		if (prefs == null) {
+			return 1000;
+		}
+		return Integer.valueOf(prefs.getString(PATTERN_ANZAHL_PATTERNS, "1000"));
 	}
 
 	// ###################################################################

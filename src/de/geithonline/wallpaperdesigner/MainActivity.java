@@ -1,5 +1,6 @@
 package de.geithonline.wallpaperdesigner;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 import android.app.Activity;
@@ -10,6 +11,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.StyleManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 /**
  * @author Oliver
@@ -71,6 +74,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 			dialog.setMessage("Saving...");
 			dialog.show();
 		}
+		String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+		extStorageDirectory += File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
+		Toaster.showInfoToast(this, "Wallpaters are saved to: " + extStorageDirectory);
 	}
 
 	@Override

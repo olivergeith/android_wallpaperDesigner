@@ -98,6 +98,7 @@
         <item >Gears</item>
         <item >Gears filled</item>
         <item >Gears mixed</item>
+        <item >Hearts</item>
         </string-array>
     
     <string-array name="patternValues">
@@ -114,6 +115,7 @@
         <item >Gears</item>
         <item >Gears filled</item>
         <item >Gears mixed</item>
+        <item >Hearts</item>
         </string-array>
     
     
@@ -135,6 +137,31 @@
         </string-array>
     
     
+     <string-array name="anzahlPatterns">
+        <item >100</item>
+        <item >200</item>
+        <item >300</item>
+        <item >400</item>
+        <item >500</item>
+        <item >600</item>
+        <item >700</item>
+        <item >800</item>
+        <item >900</item>
+        <item >1000</item>
+    </string-array>
+    
+    <string-array name="anzahlPatternsValues">
+        <item >100</item>
+        <item >200</item>
+        <item >300</item>
+        <item >400</item>
+        <item >500</item>
+        <item >600</item>
+        <item >700</item>
+        <item >800</item>
+        <item >900</item>
+        <item >1000</item>
+     </string-array>
     
     
 </resources>
