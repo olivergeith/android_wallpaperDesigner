@@ -5,10 +5,13 @@ import java.lang.ref.WeakReference;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,6 +22,7 @@ import android.view.MenuItem;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.StyleManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 /**
@@ -31,6 +35,8 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	private ProgressDialog dialog;
 	private TouchImageView wallpaperView;
 	private IWPStyle drawer;
+	private SensorManager mSensorManager;
+	private ShakeEventListener mSensorListener;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -43,6 +49,8 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
+
+		initSensors();
 
 		generate();
 
@@ -181,6 +189,32 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 			}
 		}
 
+	}
+
+	// ##########################################################
+	// for shaking
+	public void initSensors() {
+		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		mSensorListener = new ShakeEventListener();
+		mSensorListener.setOnShakeListener(new ShakeEventListener.OnShakeListener() {
+
+			@Override
+			public void onShake() {
+				generate();
+			}
+		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+	}
+
+	@Override
+	protected void onPause() {
+		mSensorManager.unregisterListener(mSensorListener);
+		super.onPause();
 	}
 
 }
