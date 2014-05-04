@@ -8,7 +8,7 @@
 	        android:key="gradientDirection"
 	        android:title="@string/gradientDirection" 
 	        android:dialogTitle="@string/gradientDirection"
-	        android:defaultValue="Stars"
+	        android:defaultValue="4-Color Gradient from corners"
 	        android:entries="@array/directions"
 	        android:entryValues="@array/directionsValues"
 	        />
