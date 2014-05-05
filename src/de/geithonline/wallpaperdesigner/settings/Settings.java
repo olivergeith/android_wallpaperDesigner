@@ -108,23 +108,23 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getBWidth();
-		default:
-		case "2560x1600":
-			return 2560;
-		case "1920x1200":
-			return 1920;
-		case "1920x1080":
-			return 1920;
-		case "1280x720":
-			return 1280;
-		case "1024x768":
-			return 1024;
-		case "960x800":
-			return 960;
-		case "640x480":
-			return 640;
+			case "customSize":
+				return getBWidth();
+			default:
+			case "2560x1600":
+				return 2560;
+			case "1920x1200":
+				return 1920;
+			case "1920x1080":
+				return 1920;
+			case "1280x720":
+				return 1280;
+			case "1024x768":
+				return 1024;
+			case "960x800":
+				return 960;
+			case "640x480":
+				return 640;
 		}
 	}
 
@@ -139,23 +139,23 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getBHeight();
-		default:
-		case "2560x1600":
-			return 1600;
-		case "1920x1200":
-			return 1200;
-		case "1920x1080":
-			return 1080;
-		case "1280x720":
-			return 720;
-		case "1024x768":
-			return 768;
-		case "960x800":
-			return 800;
-		case "640x480":
-			return 480;
+			case "customSize":
+				return getBHeight();
+			default:
+			case "2560x1600":
+				return 1600;
+			case "1920x1200":
+				return 1200;
+			case "1920x1080":
+				return 1080;
+			case "1280x720":
+				return 720;
+			case "1024x768":
+				return 768;
+			case "960x800":
+				return 800;
+			case "640x480":
+				return 480;
 		}
 	}
 
@@ -163,9 +163,9 @@ public class Settings {
 	// Background Color
 	public static String getGradientDirection() {
 		if (prefs == null) {
-			return "top-bottom";
+			return "4-Color Gradient from corners";
 		}
-		return prefs.getString("gradientDirection", "top-bottom");
+		return prefs.getString("gradientDirection", "4-Color Gradient from corners");
 	}
 
 	// Background Color
@@ -210,9 +210,9 @@ public class Settings {
 
 	public static boolean isDynamicColoring() {
 		if (prefs == null) {
-			return true;
+			return false;
 		}
-		return prefs.getBoolean("dynamicColoring", true);
+		return prefs.getBoolean("dynamicColoring", false);
 	}
 
 	public static DisplayMetrics getDisplayMetrics() {
@@ -259,6 +259,25 @@ public class Settings {
 			prefs.edit().putInt("color2_plain_bgrnd", Color.YELLOW).commit();
 			prefs.edit().putInt("color3_plain_bgrnd", Color.GREEN).commit();
 			prefs.edit().putInt("color4_plain_bgrnd", Color.BLUE).commit();
+			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
+			prefs.edit().putBoolean("dynamicColoring", false).commit();
+
+			prefs.edit().putString("stylePicker", "Patterns").commit();
+			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Stars").commit();
+			prefs.edit().putString(PATTERN_ANZAHL_PATTERNS, "1000").commit();
+
+			prefs.edit().putBoolean("dropShadow", true).commit();
+			prefs.edit().putBoolean("randomizeDropShadowColor", true).commit();
+			prefs.edit().putInt("colorDropShadow", R.integer.COLOR_BLACK).commit();
+
+			prefs.edit().putString("bWidth", "2560").commit();
+			prefs.edit().putString("bHeight", "1600").commit();
+			prefs.edit().putString("sizeSelection", "2560x1600").commit();
+
+			prefs.edit().putBoolean("randomizeColor", false).commit();
+			prefs.edit().putString("randomizeColorRange", "32").commit();
+			prefs.edit().putBoolean("randomizeAlpha", true).commit();
+			prefs.edit().putString("randomizeAlphaRange", "96").commit();
 		}
 	}
 

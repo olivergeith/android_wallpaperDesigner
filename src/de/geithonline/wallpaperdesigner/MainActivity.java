@@ -8,7 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -29,7 +28,7 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
  * @author Oliver
  * 
  */
-public class MainActivity extends Activity implements OnSharedPreferenceChangeListener {
+public class MainActivity extends Activity /* implements OnSharedPreferenceChangeListener */{
 	// Konstanten
 	private static final int REQUEST_CODE_PREFERENCES = 1;
 	private ProgressDialog dialog;
@@ -44,7 +43,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		setContentView(R.layout.activity_main);
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext());
-		prefs.registerOnSharedPreferenceChangeListener(this);
+		// prefs.registerOnSharedPreferenceChangeListener(this);
 		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
@@ -56,6 +55,31 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 
 		if (savedInstanceState == null) {
 		}
+	}
+
+	// @Override
+	// public void onOptionsMenuClosed(final Menu menu) {
+	// Log.i("MENU", "Settings closed");
+	// generate();
+	// super.onOptionsMenuClosed(menu);
+	// }
+
+	// @Override
+	// public void onWindowFocusChanged(final boolean hasFocus) {
+	// if (hasFocus) {
+	// Log.i("MENU", "HAS Fokus");
+	// generate();
+	// }
+	// super.onWindowFocusChanged(hasFocus);
+	// }
+
+	@Override
+	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+		if (requestCode == REQUEST_CODE_PREFERENCES) {
+			Log.i("MENU", "Coming beack from Settings...generating...");
+			generate();
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -86,10 +110,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		Toaster.showInfoToast(this, "Wallpaters are saved to: " + extStorageDirectory);
 	}
 
-	@Override
-	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-		generate();
-	}
+	// @Override
+	// public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+	// generate();
+	// }
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
