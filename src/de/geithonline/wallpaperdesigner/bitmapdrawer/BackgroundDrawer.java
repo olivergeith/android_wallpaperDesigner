@@ -4,9 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class BackgroundDrawer {
@@ -14,16 +16,19 @@ public class BackgroundDrawer {
 	public static void drawBackground(final Canvas canvas) {
 
 		switch (Settings.getGradientDirection()) {
-		default:
-		case "Linear Gradient top-bottom":
-		case "Linear Gradient left-right":
-		case "Linear Gradient topleft-bottomright":
-		case "Linear Gradient topright-bottomleft":
-			drawLinearGradientBackground(canvas);
-			break;
-		case "4-Color Gradient from corners":
-			draw4ColorBackground(canvas);
-			break;
+			default:
+			case "Linear Gradient top-bottom":
+			case "Linear Gradient left-right":
+			case "Linear Gradient topleft-bottomright":
+			case "Linear Gradient topright-bottomleft":
+			case "2 Color Radial Gradient":
+			case "4 Color Radial Gradient":
+			case "4 Color Sweep Gradient":
+				drawLinearGradientBackground(canvas);
+				break;
+			case "4-Color Gradient from corners":
+				draw4ColorBackground(canvas);
+				break;
 		}
 
 	}
@@ -32,20 +37,38 @@ public class BackgroundDrawer {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
+		final int radius = (int) Math.sqrt(width * width + height * height) / 2;
+
 		switch (Settings.getGradientDirection()) {
-		default:
-		case "Linear Gradient top-bottom":
-			paint.setShader(new LinearGradient(0, 0, 0, height, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient left-right":
-			paint.setShader(new LinearGradient(0, 0, width, 0, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient topleft-bottomright":
-			paint.setShader(new LinearGradient(0, 0, width, height, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient topright-bottomleft":
-			paint.setShader(new LinearGradient(width, 0, 0, height, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
-			break;
+			default:
+			case "Linear Gradient top-bottom":
+				paint.setShader(new LinearGradient(0, 0, 0, height, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient left-right":
+				paint.setShader(new LinearGradient(0, 0, width, 0, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient topleft-bottomright":
+				paint.setShader(new LinearGradient(0, 0, width, height, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient topright-bottomleft":
+				paint.setShader(new LinearGradient(width, 0, 0, height, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Shader.TileMode.MIRROR));
+				break;
+			case "2 Color Radial Gradient":
+				paint.setShader(new RadialGradient(width / 2, height / 2, height / 2, Settings.getBackgroundColor1(), Settings.getBackgroundColor2(),
+						Shader.TileMode.MIRROR));
+				break;
+			case "4 Color Radial Gradient":
+				final int colors[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Settings.getBackgroundColor3(),
+						Settings.getBackgroundColor4() };
+				final float distances[] = { 0.0f, 0.3f, 0.6f, 0.9f };
+				paint.setShader(new RadialGradient(width / 2, height / 2, radius, colors, distances, Shader.TileMode.MIRROR));
+				break;
+			case "4 Color Sweep Gradient":
+				final int colorsSweep[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Settings.getBackgroundColor3(),
+						Settings.getBackgroundColor4(), Settings.getBackgroundColor1() };
+				final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
+				paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+				break;
 		}
 		return paint;
 	}

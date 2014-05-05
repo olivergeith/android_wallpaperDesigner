@@ -173,7 +173,8 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return test.equalsIgnoreCase("4-Color Gradient from corners");
+		return test.equalsIgnoreCase("4-Color Gradient from corners") || test.equalsIgnoreCase("4 Color Radial Gradient")
+				|| test.equalsIgnoreCase("4 Color Sweep Gradient");
 	}
 
 	public static int getBackgroundColor1() {
