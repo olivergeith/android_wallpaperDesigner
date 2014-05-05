@@ -5,11 +5,16 @@ import android.graphics.Point;
 
 public class SpiralPath extends Path {
 
-	public SpiralPath(final int circles, final Point center, final float rOuter) {
+	public SpiralPath(final int circles, final Point center, final float rOuter, final boolean flip) {
 		super();
 
 		final int ecken = 100;
-		final float angle = (float) (2 * Math.PI * circles / ecken);
+		final float angle;
+		if (!flip) {
+			angle = (float) (2 * Math.PI * circles / ecken);
+		} else {
+			angle = (float) (-2 * Math.PI * circles / ecken);
+		}
 
 		for (int i = 0; i <= ecken; i++) {
 			final float r = rOuter * i / ecken;

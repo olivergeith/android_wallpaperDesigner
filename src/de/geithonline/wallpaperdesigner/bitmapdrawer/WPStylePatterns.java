@@ -10,6 +10,8 @@ import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
+import de.geithonline.wallpaperdesigner.shapes.PillowPath;
+import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
@@ -153,7 +155,17 @@ public class WPStylePatterns extends WPStyle {
 		case "Spirals":
 			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius), paint);
+			bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+			break;
+		case "Pillows":
+			paint.setStyle(Style.FILL);
+			paint.setStrokeWidth(radius / 10);
+			bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
+			break;
+		case "Roses":
+			paint.setStyle(Style.FILL);
+			paint.setStrokeWidth(radius / 10);
+			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
 			break;
 		}
 	}
