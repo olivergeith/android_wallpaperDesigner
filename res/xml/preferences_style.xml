@@ -2,25 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
  
     <PreferenceCategory 
-        android:title="@string/category_background">
-
-        <ListPreference
-	        android:key="stylePicker"
-	        android:title="@string/stylePicker" 
-	        android:dialogTitle="@string/stylePicker"
-	        android:defaultValue="Patterns"
-	        android:entries="@array/style"
-	        android:entryValues="@array/styleValues"
-	        />
-	    
-    </PreferenceCategory>
-
-    <PreferenceCategory 
         android:title="Settings">
-    <PreferenceScreen 
-        android:key="patternsScreen"
-        android:title="@string/category_patterns"
-        >
 
         <ListPreference
 	        android:key="pattern_patternPicker"
@@ -40,11 +22,6 @@
 	        android:entryValues="@array/anzahlPatternsValues"
 	        />
         
-        <CheckBoxPreference 
-            android:key="randomizeColor"
-            android:title="@string/randomizeColor"
-            android:defaultValue="false"
-            />
         <ListPreference
 	        android:key="randomizeColorRange"
 	        android:title="@string/randomizeColorRange" 
@@ -52,15 +29,7 @@
 	        android:defaultValue="64"
 	        android:entries="@array/randColorRange"
 	        android:entryValues="@array/randColorRangeValues"
-	        android:dependency="randomizeColor"
 	        />
-        
-        	
-    	<CheckBoxPreference 
-            android:key="randomizeAlpha"
-            android:title="@string/randomizeAlpha"
-            android:defaultValue="true"
-            />
         
         <ListPreference
 	        android:key="randomizeAlphaRange"
@@ -69,7 +38,6 @@
 	        android:defaultValue="128"
 	        android:entries="@array/randAlphaRange"
 	        android:entryValues="@array/randAlphaRangeValues"
-	        android:dependency="randomizeAlpha"
 	        />
 
         <ListPreference
@@ -86,20 +54,6 @@
 	        android:title="@string/colorDropShadow" 
 	        android:defaultValue="@integer/COLOR_BLACK"
 	        />
-    </PreferenceScreen>
-    
-    <PreferenceScreen 
-        android:key="squaresScreen"
-        android:title="@string/category_squares"
-        >
-
-        
-        <CheckBoxPreference 
-            android:key="randomizeColor"
-            android:title="@string/randomizeColor"
-            android:defaultValue="false"
-            />
-    </PreferenceScreen>
     
     
     </PreferenceCategory>

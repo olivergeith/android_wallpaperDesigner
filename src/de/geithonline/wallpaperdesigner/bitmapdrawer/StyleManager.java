@@ -8,7 +8,6 @@ public class StyleManager {
 
 	static {
 		drawer.put("Patterns", new WPStylePatterns());
-		drawer.put("Squares", new WPStyleSquares());
 	}
 
 	public static IWPStyle getDrawer(final String name) {

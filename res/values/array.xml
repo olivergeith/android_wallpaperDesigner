@@ -24,11 +24,14 @@
 
 
      <string-array name="randColorRange">
+        <item >0</item>
         <item >8</item>
         <item >16</item>
         <item >24</item>
         <item >32</item>
+        <item >48</item>
         <item >64</item>
+        <item >80</item>
         <item >96</item>
         <item >128</item>
         <item >160</item>
@@ -38,11 +41,14 @@
     </string-array>
     
     <string-array name="randColorRangeValues">
+        <item >0</item>
         <item >8</item>
         <item >16</item>
         <item >24</item>
         <item >32</item>
+        <item >48</item>
         <item >64</item>
+        <item >80</item>
         <item >96</item>
         <item >128</item>
         <item >160</item>
@@ -52,6 +58,7 @@
      </string-array>
 
     <string-array name="randAlphaRange">
+        <item >0</item>
         <item >32</item>
         <item >64</item>
         <item >96</item>
@@ -63,6 +70,7 @@
     </string-array>
     
     <string-array name="randAlphaRangeValues">
+        <item >0</item>
         <item >32</item>
         <item >64</item>
         <item >96</item>
@@ -122,6 +130,7 @@
         <item >Pillows</item>
         <item >Roses</item>
         <item >Skyline</item>
+        <item >Crickle Crackle</item>
         </string-array>
     
     <string-array name="patternValues">
@@ -145,6 +154,7 @@
         <item >Pillows</item>
         <item >Roses</item>
         <item >Skyline</item>
+        <item >Crickle Crackle</item>
         </string-array>
     
     

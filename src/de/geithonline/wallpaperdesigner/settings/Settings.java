@@ -20,10 +20,8 @@ public class Settings {
 	// Options Style Selection
 
 	public static String getSelectedStyle() {
-		if (prefs == null) {
-			return "Patterns";
-		}
-		return prefs.getString("stylePicker", "Patterns");
+		return "Patterns";
+		// return prefs.getString("stylePicker", "Patterns");
 	}
 
 	// ###################################################################
@@ -75,10 +73,7 @@ public class Settings {
 	// ###################################################################
 	// Options Pattern Style (Alpha)
 	public static boolean isRandomizeAlpha() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean("randomizeAlpha", true);
+		return getRandomizeAlphaRange() != 0;
 	}
 
 	public static int getRandomizeAlphaRange() {
@@ -91,10 +86,7 @@ public class Settings {
 	// ###################################################################
 	// Options Pattern Style (Color)
 	public static boolean isRandomizeColors() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("randomizeColor", false);
+		return getRandomizeColorRange() != 0;
 	}
 
 	public static int getRandomizeColorRange() {

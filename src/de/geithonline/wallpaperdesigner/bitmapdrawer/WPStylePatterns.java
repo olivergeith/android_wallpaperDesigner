@@ -15,6 +15,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
+import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
@@ -186,6 +187,11 @@ public class WPStylePatterns extends WPStyle {
 		case "Skyline":
 			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
 			bitmapCanvas.drawRect(rect, paint);
+			break;
+		case "Crickle Crackle":
+			paint.setStyle(Style.STROKE);
+			paint.setStrokeWidth(radius / 10);
+			bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
 			break;
 		}
 	}

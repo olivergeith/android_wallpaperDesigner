@@ -7,7 +7,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -15,15 +14,11 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
  */
 public class StylePreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
-	private ListPreference styleSelection;
 	private ListPreference patternSelection;
 	private ListPreference randomizeColorRange;
 	private ListPreference randomizeAlphaRange;
 	private ListPreference anzahlPatterns;
 	private ListPreference dropShadowType;;
-
-	private PreferenceScreen patternScreen;
-	private PreferenceScreen squaresScreen;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -48,18 +43,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				anzahlPatterns.setSummary((String) newValue);
-				return true;
-			}
-		});
-
-		styleSelection = (ListPreference) findPreference("stylePicker");
-		styleSelection.setSummary(Settings.getSelectedStyle());
-		styleSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				styleSelection.setSummary((String) newValue);
-				enableScreens((String) newValue);
 				return true;
 			}
 		});
@@ -97,10 +80,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
-		patternScreen = (PreferenceScreen) findPreference("patternsScreen");
-		squaresScreen = (PreferenceScreen) findPreference("squaresScreen");
-
-		enableScreens(Settings.getSelectedStyle());
 		enableProFeatures();
 	}
 
@@ -108,11 +87,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowType.setSummary(newValue);
 		final Preference dropShadowColor = findPreference(Settings.PATTERN_DROPSHADOW_COLOR);
 		dropShadowColor.setEnabled(newValue.equals("Select"));
-	}
-
-	private void enableScreens(final String style) {
-		patternScreen.setEnabled(style.equals("Patterns"));
-		squaresScreen.setEnabled(style.equals("Squares"));
 	}
 
 	private void enableProFeatures() {
