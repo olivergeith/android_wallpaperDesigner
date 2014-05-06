@@ -5,7 +5,14 @@ import android.graphics.Point;
 
 public class XEckPath extends Path {
 
-	public XEckPath(final int ecken, final Point center, final float rOuter) {
+	/**
+	 * @param ecken
+	 * @param center
+	 * @param rOuter
+	 * @param rotate
+	 *            0-2pi
+	 */
+	public XEckPath(final int ecken, final Point center, final float rOuter, final float rotate) {
 		super();
 		final float angle = (float) (Math.PI / ecken) * 2;
 
@@ -14,8 +21,8 @@ public class XEckPath extends Path {
 			// final float r = rInner;
 
 			final Point p = new Point();
-			p.x = (int) (center.x + Math.cos(i * angle) * r);
-			p.y = (int) (center.y + Math.sin(i * angle) * r);
+			p.x = (int) (center.x + Math.cos(i * angle + rotate) * r);
+			p.y = (int) (center.y + Math.sin(i * angle + rotate) * r);
 			// Log.i("Point", "Point " + i + " p=" + p.x + " " + p.y);
 			if (i == 0) {
 				moveTo(p.x, p.y);

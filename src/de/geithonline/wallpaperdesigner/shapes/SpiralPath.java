@@ -8,7 +8,7 @@ public class SpiralPath extends Path {
 	public SpiralPath(final int circles, final Point center, final float rOuter, final boolean flip) {
 		super();
 
-		final int ecken = 100;
+		final int ecken = 200;
 		final float angle;
 		if (!flip) {
 			angle = (float) (2 * Math.PI * circles / ecken);

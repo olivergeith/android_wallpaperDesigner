@@ -103,13 +103,15 @@
     
     <string-array name="pattern">
         <item >Stars</item>
-        <item >Stars filled</item>
-        <item >Stars mixed</item>
         <item >Saw</item>
         <item >Saw filled</item>
         <item >Saw mixed</item>
         <item >Bubbles</item>
+        <item >Glossy Bubbles</item>
+        <item >Squares</item>
+        <item >Squares rotated</item>
         <item >Pentagon</item>
+        <item >Pentagon rotated</item>
         <item >Hexagon</item>
         <item >Letters</item>
         <item >Gears</item>
@@ -119,17 +121,20 @@
         <item >Spirals</item>
         <item >Pillows</item>
         <item >Roses</item>
+        <item >Skyline</item>
         </string-array>
     
     <string-array name="patternValues">
         <item >Stars</item>
-        <item >Stars filled</item>
-        <item >Stars mixed</item>
         <item >Saw</item>
         <item >Saw filled</item>
         <item >Saw mixed</item>
         <item >Bubbles</item>
+        <item >Glossy Bubbles</item>
+        <item >Squares</item>
+        <item >Squares rotated</item>
         <item >Pentagon</item>
+        <item >Pentagon rotated</item>
         <item >Hexagon</item>
         <item >Letters</item>
         <item >Gears</item>
@@ -139,6 +144,7 @@
         <item >Spirals</item>
         <item >Pillows</item>
         <item >Roses</item>
+        <item >Skyline</item>
         </string-array>
     
     

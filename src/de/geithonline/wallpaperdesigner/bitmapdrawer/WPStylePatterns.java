@@ -2,10 +2,14 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
+import android.graphics.RadialGradient;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -16,6 +20,7 @@ import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
+import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public class WPStylePatterns extends WPStyle {
 
@@ -125,13 +130,7 @@ public class WPStylePatterns extends WPStyle {
 			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
 			break;
 		case "Stars":
-			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, false, getRandomBoolean()), paint);
-			break;
-		case "Stars filled":
-			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, getRandomBoolean()), paint);
-			break;
-		case "Stars mixed":
-			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, getRandomBoolean(), getRandomBoolean()), paint);
+			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, getRandomFloat(0, (float) (Math.PI / 2))), paint);
 			break;
 		case "Gears":
 			final int zaehne = 15;
@@ -145,11 +144,23 @@ public class WPStylePatterns extends WPStyle {
 			final int zm = getRandomInt(12, 20);
 			bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
 			break;
+		case "Squares":
+			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, 0), paint);
+			break;
+		case "Squares rotated":
+			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, getRandomFloat(0, (float) (Math.PI / 2))), paint);
+			break;
 		case "Pentagon":
-			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius), paint);
+			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, 0), paint);
+			break;
+		case "Pentagon rotated":
+			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, getRandomFloat(0, (float) (2 * Math.PI))), paint);
 			break;
 		case "Hexagon":
-			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius), paint);
+			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, 0), paint);
+			break;
+		case "Glossy Bubbles":
+			drawGlossyBubble(x, y, paint, radius);
 			break;
 		case "Bubbles":
 			bitmapCanvas.drawCircle(x, y, radius, paint);
@@ -172,7 +183,34 @@ public class WPStylePatterns extends WPStyle {
 			paint.setStrokeWidth(radius / 10);
 			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
 			break;
+		case "Skyline":
+			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
+			bitmapCanvas.drawRect(rect, paint);
+			break;
 		}
+	}
+
+	public void drawGlossyBubble(final int x, final int y, final Paint paint, final int radius) {
+		final int color = paint.getColor();
+		final int colordarker = ColorHelper.darker(color);
+		final int colorBrighter = ColorHelper.brighter2times(color);
+		final int whitehalftransparent = 0xCCFFFFFF;
+		final int transparent = 0x00FFFFFF;
+		// Bubble
+		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, color, Shader.TileMode.MIRROR));
+		bitmapCanvas.drawCircle(x, y, radius, paint);
+		// Ring
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 10);
+		paint.setShader(null);
+		paint.setShadowLayer(0, 0, 0, Settings.getDropShadowColor());
+		paint.setColor(colordarker);
+		bitmapCanvas.drawCircle(x, y, radius, paint);
+		// Glossy glow
+		paint.setShader(new LinearGradient(x, y - radius, x, y, whitehalftransparent, transparent, Shader.TileMode.MIRROR));
+		paint.setStyle(Style.FILL);
+		final RectF oval = new RectF(x - radius * 3 / 4, y - radius, x + radius * 3 / 4, y);
+		bitmapCanvas.drawOval(oval, paint);
 	}
 
 	private int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
