@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <!-- For upgrade to Pro Version -->
     <uses-permission android:name="com.android.vending.BILLING" />
+    <!-- For directly setting the wallpaper from within the app -->
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <uses-feature
