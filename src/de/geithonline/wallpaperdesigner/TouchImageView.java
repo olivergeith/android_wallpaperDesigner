@@ -26,7 +26,7 @@ public class TouchImageView extends ImageView implements OnTouchListener {
 	PointF last = new PointF();
 	PointF start = new PointF();
 	float minScale = 1f;
-	float maxScale = 3f;
+	float maxScale = 4f;
 	float[] m;
 
 	float redundantXSpace, redundantYSpace, origRedundantXSpace, origRedundantYSpace;;
@@ -42,6 +42,8 @@ public class TouchImageView extends ImageView implements OnTouchListener {
 	GestureDetector mGestureDetector;
 
 	Context context;
+
+	private Bitmap bitmap;
 
 	public TouchImageView(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
@@ -172,6 +174,7 @@ public class TouchImageView extends ImageView implements OnTouchListener {
 	@Override
 	public void setImageBitmap(final Bitmap bm) {
 		super.setImageBitmap(bm);
+		bitmap = bm;
 		bmWidth = bm.getWidth();
 		bmHeight = bm.getHeight();
 	}
@@ -279,6 +282,10 @@ public class TouchImageView extends ImageView implements OnTouchListener {
 		origRight = right;
 		origBottom = bottom;
 		setImageMatrix(matrix);
+	}
+
+	public Bitmap getBitmap() {
+		return bitmap;
 	}
 
 }

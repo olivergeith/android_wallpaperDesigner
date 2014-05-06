@@ -49,6 +49,8 @@
     <string name="stylePicker">Style</string>
     <string name="gradientDirection">Color Gradient</string>
     <string name="dynamicColoring">Dynamic Coloring</string>
-    
+    <string name="shakeHint">Shake device for new random image!\n...or tap here...</string>
+    <string name="Settings">Settings</string>
+    <string name="setasWallpaper">Set Wallpaper</string>
 
 </resources>

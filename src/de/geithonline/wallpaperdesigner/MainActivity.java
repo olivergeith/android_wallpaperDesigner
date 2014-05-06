@@ -1,10 +1,12 @@
 package de.geithonline.wallpaperdesigner;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +20,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.StyleManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
@@ -28,7 +33,7 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
  * @author Oliver
  * 
  */
-public class MainActivity extends Activity /* implements OnSharedPreferenceChangeListener */{
+public class MainActivity extends Activity {
 	// Konstanten
 	private static final int REQUEST_CODE_PREFERENCES = 1;
 	private ProgressDialog dialog;
@@ -36,6 +41,9 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 	private IWPStyle drawer;
 	private SensorManager mSensorManager;
 	private ShakeEventListener mSensorListener;
+	private TextView shakeHint;
+	private TextView settingsButton;
+	private TextView saveButton;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -45,6 +53,32 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		Settings.initPrefs(prefs, getApplicationContext());
 		// prefs.registerOnSharedPreferenceChangeListener(this);
 		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
+		shakeHint = (TextView) findViewById(R.id.shakeHint);
+		shakeHint.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(final View v) {
+				generate();
+			}
+		});
+		settingsButton = (TextView) findViewById(R.id.settingsButton);
+		settingsButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(final View v) {
+				startSettings();
+			}
+		});
+
+		saveButton = (TextView) findViewById(R.id.saveButton);
+		saveButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(final View v) {
+				setWallpaper();
+			}
+		});
+
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
@@ -56,22 +90,6 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		if (savedInstanceState == null) {
 		}
 	}
-
-	// @Override
-	// public void onOptionsMenuClosed(final Menu menu) {
-	// Log.i("MENU", "Settings closed");
-	// generate();
-	// super.onOptionsMenuClosed(menu);
-	// }
-
-	// @Override
-	// public void onWindowFocusChanged(final boolean hasFocus) {
-	// if (hasFocus) {
-	// Log.i("MENU", "HAS Fokus");
-	// generate();
-	// }
-	// super.onWindowFocusChanged(hasFocus);
-	// }
 
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -87,6 +105,15 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		dialog.dismiss();
 		dialog = null;
 		super.onDestroy();
+	}
+
+	public synchronized void setWallpaper() {
+		final WallpaperSettingTask task = new WallpaperSettingTask();
+		task.execute();
+		if (dialog != null) {
+			dialog.setMessage("Setting Wallpaper...");
+			dialog.show();
+		}
 	}
 
 	public synchronized void generate() {
@@ -110,11 +137,6 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		Toaster.showInfoToast(this, "Wallpaters are saved to: " + extStorageDirectory);
 	}
 
-	// @Override
-	// public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-	// generate();
-	// }
-
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -129,14 +151,14 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		// as you specify a parent activity in AndroidManifest.xml.
 		final int id = item.getItemId();
 		Log.i("Geith", "id=" + id);
-		if (id == R.id.action_settings) {
-			startSettings();
-			return true;
-		}
-		if (id == R.id.action_generate) {
-			generate();
-			return true;
-		}
+		// if (id == R.id.action_settings) {
+		// startSettings();
+		// return true;
+		// }
+		// if (id == R.id.action_generate) {
+		// generate();
+		// return true;
+		// }
 		if (id == R.id.action_save) {
 			save();
 			return true;
@@ -152,9 +174,7 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		startActivityForResult(intent, REQUEST_CODE_PREFERENCES);
 	}
 
-	/**
-	 * @author Oliver Worker Task for generating images
-	 */
+	// ##########################################################
 	class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
 		private final WeakReference<TouchImageView> imageViewReference;
 
@@ -190,9 +210,38 @@ public class MainActivity extends Activity /* implements OnSharedPreferenceChang
 		}
 	}
 
-	/**
-	 * @author Oliver Worker Task for saving images
-	 */
+	private void exit() {
+		finish();
+	}
+
+	// ##########################################################
+	class WallpaperSettingTask extends AsyncTask<Void, Void, Integer> {
+
+		public WallpaperSettingTask() {
+		}
+
+		@Override
+		protected Integer doInBackground(final Void... params) {
+			final Bitmap bitmap = wallpaperView.getBitmap();
+			final WallpaperManager wallpaperManager = WallpaperManager.getInstance(MainActivity.this);
+			try {
+				wallpaperManager.setBitmap(bitmap);
+			} catch (final IOException e) {
+				e.printStackTrace();
+			}
+			return 0;
+		}
+
+		@Override
+		protected void onPostExecute(final Integer i) {
+			if (dialog != null) {
+				dialog.cancel();
+			}
+			exit();
+		}
+	}
+
+	// ##########################################################
 	class BitmapSaverTask extends AsyncTask<Void, Void, Integer> {
 
 		public BitmapSaverTask() {

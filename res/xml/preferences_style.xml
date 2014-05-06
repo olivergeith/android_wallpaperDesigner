@@ -71,25 +71,20 @@
 	        android:entryValues="@array/randAlphaRangeValues"
 	        android:dependency="randomizeAlpha"
 	        />
-    	
-    	<CheckBoxPreference 
-            android:key="dropShadow"
-            android:title="@string/dropShadow"
-            android:defaultValue="true"
-            />
-    	<CheckBoxPreference 
-            android:key="randomizeDropShadowColor"
-            android:title="@string/randomizeDropShadowColor"
-            android:defaultValue="true"
-            android:disableDependentsState="true"
-	        android:dependency="dropShadow"
-            />
-    		    
+
+        <ListPreference
+	        android:key="pattern_dropShadowType"
+	        android:title="@string/dropShadow" 
+	        android:dialogTitle="@string/dropShadow"
+	        android:defaultValue="Random"
+	        android:entries="@array/dropShadowType"
+	        android:entryValues="@array/dropShadowTypeValues"
+	        />
+       
 	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
 	        android:key="colorDropShadow"
 	        android:title="@string/colorDropShadow" 
 	        android:defaultValue="@integer/COLOR_BLACK"
-	        android:dependency="randomizeDropShadowColor"
 	        />
     </PreferenceScreen>
     

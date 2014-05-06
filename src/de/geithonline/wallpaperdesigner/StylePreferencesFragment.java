@@ -20,6 +20,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference randomizeColorRange;
 	private ListPreference randomizeAlphaRange;
 	private ListPreference anzahlPatterns;
+	private ListPreference dropShadowType;;
 
 	private PreferenceScreen patternScreen;
 	private PreferenceScreen squaresScreen;
@@ -63,6 +64,18 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
+		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
+		handleDropShadowTypeSelection(Settings.getDropShadowType());
+		dropShadowType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleDropShadowTypeSelection((String) newValue);
+				return true;
+			}
+
+		});
+
 		randomizeColorRange = (ListPreference) findPreference("randomizeColorRange");
 		randomizeColorRange.setSummary("" + Settings.getRandomizeColorRange());
 		randomizeColorRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -89,6 +102,12 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		enableScreens(Settings.getSelectedStyle());
 		enableProFeatures();
+	}
+
+	public void handleDropShadowTypeSelection(final String newValue) {
+		dropShadowType.setSummary(newValue);
+		final Preference dropShadowColor = findPreference(Settings.PATTERN_DROPSHADOW_COLOR);
+		dropShadowColor.setEnabled(newValue.equals("Select"));
 	}
 
 	private void enableScreens(final String style) {

@@ -10,21 +10,23 @@
         android:icon="@android:drawable/ic_menu_save"
         />
     
-    <item
+
+    <!-- item
         android:id="@+id/action_generate"
         android:orderInCategory="101"
         android:showAsAction="always"
         android:title="@string/generate"
-        android:icon="@android:drawable/ic_media_play"
-        />
+        android:icon="@drawable/dice"
+        
+        /-->
     
-    <item
+    <!-- item
         android:id="@+id/action_settings"
         android:orderInCategory="102"
         android:showAsAction="always"
         android:title="@string/settings"
         android:icon="@android:drawable/ic_menu_preferences"
-        />
+        /-->
     
     
 </menu>

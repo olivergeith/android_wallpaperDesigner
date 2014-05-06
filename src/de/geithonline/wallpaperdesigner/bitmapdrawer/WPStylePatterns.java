@@ -71,9 +71,14 @@ public class WPStylePatterns extends WPStyle {
 			}
 			paint.setStyle(Style.FILL);
 			if (Settings.isDropShadow()) {
-				if (Settings.isRandomizeDropShadowColors()) {
+				if (Settings.isDropShadowColorRandom()) {
 					final int sx = getRandomInt(0, bWidth - 1);
 					final int sy = getRandomInt(0, bHeight - 1);
+					final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
+					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
+				} else if (Settings.isDropShadowColorOpposite()) {
+					final int sx = bWidth - x;
+					final int sy = bHeight - y;
 					final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
 					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
 				} else {

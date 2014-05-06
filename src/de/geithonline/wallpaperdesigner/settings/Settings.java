@@ -11,11 +11,13 @@ import de.geithonline.wallpaperdesigner.R;
 public class Settings {
 	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
 	public static final String PATTERN_ANZAHL_PATTERNS = "pattern_anzahlPatterns";
+	public static final String PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
+	public static final String PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
 	public static SharedPreferences prefs;
 	private static Context context;
 
 	// ###################################################################
-	// Options
+	// Options Style Selection
 
 	public static String getSelectedStyle() {
 		if (prefs == null) {
@@ -24,6 +26,9 @@ public class Settings {
 		return prefs.getString("stylePicker", "Patterns");
 	}
 
+	// ###################################################################
+	// Options Pattern Style
+
 	public static String getSelectedPattern() {
 		if (prefs == null) {
 			return "Stars";
@@ -31,18 +36,32 @@ public class Settings {
 		return prefs.getString(PATTERN_PATTERN_PICKER, "Stars");
 	}
 
-	public static boolean isDropShadow() {
+	public static int getAnzahlPatterns() {
 		if (prefs == null) {
-			return true;
+			return 1000;
 		}
-		return prefs.getBoolean("dropShadow", true);
+		return Integer.valueOf(prefs.getString(PATTERN_ANZAHL_PATTERNS, "1000"));
 	}
 
-	public static boolean isRandomizeDropShadowColors() {
+	// ###################################################################
+	// Options Pattern Style (DropShadow)
+	public static String getDropShadowType() {
 		if (prefs == null) {
-			return true;
+			return "Random";
 		}
-		return prefs.getBoolean("randomizeDropShadowColor", true);
+		return prefs.getString(PATTERN_DROPSHADOW_TYPE, "Random");
+	}
+
+	public static boolean isDropShadow() {
+		return !getDropShadowType().equals("No");
+	}
+
+	public static boolean isDropShadowColorRandom() {
+		return getDropShadowType().equals("Random");
+	}
+
+	public static boolean isDropShadowColorOpposite() {
+		return getDropShadowType().equals("Opposite");
 	}
 
 	public static int getDropShadowColor() {
@@ -53,6 +72,8 @@ public class Settings {
 		return col;
 	}
 
+	// ###################################################################
+	// Options Pattern Style (Alpha)
 	public static boolean isRandomizeAlpha() {
 		if (prefs == null) {
 			return true;
@@ -68,7 +89,7 @@ public class Settings {
 	}
 
 	// ###################################################################
-
+	// Options Pattern Style (Color)
 	public static boolean isRandomizeColors() {
 		if (prefs == null) {
 			return false;
@@ -81,13 +102,6 @@ public class Settings {
 			return 64;
 		}
 		return Integer.valueOf(prefs.getString("randomizeColorRange", "64"));
-	}
-
-	public static int getAnzahlPatterns() {
-		if (prefs == null) {
-			return 1000;
-		}
-		return Integer.valueOf(prefs.getString(PATTERN_ANZAHL_PATTERNS, "1000"));
 	}
 
 	// ###################################################################
@@ -216,6 +230,8 @@ public class Settings {
 		return prefs.getBoolean("dynamicColoring", false);
 	}
 
+	// ###################################################################
+	// General stuff
 	public static DisplayMetrics getDisplayMetrics() {
 		final DisplayMetrics metrics = new DisplayMetrics();
 		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

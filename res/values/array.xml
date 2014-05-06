@@ -84,6 +84,23 @@
         <item >Squares</item>
         </string-array>
 
+    
+    <string-array name="dropShadowType">
+        <item >No DropShadow</item>
+        <item >Color from a random yx-position within the image</item>
+        <item >Color from the opposite yx-position within the image</item>
+        <item >Select a color</item>
+        </string-array>
+    
+    <string-array name="dropShadowTypeValues">
+        <item >No</item>
+        <item >Random</item>
+        <item >Opposite</item>
+        <item >Select</item>
+        </string-array>
+    
+    
+    
     <string-array name="pattern">
         <item >Stars</item>
         <item >Stars filled</item>

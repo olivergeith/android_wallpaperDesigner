@@ -17,5 +17,44 @@
         android:src="@drawable/about" 
         
         />
+    
+    
+    <TextView
+        android:id="@+id/shakeHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="8dp"
+        android:drawableTop="@drawable/dice"
+        android:gravity="center"
+        android:text="@string/shakeHint"
+        />
 
+    <TextView
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:drawableTop="@android:drawable/ic_menu_preferences"
+        android:gravity="center"
+        android:text="@string/Settings" />
+
+    <TextView
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableTop="@android:drawable/ic_menu_set_as"
+        android:gravity="center"
+        android:text="@string/setasWallpaper" />
+
+    
 </RelativeLayout>
