@@ -38,6 +38,9 @@ public class Settings {
 		if (prefs == null) {
 			return 1000;
 		}
+		if (isDebugging()) {
+			return 0;
+		}
 		return Integer.valueOf(prefs.getString(PATTERN_ANZAHL_PATTERNS, "1000"));
 	}
 

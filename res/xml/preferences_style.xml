@@ -57,5 +57,25 @@
     
     
     </PreferenceCategory>
+    <PreferenceCategory 
+        android:title="Help and Howto">
+	    
+	    <Preference 
+	        android:title="HowTo: DropShadow" 
+	        android:icon="@drawable/about"
+	        >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://plus.google.com/117464431803849545973/posts/hpEBPDvjL97" />
+        </Preference>
+	    <Preference 
+	        android:title="HowTo: Randomize Color Range" 
+	        android:icon="@drawable/about"
+	        >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://plus.google.com/117464431803849545973/posts/gxYmzHFTfpX" />
+        </Preference>
+	    
+    </PreferenceCategory>
+        
     	
 </PreferenceScreen>

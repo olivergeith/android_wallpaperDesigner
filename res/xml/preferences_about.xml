@@ -64,13 +64,14 @@
         <CheckBoxPreference 
 		    android:key="debug"
     		android:defaultValue="false"
-		    android:title="Debugging" 
+		    android:title="Debugging"
+		    android:summary="Do not use this! No patterns will be drawn, if you tick this!" 
             />
-	    <CheckBoxPreference 
+	    <!-- CheckBoxPreference 
 		    android:key="debug2"
     		android:defaultValue="false"
 		    android:title="DebuggingMessages" 
-            />
+            /-->
 	    
     </PreferenceCategory>
 
