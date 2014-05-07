@@ -3,10 +3,12 @@ package de.geithonline.wallpaperdesigner;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -27,12 +29,12 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
-		patternSelection.setSummary(Settings.getSelectedPattern());
+		handlePatternSelect(Settings.getSelectedPattern());
 		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				patternSelection.setSummary((String) newValue);
+				handlePatternSelect((String) newValue);
 				return true;
 			}
 		});
@@ -87,6 +89,19 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowType.setSummary(newValue);
 		final Preference dropShadowColor = findPreference(Settings.PATTERN_DROPSHADOW_COLOR);
 		dropShadowColor.setEnabled(newValue.equals("Select"));
+	}
+
+	private void handlePatternSelect(final String newPattern) {
+		patternSelection.setSummary(newPattern);
+		final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.PATTERN_GLOSSY);
+		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE);
+		glossy.setEnabled(Settings.hasPatternGlossyEffect(newPattern));
+		outline.setEnabled(Settings.hasPatternOutlineEffect(newPattern));
+		final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
+		specialSettings.setEnabled(Settings.hasPatternGlossyEffect(newPattern)//
+				|| Settings.hasPatternOutlineEffect(newPattern)//
+		);
+
 	}
 
 	private void enableProFeatures() {

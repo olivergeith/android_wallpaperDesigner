@@ -1,5 +1,8 @@
 package de.geithonline.wallpaperdesigner.settings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -9,6 +12,8 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_OUTLINE = "outline";
+	public static final String PATTERN_GLOSSY = "glossy";
 	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
 	public static final String PATTERN_ANZAHL_PATTERNS = "pattern_anzahlPatterns";
 	public static final String PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
@@ -42,6 +47,56 @@ public class Settings {
 			return 0;
 		}
 		return Integer.valueOf(prefs.getString(PATTERN_ANZAHL_PATTERNS, "1000"));
+	}
+
+	public static boolean hasPatternGlossyEffect(final String pattern) {
+		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Stars");
+		supportingStyles.add("Hearts");
+		supportingStyles.add("Bubbles");
+		return supportingStyles.contains(pattern);
+	}
+
+	public static boolean hasPatternOutlineEffect(final String pattern) {
+		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Squares");
+		supportingStyles.add("Squares rotated");
+		supportingStyles.add("Pentagon");
+		supportingStyles.add("Hexagon");
+		supportingStyles.add("Stars");
+		supportingStyles.add("Hearts");
+		supportingStyles.add("Bubbles");
+		supportingStyles.add("Pillows");
+		return supportingStyles.contains(pattern);
+	}
+
+	public static boolean isGlossy() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(PATTERN_GLOSSY, false);
+	}
+
+	public static boolean isOutline() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(PATTERN_OUTLINE, false);
+	}
+
+	public static boolean isCustomOutlineColor() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean("customOutlineColor", false);
+	}
+
+	public static int getCustomOutlineColor() {
+		if (prefs == null) {
+			return R.integer.COLOR_BLACK;
+		}
+		final int col = prefs.getInt("colorOutline", R.integer.COLOR_BLACK);
+		return col;
 	}
 
 	// ###################################################################
@@ -290,6 +345,9 @@ public class Settings {
 			prefs.edit().putString("randomizeColorRange", "32").commit();
 			prefs.edit().putBoolean("randomizeAlpha", true).commit();
 			prefs.edit().putString("randomizeAlphaRange", "96").commit();
+
+			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
+
 		}
 	}
 

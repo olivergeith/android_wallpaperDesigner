@@ -16,7 +16,7 @@ public class XEckPath extends Path {
 		super();
 		final float angle = (float) (Math.PI / ecken) * 2;
 
-		for (int i = 0; i <= ecken; i++) {
+		for (int i = 0; i < ecken; i++) {
 			final float r = rOuter;
 			// final float r = rInner;
 

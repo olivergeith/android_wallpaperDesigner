@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
  
     <PreferenceCategory 
-        android:title="Settings">
+        android:title="Pattern">
 
         <ListPreference
 	        android:key="pattern_patternPicker"
@@ -21,6 +21,43 @@
 	        android:entries="@array/anzahlPatterns"
 	        android:entryValues="@array/anzahlPatternsValues"
 	        />
+        
+		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:key="specialPatternSettings"
+			    android:title="Special Settings for selected Pattern"
+			    android:summary="Glossy Effect, Outline, ..."
+			    android:icon="@android:drawable/ic_menu_preferences"
+			    >
+   		        <CheckBoxPreference 
+		            android:key="glossy"
+		            android:title="@string/glossy"
+		            android:defaultValue="false"
+		            />
+		
+		        <CheckBoxPreference 
+		            android:key="outline"
+		            android:title="@string/outline"
+		            android:defaultValue="false"
+		            />
+		        <CheckBoxPreference 
+		            android:key="customOutlineColor"
+		            android:title="@string/customOutlineColor"
+		            android:defaultValue="false"
+		            android:dependency="outline"
+		            />
+		        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+		        	android:key="colorOutline"
+		        	android:title="@string/colorOutline" 
+		        	android:defaultValue="@integer/COLOR_BLACK"
+		            android:dependency="customOutlineColor"
+		        	/>
+		</PreferenceScreen>
+		        		
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="Randomizer Settings">
+        
         
         <ListPreference
 	        android:key="randomizeColorRange"
