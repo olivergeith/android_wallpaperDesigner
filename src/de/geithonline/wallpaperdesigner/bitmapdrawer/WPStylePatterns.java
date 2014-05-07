@@ -102,97 +102,95 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawPattern(final int x, final int y, final Paint paint, final int radius) {
 		switch (Settings.getSelectedPattern()) {
-		default:
-			// case "Text":
-			// paint.setTextSize(radius * 4);
-			// paint.setTextAlign(Align.CENTER);
-			// bitmapCanvas.drawText("Emmylou", x, y, paint);
-			// break;
-		case "Letters":
-			final int letterindex = getRandomInt(0, letters.length() - 1);
-			final char c = letters.charAt(letterindex);
-			if (getRandomBoolean()) {
-				paint.setTypeface(Typeface.DEFAULT_BOLD);
-			} else {
-				paint.setTypeface(Typeface.DEFAULT);
-			}
+			default:
+			case "Letters":
+				final int letterindex = getRandomInt(0, letters.length() - 1);
+				final char c = letters.charAt(letterindex);
+				if (getRandomBoolean()) {
+					paint.setTypeface(Typeface.DEFAULT_BOLD);
+				} else {
+					paint.setTypeface(Typeface.DEFAULT);
+				}
 
-			paint.setTextSize(radius * 3);
-			paint.setTextAlign(Align.CENTER);
-			bitmapCanvas.drawText("" + c, x, y, paint);
-			break;
-		case "Saw":
-			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, false, getRandomBoolean()), paint);
-			break;
-		case "Saw filled":
-			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, true, getRandomBoolean()), paint);
-			break;
-		case "Saw mixed":
-			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
-			break;
-		case "Stars":
-			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, getRandomFloat(0, (float) (Math.PI / 2))), paint);
-			break;
-		case "Gears":
-			final int zaehne = 15;
-			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, false), paint);
-			break;
-		case "Gears filled":
-			final int zf = getRandomInt(12, 20);
-			bitmapCanvas.drawPath(new GearPath(zf, new Point(x, y), radius, true), paint);
-			break;
-		case "Gears mixed":
-			final int zm = getRandomInt(12, 20);
-			bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
-			break;
-		case "Squares":
-			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, 0), paint);
-			break;
-		case "Squares rotated":
-			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, getRandomFloat(0, (float) (Math.PI / 2))), paint);
-			break;
-		case "Pentagon":
-			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, 0), paint);
-			break;
-		case "Pentagon rotated":
-			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, getRandomFloat(0, (float) (2 * Math.PI))), paint);
-			break;
-		case "Hexagon":
-			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, 0), paint);
-			break;
-		case "Glossy Bubbles":
-			drawGlossyBubble(x, y, paint, radius);
-			break;
-		case "Bubbles":
-			bitmapCanvas.drawCircle(x, y, radius, paint);
-			break;
-		case "Hearts":
-			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), getRandomFloat(1f, 5f)), paint);
-			break;
-		case "Spirals":
-			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
-			break;
-		case "Pillows":
-			paint.setStyle(Style.FILL);
-			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
-			break;
-		case "Roses":
-			paint.setStyle(Style.FILL);
-			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
-			break;
-		case "Skyline":
-			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
-			bitmapCanvas.drawRect(rect, paint);
-			break;
-		case "Crickle Crackle":
-			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
-			break;
+				paint.setTextSize(radius * 3);
+				paint.setTextAlign(Align.CENTER);
+				bitmapCanvas.drawText("" + c, x, y, paint);
+				break;
+			case "Saw":
+				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, false, getRandomBoolean()), paint);
+				break;
+			case "Saw filled":
+				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, true, getRandomBoolean()), paint);
+				break;
+			case "Saw mixed":
+				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
+				break;
+			case "Stars":
+				bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, getRandomFloat(0, (float) (Math.PI / 2))), paint);
+				break;
+			case "Gears":
+				final int zaehne = 15;
+				bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, false), paint);
+				break;
+			case "Gears filled":
+				final int zf = getRandomInt(12, 20);
+				bitmapCanvas.drawPath(new GearPath(zf, new Point(x, y), radius, true), paint);
+				break;
+			case "Gears mixed":
+				final int zm = getRandomInt(12, 20);
+				bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
+				break;
+			case "Squares":
+				bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, 0), paint);
+				break;
+			case "Squares rotated":
+				bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, getRandomFloat(0, (float) (Math.PI / 2))), paint);
+				break;
+			case "Pentagon":
+				bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, 0), paint);
+				break;
+			case "Pentagon rotated":
+				bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, getRandomFloat(0, (float) (2 * Math.PI))), paint);
+				break;
+			case "Hexagon":
+				bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, 0), paint);
+				break;
+			case "Glossy Bubbles":
+				drawGlossyBubble(x, y, paint, radius);
+				break;
+			case "Glossy Hearts":
+				drawGlossyHeart(x, y, paint, radius);
+				break;
+			case "Bubbles":
+				bitmapCanvas.drawCircle(x, y, radius, paint);
+				break;
+			case "Hearts":
+				bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius /* getRandomFloat(1f, 5f) */), paint);
+				break;
+			case "Spirals":
+				paint.setStyle(Style.STROKE);
+				paint.setStrokeWidth(radius / 10);
+				bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+				break;
+			case "Pillows":
+				paint.setStyle(Style.FILL);
+				paint.setStrokeWidth(radius / 10);
+				bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
+				break;
+			case "Roses":
+				paint.setStyle(Style.FILL);
+				paint.setStrokeWidth(radius / 10);
+				bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
+				break;
+			case "Skyline":
+				final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
+				bitmapCanvas.drawRect(rect, paint);
+				break;
+			case "Crickle Crackle":
+				paint.setStyle(Style.STROKE);
+				paint.setStrokeWidth(radius / 10);
+				bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
+				break;
 		}
 	}
 
@@ -217,6 +215,28 @@ public class WPStylePatterns extends WPStyle {
 		paint.setStyle(Style.FILL);
 		final RectF oval = new RectF(x - radius * 3 / 4, y - radius, x + radius * 3 / 4, y);
 		bitmapCanvas.drawOval(oval, paint);
+	}
+
+	public void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius) {
+		final int color = paint.getColor();
+		final int colordarker = ColorHelper.darker(color);
+		final int colorBrighter = ColorHelper.brighter2times(color);
+		final int whitehalftransparent = 0xBBFFFFFF;
+		final int transparent = 0x00FFFFFF;
+		// Heart
+		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, color, Shader.TileMode.MIRROR));
+		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+		// Ring
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 10);
+		paint.setShader(null);
+		paint.setShadowLayer(0, 0, 0, Settings.getDropShadowColor());
+		paint.setColor(colordarker);
+		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+		// Glossy glow
+		paint.setShader(new LinearGradient(x - radius * 2 / 3, y - radius * 2 / 3, x, y, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
+		paint.setStyle(Style.FILL);
+		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
 	}
 
 	private int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {

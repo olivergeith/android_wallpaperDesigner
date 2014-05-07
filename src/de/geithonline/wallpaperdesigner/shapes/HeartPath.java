@@ -16,7 +16,7 @@ public class HeartPath extends Path {
 		// x(t)=12sin(t)-4sin(3t)
 		// y(t)=13cos(t)-5cos(2t)-2cos(3t)-cos(4t)
 		super();
-
+		final int radiusfactor = 15;
 		final int ecken = 100;
 		final float angle = (float) (2 * Math.PI / ecken);
 
@@ -24,8 +24,8 @@ public class HeartPath extends Path {
 			final PointF p = new PointF();
 
 			final float t = i * angle;
-			p.x = (float) (rOuter * (12 * Math.sin(t) - 4 * Math.sin(3 * t)));
-			p.y = (float) (rOuter * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)));
+			p.x = (float) (rOuter * (12 * Math.sin(t) - 4 * Math.sin(3 * t)) / radiusfactor);
+			p.y = (float) (rOuter * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) / radiusfactor);
 
 			p.x = p.x + center.x;
 			p.y = -p.y + center.y;
