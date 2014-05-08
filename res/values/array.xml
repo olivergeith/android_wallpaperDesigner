@@ -92,11 +92,25 @@
         <item >Squares</item>
         </string-array>
 
+    <string-array name="hole">
+        <item >Filled</item>
+        <item >Not filled</item>
+        <item >Randomly mixed</item>
+    </string-array>
+    
+    <string-array name="holeValues">
+        <item >Filled</item>
+        <item >Not filled</item>
+        <item >Randomly mixed</item>
+        </string-array>
+    
+    
     
     <string-array name="dropShadowType">
         <item >No DropShadow</item>
         <item >Color from a random yx-position within the image</item>
         <item >Color from the opposite yx-position within the image</item>
+        <item >Darker Color of Pattern</item>
         <item >Select a color</item>
         </string-array>
     
@@ -104,6 +118,7 @@
         <item >No</item>
         <item >Random</item>
         <item >Opposite</item>
+        <item >Darker</item>
         <item >Select</item>
         </string-array>
     
@@ -112,16 +127,12 @@
     <string-array name="pattern">
         <item >Stars</item>
         <item >Saw</item>
-        <item >Saw filled</item>
-        <item >Saw mixed</item>
         <item >Bubbles</item>
         <item >Squares</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
         <item >Gears</item>
-        <item >Gears filled</item>
-        <item >Gears mixed</item>
         <item >Hearts</item>
         <item >Spirals</item>
         <item >Pillows</item>
@@ -133,16 +144,12 @@
     <string-array name="patternValues">
         <item >Stars</item>
         <item >Saw</item>
-        <item >Saw filled</item>
-        <item >Saw mixed</item>
         <item >Bubbles</item>
         <item >Squares</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
         <item >Gears</item>
-        <item >Gears filled</item>
-        <item >Gears mixed</item>
         <item >Hearts</item>
         <item >Spirals</item>
         <item >Pillows</item>

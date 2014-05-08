@@ -19,7 +19,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference patternSelection;
 	private ListPreference randomizeColorRange;
 	private ListPreference randomizeAlphaRange;
-	private ListPreference dropShadowType;;
+	private ListPreference dropShadowType;
+	private ListPreference filledOption;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -28,6 +29,11 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
+		filledOption = (ListPreference) findPreference(Settings.PATTERN_FILLED_OPTION);
+		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
+		randomizeColorRange = (ListPreference) findPreference("randomizeColorRange");
+		randomizeAlphaRange = (ListPreference) findPreference("randomizeAlphaRange");
+
 		handlePatternSelect(Settings.getSelectedPattern());
 		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -38,7 +44,16 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
-		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
+		handleFilledOptionSelected(Settings.getFilledOption());
+		filledOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleFilledOptionSelected((String) newValue);
+				return true;
+			}
+		});
+
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
 		dropShadowType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -50,7 +65,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		});
 
-		randomizeColorRange = (ListPreference) findPreference("randomizeColorRange");
 		randomizeColorRange.setSummary("" + Settings.getRandomizeColorRange());
 		randomizeColorRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -60,7 +74,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 		});
-		randomizeAlphaRange = (ListPreference) findPreference("randomizeAlphaRange");
 		randomizeAlphaRange.setSummary("" + Settings.getRandomizeAlphaRange());
 		randomizeAlphaRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -72,6 +85,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		});
 
 		enableProFeatures();
+	}
+
+	private void handleFilledOptionSelected(final String value) {
+		filledOption.setSummary(value);
 	}
 
 	public void handleDropShadowTypeSelection(final String newValue) {
@@ -88,11 +105,12 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		glossy.setEnabled(Settings.hasPatternGlossyEffect(newPattern));
 		outline.setEnabled(Settings.hasPatternOutlineEffect(newPattern));
 		rotate.setEnabled(Settings.hasPatternRandomRotate(newPattern));
+		filledOption.setEnabled(Settings.hasPatternFilledOption(newPattern));
 		final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
 		specialSettings.setEnabled(Settings.hasPatternGlossyEffect(newPattern)//
 				|| Settings.hasPatternOutlineEffect(newPattern)//
 				|| Settings.hasPatternRandomRotate(newPattern)//
-		);
+				|| Settings.hasPatternFilledOption(newPattern));
 
 	}
 

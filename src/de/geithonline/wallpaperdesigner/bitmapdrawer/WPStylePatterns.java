@@ -82,20 +82,25 @@ public class WPStylePatterns extends WPStyle {
 				paint.setAlpha(255);
 			}
 			paint.setStyle(Style.FILL);
-			if (Settings.isDropShadow()) {
-				if (Settings.isDropShadowColorRandom()) {
+			switch (Settings.getDropShadowType()) {
+				default:
+				case "No":
+					break;
+				case "Random":
 					final int sx = getRandomInt(0, bWidth - 1);
 					final int sy = getRandomInt(0, bHeight - 1);
 					final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
 					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
-				} else if (Settings.isDropShadowColorOpposite()) {
-					final int sx = bWidth - x;
-					final int sy = bHeight - y;
-					final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
-					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
-				} else {
+					break;
+				case "Opposite":
+					paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+					break;
+				case "Darker":
+					paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.darker2times(pcolor));
+					break;
+				case "Select":
 					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
-				}
+					break;
 			}
 			final int radius = getRandomInt(minRadius, maxRadius);
 			drawPattern(x, y, paint, radius);
@@ -110,46 +115,22 @@ public class WPStylePatterns extends WPStyle {
 		switch (Settings.getSelectedPattern()) {
 			default:
 			case "Letters":
-				final int letterindex = getRandomInt(0, letters.length() - 1);
-				final char c = letters.charAt(letterindex);
-				if (getRandomBoolean()) {
-					paint.setTypeface(Typeface.DEFAULT_BOLD);
-				} else {
-					paint.setTypeface(Typeface.DEFAULT);
-				}
-
-				paint.setTextSize(radius * 3);
-				paint.setTextAlign(Align.CENTER);
-				bitmapCanvas.drawText("" + c, x, y, paint);
+				drawText(x, y, paint, radius);
 				break;
 			case "Saw":
-				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, false, getRandomBoolean()), paint);
+				drawSaw(x, y, paint, radius);
 				break;
-			case "Saw filled":
-				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, true, getRandomBoolean()), paint);
-				break;
-			case "Saw mixed":
-				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
-				break;
+
 			case "Stars":
 				if (Settings.isGlossy()) {
 					drawGlossyStar(x, y, paint, radius);
 				} else {
 					drawStar(x, y, paint, radius);
 				}
+				break;
 
-				break;
 			case "Gears":
-				final int zaehne = 15;
-				bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, false), paint);
-				break;
-			case "Gears filled":
-				final int zf = getRandomInt(12, 20);
-				bitmapCanvas.drawPath(new GearPath(zf, new Point(x, y), radius, true), paint);
-				break;
-			case "Gears mixed":
-				final int zm = getRandomInt(12, 20);
-				bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
+				drawGear(x, y, paint, radius);
 				break;
 			case "Squares":
 				drawSquares(x, y, paint, radius);
@@ -175,9 +156,7 @@ public class WPStylePatterns extends WPStyle {
 				}
 				break;
 			case "Spirals":
-				paint.setStyle(Style.STROKE);
-				paint.setStrokeWidth(radius / 10);
-				bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+				drawSpiral(x, y, paint, radius);
 				break;
 			case "Pillows":
 				drawPillow(x, y, paint, radius);
@@ -190,11 +169,63 @@ public class WPStylePatterns extends WPStyle {
 				bitmapCanvas.drawRect(rect, paint);
 				break;
 			case "Crickle Crackle":
-				paint.setStyle(Style.STROKE);
-				paint.setStrokeWidth(radius / 10);
-				bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
+				drawCrickleCrackle(x, y, paint, radius);
 				break;
 		}
+	}
+
+	private void drawSaw(final int x, final int y, final Paint paint, final int radius) {
+		final int zaehne = 20;
+		final boolean filled = getFilledBoolean();
+		bitmapCanvas.drawPath(new SawPath(zaehne, new Point(x, y), radius, filled, getRandomBoolean()), paint);
+	}
+
+	private void drawGear(final int x, final int y, final Paint paint, final int radius) {
+		final int zaehne = 15;
+		final boolean filled = getFilledBoolean();
+		bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, filled), paint);
+	}
+
+	private boolean getFilledBoolean() {
+		boolean filled;
+		switch (Settings.getFilledOption()) {
+			default:
+			case "Not filled":
+				filled = false;
+				break;
+			case "Filled":
+				filled = true;
+				break;
+			case "Randomly mixed":
+				filled = getRandomBoolean();
+				break;
+		}
+		return filled;
+	}
+
+	private void drawCrickleCrackle(final int x, final int y, final Paint paint, final int radius) {
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 10);
+		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
+	}
+
+	private void drawSpiral(final int x, final int y, final Paint paint, final int radius) {
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 10);
+		bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+	}
+
+	private void drawText(final int x, final int y, final Paint paint, final int radius) {
+		final int letterindex = getRandomInt(0, letters.length() - 1);
+		final char c = letters.charAt(letterindex);
+		if (getRandomBoolean()) {
+			paint.setTypeface(Typeface.DEFAULT_BOLD);
+		} else {
+			paint.setTypeface(Typeface.DEFAULT);
+		}
+		paint.setTextSize(radius * 3);
+		paint.setTextAlign(Align.CENTER);
+		bitmapCanvas.drawText("" + c, x, y, paint);
 	}
 
 	private void drawStar(final int x, final int y, final Paint paint, final int radius) {

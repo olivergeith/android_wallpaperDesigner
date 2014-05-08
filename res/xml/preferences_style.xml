@@ -31,7 +31,8 @@
 			    android:summary="Glossy Effect, Outline, ..."
 			    android:icon="@android:drawable/ic_menu_preferences"
 			    >
-   		        <CheckBoxPreference 
+		        
+		        <CheckBoxPreference 
 		            android:key="randomRotate"
 		            android:title="@string/randomRotate"
 		            android:defaultValue="false"
@@ -60,7 +61,15 @@
 		        	android:defaultValue="@integer/COLOR_BLACK"
 		            android:dependency="customOutlineColor"
 		        	/>
-		</PreferenceScreen>
+		        <ListPreference
+			        android:key="filledOption"
+			        android:title="@string/filledOption" 
+			        android:dialogTitle="@string/filledOption"
+			        android:defaultValue="Not filled"
+			        android:entries="@array/hole"
+			        android:entryValues="@array/holeValues"
+			        />
+		    </PreferenceScreen>
 		        		
     </PreferenceCategory>
     

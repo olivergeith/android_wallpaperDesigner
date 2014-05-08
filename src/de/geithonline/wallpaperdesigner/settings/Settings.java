@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_FILLED_OPTION = "filledOption";
 	public static final String PATTERN_RANDOM_ROTATE = "randomRotate";
 	public static final String PATTERN_OUTLINE = "outline";
 	public static final String PATTERN_GLOSSY = "glossy";
@@ -69,7 +70,13 @@ public class Settings {
 		supportingStyles.add("Stars");
 		supportingStyles.add("Hearts");
 		supportingStyles.add("Bubbles");
-		supportingStyles.add("Squares");
+		return supportingStyles.contains(pattern);
+	}
+
+	public static boolean hasPatternFilledOption(final String pattern) {
+		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Gears");
+		supportingStyles.add("Saw");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -92,6 +99,13 @@ public class Settings {
 		supportingStyles.add("Bubbles");
 		supportingStyles.add("Pillows");
 		return supportingStyles.contains(pattern);
+	}
+
+	public static String getFilledOption() {
+		if (prefs == null) {
+			return "Not filled";
+		}
+		return prefs.getString(PATTERN_FILLED_OPTION, "Not filled");
 	}
 
 	public static boolean isRandomRotate() {
@@ -143,13 +157,17 @@ public class Settings {
 		return !getDropShadowType().equals("No");
 	}
 
-	public static boolean isDropShadowColorRandom() {
-		return getDropShadowType().equals("Random");
-	}
-
-	public static boolean isDropShadowColorOpposite() {
-		return getDropShadowType().equals("Opposite");
-	}
+	// public static boolean isDropShadowDarker() {
+	// return !getDropShadowType().equals("Darker");
+	// }
+	//
+	// public static boolean isDropShadowColorRandom() {
+	// return getDropShadowType().equals("Random");
+	// }
+	//
+	// public static boolean isDropShadowColorOpposite() {
+	// return getDropShadowType().equals("Opposite");
+	// }
 
 	public static int getDropShadowColor() {
 		if (prefs == null) {
