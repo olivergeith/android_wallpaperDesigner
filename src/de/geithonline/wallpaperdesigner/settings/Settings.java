@@ -101,6 +101,9 @@ public class Settings {
 		supportingStyles.add("Bubbles");
 		supportingStyles.add("Pillows");
 		supportingStyles.add("Rings");
+		supportingStyles.add("Gears");
+		supportingStyles.add("Saw");
+		supportingStyles.add("Roses");
 		return supportingStyles.contains(pattern);
 	}
 

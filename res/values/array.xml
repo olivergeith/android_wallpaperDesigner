@@ -125,16 +125,16 @@
     
     
     <string-array name="pattern">
-        <item >Stars</item>
+        <item >Gears</item>
         <item >Saw</item>
+        <item >Stars</item>
         <item >Bubbles</item>
+        <item >Hearts</item>
         <item >Triangles</item>
         <item >Squares</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
-        <item >Gears</item>
-        <item >Hearts</item>
         <item >Spirals</item>
         <item >Pillows</item>
         <item >Roses</item>
@@ -144,16 +144,16 @@
         </string-array>
     
     <string-array name="patternValues">
-        <item >Stars</item>
+        <item >Gears</item>
         <item >Saw</item>
+        <item >Stars</item>
         <item >Bubbles</item>
+        <item >Hearts</item>
         <item >Triangles</item>
         <item >Squares</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
-        <item >Gears</item>
-        <item >Hearts</item>
         <item >Spirals</item>
         <item >Pillows</item>
         <item >Roses</item>

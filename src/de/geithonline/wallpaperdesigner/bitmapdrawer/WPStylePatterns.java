@@ -166,7 +166,7 @@ public class WPStylePatterns extends WPStyle {
 			drawPillow(x, y, paint, radius);
 			break;
 		case "Roses":
-			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
+			drawRose(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -178,6 +178,14 @@ public class WPStylePatterns extends WPStyle {
 		case "Crickle Crackle":
 			drawCrickleCrackle(x, y, paint, radius);
 			break;
+		}
+	}
+
+	public void drawRose(final int x, final int y, final Paint paint, final int radius) {
+		bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
 		}
 	}
 
@@ -193,13 +201,22 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSaw(final int x, final int y, final Paint paint, final int radius) {
 		final int zaehne = 20;
 		final boolean filled = getFilledBoolean();
-		bitmapCanvas.drawPath(new SawPath(zaehne, new Point(x, y), radius, filled, getRandomBoolean()), paint);
+		final boolean flip = getRandomBoolean();
+		bitmapCanvas.drawPath(new SawPath(zaehne, new Point(x, y), radius, filled, flip), paint);
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			bitmapCanvas.drawPath(new SawPath(zaehne, new Point(x, y), radius, filled, flip), paint);
+		}
 	}
 
 	private void drawGear(final int x, final int y, final Paint paint, final int radius) {
 		final int zaehne = 15;
 		final boolean filled = getFilledBoolean();
 		bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, filled), paint);
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, filled), paint);
+		}
 	}
 
 	private boolean getFilledBoolean() {
@@ -426,7 +443,11 @@ public class WPStylePatterns extends WPStyle {
 
 	private void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(radius / 10);
+		int strokewidth = radius / 10;
+		if (strokewidth < 2) {
+			strokewidth = 2;
+		}
+		paint.setStrokeWidth(strokewidth);
 		paint.setShader(null);
 		paint.setShadowLayer(0, 0, 0, Settings.getDropShadowColor());
 		if (Settings.isCustomOutlineColor()) {
