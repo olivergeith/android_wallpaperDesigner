@@ -84,11 +84,14 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		patternSelection.setSummary(newPattern);
 		final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.PATTERN_GLOSSY);
 		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE);
+		final CheckBoxPreference rotate = (CheckBoxPreference) findPreference(Settings.PATTERN_RANDOM_ROTATE);
 		glossy.setEnabled(Settings.hasPatternGlossyEffect(newPattern));
 		outline.setEnabled(Settings.hasPatternOutlineEffect(newPattern));
+		rotate.setEnabled(Settings.hasPatternRandomRotate(newPattern));
 		final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
 		specialSettings.setEnabled(Settings.hasPatternGlossyEffect(newPattern)//
 				|| Settings.hasPatternOutlineEffect(newPattern)//
+				|| Settings.hasPatternRandomRotate(newPattern)//
 		);
 
 	}

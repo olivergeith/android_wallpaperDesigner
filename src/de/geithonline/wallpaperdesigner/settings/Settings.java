@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_RANDOM_ROTATE = "randomRotate";
 	public static final String PATTERN_OUTLINE = "outline";
 	public static final String PATTERN_GLOSSY = "glossy";
 	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
@@ -68,13 +69,22 @@ public class Settings {
 		supportingStyles.add("Stars");
 		supportingStyles.add("Hearts");
 		supportingStyles.add("Bubbles");
+		supportingStyles.add("Squares");
+		return supportingStyles.contains(pattern);
+	}
+
+	public static boolean hasPatternRandomRotate(final String pattern) {
+		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Stars");
+		supportingStyles.add("Hexagon");
+		supportingStyles.add("Squares");
+		supportingStyles.add("Pentagon");
 		return supportingStyles.contains(pattern);
 	}
 
 	public static boolean hasPatternOutlineEffect(final String pattern) {
 		final List<String> supportingStyles = new ArrayList<String>();
 		supportingStyles.add("Squares");
-		supportingStyles.add("Squares rotated");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Hexagon");
 		supportingStyles.add("Stars");
@@ -82,6 +92,13 @@ public class Settings {
 		supportingStyles.add("Bubbles");
 		supportingStyles.add("Pillows");
 		return supportingStyles.contains(pattern);
+	}
+
+	public static boolean isRandomRotate() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(PATTERN_RANDOM_ROTATE, false);
 	}
 
 	public static boolean isGlossy() {

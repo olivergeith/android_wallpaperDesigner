@@ -32,6 +32,12 @@
 			    android:icon="@android:drawable/ic_menu_preferences"
 			    >
    		        <CheckBoxPreference 
+		            android:key="randomRotate"
+		            android:title="@string/randomRotate"
+		            android:defaultValue="false"
+		            />
+		    
+   		        <CheckBoxPreference 
 		            android:key="glossy"
 		            android:title="@string/glossy"
 		            android:defaultValue="false"

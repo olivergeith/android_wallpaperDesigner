@@ -54,6 +54,7 @@
     <string name="setasWallpaper">Set Wallpaper</string>
     <string name="glossy">Glossy Effect</string>
     <string name="outline">Outline</string>
+    <string name="randomRotate">Random Rotation</string>
     <string name="customOutlineColor">Custom Outline Color</string>
     <string name="colorOutline">Outline Color</string>
     <string name="patternSizeAdjust">Pattern Size Adjustment</string>
