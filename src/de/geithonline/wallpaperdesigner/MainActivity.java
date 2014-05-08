@@ -134,7 +134,7 @@ public class MainActivity extends Activity {
 		}
 		String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
 		extStorageDirectory += File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
-		Toaster.showInfoToast(this, "Wallpaters are saved to: " + extStorageDirectory);
+		Toaster.showInfoToast(this, "Wallpapers are saved to: " + extStorageDirectory);
 	}
 
 	@Override
