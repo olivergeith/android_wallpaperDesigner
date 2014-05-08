@@ -46,10 +46,15 @@ public class WPStylePatterns extends WPStyle {
 		BackgroundDrawer.drawBackground(refbitmapCanvas);
 
 		// initializing some values depending on BitmapSize
-		int maxRadius = Math.round(bWidth * 0.04f);
+		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
 		if (maxRadius < 30) {
 			maxRadius = 30;
 		}
+		final int minRadius = Math.round(maxRadius * Settings.getPatternMinSizeFactor());
+		if (minRadius < 5) {
+			maxRadius = 5;
+		}
+
 		int dropShadowRadius = Math.round(bWidth * 0.01f);
 		if (dropShadowRadius < 10) {
 			dropShadowRadius = 10;
@@ -92,7 +97,7 @@ public class WPStylePatterns extends WPStyle {
 					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
 				}
 			}
-			final int radius = getRandomInt(10, maxRadius);
+			final int radius = getRandomInt(minRadius, maxRadius);
 			drawPattern(x, y, paint, radius);
 		}
 
@@ -103,140 +108,140 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawPattern(final int x, final int y, final Paint paint, final int radius) {
 		switch (Settings.getSelectedPattern()) {
-		default:
-		case "Letters":
-			final int letterindex = getRandomInt(0, letters.length() - 1);
-			final char c = letters.charAt(letterindex);
-			if (getRandomBoolean()) {
-				paint.setTypeface(Typeface.DEFAULT_BOLD);
-			} else {
-				paint.setTypeface(Typeface.DEFAULT);
-			}
+			default:
+			case "Letters":
+				final int letterindex = getRandomInt(0, letters.length() - 1);
+				final char c = letters.charAt(letterindex);
+				if (getRandomBoolean()) {
+					paint.setTypeface(Typeface.DEFAULT_BOLD);
+				} else {
+					paint.setTypeface(Typeface.DEFAULT);
+				}
 
-			paint.setTextSize(radius * 3);
-			paint.setTextAlign(Align.CENTER);
-			bitmapCanvas.drawText("" + c, x, y, paint);
-			break;
-		case "Saw":
-			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, false, getRandomBoolean()), paint);
-			break;
-		case "Saw filled":
-			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, true, getRandomBoolean()), paint);
-			break;
-		case "Saw mixed":
-			bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
-			break;
-		case "Stars":
-			if (Settings.isGlossy()) {
-				drawGlossyStar(x, y, paint, radius);
-			} else {
-				final float rotatestar = getRandomFloat(0, (float) (Math.PI / 2));
-				bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotatestar), paint);
-				// Outline
-				if (Settings.isOutline()) {
-					setupPaintForOutline(paint, radius);
+				paint.setTextSize(radius * 3);
+				paint.setTextAlign(Align.CENTER);
+				bitmapCanvas.drawText("" + c, x, y, paint);
+				break;
+			case "Saw":
+				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, false, getRandomBoolean()), paint);
+				break;
+			case "Saw filled":
+				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, true, getRandomBoolean()), paint);
+				break;
+			case "Saw mixed":
+				bitmapCanvas.drawPath(new SawPath(20, new Point(x, y), radius, getRandomBoolean(), getRandomBoolean()), paint);
+				break;
+			case "Stars":
+				if (Settings.isGlossy()) {
+					drawGlossyStar(x, y, paint, radius);
+				} else {
+					final float rotatestar = getRandomFloat(0, (float) (Math.PI / 2));
 					bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotatestar), paint);
+					// Outline
+					if (Settings.isOutline()) {
+						setupPaintForOutline(paint, radius);
+						bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotatestar), paint);
+					}
 				}
-			}
 
-			break;
-		case "Gears":
-			final int zaehne = 15;
-			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, false), paint);
-			break;
-		case "Gears filled":
-			final int zf = getRandomInt(12, 20);
-			bitmapCanvas.drawPath(new GearPath(zf, new Point(x, y), radius, true), paint);
-			break;
-		case "Gears mixed":
-			final int zm = getRandomInt(12, 20);
-			bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
-			break;
-		case "Squares":
-			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, 0), paint);
-			// Outline
-			if (Settings.isOutline()) {
-				setupPaintForOutline(paint, radius);
+				break;
+			case "Gears":
+				final int zaehne = 15;
+				bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, false), paint);
+				break;
+			case "Gears filled":
+				final int zf = getRandomInt(12, 20);
+				bitmapCanvas.drawPath(new GearPath(zf, new Point(x, y), radius, true), paint);
+				break;
+			case "Gears mixed":
+				final int zm = getRandomInt(12, 20);
+				bitmapCanvas.drawPath(new GearPath(zm, new Point(x, y), radius, getRandomBoolean()), paint);
+				break;
+			case "Squares":
 				bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, 0), paint);
-			}
-			break;
-		case "Squares rotated":
-			final float rota = getRandomFloat(0, (float) (Math.PI / 2));
-			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, rota), paint);
-			// Outline
-			if (Settings.isOutline()) {
-				setupPaintForOutline(paint, radius);
+				// Outline
+				if (Settings.isOutline()) {
+					setupPaintForOutline(paint, radius);
+					bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, 0), paint);
+				}
+				break;
+			case "Squares rotated":
+				final float rota = getRandomFloat(0, (float) (Math.PI / 2));
 				bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, rota), paint);
-			}
-			break;
-		case "Pentagon":
-			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, 0), paint);
-			// Outline
-			if (Settings.isOutline()) {
-				setupPaintForOutline(paint, radius);
+				// Outline
+				if (Settings.isOutline()) {
+					setupPaintForOutline(paint, radius);
+					bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, rota), paint);
+				}
+				break;
+			case "Pentagon":
 				bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, 0), paint);
-			}
-			break;
-		case "Pentagon rotated":
-			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, getRandomFloat(0, (float) (2 * Math.PI))), paint);
-			break;
-		case "Hexagon":
-			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, 0), paint);
-			// Outline
-			if (Settings.isOutline()) {
-				setupPaintForOutline(paint, radius);
+				// Outline
+				if (Settings.isOutline()) {
+					setupPaintForOutline(paint, radius);
+					bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, 0), paint);
+				}
+				break;
+			case "Pentagon rotated":
+				bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, getRandomFloat(0, (float) (2 * Math.PI))), paint);
+				break;
+			case "Hexagon":
 				bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, 0), paint);
-			}
-			break;
-		case "Bubbles":
-			if (Settings.isGlossy()) {
-				drawGlossyBubble(x, y, paint, radius);
-			} else {
-				bitmapCanvas.drawCircle(x, y, radius, paint);
 				// Outline
 				if (Settings.isOutline()) {
 					setupPaintForOutline(paint, radius);
+					bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, 0), paint);
+				}
+				break;
+			case "Bubbles":
+				if (Settings.isGlossy()) {
+					drawGlossyBubble(x, y, paint, radius);
+				} else {
 					bitmapCanvas.drawCircle(x, y, radius, paint);
+					// Outline
+					if (Settings.isOutline()) {
+						setupPaintForOutline(paint, radius);
+						bitmapCanvas.drawCircle(x, y, radius, paint);
+					}
 				}
-			}
-			break;
-		case "Hearts":
-			if (Settings.isGlossy()) {
-				drawGlossyHeart(x, y, paint, radius);
-			} else {
-				bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+				break;
+			case "Hearts":
+				if (Settings.isGlossy()) {
+					drawGlossyHeart(x, y, paint, radius);
+				} else {
+					bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+					// Outline
+					if (Settings.isOutline()) {
+						setupPaintForOutline(paint, radius);
+						bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+					}
+				}
+				break;
+			case "Spirals":
+				paint.setStyle(Style.STROKE);
+				paint.setStrokeWidth(radius / 10);
+				bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+				break;
+			case "Pillows":
+				bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
 				// Outline
 				if (Settings.isOutline()) {
 					setupPaintForOutline(paint, radius);
-					bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+					bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
 				}
-			}
-			break;
-		case "Spirals":
-			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
-			break;
-		case "Pillows":
-			bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
-			// Outline
-			if (Settings.isOutline()) {
-				setupPaintForOutline(paint, radius);
-				bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
-			}
-			break;
-		case "Roses":
-			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
-			break;
-		case "Skyline":
-			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
-			bitmapCanvas.drawRect(rect, paint);
-			break;
-		case "Crickle Crackle":
-			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(radius / 10);
-			bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
-			break;
+				break;
+			case "Roses":
+				bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
+				break;
+			case "Skyline":
+				final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
+				bitmapCanvas.drawRect(rect, paint);
+				break;
+			case "Crickle Crackle":
+				paint.setStyle(Style.STROKE);
+				paint.setStrokeWidth(radius / 10);
+				bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
+				break;
 		}
 	}
 

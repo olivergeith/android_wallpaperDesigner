@@ -56,5 +56,7 @@
     <string name="outline">Outline</string>
     <string name="customOutlineColor">Custom Outline Color</string>
     <string name="colorOutline">Outline Color</string>
+    <string name="patternSizeAdjust">Pattern Size Adjustment</string>
+    <string name="patternMinSizeAdjust">Min. PatternSize relativ to max. PatternSize</string>
     
 </resources>

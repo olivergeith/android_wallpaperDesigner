@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
     <PreferenceCategory 
         android:title="Pattern">
@@ -13,15 +14,17 @@
 	        android:entryValues="@array/patternValues"
 	        />
 
-        <ListPreference
-	        android:key="pattern_anzahlPatterns"
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="anzahlPatterns"
 	        android:title="@string/pattern_anzahlPatterns" 
-	        android:dialogTitle="@string/pattern_anzahlPatterns"
-	        android:defaultValue="1000"
-	        android:entries="@array/anzahlPatterns"
-	        android:entryValues="@array/anzahlPatternsValues"
-	        />
-        
+		    seekbarpreference:minValue="10"
+		    seekbarpreference:stepValue="10"
+		    seekbarpreference:maxValue="1500"
+		    android:summary="Draw %1$d Patterns" 
+		    android:defaultValue="1000"
+		    android:dialogMessage="@string/pattern_anzahlPatterns" />
+            
+         
 		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 			    android:key="specialPatternSettings"
 			    android:title="Special Settings for selected Pattern"
@@ -57,6 +60,33 @@
     
     <PreferenceCategory 
         android:title="Randomizer Settings">
+        
+		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+			    android:key="specialPatternSizeSettings"
+			    android:title="Sizes of Patterns"
+			    android:summary="Size of pattern and range of randomization of size"
+			    android:icon="@android:drawable/ic_menu_sort_by_size"
+			    >
+	        <de.geithonline.android.basics.preferences.SeekBarPreference
+	            android:key="patternSizeAdjust"
+		        android:title="@string/patternSizeAdjust" 
+			    seekbarpreference:minValue="30"
+			    seekbarpreference:stepValue="5"
+			    seekbarpreference:maxValue="200"
+			    android:defaultValue="100"
+			    android:summary="%1$d percent" 
+			    android:dialogMessage="@string/patternSizeAdjust" />
+	
+	        <de.geithonline.android.basics.preferences.SeekBarPreference
+	            android:key="patternMinSizeAdjust"
+		        android:title="@string/patternMinSizeAdjust" 
+			    seekbarpreference:minValue="5"
+			    seekbarpreference:stepValue="5"
+			    seekbarpreference:maxValue="100"
+			    android:defaultValue="10"
+			    android:summary="Minimum Pattern size is %1$d percent of maximum Pattern Size" 
+			    android:dialogMessage="@string/patternMinSizeAdjust" />
+		</PreferenceScreen>
         
         
         <ListPreference

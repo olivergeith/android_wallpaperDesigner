@@ -19,7 +19,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference patternSelection;
 	private ListPreference randomizeColorRange;
 	private ListPreference randomizeAlphaRange;
-	private ListPreference anzahlPatterns;
 	private ListPreference dropShadowType;;
 
 	@Override
@@ -35,16 +34,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				handlePatternSelect((String) newValue);
-				return true;
-			}
-		});
-		anzahlPatterns = (ListPreference) findPreference(Settings.PATTERN_ANZAHL_PATTERNS);
-		anzahlPatterns.setSummary("" + Settings.getAnzahlPatterns());
-		anzahlPatterns.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				anzahlPatterns.setSummary((String) newValue);
 				return true;
 			}
 		});
@@ -110,8 +99,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		switch (key) {
-		default:
-			break;
+			default:
+				break;
 		}
 
 	}

@@ -15,7 +15,7 @@ public class Settings {
 	public static final String PATTERN_OUTLINE = "outline";
 	public static final String PATTERN_GLOSSY = "glossy";
 	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
-	public static final String PATTERN_ANZAHL_PATTERNS = "pattern_anzahlPatterns";
+	public static final String PATTERN_ANZAHL_PATTERNS = "anzahlPatterns";
 	public static final String PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
 	public static final String PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
 	public static SharedPreferences prefs;
@@ -46,7 +46,21 @@ public class Settings {
 		if (isDebugging()) {
 			return 0;
 		}
-		return Integer.valueOf(prefs.getString(PATTERN_ANZAHL_PATTERNS, "1000"));
+		return prefs.getInt(PATTERN_ANZAHL_PATTERNS, 1000);
+	}
+
+	public static float getPatternSizeFactor() {
+		if (prefs == null) {
+			return 1.0f;
+		}
+		return prefs.getInt("patternSizeAdjust", 100) / 100f;
+	}
+
+	public static float getPatternMinSizeFactor() {
+		if (prefs == null) {
+			return 0.1f;
+		}
+		return prefs.getInt("patternMinSizeAdjust", 10) / 100f;
 	}
 
 	public static boolean hasPatternGlossyEffect(final String pattern) {
@@ -172,23 +186,23 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getBWidth();
-		default:
-		case "2560x1600":
-			return 2560;
-		case "1920x1200":
-			return 1920;
-		case "1920x1080":
-			return 1920;
-		case "1280x720":
-			return 1280;
-		case "1024x768":
-			return 1024;
-		case "960x800":
-			return 960;
-		case "640x480":
-			return 640;
+			case "customSize":
+				return getBWidth();
+			default:
+			case "2560x1600":
+				return 2560;
+			case "1920x1200":
+				return 1920;
+			case "1920x1080":
+				return 1920;
+			case "1280x720":
+				return 1280;
+			case "1024x768":
+				return 1024;
+			case "960x800":
+				return 960;
+			case "640x480":
+				return 640;
 		}
 	}
 
@@ -203,23 +217,23 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getBHeight();
-		default:
-		case "2560x1600":
-			return 1600;
-		case "1920x1200":
-			return 1200;
-		case "1920x1080":
-			return 1080;
-		case "1280x720":
-			return 720;
-		case "1024x768":
-			return 768;
-		case "960x800":
-			return 800;
-		case "640x480":
-			return 480;
+			case "customSize":
+				return getBHeight();
+			default:
+			case "2560x1600":
+				return 1600;
+			case "1920x1200":
+				return 1200;
+			case "1920x1080":
+				return 1080;
+			case "1280x720":
+				return 720;
+			case "1024x768":
+				return 768;
+			case "960x800":
+				return 800;
+			case "640x480":
+				return 480;
 		}
 	}
 
@@ -331,7 +345,7 @@ public class Settings {
 
 			prefs.edit().putString("stylePicker", "Patterns").commit();
 			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Stars").commit();
-			prefs.edit().putString(PATTERN_ANZAHL_PATTERNS, "1000").commit();
+			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
 			prefs.edit().putBoolean("dropShadow", true).commit();
 			prefs.edit().putBoolean("randomizeDropShadowColor", true).commit();
