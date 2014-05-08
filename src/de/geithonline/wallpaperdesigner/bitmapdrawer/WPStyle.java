@@ -31,7 +31,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 	@Override
 	public synchronized void save(final Context context) {
 		final Date date = new Date();
-		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_hhmmss");
+		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		final String timeStamp = dt.format(date);
 		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(bitmap, "WallpaperDesigner", "WallpaperDesigner_" + timeStamp + ".png");
 		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null, new MediaScannerConnection.OnScanCompletedListener() {

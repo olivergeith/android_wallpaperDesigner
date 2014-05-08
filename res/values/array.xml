@@ -141,6 +141,7 @@
         <item >Rings</item>
         <item >Skyline</item>
         <item >Crickle Crackle</item>
+        <item >Streamers</item>
         </string-array>
     
     <string-array name="patternValues">
@@ -160,6 +161,7 @@
         <item >Rings</item>
         <item >Skyline</item>
         <item >Crickle Crackle</item>
+        <item >Streamers</item>
         </string-array>
     
     

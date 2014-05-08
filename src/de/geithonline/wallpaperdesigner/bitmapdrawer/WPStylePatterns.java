@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
+import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
@@ -178,6 +179,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Crickle Crackle":
 			drawCrickleCrackle(x, y, paint, radius);
 			break;
+		case "Streamers":
+			drawStreamer(x, y, paint, radius);
+			break;
 		}
 	}
 
@@ -239,6 +243,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawCrickleCrackle(final int x, final int y, final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
+		// bitmapCanvas.drawPath(new RandomSinPath(new Point(x, y), bWidth, bHeight, radius), paint);
 		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
 	}
 
@@ -246,6 +251,12 @@ public class WPStylePatterns extends WPStyle {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
 		bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+	}
+
+	private void drawStreamer(final int x, final int y, final Paint paint, final int radius) {
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 10);
+		bitmapCanvas.drawPath(new LuftschlangenPath(getRandomInt(5, 7), new Point(x, y), radius, getRandomBoolean()), paint);
 	}
 
 	private void drawText(final int x, final int y, final Paint paint, final int radius) {
