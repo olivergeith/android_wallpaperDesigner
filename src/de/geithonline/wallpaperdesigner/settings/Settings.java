@@ -104,6 +104,7 @@ public class Settings {
 		supportingStyles.add("Gears");
 		supportingStyles.add("Saw");
 		supportingStyles.add("Roses");
+		supportingStyles.add("Virus Attack");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -390,6 +391,11 @@ public class Settings {
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 
 		}
+	}
+
+	public static String getText() {
+		// TODO Auto-generated method stub
+		return "CyanFox";
 	}
 
 }

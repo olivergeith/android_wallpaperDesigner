@@ -75,12 +75,15 @@
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
+        <item >Custom Text</item>
         <item >Spirals</item>
         <item >Pillows</item>
         <item >Roses</item>
         <item >Rings</item>
         <item >Skyline</item>
         <item >Crickle Crackle</item>
+        <item >Maze</item>
+        <item >Virus Attack</item>
         <item >Streamers</item>
         </string-array>
     
@@ -95,12 +98,15 @@
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
+        <item >Custom Text</item>
         <item >Spirals</item>
         <item >Pillows</item>
         <item >Roses</item>
         <item >Rings</item>
         <item >Skyline</item>
         <item >Crickle Crackle</item>
+        <item >Maze</item>
+        <item >Virus Attack</item>
         <item >Streamers</item>
         </string-array>
     

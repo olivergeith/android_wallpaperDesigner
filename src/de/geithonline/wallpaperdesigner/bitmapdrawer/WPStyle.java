@@ -49,14 +49,14 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		}
 	}
 
-	protected void drawNonPremiumText(final Canvas canvas) {
+	protected void drawNonPremiumText(final Canvas canvas, final String patternName) {
 		if (!Settings.isPremium()) {
 			final int fontSize = Math.round(canvas.getWidth() * 0.015f);
 			int dropShadowRadius = Math.round(canvas.getWidth() * 0.01f);
 			if (dropShadowRadius < 3) {
 				dropShadowRadius = 3;
 			}
-			final String text = "Created with 'The Wallpaper Designer' ...please get the Premium Version, to get rid of this text :-)";
+			final String text = patternName + " - Created with 'The Wallpaper Designer' ...please get the Premium Version, to remove this text :-)";
 			final Paint paint = new Paint();
 			paint.setAntiAlias(true);
 			paint.setColor(Color.WHITE);

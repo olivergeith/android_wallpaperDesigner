@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
+import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
@@ -22,6 +24,7 @@ import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
+import de.geithonline.wallpaperdesigner.shapes.VirusPath;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
@@ -29,8 +32,9 @@ public class WPStylePatterns extends WPStyle {
 
 	protected int bWidth = 2560;
 	protected int bHeight = 1600;
-	// private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private final String letters = "AOKP";
+	private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	// private final String letters = "AOKP";
 
 	@Override
 	public synchronized Bitmap drawBitmap() {
@@ -108,7 +112,7 @@ public class WPStylePatterns extends WPStyle {
 			drawPattern(x, y, paint, radius);
 		}
 
-		drawNonPremiumText(bitmapCanvas);
+		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
 		refbitmap.recycle();
 		return bitmap;
 	}
@@ -117,6 +121,9 @@ public class WPStylePatterns extends WPStyle {
 		switch (Settings.getSelectedPattern()) {
 		default:
 		case "Letters":
+			drawLetters(x, y, paint, radius);
+			break;
+		case "Custom Text":
 			drawText(x, y, paint, radius);
 			break;
 		case "Saw":
@@ -179,6 +186,12 @@ public class WPStylePatterns extends WPStyle {
 		case "Crickle Crackle":
 			drawCrickleCrackle(x, y, paint, radius);
 			break;
+		case "Maze":
+			drawMaze(x, y, paint, radius);
+			break;
+		case "Virus Attack":
+			drawVirus(x, y, paint, radius);
+			break;
 		case "Streamers":
 			drawStreamer(x, y, paint, radius);
 			break;
@@ -240,11 +253,27 @@ public class WPStylePatterns extends WPStyle {
 		return filled;
 	}
 
+	private void drawMaze(final int x, final int y, final Paint paint, final int radius) {
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 10);
+		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius, true), paint);
+	}
+
+	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new VirusPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	private void drawCrickleCrackle(final int x, final int y, final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
-		// bitmapCanvas.drawPath(new RandomSinPath(new Point(x, y), bWidth, bHeight, radius), paint);
-		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius), paint);
+		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius, false), paint);
 	}
 
 	private void drawSpiral(final int x, final int y, final Paint paint, final int radius) {
@@ -259,7 +288,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(new LuftschlangenPath(getRandomInt(5, 7), new Point(x, y), radius, getRandomBoolean()), paint);
 	}
 
-	private void drawText(final int x, final int y, final Paint paint, final int radius) {
+	private void drawLetters(final int x, final int y, final Paint paint, final int radius) {
 		final int letterindex = getRandomInt(0, letters.length() - 1);
 		final char c = letters.charAt(letterindex);
 		if (getRandomBoolean()) {
@@ -267,9 +296,20 @@ public class WPStylePatterns extends WPStyle {
 		} else {
 			paint.setTypeface(Typeface.DEFAULT);
 		}
-		paint.setTextSize(radius * 3);
+		paint.setTextSize(radius * 2.5f);
 		paint.setTextAlign(Align.CENTER);
 		bitmapCanvas.drawText("" + c, x, y, paint);
+	}
+
+	private void drawText(final int x, final int y, final Paint paint, final int radius) {
+		if (getRandomBoolean()) {
+			paint.setTypeface(Typeface.DEFAULT_BOLD);
+		} else {
+			paint.setTypeface(Typeface.DEFAULT);
+		}
+		paint.setTextSize(radius);
+		paint.setTextAlign(Align.CENTER);
+		bitmapCanvas.drawText(Settings.getText(), x, y, paint);
 	}
 
 	private void drawStar(final int x, final int y, final Paint paint, final int radius) {
