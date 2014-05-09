@@ -163,18 +163,6 @@ public class Settings {
 		return !getDropShadowType().equals("No");
 	}
 
-	// public static boolean isDropShadowDarker() {
-	// return !getDropShadowType().equals("Darker");
-	// }
-	//
-	// public static boolean isDropShadowColorRandom() {
-	// return getDropShadowType().equals("Random");
-	// }
-	//
-	// public static boolean isDropShadowColorOpposite() {
-	// return getDropShadowType().equals("Opposite");
-	// }
-
 	public static int getDropShadowColor() {
 		if (prefs == null) {
 			return R.integer.COLOR_BLACK;
@@ -193,7 +181,7 @@ public class Settings {
 		if (prefs == null) {
 			return 128;
 		}
-		return Integer.valueOf(prefs.getString("randomizeAlphaRange", "128"));
+		return prefs.getInt("randomizeAlphaRangeInt", 128);
 	}
 
 	// ###################################################################
@@ -204,9 +192,9 @@ public class Settings {
 
 	public static int getRandomizeColorRange() {
 		if (prefs == null) {
-			return 64;
+			return 32;
 		}
-		return Integer.valueOf(prefs.getString("randomizeColorRange", "64"));
+		return prefs.getInt("randomizeColorRangeInt", 32);
 	}
 
 	// ###################################################################
@@ -396,10 +384,8 @@ public class Settings {
 			prefs.edit().putString("bHeight", "1600").commit();
 			prefs.edit().putString("sizeSelection", "2560x1600").commit();
 
-			prefs.edit().putBoolean("randomizeColor", false).commit();
-			prefs.edit().putString("randomizeColorRange", "32").commit();
-			prefs.edit().putBoolean("randomizeAlpha", true).commit();
-			prefs.edit().putString("randomizeAlphaRange", "96").commit();
+			prefs.edit().putInt("randomizeColorRangeInt", 32).commit();
+			prefs.edit().putInt("randomizeAlphaRangeInt", 96).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 

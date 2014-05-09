@@ -17,8 +17,6 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 public class StylePreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	private ListPreference patternSelection;
-	private ListPreference randomizeColorRange;
-	private ListPreference randomizeAlphaRange;
 	private ListPreference dropShadowType;
 	private ListPreference filledOption;
 
@@ -31,10 +29,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.PATTERN_FILLED_OPTION);
 		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
-		randomizeColorRange = (ListPreference) findPreference("randomizeColorRange");
-		randomizeAlphaRange = (ListPreference) findPreference("randomizeAlphaRange");
 
-		handlePatternSelect(Settings.getSelectedPattern());
 		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -44,7 +39,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
-		handleFilledOptionSelected(Settings.getFilledOption());
 		filledOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -54,7 +48,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
-		handleDropShadowTypeSelection(Settings.getDropShadowType());
 		dropShadowType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -65,25 +58,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		});
 
-		randomizeColorRange.setSummary("" + Settings.getRandomizeColorRange());
-		randomizeColorRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				randomizeColorRange.setSummary((String) newValue);
-				return true;
-			}
-		});
-		randomizeAlphaRange.setSummary("" + Settings.getRandomizeAlphaRange());
-		randomizeAlphaRange.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				randomizeAlphaRange.setSummary((String) newValue);
-				return true;
-			}
-		});
-
+		handlePatternSelect(Settings.getSelectedPattern());
+		handleFilledOptionSelected(Settings.getFilledOption());
+		handleDropShadowTypeSelection(Settings.getDropShadowType());
 		enableProFeatures();
 	}
 
@@ -120,8 +97,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		switch (key) {
-			default:
-				break;
+		default:
+			break;
 		}
 
 	}

@@ -103,24 +103,27 @@
 			    android:dialogMessage="@string/patternMinSizeAdjust" />
 		</PreferenceScreen>
         
-        
-        <ListPreference
-	        android:key="randomizeColorRange"
+
+		<de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="randomizeColorRangeInt"
 	        android:title="@string/randomizeColorRange" 
-	        android:dialogTitle="@string/randomizeColorRange"
-	        android:defaultValue="64"
-	        android:entries="@array/randColorRange"
-	        android:entryValues="@array/randColorRangeValues"
-	        />
-        
-        <ListPreference
-	        android:key="randomizeAlphaRange"
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="1"
+		    seekbarpreference:maxValue="255"
+		    android:summary="%1$d" 
+		    android:defaultValue="32"
+		    android:dialogMessage="@string/randomizeColorRange" />
+		
+		<de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="randomizeAlphaRangeInt"
 	        android:title="@string/randomizeAlphaRange" 
-	        android:dialogTitle="@string/randomizeAlphaRange"
-	        android:defaultValue="128"
-	        android:entries="@array/randAlphaRange"
-	        android:entryValues="@array/randAlphaRangeValues"
-	        />
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="1"
+		    seekbarpreference:maxValue="255"
+		    android:summary="%1$d" 
+		    android:defaultValue="128"
+		    android:dialogMessage="@string/randomizeAlphaRange" />
+		
 
         <ListPreference
 	        android:key="pattern_dropShadowType"
