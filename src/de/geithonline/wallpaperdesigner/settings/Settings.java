@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_OUTLINE_DARKNESS_ADJUST = "outlineDarknessAdjust";
+	public static final String PATTERN_OUTLINE_NEVER_TRANSPARENT = "outlineNeverTransparent";
 	public static final String PATTERN_TEXT = "textPattern";
 	public static final String PATTERN_TEXT_DRAW_STYLE = "textDrawStyle";
 	public static final String PATTERN_FILLED_OPTION = "filledOption";
@@ -147,6 +149,13 @@ public class Settings {
 		return prefs.getBoolean(PATTERN_OUTLINE, false);
 	}
 
+	public static boolean isOutlineNeverTransparent() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(PATTERN_OUTLINE_NEVER_TRANSPARENT, false);
+	}
+
 	public static boolean isCustomOutlineColor() {
 		if (prefs == null) {
 			return false;
@@ -160,6 +169,13 @@ public class Settings {
 		}
 		final int col = prefs.getInt("colorOutline", R.integer.COLOR_BLACK);
 		return col;
+	}
+
+	public static int getOutlineDarkness() {
+		if (prefs == null) {
+			return 48;
+		}
+		return prefs.getInt(PATTERN_OUTLINE_DARKNESS_ADJUST, 48);
 	}
 
 	public static String getText() {

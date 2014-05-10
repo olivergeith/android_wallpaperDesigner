@@ -90,6 +90,33 @@ public class ColorHelper {
 		return Color.argb(a, r, g, b);
 	}
 
+	/**
+	 * @param color
+	 * @param amount
+	 *            0-255
+	 * @return
+	 */
+	public static int darker(final int color, final int amount) {
+		final int a = Color.alpha(color);
+		int r = Color.red(color);
+		int g = Color.green(color);
+		int b = Color.blue(color);
+
+		r -= amount;
+		if (r < 0) {
+			r = 0;
+		}
+		g -= amount;
+		if (g < 0) {
+			g = 0;
+		}
+		b -= amount;
+		if (b < 0) {
+			b = 0;
+		}
+		return Color.argb(a, r, g, b);
+	}
+
 	public static int getRadiantColor(final int col1, final int col2, final int level, final int min, final int max) {
 		final int diff = min - max;
 		final int diffpercent = min - level;

@@ -621,11 +621,14 @@ public class WPStylePatterns extends WPStyle {
 		}
 		paint.setStrokeWidth(strokewidth);
 		paint.setShader(null);
-		paint.setShadowLayer(0, 0, 0, Settings.getDropShadowColor());
+		if (Settings.isOutlineNeverTransparent()) {
+			paint.setAlpha(255);
+		}
+		// paint.setShadowLayer(0, 0, 0, Settings.getDropShadowColor());
 		if (Settings.isCustomOutlineColor()) {
 			paint.setColor(Settings.getCustomOutlineColor());
 		} else {
-			paint.setColor(ColorHelper.darker(paint.getColor()));
+			paint.setColor(ColorHelper.darker(paint.getColor(), Settings.getOutlineDarkness()));
 		}
 	}
 

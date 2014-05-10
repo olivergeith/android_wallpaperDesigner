@@ -32,7 +32,16 @@
 			    android:icon="@android:drawable/ic_menu_preferences"
 			    >
 		        
-		        <CheckBoxPreference 
+			    <ListPreference
+			        android:key="filledOption"
+			        android:title="@string/filledOption" 
+			        android:dialogTitle="@string/filledOption"
+			        android:defaultValue="Not filled"
+			        android:entries="@array/hole"
+			        android:entryValues="@array/holeValues"
+			        />
+
+			    <CheckBoxPreference 
 		            android:key="randomRotate"
 		            android:title="@string/randomRotate"
 		            android:defaultValue="false"
@@ -44,31 +53,42 @@
 		            android:defaultValue="false"
 		            />
 		
-		        <CheckBoxPreference 
-		            android:key="outline"
-		            android:title="@string/outline"
-		            android:defaultValue="false"
-		            />
-		        <CheckBoxPreference 
-		            android:key="customOutlineColor"
-		            android:title="@string/customOutlineColor"
-		            android:defaultValue="false"
-		            android:dependency="outline"
-		            />
-		        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-		        	android:key="colorOutline"
-		        	android:title="@string/colorOutline" 
-		        	android:defaultValue="@integer/COLOR_BLACK"
-		            android:dependency="customOutlineColor"
-		        	/>
-		        <ListPreference
-			        android:key="filledOption"
-			        android:title="@string/filledOption" 
-			        android:dialogTitle="@string/filledOption"
-			        android:defaultValue="Not filled"
-			        android:entries="@array/hole"
-			        android:entryValues="@array/holeValues"
-			        />
+	   		        <CheckBoxPreference 
+			            android:key="outline"
+			            android:title="@string/outline"
+			            android:defaultValue="false"
+			            />
+			        <CheckBoxPreference 
+			            android:key="outlineNeverTransparent"
+			            android:title="@string/outlineNeverTransparent"
+			            android:summary="@string/outlineNeverTransparentSummary"
+			            android:defaultValue="false"
+			            android:dependency="outline"
+			            />
+			        <de.geithonline.android.basics.preferences.SeekBarPreference
+			            android:key="outlineDarknessAdjust"
+				        android:title="@string/outlineDarknessAdjust" 
+					    seekbarpreference:minValue="16"
+					    seekbarpreference:stepValue="16"
+					    seekbarpreference:maxValue="192"
+					    android:defaultValue="48"
+					    android:summary="%1$d" 
+					    android:dialogMessage="@string/outlineDarknessAdjust" 
+					    />
+			        
+			        <CheckBoxPreference 
+			            android:key="customOutlineColor"
+			            android:title="@string/customOutlineColor"
+			            android:defaultValue="false"
+			            android:dependency="outline"
+			            />
+			        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+			        	android:key="colorOutline"
+			        	android:title="@string/colorOutline" 
+			        	android:defaultValue="@integer/COLOR_BLACK"
+			            android:dependency="customOutlineColor"
+			        	/>
+
 		        <EditTextPreference
 				    android:key="textPattern"
 		    		android:defaultValue="The Wallpaper Designer"
@@ -84,7 +104,6 @@
 			        android:entryValues="@array/textDrawStyleValues"
 			        />
 		        		        
-		        
 		    </PreferenceScreen>
 		        		
     </PreferenceCategory>
