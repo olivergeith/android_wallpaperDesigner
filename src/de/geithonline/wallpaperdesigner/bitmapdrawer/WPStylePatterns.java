@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
@@ -69,14 +70,18 @@ public class WPStylePatterns extends WPStyle {
 
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
+
+		final int anzahlPatterns = Settings.getAnzahlPatterns();
+
 		// Zeichnen
-		for (int i = 0; i < Settings.getAnzahlPatterns(); i++) {
+		for (int i = 0; i < anzahlPatterns; i++) {
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
 
 			// random koordinate an der gemalt werden soll
-			final int x = getRandomInt(0, bWidth - 1);
-			final int y = getRandomInt(0, bHeight - 1);
+			final Point point = getRandomPoint();
+			final int x = point.x;
+			final int y = point.y;
 			// davon die aktuelle Farbe
 			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
 
@@ -115,6 +120,12 @@ public class WPStylePatterns extends WPStyle {
 		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
 		refbitmap.recycle();
 		return bitmap;
+	}
+
+	private Point getRandomPoint() {
+		final int x = getRandomInt(0, bWidth - 1);
+		final int y = getRandomInt(0, bHeight - 1);
+		return new Point(x, y);
 	}
 
 	private void drawPattern(final int x, final int y, final Paint paint, final int radius) {
@@ -178,6 +189,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Flowers":
 			drawFlower(x, y, paint, radius);
+			break;
+		case "Bubble Flowers":
+			drawFlowerV2(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -275,6 +289,18 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawFlowerV2(final int x, final int y, final Paint paint, final int radius) {
+		// final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
+		final Path path = new BubbleCirclePath(6, new Point(x, y), radius, getFilledBoolean());
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

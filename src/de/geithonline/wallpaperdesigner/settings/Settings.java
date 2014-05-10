@@ -85,6 +85,7 @@ public class Settings {
 		final List<String> supportingStyles = new ArrayList<String>();
 		supportingStyles.add("Gears");
 		supportingStyles.add("Saw");
+		supportingStyles.add("Bubble Flowers");
 		return supportingStyles.contains(pattern);
 	}
 
