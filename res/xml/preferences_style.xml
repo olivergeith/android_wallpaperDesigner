@@ -2,8 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
-    <PreferenceCategory 
-        android:title="Pattern">
+    <PreferenceCategory  android:title="Pattern"/>
 
         <ListPreference
 	        android:key="pattern_patternPicker"
@@ -31,7 +30,8 @@
 			    android:summary="Glossy Effect, Outline, Text, Filling ..."
 			    android:icon="@android:drawable/ic_menu_preferences"
 			    >
-		        
+		    <PreferenceCategory  android:title="Assorted Options"/>
+		    
 			    <ListPreference
 			        android:key="filledOption"
 			        android:title="@string/filledOption" 
@@ -53,42 +53,44 @@
 		            android:defaultValue="false"
 		            />
 		
-	   		        <CheckBoxPreference 
-			            android:key="outline"
-			            android:title="@string/outline"
-			            android:defaultValue="false"
-			            />
-			        <CheckBoxPreference 
-			            android:key="outlineNeverTransparent"
-			            android:title="@string/outlineNeverTransparent"
-			            android:summary="@string/outlineNeverTransparentSummary"
-			            android:defaultValue="false"
-			            android:dependency="outline"
-			            />
-			        <de.geithonline.android.basics.preferences.SeekBarPreference
-			            android:key="outlineDarknessAdjust"
-				        android:title="@string/outlineDarknessAdjust" 
-					    seekbarpreference:minValue="16"
-					    seekbarpreference:stepValue="16"
-					    seekbarpreference:maxValue="192"
-					    android:defaultValue="48"
-					    android:summary="%1$d" 
-					    android:dialogMessage="@string/outlineDarknessAdjust" 
-					    />
-			        
-			        <CheckBoxPreference 
-			            android:key="customOutlineColor"
-			            android:title="@string/customOutlineColor"
-			            android:defaultValue="false"
-			            android:dependency="outline"
-			            />
-			        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-			        	android:key="colorOutline"
-			        	android:title="@string/colorOutline" 
-			        	android:defaultValue="@integer/COLOR_BLACK"
-			            android:dependency="customOutlineColor"
-			        	/>
+		    	<PreferenceCategory  android:title="Outline Options"/>
+  		            <CheckBoxPreference 
+		            android:key="outline"
+		            android:title="@string/outline"
+		            android:defaultValue="false"
+		            />
+		        <CheckBoxPreference 
+		            android:key="outlineNeverTransparent"
+		            android:title="@string/outlineNeverTransparent"
+		            android:summary="@string/outlineNeverTransparentSummary"
+		            android:defaultValue="false"
+		            android:dependency="outline"
+		            />
+		        <de.geithonline.android.basics.preferences.SeekBarPreference
+		            android:key="outlineDarknessAdjust"
+			        android:title="@string/outlineDarknessAdjust" 
+				    seekbarpreference:minValue="16"
+				    seekbarpreference:stepValue="16"
+				    seekbarpreference:maxValue="192"
+				    android:defaultValue="48"
+				    android:summary="%1$d" 
+				    android:dialogMessage="@string/outlineDarknessAdjust" 
+				    />
+		        
+		        <CheckBoxPreference 
+		            android:key="customOutlineColor"
+		            android:title="@string/customOutlineColor"
+		            android:defaultValue="false"
+		            android:dependency="outline"
+		            />
+		        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+		        	android:key="colorOutline"
+		        	android:title="@string/colorOutline" 
+		        	android:defaultValue="@integer/COLOR_BLACK"
+		            android:dependency="customOutlineColor"
+		        	/>
 
+		        <PreferenceCategory  android:title="Custom Text Options"/>
 		        <EditTextPreference
 				    android:key="textPattern"
 		    		android:defaultValue="The Wallpaper Designer"
@@ -106,10 +108,8 @@
 		        		        
 		    </PreferenceScreen>
 		        		
-    </PreferenceCategory>
     
-    <PreferenceCategory 
-        android:title="Randomizer Settings">
+    <PreferenceCategory android:title="Randomizer Settings"/>
         
 		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 			    android:key="specialPatternSizeSettings"
@@ -160,7 +160,9 @@
 		    android:dialogMessage="@string/randomizeAlphaRange" />
 		
 
-        <ListPreference
+    <PreferenceCategory android:title="DropShadow"/>
+		
+		<ListPreference
 	        android:key="pattern_dropShadowType"
 	        android:title="@string/dropShadow" 
 	        android:dialogTitle="@string/dropShadow"
@@ -188,9 +190,7 @@
 	        />
     
     
-    </PreferenceCategory>
-    <PreferenceCategory 
-        android:title="Help and Howto">
+    <PreferenceCategory  android:title="Help and Howto"/>
 	    
 	    <Preference 
 	        android:title="HowTo: DropShadow" 
@@ -207,7 +207,6 @@
                 android:data="https://plus.google.com/117464431803849545973/posts/gxYmzHFTfpX" />
         </Preference>
 	    
-    </PreferenceCategory>
         
     	
 </PreferenceScreen>
