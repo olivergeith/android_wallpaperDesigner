@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_DROPSHADOW_DARKNESS_ADJUST = "dropShadowDarknessAdjust";
 	public static final String PATTERN_OUTLINE_DARKNESS_ADJUST = "outlineDarknessAdjust";
 	public static final String PATTERN_OUTLINE_NEVER_TRANSPARENT = "outlineNeverTransparent";
 	public static final String PATTERN_TEXT = "textPattern";
@@ -176,6 +177,13 @@ public class Settings {
 			return 48;
 		}
 		return prefs.getInt(PATTERN_OUTLINE_DARKNESS_ADJUST, 48);
+	}
+
+	public static int getDropShadowDarkness() {
+		if (prefs == null) {
+			return 48;
+		}
+		return prefs.getInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, 48);
 	}
 
 	public static String getText() {

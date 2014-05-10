@@ -168,7 +168,19 @@
 	        android:entries="@array/dropShadowType"
 	        android:entryValues="@array/dropShadowTypeValues"
 	        />
-       
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="dropShadowDarknessAdjust"
+	        android:title="@string/dropShadowDarknessAdjust" 
+		    seekbarpreference:minValue="16"
+		    seekbarpreference:stepValue="16"
+		    seekbarpreference:maxValue="192"
+		    android:defaultValue="48"
+		    android:summary="%1$d" 
+		    android:dialogMessage="@string/dropShadowDarknessAdjust" 
+		    />
+        
+        
 	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
 	        android:key="colorDropShadow"
 	        android:title="@string/colorDropShadow" 

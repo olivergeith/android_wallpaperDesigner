@@ -64,8 +64,8 @@ public class WPStylePatterns extends WPStyle {
 		}
 
 		int dropShadowRadius = Math.round(bWidth * 0.01f);
-		if (dropShadowRadius < 10) {
-			dropShadowRadius = 10;
+		if (dropShadowRadius < 5) {
+			dropShadowRadius = 5;
 		}
 
 		final Paint paint = new Paint();
@@ -108,7 +108,7 @@ public class WPStylePatterns extends WPStyle {
 				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
 				break;
 			case "Darker":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.darker2times(pcolor));
+				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.darker(pcolor, Settings.getDropShadowDarkness()));
 				break;
 			case "Select":
 				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());

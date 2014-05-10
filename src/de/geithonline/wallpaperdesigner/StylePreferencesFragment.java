@@ -107,6 +107,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowType.setSummary(newValue);
 		final Preference dropShadowColor = findPreference(Settings.PATTERN_DROPSHADOW_COLOR);
 		dropShadowColor.setEnabled(newValue.equals("Select"));
+		final Preference dropShadowDarkness = findPreference(Settings.PATTERN_DROPSHADOW_DARKNESS_ADJUST);
+		dropShadowDarkness.setEnabled(newValue.equals("Darker"));
 	}
 
 	private void handlePatternSelect(final String newPattern) {
