@@ -209,6 +209,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Virus Attack":
 			drawVirus(x, y, paint, radius);
 			break;
+		case "Virus Attack V2":
+			drawVirusV2(x, y, paint, radius);
+			break;
 		case "Streamers":
 			drawStreamer(x, y, paint, radius);
 			break;
@@ -278,6 +281,17 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new VirusPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawVirusV2(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new VirusPath(new Point(x, y), radius, 13);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

@@ -115,6 +115,7 @@ public class Settings {
 		supportingStyles.add("Roses");
 		supportingStyles.add("Flowers");
 		supportingStyles.add("Virus Attack");
+		supportingStyles.add("Virus Attack V2");
 		return supportingStyles.contains(pattern);
 	}
 
