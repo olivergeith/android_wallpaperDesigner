@@ -112,6 +112,7 @@ public class Settings {
 		supportingStyles.add("Gears");
 		supportingStyles.add("Saw");
 		supportingStyles.add("Roses");
+		supportingStyles.add("Flowers");
 		supportingStyles.add("Virus Attack");
 		return supportingStyles.contains(pattern);
 	}

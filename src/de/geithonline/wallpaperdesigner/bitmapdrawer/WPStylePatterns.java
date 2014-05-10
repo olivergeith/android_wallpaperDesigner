@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
@@ -66,8 +67,12 @@ public class WPStylePatterns extends WPStyle {
 			dropShadowRadius = 10;
 		}
 
+		final Paint paint = new Paint();
+		paint.setAntiAlias(true);
 		// Zeichnen
 		for (int i = 0; i < Settings.getAnzahlPatterns(); i++) {
+			paint.setStyle(Style.FILL);
+			final int radius = getRandomInt(minRadius, maxRadius);
 
 			// random koordinate an der gemalt werden soll
 			final int x = getRandomInt(0, bWidth - 1);
@@ -78,16 +83,12 @@ public class WPStylePatterns extends WPStyle {
 			if (Settings.isRandomizeColors()) {
 				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
 			}
-
-			final Paint paint = new Paint();
-			paint.setAntiAlias(true);
 			paint.setColor(pcolor);
 			if (Settings.isRandomizeAlpha()) {
 				paint.setAlpha(getRandomInt(255 - Settings.getRandomizeAlphaRange(), 255));
 			} else {
 				paint.setAlpha(255);
 			}
-			paint.setStyle(Style.FILL);
 			switch (Settings.getDropShadowType()) {
 			default:
 			case "No":
@@ -108,7 +109,6 @@ public class WPStylePatterns extends WPStyle {
 				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
 				break;
 			}
-			final int radius = getRandomInt(minRadius, maxRadius);
 			drawPattern(x, y, paint, radius);
 		}
 
@@ -175,6 +175,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Roses":
 			drawRose(x, y, paint, radius);
+			break;
+		case "Flowers":
+			drawFlower(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -261,6 +264,17 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new VirusPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
