@@ -58,9 +58,9 @@ public class WPStylePatterns extends WPStyle {
 		if (maxRadius < 30) {
 			maxRadius = 30;
 		}
-		final int minRadius = Math.round(maxRadius * Settings.getPatternMinSizeFactor());
+		int minRadius = Math.round(maxRadius * Settings.getPatternMinSizeFactor());
 		if (minRadius < 5) {
-			maxRadius = 5;
+			minRadius = 5;
 		}
 
 		int dropShadowRadius = Math.round(bWidth * 0.01f);
