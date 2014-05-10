@@ -44,6 +44,19 @@
         <item >Randomly mixed</item>
         </string-array>
     
+    <string-array name="textDrawStyle">
+        <item >Normal</item>
+        <item >Angled</item>
+        <item >Round</item>
+        <item >Random</item>
+        </string-array>
+    
+    <string-array name="textDrawStyleValues">
+        <item >Normal</item>
+        <item >Angled</item>
+        <item >Round</item>
+        <item >Random</item>
+        </string-array>
     
     
     <string-array name="dropShadowType">

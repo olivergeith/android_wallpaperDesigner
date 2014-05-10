@@ -28,7 +28,7 @@
 		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 			    android:key="specialPatternSettings"
 			    android:title="Special Settings for selected Pattern"
-			    android:summary="Glossy Effect, Outline, ..."
+			    android:summary="Glossy Effect, Outline, Text, Filling ..."
 			    android:icon="@android:drawable/ic_menu_preferences"
 			    >
 		        
@@ -69,6 +69,22 @@
 			        android:entries="@array/hole"
 			        android:entryValues="@array/holeValues"
 			        />
+		        <EditTextPreference
+				    android:key="textPattern"
+		    		android:defaultValue="The Wallpaper Designer"
+				    android:title="@string/textPattern" 
+		    		android:dialogTitle="@string/textPattern"
+		         	/>
+		        <ListPreference
+			        android:key="textDrawStyle"
+			        android:title="@string/textDrawStyle" 
+			        android:dialogTitle="@string/textDrawStyle"
+			        android:defaultValue="Round"
+			        android:entries="@array/textDrawStyle"
+			        android:entryValues="@array/textDrawStyleValues"
+			        />
+		        		        
+		        
 		    </PreferenceScreen>
 		        		
     </PreferenceCategory>

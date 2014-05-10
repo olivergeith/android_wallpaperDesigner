@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -19,6 +20,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference patternSelection;
 	private ListPreference dropShadowType;
 	private ListPreference filledOption;
+	private EditTextPreference textPattern;
+	private ListPreference textDrawStyle;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -28,7 +31,19 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.PATTERN_FILLED_OPTION);
+		textDrawStyle = (ListPreference) findPreference(Settings.PATTERN_TEXT_DRAW_STYLE);
 		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
+		textPattern = (EditTextPreference) findPreference(Settings.PATTERN_TEXT);
+
+		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handlePatternTextChanged((String) newValue);
+				return true;
+			}
+
+		});
 
 		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -48,6 +63,15 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
+		textDrawStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleTextDrawStyleSelected((String) newValue);
+				return true;
+			}
+		});
+
 		dropShadowType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -61,7 +85,18 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		handlePatternSelect(Settings.getSelectedPattern());
 		handleFilledOptionSelected(Settings.getFilledOption());
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
+		handlePatternTextChanged(Settings.getText());
+		handleTextDrawStyleSelected(Settings.getTextDrawStyle());
 		enableProFeatures();
+	}
+
+	protected void handleTextDrawStyleSelected(final String newValue) {
+		textDrawStyle.setSummary(newValue);
+
+	}
+
+	private void handlePatternTextChanged(final String newValue) {
+		textPattern.setSummary(newValue);
 	}
 
 	private void handleFilledOptionSelected(final String value) {
@@ -83,10 +118,13 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		outline.setEnabled(Settings.hasPatternOutlineEffect(newPattern));
 		rotate.setEnabled(Settings.hasPatternRandomRotate(newPattern));
 		filledOption.setEnabled(Settings.hasPatternFilledOption(newPattern));
+		textPattern.setEnabled(Settings.hasPatternTextOption(newPattern));
+		textDrawStyle.setEnabled(Settings.hasPatternTextOption(newPattern));
 		final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
 		specialSettings.setEnabled(Settings.hasPatternGlossyEffect(newPattern)//
 				|| Settings.hasPatternOutlineEffect(newPattern)//
 				|| Settings.hasPatternRandomRotate(newPattern)//
+				|| Settings.hasPatternTextOption(newPattern)//
 				|| Settings.hasPatternFilledOption(newPattern));
 
 	}

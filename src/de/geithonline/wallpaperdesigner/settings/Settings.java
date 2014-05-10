@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 
 public class Settings {
+	public static final String PATTERN_TEXT = "textPattern";
+	public static final String PATTERN_TEXT_DRAW_STYLE = "textDrawStyle";
 	public static final String PATTERN_FILLED_OPTION = "filledOption";
 	public static final String PATTERN_RANDOM_ROTATE = "randomRotate";
 	public static final String PATTERN_OUTLINE = "outline";
@@ -63,6 +65,12 @@ public class Settings {
 			return 0.1f;
 		}
 		return prefs.getInt("patternMinSizeAdjust", 10) / 100f;
+	}
+
+	public static boolean hasPatternTextOption(final String pattern) {
+		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Custom Text");
+		return supportingStyles.contains(pattern);
 	}
 
 	public static boolean hasPatternGlossyEffect(final String pattern) {
@@ -149,6 +157,20 @@ public class Settings {
 		}
 		final int col = prefs.getInt("colorOutline", R.integer.COLOR_BLACK);
 		return col;
+	}
+
+	public static String getText() {
+		if (prefs == null) {
+			return "The Wallpaper Designer";
+		}
+		return prefs.getString(PATTERN_TEXT, "The Wallpaper Designer");
+	}
+
+	public static String getTextDrawStyle() {
+		if (prefs == null) {
+			return "Round";
+		}
+		return prefs.getString(PATTERN_TEXT_DRAW_STYLE, "Round");
 	}
 
 	// ###################################################################
@@ -391,11 +413,6 @@ public class Settings {
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 
 		}
-	}
-
-	public static String getText() {
-		// TODO Auto-generated method stub
-		return "CyanFox";
 	}
 
 }

@@ -302,6 +302,37 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawText(final int x, final int y, final Paint paint, final int radius) {
+
+		switch (Settings.getTextDrawStyle()) {
+		default:
+		case "Round":
+			drawTextCircle(x, y, paint, radius);
+			break;
+		case "Normal":
+			drawTextStraight(x, y, paint, radius);
+			break;
+		case "Angled":
+			drawTextAngled(x, y, paint, radius);
+			break;
+		case "Random":
+			final int i = getRandomInt(0, 3);
+			switch (i) {
+			default:
+			case 1:
+				drawTextCircle(x, y, paint, radius);
+				break;
+			case 2:
+				drawTextStraight(x, y, paint, radius);
+				break;
+			case 3:
+				drawTextAngled(x, y, paint, radius);
+				break;
+			}
+			break;
+		}
+	}
+
+	private void drawTextStraight(final int x, final int y, final Paint paint, final int radius) {
 		if (getRandomBoolean()) {
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 		} else {
@@ -310,6 +341,42 @@ public class WPStylePatterns extends WPStyle {
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.CENTER);
 		bitmapCanvas.drawText(Settings.getText(), x, y, paint);
+	}
+
+	private void drawTextCircle(final int x, final int y, final Paint paint, final int radius) {
+		if (getRandomBoolean()) {
+			paint.setTypeface(Typeface.DEFAULT_BOLD);
+		} else {
+			paint.setTypeface(Typeface.DEFAULT);
+		}
+		paint.setTextSize(radius);
+		paint.setTextAlign(Align.CENTER);
+		final Path mArc = new Path();
+		final RectF oval = getRectForRadius(x, y, radius * 2);
+		mArc.addArc(oval, getRandomInt(0, 360), 355);
+
+		bitmapCanvas.drawTextOnPath(Settings.getText(), mArc, 0, 0, paint);
+	}
+
+	private void drawTextAngled(final int x, final int y, final Paint paint, final int radius) {
+		if (getRandomBoolean()) {
+			paint.setTypeface(Typeface.DEFAULT_BOLD);
+		} else {
+			paint.setTypeface(Typeface.DEFAULT);
+		}
+		paint.setTextSize(radius);
+		paint.setTextAlign(Align.LEFT);
+		final Path mArc = new Path();
+		mArc.moveTo(x, y);
+		final int y2 = getRandomInt(-bHeight, bHeight);
+		final int x2 = getRandomInt(-bWidth, bWidth);
+		mArc.lineTo(x2, y2);
+
+		bitmapCanvas.drawTextOnPath(Settings.getText(), mArc, 0, 0, paint);
+	}
+
+	protected RectF getRectForRadius(final int x, final int y, final int radius) {
+		return new RectF(x - radius, y - radius, x + radius, y + radius);
 	}
 
 	private void drawStar(final int x, final int y, final Paint paint, final int radius) {
