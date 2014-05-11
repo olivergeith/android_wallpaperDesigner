@@ -24,9 +24,14 @@ public class BackgroundDrawer {
 		case "2 Color Radial Gradient":
 		case "4 Color Radial Gradient":
 		case "4 Color Sweep Gradient":
+		case "4 Color Linear Gradient left-right":
+		case "4 Color Linear Gradient top-bottom":
 			drawLinearGradientBackground(canvas);
 			break;
 		case "4-Color Gradient from corners":
+			draw4ColorCornerGradientBackground(canvas);
+			break;
+		case "4-Colors in corners":
 			draw4ColorBackground(canvas);
 			break;
 		}
@@ -38,6 +43,9 @@ public class BackgroundDrawer {
 		paint.setAntiAlias(true);
 
 		final int radius = (int) Math.sqrt(width * width + height * height) / 2;
+
+		final int colors[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Settings.getBackgroundColor3(), Settings.getBackgroundColor4() };
+		final float distances[] = { 0.05f, 0.30f, 0.60f, 0.95f };
 
 		switch (Settings.getGradientDirection()) {
 		default:
@@ -58,9 +66,6 @@ public class BackgroundDrawer {
 					Shader.TileMode.MIRROR));
 			break;
 		case "4 Color Radial Gradient":
-			final int colors[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Settings.getBackgroundColor3(),
-					Settings.getBackgroundColor4() };
-			final float distances[] = { 0.0f, 0.3f, 0.6f, 0.9f };
 			paint.setShader(new RadialGradient(width / 2, height / 2, radius, colors, distances, Shader.TileMode.MIRROR));
 			break;
 		case "4 Color Sweep Gradient":
@@ -68,6 +73,12 @@ public class BackgroundDrawer {
 					Settings.getBackgroundColor4(), Settings.getBackgroundColor1() };
 			final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
 			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+			break;
+		case "4 Color Linear Gradient left-right":
+			paint.setShader(new LinearGradient(0, 0, width, 0, colors, distances, Shader.TileMode.MIRROR));
+			break;
+		case "4 Color Linear Gradient top-bottom":
+			paint.setShader(new LinearGradient(0, 0, 0, height, colors, distances, Shader.TileMode.MIRROR));
 			break;
 		}
 		return paint;
@@ -81,6 +92,33 @@ public class BackgroundDrawer {
 	}
 
 	public static void draw4ColorBackground(final Canvas canvas) {
+		final int cWidth = canvas.getWidth();
+		final int cHeight = canvas.getHeight();
+		final int c1 = Settings.getBackgroundColor1();
+		final int c2 = Settings.getBackgroundColor2();
+		final int c3 = Settings.getBackgroundColor3();
+		final int c4 = Settings.getBackgroundColor4();
+		final Paint paint = new Paint();
+		paint.setAntiAlias(true);
+		paint.setColor(c1);
+		Rect r = new Rect(0, 0, cWidth / 2, cHeight / 2);
+		canvas.drawRect(r, paint);
+
+		paint.setColor(c2);
+		r = new Rect(cWidth / 2, 0, cWidth, cHeight / 2);
+		canvas.drawRect(r, paint);
+
+		paint.setColor(c3);
+		r = new Rect(cWidth / 2, cHeight / 2, cWidth, cHeight);
+		canvas.drawRect(r, paint);
+
+		paint.setColor(c4);
+		r = new Rect(0, cHeight / 2, cWidth / 2, cHeight);
+		canvas.drawRect(r, paint);
+
+	}
+
+	public static void draw4ColorCornerGradientBackground(final Canvas canvas) {
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
 		// final int c1 = Color.RED;

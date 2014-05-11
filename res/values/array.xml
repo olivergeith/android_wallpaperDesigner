@@ -137,9 +137,12 @@
         <item >Linear Gradient topleft-bottomright</item>
         <item >Linear Gradient topright-bottomleft</item>
         <item >4-Color Gradient from corners</item>
+        <item >4-Colors in corners</item>
         <item >2 Color Radial Gradient</item>
         <item >4 Color Radial Gradient</item>
         <item >4 Color Sweep Gradient</item>
+        <item >4 Color Linear Gradient left-right</item>
+        <item >4 Color Linear Gradient top-bottom</item>
         </string-array>
     
     <string-array name="directionsValues">
@@ -148,9 +151,12 @@
         <item >Linear Gradient topleft-bottomright</item>
         <item >Linear Gradient topright-bottomleft</item>
         <item >4-Color Gradient from corners</item>
+        <item >4-Colors in corners</item>
         <item >2 Color Radial Gradient</item>
         <item >4 Color Radial Gradient</item>
         <item >4 Color Sweep Gradient</item>
+        <item >4 Color Linear Gradient left-right</item>
+        <item >4 Color Linear Gradient top-bottom</item>
         </string-array>
     
     

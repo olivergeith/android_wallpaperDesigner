@@ -330,7 +330,11 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return test.equalsIgnoreCase("4-Color Gradient from corners") || test.equalsIgnoreCase("4 Color Radial Gradient")
+		return test.equalsIgnoreCase("4-Color Gradient from corners") //
+				|| test.equalsIgnoreCase("4 Color Radial Gradient")//
+				|| test.equalsIgnoreCase("4 Color Linear Gradient left-right")//
+				|| test.equalsIgnoreCase("4 Color Linear Gradient top-bottom")//
+				|| test.equalsIgnoreCase("4-Colors in corners")//
 				|| test.equalsIgnoreCase("4 Color Sweep Gradient");
 	}
 
