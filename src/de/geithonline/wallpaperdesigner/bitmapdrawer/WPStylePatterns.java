@@ -276,7 +276,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawMaze(final int x, final int y, final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
-		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius, true), paint);
+		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(10, 40), radius, true), paint);
 	}
 
 	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
