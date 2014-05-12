@@ -12,6 +12,15 @@
 	        android:entries="@array/directions"
 	        android:entryValues="@array/directionsValues"
 	        />
+
+        <ListPreference
+	        android:key="anzColors"
+	        android:title="@string/anzColors" 
+	        android:dialogTitle="@string/anzColors"
+	        android:defaultValue="4"
+	        android:entries="@array/anzColors"
+	        android:entryValues="@array/anzColorsValues"
+	        />
         
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
 	        android:key="color_plain_bgrnd"
