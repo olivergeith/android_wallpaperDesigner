@@ -119,6 +119,8 @@ public class Settings {
 		supportingStyles.add("Flowers");
 		supportingStyles.add("Virus Attack");
 		supportingStyles.add("Virus Attack V2");
+		supportingStyles.add("Bubble Flowers");
+		supportingStyles.add("Letters");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -265,23 +267,23 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-			case "customSize":
-				return getBWidth();
-			default:
-			case "2560x1600":
-				return 2560;
-			case "1920x1200":
-				return 1920;
-			case "1920x1080":
-				return 1920;
-			case "1280x720":
-				return 1280;
-			case "1024x768":
-				return 1024;
-			case "960x800":
-				return 960;
-			case "640x480":
-				return 640;
+		case "customSize":
+			return getBWidth();
+		default:
+		case "2560x1600":
+			return 2560;
+		case "1920x1200":
+			return 1920;
+		case "1920x1080":
+			return 1920;
+		case "1280x720":
+			return 1280;
+		case "1024x768":
+			return 1024;
+		case "960x800":
+			return 960;
+		case "640x480":
+			return 640;
 		}
 	}
 
@@ -296,23 +298,23 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-			case "customSize":
-				return getBHeight();
-			default:
-			case "2560x1600":
-				return 1600;
-			case "1920x1200":
-				return 1200;
-			case "1920x1080":
-				return 1080;
-			case "1280x720":
-				return 720;
-			case "1024x768":
-				return 768;
-			case "960x800":
-				return 800;
-			case "640x480":
-				return 480;
+		case "customSize":
+			return getBHeight();
+		default:
+		case "2560x1600":
+			return 1600;
+		case "1920x1200":
+			return 1200;
+		case "1920x1080":
+			return 1080;
+		case "1280x720":
+			return 720;
+		case "1024x768":
+			return 768;
+		case "960x800":
+			return 800;
+		case "640x480":
+			return 480;
 		}
 	}
 
