@@ -20,6 +20,7 @@ import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
+import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
@@ -183,6 +184,9 @@ public class WPStylePatterns extends WPStyle {
 				break;
 			case "Crop Circles":
 				drawDotSpiral(x, y, paint, radius);
+				break;
+			case "PacMan":
+				drawPacMan(x, y, paint, radius);
 				break;
 			case "Pillows":
 				drawPillow(x, y, paint, radius);
@@ -360,6 +364,17 @@ public class WPStylePatterns extends WPStyle {
 			rotate = getRandomFloat(0, (float) (Math.PI * 2));
 		}
 		final Path path = new DotSpiralPath(3, new Point(x, y), radius, rotate);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new PacmanPath(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

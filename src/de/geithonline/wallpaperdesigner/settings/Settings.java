@@ -125,6 +125,7 @@ public class Settings {
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Letters");
 		supportingStyles.add("Crop Circles");
+		supportingStyles.add("PacMan");
 		return supportingStyles.contains(pattern);
 	}
 
