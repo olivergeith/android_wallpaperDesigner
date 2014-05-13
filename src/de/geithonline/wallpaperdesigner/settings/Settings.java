@@ -41,9 +41,9 @@ public class Settings {
 
 	public static String getSelectedPattern() {
 		if (prefs == null) {
-			return "Stars";
+			return "Virus Attack";
 		}
-		return prefs.getString(PATTERN_PATTERN_PICKER, "Stars");
+		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack");
 	}
 
 	public static int getAnzahlPatterns() {
@@ -119,6 +119,7 @@ public class Settings {
 		supportingStyles.add("Flowers");
 		supportingStyles.add("Virus Attack");
 		supportingStyles.add("Virus Attack V2");
+		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Letters");
 		return supportingStyles.contains(pattern);
@@ -147,9 +148,9 @@ public class Settings {
 
 	public static boolean isOutline() {
 		if (prefs == null) {
-			return false;
+			return true;
 		}
-		return prefs.getBoolean(PATTERN_OUTLINE, false);
+		return prefs.getBoolean(PATTERN_OUTLINE, true);
 	}
 
 	public static boolean isOutlineNeverTransparent() {
@@ -206,9 +207,9 @@ public class Settings {
 	// Options Pattern Style (DropShadow)
 	public static String getDropShadowType() {
 		if (prefs == null) {
-			return "Random";
+			return "Darker";
 		}
-		return prefs.getString(PATTERN_DROPSHADOW_TYPE, "Random");
+		return prefs.getString(PATTERN_DROPSHADOW_TYPE, "Darker");
 	}
 
 	public static boolean isDropShadow() {
@@ -267,23 +268,23 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getBWidth();
-		default:
-		case "2560x1600":
-			return 2560;
-		case "1920x1200":
-			return 1920;
-		case "1920x1080":
-			return 1920;
-		case "1280x720":
-			return 1280;
-		case "1024x768":
-			return 1024;
-		case "960x800":
-			return 960;
-		case "640x480":
-			return 640;
+			case "customSize":
+				return getBWidth();
+			default:
+			case "2560x1600":
+				return 2560;
+			case "1920x1200":
+				return 1920;
+			case "1920x1080":
+				return 1920;
+			case "1280x720":
+				return 1280;
+			case "1024x768":
+				return 1024;
+			case "960x800":
+				return 960;
+			case "640x480":
+				return 640;
 		}
 	}
 
@@ -298,23 +299,23 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getBHeight();
-		default:
-		case "2560x1600":
-			return 1600;
-		case "1920x1200":
-			return 1200;
-		case "1920x1080":
-			return 1080;
-		case "1280x720":
-			return 720;
-		case "1024x768":
-			return 768;
-		case "960x800":
-			return 800;
-		case "640x480":
-			return 480;
+			case "customSize":
+				return getBHeight();
+			default:
+			case "2560x1600":
+				return 1600;
+			case "1920x1200":
+				return 1200;
+			case "1920x1080":
+				return 1080;
+			case "1280x720":
+				return 720;
+			case "1024x768":
+				return 768;
+			case "960x800":
+				return 800;
+			case "640x480":
+				return 480;
 		}
 	}
 
@@ -425,15 +426,15 @@ public class Settings {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();
 			// init colors
-			prefs.edit().putInt("color_plain_bgrnd", Color.RED).commit();
-			prefs.edit().putInt("color2_plain_bgrnd", Color.YELLOW).commit();
-			prefs.edit().putInt("color3_plain_bgrnd", Color.GREEN).commit();
-			prefs.edit().putInt("color4_plain_bgrnd", Color.BLUE).commit();
+			prefs.edit().putInt("color_plain_bgrnd", 0xff820000).commit();
+			prefs.edit().putInt("color2_plain_bgrnd", 0xfff2e518).commit();
+			prefs.edit().putInt("color3_plain_bgrnd", 0xff008200).commit();
+			prefs.edit().putInt("color4_plain_bgrnd", 0xff014f81).commit();
 			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString("stylePicker", "Patterns").commit();
-			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Stars").commit();
+			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
 			prefs.edit().putBoolean("dropShadow", true).commit();
@@ -445,9 +446,10 @@ public class Settings {
 			prefs.edit().putString("sizeSelection", "2560x1600").commit();
 
 			prefs.edit().putInt("randomizeColorRangeInt", 32).commit();
-			prefs.edit().putInt("randomizeAlphaRangeInt", 96).commit();
+			prefs.edit().putInt("randomizeAlphaRangeInt", 30).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
+			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
 
 		}
 	}

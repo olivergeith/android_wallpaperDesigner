@@ -57,7 +57,7 @@
   		            <CheckBoxPreference 
 		            android:key="outline"
 		            android:title="@string/outline"
-		            android:defaultValue="false"
+		            android:defaultValue="true"
 		            />
 		        <CheckBoxPreference 
 		            android:key="outlineNeverTransparent"
@@ -69,8 +69,8 @@
 		        <de.geithonline.android.basics.preferences.SeekBarPreference
 		            android:key="outlineDarknessAdjust"
 			        android:title="@string/outlineDarknessAdjust" 
-				    seekbarpreference:minValue="16"
-				    seekbarpreference:stepValue="16"
+				    seekbarpreference:minValue="8"
+				    seekbarpreference:stepValue="8"
 				    seekbarpreference:maxValue="192"
 				    android:defaultValue="48"
 				    android:summary="%1$d" 
@@ -143,8 +143,8 @@
             android:key="randomizeColorRangeInt"
 	        android:title="@string/randomizeColorRange" 
 		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="1"
-		    seekbarpreference:maxValue="255"
+		    seekbarpreference:stepValue="4"
+		    seekbarpreference:maxValue="160"
 		    android:summary="%1$d" 
 		    android:defaultValue="32"
 		    android:dialogMessage="@string/randomizeColorRange" />
@@ -153,10 +153,10 @@
             android:key="randomizeAlphaRangeInt"
 	        android:title="@string/randomizeAlphaRange" 
 		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="1"
+		    seekbarpreference:stepValue="5"
 		    seekbarpreference:maxValue="255"
 		    android:summary="%1$d" 
-		    android:defaultValue="128"
+		    android:defaultValue="30"
 		    android:dialogMessage="@string/randomizeAlphaRange" />
 		
 
@@ -166,7 +166,7 @@
 	        android:key="pattern_dropShadowType"
 	        android:title="@string/dropShadow" 
 	        android:dialogTitle="@string/dropShadow"
-	        android:defaultValue="Random"
+	        android:defaultValue="Darker"
 	        android:entries="@array/dropShadowType"
 	        android:entryValues="@array/dropShadowTypeValues"
 	        />
@@ -174,8 +174,8 @@
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="dropShadowDarknessAdjust"
 	        android:title="@string/dropShadowDarknessAdjust" 
-		    seekbarpreference:minValue="16"
-		    seekbarpreference:stepValue="16"
+		    seekbarpreference:minValue="8"
+		    seekbarpreference:stepValue="8"
 		    seekbarpreference:maxValue="192"
 		    android:defaultValue="48"
 		    android:summary="%1$d" 
