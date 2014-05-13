@@ -67,7 +67,7 @@ public class VirusPath extends Path {
 	 * @param radius
 	 * @param arms
 	 */
-	public VirusPath(final Point center, float radius, final int arms, final boolean invertCircle) {
+	public VirusPath(final Point center, float radius, final int arms, final boolean filled) {
 		super();
 		radius = radius * 1.2f;
 		final float angle = (float) (2 * Math.PI / (arms));
@@ -102,10 +102,10 @@ public class VirusPath extends Path {
 				addCircle(p3.x, p3.y, bubbleRadius, Direction.CCW);
 			}
 		}
-
-		// if (invertCircle) {
-		// addCircle(center.x, center.y, radius, Direction.CCW);
-		// }
+		// cutout inner circle
+		if (!filled) {
+			addCircle(center.x, center.y, radius * 2 / 10, Direction.CCW);
+		}
 	}
 
 }

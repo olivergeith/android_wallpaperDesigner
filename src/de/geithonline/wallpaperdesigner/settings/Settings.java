@@ -89,6 +89,7 @@ public class Settings {
 		supportingStyles.add("Gears");
 		supportingStyles.add("Saw");
 		supportingStyles.add("Bubble Flowers");
+		supportingStyles.add("Virus Attack V3");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -99,6 +100,7 @@ public class Settings {
 		supportingStyles.add("Squares");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Triangles");
+		supportingStyles.add("Crop Circles");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -122,6 +124,7 @@ public class Settings {
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Letters");
+		supportingStyles.add("Crop Circles");
 		return supportingStyles.contains(pattern);
 	}
 

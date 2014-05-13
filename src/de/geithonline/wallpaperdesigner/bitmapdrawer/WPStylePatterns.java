@@ -15,6 +15,7 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
+import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
@@ -180,6 +181,9 @@ public class WPStylePatterns extends WPStyle {
 			case "Spirals":
 				drawSpiral(x, y, paint, radius);
 				break;
+			case "Crop Circles":
+				drawDotSpiral(x, y, paint, radius);
+				break;
 			case "Pillows":
 				drawPillow(x, y, paint, radius);
 				break;
@@ -305,7 +309,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawVirusV3(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath(new Point(x, y), radius, 17, false);
+		final Path path = new VirusPath(new Point(x, y), radius, 17, getFilledBoolean());
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -348,6 +352,21 @@ public class WPStylePatterns extends WPStyle {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
 		bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+	}
+
+	private void drawDotSpiral(final int x, final int y, final Paint paint, final int radius) {
+		float rotate = 0;
+		if (Settings.isRandomRotate()) {
+			rotate = getRandomFloat(0, (float) (Math.PI * 2));
+		}
+		final Path path = new DotSpiralPath(3, new Point(x, y), radius, rotate);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
 	}
 
 	private void drawStreamer(final int x, final int y, final Paint paint, final int radius) {
