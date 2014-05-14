@@ -37,8 +37,8 @@ public class PacmanPath extends Path {
 		final float alx = center.x - radius * 0.25f;
 		final float arx = center.x + radius * 0.45f;
 		final float ay = center.y - radius * 0.20f;
-		final float alxi = center.x - radius * 0.2f;
-		final float arxi = center.x + radius * 0.5f;
+		final float alxi = center.x - radius * 0.15f;
+		final float arxi = center.x + radius * 0.55f;
 		addCircle(alx, ay, radius * 0.25f, Direction.CW);
 		addCircle(arx, ay, radius * 0.25f, Direction.CW);
 		// inneres der Augen

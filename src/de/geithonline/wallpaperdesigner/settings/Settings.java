@@ -82,6 +82,7 @@ public class Settings {
 		supportingStyles.add("Hearts");
 		supportingStyles.add("Bubbles");
 		supportingStyles.add("Smiley");
+		supportingStyles.add("PacMan");
 		return supportingStyles.contains(pattern);
 	}
 
