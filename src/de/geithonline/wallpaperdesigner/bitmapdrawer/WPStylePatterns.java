@@ -389,7 +389,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new PacmanPath(new Point(x, y), radius);
+		final Path path = new PacmanPath(new Point(x, y), radius, getFilledBoolean());
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -660,16 +660,16 @@ public class WPStylePatterns extends WPStyle {
 		final int colorDarker = ColorHelper.darker2times(color);
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int transparent = 0x00FFFFFF;
-		final Path path = new PacmanPath(new Point(x, y), radius);
+		final Path path = new PacmanPath(new Point(x, y), radius, getFilledBoolean());
 		// Bubble
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShader(new RadialGradient(x, y, radius * 2, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
 		paint.setShadowLayer(0, 0, 0, 0);
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
-		paint.setShader(new LinearGradient(x, y - radius * 0.95f, x, y, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
+		paint.setShader(new LinearGradient(x, y - radius * 0.95f, x, y - radius * 0.2f, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
-		final RectF oval = new RectF(x - radius * 6 / 10, y - radius * 0.95f, x + radius * 6 / 10, y);
+		final RectF oval = new RectF(x - radius * 6 / 10, y - radius * 0.95f, x + radius * 6 / 10, y - radius * 0.2f);
 		bitmapCanvas.drawOval(oval, paint);
 		// Ring
 		if (Settings.isOutline()) {

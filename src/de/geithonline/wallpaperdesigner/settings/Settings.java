@@ -93,6 +93,7 @@ public class Settings {
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Smiley");
+		supportingStyles.add("PacMan");
 		return supportingStyles.contains(pattern);
 	}
 
