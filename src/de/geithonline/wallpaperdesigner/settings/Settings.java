@@ -254,6 +254,17 @@ public class Settings {
 		return prefs.getInt("randomizeColorRangeInt", 32);
 	}
 
+	public static boolean isRandomizeBrightness() {
+		return getRandomizeColorBrighnessRange() != 0;
+	}
+
+	public static int getRandomizeColorBrighnessRange() {
+		if (prefs == null) {
+			return 32;
+		}
+		return prefs.getInt("randomizeColorBrightnessRangeInt", 32);
+	}
+
 	// ###################################################################
 	// Wallpater Size
 

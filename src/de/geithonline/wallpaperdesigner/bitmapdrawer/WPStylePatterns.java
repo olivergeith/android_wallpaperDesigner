@@ -87,6 +87,9 @@ public class WPStylePatterns extends WPStyle {
 			// davon die aktuelle Farbe
 			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
 
+			if (Settings.isRandomizeBrightness()) {
+				pcolor = randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
+			}
 			if (Settings.isRandomizeColors()) {
 				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
 			}

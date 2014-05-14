@@ -38,6 +38,17 @@ public class ColorProvider {
 		return Color.rgb(r, g, b);
 	}
 
+	protected int randomizeColorBrightness(final int color, final int range) {
+		int r = Color.red(color);
+		int g = Color.green(color);
+		int b = Color.blue(color);
+		final int off = getRandomInt(-range, range);
+		r = validateColor(r + off);
+		g = validateColor(g + off);
+		b = validateColor(b + off);
+		return Color.rgb(r, g, b);
+	}
+
 	protected int validateColor(int col) {
 		if (col < 0) {
 			col = 0;

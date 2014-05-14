@@ -155,6 +155,7 @@
         <item >Linear Gradient topleft-bottomright</item>
         <item >Linear Gradient topright-bottomleft</item>
         <item >Radial Gradient</item>
+        <item >Sweep Gradient from corner</item>
         <item >4 Color Sweep Gradient</item>
         <item >4-Color Gradient from corners</item>
         <item >4-Colors in corners</item>
@@ -166,6 +167,7 @@
         <item >Linear Gradient topleft-bottomright</item>
         <item >Linear Gradient topright-bottomleft</item>
         <item >Radial Gradient</item>
+        <item >Sweep Gradient from corner</item>
         <item >4 Color Sweep Gradient</item>
         <item >4-Color Gradient from corners</item>
         <item >4-Colors in corners</item>

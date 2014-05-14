@@ -31,6 +31,9 @@ public class BackgroundDrawer {
 			case "4-Colors in corners":
 				draw4ColorBackground(canvas);
 				break;
+			case "Sweep Gradient from corner":
+				drawSweepGradientFromCorner(canvas);
+				break;
 		}
 
 	}
@@ -88,6 +91,22 @@ public class BackgroundDrawer {
 		final float distances2[] = { 0.0f, 1f };
 		final float distances3[] = { 0.0f, 0.50f, 1f };
 		final float distances4[] = { 0.05f, 0.30f, 0.60f, 0.95f };
+		final int anzahl = Settings.getAnzahlGradientColors();
+		switch (anzahl) {
+			default:
+			case 2:
+				return distances2;
+			case 3:
+				return distances3;
+			case 4:
+				return distances4;
+		}
+	}
+
+	private static float[] getDistancesCornerSweep() {
+		final float distances2[] = { 0.0f, 0.25f };
+		final float distances3[] = { 0.0f, 0.125f, 0.24f };
+		final float distances4[] = { 0.0f, 0.08f, 0.16f, 0.24f };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
 			default:
@@ -166,6 +185,18 @@ public class BackgroundDrawer {
 
 		paint.setColor(c4);
 		r = new Rect(0, cHeight / 2, cWidth / 2, cHeight);
+		canvas.drawRect(r, paint);
+
+	}
+
+	private static void drawSweepGradientFromCorner(final Canvas canvas) {
+		final int cWidth = canvas.getWidth();
+		final int cHeight = canvas.getHeight();
+		final Paint paint = new Paint();
+		// paint.setAntiAlias(true);
+		paint.setShader(new SweepGradient(-50, -50, getColors(), getDistancesCornerSweep()));
+
+		final Rect r = new Rect(0, 0, cWidth, cHeight);
 		canvas.drawRect(r, paint);
 
 	}

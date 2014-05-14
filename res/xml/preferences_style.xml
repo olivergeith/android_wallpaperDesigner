@@ -148,7 +148,16 @@
 		    android:summary="%1$d" 
 		    android:defaultValue="32"
 		    android:dialogMessage="@string/randomizeColorRange" />
-		
+		<de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="randomizeColorBrightnessRangeInt"
+	        android:title="@string/randomizeColorBrightnessRangeInt" 
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="4"
+		    seekbarpreference:maxValue="160"
+		    android:summary="%1$d" 
+		    android:defaultValue="32"
+		    android:dialogMessage="@string/randomizeColorBrightnessRangeInt" />
+				
 		<de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="randomizeAlphaRangeInt"
 	        android:title="@string/randomizeAlphaRange" 

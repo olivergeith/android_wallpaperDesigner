@@ -37,6 +37,7 @@
     <string name="randomizeColor">Randomize Color</string>
     <string name="randomizeDropShadowColor">Randomize DropShadowColor</string>
     <string name="randomizeColorRange">Randomize Color Range</string>
+    <string name="randomizeColorBrightnessRangeInt">Randomize Brightness Range</string>
     <string name="randomizeAlphaRange">Randomize Alpha Range</string>
     <string name="dropShadow">Drop Shadow</string>
     <string name="bWidth">Wallpaper Width</string>
