@@ -101,24 +101,24 @@ public class WPStylePatterns extends WPStyle {
 				paint.setAlpha(255);
 			}
 			switch (Settings.getDropShadowType()) {
-			default:
-			case "No":
-				break;
-			case "Random":
-				final int sx = getRandomInt(0, bWidth - 1);
-				final int sy = getRandomInt(0, bHeight - 1);
-				final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
-				paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
-				break;
-			case "Opposite":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
-				break;
-			case "Darker":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.darker(pcolor, Settings.getDropShadowDarkness()));
-				break;
-			case "Select":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
-				break;
+				default:
+				case "No":
+					break;
+				case "Random":
+					final int sx = getRandomInt(0, bWidth - 1);
+					final int sy = getRandomInt(0, bHeight - 1);
+					final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
+					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
+					break;
+				case "Opposite":
+					paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+					break;
+				case "Darker":
+					paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.darker(pcolor, Settings.getDropShadowDarkness()));
+					break;
+				case "Select":
+					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
+					break;
 			}
 			drawPattern(x, y, paint, radius);
 		}
@@ -136,118 +136,118 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawPattern(final int x, final int y, final Paint paint, final int radius) {
 		switch (Settings.getSelectedPattern()) {
-		case "Letters":
-			drawLetters(x, y, paint, radius);
-			break;
-		case "Custom Text":
-			drawText(x, y, paint, radius);
-			break;
-		case "Saw":
-			drawSaw(x, y, paint, radius);
-			break;
+			case "Letters":
+				drawLetters(x, y, paint, radius);
+				break;
+			case "Custom Text":
+				drawText(x, y, paint, radius);
+				break;
+			case "Saw":
+				drawSaw(x, y, paint, radius);
+				break;
 
-		case "Stars":
-			if (Settings.isGlossy()) {
-				drawGlossyStar(x, y, paint, radius);
-			} else {
-				drawStar(x, y, paint, radius);
-			}
-			break;
+			case "Stars":
+				if (Settings.isGlossy()) {
+					drawGlossyStar(x, y, paint, radius);
+				} else {
+					drawStar(x, y, paint, radius);
+				}
+				break;
 
-		case "Gears":
-			drawGear(x, y, paint, radius);
-			break;
-		case "Triangles":
-			drawTriangle(x, y, paint, radius);
-			break;
-		case "Squares":
-			drawSquares(x, y, paint, radius);
-			break;
-		case "Pentagon":
-			drawPentagon(x, y, paint, radius);
-			break;
-		case "Hexagon":
-			drawHexagon(x, y, paint, radius);
-			break;
-		case "Bubbles":
-			if (Settings.isGlossy()) {
-				drawGlossyBubble(x, y, paint, radius);
-			} else {
-				drawCircle(x, y, paint, radius);
-			}
-			break;
-		case "Hearts":
-			if (Settings.isGlossy()) {
-				drawGlossyHeart(x, y, paint, radius);
-			} else {
-				drawHeart(x, y, paint, radius);
-			}
-			break;
-		case "Spirals":
-			drawSpiral(x, y, paint, radius);
-			break;
-		case "Crop Circles":
-			drawDotSpiral(x, y, paint, radius);
-			break;
-		case "PacMan":
-			if (Settings.isGlossy()) {
-				drawGlossyPacman(x, y, paint, radius);
-			} else {
-				drawPacMan(x, y, paint, radius);
-			}
-			break;
-		case "Smiley":
-			if (Settings.isGlossy()) {
-				drawGlossySmiley(x, y, paint, radius);
-			} else {
-				drawSmiley(x, y, paint, radius);
-			}
-			break;
-		case "Pillows":
-			drawPillow(x, y, paint, radius);
-			break;
-		case "Roses":
-			drawRose(x, y, paint, radius);
-			break;
-		case "Flowers":
-			drawFlower(x, y, paint, radius);
-			break;
-		case "Bubble Flowers":
-			drawFlowerV2(x, y, paint, radius);
-			break;
-		case "Rings":
-			drawRing(x, y, paint, radius);
-			break;
-		case "Skyline":
-			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
-			bitmapCanvas.drawRect(rect, paint);
-			break;
-		case "Crickle Crackle":
-			drawCrickleCrackle(x, y, paint, radius);
-			break;
-		case "Maze":
-			drawMaze(x, y, paint, radius);
-			break;
-		default:
-		case "Virus Attack":
-			drawVirus(x, y, paint, radius);
-			break;
-		case "Virus Attack V2":
-			drawVirusV2(x, y, paint, radius);
-			break;
-		case "Virus Attack V3":
-			drawVirusV3(x, y, paint, radius);
-			break;
-		case "Streamers":
-			drawStreamer(x, y, paint, radius);
-			break;
+			case "Gears":
+				drawGear(x, y, paint, radius);
+				break;
+			case "Triangles":
+				drawTriangle(x, y, paint, radius);
+				break;
+			case "Squares":
+				drawSquares(x, y, paint, radius);
+				break;
+			case "Pentagon":
+				drawPentagon(x, y, paint, radius);
+				break;
+			case "Hexagon":
+				drawHexagon(x, y, paint, radius);
+				break;
+			case "Bubbles":
+				if (Settings.isGlossy()) {
+					drawGlossyBubble(x, y, paint, radius);
+				} else {
+					drawCircle(x, y, paint, radius);
+				}
+				break;
+			case "Hearts":
+				if (Settings.isGlossy()) {
+					drawGlossyHeart(x, y, paint, radius);
+				} else {
+					drawHeart(x, y, paint, radius);
+				}
+				break;
+			case "Spirals":
+				drawSpiral(x, y, paint, radius);
+				break;
+			case "Crop Circles":
+				drawDotSpiral(x, y, paint, radius);
+				break;
+			case "PacMan":
+				if (Settings.isGlossy()) {
+					drawGlossyPacman(x, y, paint, radius);
+				} else {
+					drawPacMan(x, y, paint, radius);
+				}
+				break;
+			case "Smiley":
+				if (Settings.isGlossy()) {
+					drawGlossySmiley(x, y, paint, radius);
+				} else {
+					drawSmiley(x, y, paint, radius);
+				}
+				break;
+			case "Pillows":
+				drawPillow(x, y, paint, radius);
+				break;
+			case "Roses":
+				drawRose(x, y, paint, radius);
+				break;
+			case "Flowers":
+				drawFlower(x, y, paint, radius);
+				break;
+			case "Bubble Flowers":
+				drawFlowerV2(x, y, paint, radius);
+				break;
+			case "Rings":
+				drawRing(x, y, paint, radius);
+				break;
+			case "Skyline":
+				final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
+				bitmapCanvas.drawRect(rect, paint);
+				break;
+			case "Crickle Crackle":
+				drawCrickleCrackle(x, y, paint, radius);
+				break;
+			case "Maze":
+				drawMaze(x, y, paint, radius);
+				break;
+			default:
+			case "Virus Attack":
+				drawVirus(x, y, paint, radius);
+				break;
+			case "Virus Attack V2":
+				drawVirusV2(x, y, paint, radius);
+				break;
+			case "Virus Attack V3":
+				drawVirusV3(x, y, paint, radius);
+				break;
+			case "Streamers":
+				drawStreamer(x, y, paint, radius);
+				break;
 		}
 	}
 
 	public void drawRose(final int x, final int y, final Paint paint, final int radius) {
 		bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
 		}
 	}
@@ -267,7 +267,7 @@ public class WPStylePatterns extends WPStyle {
 		final boolean flip = getRandomBoolean();
 		bitmapCanvas.drawPath(new SawPath(zaehne, new Point(x, y), radius, filled, flip), paint);
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new SawPath(zaehne, new Point(x, y), radius, filled, flip), paint);
 		}
 	}
@@ -277,7 +277,7 @@ public class WPStylePatterns extends WPStyle {
 		final boolean filled = getFilledBoolean();
 		bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, filled), paint);
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, filled), paint);
 		}
 	}
@@ -285,16 +285,16 @@ public class WPStylePatterns extends WPStyle {
 	private boolean getFilledBoolean() {
 		boolean filled;
 		switch (Settings.getFilledOption()) {
-		default:
-		case "Not filled":
-			filled = false;
-			break;
-		case "Filled":
-			filled = true;
-			break;
-		case "Randomly mixed":
-			filled = getRandomBoolean();
-			break;
+			default:
+			case "Not filled":
+				filled = false;
+				break;
+			case "Filled":
+				filled = true;
+				break;
+			case "Randomly mixed":
+				filled = getRandomBoolean();
+				break;
 		}
 		return filled;
 	}
@@ -310,7 +310,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -321,7 +321,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -332,7 +332,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -343,7 +343,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -355,7 +355,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -382,7 +382,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -393,7 +393,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -404,7 +404,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -429,7 +429,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawText("" + c, x, y, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawText("" + c, x, y, paint);
 		}
 
@@ -438,31 +438,31 @@ public class WPStylePatterns extends WPStyle {
 	private void drawText(final int x, final int y, final Paint paint, final int radius) {
 
 		switch (Settings.getTextDrawStyle()) {
-		default:
-		case "Round":
-			drawTextCircle(x, y, paint, radius);
-			break;
-		case "Normal":
-			drawTextStraight(x, y, paint, radius);
-			break;
-		case "Angled":
-			drawTextAngled(x, y, paint, radius);
-			break;
-		case "Random":
-			final int i = getRandomInt(0, 3);
-			switch (i) {
 			default:
-			case 1:
+			case "Round":
 				drawTextCircle(x, y, paint, radius);
 				break;
-			case 2:
+			case "Normal":
 				drawTextStraight(x, y, paint, radius);
 				break;
-			case 3:
+			case "Angled":
 				drawTextAngled(x, y, paint, radius);
 				break;
-			}
-			break;
+			case "Random":
+				final int i = getRandomInt(0, 3);
+				switch (i) {
+					default:
+					case 1:
+						drawTextCircle(x, y, paint, radius);
+						break;
+					case 2:
+						drawTextStraight(x, y, paint, radius);
+						break;
+					case 3:
+						drawTextAngled(x, y, paint, radius);
+						break;
+				}
+				break;
 		}
 	}
 
@@ -623,7 +623,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawOval(oval, paint);
 		// Ring
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawCircle(x, y, radius, paint);
 		}
 		paint.setShader(null);
@@ -648,7 +648,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawOval(oval, paint);
 		// Ring
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
 		paint.setShader(null);
@@ -673,7 +673,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawOval(oval, paint);
 		// Ring
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
 		paint.setShader(null);
@@ -697,8 +697,8 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
 		// Ring
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
 		}
 		paint.setShader(null);
@@ -728,7 +728,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotation), paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotation), paint);
 		}
 		paint.setShader(null);
@@ -745,7 +745,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
-		int strokewidth = radius / 10;
+		int strokewidth = radius / 20;
 		if (strokewidth < 2) {
 			strokewidth = 2;
 		}
