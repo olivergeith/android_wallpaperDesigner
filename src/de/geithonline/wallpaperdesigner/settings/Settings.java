@@ -102,6 +102,7 @@ public class Settings {
 		supportingStyles.add("Stars");
 		supportingStyles.add("Hexagon");
 		supportingStyles.add("Squares");
+		supportingStyles.add("Rectangles");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Crop Circles");
@@ -112,6 +113,7 @@ public class Settings {
 		final List<String> supportingStyles = new ArrayList<String>();
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Squares");
+		supportingStyles.add("Rectangles");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Hexagon");
 		supportingStyles.add("Stars");
