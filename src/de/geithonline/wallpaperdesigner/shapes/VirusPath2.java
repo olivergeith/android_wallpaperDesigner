@@ -2,7 +2,6 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
-import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class VirusPath2 extends Path {
 
@@ -13,14 +12,14 @@ public class VirusPath2 extends Path {
 	 * @param radius
 	 * @param arms
 	 */
-	public VirusPath2(final Point center, float radius) {
+	public VirusPath2(final Point center, float radius, final int arms) {
 		super();
-		final int arms = 13; // Randomizer.getRandomInt(7, 11);
-		radius = radius * 1.5f;
+		radius = radius * 2;
 		final float angle = (float) (2 * Math.PI / (arms));
+		final float innerR = radius / 5;
 		for (int i = 0; i <= arms; i++) {
-			final float r2 = radius;
-			final float innerR = Randomizer.getRandomFloat(0, radius / 2);
+			final float r2 = radius; // Randomizer.getRandomFloat(radius * 2 /
+										// 3, radius);
 			final Point p1 = new Point();
 			final Point p2 = new Point();
 			p1.x = (int) (center.x + Math.cos(i * angle + Math.PI) * innerR);
@@ -36,5 +35,4 @@ public class VirusPath2 extends Path {
 		}
 		close();
 	}
-
 }
