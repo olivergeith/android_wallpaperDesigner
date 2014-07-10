@@ -15,13 +15,15 @@ public class VirusPath4 extends Path {
 	 */
 	public VirusPath4(final Point center, final float radius) {
 		super();
-		final int arms = 13; // Randomizer.getRandomInt(7, 11);
+		final int arms = 12; // Randomizer.getRandomInt(7, 11);
 		final float angle = (float) (Math.PI / (arms));
 		for (int i = 0; i <= arms; i++) {
-			final float r2 = radius;
-			float innerR = Randomizer.getRandomFloat(0, radius * 3 / 4);
-			if (Randomizer.getRandomBoolean() == true) {
-				innerR = 2 * radius - innerR;
+			final float r2 = Randomizer.getRandomFloat(radius * 0.5f, radius * 1.5f);// radius;
+			float innerR = Randomizer.getRandomFloat(0, radius / 4);
+			// if (i % 4 == 0) {
+			// if (Randomizer.getRandomBoolean() == true) {
+			if (Randomizer.getRandomInt(1, 6) == 2) {
+				innerR = 2.5f * radius - innerR;
 			}
 			final Point p1 = new Point();
 			final Point p2 = new Point();
@@ -38,5 +40,4 @@ public class VirusPath4 extends Path {
 		}
 		close();
 	}
-
 }
