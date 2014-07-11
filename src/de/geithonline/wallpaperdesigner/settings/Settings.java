@@ -131,6 +131,7 @@ public class Settings {
 		supportingStyles.add("Virus Attack V2");
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Virus Attack V4");
+		supportingStyles.add("Virus Attack V5");
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Letters");
 		supportingStyles.add("Crop Circles");

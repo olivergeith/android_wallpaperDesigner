@@ -34,6 +34,7 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath2;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath3;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
+import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
@@ -269,6 +270,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Virus Attack V4":
 			drawVirusV4(x, y, paint, radius);
 			break;
+		case "Virus Attack V5":
+			drawVirusV5(x, y, paint, radius);
+			break;
 		case "Streamers":
 			drawStreamer(x, y, paint, radius);
 			break;
@@ -388,6 +392,18 @@ public class WPStylePatterns extends WPStyle {
 	private void drawVirusV4(final int x, final int y, final Paint paint,
 			final int radius) {
 		final Path path = new VirusPath4(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawVirusV5(final int x, final int y, final Paint paint,
+			final int radius) {
+		final Path path = new VirusPath5(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
