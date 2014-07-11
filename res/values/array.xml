@@ -86,6 +86,7 @@
         <item >Triangles</item>
         <item >Squares</item>
         <item >Rectangles</item>
+        <item >Rectangles (rounded)</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>
@@ -118,6 +119,7 @@
         <item >Triangles</item>
         <item >Squares</item>
         <item >Rectangles</item>
+        <item >Rectangles (rounded)</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
         <item >Letters</item>

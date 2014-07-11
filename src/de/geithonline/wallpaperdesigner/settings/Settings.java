@@ -103,6 +103,7 @@ public class Settings {
 		supportingStyles.add("Hexagon");
 		supportingStyles.add("Squares");
 		supportingStyles.add("Rectangles");
+		supportingStyles.add("Rectangles (rounded)");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Crop Circles");
@@ -114,6 +115,7 @@ public class Settings {
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Squares");
 		supportingStyles.add("Rectangles");
+		supportingStyles.add("Rectangles (rounded)");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Hexagon");
 		supportingStyles.add("Stars");
@@ -128,6 +130,7 @@ public class Settings {
 		supportingStyles.add("Virus Attack");
 		supportingStyles.add("Virus Attack V2");
 		supportingStyles.add("Virus Attack V3");
+		supportingStyles.add("Virus Attack V4");
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Letters");
 		supportingStyles.add("Crop Circles");
@@ -347,7 +350,8 @@ public class Settings {
 		if (prefs == null) {
 			return "4-Color Gradient from corners";
 		}
-		return prefs.getString("gradientDirection", "4-Color Gradient from corners");
+		return prefs.getString("gradientDirection",
+				"4-Color Gradient from corners");
 	}
 
 	public static int getAnzahlGradientColors() {
@@ -371,7 +375,8 @@ public class Settings {
 		if (prefs == null) {
 			return R.integer.COLOR_BLACK;
 		}
-		final int col = prefs.getInt("color_plain_bgrnd", R.integer.COLOR_BLACK);
+		final int col = prefs
+				.getInt("color_plain_bgrnd", R.integer.COLOR_BLACK);
 		return col;
 	}
 
@@ -379,7 +384,8 @@ public class Settings {
 		if (prefs == null) {
 			return R.integer.COLOR_WHITE;
 		}
-		final int col = prefs.getInt("color2_plain_bgrnd", R.integer.COLOR_WHITE);
+		final int col = prefs.getInt("color2_plain_bgrnd",
+				R.integer.COLOR_WHITE);
 		return col;
 	}
 
@@ -410,7 +416,8 @@ public class Settings {
 	// General stuff
 	public static DisplayMetrics getDisplayMetrics() {
 		final DisplayMetrics metrics = new DisplayMetrics();
-		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		final WindowManager wm = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
 		wm.getDefaultDisplay().getMetrics(metrics);
 		return metrics;
 	}
@@ -441,22 +448,27 @@ public class Settings {
 	 * 
 	 * @param preferences
 	 */
-	public static void initPrefs(final SharedPreferences preferences, final Context ctx) {
+	public static void initPrefs(final SharedPreferences preferences,
+			final Context ctx) {
 		context = ctx;
 		prefs = preferences;
 		if (prefs.getBoolean("firstrun", true)) {
-			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
+			Log.i("GEITH",
+					"FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();
 			// init colors
 			prefs.edit().putInt("color_plain_bgrnd", 0xff820000).commit();
 			prefs.edit().putInt("color2_plain_bgrnd", 0xfff2e518).commit();
 			prefs.edit().putInt("color3_plain_bgrnd", 0xff008200).commit();
 			prefs.edit().putInt("color4_plain_bgrnd", 0xff014f81).commit();
-			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
+			prefs.edit()
+					.putString("gradientDirection",
+							"4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString("stylePicker", "Patterns").commit();
-			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
+			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack")
+					.commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
 			prefs.edit().putBoolean("dropShadow", true).commit();
