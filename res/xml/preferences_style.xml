@@ -16,9 +16,9 @@
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="anzahlPatterns"
 	        android:title="@string/pattern_anzahlPatterns" 
-		    seekbarpreference:minValue="10"
-		    seekbarpreference:stepValue="10"
-		    seekbarpreference:maxValue="1500"
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="20"
+		    seekbarpreference:maxValue="2000"
 		    android:summary="Draw %1$d Patterns" 
 		    android:defaultValue="1000"
 		    android:dialogMessage="@string/pattern_anzahlPatterns" />
@@ -122,7 +122,7 @@
 		        android:title="@string/patternSizeAdjust" 
 			    seekbarpreference:minValue="30"
 			    seekbarpreference:stepValue="5"
-			    seekbarpreference:maxValue="200"
+			    seekbarpreference:maxValue="300"
 			    android:defaultValue="100"
 			    android:summary="%1$d percent" 
 			    android:dialogMessage="@string/patternSizeAdjust" />
