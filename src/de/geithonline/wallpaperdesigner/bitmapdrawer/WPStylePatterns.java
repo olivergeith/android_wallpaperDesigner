@@ -16,6 +16,7 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
+import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -236,6 +237,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Crickle Crackle":
 			drawCrickleCrackle(x, y, paint, radius);
+			break;
+		case "Clouds":
+			drawCloud(x, y, paint, radius);
 			break;
 		case "Maze":
 			drawMaze(x, y, paint, radius);
@@ -691,6 +695,17 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, rotate), paint);
+		}
+	}
+
+	private void drawCloud(final int x, final int y, final Paint paint, final int radius) {
+		// final Path path = new CloudPath(new Point(x, y), radius);
+		final Path path = new CloudPath(new Point(x, y), radius, 2, 5);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
