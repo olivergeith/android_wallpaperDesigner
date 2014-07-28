@@ -94,6 +94,7 @@ public class Settings {
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("PacMan");
+		supportingStyles.add("Blitz");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -127,6 +128,7 @@ public class Settings {
 		supportingStyles.add("Gears");
 		supportingStyles.add("Saw");
 		supportingStyles.add("Roses");
+		supportingStyles.add("Clouds");
 		supportingStyles.add("Flowers");
 		supportingStyles.add("Virus Attack");
 		supportingStyles.add("Virus Attack V2");

@@ -75,6 +75,7 @@
 				    android:defaultValue="48"
 				    android:summary="%1$d" 
 				    android:dialogMessage="@string/outlineDarknessAdjust" 
+		            android:dependency="outline"
 				    />
 		        
 		        <CheckBoxPreference 

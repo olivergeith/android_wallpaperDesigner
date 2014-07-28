@@ -61,10 +61,6 @@ public class PacmanPath extends Path {
 			oval.bottom = u;
 
 			moveTo(center.x, center.y);
-			final float mx = (float) (center.x + (radius * Math.sin(2 * Math.PI * 35 / 360)));
-			final float my = (float) (center.y - (radius * Math.cos(2 * Math.PI * 35 / 360)));
-			// lineTo(mx, my);
-
 			addArc(oval, -35, -290);
 			lineTo(center.x, center.y);
 			close();

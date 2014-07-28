@@ -15,6 +15,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
@@ -244,6 +245,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Maze":
 			drawMaze(x, y, paint, radius);
 			break;
+		case "Blitz":
+			drawBlitz(x, y, paint, radius);
+			break;
 		default:
 		case "Virus Attack":
 			drawVirus(x, y, paint, radius);
@@ -328,6 +332,12 @@ public class WPStylePatterns extends WPStyle {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
 		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(10, 40), radius, true), paint);
+	}
+
+	private void drawBlitz(final int x, final int y, final Paint paint, final int radius) {
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(radius / 12);
+		bitmapCanvas.drawPath(new BlitzPath(new Point(x, y), getRandomInt(5, 30), radius, getFilledBoolean()), paint);
 	}
 
 	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
@@ -699,8 +709,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawCloud(final int x, final int y, final Paint paint, final int radius) {
-		// final Path path = new CloudPath(new Point(x, y), radius);
-		final Path path = new CloudPath(new Point(x, y), radius, 2, 5);
+		final Path path = new CloudPath(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
