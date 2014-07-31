@@ -138,6 +138,7 @@ public class Settings {
 		supportingStyles.add("Virus Attack V6");
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Letters");
+		supportingStyles.add("Dandelion");
 		supportingStyles.add("Crop Circles");
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Smiley");

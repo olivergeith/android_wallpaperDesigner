@@ -18,6 +18,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
+import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -248,6 +249,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Blitz":
 			drawBlitz(x, y, paint, radius);
 			break;
+		case "Dandelion":
+			drawDandelion(x, y, paint, radius);
+			break;
 		default:
 		case "Virus Attack":
 			drawVirus(x, y, paint, radius);
@@ -338,6 +342,21 @@ public class WPStylePatterns extends WPStyle {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 12);
 		bitmapCanvas.drawPath(new BlitzPath(new Point(x, y), getRandomInt(5, 30), radius, getFilledBoolean()), paint);
+	}
+
+	private void drawDandelion(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new DandelionPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+
+		// paint.setStyle(Style.FILL_AND_STROKE);
+		// paint.setStrokeWidth(radius / 20);
+		// bitmapCanvas.drawPath(new DandelionPath(new Point(x, y), radius), paint);
 	}
 
 	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
