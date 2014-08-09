@@ -69,10 +69,10 @@
 		        <de.geithonline.android.basics.preferences.SeekBarPreference
 		            android:key="outlineDarknessAdjust"
 			        android:title="@string/outlineDarknessAdjust" 
-				    seekbarpreference:minValue="8"
+				    seekbarpreference:minValue="-192"
 				    seekbarpreference:stepValue="8"
 				    seekbarpreference:maxValue="192"
-				    android:defaultValue="48"
+				    android:defaultValue="-48"
 				    android:summary="%1$d" 
 				    android:dialogMessage="@string/outlineDarknessAdjust" 
 		            android:dependency="outline"
@@ -184,10 +184,10 @@
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="dropShadowDarknessAdjust"
 	        android:title="@string/dropShadowDarknessAdjust" 
-		    seekbarpreference:minValue="8"
+		    seekbarpreference:minValue="-192"
 		    seekbarpreference:stepValue="8"
 		    seekbarpreference:maxValue="192"
-		    android:defaultValue="48"
+		    android:defaultValue="-48"
 		    android:summary="%1$d" 
 		    android:dialogMessage="@string/dropShadowDarknessAdjust" 
 		    />

@@ -63,7 +63,7 @@
         <item >No DropShadow</item>
         <item >Color from a random yx-position within the image</item>
         <item >Color from the opposite yx-position within the image</item>
-        <item >Darker Color of Pattern</item>
+        <item >Darker/Brighter Color of Pattern</item>
         <item >Select a color</item>
         </string-array>
     

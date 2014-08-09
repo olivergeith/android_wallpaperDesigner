@@ -57,8 +57,8 @@
     <string name="outline">Outline</string>
     <string name="outlineNeverTransparent">Outline is never transparent</string>
     <string name="outlineNeverTransparentSummary">If set, the outline is not transparent, even if the pattern is transparent! If not set, the outline has the same alpha/transparency like its pattern!</string>
-    <string name="outlineDarknessAdjust">Hoch much darker is the outline?</string>
-    <string name="dropShadowDarknessAdjust">Hoch much darker is the DropShadow?</string>
+    <string name="outlineDarknessAdjust">Color Brightness Offset of Outline?</string>
+    <string name="dropShadowDarknessAdjust">Color Brightness Offset of DropShadow?</string>
     
     <string name="randomRotate">Random Rotation</string>
     <string name="customOutlineColor">Custom Outline Color</string>

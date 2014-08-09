@@ -123,7 +123,7 @@ public class WPStylePatterns extends WPStyle {
 				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
 				break;
 			case "Darker":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.darker(pcolor, Settings.getDropShadowDarkness()));
+				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
 				break;
 			case "Select":
 				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
@@ -917,7 +917,7 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isCustomOutlineColor()) {
 			paint.setColor(Settings.getCustomOutlineColor());
 		} else {
-			paint.setColor(ColorHelper.darker(paint.getColor(), Settings.getOutlineDarkness()));
+			paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
 		}
 	}
 
