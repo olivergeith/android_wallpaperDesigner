@@ -40,6 +40,7 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
+import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public class WPStylePatterns extends WPStyle {
@@ -126,6 +127,16 @@ public class WPStylePatterns extends WPStyle {
 				break;
 			}
 			drawPattern(x, y, paint, radius);
+			if (i == anzahlPatterns / 4) {
+				bitmap = BitmapBlurrer.doBlur(bitmap, 8, true);
+			}
+			if (i == anzahlPatterns * 2 / 4) {
+				bitmap = BitmapBlurrer.doBlur(bitmap, 6, true);
+			}
+			if (i == anzahlPatterns * 3 / 4) {
+				bitmap = BitmapBlurrer.doBlur(bitmap, 4, true);
+			}
+
 		}
 
 		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
