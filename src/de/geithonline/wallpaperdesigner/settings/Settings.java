@@ -25,6 +25,7 @@ public class Settings {
 	public static final String PATTERN_ANZAHL_PATTERNS = "anzahlPatterns";
 	public static final String PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
 	public static final String PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
+	public static final String PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
 	private static Context context;
 
@@ -157,6 +158,13 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(PATTERN_RANDOM_ROTATE, false);
+	}
+
+	public static boolean isBlurPatterns() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(PATTERN_BLUR, false);
 	}
 
 	public static boolean isGlossy() {
@@ -482,6 +490,7 @@ public class Settings {
 			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
+			prefs.edit().putBoolean(PATTERN_BLUR, false).commit();
 			prefs.edit().putBoolean("dropShadow", true).commit();
 			prefs.edit().putBoolean("randomizeDropShadowColor", true).commit();
 			prefs.edit().putInt("colorDropShadow", Color.BLACK).commit();

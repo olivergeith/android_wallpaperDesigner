@@ -71,5 +71,6 @@
     <string name="textPattern">Content of Text Pattern</string>
     <string name="textDrawStyle">How to draw Text</string>
     <string name="anzColors">How Many Colors in Gradient</string>
+    <string name="blurPatterns">Blur patterns in Background</string>
     
 </resources>

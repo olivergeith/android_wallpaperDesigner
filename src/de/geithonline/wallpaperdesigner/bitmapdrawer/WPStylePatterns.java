@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
@@ -40,6 +41,7 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
+import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public class WPStylePatterns extends WPStyle {
@@ -82,6 +84,10 @@ public class WPStylePatterns extends WPStyle {
 		paint.setAntiAlias(true);
 
 		final int anzahlPatterns = Settings.getAnzahlPatterns();
+
+		final int blurLevel1 = anzahlPatterns * 1 / 4;
+		final int blurLevel2 = anzahlPatterns * 2 / 4;
+		final int blurLevel3 = anzahlPatterns * 3 / 4;
 
 		// Zeichnen
 		for (int i = 0; i < anzahlPatterns; i++) {
@@ -126,6 +132,21 @@ public class WPStylePatterns extends WPStyle {
 				break;
 			}
 			drawPattern(x, y, paint, radius);
+
+			if (Settings.isBlurPatterns()) {
+				if (i == blurLevel1) {
+					Log.i("GEITH", "Blur1");
+					bitmap = BitmapBlurrer.doBlur(bitmap, 8, true);
+				}
+				if (i == blurLevel2) {
+					Log.i("GEITH", "Blur2");
+					bitmap = BitmapBlurrer.doBlur(bitmap, 6, true);
+				}
+				if (i == blurLevel3) {
+					Log.i("GEITH", "Blur3");
+					bitmap = BitmapBlurrer.doBlur(bitmap, 4, true);
+				}
+			}
 		}
 
 		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
