@@ -246,15 +246,29 @@ public class Settings {
 
 	// ###################################################################
 	// Options Pattern Style (Alpha)
-	public static boolean isRandomizeAlpha() {
-		return getRandomizeAlphaRange() != 0;
+	// public static boolean isRandomizeAlpha() {
+	// return getRandomizeAlphaRange() != 0;
+	// }
+	//
+	// public static int getRandomizeAlphaRange() {
+	// if (prefs == null) {
+	// return 128;
+	// }
+	// return prefs.getInt("randomizeAlphaRangeInt", 128);
+	// }
+
+	public static int getMinOpacity() {
+		if (prefs == null) {
+			return 192;
+		}
+		return prefs.getInt("minOpacity", 128);
 	}
 
-	public static int getRandomizeAlphaRange() {
+	public static int getMaxOpacity() {
 		if (prefs == null) {
-			return 128;
+			return 255;
 		}
-		return prefs.getInt("randomizeAlphaRangeInt", 128);
+		return prefs.getInt("maxOpacity", 255);
 	}
 
 	// ###################################################################
@@ -477,7 +491,9 @@ public class Settings {
 			prefs.edit().putString("sizeSelection", "2560x1600").commit();
 
 			prefs.edit().putInt("randomizeColorRangeInt", 32).commit();
-			prefs.edit().putInt("randomizeAlphaRangeInt", 30).commit();
+			// prefs.edit().putInt("randomizeAlphaRangeInt", 30).commit();
+			prefs.edit().putInt("minOpacity", 125).commit();
+			prefs.edit().putInt("maxOpacity", 255).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();

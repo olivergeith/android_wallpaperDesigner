@@ -39,6 +39,8 @@
     <string name="randomizeColorRange">Randomize Color Range</string>
     <string name="randomizeColorBrightnessRangeInt">Randomize Brightness Range</string>
     <string name="randomizeAlphaRange">Randomize Alpha Range</string>
+    <string name="minOpacity">Minimum Opacity of patterns</string>
+    <string name="maxOpacity">Maximum Opacity of patterns</string>
     <string name="dropShadow">Drop Shadow</string>
     <string name="bWidth">Wallpaper Width</string>
     <string name="bHeight">Wallpaper Height</string>

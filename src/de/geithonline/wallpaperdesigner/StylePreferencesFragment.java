@@ -10,6 +10,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.util.Log;
+import de.geithonline.android.basics.preferences.SeekBarPreference;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -22,6 +24,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference filledOption;
 	private EditTextPreference textPattern;
 	private ListPreference textDrawStyle;
+	private SeekBarPreference minOpacity;
+	private SeekBarPreference maxOpacity;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -34,6 +38,19 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		textDrawStyle = (ListPreference) findPreference(Settings.PATTERN_TEXT_DRAW_STYLE);
 		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
 		textPattern = (EditTextPreference) findPreference(Settings.PATTERN_TEXT);
+
+		minOpacity = (SeekBarPreference) findPreference("minOpacity");
+		maxOpacity = (SeekBarPreference) findPreference("maxOpacity");
+
+		maxOpacity.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleMaxOpacityChange((int) newValue);
+				return true;
+			}
+
+		});
 
 		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -143,6 +160,14 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			break;
 		}
 
+	}
+
+	private void handleMaxOpacityChange(final int newValue) {
+		Log.i("Geith", "NewVal = " + newValue);
+		if (newValue < Settings.prefs.getInt("minOpacity", 128)) {
+			Settings.prefs.edit().putInt("minOpacity", newValue).commit();
+
+		}
 	}
 
 }

@@ -58,8 +58,6 @@ public class WPStylePatterns extends WPStyle {
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
 		BackgroundDrawer.drawBackground(bitmapCanvas);
-		// bitmapCanvas.drawRect(sizesRect, Settings.getBackgroundPaint(bWidth,
-		// bHeight));
 
 		final Bitmap refbitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		final Canvas refbitmapCanvas = new Canvas(refbitmap);
@@ -104,11 +102,9 @@ public class WPStylePatterns extends WPStyle {
 				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
 			}
 			paint.setColor(pcolor);
-			if (Settings.isRandomizeAlpha()) {
-				paint.setAlpha(getRandomInt(255 - Settings.getRandomizeAlphaRange(), 255));
-			} else {
-				paint.setAlpha(255);
-			}
+
+			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
+
 			switch (Settings.getDropShadowType()) {
 			default:
 			case "No":
@@ -856,7 +852,6 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
 		// Ring
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
 		}

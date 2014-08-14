@@ -18,7 +18,7 @@
 	        android:title="@string/pattern_anzahlPatterns" 
 		    seekbarpreference:minValue="0"
 		    seekbarpreference:stepValue="20"
-		    seekbarpreference:maxValue="2000"
+		    seekbarpreference:maxValue="3000"
 		    android:summary="Draw %1$d Patterns" 
 		    android:defaultValue="1000"
 		    android:dialogMessage="@string/pattern_anzahlPatterns" />
@@ -160,16 +160,27 @@
 		    android:dialogMessage="@string/randomizeColorBrightnessRangeInt" />
 				
 		<de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="randomizeAlphaRangeInt"
-	        android:title="@string/randomizeAlphaRange" 
+            android:key="maxOpacity"
+	        android:title="@string/maxOpacity" 
+		    seekbarpreference:minValue="15"
+		    seekbarpreference:stepValue="5"
+		    seekbarpreference:maxValue="255"
+		    android:defaultValue="255"
+		    android:summary="%1$d" 
+		    android:dialogMessage="@string/maxOpacity" />
+
+		<de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="minOpacity"
+	        android:title="@string/minOpacity" 
 		    seekbarpreference:minValue="0"
 		    seekbarpreference:stepValue="5"
 		    seekbarpreference:maxValue="255"
+		    android:defaultValue="128"
 		    android:summary="%1$d" 
-		    android:defaultValue="30"
-		    android:dialogMessage="@string/randomizeAlphaRange" />
+		    android:dialogMessage="@string/minOpacity" />
+				
 		
-
+		
     <PreferenceCategory android:title="DropShadow"/>
 		
 		<ListPreference
