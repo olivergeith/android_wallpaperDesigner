@@ -74,6 +74,7 @@ public class Settings {
 	public static boolean hasPatternTextOption(final String pattern) {
 		final List<String> supportingStyles = new ArrayList<String>();
 		supportingStyles.add("Custom Text");
+		supportingStyles.add("Numbers");
 		return supportingStyles.contains(pattern);
 	}
 

@@ -131,7 +131,7 @@ public class WPStylePatterns extends WPStyle {
 				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
 				break;
 			}
-			drawPattern(x, y, paint, radius);
+			drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
 				if (i == blurLevel1) {
@@ -160,13 +160,19 @@ public class WPStylePatterns extends WPStyle {
 		return new Point(x, y);
 	}
 
-	private void drawPattern(final int x, final int y, final Paint paint, final int radius) {
+	private void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
 		switch (Settings.getSelectedPattern()) {
 		case "Letters":
 			drawLetters(x, y, paint, radius);
 			break;
 		case "Custom Text":
-			drawText(x, y, paint, radius);
+			final String text = Settings.getText();
+			// final String text = "" + index;
+			drawText(x, y, paint, radius, text);
+			break;
+		case "Numbers":
+			final String number = "" + index;
+			drawText(x, y, paint, radius * 2, number);
 			break;
 		case "Saw":
 			drawSaw(x, y, paint, radius);
@@ -547,38 +553,38 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
-	private void drawText(final int x, final int y, final Paint paint, final int radius) {
+	private void drawText(final int x, final int y, final Paint paint, final int radius, final String text) {
 
 		switch (Settings.getTextDrawStyle()) {
 		default:
 		case "Round":
-			drawTextCircle(x, y, paint, radius);
+			drawTextCircle(x, y, paint, radius, text);
 			break;
 		case "Normal":
-			drawTextStraight(x, y, paint, radius);
+			drawTextStraight(x, y, paint, radius, text);
 			break;
 		case "Angled":
-			drawTextAngled(x, y, paint, radius);
+			drawTextAngled(x, y, paint, radius, text);
 			break;
 		case "Random":
 			final int i = getRandomInt(0, 3);
 			switch (i) {
 			default:
 			case 1:
-				drawTextCircle(x, y, paint, radius);
+				drawTextCircle(x, y, paint, radius, text);
 				break;
 			case 2:
-				drawTextStraight(x, y, paint, radius);
+				drawTextStraight(x, y, paint, radius, text);
 				break;
 			case 3:
-				drawTextAngled(x, y, paint, radius);
+				drawTextAngled(x, y, paint, radius, text);
 				break;
 			}
 			break;
 		}
 	}
 
-	private void drawTextStraight(final int x, final int y, final Paint paint, final int radius) {
+	private void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
 		if (getRandomBoolean()) {
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 		} else {
@@ -586,10 +592,10 @@ public class WPStylePatterns extends WPStyle {
 		}
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.CENTER);
-		bitmapCanvas.drawText(Settings.getText(), x, y, paint);
+		bitmapCanvas.drawText(text, x, y, paint);
 	}
 
-	private void drawTextCircle(final int x, final int y, final Paint paint, final int radius) {
+	private void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
 		if (getRandomBoolean()) {
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 		} else {
@@ -601,10 +607,10 @@ public class WPStylePatterns extends WPStyle {
 		final RectF oval = getRectForRadius(x, y, radius * 2);
 		mArc.addArc(oval, getRandomInt(0, 360), 355);
 
-		bitmapCanvas.drawTextOnPath(Settings.getText(), mArc, 0, 0, paint);
+		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
 	}
 
-	private void drawTextAngled(final int x, final int y, final Paint paint, final int radius) {
+	private void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
 		if (getRandomBoolean()) {
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 		} else {
@@ -618,7 +624,7 @@ public class WPStylePatterns extends WPStyle {
 		final int x2 = getRandomInt(-bWidth, bWidth);
 		mArc.lineTo(x2, y2);
 
-		bitmapCanvas.drawTextOnPath(Settings.getText(), mArc, 0, 0, paint);
+		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
 	}
 
 	protected RectF getRectForRadius(final int x, final int y, final int radius) {
