@@ -89,6 +89,7 @@
         <item >Rectangles (rounded)</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
+        <item >Octagon</item>
         <item >Letters</item>
         <item >Custom Text</item>
         <item >Spirals</item>
@@ -127,6 +128,7 @@
         <item >Rectangles (rounded)</item>
         <item >Pentagon</item>
         <item >Hexagon</item>
+        <item >Octagon</item>
         <item >Letters</item>
         <item >Custom Text</item>
         <item >Spirals</item>

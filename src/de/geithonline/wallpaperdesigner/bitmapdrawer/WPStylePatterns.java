@@ -85,9 +85,9 @@ public class WPStylePatterns extends WPStyle {
 
 		final int anzahlPatterns = Settings.getAnzahlPatterns();
 
-		final int blurLevel1 = anzahlPatterns * 1 / 4;
-		final int blurLevel2 = anzahlPatterns * 2 / 4;
-		final int blurLevel3 = anzahlPatterns * 3 / 4;
+		final int blurLevel1 = anzahlPatterns * 4 / 10;
+		final int blurLevel2 = anzahlPatterns * 6 / 10;
+		final int blurLevel3 = anzahlPatterns * 8 / 10;
 
 		// Zeichnen
 		for (int i = 0; i < anzahlPatterns; i++) {
@@ -144,7 +144,7 @@ public class WPStylePatterns extends WPStyle {
 				}
 				if (i == blurLevel3) {
 					Log.i("GEITH", "Blur3");
-					bitmap = BitmapBlurrer.doBlur(bitmap, 4, true);
+					bitmap = BitmapBlurrer.doBlur(bitmap, 3, true);
 				}
 			}
 		}
@@ -200,6 +200,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Hexagon":
 			drawHexagon(x, y, paint, radius);
+			break;
+		case "Octagon":
+			drawOctagon(x, y, paint, radius);
 			break;
 		case "Bubbles":
 			if (Settings.isGlossy()) {
@@ -640,11 +643,12 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (Math.PI / 2));
 		}
-		bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, rotate), paint);
+		final Path path = new XEckPath(4, new Point(x, y), radius, rotate, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new XEckPath(4, new Point(x, y), radius, rotate), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
@@ -710,11 +714,12 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (Math.PI / 2));
 		}
-		bitmapCanvas.drawPath(new XEckPath(3, new Point(x, y), radius, rotate), paint);
+		final Path path = new XEckPath(3, new Point(x, y), radius, rotate, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new XEckPath(3, new Point(x, y), radius, rotate), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
@@ -723,11 +728,12 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (2 * Math.PI));
 		}
-		bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, rotate), paint);
+		final Path path = new XEckPath(5, new Point(x, y), radius, rotate, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new XEckPath(5, new Point(x, y), radius, rotate), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
@@ -736,11 +742,26 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (2 * Math.PI));
 		}
-		bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, rotate), paint);
+		final Path path = new XEckPath(6, new Point(x, y), radius, rotate, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new XEckPath(6, new Point(x, y), radius, rotate), paint);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawOctagon(final int x, final int y, final Paint paint, final int radius) {
+		float rotate = 0;
+		if (Settings.isRandomRotate()) {
+			rotate = getRandomFloat(0, (float) (2 * Math.PI));
+		}
+		final Path path = new XEckPath(8, new Point(x, y), radius, rotate, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 

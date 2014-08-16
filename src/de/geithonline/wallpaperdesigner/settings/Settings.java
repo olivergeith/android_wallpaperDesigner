@@ -91,6 +91,11 @@ public class Settings {
 		final List<String> supportingStyles = new ArrayList<String>();
 		supportingStyles.add("Gears");
 		supportingStyles.add("Saw");
+		supportingStyles.add("Triangles");
+		supportingStyles.add("Squares");
+		supportingStyles.add("Pentagon");
+		supportingStyles.add("Hexagon");
+		supportingStyles.add("Octagon");
 		supportingStyles.add("Bubble Flowers");
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Smiley");
@@ -107,6 +112,7 @@ public class Settings {
 		supportingStyles.add("Rectangles");
 		supportingStyles.add("Rectangles (rounded)");
 		supportingStyles.add("Pentagon");
+		supportingStyles.add("Octagon");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Crop Circles");
 		supportingStyles.add("Virus Attack V6");
@@ -121,6 +127,7 @@ public class Settings {
 		supportingStyles.add("Rectangles (rounded)");
 		supportingStyles.add("Pentagon");
 		supportingStyles.add("Hexagon");
+		supportingStyles.add("Octagon");
 		supportingStyles.add("Stars");
 		supportingStyles.add("Hearts");
 		supportingStyles.add("Bubbles");
