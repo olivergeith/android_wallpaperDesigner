@@ -1,5 +1,7 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
+import java.util.Locale;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -14,7 +16,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
@@ -135,15 +136,12 @@ public class WPStylePatterns extends WPStyle {
 
 			if (Settings.isBlurPatterns()) {
 				if (i == blurLevel1) {
-					Log.i("GEITH", "Blur1");
-					bitmap = BitmapBlurrer.doBlur(bitmap, 8, true);
+					bitmap = BitmapBlurrer.doBlur(bitmap, 7, true);
 				}
 				if (i == blurLevel2) {
-					Log.i("GEITH", "Blur2");
-					bitmap = BitmapBlurrer.doBlur(bitmap, 6, true);
+					bitmap = BitmapBlurrer.doBlur(bitmap, 5, true);
 				}
 				if (i == blurLevel3) {
-					Log.i("GEITH", "Blur3");
 					bitmap = BitmapBlurrer.doBlur(bitmap, 3, true);
 				}
 			}
@@ -167,11 +165,10 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Custom Text":
 			final String text = Settings.getText();
-			// final String text = "" + index;
 			drawText(x, y, paint, radius, text);
 			break;
 		case "Numbers":
-			final String number = "" + index;
+			final String number = String.format(Locale.GERMANY, "%04d", index);
 			drawText(x, y, paint, radius * 2, number);
 			break;
 		case "Saw":
@@ -312,11 +309,13 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	public void drawRing(final int x, final int y, final Paint paint, final int radius) {
-		bitmapCanvas.drawPath(new RingPath(new Point(x, y), radius, radius / 2), paint);
+		final Path path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean());
+
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new RingPath(new Point(x, y), radius, radius / 2), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 

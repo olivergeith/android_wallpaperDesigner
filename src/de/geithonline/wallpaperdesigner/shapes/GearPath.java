@@ -9,7 +9,7 @@ public class GearPath extends Path {
 		super();
 
 		final float rInner = radius * 0.8f;
-		final float rInner2 = radius * 0.6f;
+		final float rInner2 = radius * 0.5f;
 		final float angle = (float) (2 * Math.PI / (arms * 4));
 
 		int c = 0;

@@ -101,7 +101,7 @@ public class Settings {
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("PacMan");
-		supportingStyles.add("Blitz");
+		supportingStyles.add("Rings");
 		return supportingStyles.contains(pattern);
 	}
 

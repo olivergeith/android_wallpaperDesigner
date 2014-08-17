@@ -12,7 +12,7 @@ public class SawPath extends Path {
 			angle = (float) -(2 * Math.PI / arms);
 		}
 		final float rInner = rOuter * 0.8f;
-		final float rInner2 = rOuter * 0.7f;
+		final float rInner2 = rOuter * 0.55f;
 
 		for (int i = 0; i < arms; i++) {
 			// final float r = rInner;
