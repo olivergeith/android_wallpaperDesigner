@@ -122,6 +122,9 @@ public class Settings {
 
 	public static boolean hasPatternOutlineEffect(final String pattern) {
 		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Sailboat");
+		supportingStyles.add("Sailboat2");
+		supportingStyles.add("Anchor");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Squares");
 		supportingStyles.add("Rectangles");

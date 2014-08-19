@@ -17,6 +17,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
@@ -31,6 +32,8 @@ import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
+import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
+import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
@@ -275,6 +278,15 @@ public class WPStylePatterns extends WPStyle {
 		case "Dandelion":
 			drawDandelion(x, y, paint, radius);
 			break;
+		case "Sailboat":
+			drawSailboat(x, y, paint, radius);
+			break;
+		case "Sailboat2":
+			drawSailboat2(x, y, paint, radius);
+			break;
+		case "Anchor":
+			drawAnker(x, y, paint, radius);
+			break;
 		default:
 		case "Virus Attack":
 			drawVirus(x, y, paint, radius);
@@ -382,6 +394,39 @@ public class WPStylePatterns extends WPStyle {
 		// paint.setStyle(Style.FILL_AND_STROKE);
 		// paint.setStrokeWidth(radius / 20);
 		// bitmapCanvas.drawPath(new DandelionPath(new Point(x, y), radius), paint);
+	}
+
+	private void drawAnker(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new AnkerPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSailboat(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new SailboatPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSailboat2(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new SailboatPath2(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
 	}
 
 	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
