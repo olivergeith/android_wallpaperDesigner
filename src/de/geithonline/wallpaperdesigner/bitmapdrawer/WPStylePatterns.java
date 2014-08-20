@@ -397,7 +397,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawAnker(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new AnkerPath(new Point(x, y), radius);
+		final Path path = new AnkerPath(new Point(x, y), radius * 1.5f);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -408,7 +408,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawSailboat(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new SailboatPath(new Point(x, y), radius);
+		final Path path = new SailboatPath(new Point(x, y), radius * 1.5f);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -419,7 +419,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawSailboat2(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new SailboatPath2(new Point(x, y), radius);
+		final Path path = new SailboatPath2(new Point(x, y), radius * 1.5f);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
