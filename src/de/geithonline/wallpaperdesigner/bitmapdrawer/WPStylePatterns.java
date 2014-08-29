@@ -27,6 +27,7 @@ import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
+import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
@@ -255,6 +256,15 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Bubble Flowers":
 			drawFlowerV2(x, y, paint, radius);
+			break;
+		case "FlowersV3":
+			drawFlowerV3(x, y, paint, radius);
+			break;
+		case "FlowersV4":
+			drawFlowerV4(x, y, paint, radius);
+			break;
+		case "FlowersV5":
+			drawFlowerV5(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -514,6 +524,51 @@ public class WPStylePatterns extends WPStyle {
 	private void drawFlowerV2(final int x, final int y, final Paint paint, final int radius) {
 		// final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
 		final Path path = new BubbleCirclePath(6, new Point(x, y), radius, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawFlowerV3(final int x, final int y, final Paint paint, final int radius) {
+		float rotate = 0;
+		if (Settings.isRandomRotate()) {
+			rotate = getRandomFloat(0, (float) (Math.PI / 5));
+		}
+		final Path path = new NiceFlowerPath(5, new Point(x, y), radius, getFilledBoolean(), 1.0f, rotate);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawFlowerV4(final int x, final int y, final Paint paint, final int radius) {
+		float rotate = 0;
+		if (Settings.isRandomRotate()) {
+			rotate = getRandomFloat(0, (float) (Math.PI / 5));
+		}
+		final Path path = new NiceFlowerPath(5, new Point(x, y), radius, getFilledBoolean(), 0.8f, rotate);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawFlowerV5(final int x, final int y, final Paint paint, final int radius) {
+		float rotate = 0;
+		if (Settings.isRandomRotate()) {
+			rotate = getRandomFloat(0, (float) (Math.PI / 5));
+		}
+		final Path path = new NiceFlowerPath(5, new Point(x, y), radius, getFilledBoolean(), rotate);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

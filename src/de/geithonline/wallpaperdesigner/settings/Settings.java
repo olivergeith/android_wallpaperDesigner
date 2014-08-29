@@ -98,6 +98,9 @@ public class Settings {
 		supportingStyles.add("Hexagon");
 		supportingStyles.add("Octagon");
 		supportingStyles.add("Bubble Flowers");
+		supportingStyles.add("FlowersV3");
+		supportingStyles.add("FlowersV4");
+		supportingStyles.add("FlowersV5");
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("PacMan");
@@ -117,6 +120,9 @@ public class Settings {
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Crop Circles");
 		supportingStyles.add("Virus Attack V6");
+		supportingStyles.add("FlowersV3");
+		supportingStyles.add("FlowersV4");
+		supportingStyles.add("FlowersV5");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -142,6 +148,9 @@ public class Settings {
 		supportingStyles.add("Roses");
 		supportingStyles.add("Clouds");
 		supportingStyles.add("Flowers");
+		supportingStyles.add("FlowersV3");
+		supportingStyles.add("FlowersV4");
+		supportingStyles.add("FlowersV5");
 		supportingStyles.add("Virus Attack");
 		supportingStyles.add("Virus Attack V2");
 		supportingStyles.add("Virus Attack V3");
