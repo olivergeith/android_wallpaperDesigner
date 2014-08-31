@@ -112,7 +112,25 @@
 			        android:entries="@array/textDrawStyle"
 			        android:entryValues="@array/textDrawStyleValues"
 			        />
-		        		        
+		        <PreferenceCategory  android:title="Flower Options"/>
+		        <CheckBoxPreference 
+		            android:key="randomLeafCount"
+		            android:title="@string/randomLeafCount"
+		            android:defaultValue="false"
+		            android:disableDependentsState="true"
+		            />
+   		        <de.geithonline.android.basics.preferences.SeekBarPreference
+		            android:key="numberOfLeafs"
+			        android:title="@string/numberOfLeafs" 
+				    seekbarpreference:minValue="4"
+				    seekbarpreference:stepValue="1"
+				    seekbarpreference:maxValue="10"
+				    android:defaultValue="5"
+				    android:summary="%1$d" 
+				    android:dialogMessage="@string/numberOfLeafs" 
+		            android:dependency="randomLeafCount"
+				    />
+		        		        		        		        
 		    </PreferenceScreen>
 		        		
     

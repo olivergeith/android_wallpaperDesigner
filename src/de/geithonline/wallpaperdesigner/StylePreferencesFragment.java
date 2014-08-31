@@ -26,6 +26,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference textDrawStyle;
 	private SeekBarPreference minOpacity;
 	private SeekBarPreference maxOpacity;
+	private SeekBarPreference numberOfLeafs;
+	private CheckBoxPreference randomLeafCount;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		minOpacity = (SeekBarPreference) findPreference("minOpacity");
 		maxOpacity = (SeekBarPreference) findPreference("maxOpacity");
+		numberOfLeafs = (SeekBarPreference) findPreference(Settings.NUMBER_OF_LEAFS);
+		randomLeafCount = (CheckBoxPreference) findPreference(Settings.RANDOM_LEAF_COUNT);
 
 		maxOpacity.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -147,7 +151,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				|| Settings.hasPatternRandomRotate(newPattern)//
 				|| Settings.hasPatternTextOption(newPattern)//
 				|| Settings.hasPatternFilledOption(newPattern));
-
+		numberOfLeafs.setEnabled(Settings.hasNumberOfLeafsOption(newPattern));
+		randomLeafCount.setEnabled(Settings.hasNumberOfLeafsOption(newPattern));
 	}
 
 	private void enableProFeatures() {

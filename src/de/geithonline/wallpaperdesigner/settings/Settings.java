@@ -10,8 +10,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String NUMBER_OF_LEAFS = "numberOfLeafs";
+	public static final String RANDOM_LEAF_COUNT = "randomLeafCount";
 	public static final String PATTERN_DROPSHADOW_DARKNESS_ADJUST = "dropShadowDarknessAdjust";
 	public static final String PATTERN_OUTLINE_DARKNESS_ADJUST = "outlineDarknessAdjust";
 	public static final String PATTERN_OUTLINE_NEVER_TRANSPARENT = "outlineNeverTransparent";
@@ -85,6 +88,16 @@ public class Settings {
 		supportingStyles.add("Bubbles");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("PacMan");
+		return supportingStyles.contains(pattern);
+	}
+
+	public static boolean hasNumberOfLeafsOption(final String pattern) {
+		final List<String> supportingStyles = new ArrayList<String>();
+		supportingStyles.add("Flowers");
+		supportingStyles.add("FlowersV3");
+		supportingStyles.add("FlowersV4");
+		supportingStyles.add("FlowersV5");
+		supportingStyles.add("Flower Bucket");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -332,6 +345,25 @@ public class Settings {
 			return 32;
 		}
 		return prefs.getInt("randomizeColorBrightnessRangeInt", 32);
+	}
+
+	// ###################################################################
+	// Wallpater Size
+	public static int getAnzahlFlowerLeafs() {
+		if (isRandomLeafCount()) {
+			return Randomizer.getRandomInt(4, 10);
+		}
+		if (prefs == null) {
+			return 5;
+		}
+		return prefs.getInt(NUMBER_OF_LEAFS, 5);
+	}
+
+	private static boolean isRandomLeafCount() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(RANDOM_LEAF_COUNT, false);
 	}
 
 	// ###################################################################

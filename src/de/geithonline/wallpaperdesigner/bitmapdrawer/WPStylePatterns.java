@@ -623,7 +623,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
+		final Path path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(), 5);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -650,7 +650,7 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (Math.PI / 5));
 		}
-		final Path path = new NiceFlowerPath(5, new Point(x, y), radius, getFilledBoolean(), 1.0f, rotate);
+		final Path path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(), new Point(x, y), radius, getFilledBoolean(), 1.0f, rotate);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -665,7 +665,7 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (Math.PI / 5));
 		}
-		final Path path = new NiceFlowerPath(5, new Point(x, y), radius, getFilledBoolean(), 0.8f, rotate);
+		final Path path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(), new Point(x, y), radius, getFilledBoolean(), 0.8f, rotate);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -680,7 +680,7 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			rotate = getRandomFloat(0, (float) (Math.PI / 5));
 		}
-		final Path path = new NiceFlowerPath(5, new Point(x, y), radius, getFilledBoolean(), rotate);
+		final Path path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(), new Point(x, y), radius, getFilledBoolean(), rotate);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
