@@ -26,12 +26,14 @@ import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
+import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
+import de.geithonline.wallpaperdesigner.shapes.RocketPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
@@ -39,6 +41,7 @@ import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
+import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath2;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath3;
@@ -266,6 +269,9 @@ public class WPStylePatterns extends WPStyle {
 		case "FlowersV5":
 			drawFlowerV5(x, y, paint, radius);
 			break;
+		case "Flower Bucket":
+			drawFlowerBucket(x, y, paint, radius);
+			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
 			break;
@@ -296,6 +302,21 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Anchor":
 			drawAnker(x, y, paint, radius);
+			break;
+		case "Lighthouse":
+			drawLighthouse(x, y, paint, radius);
+			break;
+		case "Marina":
+			drawMarina(x, y, paint, radius);
+			break;
+		case "Ufo":
+			drawUfo(x, y, paint, radius);
+			break;
+		case "Rocket":
+			drawRocket(x, y, paint, radius);
+			break;
+		case "Space":
+			drawSpace(x, y, paint, radius);
 			break;
 		default:
 		case "Virus Attack":
@@ -428,14 +449,105 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSailboat2(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new SailboatPath2(new Point(x, y), radius * 1.5f);
+	private void drawLighthouse(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new LighthousePath(new Point(x, y), radius * 1.2f);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawMarina(final int x, final int y, final Paint paint, final int radius) {
+		final int p = getRandomInt(-1, 3);
+		switch (p) {
+		default:
+		case 0:
+			drawLighthouse(x, y, paint, radius);
+			break;
+		case 1:
+			drawSailboat(x, y, paint, radius);
+			break;
+		case 2:
+			drawSailboat2(x, y, paint, radius);
+			break;
+		case 3:
+			drawAnker(x, y, paint, radius);
+			break;
+		}
+	}
+
+	private void drawFlowerBucket(final int x, final int y, final Paint paint, final int radius) {
+		final int p = getRandomInt(-1, 2);
+		switch (p) {
+		default:
+		case 0:
+			drawFlowerV3(x, y, paint, radius);
+			break;
+		case 1:
+			drawFlowerV4(x, y, paint, radius);
+			break;
+		case 2:
+			drawFlowerV5(x, y, paint, radius);
+			break;
+		}
+	}
+
+	private void drawSailboat2(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new SailboatPath2(new Point(x, y), radius * 1.2f);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawUfo(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new UfoPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+
+		// Iwant to believe text
+		if (getFilledBoolean()) {
+			setupPaintForDarkerFont(paint, radius);
+			paint.setTypeface(Typeface.DEFAULT);
+			paint.setTextSize(radius * 0.2f);
+			paint.setTextAlign(Align.CENTER);
+			bitmapCanvas.drawText("...I want to believe...", x, y + 0.7f * radius / 6, paint);
+		}
+
+	}
+
+	private void drawRocket(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new RocketPath(new Point(x, y), radius, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			// paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSpace(final int x, final int y, final Paint paint, final int radius) {
+		final int p = getRandomInt(-1, 1);
+		switch (p) {
+		default:
+		case 0:
+			drawUfo(x, y, paint, radius);
+			break;
+		case 1:
+			drawRocket(x, y, paint, radius);
+			break;
 		}
 	}
 
@@ -1055,6 +1167,17 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isOutlineNeverTransparent()) {
 			paint.setAlpha(255);
 		}
+		paint.setShadowLayer(0, 0, 0, 0);
+		if (Settings.isCustomOutlineColor()) {
+			paint.setColor(Settings.getCustomOutlineColor());
+		} else {
+			paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
+		}
+	}
+
+	private void setupPaintForDarkerFont(final Paint paint, final int radius) {
+		paint.setStyle(Style.FILL);
+		paint.setShader(null);
 		paint.setShadowLayer(0, 0, 0, 0);
 		if (Settings.isCustomOutlineColor()) {
 			paint.setColor(Settings.getCustomOutlineColor());

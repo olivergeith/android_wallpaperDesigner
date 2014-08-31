@@ -101,10 +101,14 @@ public class Settings {
 		supportingStyles.add("FlowersV3");
 		supportingStyles.add("FlowersV4");
 		supportingStyles.add("FlowersV5");
+		supportingStyles.add("Flower Bucket");
 		supportingStyles.add("Virus Attack V3");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Rings");
+		supportingStyles.add("Ufo");
+		supportingStyles.add("Rocket");
+		supportingStyles.add("Space");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -123,6 +127,7 @@ public class Settings {
 		supportingStyles.add("FlowersV3");
 		supportingStyles.add("FlowersV4");
 		supportingStyles.add("FlowersV5");
+		supportingStyles.add("Flower Bucket");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -131,6 +136,11 @@ public class Settings {
 		supportingStyles.add("Sailboat");
 		supportingStyles.add("Sailboat2");
 		supportingStyles.add("Anchor");
+		supportingStyles.add("Lighthouse");
+		supportingStyles.add("Marina");
+		supportingStyles.add("Ufo");
+		supportingStyles.add("Rocket");
+		supportingStyles.add("Space");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Squares");
 		supportingStyles.add("Rectangles");
@@ -151,6 +161,7 @@ public class Settings {
 		supportingStyles.add("FlowersV3");
 		supportingStyles.add("FlowersV4");
 		supportingStyles.add("FlowersV5");
+		supportingStyles.add("Flower Bucket");
 		supportingStyles.add("Virus Attack");
 		supportingStyles.add("Virus Attack V2");
 		supportingStyles.add("Virus Attack V3");
@@ -225,16 +236,16 @@ public class Settings {
 
 	public static int getOutlineDarkness() {
 		if (prefs == null) {
-			return 48;
+			return -48;
 		}
-		return prefs.getInt(PATTERN_OUTLINE_DARKNESS_ADJUST, 48);
+		return prefs.getInt(PATTERN_OUTLINE_DARKNESS_ADJUST, -48);
 	}
 
 	public static int getDropShadowDarkness() {
 		if (prefs == null) {
-			return 48;
+			return -48;
 		}
-		return prefs.getInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, 48);
+		return prefs.getInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -48);
 	}
 
 	public static String getText() {
@@ -523,6 +534,9 @@ public class Settings {
 			// prefs.edit().putInt("randomizeAlphaRangeInt", 30).commit();
 			prefs.edit().putInt("minOpacity", 125).commit();
 			prefs.edit().putInt("maxOpacity", 255).commit();
+
+			prefs.edit().putInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -56).commit();
+			prefs.edit().putInt(PATTERN_OUTLINE_DARKNESS_ADJUST, +32).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
