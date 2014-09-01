@@ -151,6 +151,7 @@ public class Settings {
 		supportingStyles.add("Anchor");
 		supportingStyles.add("Lighthouse");
 		supportingStyles.add("Marina");
+		supportingStyles.add("Skulls");
 		supportingStyles.add("Ufo");
 		supportingStyles.add("Rocket");
 		supportingStyles.add("Space");

@@ -38,6 +38,7 @@ import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
+import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
@@ -192,6 +193,9 @@ public class WPStylePatterns extends WPStyle {
 
 		case "Gears":
 			drawGear(x, y, paint, radius);
+			break;
+		case "Skulls":
+			drawSkull(x, y, paint, radius);
 			break;
 		case "Triangles":
 			drawTriangle(x, y, paint, radius);
@@ -984,6 +988,16 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawCloud(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new CloudPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSkull(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new SkullPath(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
