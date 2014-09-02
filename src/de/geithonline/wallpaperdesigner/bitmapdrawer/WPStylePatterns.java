@@ -22,6 +22,7 @@ import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
+import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -322,6 +323,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Space":
 			drawSpace(x, y, paint, radius);
 			break;
+		case "Deathstars":
+			drawDeathstar(x, y, paint, radius);
+			break;
 		default:
 		case "Virus Attack":
 			drawVirus(x, y, paint, radius);
@@ -552,6 +556,17 @@ public class WPStylePatterns extends WPStyle {
 		case 1:
 			drawRocket(x, y, paint, radius);
 			break;
+		}
+	}
+
+	private void drawDeathstar(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new DeathstarPath(new Point(x, y), radius);
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			// paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 

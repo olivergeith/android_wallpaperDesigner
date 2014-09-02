@@ -155,6 +155,7 @@ public class Settings {
 		supportingStyles.add("Ufo");
 		supportingStyles.add("Rocket");
 		supportingStyles.add("Space");
+		supportingStyles.add("Deathstars");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Squares");
 		supportingStyles.add("Rectangles");
