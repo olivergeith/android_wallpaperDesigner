@@ -191,6 +191,7 @@ public class Settings {
 		supportingStyles.add("Crop Circles");
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Smiley");
+		supportingStyles.add("Android");
 		return supportingStyles.contains(pattern);
 	}
 

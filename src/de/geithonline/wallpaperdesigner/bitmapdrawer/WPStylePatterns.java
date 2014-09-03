@@ -17,6 +17,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
@@ -252,6 +253,9 @@ public class WPStylePatterns extends WPStyle {
 			} else {
 				drawSmiley(x, y, paint, radius);
 			}
+			break;
+		case "Android":
+			drawAndroid(x, y, paint, radius);
 			break;
 		case "Pillows":
 			drawPillow(x, y, paint, radius);
@@ -764,6 +768,17 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawAndroid(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new AndroidPath(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
