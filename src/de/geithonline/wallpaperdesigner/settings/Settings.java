@@ -120,6 +120,7 @@ public class Settings {
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Rings");
 		supportingStyles.add("Ufo");
+		supportingStyles.add("UfoV2");
 		supportingStyles.add("Rocket");
 		supportingStyles.add("Space");
 		return supportingStyles.contains(pattern);
@@ -153,6 +154,7 @@ public class Settings {
 		supportingStyles.add("Marina");
 		supportingStyles.add("Skulls");
 		supportingStyles.add("Ufo");
+		supportingStyles.add("UfoV2");
 		supportingStyles.add("Rocket");
 		supportingStyles.add("Space");
 		supportingStyles.add("Deathstars");

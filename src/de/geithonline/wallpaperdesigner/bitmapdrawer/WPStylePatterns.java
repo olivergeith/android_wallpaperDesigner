@@ -315,7 +315,10 @@ public class WPStylePatterns extends WPStyle {
 			drawMarina(x, y, paint, radius);
 			break;
 		case "Ufo":
-			drawUfo(x, y, paint, radius);
+			drawUfo1(x, y, paint, radius);
+			break;
+		case "UfoV2":
+			drawUfo2(x, y, paint, radius);
 			break;
 		case "Rocket":
 			drawRocket(x, y, paint, radius);
@@ -514,13 +517,12 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawUfo(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new UfoPath(new Point(x, y), radius);
+	private void drawUfo1(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new UfoPath(new Point(x, y), radius, 1, getFilledBoolean());
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
 
@@ -535,6 +537,16 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
+	private void drawUfo2(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new UfoPath(new Point(x, y), radius, 2, getFilledBoolean());
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	private void drawRocket(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new RocketPath(new Point(x, y), radius, getFilledBoolean());
 		bitmapCanvas.drawPath(path, paint);
@@ -547,14 +559,17 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawSpace(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(-1, 1);
+		final int p = getRandomInt(-1, 2);
 		switch (p) {
 		default:
 		case 0:
-			drawUfo(x, y, paint, radius);
+			drawUfo1(x, y, paint, radius);
 			break;
 		case 1:
 			drawRocket(x, y, paint, radius);
+			break;
+		case 2:
+			drawUfo2(x, y, paint, radius);
 			break;
 		}
 	}
