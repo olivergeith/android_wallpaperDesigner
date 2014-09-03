@@ -149,6 +149,22 @@ public class Settings {
 		supportingStyles.add("Ufo");
 		supportingStyles.add("UfoV2");
 		supportingStyles.add("Space");
+		supportingStyles.add("Skulls");
+		supportingStyles.add("Hearts");
+		supportingStyles.add("Pillows");
+		supportingStyles.add("Clouds");
+
+		supportingStyles.add("Rectangles");
+		supportingStyles.add("Rectangles (rounded)");
+
+		supportingStyles.add("PacMan");
+		supportingStyles.add("Smiley");
+
+		supportingStyles.add("Sailboat");
+		supportingStyles.add("Sailboat2");
+		supportingStyles.add("Anchor");
+		supportingStyles.add("Lighthouse");
+
 		return supportingStyles.contains(pattern);
 	}
 

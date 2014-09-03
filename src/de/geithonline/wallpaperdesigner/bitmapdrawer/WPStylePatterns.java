@@ -13,7 +13,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RadialGradient;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
@@ -35,6 +34,7 @@ import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
+import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
 import de.geithonline.wallpaperdesigner.shapes.RocketPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
@@ -437,14 +437,11 @@ public class WPStylePatterns extends WPStyle {
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
-
-		// paint.setStyle(Style.FILL_AND_STROKE);
-		// paint.setStrokeWidth(radius / 20);
-		// bitmapCanvas.drawPath(new DandelionPath(new Point(x, y), radius), paint);
 	}
 
 	private void drawAnker(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new AnkerPath(new Point(x, y), radius * 1.5f);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -456,6 +453,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawSailboat(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SailboatPath(new Point(x, y), radius * 1.5f);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -467,6 +465,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawLighthouse(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new LighthousePath(new Point(x, y), radius * 1.2f);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -513,6 +512,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawSailboat2(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SailboatPath2(new Point(x, y), radius * 1.2f);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -650,12 +650,8 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawVirusV6(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (Math.PI / 4));
-		}
-
-		final Path path = new VirusPath6(new Point(x, y), radius, rotate);
+		final Path path = new VirusPath6(new Point(x, y), radius, 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -689,11 +685,9 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawFlowerV3(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (Math.PI / 5));
-		}
-		final Path path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, rotate);
+		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
+		final Path path = new NiceFlowerPath(arms, new Point(x, y), radius, getFilledBoolean(), 1.0f, 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -704,11 +698,9 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawFlowerV4(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (Math.PI / 5));
-		}
-		final Path path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, rotate);
+		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
+		final Path path = new NiceFlowerPath(arms, new Point(x, y), radius, getFilledBoolean(), 0.8f, 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -719,11 +711,9 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawFlowerV5(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (Math.PI / 5));
-		}
-		final Path path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), rotate);
+		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
+		final Path path = new NiceFlowerPath(arms, new Point(x, y), radius, getFilledBoolean(), 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -746,11 +736,8 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawDotSpiral(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (Math.PI * 2));
-		}
-		final Path path = new DotSpiralPath(3, new Point(x, y), radius, rotate);
+		final Path path = new DotSpiralPath(3, new Point(x, y), radius, 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -762,6 +749,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new PacmanPath(new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -773,6 +761,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -922,68 +911,36 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawRectangles(final int x, final int y, final Paint paint, final int radius) {
-		final Rect r = new Rect();
-		final int height = (int) (radius / 2 * getRandomFloat(0.1f, 1f));
-		boolean horizontal = true;
-
-		if (Settings.isRandomRotate()) {
-			horizontal = getRandomBoolean();
-		}
-		if (horizontal == false) {
-			r.left = x - radius;
-			r.right = x + radius;
-			r.top = y - height;
-			r.bottom = y + height;
-		} else {
-			r.left = x - height;
-			r.right = x + height;
-			r.top = y - radius;
-			r.bottom = y + radius;
-		}
-
-		bitmapCanvas.drawRect(r, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawRect(r, paint);
-		}
+		drawRect(x, y, paint, radius, false);
 	}
 
 	private void drawRoundedRectangles(final int x, final int y, final Paint paint, final int radius) {
-		final RectF r = new RectF();
-		final int height = (int) (radius * 0.8f * getRandomFloat(0.1f, 1f));
-		boolean horizontal = true;
-		final float cornerRad = radius * 0.3f;
+		drawRect(x, y, paint, radius, true);
+	}
 
+	private void drawRect(final int x, final int y, final Paint paint, final int radius, final boolean rounded) {
+		final Path path = new RectanglePath(new Point(x, y), radius, rounded);
 		if (Settings.isRandomRotate()) {
-			horizontal = getRandomBoolean();
-		}
-		if (horizontal == false) {
-			r.left = x - radius;
-			r.right = x + radius;
-			r.top = y - height;
-			r.bottom = y + height;
+			rotatePath(x, y, path, Settings.getRotationDegrees(0, 180));
 		} else {
-			r.left = x - height;
-			r.right = x + height;
-			r.top = y - radius;
-			r.bottom = y + radius;
+			int degr = Settings.getRotationDegrees(0, 180);
+			if (getRandomBoolean()) {
+				degr = degr + 90;
+			}
+			rotatePath(x, y, path, degr);
 		}
-
-		bitmapCanvas.drawRoundRect(r, cornerRad, cornerRad, paint);
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawRoundRect(r, cornerRad, cornerRad, paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
 	private void drawTriangle(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (Math.PI / 2));
-		}
-		final Path path = new XEckPath(3, new Point(x, y), radius, rotate, getFilledBoolean());
+		final int arms = 3;
+		final Path path = new XEckPath(arms, new Point(x, y), radius, 0, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -993,11 +950,9 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPentagon(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (2 * Math.PI));
-		}
-		final Path path = new XEckPath(5, new Point(x, y), radius, rotate, getFilledBoolean());
+		final int arms = 5;
+		final Path path = new XEckPath(arms, new Point(x, y), radius, 0, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1007,11 +962,9 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawHexagon(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (2 * Math.PI));
-		}
-		final Path path = new XEckPath(6, new Point(x, y), radius, rotate, getFilledBoolean());
+		final int arms = 6;
+		final Path path = new XEckPath(arms, new Point(x, y), radius, 0, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1021,11 +974,9 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawOctagon(final int x, final int y, final Paint paint, final int radius) {
-		float rotate = 0;
-		if (Settings.isRandomRotate()) {
-			rotate = getRandomFloat(0, (float) (2 * Math.PI));
-		}
-		final Path path = new XEckPath(8, new Point(x, y), radius, rotate, getFilledBoolean());
+		final int arms = 8;
+		final Path path = new XEckPath(arms, new Point(x, y), radius, 0, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1036,6 +987,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawCloud(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new CloudPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1046,6 +998,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawSkull(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SkullPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1064,20 +1017,24 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPillow(final int x, final int y, final Paint paint, final int radius) {
-		bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
+		final Path path = new PillowPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new PillowPath(new Point(x, y), radius), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
 	private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
-		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+		final Path path = new HeartPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
@@ -1112,6 +1069,7 @@ public class WPStylePatterns extends WPStyle {
 		final int whitehalftransparent = 0xAAFFFFFF;
 		final int transparent = 0x00FFFFFF;
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		// Bubble
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
@@ -1137,6 +1095,7 @@ public class WPStylePatterns extends WPStyle {
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int transparent = 0x00FFFFFF;
 		final Path path = new PacmanPath(new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		// Bubble
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShader(new RadialGradient(x, y, radius * 2, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
@@ -1162,19 +1121,21 @@ public class WPStylePatterns extends WPStyle {
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int transparent = 0x00FFFFFF;
 		// Heart für dropshadow
-		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+		final Path path = new HeartPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
 		// Heart
 		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
-		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
 		paint.setShader(new LinearGradient(x - radius * 2 / 3, y - radius * 2 / 3, x, y, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
-		bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+		bitmapCanvas.drawPath(path, paint);
 		// Ring
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new HeartPath(new Point(x, y), radius), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 		paint.setShader(null);
 	}
@@ -1186,25 +1147,25 @@ public class WPStylePatterns extends WPStyle {
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int whitequartertransparent = 0x22FFFFFF;
 		final int transparent = 0x00FFFFFF;
-		float rotation = 0;
-		if (Settings.isRandomRotate()) {
-			rotation = getRandomFloat(0, (float) (Math.PI / 2));
-		}
 		// Star
-		bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotation), paint);
+		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
+		final Path path = new StarPath(arms, new Point(x, y), radius, radius / 2, true, 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
+
+		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
 		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
-		bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotation), paint);
+		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
 		final int colors[] = { whitehalftransparent, whitequartertransparent, transparent };
 		final float dists[] = { 0f, 0.35f, 0.355f };
 		paint.setShader(new LinearGradient(x - radius * 1 / 2, y - radius * 1 / 2, x + radius, y + radius, colors, dists, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
-		bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotation), paint);
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new StarPath(5, new Point(x, y), radius, radius / 2, true, rotation), paint);
+			bitmapCanvas.drawPath(path, paint);
 		}
 		paint.setShader(null);
 	}
