@@ -73,8 +73,9 @@
     <string name="anzColors">How Many Colors in Gradient</string>
     <string name="blurPatterns">Blur patterns in Background</string>
     
-    <string name="numberOfLeafs">How many leafs should the Flowers have?</string>
-    <string name="randomLeafCount">Random Number of leafs</string>
+    <string name="numberOfLeafs">How many leafs-arms should the Pattern have?</string>
+    <string name="randomLeafCount">Random Number of leafs-arms</string>
+    <string name="rotationDegrees">Rotate pattern by degrees</string>
     
     
     

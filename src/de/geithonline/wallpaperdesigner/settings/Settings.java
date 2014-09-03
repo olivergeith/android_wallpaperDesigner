@@ -98,6 +98,7 @@ public class Settings {
 		supportingStyles.add("FlowersV4");
 		supportingStyles.add("FlowersV5");
 		supportingStyles.add("Flower Bucket");
+		supportingStyles.add("Stars");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -142,6 +143,12 @@ public class Settings {
 		supportingStyles.add("FlowersV4");
 		supportingStyles.add("FlowersV5");
 		supportingStyles.add("Flower Bucket");
+		supportingStyles.add("Android");
+		supportingStyles.add("Rocket");
+		supportingStyles.add("Deathstars");
+		supportingStyles.add("Ufo");
+		supportingStyles.add("UfoV2");
+		supportingStyles.add("Space");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -207,6 +214,18 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(PATTERN_RANDOM_ROTATE, false);
+	}
+
+	// ###################################################################
+	// Wallpater Size
+	public static int getRotationDegrees(final int randomMin, final int randomMax) {
+		if (isRandomRotate()) {
+			return Randomizer.getRandomInt(randomMin - 1, randomMax);
+		}
+		if (prefs == null) {
+			return 0;
+		}
+		return prefs.getInt("rotationDegrees", 0);
 	}
 
 	public static boolean isBlurPatterns() {
@@ -354,9 +373,9 @@ public class Settings {
 
 	// ###################################################################
 	// Wallpater Size
-	public static int getAnzahlFlowerLeafs() {
+	public static int getAnzahlFlowerLeafs(final int randomMin, final int randomMax) {
 		if (isRandomLeafCount()) {
-			return Randomizer.getRandomInt(4, 10);
+			return Randomizer.getRandomInt(randomMin - 1, randomMax);
 		}
 		if (prefs == null) {
 			return 5;

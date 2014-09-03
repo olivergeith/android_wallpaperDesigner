@@ -36,8 +36,7 @@
 			    android:summary="Glossy Effect, Outline, Text, Filling ..."
 			    android:icon="@android:drawable/ic_menu_preferences"
 			    >
-		    <PreferenceCategory  android:title="Assorted Options"/>
-		    
+		    	<PreferenceCategory  android:title="Assorted Options"/>
 			    <ListPreference
 			        android:key="filledOption"
 			        android:title="@string/filledOption" 
@@ -46,18 +45,31 @@
 			        android:entries="@array/hole"
 			        android:entryValues="@array/holeValues"
 			        />
-
-			    <CheckBoxPreference 
-		            android:key="randomRotate"
-		            android:title="@string/randomRotate"
-		            android:defaultValue="false"
-		            />
-		    
    		        <CheckBoxPreference 
 		            android:key="glossy"
 		            android:title="@string/glossy"
 		            android:defaultValue="false"
 		            />
+			    
+		        <PreferenceCategory  android:title="Rotating"/>
+			    <CheckBoxPreference 
+		            android:key="randomRotate"
+		            android:title="@string/randomRotate"
+		            android:defaultValue="false"
+		            android:disableDependentsState="true"
+		            />
+   		        <de.geithonline.android.basics.preferences.SeekBarPreference
+		            android:key="rotationDegrees"
+			        android:title="@string/rotationDegrees" 
+				    seekbarpreference:minValue="-180"
+				    seekbarpreference:stepValue="5"
+				    seekbarpreference:maxValue="180"
+				    android:defaultValue="0"
+				    android:summary="%1$d" 
+				    android:dialogMessage="@string/rotationDegrees" 
+		            android:dependency="randomRotate"
+				    />
+			    		    
 		
 		    	<PreferenceCategory  android:title="Outline Options"/>
   		            <CheckBoxPreference 
@@ -112,7 +124,7 @@
 			        android:entries="@array/textDrawStyle"
 			        android:entryValues="@array/textDrawStyleValues"
 			        />
-		        <PreferenceCategory  android:title="Flower Options"/>
+		        <PreferenceCategory  android:title="Leafs-Arms Options"/>
 		        <CheckBoxPreference 
 		            android:key="randomLeafCount"
 		            android:title="@string/randomLeafCount"

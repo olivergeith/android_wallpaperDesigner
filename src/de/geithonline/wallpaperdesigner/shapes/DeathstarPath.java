@@ -121,10 +121,10 @@ public class DeathstarPath extends Path {
 		lineTo(center.x + 11 * raster, center.y + 4 * raster);
 		lineTo(center.x + 7 * raster, center.y + 4 * raster);
 		lineTo(center.x + 7 * raster, center.y + 5 * raster);
-		lineTo(center.x + 5 * raster, center.y + 5 * raster);
-		lineTo(center.x + 5 * raster, center.y + 6 * raster);
-		lineTo(center.x + 8 * raster, center.y + 6 * raster);
-		lineTo(center.x + 8 * raster, center.y + 7 * raster);
+		lineTo(center.x + 2 * raster, center.y + 5 * raster);
+		lineTo(center.x + 2 * raster, center.y + 6 * raster);
+		lineTo(center.x + 4 * raster, center.y + 6 * raster);
+		lineTo(center.x + 4 * raster, center.y + 7 * raster);
 		lineTo(center.x + 10 * raster, center.y + 7 * raster);
 		lineTo(center.x + 10 * raster, center.y + 8 * raster);
 		lineTo(center.x + 9 * raster, center.y + 8 * raster);
