@@ -149,6 +149,11 @@ public class Settings {
 		supportingStyles.add("Ufo");
 		supportingStyles.add("UfoV2");
 		supportingStyles.add("Space");
+		supportingStyles.add("Skulls");
+		supportingStyles.add("Hearts");
+		supportingStyles.add("Pillows");
+		supportingStyles.add("Clouds");
+
 		return supportingStyles.contains(pattern);
 	}
 
