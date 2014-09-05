@@ -28,6 +28,7 @@ import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
+import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
@@ -51,7 +52,7 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath2;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath3;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
-import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
+import de.geithonline.wallpaperdesigner.shapes.VirusPath7;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -241,6 +242,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Crop Circles":
 			drawDotSpiral(x, y, paint, radius);
 			break;
+		case "Hedgehog":
+			drawIgel(x, y, paint, radius);
+			break;
 		case "PacMan":
 			if (Settings.isGlossy()) {
 				drawGlossyPacman(x, y, paint, radius);
@@ -364,6 +368,20 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
+		}
+	}
+
+	public void drawIgel(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new IgelPath(new Point(x, y + radius / 2), radius * 1.3f);
+		if (getFilledBoolean()) {
+			mirrorPath(x, y, path);
+		}
+		rotatePath(x, y + radius / 2, path, Settings.getRotationDegrees(-30, 30));
+
+		bitmapCanvas.drawPath(path, paint);
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
@@ -650,7 +668,8 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawVirusV6(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath6(new Point(x, y), radius, 0);
+		// final Path path = new VirusPath6(new Point(x, y), radius, 0);
+		final Path path = new VirusPath7(new Point(x, y), radius);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1217,4 +1236,11 @@ public class WPStylePatterns extends WPStyle {
 		path.transform(mMatrix);
 	}
 
+	private void mirrorPath(final int x, final int y, final Path path) {
+		final Matrix mMatrix = new Matrix();
+		final RectF bounds = new RectF();
+		path.computeBounds(bounds, true);
+		mMatrix.postScale(-1f, 1f, x, y);
+		path.transform(mMatrix);
+	}
 }

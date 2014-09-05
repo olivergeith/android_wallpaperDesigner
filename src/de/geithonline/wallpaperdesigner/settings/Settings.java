@@ -124,6 +124,7 @@ public class Settings {
 		supportingStyles.add("UfoV2");
 		supportingStyles.add("Rocket");
 		supportingStyles.add("Space");
+		supportingStyles.add("Hedgehog");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -164,6 +165,8 @@ public class Settings {
 		supportingStyles.add("Sailboat2");
 		supportingStyles.add("Anchor");
 		supportingStyles.add("Lighthouse");
+
+		supportingStyles.add("Hedgehog");
 
 		return supportingStyles.contains(pattern);
 	}
@@ -215,6 +218,8 @@ public class Settings {
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("Android");
+		supportingStyles.add("Hedgehog");
+
 		return supportingStyles.contains(pattern);
 	}
 
