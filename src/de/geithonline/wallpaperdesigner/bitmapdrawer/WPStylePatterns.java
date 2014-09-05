@@ -46,13 +46,14 @@ import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
+import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath2;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath3;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
-import de.geithonline.wallpaperdesigner.shapes.VirusPath7;
+import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -356,6 +357,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Virus Attack V6":
 			drawVirusV6(x, y, paint, radius);
+			break;
+		case "Sun":
+			drawSun(x, y, paint, radius);
 			break;
 		case "Streamers":
 			drawStreamer(x, y, paint, radius);
@@ -668,9 +672,20 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawVirusV6(final int x, final int y, final Paint paint, final int radius) {
-		// final Path path = new VirusPath6(new Point(x, y), radius, 0);
-		final Path path = new VirusPath7(new Point(x, y), radius);
+		final Path path = new VirusPath6(new Point(x, y), radius, 0);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 45));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSun(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new SunPath(new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 36));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

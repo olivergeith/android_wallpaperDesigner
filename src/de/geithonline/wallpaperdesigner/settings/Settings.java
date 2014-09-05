@@ -125,6 +125,7 @@ public class Settings {
 		supportingStyles.add("Rocket");
 		supportingStyles.add("Space");
 		supportingStyles.add("Hedgehog");
+		supportingStyles.add("Sun");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -167,6 +168,7 @@ public class Settings {
 		supportingStyles.add("Lighthouse");
 
 		supportingStyles.add("Hedgehog");
+		supportingStyles.add("Sun");
 
 		return supportingStyles.contains(pattern);
 	}
@@ -219,6 +221,7 @@ public class Settings {
 		supportingStyles.add("Smiley");
 		supportingStyles.add("Android");
 		supportingStyles.add("Hedgehog");
+		supportingStyles.add("Sun");
 
 		return supportingStyles.contains(pattern);
 	}

@@ -3,7 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 
-public class VirusPath7 extends Path {
+public class SunPath extends Path {
 
 	/**
 	 * More smooth and round no random peeks....
@@ -12,8 +12,8 @@ public class VirusPath7 extends Path {
 	 * @param radius
 	 * @param arms
 	 */
-	public VirusPath7(final Point center, final float radius) {
-		final int arms = 12;
+	public SunPath(final Point center, final float radius, final boolean filled) {
+		final int arms = 10;
 		final float angle = (float) (2 * Math.PI / (arms));
 		final float cpRadius = radius * 0.3f;
 		for (int i = 0; i <= arms; i++) {
@@ -47,8 +47,10 @@ public class VirusPath7 extends Path {
 		// }
 		// close();
 
-		final float innerRadius = radius * 0.5f;
-		addCircle(center.x, center.y, innerRadius, Direction.CCW);
+		if (!filled) {
+			final float innerRadius = radius * 0.5f;
+			addCircle(center.x, center.y, innerRadius, Direction.CCW);
+		}
 		// addCircle(center.x, center.y, innerRadius / 2, Direction.CW);
 
 	}
