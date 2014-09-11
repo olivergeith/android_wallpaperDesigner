@@ -42,6 +42,8 @@ import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
+import de.geithonline.wallpaperdesigner.shapes.ShellPath;
+import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
@@ -241,6 +243,12 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Crop Circles":
 			drawDotSpiral(x, y, paint, radius);
+			break;
+		case "Shells":
+			drawShell(x, y, paint, radius);
+			break;
+		case "Shells V2":
+			drawShellV2(x, y, paint, radius);
 			break;
 		case "Hedgehog":
 			drawIgel(x, y, paint, radius);
@@ -756,11 +764,35 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawDotSpiral(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new DotSpiralPath(3, new Point(x, y), radius, 0);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawShell(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new ShellPath(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius, ShellPath.VARIANTE_OUTER);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius * 2 / 3);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawShellV2(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius * 2 / 3);
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}

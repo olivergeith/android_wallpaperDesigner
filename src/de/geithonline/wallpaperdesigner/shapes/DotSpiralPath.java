@@ -9,6 +9,10 @@ public class DotSpiralPath extends Path {
 	public DotSpiralPath(final int circles, final Point center, final float rOuter, final float rotate) {
 		super();
 
+		drawDotSpiral(circles, center, rOuter, rotate);
+	}
+
+	private void drawDotSpiral(final int circles, final Point center, final float rOuter, final float rotate) {
 		final int ecken = circles * 20;
 		final float angle;
 		angle = (float) (2 * Math.PI * circles / ecken);
@@ -21,6 +25,6 @@ public class DotSpiralPath extends Path {
 			p.y = (float) (center.y + Math.sin(i * angle + rotate) * r);
 			addCircle(p.x, p.y, r * 0.15f, Direction.CCW);
 		}
-		// close();
+
 	}
 }
