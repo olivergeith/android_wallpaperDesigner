@@ -10,12 +10,12 @@ public class ShellV2Path extends Path {
 	public static final int VARIANTE_INNER = 0;
 	public static final int VARIANTE_OUTER = 2;
 
-	public ShellV2Path(final int abschnitte, final Point center, final float rOuter, final int variante) {
+	public ShellV2Path(final int abschnitte, final Point center, final float rOuter, final int variante, final boolean filled) {
 		super();
-		drawSchnecke2(abschnitte, center, rOuter, variante);
+		drawSchnecke2(abschnitte, center, rOuter, variante, filled);
 	}
 
-	private void drawSchnecke2(final int abschnitte, final Point center, final float rOuter, final int variante) {
+	private void drawSchnecke2(final int abschnitte, final Point center, final float rOuter, final int variante, final boolean filled) {
 
 		final int circles = 1;
 		final int ecken = circles * abschnitte;
@@ -23,7 +23,9 @@ public class ShellV2Path extends Path {
 		angle = (float) (2 * Math.PI * circles / ecken);
 		final float ri = rOuter * 0.15f;
 
-		// addCircle(center.x, center.y, rOuter, Direction.CCW);
+		if (filled) {
+			addCircle(center.x, center.y, ri * 0.8f, Direction.CCW);
+		}
 
 		for (int i = 0; i <= ecken; i++) {
 			final float ra = ri + rOuter * ((float) i / ecken); // * ((float) i / ecken);

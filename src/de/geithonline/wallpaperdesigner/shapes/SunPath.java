@@ -12,8 +12,7 @@ public class SunPath extends Path {
 	 * @param radius
 	 * @param arms
 	 */
-	public SunPath(final Point center, final float radius, final boolean filled) {
-		final int arms = 10;
+	public SunPath(final int arms, final Point center, final float radius, final boolean filled) {
 		final float angle = (float) (2 * Math.PI / (arms));
 		final float cpRadius = radius * 0.3f;
 		for (int i = 0; i <= arms; i++) {

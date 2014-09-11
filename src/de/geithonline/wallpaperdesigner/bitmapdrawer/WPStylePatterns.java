@@ -506,7 +506,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawMarina(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(-1, 3);
+		final int p = getRandomInt(-1, 5);
 		switch (p) {
 		default:
 		case 0:
@@ -520,6 +520,12 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case 3:
 			drawAnker(x, y, paint, radius);
+			break;
+		case 4:
+			drawShell(x, y, paint, radius);
+			break;
+		case 5:
+			drawShellV2(x, y, paint, radius);
 			break;
 		}
 	}
@@ -692,7 +698,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawSun(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new SunPath(new Point(x, y), radius, getFilledBoolean());
+		final Path path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(3, 10), new Point(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 36));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -802,8 +808,10 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawShellV2(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER);
+		final Path path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER,
+				getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// mirrorPath(x, y, path);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

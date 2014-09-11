@@ -100,6 +100,7 @@ public class Settings {
 		supportingStyles.add("Flower Bucket");
 		supportingStyles.add("Stars");
 		supportingStyles.add("Shells");
+		supportingStyles.add("Shells V2");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -127,6 +128,7 @@ public class Settings {
 		supportingStyles.add("Space");
 		supportingStyles.add("Hedgehog");
 		supportingStyles.add("Sun");
+		supportingStyles.add("Shells V2");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -169,6 +171,7 @@ public class Settings {
 		supportingStyles.add("Sailboat2");
 		supportingStyles.add("Anchor");
 		supportingStyles.add("Lighthouse");
+		supportingStyles.add("Marina");
 
 		supportingStyles.add("Hedgehog");
 		supportingStyles.add("Sun");
