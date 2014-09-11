@@ -99,6 +99,7 @@ public class Settings {
 		supportingStyles.add("FlowersV5");
 		supportingStyles.add("Flower Bucket");
 		supportingStyles.add("Stars");
+		supportingStyles.add("Shells");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -140,6 +141,8 @@ public class Settings {
 		supportingStyles.add("Octagon");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Crop Circles");
+		supportingStyles.add("Shells");
+		supportingStyles.add("Shells V2");
 		supportingStyles.add("Virus Attack V6");
 		supportingStyles.add("FlowersV3");
 		supportingStyles.add("FlowersV4");
@@ -217,6 +220,8 @@ public class Settings {
 		supportingStyles.add("Letters");
 		supportingStyles.add("Dandelion");
 		supportingStyles.add("Crop Circles");
+		supportingStyles.add("Shells");
+		supportingStyles.add("Shells V2");
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("Android");
