@@ -8,10 +8,13 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 
 public class PreferencesActivity extends PreferenceActivity {
 
@@ -50,9 +53,24 @@ public class PreferencesActivity extends PreferenceActivity {
 			final Button button = billingManager.getButton();
 			ll.addView(button);
 		}
+		ll.addView(getSaveSettingsButton());
 
 		// set view with buttons to the list footer
 		setListFooter(ll);
+	}
+
+	private Button getSaveSettingsButton() {
+		final Button button = new Button(PreferencesActivity.this);
+		button.setText("Save Preferences...");
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(final View v) {
+				// SettingsIO.savePreferencesToFile(PreferencesActivity.this, Settings.prefs, "Settings.pref");
+				SettingsIO.loadPreferencespromFile(PreferencesActivity.this, Settings.prefs, "Settings.pref");
+			}
+		});
+		return button;
 	}
 
 	/**

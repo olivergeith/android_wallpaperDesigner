@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 	private ShakeEventListener mSensorListener;
 	private TextView shakeHint;
 	private TextView settingsButton;
-	private TextView saveButton;
+	private TextView setWallButton;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -70,8 +70,8 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		saveButton = (TextView) findViewById(R.id.saveButton);
-		saveButton.setOnClickListener(new OnClickListener() {
+		setWallButton = (TextView) findViewById(R.id.saveButton);
+		setWallButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(final View v) {
