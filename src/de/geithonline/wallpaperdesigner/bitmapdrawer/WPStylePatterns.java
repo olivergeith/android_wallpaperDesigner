@@ -786,6 +786,10 @@ public class WPStylePatterns extends WPStyle {
 	private void drawDotSpiral(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new DotSpiralPath(3, new Point(x, y), radius, 0);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -796,12 +800,16 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawShell(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellPath(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius, ShellPath.VARIANTE_OUTER);
+		final Path path = new ShellPath(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius * 2 / 3);
+			setupPaintForOutline(paint, (int) (radius * 0.5f));
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -811,11 +819,14 @@ public class WPStylePatterns extends WPStyle {
 		final Path path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER,
 				getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
-		// mirrorPath(x, y, path);
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius * 2 / 3);
+			setupPaintForOutline(paint, (int) (radius * 0.5f));
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
@@ -1255,9 +1266,9 @@ public class WPStylePatterns extends WPStyle {
 
 	private void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
-		int strokewidth = radius / 20;
-		if (strokewidth < 2) {
-			strokewidth = 2;
+		float strokewidth = radius / 20;
+		if (strokewidth < 1.5f) {
+			strokewidth = 1.5f;
 		}
 		paint.setStrokeWidth(strokewidth);
 		paint.setShader(null);
