@@ -44,6 +44,7 @@ import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.ShellPath;
 import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
+import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
@@ -150,9 +151,9 @@ public class WPStylePatterns extends WPStyle {
 			drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
-				if (i == blurLevel1) {
-					bitmap = BitmapBlurrer.doBlur(bitmap, 7, true);
-				}
+				// if (i == blurLevel1) {
+				// bitmap = BitmapBlurrer.doBlur(bitmap, 7, true);
+				// }
 				if (i == blurLevel2) {
 					bitmap = BitmapBlurrer.doBlur(bitmap, 5, true);
 				}
@@ -250,6 +251,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Shells V2":
 			drawShellV2(x, y, paint, radius);
+			break;
+		case "Shells V3":
+			drawShellV3(x, y, paint, radius);
 			break;
 		case "Hedgehog":
 			drawIgel(x, y, paint, radius);
@@ -506,7 +510,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawMarina(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(-1, 5);
+		final int p = getRandomInt(-1, 6);
 		switch (p) {
 		default:
 		case 0:
@@ -526,6 +530,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case 5:
 			drawShellV2(x, y, paint, radius);
+			break;
+		case 6:
+			drawShellV3(x, y, paint, radius);
 			break;
 		}
 	}
@@ -809,8 +816,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, (int) (radius * 0.5f));
-			paint.setStrokeCap(Cap.ROUND);
+			setupPaintForOutline(paint, radius / 2);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
@@ -826,8 +832,22 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, (int) (radius * 0.5f));
-			paint.setStrokeCap(Cap.ROUND);
+			setupPaintForOutline(paint, radius / 2);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawShellV3(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new ShellV3Path(4, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
@@ -1266,11 +1286,15 @@ public class WPStylePatterns extends WPStyle {
 
 	private void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
-		float strokewidth = radius / 20;
-		if (strokewidth < 1.5f) {
-			strokewidth = 1.5f;
+		float strokewidth = radius / 15f;
+		if (strokewidth > 3.0f) {
+			strokewidth = 3;
+		}
+		if (strokewidth < 1.0f) {
+			strokewidth = 0;
 		}
 		paint.setStrokeWidth(strokewidth);
+		// paint.setStrokeWidth(2);
 		paint.setShader(null);
 		if (Settings.isOutlineNeverTransparent()) {
 			paint.setAlpha(255);

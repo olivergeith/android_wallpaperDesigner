@@ -101,6 +101,7 @@ public class Settings {
 		supportingStyles.add("Stars");
 		supportingStyles.add("Shells");
 		supportingStyles.add("Shells V2");
+		supportingStyles.add("Shells V3");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -145,6 +146,7 @@ public class Settings {
 		supportingStyles.add("Crop Circles");
 		supportingStyles.add("Shells");
 		supportingStyles.add("Shells V2");
+		supportingStyles.add("Shells V3");
 		supportingStyles.add("Virus Attack V6");
 		supportingStyles.add("FlowersV3");
 		supportingStyles.add("FlowersV4");
@@ -225,6 +227,7 @@ public class Settings {
 		supportingStyles.add("Crop Circles");
 		supportingStyles.add("Shells");
 		supportingStyles.add("Shells V2");
+		supportingStyles.add("Shells V3");
 		supportingStyles.add("PacMan");
 		supportingStyles.add("Smiley");
 		supportingStyles.add("Android");
@@ -628,7 +631,6 @@ public class Settings {
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
-
 		}
 	}
 
