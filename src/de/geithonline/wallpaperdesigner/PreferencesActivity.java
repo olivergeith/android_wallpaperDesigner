@@ -55,6 +55,7 @@ public class PreferencesActivity extends PreferenceActivity {
 		}
 		ll.addView(getSaveSettingsButton());
 		ll.addView(getLoadSettingsButton());
+		ll.addView(getDeleteSettingsButton());
 
 		// set view with buttons to the list footer
 		setListFooter(ll);
@@ -81,6 +82,19 @@ public class PreferencesActivity extends PreferenceActivity {
 			@Override
 			public void onClick(final View v) {
 				SettingsIO.loadPreferences(PreferencesActivity.this, Settings.prefs);
+			}
+		});
+		return button;
+	}
+
+	private Button getDeleteSettingsButton() {
+		final Button button = new Button(PreferencesActivity.this);
+		button.setText("Delete a Preferences-Backup...");
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(final View v) {
+				SettingsIO.deletePreferences(PreferencesActivity.this);
 			}
 		});
 		return button;

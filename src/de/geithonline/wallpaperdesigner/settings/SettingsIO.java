@@ -66,7 +66,7 @@ public class SettingsIO {
 		final List<String> preferenzFileNameList = getPreferenzFileNameList(activity);
 
 		if (preferenzFileNameList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no backups of preferences!");
+			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
 			return;
 		}
 
@@ -109,6 +109,61 @@ public class SettingsIO {
 
 		alert.show();
 
+	}
+
+	public static void deletePreferences(final Activity activity) {
+
+		final List<String> preferenzFileNameList = getPreferenzFileNameList(activity);
+
+		if (preferenzFileNameList.isEmpty()) {
+			Toaster.showErrorToast(activity, "There are no backups of preferences you possibly could delete!");
+			return;
+		}
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+
+		alert.setTitle("Delete backup of preferences");
+		alert.setMessage("Select preferences to be deleted");
+
+		final ListView listview = new ListView(activity);
+		/** Declaring an ArrayAdapter to set items to ListView */
+		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity.getBaseContext(), android.R.layout.simple_list_item_single_choice,
+				preferenzFileNameList);
+		listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listview.setAdapter(adapter);
+		listview.setItemChecked(0, true);
+		alert.setView(listview);
+
+		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int whichButton) {
+				final int position = listview.getCheckedItemPosition();
+				Log.i("Loading Settings ", "from " + position);
+				if (position >= 0) {
+					final String filename = preferenzFileNameList.get(position);
+					if (filename != null) {
+						SettingsIO.deletePreferencesFile(activity, filename);
+					}
+
+				}
+			}
+
+		});
+
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int whichButton) {
+				// Canceled.
+			}
+		});
+
+		alert.show();
+
+	}
+
+	protected static void deletePreferencesFile(final Activity activity, final String filename) {
+		final File file = new File(activity.getFilesDir(), filename);
+		file.delete();
 	}
 
 	private static void savePreferencesToFile(final Activity activity, final SharedPreferences prefs, final String filename) {
