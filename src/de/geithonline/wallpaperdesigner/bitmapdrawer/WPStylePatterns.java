@@ -255,6 +255,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Shells V3":
 			drawShellV3(x, y, paint, radius);
 			break;
+		case "Mixed Shells":
+			drawMixedShells(x, y, paint, radius);
+			break;
 		case "Hedgehog":
 			drawIgel(x, y, paint, radius);
 			break;
@@ -801,7 +804,6 @@ public class WPStylePatterns extends WPStyle {
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
@@ -817,6 +819,7 @@ public class WPStylePatterns extends WPStyle {
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
@@ -833,12 +836,13 @@ public class WPStylePatterns extends WPStyle {
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 
 	private void drawShellV3(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellV3Path(4, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		final Path path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
@@ -848,7 +852,25 @@ public class WPStylePatterns extends WPStyle {
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawMixedShells(final int x, final int y, final Paint paint, final int radius) {
+		final int p = getRandomInt(0, 3);
+		switch (p) {
+		default:
+		case 0:
+		case 1:
+			drawShell(x, y, paint, radius);
+			break;
+		case 2:
+			drawShellV2(x, y, paint, radius);
+			break;
+		case 3:
+			drawShellV3(x, y, paint, radius);
+			break;
 		}
 	}
 
@@ -1293,7 +1315,7 @@ public class WPStylePatterns extends WPStyle {
 		if (strokewidth < 1.0f) {
 			strokewidth = 0;
 		}
-		paint.setStrokeWidth(strokewidth);
+		paint.setStrokeWidth(Math.round(strokewidth));
 		// paint.setStrokeWidth(2);
 		paint.setShader(null);
 		if (Settings.isOutlineNeverTransparent()) {
