@@ -2,10 +2,11 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PointF;
 
 public class StarPath extends Path {
 
-	public StarPath(final int arms, final Point center, final float rOuter, final float rInner, final boolean filled, final float rotate) {
+	public StarPath(final int arms, final PointF c, final float rOuter, final float rInner, final boolean filled, final float rotate) {
 		super();
 		final float angle = (float) (Math.PI / arms);
 		final float rInner2 = rInner * 0.75f;
@@ -16,8 +17,8 @@ public class StarPath extends Path {
 			// final float r = rInner;
 
 			final Point p = new Point();
-			p.x = (int) (center.x + Math.cos(i * angle + rotate) * r);
-			p.y = (int) (center.y + Math.sin(i * angle + rotate) * r);
+			p.x = (int) (c.x + Math.cos(i * angle + rotate) * r);
+			p.y = (int) (c.y + Math.sin(i * angle + rotate) * r);
 			// Log.i("Point", "Point " + i + " p=" + p.x + " " + p.y);
 			if (i == 0) {
 				moveTo(p.x, p.y);
@@ -28,7 +29,7 @@ public class StarPath extends Path {
 			}
 		}
 		if (!filled) {
-			addCircle(center.x, center.y, rInner2, Direction.CCW);
+			addCircle(c.x, c.y, rInner2, Direction.CCW);
 		}
 
 		close();

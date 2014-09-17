@@ -12,6 +12,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -58,6 +59,8 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
+import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
+import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
@@ -204,6 +207,12 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Skulls":
 			drawSkull(x, y, paint, radius);
+			break;
+		case "Lemons":
+			drawZitrone(x, y, paint, radius);
+			break;
+		case "XmasTrees":
+			drawXmasTree(x, y, paint, radius);
 			break;
 		case "Triangles":
 			drawTriangle(x, y, paint, radius);
@@ -1015,7 +1024,7 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawStar(final int x, final int y, final Paint paint, final int radius) {
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new StarPath(arms, new Point(x, y), radius, radius / 2, true, 0);
+		final Path path = new StarPath(arms, new PointF(x, y), radius, radius / 2, true, 0);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1125,6 +1134,29 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawSkull(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SkullPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawZitrone(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new ZitronePath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawXmasTree(final int x, final int y, final Paint paint, final int radius) {
+		// final Path path = new ZitronePath(new Point(x, y), radius);
+		final Path path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1276,7 +1308,7 @@ public class WPStylePatterns extends WPStyle {
 		final int transparent = 0x00FFFFFF;
 		// Star
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new StarPath(arms, new Point(x, y), radius, radius / 2, true, 0);
+		final Path path = new StarPath(arms, new PointF(x, y), radius, radius / 2, true, 0);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 
 		bitmapCanvas.drawPath(path, paint);
@@ -1315,8 +1347,8 @@ public class WPStylePatterns extends WPStyle {
 		if (strokewidth < 1.0f) {
 			strokewidth = 0;
 		}
-		paint.setStrokeWidth(Math.round(strokewidth));
-		// paint.setStrokeWidth(2);
+		paint.setStrokeWidth(strokewidth);
+		// paint.setStrokeWidth(Math.round(strokewidth));
 		paint.setShader(null);
 		if (Settings.isOutlineNeverTransparent()) {
 			paint.setAlpha(255);

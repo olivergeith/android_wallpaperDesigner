@@ -131,6 +131,7 @@ public class Settings {
 		supportingStyles.add("Hedgehog");
 		supportingStyles.add("Sun");
 		supportingStyles.add("Shells V2");
+		supportingStyles.add("XmasTrees");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -179,6 +180,8 @@ public class Settings {
 
 		supportingStyles.add("Hedgehog");
 		supportingStyles.add("Sun");
+		supportingStyles.add("Lemons");
+		supportingStyles.add("XmasTrees");
 
 		return supportingStyles.contains(pattern);
 	}
@@ -238,6 +241,8 @@ public class Settings {
 		supportingStyles.add("Android");
 		supportingStyles.add("Hedgehog");
 		supportingStyles.add("Sun");
+		supportingStyles.add("Lemons");
+		supportingStyles.add("XmasTrees");
 
 		return supportingStyles.contains(pattern);
 	}

@@ -84,6 +84,7 @@
         <item >Bubbles</item>
         <item >Hearts</item>
         <item >Skulls</item>
+        <item >Lemons</item>
         <item >Triangles</item>
         <item >Squares</item>
         <item >Rectangles</item>
@@ -137,6 +138,7 @@
         <item >Virus Attack V6</item>
         <item >Sun</item>
         <item >Streamers</item>
+        <item >XmasTrees</item>
         </string-array>
     
     <string-array name="patternValues">
@@ -146,6 +148,7 @@
         <item >Bubbles</item>
         <item >Hearts</item>
         <item >Skulls</item>
+        <item >Lemons</item>
         <item >Triangles</item>
         <item >Squares</item>
         <item >Rectangles</item>
@@ -199,6 +202,7 @@
         <item >Virus Attack V6</item>
         <item >Sun</item>
         <item >Streamers</item>
+        <item >XmasTrees</item>
         </string-array>
     
     
