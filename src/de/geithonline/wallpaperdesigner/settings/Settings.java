@@ -132,6 +132,7 @@ public class Settings {
 		supportingStyles.add("Sun");
 		supportingStyles.add("Shells V2");
 		supportingStyles.add("XmasTrees");
+		supportingStyles.add("Star Circles");
 		return supportingStyles.contains(pattern);
 	}
 
@@ -182,6 +183,7 @@ public class Settings {
 		supportingStyles.add("Sun");
 		supportingStyles.add("Lemons");
 		supportingStyles.add("XmasTrees");
+		supportingStyles.add("Star Circles");
 
 		return supportingStyles.contains(pattern);
 	}
@@ -243,6 +245,7 @@ public class Settings {
 		supportingStyles.add("Sun");
 		supportingStyles.add("Lemons");
 		supportingStyles.add("XmasTrees");
+		supportingStyles.add("Star Circles");
 
 		return supportingStyles.contains(pattern);
 	}

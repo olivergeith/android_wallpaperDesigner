@@ -49,6 +49,7 @@ import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
+import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
@@ -213,6 +214,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "XmasTrees":
 			drawXmasTree(x, y, paint, radius);
+			break;
+		case "Star Circles":
+			drawStarCircles(x, y, paint, radius);
 			break;
 		case "Triangles":
 			drawTriangle(x, y, paint, radius);
@@ -1157,6 +1161,17 @@ public class WPStylePatterns extends WPStyle {
 	private void drawXmasTree(final int x, final int y, final Paint paint, final int radius) {
 		// final Path path = new ZitronePath(new Point(x, y), radius);
 		final Path path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawStarCircles(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new StarCirclePath(new PointF(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
