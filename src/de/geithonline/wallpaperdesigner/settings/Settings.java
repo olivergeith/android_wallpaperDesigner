@@ -102,6 +102,8 @@ public class Settings {
 		supportingStyles.add("Shells");
 		supportingStyles.add("Shells V2");
 		supportingStyles.add("Shells V3");
+		supportingStyles.add("Shells V4");
+		supportingStyles.add("Shells V5");
 		supportingStyles.add("Mixed Shells");
 		return supportingStyles.contains(pattern);
 	}
@@ -147,10 +149,14 @@ public class Settings {
 		supportingStyles.add("Octagon");
 		supportingStyles.add("Triangles");
 		supportingStyles.add("Crop Circles");
+
 		supportingStyles.add("Shells");
 		supportingStyles.add("Shells V2");
 		supportingStyles.add("Shells V3");
+		supportingStyles.add("Shells V4");
+		supportingStyles.add("Shells V5");
 		supportingStyles.add("Mixed Shells");
+
 		supportingStyles.add("Virus Attack V6");
 		supportingStyles.add("FlowersV3");
 		supportingStyles.add("FlowersV4");
@@ -236,6 +242,8 @@ public class Settings {
 		supportingStyles.add("Shells");
 		supportingStyles.add("Shells V2");
 		supportingStyles.add("Shells V3");
+		supportingStyles.add("Shells V4");
+		supportingStyles.add("Shells V5");
 		supportingStyles.add("Mixed Shells");
 
 		supportingStyles.add("PacMan");

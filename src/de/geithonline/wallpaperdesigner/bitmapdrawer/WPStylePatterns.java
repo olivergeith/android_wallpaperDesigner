@@ -46,6 +46,8 @@ import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.ShellPath;
 import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
+import de.geithonline.wallpaperdesigner.shapes.ShellV4Path;
+import de.geithonline.wallpaperdesigner.shapes.ShellV5Path;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
@@ -267,6 +269,12 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Shells V3":
 			drawShellV3(x, y, paint, radius);
+			break;
+		case "Shells V4":
+			drawShellV4(x, y, paint, radius);
+			break;
+		case "Shells V5":
+			drawShellV5(x, y, paint, radius);
 			break;
 		case "Mixed Shells":
 			drawMixedShells(x, y, paint, radius);
@@ -870,8 +878,40 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
+	private void drawShellV4(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new ShellV4Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawShellV5(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new ShellV5Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	private void drawMixedShells(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(0, 3);
+		final int p = getRandomInt(0, 5);
 		switch (p) {
 		default:
 		case 0:
@@ -883,6 +923,12 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case 3:
 			drawShellV3(x, y, paint, radius);
+			break;
+		case 4:
+			drawShellV4(x, y, paint, radius);
+			break;
+		case 5:
+			drawShellV5(x, y, paint, radius);
 			break;
 		}
 	}
