@@ -31,6 +31,169 @@ public class Settings {
 	public static final String PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
 	private static Context context;
+	private final static List<String> textStyles = new ArrayList<String>();
+	private final static List<String> glossyStyles = new ArrayList<String>();
+	private final static List<String> leafsStyles = new ArrayList<String>();
+	private final static List<String> filledOptionStyles = new ArrayList<String>();
+	private final static List<String> randomRotateStyles = new ArrayList<String>();
+	private final static List<String> outlineStyles = new ArrayList<String>();
+
+	static {
+		textStyles.add("Custom Text");
+		textStyles.add("Numbers");
+
+		glossyStyles.add("Stars");
+		glossyStyles.add("Hearts");
+		glossyStyles.add("Bubbles");
+		glossyStyles.add("Smiley");
+		glossyStyles.add("PacMan");
+
+		leafsStyles.add("Flowers");
+		leafsStyles.add("FlowersV3");
+		leafsStyles.add("FlowersV4");
+		leafsStyles.add("FlowersV5");
+		leafsStyles.add("Flower Bucket");
+		leafsStyles.add("Stars");
+		leafsStyles.add("Shells");
+		leafsStyles.add("Shells V2");
+		leafsStyles.add("Shells V3");
+		leafsStyles.add("Shells V4");
+		leafsStyles.add("Shells V5");
+		leafsStyles.add("Shells V6");
+		leafsStyles.add("Mixed Shells");
+
+		filledOptionStyles.add("Gears");
+		filledOptionStyles.add("Saw");
+		filledOptionStyles.add("Triangles");
+		filledOptionStyles.add("Squares");
+		filledOptionStyles.add("Pentagon");
+		filledOptionStyles.add("Hexagon");
+		filledOptionStyles.add("Octagon");
+		filledOptionStyles.add("Bubble Flowers");
+		filledOptionStyles.add("FlowersV3");
+		filledOptionStyles.add("FlowersV4");
+		filledOptionStyles.add("FlowersV5");
+		filledOptionStyles.add("Flower Bucket");
+		filledOptionStyles.add("Virus Attack V3");
+		filledOptionStyles.add("Smiley");
+		filledOptionStyles.add("PacMan");
+		filledOptionStyles.add("Rings");
+		filledOptionStyles.add("Ufo");
+		filledOptionStyles.add("UfoV2");
+		filledOptionStyles.add("Rocket");
+		filledOptionStyles.add("Space");
+		filledOptionStyles.add("Hedgehog");
+		filledOptionStyles.add("Sun");
+		filledOptionStyles.add("Shells V2");
+		filledOptionStyles.add("XmasTrees");
+		filledOptionStyles.add("Star Circles");
+
+		randomRotateStyles.add("Stars");
+		randomRotateStyles.add("Hexagon");
+		randomRotateStyles.add("Squares");
+		randomRotateStyles.add("Rectangles");
+		randomRotateStyles.add("Rectangles (rounded)");
+		randomRotateStyles.add("Pentagon");
+		randomRotateStyles.add("Octagon");
+		randomRotateStyles.add("Triangles");
+		randomRotateStyles.add("Crop Circles");
+		randomRotateStyles.add("Shells");
+		randomRotateStyles.add("Shells V2");
+		randomRotateStyles.add("Shells V3");
+		randomRotateStyles.add("Shells V4");
+		randomRotateStyles.add("Shells V5");
+		randomRotateStyles.add("Shells V6");
+		randomRotateStyles.add("Mixed Shells");
+		randomRotateStyles.add("Virus Attack V6");
+		randomRotateStyles.add("FlowersV3");
+		randomRotateStyles.add("FlowersV4");
+		randomRotateStyles.add("FlowersV5");
+		randomRotateStyles.add("Flower Bucket");
+		randomRotateStyles.add("Android");
+		randomRotateStyles.add("Rocket");
+		randomRotateStyles.add("Deathstars");
+		randomRotateStyles.add("Ufo");
+		randomRotateStyles.add("UfoV2");
+		randomRotateStyles.add("Space");
+		randomRotateStyles.add("Skulls");
+		randomRotateStyles.add("Hearts");
+		randomRotateStyles.add("Pillows");
+		randomRotateStyles.add("Clouds");
+		randomRotateStyles.add("Rectangles");
+		randomRotateStyles.add("Rectangles (rounded)");
+		randomRotateStyles.add("PacMan");
+		randomRotateStyles.add("Smiley");
+		randomRotateStyles.add("Sailboat");
+		randomRotateStyles.add("Sailboat2");
+		randomRotateStyles.add("Anchor");
+		randomRotateStyles.add("Lighthouse");
+		randomRotateStyles.add("Marina");
+		randomRotateStyles.add("Hedgehog");
+		randomRotateStyles.add("Sun");
+		randomRotateStyles.add("Lemons");
+		randomRotateStyles.add("XmasTrees");
+		randomRotateStyles.add("Star Circles");
+
+		outlineStyles.add("Sailboat");
+		outlineStyles.add("Sailboat2");
+		outlineStyles.add("Anchor");
+		outlineStyles.add("Lighthouse");
+		outlineStyles.add("Marina");
+		outlineStyles.add("Skulls");
+		outlineStyles.add("Ufo");
+		outlineStyles.add("UfoV2");
+		outlineStyles.add("Rocket");
+		outlineStyles.add("Space");
+		outlineStyles.add("Deathstars");
+		outlineStyles.add("Triangles");
+		outlineStyles.add("Squares");
+		outlineStyles.add("Rectangles");
+		outlineStyles.add("Rectangles (rounded)");
+		outlineStyles.add("Pentagon");
+		outlineStyles.add("Hexagon");
+		outlineStyles.add("Octagon");
+		outlineStyles.add("Stars");
+		outlineStyles.add("Hearts");
+		outlineStyles.add("Bubbles");
+		outlineStyles.add("Pillows");
+		outlineStyles.add("Rings");
+		outlineStyles.add("Gears");
+		outlineStyles.add("Saw");
+		outlineStyles.add("Roses");
+		outlineStyles.add("Clouds");
+		outlineStyles.add("Flowers");
+		outlineStyles.add("FlowersV3");
+		outlineStyles.add("FlowersV4");
+		outlineStyles.add("FlowersV5");
+		outlineStyles.add("Flower Bucket");
+		outlineStyles.add("Virus Attack");
+		outlineStyles.add("Virus Attack V2");
+		outlineStyles.add("Virus Attack V3");
+		outlineStyles.add("Virus Attack V4");
+		outlineStyles.add("Virus Attack V5");
+		outlineStyles.add("Virus Attack V6");
+		outlineStyles.add("Bubble Flowers");
+		outlineStyles.add("Letters");
+		outlineStyles.add("Dandelion");
+		outlineStyles.add("Crop Circles");
+
+		outlineStyles.add("Shells");
+		outlineStyles.add("Shells V2");
+		outlineStyles.add("Shells V3");
+		outlineStyles.add("Shells V4");
+		outlineStyles.add("Shells V5");
+		outlineStyles.add("Shells V6");
+		outlineStyles.add("Mixed Shells");
+
+		outlineStyles.add("PacMan");
+		outlineStyles.add("Smiley");
+		outlineStyles.add("Android");
+		outlineStyles.add("Hedgehog");
+		outlineStyles.add("Sun");
+		outlineStyles.add("Lemons");
+		outlineStyles.add("XmasTrees");
+		outlineStyles.add("Star Circles");
+	}
 
 	// ###################################################################
 	// Options Style Selection
@@ -75,187 +238,27 @@ public class Settings {
 	}
 
 	public static boolean hasPatternTextOption(final String pattern) {
-		final List<String> supportingStyles = new ArrayList<String>();
-		supportingStyles.add("Custom Text");
-		supportingStyles.add("Numbers");
-		return supportingStyles.contains(pattern);
+		return textStyles.contains(pattern);
 	}
 
 	public static boolean hasPatternGlossyEffect(final String pattern) {
-		final List<String> supportingStyles = new ArrayList<String>();
-		supportingStyles.add("Stars");
-		supportingStyles.add("Hearts");
-		supportingStyles.add("Bubbles");
-		supportingStyles.add("Smiley");
-		supportingStyles.add("PacMan");
-		return supportingStyles.contains(pattern);
+		return glossyStyles.contains(pattern);
 	}
 
 	public static boolean hasNumberOfLeafsOption(final String pattern) {
-		final List<String> supportingStyles = new ArrayList<String>();
-		supportingStyles.add("Flowers");
-		supportingStyles.add("FlowersV3");
-		supportingStyles.add("FlowersV4");
-		supportingStyles.add("FlowersV5");
-		supportingStyles.add("Flower Bucket");
-		supportingStyles.add("Stars");
-		supportingStyles.add("Shells");
-		supportingStyles.add("Shells V2");
-		supportingStyles.add("Shells V3");
-		supportingStyles.add("Shells V4");
-		supportingStyles.add("Shells V5");
-		supportingStyles.add("Mixed Shells");
-		return supportingStyles.contains(pattern);
+		return leafsStyles.contains(pattern);
 	}
 
 	public static boolean hasPatternFilledOption(final String pattern) {
-		final List<String> supportingStyles = new ArrayList<String>();
-		supportingStyles.add("Gears");
-		supportingStyles.add("Saw");
-		supportingStyles.add("Triangles");
-		supportingStyles.add("Squares");
-		supportingStyles.add("Pentagon");
-		supportingStyles.add("Hexagon");
-		supportingStyles.add("Octagon");
-		supportingStyles.add("Bubble Flowers");
-		supportingStyles.add("FlowersV3");
-		supportingStyles.add("FlowersV4");
-		supportingStyles.add("FlowersV5");
-		supportingStyles.add("Flower Bucket");
-		supportingStyles.add("Virus Attack V3");
-		supportingStyles.add("Smiley");
-		supportingStyles.add("PacMan");
-		supportingStyles.add("Rings");
-		supportingStyles.add("Ufo");
-		supportingStyles.add("UfoV2");
-		supportingStyles.add("Rocket");
-		supportingStyles.add("Space");
-		supportingStyles.add("Hedgehog");
-		supportingStyles.add("Sun");
-		supportingStyles.add("Shells V2");
-		supportingStyles.add("XmasTrees");
-		supportingStyles.add("Star Circles");
-		return supportingStyles.contains(pattern);
+		return filledOptionStyles.contains(pattern);
 	}
 
 	public static boolean hasPatternRandomRotate(final String pattern) {
-		final List<String> supportingStyles = new ArrayList<String>();
-		supportingStyles.add("Stars");
-		supportingStyles.add("Hexagon");
-		supportingStyles.add("Squares");
-		supportingStyles.add("Rectangles");
-		supportingStyles.add("Rectangles (rounded)");
-		supportingStyles.add("Pentagon");
-		supportingStyles.add("Octagon");
-		supportingStyles.add("Triangles");
-		supportingStyles.add("Crop Circles");
-
-		supportingStyles.add("Shells");
-		supportingStyles.add("Shells V2");
-		supportingStyles.add("Shells V3");
-		supportingStyles.add("Shells V4");
-		supportingStyles.add("Shells V5");
-		supportingStyles.add("Mixed Shells");
-
-		supportingStyles.add("Virus Attack V6");
-		supportingStyles.add("FlowersV3");
-		supportingStyles.add("FlowersV4");
-		supportingStyles.add("FlowersV5");
-		supportingStyles.add("Flower Bucket");
-		supportingStyles.add("Android");
-		supportingStyles.add("Rocket");
-		supportingStyles.add("Deathstars");
-		supportingStyles.add("Ufo");
-		supportingStyles.add("UfoV2");
-		supportingStyles.add("Space");
-		supportingStyles.add("Skulls");
-		supportingStyles.add("Hearts");
-		supportingStyles.add("Pillows");
-		supportingStyles.add("Clouds");
-
-		supportingStyles.add("Rectangles");
-		supportingStyles.add("Rectangles (rounded)");
-
-		supportingStyles.add("PacMan");
-		supportingStyles.add("Smiley");
-
-		supportingStyles.add("Sailboat");
-		supportingStyles.add("Sailboat2");
-		supportingStyles.add("Anchor");
-		supportingStyles.add("Lighthouse");
-		supportingStyles.add("Marina");
-
-		supportingStyles.add("Hedgehog");
-		supportingStyles.add("Sun");
-		supportingStyles.add("Lemons");
-		supportingStyles.add("XmasTrees");
-		supportingStyles.add("Star Circles");
-
-		return supportingStyles.contains(pattern);
+		return randomRotateStyles.contains(pattern);
 	}
 
 	public static boolean hasPatternOutlineEffect(final String pattern) {
-		final List<String> supportingStyles = new ArrayList<String>();
-		supportingStyles.add("Sailboat");
-		supportingStyles.add("Sailboat2");
-		supportingStyles.add("Anchor");
-		supportingStyles.add("Lighthouse");
-		supportingStyles.add("Marina");
-		supportingStyles.add("Skulls");
-		supportingStyles.add("Ufo");
-		supportingStyles.add("UfoV2");
-		supportingStyles.add("Rocket");
-		supportingStyles.add("Space");
-		supportingStyles.add("Deathstars");
-		supportingStyles.add("Triangles");
-		supportingStyles.add("Squares");
-		supportingStyles.add("Rectangles");
-		supportingStyles.add("Rectangles (rounded)");
-		supportingStyles.add("Pentagon");
-		supportingStyles.add("Hexagon");
-		supportingStyles.add("Octagon");
-		supportingStyles.add("Stars");
-		supportingStyles.add("Hearts");
-		supportingStyles.add("Bubbles");
-		supportingStyles.add("Pillows");
-		supportingStyles.add("Rings");
-		supportingStyles.add("Gears");
-		supportingStyles.add("Saw");
-		supportingStyles.add("Roses");
-		supportingStyles.add("Clouds");
-		supportingStyles.add("Flowers");
-		supportingStyles.add("FlowersV3");
-		supportingStyles.add("FlowersV4");
-		supportingStyles.add("FlowersV5");
-		supportingStyles.add("Flower Bucket");
-		supportingStyles.add("Virus Attack");
-		supportingStyles.add("Virus Attack V2");
-		supportingStyles.add("Virus Attack V3");
-		supportingStyles.add("Virus Attack V4");
-		supportingStyles.add("Virus Attack V5");
-		supportingStyles.add("Virus Attack V6");
-		supportingStyles.add("Bubble Flowers");
-		supportingStyles.add("Letters");
-		supportingStyles.add("Dandelion");
-		supportingStyles.add("Crop Circles");
-
-		supportingStyles.add("Shells");
-		supportingStyles.add("Shells V2");
-		supportingStyles.add("Shells V3");
-		supportingStyles.add("Shells V4");
-		supportingStyles.add("Shells V5");
-		supportingStyles.add("Mixed Shells");
-
-		supportingStyles.add("PacMan");
-		supportingStyles.add("Smiley");
-		supportingStyles.add("Android");
-		supportingStyles.add("Hedgehog");
-		supportingStyles.add("Sun");
-		supportingStyles.add("Lemons");
-		supportingStyles.add("XmasTrees");
-		supportingStyles.add("Star Circles");
-
-		return supportingStyles.contains(pattern);
+		return outlineStyles.contains(pattern);
 	}
 
 	public static String getFilledOption() {

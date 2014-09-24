@@ -48,6 +48,7 @@ import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV4Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV5Path;
+import de.geithonline.wallpaperdesigner.shapes.ShellV6Path;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
@@ -262,19 +263,22 @@ public class WPStylePatterns extends WPStyle {
 			drawDotSpiral(x, y, paint, radius);
 			break;
 		case "Shells":
-			drawShell(x, y, paint, radius);
+			drawShell(x, y, paint, radius, 1);
 			break;
 		case "Shells V2":
-			drawShellV2(x, y, paint, radius);
+			drawShell(x, y, paint, radius, 2);
 			break;
 		case "Shells V3":
-			drawShellV3(x, y, paint, radius);
+			drawShell(x, y, paint, radius, 3);
 			break;
 		case "Shells V4":
-			drawShellV4(x, y, paint, radius);
+			drawShell(x, y, paint, radius, 4);
 			break;
 		case "Shells V5":
-			drawShellV5(x, y, paint, radius);
+			drawShell(x, y, paint, radius, 5);
+			break;
+		case "Shells V6":
+			drawShell(x, y, paint, radius, 6);
 			break;
 		case "Mixed Shells":
 			drawMixedShells(x, y, paint, radius);
@@ -534,7 +538,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawMarina(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(-1, 6);
+		final int p = getRandomInt(-1, 3);
 		switch (p) {
 		default:
 		case 0:
@@ -548,15 +552,6 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case 3:
 			drawAnker(x, y, paint, radius);
-			break;
-		case 4:
-			drawShell(x, y, paint, radius);
-			break;
-		case 5:
-			drawShellV2(x, y, paint, radius);
-			break;
-		case 6:
-			drawShellV3(x, y, paint, radius);
 			break;
 		}
 	}
@@ -829,73 +824,29 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawShell(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellPath(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
-		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
-			mirrorPath(x, y, path);
+	private void drawShell(final int x, final int y, final Paint paint, final int radius, final int version) {
+		Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		switch (version) {
+		default:
+		case 1:
+			path = new ShellPath(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+			break;
+		case 2:
+			path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER, getFilledBoolean());
+			break;
+		case 3:
+			path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+			break;
+		case 4:
+			path = new ShellV4Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+			break;
+		case 5:
+			path = new ShellV5Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+			break;
+		case 6:
+			path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+			break;
 		}
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawShellV2(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER,
-				getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
-		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
-			mirrorPath(x, y, path);
-		}
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawShellV3(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
-		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
-			mirrorPath(x, y, path);
-		}
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawShellV4(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellV4Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
-		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
-			mirrorPath(x, y, path);
-		}
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawShellV5(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ShellV5Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
@@ -911,26 +862,8 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawMixedShells(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(0, 5);
-		switch (p) {
-		default:
-		case 0:
-		case 1:
-			drawShell(x, y, paint, radius);
-			break;
-		case 2:
-			drawShellV2(x, y, paint, radius);
-			break;
-		case 3:
-			drawShellV3(x, y, paint, radius);
-			break;
-		case 4:
-			drawShellV4(x, y, paint, radius);
-			break;
-		case 5:
-			drawShellV5(x, y, paint, radius);
-			break;
-		}
+		final int shellVersion = getRandomInt(0, 6);
+		drawShell(x, y, paint, radius, shellVersion);
 	}
 
 	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
