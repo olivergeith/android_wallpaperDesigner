@@ -382,22 +382,25 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		default:
 		case "Virus Attack V1":
-			drawVirusV1(x, y, paint, radius);
+			drawVirus(x, y, paint, radius, 1);
 			break;
 		case "Virus Attack V2":
-			drawVirusV2(x, y, paint, radius);
+			drawVirus(x, y, paint, radius, 2);
 			break;
 		case "Virus Attack V3":
-			drawVirusV3(x, y, paint, radius);
+			drawVirus(x, y, paint, radius, 3);
 			break;
 		case "Virus Attack V4":
-			drawVirusV4(x, y, paint, radius);
+			drawVirus(x, y, paint, radius, 4);
 			break;
 		case "Virus Attack V5":
-			drawVirusV5(x, y, paint, radius);
+			drawVirus(x, y, paint, radius, 5);
 			break;
 		case "Virus Attack V6":
-			drawVirusV6(x, y, paint, radius);
+			drawVirus(x, y, paint, radius, 6);
+			break;
+		case "Viruses Mixed":
+			drawVirus(x, y, paint, radius, getRandomInt(0, 6));
 			break;
 		case "Sun":
 			drawSun(x, y, paint, radius);
@@ -657,69 +660,35 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawVirusV1(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath(new Point(x, y), radius);
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
+	private void drawVirus(final int x, final int y, final Paint paint, final int radius, final int version) {
+		Path path;
+		switch (version) {
+		default:
+		case 1:
+			path = new VirusPath(new Point(x, y), radius);
+			break;
+		case 2:
+			path = new VirusPath2(new Point(x, y), radius, 0);
+			break;
+		case 3:
+			path = new VirusPath3(new Point(x, y), radius, 17, getFilledBoolean());
+			break;
+		case 4:
+			path = new VirusPath4(new Point(x, y), radius);
+			break;
+		case 5:
+			path = new VirusPath5(new Point(x, y), radius);
+			break;
+		case 6:
+			path = new VirusPath6(new Point(x, y), radius, 0);
+			rotatePath(x, y, path, Settings.getRotationDegrees(0, 45));
+			break;
 		}
-	}
-
-	private void drawVirusV2(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath2(new Point(x, y), radius, 13);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawVirusV3(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath3(new Point(x, y), radius, 17, getFilledBoolean());
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawVirusV4(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath4(new Point(x, y), radius);
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawVirusV5(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath5(new Point(x, y), radius);
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawVirusV6(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new VirusPath6(new Point(x, y), radius, 0);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 45));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
+			// paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}

@@ -108,6 +108,8 @@ public class Settings {
 		patternProperties.put("Virus Attack V4", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Virus Attack V5", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Virus Attack V6", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Viruses Mixed", new PatternProperties(true, true, false, true, false, false));
+
 		patternProperties.put("XmasTrees", new PatternProperties(true, true, false, true, false, false));
 
 	}
