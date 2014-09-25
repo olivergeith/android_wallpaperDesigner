@@ -21,12 +21,12 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
-import de.geithonline.wallpaperdesigner.shapes.BubbleCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
+import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
@@ -262,7 +262,7 @@ public class WPStylePatterns extends WPStyle {
 		case "Crop Circles":
 			drawDotSpiral(x, y, paint, radius);
 			break;
-		case "Shells":
+		case "Shells V1":
 			drawShell(x, y, paint, radius, 1);
 			break;
 		case "Shells V2":
@@ -280,8 +280,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Shells V6":
 			drawShell(x, y, paint, radius, 6);
 			break;
-		case "Mixed Shells":
-			drawMixedShells(x, y, paint, radius);
+		case "Shells Mixed":
+			final int shellVersion = getRandomInt(0, 6);
+			drawShell(x, y, paint, radius, shellVersion);
 			break;
 		case "Hedgehog":
 			drawIgel(x, y, paint, radius);
@@ -309,22 +310,22 @@ public class WPStylePatterns extends WPStyle {
 		case "Roses":
 			drawRose(x, y, paint, radius);
 			break;
-		case "Flowers":
+		case "Flowers V1":
 			drawFlower(x, y, paint, radius);
 			break;
-		case "Bubble Flowers":
+		case "Flowers V2":
 			drawFlowerV2(x, y, paint, radius);
 			break;
-		case "FlowersV3":
+		case "Flowers V3":
 			drawFlowerV3(x, y, paint, radius);
 			break;
-		case "FlowersV4":
+		case "Flowers V4":
 			drawFlowerV4(x, y, paint, radius);
 			break;
-		case "FlowersV5":
+		case "Flowers V5":
 			drawFlowerV5(x, y, paint, radius);
 			break;
-		case "Flower Bucket":
+		case "Flowers Mixed":
 			drawFlowerBucket(x, y, paint, radius);
 			break;
 		case "Rings":
@@ -349,10 +350,10 @@ public class WPStylePatterns extends WPStyle {
 		case "Dandelion":
 			drawDandelion(x, y, paint, radius);
 			break;
-		case "Sailboat":
+		case "Sailboat V1":
 			drawSailboat(x, y, paint, radius);
 			break;
-		case "Sailboat2":
+		case "Sailboat V2":
 			drawSailboat2(x, y, paint, radius);
 			break;
 		case "Anchor":
@@ -380,8 +381,8 @@ public class WPStylePatterns extends WPStyle {
 			drawDeathstar(x, y, paint, radius);
 			break;
 		default:
-		case "Virus Attack":
-			drawVirus(x, y, paint, radius);
+		case "Virus Attack V1":
+			drawVirusV1(x, y, paint, radius);
 			break;
 		case "Virus Attack V2":
 			drawVirusV2(x, y, paint, radius);
@@ -656,7 +657,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
+	private void drawVirusV1(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new VirusPath(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -748,7 +749,8 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawFlowerV2(final int x, final int y, final Paint paint, final int radius) {
 		// final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
-		final Path path = new BubbleCirclePath(6, new Point(x, y), radius, getFilledBoolean());
+		final Path path = new FlowerV2Path(6, new Point(x, y), radius, getFilledBoolean());
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / 6));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -859,11 +861,6 @@ public class WPStylePatterns extends WPStyle {
 			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
-	}
-
-	private void drawMixedShells(final int x, final int y, final Paint paint, final int radius) {
-		final int shellVersion = getRandomInt(0, 6);
-		drawShell(x, y, paint, radius, shellVersion);
 	}
 
 	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {

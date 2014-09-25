@@ -1,7 +1,7 @@
 package de.geithonline.wallpaperdesigner.settings;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -31,168 +31,85 @@ public class Settings {
 	public static final String PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
 	private static Context context;
-	private final static List<String> textStyles = new ArrayList<String>();
-	private final static List<String> glossyStyles = new ArrayList<String>();
-	private final static List<String> leafsStyles = new ArrayList<String>();
-	private final static List<String> filledOptionStyles = new ArrayList<String>();
-	private final static List<String> randomRotateStyles = new ArrayList<String>();
-	private final static List<String> outlineStyles = new ArrayList<String>();
+
+	private static final Map<String, PatternProperties> patternProperties = new HashMap<String, PatternProperties>();
 
 	static {
-		textStyles.add("Custom Text");
-		textStyles.add("Numbers");
+		// new PatternProperties(outlineOption, randomrotateOption, textOption, filledOption, leafOption, glossyOption)
+		patternProperties.put("Anchor", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Android", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
+		patternProperties.put("Clouds", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Crop Circles", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Custom Text", new PatternProperties(false, false, true, false, false, false));
+		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
+		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
 
-		glossyStyles.add("Stars");
-		glossyStyles.add("Hearts");
-		glossyStyles.add("Bubbles");
-		glossyStyles.add("Smiley");
-		glossyStyles.add("PacMan");
+		patternProperties.put("Flowers V1", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Flowers V2", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Flowers V3", new PatternProperties(true, true, false, true, true, false));
+		patternProperties.put("Flowers V4", new PatternProperties(true, true, false, true, true, false));
+		patternProperties.put("Flowers V5", new PatternProperties(true, true, false, true, true, false));
+		patternProperties.put("Flowers Mixed", new PatternProperties(true, true, false, true, true, false));
 
-		leafsStyles.add("Flowers");
-		leafsStyles.add("FlowersV3");
-		leafsStyles.add("FlowersV4");
-		leafsStyles.add("FlowersV5");
-		leafsStyles.add("Flower Bucket");
-		leafsStyles.add("Stars");
-		leafsStyles.add("Shells");
-		leafsStyles.add("Shells V2");
-		leafsStyles.add("Shells V3");
-		leafsStyles.add("Shells V4");
-		leafsStyles.add("Shells V5");
-		leafsStyles.add("Shells V6");
-		leafsStyles.add("Mixed Shells");
+		patternProperties.put("Gears", new PatternProperties(true, false, false, true, false, false));
 
-		filledOptionStyles.add("Gears");
-		filledOptionStyles.add("Saw");
-		filledOptionStyles.add("Triangles");
-		filledOptionStyles.add("Squares");
-		filledOptionStyles.add("Pentagon");
-		filledOptionStyles.add("Hexagon");
-		filledOptionStyles.add("Octagon");
-		filledOptionStyles.add("Bubble Flowers");
-		filledOptionStyles.add("FlowersV3");
-		filledOptionStyles.add("FlowersV4");
-		filledOptionStyles.add("FlowersV5");
-		filledOptionStyles.add("Flower Bucket");
-		filledOptionStyles.add("Virus Attack V3");
-		filledOptionStyles.add("Smiley");
-		filledOptionStyles.add("PacMan");
-		filledOptionStyles.add("Rings");
-		filledOptionStyles.add("Ufo");
-		filledOptionStyles.add("UfoV2");
-		filledOptionStyles.add("Rocket");
-		filledOptionStyles.add("Space");
-		filledOptionStyles.add("Hedgehog");
-		filledOptionStyles.add("Sun");
-		filledOptionStyles.add("Shells V2");
-		filledOptionStyles.add("XmasTrees");
-		filledOptionStyles.add("Star Circles");
+		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true));
+		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Hexagon", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Lemons", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Letters", new PatternProperties(true, false, false, false, false, false));
+		patternProperties.put("Lighthouse", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Marina", new PatternProperties(true, true, false, false, false, false));
 
-		randomRotateStyles.add("Stars");
-		randomRotateStyles.add("Hexagon");
-		randomRotateStyles.add("Squares");
-		randomRotateStyles.add("Rectangles");
-		randomRotateStyles.add("Rectangles (rounded)");
-		randomRotateStyles.add("Pentagon");
-		randomRotateStyles.add("Octagon");
-		randomRotateStyles.add("Triangles");
-		randomRotateStyles.add("Crop Circles");
-		randomRotateStyles.add("Shells");
-		randomRotateStyles.add("Shells V2");
-		randomRotateStyles.add("Shells V3");
-		randomRotateStyles.add("Shells V4");
-		randomRotateStyles.add("Shells V5");
-		randomRotateStyles.add("Shells V6");
-		randomRotateStyles.add("Mixed Shells");
-		randomRotateStyles.add("Virus Attack V6");
-		randomRotateStyles.add("FlowersV3");
-		randomRotateStyles.add("FlowersV4");
-		randomRotateStyles.add("FlowersV5");
-		randomRotateStyles.add("Flower Bucket");
-		randomRotateStyles.add("Android");
-		randomRotateStyles.add("Rocket");
-		randomRotateStyles.add("Deathstars");
-		randomRotateStyles.add("Ufo");
-		randomRotateStyles.add("UfoV2");
-		randomRotateStyles.add("Space");
-		randomRotateStyles.add("Skulls");
-		randomRotateStyles.add("Hearts");
-		randomRotateStyles.add("Pillows");
-		randomRotateStyles.add("Clouds");
-		randomRotateStyles.add("Rectangles");
-		randomRotateStyles.add("Rectangles (rounded)");
-		randomRotateStyles.add("PacMan");
-		randomRotateStyles.add("Smiley");
-		randomRotateStyles.add("Sailboat");
-		randomRotateStyles.add("Sailboat2");
-		randomRotateStyles.add("Anchor");
-		randomRotateStyles.add("Lighthouse");
-		randomRotateStyles.add("Marina");
-		randomRotateStyles.add("Hedgehog");
-		randomRotateStyles.add("Sun");
-		randomRotateStyles.add("Lemons");
-		randomRotateStyles.add("XmasTrees");
-		randomRotateStyles.add("Star Circles");
+		patternProperties.put("Numbers", new PatternProperties(false, false, true, false, false, false));
+		patternProperties.put("Octagon", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("PacMan", new PatternProperties(true, true, false, true, false, true));
+		patternProperties.put("Pentagon", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Pillows", new PatternProperties(true, true, false, true, false, false));
 
-		outlineStyles.add("Sailboat");
-		outlineStyles.add("Sailboat2");
-		outlineStyles.add("Anchor");
-		outlineStyles.add("Lighthouse");
-		outlineStyles.add("Marina");
-		outlineStyles.add("Skulls");
-		outlineStyles.add("Ufo");
-		outlineStyles.add("UfoV2");
-		outlineStyles.add("Rocket");
-		outlineStyles.add("Space");
-		outlineStyles.add("Deathstars");
-		outlineStyles.add("Triangles");
-		outlineStyles.add("Squares");
-		outlineStyles.add("Rectangles");
-		outlineStyles.add("Rectangles (rounded)");
-		outlineStyles.add("Pentagon");
-		outlineStyles.add("Hexagon");
-		outlineStyles.add("Octagon");
-		outlineStyles.add("Stars");
-		outlineStyles.add("Hearts");
-		outlineStyles.add("Bubbles");
-		outlineStyles.add("Pillows");
-		outlineStyles.add("Rings");
-		outlineStyles.add("Gears");
-		outlineStyles.add("Saw");
-		outlineStyles.add("Roses");
-		outlineStyles.add("Clouds");
-		outlineStyles.add("Flowers");
-		outlineStyles.add("FlowersV3");
-		outlineStyles.add("FlowersV4");
-		outlineStyles.add("FlowersV5");
-		outlineStyles.add("Flower Bucket");
-		outlineStyles.add("Virus Attack");
-		outlineStyles.add("Virus Attack V2");
-		outlineStyles.add("Virus Attack V3");
-		outlineStyles.add("Virus Attack V4");
-		outlineStyles.add("Virus Attack V5");
-		outlineStyles.add("Virus Attack V6");
-		outlineStyles.add("Bubble Flowers");
-		outlineStyles.add("Letters");
-		outlineStyles.add("Dandelion");
-		outlineStyles.add("Crop Circles");
+		patternProperties.put("Rectangles", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Rectangles (rounded)", new PatternProperties(true, true, false, false, false, false));
 
-		outlineStyles.add("Shells");
-		outlineStyles.add("Shells V2");
-		outlineStyles.add("Shells V3");
-		outlineStyles.add("Shells V4");
-		outlineStyles.add("Shells V5");
-		outlineStyles.add("Shells V6");
-		outlineStyles.add("Mixed Shells");
+		patternProperties.put("Rings", new PatternProperties(true, false, false, true, false, false));
+		patternProperties.put("Rocket", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
 
-		outlineStyles.add("PacMan");
-		outlineStyles.add("Smiley");
-		outlineStyles.add("Android");
-		outlineStyles.add("Hedgehog");
-		outlineStyles.add("Sun");
-		outlineStyles.add("Lemons");
-		outlineStyles.add("XmasTrees");
-		outlineStyles.add("Star Circles");
+		patternProperties.put("Sailboat V1", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Sailboat V2", new PatternProperties(true, true, false, false, false, false));
+
+		patternProperties.put("Saw", new PatternProperties(true, false, false, true, false, false));
+
+		patternProperties.put("Shells V1", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Shells V2", new PatternProperties(true, true, false, true, true, false));
+		patternProperties.put("Shells V3", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Shells V4", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Shells V5", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Shells V6", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Shells Mixed", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Skulls", new PatternProperties(true, true, false, false, false, false));
+
+		patternProperties.put("Smiley", new PatternProperties(true, true, false, true, false, true));
+		patternProperties.put("Space", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Stars", new PatternProperties(true, true, false, false, true, true));
+		patternProperties.put("Star Circles", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Sun", new PatternProperties(true, true, false, true, false, false));
+
+		patternProperties.put("Squares", new PatternProperties(true, true, false, true, false, false));
+
+		patternProperties.put("Triangles", new PatternProperties(true, true, false, true, false, false));
+
+		patternProperties.put("Ufo V1", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Ufo V2", new PatternProperties(true, true, false, true, false, false));
+
+		patternProperties.put("Virus Attack V1", new PatternProperties(true, false, false, false, false, false));
+		patternProperties.put("Virus Attack V2", new PatternProperties(true, false, false, false, false, false));
+		patternProperties.put("Virus Attack V3", new PatternProperties(true, false, false, true, false, false));
+		patternProperties.put("Virus Attack V4", new PatternProperties(true, false, false, false, false, false));
+		patternProperties.put("Virus Attack V5", new PatternProperties(true, false, false, false, false, false));
+		patternProperties.put("Virus Attack V6", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("XmasTrees", new PatternProperties(true, true, false, true, false, false));
+
 	}
 
 	// ###################################################################
@@ -208,9 +125,9 @@ public class Settings {
 
 	public static String getSelectedPattern() {
 		if (prefs == null) {
-			return "Virus Attack";
+			return "Virus Attack V1";
 		}
-		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack");
+		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack V1");
 	}
 
 	public static int getAnzahlPatterns() {
@@ -238,27 +155,51 @@ public class Settings {
 	}
 
 	public static boolean hasPatternTextOption(final String pattern) {
-		return textStyles.contains(pattern);
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasTextOption();
 	}
 
 	public static boolean hasPatternGlossyEffect(final String pattern) {
-		return glossyStyles.contains(pattern);
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasGlossyOption();
 	}
 
 	public static boolean hasNumberOfLeafsOption(final String pattern) {
-		return leafsStyles.contains(pattern);
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasLeafOption();
 	}
 
 	public static boolean hasPatternFilledOption(final String pattern) {
-		return filledOptionStyles.contains(pattern);
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasFilledOption();
 	}
 
 	public static boolean hasPatternRandomRotate(final String pattern) {
-		return randomRotateStyles.contains(pattern);
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasRandomrotateOption();
 	}
 
 	public static boolean hasPatternOutlineEffect(final String pattern) {
-		return outlineStyles.contains(pattern);
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasOutlineOption();
 	}
 
 	public static String getFilledOption() {
@@ -633,7 +574,7 @@ public class Settings {
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString("stylePicker", "Patterns").commit();
-			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
+			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack V1").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
 			prefs.edit().putBoolean(PATTERN_BLUR, false).commit();
