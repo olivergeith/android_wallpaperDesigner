@@ -12,6 +12,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
+import de.geithonline.wallpaperdesigner.settings.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -140,22 +141,18 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE);
 		final CheckBoxPreference outlineneverTransparent = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE_NEVER_TRANSPARENT);
 		final CheckBoxPreference rotate = (CheckBoxPreference) findPreference(Settings.PATTERN_RANDOM_ROTATE);
-		glossy.setEnabled(Settings.hasPatternGlossyEffect(newPattern));
-		outline.setEnabled(Settings.hasPatternOutlineEffect(newPattern));
-		outlineneverTransparent.setEnabled(Settings.hasPatternOutlineEffect(newPattern));
-		rotate.setEnabled(Settings.hasPatternRandomRotate(newPattern));
-		rotationDegrees.setEnabled(Settings.hasPatternRandomRotate(newPattern));
-		filledOption.setEnabled(Settings.hasPatternFilledOption(newPattern));
-		textPattern.setEnabled(Settings.hasPatternTextOption(newPattern));
-		textDrawStyle.setEnabled(Settings.hasPatternTextOption(newPattern));
+		glossy.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
+		outline.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
+		outlineneverTransparent.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
+		rotate.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+		rotationDegrees.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
+		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
+		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
 		final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
-		specialSettings.setEnabled(Settings.hasPatternGlossyEffect(newPattern)//
-				|| Settings.hasPatternOutlineEffect(newPattern)//
-				|| Settings.hasPatternRandomRotate(newPattern)//
-				|| Settings.hasPatternTextOption(newPattern)//
-				|| Settings.hasPatternFilledOption(newPattern));
-		numberOfLeafs.setEnabled(Settings.hasNumberOfLeafsOption(newPattern));
-		randomLeafCount.setEnabled(Settings.hasNumberOfLeafsOption(newPattern));
+		specialSettings.setEnabled(PatternPropertyStore.hasPatternSpecialSettings(newPattern));
+		numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
+		randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 	}
 
 	private void enableProFeatures() {
