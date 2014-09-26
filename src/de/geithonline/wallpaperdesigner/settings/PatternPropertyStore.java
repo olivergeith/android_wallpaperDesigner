@@ -33,6 +33,12 @@ public class PatternPropertyStore {
 		patternProperties.put("Lemons", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Letters", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Lighthouse", new PatternProperties(true, true, false, false, false, false));
+
+		patternProperties.put("Mandala V1", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Mandala V2", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Mandala V3", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Mandala V4", new PatternProperties(true, true, false, false, false, false));
+
 		patternProperties.put("Marina", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Numbers", new PatternProperties(false, false, true, false, false, false));

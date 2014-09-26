@@ -32,6 +32,10 @@ import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
+import de.geithonline.wallpaperdesigner.shapes.MandalaV1Path;
+import de.geithonline.wallpaperdesigner.shapes.MandalaV2Path;
+import de.geithonline.wallpaperdesigner.shapes.MandalaV3Path;
+import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
@@ -327,6 +331,18 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Flowers Mixed":
 			drawFlowerBucket(x, y, paint, radius);
+			break;
+		case "Mandala V1":
+			drawMandala(x, y, paint, radius, 1);
+			break;
+		case "Mandala V2":
+			drawMandala(x, y, paint, radius, 2);
+			break;
+		case "Mandala V3":
+			drawMandala(x, y, paint, radius, 3);
+			break;
+		case "Mandala V4":
+			drawMandala(x, y, paint, radius, 4);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -816,6 +832,37 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case 6:
 			path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+			break;
+		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
+			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawMandala(final int x, final int y, final Paint paint, final int radius, final int version) {
+		Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		switch (version) {
+		default:
+		case 1:
+			path = new MandalaV1Path(2 + 2 * Settings.getAnzahlFlowerLeafs(2, 8), new Point(x, y), radius);
+			break;
+		case 2:
+			path = new MandalaV2Path(3, 16, new Point(x, y), radius);
+			break;
+		case 3:
+			path = new MandalaV3Path(3, 2 + 2 * Settings.getAnzahlFlowerLeafs(4, 10), new Point(x, y), radius);
+			break;
+		case 4:
+			path = new MandalaV4Path(3, new Point(x, y), radius);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
