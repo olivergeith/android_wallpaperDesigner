@@ -18,6 +18,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
 
+		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, false));
+
 		patternProperties.put("Flowers V1", new PatternProperties(true, true, false, false, true, false));
 		patternProperties.put("Flowers V2", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Flowers V3", new PatternProperties(true, true, false, true, true, false));

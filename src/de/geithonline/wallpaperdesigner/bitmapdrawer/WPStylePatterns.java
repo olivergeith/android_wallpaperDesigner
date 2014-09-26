@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
+import de.geithonline.wallpaperdesigner.shapes.FishPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -307,6 +308,9 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Android":
 			drawAndroid(x, y, paint, radius);
+			break;
+		case "Fish":
+			drawFisch(x, y, paint, radius);
 			break;
 		case "Pillows":
 			drawPillow(x, y, paint, radius);
@@ -911,6 +915,22 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawFisch(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new FishPath(new Point(x, y), radius);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
+		// Mirror only on random rotation
+		if (Settings.isRandomRotate() && getRandomBoolean()) {
+			mirrorPath(x, y, path);
+		}
+		bitmapCanvas.drawPath(path, paint);
+
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
