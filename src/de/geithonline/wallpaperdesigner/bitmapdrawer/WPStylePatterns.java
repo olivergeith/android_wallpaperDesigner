@@ -25,7 +25,9 @@ import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
-import de.geithonline.wallpaperdesigner.shapes.FishPath;
+import de.geithonline.wallpaperdesigner.shapes.FishV1Path;
+import de.geithonline.wallpaperdesigner.shapes.FishV2Path;
+import de.geithonline.wallpaperdesigner.shapes.FishV3Path;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
@@ -309,8 +311,14 @@ public class WPStylePatterns extends WPStyle {
 		case "Android":
 			drawAndroid(x, y, paint, radius);
 			break;
-		case "Fish":
-			drawFisch(x, y, paint, radius);
+		case "Fish V1":
+			drawFisch(x, y, paint, radius, 1);
+			break;
+		case "Fish V2":
+			drawFisch(x, y, paint, radius, 2);
+			break;
+		case "Fish Mixed":
+			drawFisch(x, y, paint, radius, 99);
 			break;
 		case "Pillows":
 			drawPillow(x, y, paint, radius);
@@ -919,8 +927,30 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawFisch(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new FishPath(new Point(x, y), radius);
+	private void drawFisch(final int x, final int y, final Paint paint, final int radius, final int variante) {
+		Path path;
+
+		switch (variante) {
+		default:
+		case 1:
+			path = new FishV1Path(new Point(x, y), radius);
+			break;
+		case 2:
+			path = new FishV2Path(new Point(x, y), radius);
+			break;
+		case 99:
+			final int shark = getRandomInt(0, 50);
+			if (shark == 50) {
+				path = new FishV3Path(new Point(x, y), radius);
+			} else if (shark < 25) {
+				path = new FishV1Path(new Point(x, y), radius);
+			} else {
+				path = new FishV2Path(new Point(x, y), radius);
+			}
+
+			break;
+		}
+
 		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
