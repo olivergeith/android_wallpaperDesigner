@@ -22,7 +22,7 @@ public class FishV3Path extends Path {
 		// flosse oben
 		quadTo(center.x - 0 * raster, center.y - 6 * raster, // controllpoint
 				center.x - 1 * raster, center.y - 7 * raster); // Zielpunkt
-		quadTo(center.x + 2 * raster, center.y - 7 * raster, // controllpoint
+		quadTo(center.x + 1 * raster, center.y - 7 * raster, // controllpoint
 				center.x + 2 * raster, center.y - 4 * raster); // Zielpunkt
 		// weiter zur nase
 		quadTo(center.x + 6 * raster, center.y - 4 * raster, // controllpoint
