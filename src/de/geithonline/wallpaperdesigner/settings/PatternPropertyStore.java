@@ -55,12 +55,16 @@ public class PatternPropertyStore {
 		patternProperties.put("Rectangles (rounded)", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Rings", new PatternProperties(true, false, false, true, false, false));
-		patternProperties.put("Rocket", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Rocket V1", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Rocket V2", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Rocket V3", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Rockets Ufos Mixed", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
 
 		patternProperties.put("Sailboat V1", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Sailboat V2", new PatternProperties(true, true, false, false, false, false));
 
+		patternProperties.put("Satellites", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Saw", new PatternProperties(true, false, false, true, false, false));
 
 		patternProperties.put("Shells V1", new PatternProperties(true, true, false, false, true, false));
@@ -73,7 +77,6 @@ public class PatternPropertyStore {
 		patternProperties.put("Skulls", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Smiley", new PatternProperties(true, true, false, true, false, true));
-		patternProperties.put("Space", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Stars", new PatternProperties(true, true, false, false, true, true));
 		patternProperties.put("Star Circles", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Sun", new PatternProperties(true, true, false, true, false, false));

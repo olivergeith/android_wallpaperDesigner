@@ -49,6 +49,7 @@ import de.geithonline.wallpaperdesigner.shapes.RocketPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
+import de.geithonline.wallpaperdesigner.shapes.SatelitePath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
 import de.geithonline.wallpaperdesigner.shapes.ShellPath;
 import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
@@ -399,10 +400,19 @@ public class WPStylePatterns extends WPStyle {
 		case "UfoV2":
 			drawUfo2(x, y, paint, radius);
 			break;
-		case "Rocket":
-			drawRocket(x, y, paint, radius);
+		case "Rocket V1":
+			drawRocket(x, y, paint, radius, 1);
 			break;
-		case "Space":
+		case "Rocket V2":
+			drawRocket(x, y, paint, radius, 2);
+			break;
+		case "Rocket V3":
+			drawRocket(x, y, paint, radius, 3);
+			break;
+		case "Satellites":
+			drawSatellite(x, y, paint, radius, 1);
+			break;
+		case "Rockets Ufos Mixed":
 			drawSpace(x, y, paint, radius);
 			break;
 		case "Deathstars":
@@ -648,8 +658,8 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawRocket(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new RocketPath(new Point(x, y), radius, getFilledBoolean());
+	private void drawRocket(final int x, final int y, final Paint paint, final int radius, final int variante) {
+		final Path path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), variante);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -660,19 +670,55 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
+	private void drawSatellite(final int x, final int y, final Paint paint, final int radius, final int variante) {
+		final Path path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), variante);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			// paint.setStrokeCap(Cap.ROUND);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawSpaceStar(final int x, final int y, final Paint paint, final int radius) {
+		final int arms = 5;
+		final Path path = new StarPath(arms, new PointF(x, y), radius, radius * 0.3f, true, 0);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	private void drawSpace(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(-1, 2);
+		final int p = getRandomInt(0, 6);
 		switch (p) {
 		default:
-		case 0:
-			drawUfo1(x, y, paint, radius);
+			drawSpaceStar(x, y, paint, radius / 3);
 			break;
 		case 1:
-			drawRocket(x, y, paint, radius);
+			drawUfo1(x, y, paint, radius);
 			break;
 		case 2:
+			drawRocket(x, y, paint, radius, 1);
+			break;
+		case 3:
+			drawRocket(x, y, paint, radius, 2);
+			break;
+		case 4:
+			drawRocket(x, y, paint, radius, 3);
+			break;
+		case 5:
 			drawUfo2(x, y, paint, radius);
 			break;
+		case 6:
+			drawSatellite(x, y, paint, radius, 1);
+			break;
+
 		}
 	}
 

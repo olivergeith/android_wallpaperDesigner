@@ -5,10 +5,20 @@ import android.graphics.Point;
 
 public class RocketPath extends Path {
 
-	public RocketPath(final Point center, final float radius, final boolean filled) {
+	public RocketPath(final Point center, final float radius, final boolean filled, final int variante) {
 		super();
 
-		drawRocketV1(center, radius, filled);
+		switch (variante) {
+		case 1:
+			drawRocketV1(center, radius, filled);
+			break;
+		case 2:
+			drawRocketV2(center, radius, filled);
+			break;
+		case 3:
+			drawRocketV3(center, radius, filled);
+			break;
+		}
 	}
 
 	private void drawRocketV1(final Point center, final float radius, final boolean filled) {
@@ -71,8 +81,8 @@ public class RocketPath extends Path {
 		close();
 		// Triebwerk
 		moveTo(center.x + 0.5f * raster, center.y + 3 * raster);
-		lineTo(center.x + 0.7f * raster, center.y + 3.2f * raster);
-		lineTo(center.x - 0.7f * raster, center.y + 3.2f * raster);
+		lineTo(center.x + 0.7f * raster, center.y + 3.5f * raster);
+		lineTo(center.x - 0.7f * raster, center.y + 3.5f * raster);
 		lineTo(center.x - 0.5f * raster, center.y + 3 * raster);
 		close();
 
@@ -109,26 +119,26 @@ public class RocketPath extends Path {
 
 		if (filled) {
 			// Raketenstrahl
-			moveTo(center.x - 0.5f * raster, center.y + 3.5f * raster);
-			lineTo(center.x + 0 * raster, center.y + 5.5f * raster);
-			lineTo(center.x + 0.5f * raster, center.y + 3.5f * raster);
+			moveTo(center.x - 0.3f * raster, center.y + 4f * raster);
+			lineTo(center.x + 0 * raster, center.y + 7f * raster);
+			lineTo(center.x + 0.3f * raster, center.y + 4f * raster);
 			close();
-			moveTo(center.x - 0.25f * raster, center.y + 5.8f * raster);
-			lineTo(center.x + 0 * raster, center.y + 6.8f * raster);
-			lineTo(center.x + 0.25f * raster, center.y + 5.8f * raster);
+			moveTo(center.x - 0.2f * raster, center.y + 8f * raster);
+			lineTo(center.x + 0 * raster, center.y + 10f * raster);
+			lineTo(center.x + 0.2f * raster, center.y + 8f * raster);
 			close();
 		}
 	}
 
 	private void drawRocketV3(final Point center, final float radius, final boolean filled) {
-		final float raster = radius / 5;
+		final float raster = radius / 7;
 
 		// Rumpf
 		moveTo(center.x - 1 * raster, center.y + 2 * raster);
 		lineTo(center.x - 2 * raster, center.y - 0 * raster);
 		lineTo(center.x - 2 * raster, center.y - 2 * raster);
 		quadTo(center.x - 2 * raster, center.y - 4.5f * raster, // controllpoint
-				center.x - 0 * raster, center.y - 6 * raster); // Zielpunkt
+				center.x - 0 * raster, center.y - 7 * raster); // Zielpunkt
 		quadTo(center.x + 2 * raster, center.y - 4.5f * raster, // controllpoint
 				center.x + 2 * raster, center.y - 2 * raster); // Zielpunkt
 		lineTo(center.x + 2 * raster, center.y - 0 * raster);
@@ -147,7 +157,12 @@ public class RocketPath extends Path {
 		close();
 		moveTo(center.x - 3 * raster, center.y + 4 * raster);
 		lineTo(center.x - 3 * raster, center.y + 5 * raster);
-		lineTo(center.x - 4 * raster, center.y + 5 * raster);
+
+		quadTo(center.x - 3.5f * raster, center.y + 6f * raster, // controllpoint
+				center.x - 4 * raster, center.y + 5 * raster); // Zielpunkt
+
+		// lineTo(center.x - 4 * raster, center.y + 5 * raster);
+
 		lineTo(center.x - 4 * raster, center.y + 1 * raster);
 		lineTo(center.x - 3.5f * raster, center.y - 1 * raster);
 		lineTo(center.x - 3 * raster, center.y + 1 * raster);
@@ -161,7 +176,9 @@ public class RocketPath extends Path {
 		close();
 		moveTo(center.x + 3 * raster, center.y + 4 * raster);
 		lineTo(center.x + 3 * raster, center.y + 5 * raster);
-		lineTo(center.x + 4 * raster, center.y + 5 * raster);
+		quadTo(center.x + 3.5f * raster, center.y + 6f * raster, // controllpoint
+				center.x + 4 * raster, center.y + 5 * raster); // Zielpunkt
+		// lineTo(center.x + 4 * raster, center.y + 5 * raster);
 		lineTo(center.x + 4 * raster, center.y + 1 * raster);
 		lineTo(center.x + 3.5f * raster, center.y - 1 * raster);
 		lineTo(center.x + 3 * raster, center.y + 1 * raster);
@@ -169,13 +186,13 @@ public class RocketPath extends Path {
 
 		if (filled) {
 			// Raketenstrahl
-			moveTo(center.x - 3 * raster, center.y + 6 * raster);
-			lineTo(center.x - 3.5f * raster, center.y + 8 * raster);
-			lineTo(center.x - 4 * raster, center.y + 6 * raster);
+			moveTo(center.x - 3.2f * raster, center.y + 6 * raster);
+			lineTo(center.x - 3.5f * raster, center.y + 9 * raster);
+			lineTo(center.x - 3.8f * raster, center.y + 6 * raster);
 			close();
-			moveTo(center.x + 3 * raster, center.y + 6 * raster);
-			lineTo(center.x + 3.5f * raster, center.y + 8 * raster);
-			lineTo(center.x + 4 * raster, center.y + 6 * raster);
+			moveTo(center.x + 3.2f * raster, center.y + 6 * raster);
+			lineTo(center.x + 3.5f * raster, center.y + 9 * raster);
+			lineTo(center.x + 3.8f * raster, center.y + 6 * raster);
 			close();
 		}
 	}
