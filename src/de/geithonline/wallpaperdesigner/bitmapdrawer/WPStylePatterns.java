@@ -412,6 +412,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Satellites":
 			drawSatellite(x, y, paint, radius, 1);
 			break;
+		case "Rockets Mixed":
+			drawRocket(x, y, paint, radius, getRandomInt(0, 3));
+			break;
 		case "Rockets Ufos Mixed":
 			drawSpace(x, y, paint, radius);
 			break;

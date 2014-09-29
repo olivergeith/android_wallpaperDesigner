@@ -58,6 +58,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Rocket V1", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Rocket V2", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Rocket V3", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Rockets Mixed", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Rockets Ufos Mixed", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
 
