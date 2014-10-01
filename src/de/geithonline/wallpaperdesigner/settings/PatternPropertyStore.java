@@ -20,6 +20,7 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Fish V1", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Fish V2", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Fish Sharks", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Fish Mixed", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Flowers V1", new PatternProperties(true, true, false, false, true, false));
