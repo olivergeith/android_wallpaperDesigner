@@ -40,6 +40,7 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
+import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
@@ -447,6 +448,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Sun":
 			drawSun(x, y, paint, radius);
 			break;
+		case "Planes":
+			drawPlane(x, y, paint, radius);
+			break;
 		case "Streamers":
 			drawStreamer(x, y, paint, radius);
 			break;
@@ -783,6 +787,17 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
+	private void drawPlane(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new PlanePath(new Point(x, y), radius, 1);
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
 		bitmapCanvas.drawPath(path, paint);
@@ -980,7 +995,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawFisch(final int x, final int y, final Paint paint, final int radius, final int variante) {
 		final Path path = new FishPath(new Point(x, y), radius, variante);
 
-		rotatePath(x, y, path, Settings.getRotationDegrees(-35, 35));
+		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			mirrorPath(x, y, path);

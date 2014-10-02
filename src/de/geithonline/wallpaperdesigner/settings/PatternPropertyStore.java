@@ -51,6 +51,7 @@ public class PatternPropertyStore {
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, true, false, true));
 		patternProperties.put("Pentagon", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Pillows", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Rectangles (rounded)", new PatternProperties(true, true, false, false, false, false));
