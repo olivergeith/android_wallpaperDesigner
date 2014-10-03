@@ -50,7 +50,7 @@ import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
 import de.geithonline.wallpaperdesigner.shapes.SatelitePath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
-import de.geithonline.wallpaperdesigner.shapes.ShellPath;
+import de.geithonline.wallpaperdesigner.shapes.ShellV1Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV4Path;
@@ -235,10 +235,7 @@ public class WPStylePatterns extends WPStyle {
 			drawSquares(x, y, paint, radius);
 			break;
 		case "Rectangles":
-			drawRectangles(x, y, paint, radius);
-			break;
-		case "Rectangles (rounded)":
-			drawRoundedRectangles(x, y, paint, radius);
+			drawRect(x, y, paint, radius);
 			break;
 		case "Pentagon":
 			drawPentagon(x, y, paint, radius);
@@ -269,27 +266,8 @@ public class WPStylePatterns extends WPStyle {
 		case "Crop Circles":
 			drawDotSpiral(x, y, paint, radius);
 			break;
-		case "Shells V1":
-			drawShell(x, y, paint, radius, 1);
-			break;
-		case "Shells V2":
-			drawShell(x, y, paint, radius, 2);
-			break;
-		case "Shells V3":
-			drawShell(x, y, paint, radius, 3);
-			break;
-		case "Shells V4":
-			drawShell(x, y, paint, radius, 4);
-			break;
-		case "Shells V5":
-			drawShell(x, y, paint, radius, 5);
-			break;
-		case "Shells V6":
-			drawShell(x, y, paint, radius, 6);
-			break;
-		case "Shells Mixed":
-			final int shellVersion = getRandomInt(0, 6);
-			drawShell(x, y, paint, radius, shellVersion);
+		case "Shells":
+			drawShell(x, y, paint, radius);
 			break;
 		case "Hedgehog":
 			drawIgel(x, y, paint, radius);
@@ -402,23 +380,14 @@ public class WPStylePatterns extends WPStyle {
 		case "UfoV2":
 			drawUfo2(x, y, paint, radius);
 			break;
-		case "Rocket V1":
-			drawRocket(x, y, paint, radius, 1);
-			break;
-		case "Rocket V2":
-			drawRocket(x, y, paint, radius, 2);
-			break;
-		case "Rocket V3":
-			drawRocket(x, y, paint, radius, 3);
-			break;
-		case "Satellites":
-			drawSatellite(x, y, paint, radius, 1);
-			break;
-		case "Rockets Mixed":
-			drawRocket(x, y, paint, radius, getRandomInt(0, 3));
+		case "Rockets":
+			drawRocket(x, y, paint, radius);
 			break;
 		case "Rockets Ufos Mixed":
 			drawSpace(x, y, paint, radius);
+			break;
+		case "Satellites":
+			drawSatellite(x, y, paint, radius, 1);
 			break;
 		case "Deathstars":
 			drawDeathstar(x, y, paint, radius);
@@ -666,16 +635,19 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawRocket(final int x, final int y, final Paint paint, final int radius, final int variante) {
+	private void drawRocket(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final Path path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), variante);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			// paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
+	}
+
+	private void drawRocket(final int x, final int y, final Paint paint, final int radius) {
+		drawRocket(x, y, paint, radius, Settings.getSelectedPatternVariant());
 	}
 
 	private void drawSatellite(final int x, final int y, final Paint paint, final int radius, final int variante) {
@@ -712,13 +684,13 @@ public class WPStylePatterns extends WPStyle {
 			drawUfo1(x, y, paint, radius);
 			break;
 		case 2:
-			drawRocket(x, y, paint, radius, 1);
+			drawRocket(x, y, paint, radius, "Rocket V1");
 			break;
 		case 3:
-			drawRocket(x, y, paint, radius, 2);
+			drawRocket(x, y, paint, radius, "Rocket V2");
 			break;
 		case 4:
-			drawRocket(x, y, paint, radius, 3);
+			drawRocket(x, y, paint, radius, "Rocket V3");
 			break;
 		case 5:
 			drawUfo2(x, y, paint, radius);
@@ -788,7 +760,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPlane(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new PlanePath(new Point(x, y), radius, getRandomInt(0, 3));
+		final Path path = new PlanePath(new Point(x, y), radius, Settings.getSelectedPatternVariant());
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -888,26 +860,35 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawShell(final int x, final int y, final Paint paint, final int radius, final int version) {
-		Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-		switch (version) {
+	private void drawShell(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Shells Mixed")) {
+			final int nr = getRandomInt(0, 6);
+			variant = "Shells V" + nr;
+		}
+		drawShell(x, y, paint, radius, variant);
+	}
+
+	public void drawShell(final int x, final int y, final Paint paint, final int radius, final String variant) {
+		Path path;
+		switch (variant) {
 		default:
-		case 1:
-			path = new ShellPath(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+		case "Shells V1":
+			path = new ShellV1Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
-		case 2:
+		case "Shells V2":
 			path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER, getFilledBoolean());
 			break;
-		case 3:
+		case "Shells V3":
 			path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
-		case 4:
+		case "Shells V4":
 			path = new ShellV4Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
-		case 5:
+		case "Shells V5":
 			path = new ShellV5Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
-		case 6:
+		case "Shells V6":
 			path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
 		}
@@ -1163,16 +1144,9 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawRectangles(final int x, final int y, final Paint paint, final int radius) {
-		drawRect(x, y, paint, radius, false);
-	}
+	private void drawRect(final int x, final int y, final Paint paint, final int radius) {
+		final Path path = new RectanglePath(new Point(x, y), radius, Settings.getSelectedPatternVariant());
 
-	private void drawRoundedRectangles(final int x, final int y, final Paint paint, final int radius) {
-		drawRect(x, y, paint, radius, true);
-	}
-
-	private void drawRect(final int x, final int y, final Paint paint, final int radius, final boolean rounded) {
-		final Path path = new RectanglePath(new Point(x, y), radius, rounded);
 		if (Settings.isRandomRotate()) {
 			rotatePath(x, y, path, Settings.getRotationDegrees(0, 180));
 		} else {

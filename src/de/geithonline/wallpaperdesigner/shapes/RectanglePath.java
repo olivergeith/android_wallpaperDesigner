@@ -7,8 +7,16 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RectanglePath extends Path {
 
-	public RectanglePath(final Point center, final float radius, final boolean rounded) {
+	public RectanglePath(final Point center, final float radius, final String variant) {
 		super();
+
+		boolean rounded = false;
+		if (variant.equalsIgnoreCase("Rounded")) {
+			rounded = true;
+		} else if (variant.equalsIgnoreCase("Mixed")) {
+			rounded = Randomizer.getRandomBoolean();
+		}
+
 		final int height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
 		final RectF rect = new RectF();
 

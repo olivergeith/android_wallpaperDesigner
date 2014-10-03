@@ -4,9 +4,9 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 
-public class ShellPath extends Path {
+public class ShellV1Path extends Path {
 
-	public ShellPath(final int circles, final int abschnitte, final Point center, final float rOuter) {
+	public ShellV1Path(final int circles, final int abschnitte, final Point center, final float rOuter) {
 		super();
 		drawSchnecke(circles, abschnitte, center, rOuter);
 	}

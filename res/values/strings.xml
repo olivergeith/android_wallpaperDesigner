@@ -48,6 +48,7 @@
     <string name="sizeSelection_summary">Choose a size</string>
     <string name="colorDropShadow">DropShadowColor</string>
     <string name="patternPicker">Pattern</string>
+    <string name="patternVariantPicker">Pattern Variant</string>
     <string name="pattern_anzahlPatterns">Number of Patterns to draw</string>
     <string name="stylePicker">Style</string>
     <string name="gradientDirection">Coloring style</string>

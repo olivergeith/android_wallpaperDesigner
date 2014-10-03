@@ -22,6 +22,7 @@ public class Settings {
 	public static final String PATTERN_OUTLINE = "outline";
 	public static final String PATTERN_GLOSSY = "glossy";
 	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
+	public static final String PATTERN_PATTERN_VARIANT_PICKER = "pattern_patternVariantPicker";
 	public static final String PATTERN_ANZAHL_PATTERNS = "anzahlPatterns";
 	public static final String PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
 	public static final String PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
@@ -45,6 +46,13 @@ public class Settings {
 			return "Virus Attack V1";
 		}
 		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack V1");
+	}
+
+	public static String getSelectedPatternVariant() {
+		if (prefs == null) {
+			return "none";
+		}
+		return prefs.getString(PATTERN_PATTERN_VARIANT_PICKER, "none");
 	}
 
 	public static int getAnzahlPatterns() {

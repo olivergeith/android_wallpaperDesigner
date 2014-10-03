@@ -21,6 +21,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 public class StylePreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	private ListPreference patternSelection;
+	private ListPreference patternVariantSelection;
 	private ListPreference dropShadowType;
 	private ListPreference filledOption;
 	private EditTextPreference textPattern;
@@ -38,6 +39,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
+		patternVariantSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_VARIANT_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.PATTERN_FILLED_OPTION);
 		textDrawStyle = (ListPreference) findPreference(Settings.PATTERN_TEXT_DRAW_STYLE);
 		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
@@ -74,6 +76,15 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				handlePatternSelect((String) newValue);
+				return true;
+			}
+		});
+
+		patternVariantSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handlePatternVariantSelect((String) newValue);
 				return true;
 			}
 		});
@@ -153,6 +164,33 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		specialSettings.setEnabled(PatternPropertyStore.hasPatternSpecialSettings(newPattern));
 		numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 		randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
+
+		// Pattern Variants
+		patternVariantSelection.setEnabled(PatternPropertyStore.hasPatternVariants(newPattern));
+
+		if (PatternPropertyStore.hasPatternVariants(newPattern)) {
+			Log.i("GEITH", "Setting Pattern...");
+			final CharSequence[] patternVariants = PatternPropertyStore.getPatternVariants(newPattern);
+			patternVariantSelection.setEntries(patternVariants);
+			patternVariantSelection.setEntryValues(patternVariants);
+			if (!newPattern.equals(patternSelection.getValue())) {
+				patternVariantSelection.setValueIndex(0);
+				patternVariantSelection.setDefaultValue(patternVariantSelection.getValue());
+			}
+			// patternVariantSelection.setValueIndex(0);
+			// patternVariantSelection.setDefaultValue(patternVariantSelection.getValue());
+			patternVariantSelection.setSummary(patternVariantSelection.getValue());
+
+		} else {
+			patternVariantSelection.setEntries(null);
+			patternVariantSelection.setEntryValues(null);
+			patternVariantSelection.setSummary("not available");
+		}
+
+	}
+
+	protected void handlePatternVariantSelect(final String newVariant) {
+		patternVariantSelection.setSummary(newVariant);
 	}
 
 	private void enableProFeatures() {

@@ -51,16 +51,16 @@ public class PatternPropertyStore {
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, true, false, true));
 		patternProperties.put("Pentagon", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Pillows", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false));
 
-		patternProperties.put("Rectangles", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Rectangles (rounded)", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
+
+		patternProperties.put("Rectangles", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "Normal", "Rounded", "Mixed" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, false, false, true, false, false));
-		patternProperties.put("Rocket V1", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Rocket V2", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Rocket V3", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Rockets Mixed", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Rockets", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Mixed Rockets" }));
 		patternProperties.put("Rockets Ufos Mixed", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
 
@@ -70,13 +70,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Satellites", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Saw", new PatternProperties(true, false, false, true, false, false));
 
-		patternProperties.put("Shells V1", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Shells V2", new PatternProperties(true, true, false, true, true, false));
-		patternProperties.put("Shells V3", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Shells V4", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Shells V5", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Shells V6", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Shells Mixed", new PatternProperties(true, true, false, false, true, false));
+		patternProperties.put("Shells", new PatternProperties(true, true, false, false, true, false, //
+				new CharSequence[] { "Shells V1", "Shells V2", "Shells V3", "Shells V4", "Shells V5", "Shells V6", "Shells Mixed" }));
 		patternProperties.put("Skulls", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Smiley", new PatternProperties(true, true, false, true, false, true));
@@ -149,6 +144,23 @@ public class PatternPropertyStore {
 			return false;
 		}
 		return p.hasOutlineOption();
+	}
+
+	public static boolean hasPatternVariants(final String pattern) {
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return false;
+		}
+		return p.hasVariants();
+	}
+
+	public static CharSequence[] getPatternVariants(final String pattern) {
+		final PatternProperties p = patternProperties.get(pattern);
+		if (p == null) {
+			return null;
+		}
+		final CharSequence[] variants = p.getVariants();
+		return variants;
 	}
 
 	public static boolean hasPatternSpecialSettings(final String pattern) {

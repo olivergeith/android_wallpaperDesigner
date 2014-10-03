@@ -8,6 +8,20 @@ public class PatternProperties {
 	private final boolean leafOption;
 	private final boolean glossyOption;
 
+	private final CharSequence[] variants;
+
+	public PatternProperties(final boolean outlineOption, final boolean randomrotateOption, final boolean textOption, final boolean filledOption,
+			final boolean leafOption, final boolean glossyOption, final CharSequence[] variants) {
+		super();
+		this.outlineOption = outlineOption;
+		this.randomrotateOption = randomrotateOption;
+		this.textOption = textOption;
+		this.filledOption = filledOption;
+		this.leafOption = leafOption;
+		this.glossyOption = glossyOption;
+		this.variants = variants;
+	}
+
 	public PatternProperties(final boolean outlineOption, final boolean randomrotateOption, final boolean textOption, final boolean filledOption,
 			final boolean leafOption, final boolean glossyOption) {
 		super();
@@ -17,6 +31,7 @@ public class PatternProperties {
 		this.filledOption = filledOption;
 		this.leafOption = leafOption;
 		this.glossyOption = glossyOption;
+		variants = null;
 	}
 
 	public boolean hasOutlineOption() {
@@ -41,6 +56,14 @@ public class PatternProperties {
 
 	public boolean hasGlossyOption() {
 		return glossyOption;
+	}
+
+	public boolean hasVariants() {
+		return variants != null;
+	}
+
+	public CharSequence[] getVariants() {
+		return variants;
 	}
 
 }

@@ -2,22 +2,38 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class PlanePath extends Path {
 
-	public PlanePath(final Point center, final float radius, final int variante) {
+	public PlanePath(final Point center, final float radius, final String variante) {
 		super();
 
 		switch (variante) {
 		default:
-		case 1:
+		case "Old Planes":
 			drawPlaneV1(center, radius);
 			break;
-		case 2:
+		case "Boing":
 			drawPlaneV2(center, radius);
 			break;
-		case 3:
+		case "Stealthbomber":
 			drawPlaneV3(center, radius);
+			break;
+		case "Mixed":
+			final int v = Randomizer.getRandomInt(0, 3);
+			switch (v) {
+			default:
+			case 1:
+				drawPlaneV1(center, radius);
+				break;
+			case 2:
+				drawPlaneV2(center, radius);
+				break;
+			case 3:
+				drawPlaneV3(center, radius);
+				break;
+			}
 			break;
 		}
 	}
