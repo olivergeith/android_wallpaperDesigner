@@ -788,7 +788,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPlane(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new PlanePath(new Point(x, y), radius, 1);
+		final Path path = new PlanePath(new Point(x, y), radius, getRandomInt(0, 3));
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
