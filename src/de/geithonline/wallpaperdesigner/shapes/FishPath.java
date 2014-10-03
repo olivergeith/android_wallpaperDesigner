@@ -5,25 +5,23 @@ import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class FishPath extends Path {
-	public static final int FISH = 1;
-	public static final int FISH_FAT_SLIM = 2;
-	public static final int SHARK_V1 = 3;
-	public static final int SHARK_V2 = 4;
 
-	public FishPath(final Point center, final float radius, final int variante) {
+	public FishPath(final Point center, final float radius, final String variante) {
 		super();
 		switch (variante) {
 		default:
-		case FISH:
+		case "V1":
 			drawFisch(center, radius);
 			break;
-		case FISH_FAT_SLIM:
+		case "V2":
 			drawFatAndSlimFisch(center, radius);
 			break;
-		case SHARK_V1:
+		case "V3":
+		case "Shark V1":
 			drawShark(center, radius);
 			break;
-		case SHARK_V2:
+		case "V4":
+		case "Shark V2":
 			drawSharkV2(center, radius);
 			break;
 		}

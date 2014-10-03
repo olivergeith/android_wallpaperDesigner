@@ -289,17 +289,8 @@ public class WPStylePatterns extends WPStyle {
 		case "Android":
 			drawAndroid(x, y, paint, radius);
 			break;
-		case "Fish V1":
-			drawFisch(x, y, paint, radius, FishPath.FISH);
-			break;
-		case "Fish V2":
-			drawFisch(x, y, paint, radius, FishPath.FISH_FAT_SLIM);
-			break;
-		case "Fish Sharks":
-			drawFisch(x, y, paint, radius, FishPath.SHARK_V2);
-			break;
-		case "Fish Mixed":
-			drawFischMixed(x, y, paint, radius);
+		case "Fish":
+			drawFisch(x, y, paint, radius);
 			break;
 		case "Pillows":
 			drawPillow(x, y, paint, radius);
@@ -307,35 +298,11 @@ public class WPStylePatterns extends WPStyle {
 		case "Roses":
 			drawRose(x, y, paint, radius);
 			break;
-		case "Flowers V1":
+		case "Flowers":
 			drawFlower(x, y, paint, radius);
 			break;
-		case "Flowers V2":
-			drawFlowerV2(x, y, paint, radius);
-			break;
-		case "Flowers V3":
-			drawFlowerV3(x, y, paint, radius);
-			break;
-		case "Flowers V4":
-			drawFlowerV4(x, y, paint, radius);
-			break;
-		case "Flowers V5":
-			drawFlowerV5(x, y, paint, radius);
-			break;
-		case "Flowers Mixed":
-			drawFlowerBucket(x, y, paint, radius);
-			break;
-		case "Mandala V1":
-			drawMandala(x, y, paint, radius, 1);
-			break;
-		case "Mandala V2":
-			drawMandala(x, y, paint, radius, 2);
-			break;
-		case "Mandala V3":
-			drawMandala(x, y, paint, radius, 3);
-			break;
-		case "Mandala V4":
-			drawMandala(x, y, paint, radius, 4);
+		case "Mandala":
+			drawMandala(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -557,22 +524,6 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawFlowerBucket(final int x, final int y, final Paint paint, final int radius) {
-		final int p = getRandomInt(-1, 2);
-		switch (p) {
-		default:
-		case 0:
-			drawFlowerV3(x, y, paint, radius);
-			break;
-		case 1:
-			drawFlowerV4(x, y, paint, radius);
-			break;
-		case 2:
-			drawFlowerV5(x, y, paint, radius);
-			break;
-		}
-	}
-
 	private void drawSailboat2(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SailboatPath2(new Point(x, y), radius * 1.2f);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
@@ -629,7 +580,13 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawRocket(final int x, final int y, final Paint paint, final int radius) {
-		drawRocket(x, y, paint, radius, Settings.getSelectedPatternVariant());
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 3);
+			variant = "V" + nr;
+		}
+
+		drawRocket(x, y, paint, radius, variant);
 	}
 
 	private void drawSatellite(final int x, final int y, final Paint paint, final int radius, final int variante) {
@@ -752,7 +709,16 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPlane(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new PlanePath(new Point(x, y), radius, Settings.getSelectedPatternVariant());
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 3);
+			variant = "V" + nr;
+		}
+		drawPlane(x, y, paint, radius, variant);
+	}
+
+	private void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
+		final Path path = new PlanePath(new Point(x, y), radius, variant);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -763,64 +729,39 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(2, 5);
+			variant = "V" + nr;
 		}
+		drawFlower(x, y, paint, radius, variant);
 	}
 
-	private void drawFlowerV2(final int x, final int y, final Paint paint, final int radius) {
-		// final Path path = new FlowerPath(new Point(x, y), radius, 6, 5);
-		final Path path = new FlowerV2Path(6, new Point(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / 6));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
+	private void drawFlower(final int x, final int y, final Paint paint, final int radius, final String variant) {
 
-	private void drawFlowerV3(final int x, final int y, final Paint paint, final int radius) {
-		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new NiceFlowerPath(arms, new Point(x, y), radius, getFilledBoolean(), 1.0f, 0);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
+		Path path;
+		switch (variant) {
+		default:
+		case "V1":
+			path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
+			break;
+		case "V2":
+			path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean());
+			break;
+		case "V3":
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, 0);
+			break;
+		case "V4":
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, 0);
+			break;
+		case "V5":
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0);
+			break;
 		}
-	}
-
-	private void drawFlowerV4(final int x, final int y, final Paint paint, final int radius) {
-		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new NiceFlowerPath(arms, new Point(x, y), radius, getFilledBoolean(), 0.8f, 0);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawFlowerV5(final int x, final int y, final Paint paint, final int radius) {
-		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new NiceFlowerPath(arms, new Point(x, y), radius, getFilledBoolean(), 0);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
@@ -898,20 +839,29 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawMandala(final int x, final int y, final Paint paint, final int radius, final int version) {
+	private void drawMandala(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 4);
+			variant = "V" + nr;
+		}
+		drawMandala(x, y, paint, radius, variant);
+	}
+
+	private void drawMandala(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-		switch (version) {
+		switch (variant) {
 		default:
-		case 1:
+		case "V1":
 			path = new MandalaV1Path(2 + 2 * Settings.getAnzahlFlowerLeafs(2, 8), new Point(x, y), radius);
 			break;
-		case 2:
+		case "V2":
 			path = new MandalaV2Path(3, 16, new Point(x, y), radius);
 			break;
-		case 3:
+		case "V3":
 			path = new MandalaV3Path(3, 2 + 2 * Settings.getAnzahlFlowerLeafs(4, 10), new Point(x, y), radius);
 			break;
-		case 4:
+		case "V4":
 			path = new MandalaV4Path(3, new Point(x, y), radius);
 			break;
 		}
@@ -965,35 +915,17 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawFisch(final int x, final int y, final Paint paint, final int radius, final int variante) {
-		final Path path = new FishPath(new Point(x, y), radius, variante);
-
-		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
-		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
-			mirrorPath(x, y, path);
+	private void drawFisch(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 4);
+			variant = "V" + nr;
 		}
-		bitmapCanvas.drawPath(path, paint);
-
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
-		}
+		drawFisch(x, y, paint, radius, variant);
 	}
 
-	private void drawFischMixed(final int x, final int y, final Paint paint, final int radius) {
-		Path path;
-
-		final int shark = getRandomInt(0, 30);
-		if (shark == 1) {
-			path = new FishPath(new Point(x, y), radius, FishPath.SHARK_V1);
-			// mirrorPath(x, y, path);
-		} else if (shark < 25) {
-			path = new FishPath(new Point(x, y), radius, FishPath.FISH);
-		} else {
-			path = new FishPath(new Point(x, y), radius, FishPath.FISH_FAT_SLIM);
-		}
+	private void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		final Path path = new FishPath(new Point(x, y), radius, variante);
 
 		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		// Mirror only on random rotation

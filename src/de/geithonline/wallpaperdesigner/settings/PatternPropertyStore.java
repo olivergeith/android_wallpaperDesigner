@@ -18,17 +18,11 @@ public class PatternPropertyStore {
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
 
-		patternProperties.put("Fish V1", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Fish V2", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Fish Sharks", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Fish Mixed", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "V1", "V2", "Shark V1", "Shark V2", "Mixed" }));
 
-		patternProperties.put("Flowers V1", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Flowers V2", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Flowers V3", new PatternProperties(true, true, false, true, true, false));
-		patternProperties.put("Flowers V4", new PatternProperties(true, true, false, true, true, false));
-		patternProperties.put("Flowers V5", new PatternProperties(true, true, false, true, true, false));
-		patternProperties.put("Flowers Mixed", new PatternProperties(true, true, false, true, true, false));
+		patternProperties.put("Flowers", new PatternProperties(true, true, false, true, true, false, //
+				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "Mixed" }));
 
 		patternProperties.put("Gears", new PatternProperties(true, false, false, true, false, false));
 
@@ -39,10 +33,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Letters", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Lighthouse", new PatternProperties(true, true, false, false, false, false));
 
-		patternProperties.put("Mandala V1", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Mandala V2", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Mandala V3", new PatternProperties(true, true, false, false, true, false));
-		patternProperties.put("Mandala V4", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
+				new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));
 
 		patternProperties.put("Marina", new PatternProperties(true, true, false, false, false, false));
 
@@ -60,7 +52,7 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Rings", new PatternProperties(true, false, false, true, false, false));
 		patternProperties.put("Rockets", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Mixed Rockets" }));
+				new CharSequence[] { "V1", "V2", "V3", "Mixed" }));
 		patternProperties.put("Rockets Ufos Mixed", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
 
