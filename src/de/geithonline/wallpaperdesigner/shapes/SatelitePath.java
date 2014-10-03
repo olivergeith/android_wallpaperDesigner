@@ -5,12 +5,12 @@ import android.graphics.Point;
 
 public class SatelitePath extends Path {
 
-	public SatelitePath(final Point center, final float radius, final boolean filled, final int variante) {
+	public SatelitePath(final Point center, final float radius, final boolean filled, final String variante) {
 		super();
 
 		switch (variante) {
 		default:
-		case 1:
+		case "Satellite V1":
 			drawSatelliteV1(center, radius, filled);
 			break;
 		}

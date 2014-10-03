@@ -79,7 +79,6 @@
     
     <string-array name="pattern">
         <item >Android</item>
-        <item >Anchor</item>
         <item >Blitz</item>
         <item >Bubbles</item>
         <item >Clouds</item>
@@ -88,64 +87,41 @@
         <item >Custom Text</item>
         <item >Dandelion</item>
         <item >Deathstars</item>
-        <item >Fish V1</item>
-        <item >Fish V2</item>
-        <item >Fish Sharks</item>
-        <item >Fish Mixed</item>
-        <item >Flowers V1</item>
-        <item >Flowers V2</item>
-        <item >Flowers V3</item>
-        <item >Flowers V4</item>
-        <item >Flowers V5</item>
-        <item >Flowers Mixed</item>
+        <item >Fish</item>
+        <item >Flowers</item>
         <item >Gears</item>
+        <item >Geometrical Shapes</item>
         <item >Hearts</item>
         <item >Hedgehog</item>
-        <item >Hexagon</item>
         <item >Lemons</item>
         <item >Letters</item>
-        <item >Lighthouse</item>
-        <item >Mandala V1</item>
-        <item >Mandala V2</item>
-        <item >Mandala V3</item>
-        <item >Mandala V4</item>
-        <item >Marina</item>
+        <item >Mandala</item>
+        <item >Maritim</item>
         <item >Maze</item>
         <item >Numbers</item>
-        <item >Octagon</item>
         <item >PacMan</item>
-        <item >Pentagon</item>
         <item >Pillows</item>
         <item >Planes</item>
         <item >Rectangles</item>
         <item >Rings</item>
-        <item >Rockets</item>
-        <item >Rockets Ufos Mixed</item>
         <item >Roses</item>
-        <item >Sailboat V1</item>
-        <item >Sailboat V2</item>
-        <item >Satellites</item>
         <item >Saw</item>
         <item >Shells</item>
         <item >Skulls</item>
         <item >Skyline</item>
         <item >Smiley</item>
+        <item >Space</item>
         <item >Spirals</item>
-        <item >Squares</item>
         <item >Star Circles</item>
         <item >Stars</item>
         <item >Streamers</item>
         <item >Sun</item>
-        <item >Triangles</item>
-        <item >Ufo V1</item>
-        <item >Ufo V2</item>
         <item >Virus Attack</item>
         <item >XmasTrees</item>
         </string-array>
     
     <string-array name="patternValues">
         <item >Android</item>
-        <item >Anchor</item>
         <item >Blitz</item>
         <item >Bubbles</item>
         <item >Clouds</item>
@@ -154,57 +130,35 @@
         <item >Custom Text</item>
         <item >Dandelion</item>
         <item >Deathstars</item>
-        <item >Fish V1</item>
-        <item >Fish V2</item>
-        <item >Fish Sharks</item>
-        <item >Fish Mixed</item>
-        <item >Flowers V1</item>
-        <item >Flowers V2</item>
-        <item >Flowers V3</item>
-        <item >Flowers V4</item>
-        <item >Flowers V5</item>
-        <item >Flowers Mixed</item>
+        <item >Fish</item>
+        <item >Flowers</item>
         <item >Gears</item>
+        <item >Geometrical Shapes</item>
         <item >Hearts</item>
         <item >Hedgehog</item>
-        <item >Hexagon</item>
         <item >Lemons</item>
         <item >Letters</item>
-        <item >Lighthouse</item>
-        <item >Mandala V1</item>
-        <item >Mandala V2</item>
-        <item >Mandala V3</item>
-        <item >Mandala V4</item>
-        <item >Marina</item>
+        <item >Mandala</item>
+        <item >Maritim</item>
         <item >Maze</item>
         <item >Numbers</item>
-        <item >Octagon</item>
         <item >PacMan</item>
-        <item >Pentagon</item>
         <item >Pillows</item>
         <item >Planes</item>
         <item >Rectangles</item>
         <item >Rings</item>
-        <item >Rockets</item>
-        <item >Rockets Ufos Mixed</item>
         <item >Roses</item>
-        <item >Sailboat V1</item>
-        <item >Sailboat V2</item>
-        <item >Satellites</item>
         <item >Saw</item>
         <item >Shells</item>
         <item >Skulls</item>
         <item >Skyline</item>
         <item >Smiley</item>
+        <item >Space</item>
         <item >Spirals</item>
-        <item >Squares</item>
         <item >Star Circles</item>
         <item >Stars</item>
         <item >Streamers</item>
         <item >Sun</item>
-        <item >Triangles</item>
-        <item >Ufo V1</item>
-        <item >Ufo V2</item>
         <item >Virus Attack</item>
         <item >XmasTrees</item>
         </string-array>

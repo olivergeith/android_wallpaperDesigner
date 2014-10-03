@@ -2,7 +2,6 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
-import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RocketPath extends Path {
 
@@ -11,28 +10,18 @@ public class RocketPath extends Path {
 
 		switch (variante) {
 		default:
+		case "V1":
 		case "Rocket V1":
 			drawRocketV1(center, radius, filled);
 			break;
+		case "V2":
 		case "Rocket V2":
 			drawRocketV2(center, radius, filled);
 			break;
+		case "V3":
 		case "Rocket V3":
 			drawRocketV3(center, radius, filled);
 			break;
-		case "Mixed Rockets":
-			switch (Randomizer.getRandomInt(0, 3)) {
-			default:
-			case 1:
-				drawRocketV1(center, radius, filled);
-				break;
-			case 2:
-				drawRocketV2(center, radius, filled);
-				break;
-			case 3:
-				drawRocketV3(center, radius, filled);
-				break;
-			}
 		}
 	}
 
