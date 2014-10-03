@@ -12,7 +12,7 @@ public class VirusPath2 extends Path {
 	 * @param radius
 	 * @param arms
 	 */
-	public VirusPath2(final Point center, float radius, final int arms) {
+	public VirusPath2(final Point center, float radius, final int arms, final boolean filled) {
 		super();
 		radius = radius * 2;
 		final float angle = (float) (2 * Math.PI / (arms));
@@ -34,5 +34,8 @@ public class VirusPath2 extends Path {
 			}
 		}
 		close();
+		if (!filled) {
+			addCircle(center.x, center.y, radius * 2 / 10, Direction.CCW);
+		}
 	}
 }

@@ -86,13 +86,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Ufo V1", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Ufo V2", new PatternProperties(true, true, false, true, false, false));
 
-		patternProperties.put("Virus Attack V1", new PatternProperties(true, false, false, false, false, false));
-		patternProperties.put("Virus Attack V2", new PatternProperties(true, false, false, false, false, false));
-		patternProperties.put("Virus Attack V3", new PatternProperties(true, false, false, true, false, false));
-		patternProperties.put("Virus Attack V4", new PatternProperties(true, false, false, false, false, false));
-		patternProperties.put("Virus Attack V5", new PatternProperties(true, false, false, false, false, false));
-		patternProperties.put("Virus Attack V6", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Viruses Mixed", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "Mixed" }));
 
 		patternProperties.put("XmasTrees", new PatternProperties(true, true, false, true, false, false));
 

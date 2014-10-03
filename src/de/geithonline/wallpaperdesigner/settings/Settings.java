@@ -43,16 +43,16 @@ public class Settings {
 
 	public static String getSelectedPattern() {
 		if (prefs == null) {
-			return "Virus Attack V1";
+			return "Virus Attack";
 		}
-		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack V1");
+		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack");
 	}
 
 	public static String getSelectedPatternVariant() {
 		if (prefs == null) {
 			return "none";
 		}
-		return prefs.getString(PATTERN_PATTERN_VARIANT_PICKER, "none");
+		return prefs.getString(PATTERN_PATTERN_VARIANT_PICKER, "V1");
 	}
 
 	public static int getAnzahlPatterns() {
@@ -451,7 +451,7 @@ public class Settings {
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString("stylePicker", "Patterns").commit();
-			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack V1").commit();
+			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
 			prefs.edit().putBoolean(PATTERN_BLUR, false).commit();

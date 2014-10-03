@@ -393,26 +393,8 @@ public class WPStylePatterns extends WPStyle {
 			drawDeathstar(x, y, paint, radius);
 			break;
 		default:
-		case "Virus Attack V1":
-			drawVirus(x, y, paint, radius, 1);
-			break;
-		case "Virus Attack V2":
-			drawVirus(x, y, paint, radius, 2);
-			break;
-		case "Virus Attack V3":
-			drawVirus(x, y, paint, radius, 3);
-			break;
-		case "Virus Attack V4":
-			drawVirus(x, y, paint, radius, 4);
-			break;
-		case "Virus Attack V5":
-			drawVirus(x, y, paint, radius, 5);
-			break;
-		case "Virus Attack V6":
-			drawVirus(x, y, paint, radius, 6);
-			break;
-		case "Viruses Mixed":
-			drawVirus(x, y, paint, radius, getRandomInt(0, 6));
+		case "Virus Attack":
+			drawVirus(x, y, paint, radius);
 			break;
 		case "Sun":
 			drawSun(x, y, paint, radius);
@@ -714,30 +696,40 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawVirus(final int x, final int y, final Paint paint, final int radius, final int version) {
+	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 6);
+			variant = "V" + nr;
+		}
+
+		drawVirus(x, y, paint, radius, variant);
+	}
+
+	private void drawVirus(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		Path path;
-		switch (version) {
+		switch (variant) {
 		default:
-		case 1:
+		case "V1":
 			path = new VirusPath(new Point(x, y), radius);
 			break;
-		case 2:
-			path = new VirusPath2(new Point(x, y), radius, 0);
+		case "V2":
+			path = new VirusPath2(new Point(x, y), radius, 13, getFilledBoolean());
 			break;
-		case 3:
+		case "V3":
 			path = new VirusPath3(new Point(x, y), radius, 17, getFilledBoolean());
 			break;
-		case 4:
+		case "V4":
 			path = new VirusPath4(new Point(x, y), radius);
 			break;
-		case 5:
+		case "V5":
 			path = new VirusPath5(new Point(x, y), radius);
 			break;
-		case 6:
-			path = new VirusPath6(new Point(x, y), radius, 0);
-			rotatePath(x, y, path, Settings.getRotationDegrees(0, 45));
+		case "V6":
+			path = new VirusPath6(new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
