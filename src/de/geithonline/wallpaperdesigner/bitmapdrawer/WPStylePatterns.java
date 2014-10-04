@@ -314,6 +314,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Maritim":
 			drawMaritim(x, y, paint, radius);
 			break;
+		case "Rectangles":
+			drawRect(x, y, paint, radius);
+			break;
 		case "Space":
 			drawSpace(x, y, paint, radius);
 			break;
@@ -651,8 +654,11 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
-		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(2, 5);
+		if (variant.equalsIgnoreCase("Mixed V1-V3")) {
+			final int nr = getRandomInt(0, 3);
+			variant = "V" + nr;
+		} else if (variant.equalsIgnoreCase("Mixed V4-V5")) {
+			final int nr = getRandomInt(3, 5);
 			variant = "V" + nr;
 		}
 		drawFlower(x, y, paint, radius, variant);
@@ -664,19 +670,25 @@ public class WPStylePatterns extends WPStyle {
 		switch (variant) {
 		default:
 		case "V1":
-			path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, "Circle Filling");
 			break;
 		case "V2":
-			path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean());
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, "Circle Filling");
 			break;
 		case "V3":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, 0);
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0, "V3");
 			break;
 		case "V4":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, 0);
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, "Inner Flower");
 			break;
 		case "V5":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0);
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, "Inner Flower");
+			break;
+		case "V6":
+			path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
+			break;
+		case "V7":
+			path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
 		bitmapCanvas.drawPath(path, paint);
@@ -801,7 +813,16 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new PacmanPath(new Point(x, y), radius, getFilledBoolean());
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 2);
+			variant = "V" + nr;
+		}
+		drawPacMan(x, y, paint, radius, variant);
+	}
+
+	private void drawPacMan(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		final Path path = new PacmanPath(new Point(x, y), radius, variante);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1140,7 +1161,12 @@ public class WPStylePatterns extends WPStyle {
 		final int colorDarker = ColorHelper.darker2times(color);
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int transparent = 0x00FFFFFF;
-		final Path path = new PacmanPath(new Point(x, y), radius, getFilledBoolean());
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 2);
+			variant = "V" + nr;
+		}
+		final Path path = new PacmanPath(new Point(x, y), radius, variant);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		// Bubble
 		bitmapCanvas.drawPath(path, paint);
