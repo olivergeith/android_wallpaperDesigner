@@ -22,6 +22,14 @@ public class RocketPath extends Path {
 		case "Rocket V3":
 			drawRocketV3(center, radius, filled);
 			break;
+		case "V4":
+		case "Rocket V4":
+			drawRocketV4(center, radius, filled);
+			break;
+		case "V5":
+		case "Rocket V5":
+			drawRocketV5(center, radius, filled);
+			break;
 		}
 	}
 
@@ -198,6 +206,142 @@ public class RocketPath extends Path {
 			lineTo(center.x + 3.5f * raster, center.y + 9 * raster);
 			lineTo(center.x + 3.8f * raster, center.y + 6 * raster);
 			close();
+		}
+	}
+
+	private void drawRocketV4(final Point center, final float radius, final boolean filled) {
+		final float raster = radius / 6;
+
+		// Spitze von da clockwise
+		moveTo(center.x - 0 * raster, center.y - 6 * raster);
+		quadTo(center.x + 2 * raster, center.y - 5 * raster, // controllpoint
+				center.x + 2 * raster, center.y - 3 * raster); // Zielpunkt
+		lineTo(center.x + 2 * raster, center.y + 2 * raster);
+		lineTo(center.x + 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 2 * raster, center.y + 2 * raster);
+		lineTo(center.x - 2 * raster, center.y - 3 * raster);
+		quadTo(center.x - 2 * raster, center.y - 5 * raster, // controllpoint
+				center.x + 0 * raster, center.y - 6 * raster); // Zielpunkt
+		close();
+
+		// Fenster
+		moveTo(center.x - 0 * raster, center.y - 5 * raster);
+		quadTo(center.x - 1 * raster, center.y - 4.5f * raster, // controllpoint
+				center.x - 1 * raster, center.y - 3.5f * raster); // Zielpunkt
+		lineTo(center.x + 1 * raster, center.y - 3.5f * raster);
+		quadTo(center.x + 1 * raster, center.y - 4.5f * raster, // controllpoint
+				center.x + 0 * raster, center.y - 5 * raster); // Zielpunkt
+		close();
+
+		// Kleine Rakete links
+		moveTo(center.x - 2.5f * raster, center.y - 2 * raster);
+		lineTo(center.x - 2 * raster, center.y - 1 * raster);
+		lineTo(center.x - 2 * raster, center.y + 2 * raster);
+		lineTo(center.x - 3 * raster, center.y + 2 * raster);
+		lineTo(center.x - 3 * raster, center.y - 1 * raster);
+		close();
+		// Kleine Rakete rechts
+		moveTo(center.x + 2.5f * raster, center.y - 2 * raster);
+		lineTo(center.x + 2 * raster, center.y - 1 * raster);
+		lineTo(center.x + 2 * raster, center.y + 2 * raster);
+		lineTo(center.x + 3 * raster, center.y + 2 * raster);
+		lineTo(center.x + 3 * raster, center.y - 1 * raster);
+		close();
+		// Flügel links
+		moveTo(center.x - 3 * raster, center.y - 0 * raster);
+		lineTo(center.x - 4 * raster, center.y + 1 * raster);
+		lineTo(center.x - 4 * raster, center.y + 2 * raster);
+		lineTo(center.x - 3 * raster, center.y + 2 * raster);
+		close();
+		// Flügel rechts
+		moveTo(center.x + 3 * raster, center.y - 0 * raster);
+		lineTo(center.x + 4 * raster, center.y + 1 * raster);
+		lineTo(center.x + 4 * raster, center.y + 2 * raster);
+		lineTo(center.x + 3 * raster, center.y + 2 * raster);
+		close();
+		// Triebwerk mitte
+		moveTo(center.x - 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 0.7f * raster, center.y + 3.3f * raster);
+		lineTo(center.x + 0.7f * raster, center.y + 3.3f * raster);
+		lineTo(center.x + 1 * raster, center.y + 3 * raster);
+		close();
+
+		addRect(center.x - 0.15f * raster, center.y + 0 * raster, center.x + 0.15f * raster, center.y + 3 * raster, Direction.CCW);
+		if (filled) {
+			// Raketenstrahl
+			moveTo(center.x - 0.5f * raster, center.y + 3.8f * raster);
+			lineTo(center.x - 0 * raster, center.y + 8 * raster);
+			lineTo(center.x + 0.5f * raster, center.y + 3.8f * raster);
+			close();
+
+			moveTo(center.x - 2.8f * raster, center.y + 2.5f * raster);
+			lineTo(center.x - 2.5f * raster, center.y + 5 * raster);
+			lineTo(center.x - 2.2f * raster, center.y + 2.5f * raster);
+			close();
+			moveTo(center.x + 2.8f * raster, center.y + 2.5f * raster);
+			lineTo(center.x + 2.5f * raster, center.y + 5 * raster);
+			lineTo(center.x + 2.2f * raster, center.y + 2.5f * raster);
+			close();
+		}
+	}
+
+	private void drawRocketV5(final Point center, final float radius, final boolean filled) {
+		final float raster = radius / 7;
+
+		// Spitze von da clockwise
+		moveTo(center.x - 0 * raster, center.y - 8 * raster);
+		quadTo(center.x + 2 * raster, center.y - 7 * raster, // controllpoint
+				center.x + 2 * raster, center.y - 3 * raster); // Zielpunkt
+		lineTo(center.x + 2 * raster, center.y + 2 * raster);
+		lineTo(center.x + 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 2 * raster, center.y + 2 * raster);
+		lineTo(center.x - 2 * raster, center.y - 3 * raster);
+		quadTo(center.x - 2 * raster, center.y - 7 * raster, // controllpoint
+				center.x + 0 * raster, center.y - 8 * raster); // Zielpunkt
+		close();
+
+		// Fenster
+		moveTo(center.x - 0 * raster, center.y - 7 * raster);
+		quadTo(center.x - 1 * raster, center.y - 6.5f * raster, // controllpoint
+				center.x - 1 * raster, center.y - 5.5f * raster); // Zielpunkt
+		lineTo(center.x + 1 * raster, center.y - 5.5f * raster);
+		quadTo(center.x + 1 * raster, center.y - 6.5f * raster, // controllpoint
+				center.x + 0 * raster, center.y - 7 * raster); // Zielpunkt
+		close();
+
+		// Flügel links
+		moveTo(center.x - 2 * raster, center.y - 2 * raster);
+		quadTo(center.x - 4 * raster, center.y - 1 * raster, // controllpoint
+				center.x - 4 * raster, center.y + 1 * raster); // Zielpunkt
+		lineTo(center.x - 4 * raster, center.y + 2 * raster);
+		lineTo(center.x - 2 * raster, center.y + 2 * raster);
+		close();
+		// Flügel rechts
+		moveTo(center.x + 2 * raster, center.y - 2 * raster);
+		quadTo(center.x + 4 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 4 * raster, center.y + 1 * raster); // Zielpunkt
+		lineTo(center.x + 4 * raster, center.y + 2 * raster);
+		lineTo(center.x + 2 * raster, center.y + 2 * raster);
+		close();
+		// Triebwerk mitte
+		moveTo(center.x - 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 0.7f * raster, center.y + 3.3f * raster);
+		lineTo(center.x + 0.7f * raster, center.y + 3.3f * raster);
+		lineTo(center.x + 1 * raster, center.y + 3 * raster);
+		close();
+
+		addRect(center.x - 0.15f * raster, center.y - 2 * raster, center.x + 0.15f * raster, center.y + 2 * raster, Direction.CCW);
+		if (filled) {
+			// Raketenstrahl
+			moveTo(center.x - 0.5f * raster, center.y + 3.8f * raster);
+			lineTo(center.x - 0 * raster, center.y + 10 * raster);
+			lineTo(center.x + 0.5f * raster, center.y + 3.8f * raster);
+			close();
+			addRect(center.x - 4.0f * raster, center.y + 2.5f * raster, center.x - 3.9f * raster, center.y + 7 * raster, Direction.CCW);
+			addRect(center.x + 3.9f * raster, center.y + 2.5f * raster, center.x + 4.0f * raster, center.y + 7 * raster, Direction.CCW);
+
 		}
 	}
 

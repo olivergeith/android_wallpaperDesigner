@@ -190,17 +190,10 @@ public class WPStylePatterns extends WPStyle {
 
 	private void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
 		switch (Settings.getSelectedPattern()) {
-		case "Letters":
-			drawLetters(x, y, paint, radius);
+		case "Text":
+			drawText(x, y, paint, radius * 2, index);
 			break;
-		case "Custom Text":
-			final String text = Settings.getText();
-			drawText(x, y, paint, radius, text);
-			break;
-		case "Numbers":
-			final String number = String.format(Locale.GERMANY, "%04d", index);
-			drawText(x, y, paint, radius * 2, number);
-			break;
+
 		case "Saw":
 			drawSaw(x, y, paint, radius);
 			break;
@@ -245,8 +238,8 @@ public class WPStylePatterns extends WPStyle {
 				drawHeart(x, y, paint, radius);
 			}
 			break;
-		case "Spirals":
-			drawSpiral(x, y, paint, radius);
+		case "Lines":
+			drawLines(x, y, paint, radius);
 			break;
 		case "Crop Circles":
 			drawDotSpiral(x, y, paint, radius);
@@ -296,17 +289,8 @@ public class WPStylePatterns extends WPStyle {
 			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
 			bitmapCanvas.drawRect(rect, paint);
 			break;
-		case "Crickle Crackle":
-			drawCrickleCrackle(x, y, paint, radius);
-			break;
 		case "Clouds":
 			drawCloud(x, y, paint, radius);
-			break;
-		case "Maze":
-			drawMaze(x, y, paint, radius);
-			break;
-		case "Blitz":
-			drawBlitz(x, y, paint, radius);
 			break;
 		case "Dandelion":
 			drawDandelion(x, y, paint, radius);
@@ -332,9 +316,6 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		case "Planes":
 			drawPlane(x, y, paint, radius);
-			break;
-		case "Streamers":
-			drawStreamer(x, y, paint, radius);
 			break;
 		}
 	}
@@ -408,18 +389,6 @@ public class WPStylePatterns extends WPStyle {
 			break;
 		}
 		return filled;
-	}
-
-	private void drawMaze(final int x, final int y, final Paint paint, final int radius) {
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(radius / 10);
-		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(10, 40), radius, true), paint);
-	}
-
-	private void drawBlitz(final int x, final int y, final Paint paint, final int radius) {
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(radius / 12);
-		bitmapCanvas.drawPath(new BlitzPath(new Point(x, y), getRandomInt(5, 30), radius, getFilledBoolean()), paint);
 	}
 
 	private void drawDandelion(final int x, final int y, final Paint paint, final int radius) {
@@ -518,10 +487,10 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSpace(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = getRandomInt(0, 8);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed Rockets")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = getRandomInt(0, 5);
 			variant = "V" + nr;
 		}
 		drawSpace(x, y, paint, radius, variant);
@@ -544,14 +513,22 @@ public class WPStylePatterns extends WPStyle {
 			path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V3");
 			break;
 		case "V4":
+		case "Rocket V4":
+			path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V4");
+			break;
+		case "V5":
+		case "Rocket V5":
+			path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V5");
+			break;
+		case "V6":
 		case "Ufo V1":
 			path = new UfoPath(new Point(x, y), radius, "Ufo V1", getFilledBoolean());
 			break;
-		case "V5":
+		case "V7":
 		case "Ufo V2":
 			path = new UfoPath(new Point(x, y), radius, "Ufo V2", getFilledBoolean());
 			break;
-		case "V6":
+		case "V8":
 		case "Satellite":
 			path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), "Satellite V1");
 			break;
@@ -700,16 +677,45 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawCrickleCrackle(final int x, final int y, final Paint paint, final int radius) {
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(radius / 10);
-		bitmapCanvas.drawPath(new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius, false), paint);
+	private void drawLines(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 6);
+			variant = "V" + nr;
+		}
+		drawLines(x, y, paint, radius, variant);
+
 	}
 
-	private void drawSpiral(final int x, final int y, final Paint paint, final int radius) {
+	private void drawLines(final int x, final int y, final Paint paint, final int radius, final String variant) {
+		Path path;
+		switch (variant) {
+		default:
+		case "V1":
+		case "Spirals":
+			path = new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean());
+			break;
+		case "V2":
+		case "Streamers":
+			path = new LuftschlangenPath(getRandomInt(5, 7), new Point(x, y), radius, getRandomBoolean());
+			break;
+		case "V3":
+		case "Maze":
+			path = new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(10, 40), radius, true);
+			break;
+		case "V4":
+		case "Crickle Crackle":
+			path = new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius, false);
+			break;
+		case "V5":
+		case "Blitz":
+			path = new BlitzPath(new Point(x, y), getRandomInt(5, 30), radius, getFilledBoolean());
+			break;
+		}
+
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 10);
-		bitmapCanvas.drawPath(new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean()), paint);
+		bitmapCanvas.drawPath(path, paint);
 	}
 
 	private void drawDotSpiral(final int x, final int y, final Paint paint, final int radius) {
@@ -884,32 +890,35 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawStreamer(final int x, final int y, final Paint paint, final int radius) {
-		paint.setStyle(Style.STROKE);
-		paint.setStrokeWidth(radius / 10);
-		bitmapCanvas.drawPath(new LuftschlangenPath(getRandomInt(5, 7), new Point(x, y), radius, getRandomBoolean()), paint);
-	}
-
-	private void drawLetters(final int x, final int y, final Paint paint, final int radius) {
-		final int letterindex = getRandomInt(0, letters.length() - 1);
-		final char c = letters.charAt(letterindex);
-		if (getRandomBoolean()) {
+	private void drawText(final int x, final int y, final Paint paint, final int radius, final int index) {
+		// Some Paint Inits
+		if (getFilledBoolean()) {
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 		} else {
 			paint.setTypeface(Typeface.DEFAULT);
 		}
-		paint.setTextSize(radius * 2.5f);
-		paint.setTextAlign(Align.CENTER);
-		bitmapCanvas.drawText("" + c, x, y, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawText("" + c, x, y, paint);
+
+		final String variant = Settings.getSelectedPatternVariant();
+		switch (variant) {
+		default:
+		case "Numbers":
+			final String number = String.format(Locale.GERMANY, "%04d", index);
+			drawCustomText(x, y, paint, radius * 1, number);
+			break;
+		case "Custom Text":
+			final String text = Settings.getText();
+			drawCustomText(x, y, paint, radius * 1, text);
+			break;
+		case "Letters":
+			final int letterindex = getRandomInt(0, letters.length() - 1);
+			final char c = letters.charAt(letterindex);
+			drawCustomText(x, y, paint, radius * 2, "" + c);
+			break;
 		}
 
 	}
 
-	private void drawText(final int x, final int y, final Paint paint, final int radius, final String text) {
+	private void drawCustomText(final int x, final int y, final Paint paint, final int radius, final String text) {
 
 		switch (Settings.getTextDrawStyle()) {
 		default:
@@ -941,22 +950,23 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
-		if (getRandomBoolean()) {
-			paint.setTypeface(Typeface.DEFAULT_BOLD);
-		} else {
-			paint.setTypeface(Typeface.DEFAULT);
-		}
 		paint.setTextSize(radius);
-		paint.setTextAlign(Align.CENTER);
-		bitmapCanvas.drawText(text, x, y, paint);
+		paint.setTextAlign(Align.LEFT);
+		final Path mArc = new Path();
+		final int x2 = bWidth;
+		mArc.moveTo(x - radius / 2, y + radius / 2);
+		mArc.lineTo(x2, y + radius / 2);
+
+		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+		}
+
 	}
 
 	private void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
-		if (getRandomBoolean()) {
-			paint.setTypeface(Typeface.DEFAULT_BOLD);
-		} else {
-			paint.setTypeface(Typeface.DEFAULT);
-		}
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.CENTER);
 		final Path mArc = new Path();
@@ -964,14 +974,14 @@ public class WPStylePatterns extends WPStyle {
 		mArc.addArc(oval, getRandomInt(0, 360), 355);
 
 		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+		}
 	}
 
 	private void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
-		if (getRandomBoolean()) {
-			paint.setTypeface(Typeface.DEFAULT_BOLD);
-		} else {
-			paint.setTypeface(Typeface.DEFAULT);
-		}
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.LEFT);
 		final Path mArc = new Path();
@@ -981,6 +991,11 @@ public class WPStylePatterns extends WPStyle {
 		mArc.lineTo(x2, y2);
 
 		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+		}
 	}
 
 	protected RectF getRectForRadius(final int x, final int y, final int radius) {

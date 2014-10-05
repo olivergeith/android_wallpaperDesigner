@@ -79,12 +79,9 @@
     
     <string-array name="pattern">
         <item >Android</item>
-        <item >Blitz</item>
         <item >Bubbles</item>
         <item >Clouds</item>
-        <item >Crickle Crackle</item>
         <item >Crop Circles</item>
-        <item >Custom Text</item>
         <item >Dandelion</item>
         <item >Deathstars</item>
         <item >Fish</item>
@@ -94,11 +91,9 @@
         <item >Hearts</item>
         <item >Hedgehog</item>
         <item >Lemons</item>
-        <item >Letters</item>
+        <item >Lines</item>
         <item >Mandala</item>
         <item >Maritim</item>
-        <item >Maze</item>
-        <item >Numbers</item>
         <item >PacMan</item>
         <item >Pillows</item>
         <item >Planes</item>
@@ -111,23 +106,19 @@
         <item >Skyline</item>
         <item >Smiley</item>
         <item >Space</item>
-        <item >Spirals</item>
         <item >Star Circles</item>
         <item >Stars</item>
-        <item >Streamers</item>
         <item >Sun</item>
+        <item >Text</item>
         <item >Virus Attack</item>
         <item >XmasTrees</item>
         </string-array>
     
     <string-array name="patternValues">
         <item >Android</item>
-        <item >Blitz</item>
         <item >Bubbles</item>
         <item >Clouds</item>
-        <item >Crickle Crackle</item>
         <item >Crop Circles</item>
-        <item >Custom Text</item>
         <item >Dandelion</item>
         <item >Deathstars</item>
         <item >Fish</item>
@@ -137,11 +128,9 @@
         <item >Hearts</item>
         <item >Hedgehog</item>
         <item >Lemons</item>
-        <item >Letters</item>
+        <item >Lines</item>
         <item >Mandala</item>
         <item >Maritim</item>
-        <item >Maze</item>
-        <item >Numbers</item>
         <item >PacMan</item>
         <item >Pillows</item>
         <item >Planes</item>
@@ -154,11 +143,10 @@
         <item >Skyline</item>
         <item >Smiley</item>
         <item >Space</item>
-        <item >Spirals</item>
         <item >Star Circles</item>
         <item >Stars</item>
-        <item >Streamers</item>
         <item >Sun</item>
+        <item >Text</item>
         <item >Virus Attack</item>
         <item >XmasTrees</item>
         </string-array>

@@ -13,7 +13,6 @@ public class PatternPropertyStore {
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
 		patternProperties.put("Clouds", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Crop Circles", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Custom Text", new PatternProperties(false, false, true, false, false, false));
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
 
@@ -31,7 +30,9 @@ public class PatternPropertyStore {
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true));
 		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Lemons", new PatternProperties(true, true, false, false, false, false));
-		patternProperties.put("Letters", new PatternProperties(true, false, false, false, false, false));
+
+		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
+				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 
 		patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));
@@ -39,7 +40,6 @@ public class PatternPropertyStore {
 		patternProperties.put("Maritim", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "Sailboat V1", "Sailboat V2", "Lighthouse", "Anchor", "Mixed" }));
 
-		patternProperties.put("Numbers", new PatternProperties(false, false, true, false, false, false));
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Ghost", "Pacman", "Mixed" }));
 		patternProperties.put("Pillows", new PatternProperties(true, true, false, true, false, false));
@@ -62,12 +62,17 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Smiley", new PatternProperties(true, true, false, true, false, true));
 
-		patternProperties.put("Space", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Ufo V1", "Ufo V2", "Satellite", "Mixed Rockets", "Mixed" }));
+		patternProperties.put("Space",
+				new PatternProperties(true, true, false, true, false, false, //
+						new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Ufo V1", "Ufo V2", "Satellite", "Mixed Rockets",
+								"Mixed" }));
 
 		patternProperties.put("Stars", new PatternProperties(true, true, false, false, true, true));
 		patternProperties.put("Star Circles", new PatternProperties(true, true, false, true, false, false));
 		patternProperties.put("Sun", new PatternProperties(true, true, false, true, false, false));
+
+		patternProperties.put("Text", new PatternProperties(true, false, true, true, false, false, //
+				new CharSequence[] { "Letters", "Numbers", "Custom Text" }));
 
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "Mixed" }));
