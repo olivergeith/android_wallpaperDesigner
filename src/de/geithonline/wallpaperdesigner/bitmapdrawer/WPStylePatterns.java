@@ -1050,7 +1050,7 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawRect(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new RectanglePath(new Point(x, y), radius, Settings.getSelectedPatternVariant());
+		final Path path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), Settings.getSelectedPatternVariant());
 
 		if (Settings.isRandomRotate()) {
 			rotatePath(x, y, path, Settings.getRotationDegrees(0, 180));

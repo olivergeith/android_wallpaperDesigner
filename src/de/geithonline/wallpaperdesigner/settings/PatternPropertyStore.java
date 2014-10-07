@@ -8,7 +8,7 @@ public class PatternPropertyStore {
 	private static final Map<String, PatternProperties> patternProperties = new HashMap<String, PatternProperties>();
 
 	static {
-		// new PatternProperties(outlineOption, randomrotateOption, textOption, filledOption, leafOption, glossyOption)
+		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Android", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
 		patternProperties.put("Clouds", new PatternProperties(true, true, false, false, false, false));
@@ -42,12 +42,13 @@ public class PatternPropertyStore {
 
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Ghost", "Pacman", "Mixed" }));
-		patternProperties.put("Pillows", new PatternProperties(true, true, false, true, false, false));
+
+		patternProperties.put("Pillows", new PatternProperties(true, true, false, false, false, false));
 
 		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 
-		patternProperties.put("Rectangles", new PatternProperties(true, true, false, false, false, false, //
+		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Normal", "Rounded", "Mixed" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //

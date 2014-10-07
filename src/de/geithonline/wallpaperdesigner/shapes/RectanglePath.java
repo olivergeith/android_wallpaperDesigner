@@ -7,7 +7,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RectanglePath extends Path {
 
-	public RectanglePath(final Point center, final float radius, final String variant) {
+	public RectanglePath(final Point center, final float radius, final boolean filled, final String variant) {
 		super();
 
 		boolean rounded = false;
@@ -31,5 +31,20 @@ public class RectanglePath extends Path {
 			final float cornerRad = radius * 0.3f;
 			addRoundRect(rect, cornerRad, cornerRad, Direction.CW);
 		}
+		if (filled) {
+			rect.left = center.x - radius / 2;
+			rect.right = center.x + radius / 2;
+			rect.top = center.y - height / 2;
+			rect.bottom = center.y + height / 2;
+
+			if (!rounded) {
+				addRect(rect, Direction.CCW);
+			} else {
+				final float cornerRad = radius * 0.3f;
+				addRoundRect(rect, cornerRad, cornerRad, Direction.CCW);
+			}
+
+		}
+
 	}
 }
