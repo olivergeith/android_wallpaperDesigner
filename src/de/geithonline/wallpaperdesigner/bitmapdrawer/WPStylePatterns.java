@@ -224,6 +224,9 @@ public class WPStylePatterns extends WPStyle {
 		case "Geometrical Shapes":
 			drawGeometric(x, y, paint, radius);
 			break;
+		case "Rings":
+			drawRing(x, y, paint, radius);
+			break;
 		case "Bubbles":
 			if (Settings.isGlossy()) {
 				drawGlossyBubble(x, y, paint, radius);
@@ -282,9 +285,6 @@ public class WPStylePatterns extends WPStyle {
 		case "Mandala":
 			drawMandala(x, y, paint, radius);
 			break;
-		case "Rings":
-			drawRing(x, y, paint, radius);
-			break;
 		case "Skyline":
 			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
 			bitmapCanvas.drawRect(rect, paint);
@@ -336,17 +336,6 @@ public class WPStylePatterns extends WPStyle {
 		rotatePath(x, y + radius / 2, path, Settings.getRotationDegrees(-30, 30));
 
 		bitmapCanvas.drawPath(path, paint);
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	public void drawRing(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean());
-
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
@@ -444,6 +433,9 @@ public class WPStylePatterns extends WPStyle {
 	private void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 5);
+			variant = "V" + nr;
+		} else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
 			final int nr = getRandomInt(0, 6);
 			variant = "V" + nr;
 		}
@@ -473,6 +465,49 @@ public class WPStylePatterns extends WPStyle {
 		case "V5":
 		case "Octagon":
 			path = new XEckPath(8, new Point(x, y), radius, 0, getFilledBoolean());
+			break;
+		case "V6":
+		case "Circle":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
+			break;
+		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private void drawRing(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 4);
+			variant = "V" + nr;
+		}
+		drawRing(x, y, paint, radius, variant);
+	}
+
+	private void drawRing(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Rings V1":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V1");
+			break;
+		case "V2":
+		case "Rings V2":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V2");
+			break;
+		case "V3":
+		case "Rings V3":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
+			break;
+		case "V4":
+		case "Rings V4":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));

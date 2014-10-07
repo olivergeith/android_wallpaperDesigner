@@ -25,7 +25,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Gears", new PatternProperties(true, false, false, true, false, false));
 
 		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Triangle", "Square", "Pentagon", "Hexagon", "Octagon", "Mixed" }));
+				new CharSequence[] { "Triangle", "Square", "Pentagon", "Hexagon", "Octagon", "Circle", "Mixed", "Mixed (with Circle)" }));
 
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true));
 		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
@@ -50,7 +50,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Normal", "Rounded", "Mixed" }));
 
-		patternProperties.put("Rings", new PatternProperties(true, false, false, true, false, false));
+		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Rings V1", "Rings V2", "Rings V3", "Rings V4", "Mixed" }));
 
 		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
 
