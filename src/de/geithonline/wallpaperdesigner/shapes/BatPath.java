@@ -13,6 +13,9 @@ public class BatPath extends Path {
 		case "V1":
 			drawBatV1(center, radius);
 			break;
+		case "V2":
+			drawBatV2(center, radius);
+			break;
 		}
 
 	}
@@ -62,6 +65,39 @@ public class BatPath extends Path {
 		quadTo(center.x + 0 * raster, center.y - 0.5f * raster, // controllpoint
 				center.x - 0.7f * raster, center.y - 1.5f * raster); // Zielpunkt
 		close();
+
+	}
+
+	private void drawBatV2(final Point center, final float radius) {
+		final float raster = radius / 3.5f;
+
+		moveTo(center.x + 0 * raster, center.y - 0 * raster);
+		lineTo(center.x - 1 * raster, center.y - 1 * raster);
+		lineTo(center.x - 1 * raster, center.y - 0 * raster);
+		lineTo(center.x - 5 * raster, center.y - 1.5f * raster);
+		lineTo(center.x - 8 * raster, center.y - 0 * raster);
+
+		quadTo(center.x - 6 * raster, center.y - 0.5f * raster, // controllpoint
+				center.x - 5 * raster, center.y + 1 * raster); // Zielpunkt
+		quadTo(center.x - 3.5f * raster, center.y + 0.5f * raster, // controllpoint
+				center.x - 3 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x - 1.9f * raster, center.y + 0.8f * raster, // controllpoint
+				center.x - 1 * raster, center.y + 2 * raster); // Zielpunkt
+		lineTo(center.x - 0 * raster, center.y + 3 * raster);
+		lineTo(center.x + 1 * raster, center.y + 2 * raster);
+		quadTo(center.x + 1.9f * raster, center.y + 0.8f * raster, // controllpoint
+				center.x + 3 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x + 3.5f * raster, center.y + 0.5f * raster, // controllpoint
+				center.x + 5 * raster, center.y + 1 * raster); // Zielpunkt
+		quadTo(center.x + 6 * raster, center.y - 0.5f * raster, // controllpoint
+				center.x + 8 * raster, center.y + 0 * raster); // Zielpunkt
+		lineTo(center.x + 5 * raster, center.y - 1.5f * raster);
+		lineTo(center.x + 1 * raster, center.y - 0 * raster);
+		lineTo(center.x + 1 * raster, center.y - 1 * raster);
+		close();
+		// Augen
+		addCircle(center.x - 0.5f * raster, center.y + 0.2f * raster, raster * 0.25f, Direction.CW);
+		addCircle(center.x + 0.5f * raster, center.y + 0.2f * raster, raster * 0.25f, Direction.CW);
 
 	}
 
