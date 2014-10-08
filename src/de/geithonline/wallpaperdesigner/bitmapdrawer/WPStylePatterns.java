@@ -20,6 +20,7 @@ import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
+import de.geithonline.wallpaperdesigner.shapes.BatPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
@@ -209,8 +210,8 @@ public class WPStylePatterns extends WPStyle {
 		case "Gears":
 			drawGear(x, y, paint, radius);
 			break;
-		case "Skulls":
-			drawSkull(x, y, paint, radius);
+		case "Spooky":
+			drawSpooky(x, y, paint, radius);
 			break;
 		case "Lemons":
 			drawZitrone(x, y, paint, radius);
@@ -1080,8 +1081,28 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSkull(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new SkullPath(new Point(x, y), radius);
+	private void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
+		String variante = Settings.getSelectedPatternVariant();
+		if (variante.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 2);
+			variante = "V" + nr;
+		}
+		drawSpooky(x, y, paint, radius, variante);
+	}
+
+	private void drawSpooky(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Skull":
+			path = new SkullPath(new Point(x, y), radius);
+			break;
+		case "V2":
+		case "Aarons Cute Bat":
+			path = new BatPath(new Point(x, y), radius, "V1");
+			break;
+		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline

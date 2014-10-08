@@ -60,7 +60,8 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Shells", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "Shells V1", "Shells V2", "Shells V3", "Shells V4", "Shells V5", "Shells V6", "Shells Mixed" }));
-		patternProperties.put("Skulls", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Spooky", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "Skull", "Aarons Cute Bat", "Mixed" }));
 
 		patternProperties.put("Smiley", new PatternProperties(true, true, false, true, false, true));
 
