@@ -148,7 +148,7 @@ public class BatPath extends Path {
 	}
 
 	private void drawBatV4(final Point center, final float radius) {
-		final float raster = radius / 3.5f;
+		final float raster = radius / 4.5f;
 
 		moveTo(center.x + 1 * raster, center.y - 2 * raster);
 		quadTo(center.x - 0 * raster, center.y - 0.5f * raster, // controllpoint
@@ -163,9 +163,9 @@ public class BatPath extends Path {
 		quadTo(center.x - 3.5f * raster, center.y + 0 * raster, // controllpoint
 				center.x - 3 * raster, center.y + 2 * raster); // Zielpunkt
 
-		quadTo(center.x - 1 * raster, center.y + 2 * raster, // controllpoint
+		quadTo(center.x - 0 * raster, center.y + 2 * raster, // controllpoint
 				center.x + 0 * raster, center.y + 6 * raster); // Zielpunkt
-		quadTo(center.x + 1 * raster, center.y + 2 * raster, // controllpoint
+		quadTo(center.x + 0 * raster, center.y + 2 * raster, // controllpoint
 				center.x + 3 * raster, center.y + 2 * raster); // Zielpunkt
 		quadTo(center.x + 3.5f * raster, center.y - 0 * raster, // controllpoint
 				center.x + 6 * raster, center.y + 0 * raster); // Zielpunkt

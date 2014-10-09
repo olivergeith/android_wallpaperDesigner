@@ -40,6 +40,7 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV2Path;
 import de.geithonline.wallpaperdesigner.shapes.MandalaV3Path;
 import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
+import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
@@ -1085,7 +1086,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 8);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
 			final int nr = getRandomInt(1, 5);
@@ -1128,6 +1129,10 @@ public class WPStylePatterns extends WPStyle {
 		case "V7":
 		case "Ghost V2":
 			path = new GhostPath(new Point(x, y), radius, "V2");
+			break;
+		case "V8":
+		case "Owl V1":
+			path = new OwlPath(new Point(x, y), radius, "V1");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
