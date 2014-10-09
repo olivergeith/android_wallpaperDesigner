@@ -1088,10 +1088,10 @@ public class WPStylePatterns extends WPStyle {
 			final int nr = getRandomInt(0, 5);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
-			final int nr = getRandomInt(1, 3);
+			final int nr = getRandomInt(1, 5);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Ghosts")) {
-			final int nr = getRandomInt(3, 5);
+			final int nr = getRandomInt(5, 7);
 			variante = "V" + nr;
 		}
 		drawSpooky(x, y, paint, radius, variante);
@@ -1106,18 +1106,26 @@ public class WPStylePatterns extends WPStyle {
 			path = new SkullPath(new Point(x, y), radius);
 			break;
 		case "V2":
-		case "Aarons Cute Bat":
+		case "Bat V1 (Aarons Cute Design)":
 			path = new BatPath(new Point(x, y), radius, "V1");
 			break;
 		case "V3":
-		case "Bat":
+		case "Bat V2":
 			path = new BatPath(new Point(x, y), radius, "V2");
 			break;
 		case "V4":
+		case "Bat V3":
+			path = new BatPath(new Point(x, y), radius, "V3");
+			break;
+		case "V5":
+		case "Bat V4":
+			path = new BatPath(new Point(x, y), radius, "V4");
+			break;
+		case "V6":
 		case "Ghost V1":
 			path = new GhostPath(new Point(x, y), radius, "V1");
 			break;
-		case "V5":
+		case "V7":
 		case "Ghost V2":
 			path = new GhostPath(new Point(x, y), radius, "V2");
 			break;

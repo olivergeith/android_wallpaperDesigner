@@ -16,6 +16,12 @@ public class BatPath extends Path {
 		case "V2":
 			drawBatV2(center, radius);
 			break;
+		case "V3":
+			drawBatV3(center, radius);
+			break;
+		case "V4":
+			drawBatV4(center, radius);
+			break;
 		}
 
 	}
@@ -98,6 +104,83 @@ public class BatPath extends Path {
 		// Augen
 		addCircle(center.x - 0.5f * raster, center.y + 0.2f * raster, raster * 0.25f, Direction.CW);
 		addCircle(center.x + 0.5f * raster, center.y + 0.2f * raster, raster * 0.25f, Direction.CW);
+
+	}
+
+	private void drawBatV3(final Point center, final float radius) {
+		final float raster = radius / 3.5f;
+
+		moveTo(center.x + 1 * raster, center.y - 2 * raster);
+		quadTo(center.x - 0 * raster, center.y - 0.5f * raster, // controllpoint
+				center.x - 1 * raster, center.y - 2 * raster); // Zielpunkt
+		lineTo(center.x - 1 * raster, center.y - 1 * raster);
+
+		quadTo(center.x - 4 * raster, center.y - 1 * raster, // controllpoint
+				center.x - 5 * raster, center.y - 2 * raster); // Zielpunkt
+		quadTo(center.x - 7 * raster, center.y - 1.5f * raster, // controllpoint
+				center.x - 8 * raster, center.y + 0 * raster); // Zielpunkt
+
+		quadTo(center.x - 6 * raster, center.y - 0.5f * raster, // controllpoint
+				center.x - 5 * raster, center.y + 1 * raster); // Zielpunkt
+		quadTo(center.x - 3 * raster, center.y + 0.5f * raster, // controllpoint
+				center.x - 2 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x - 0.5f * raster, center.y + 1.5f * raster, // controllpoint
+				center.x + 0 * raster, center.y + 3 * raster); // Zielpunkt
+
+		quadTo(center.x + 0.5f * raster, center.y + 1.5f * raster, // controllpoint
+				center.x + 2 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x + 3 * raster, center.y + 0.5f * raster, // controllpoint
+				center.x + 5 * raster, center.y + 1 * raster); // Zielpunkt
+		quadTo(center.x + 6 * raster, center.y - 0.5f * raster, // controllpoint
+				center.x + 8 * raster, center.y + 0 * raster); // Zielpunkt
+
+		quadTo(center.x + 7 * raster, center.y - 1.5f * raster, // controllpoint
+				center.x + 5 * raster, center.y - 2 * raster); // Zielpunkt
+		quadTo(center.x + 4 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 1 * raster, center.y - 1 * raster); // Zielpunkt
+		lineTo(center.x + 1 * raster, center.y - 2 * raster);
+		close();
+
+		// Augen
+		addCircle(center.x - 0.5f * raster, center.y - 0.5f * raster, raster * 0.25f, Direction.CW);
+		addCircle(center.x + 0.5f * raster, center.y - 0.5f * raster, raster * 0.25f, Direction.CW);
+
+	}
+
+	private void drawBatV4(final Point center, final float radius) {
+		final float raster = radius / 3.5f;
+
+		moveTo(center.x + 1 * raster, center.y - 2 * raster);
+		quadTo(center.x - 0 * raster, center.y - 0.5f * raster, // controllpoint
+				center.x - 1 * raster, center.y - 2 * raster); // Zielpunkt
+
+		quadTo(center.x - 1 * raster, center.y + 1 * raster, // controllpoint
+				center.x - 5 * raster, center.y - 4 * raster); // Zielpunkt
+		quadTo(center.x - 6 * raster, center.y - 3 * raster, // controllpoint
+				center.x - 8 * raster, center.y - 3 * raster); // Zielpunkt
+		quadTo(center.x - 6 * raster, center.y - 2 * raster, // controllpoint
+				center.x - 6 * raster, center.y + 0 * raster); // Zielpunkt
+		quadTo(center.x - 3.5f * raster, center.y + 0 * raster, // controllpoint
+				center.x - 3 * raster, center.y + 2 * raster); // Zielpunkt
+
+		quadTo(center.x - 1 * raster, center.y + 2 * raster, // controllpoint
+				center.x + 0 * raster, center.y + 6 * raster); // Zielpunkt
+		quadTo(center.x + 1 * raster, center.y + 2 * raster, // controllpoint
+				center.x + 3 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x + 3.5f * raster, center.y - 0 * raster, // controllpoint
+				center.x + 6 * raster, center.y + 0 * raster); // Zielpunkt
+		quadTo(center.x + 6 * raster, center.y - 2 * raster, // controllpoint
+				center.x + 8 * raster, center.y - 3 * raster); // Zielpunkt
+		quadTo(center.x + 6 * raster, center.y - 3 * raster, // controllpoint
+				center.x + 5 * raster, center.y - 4 * raster); // Zielpunkt
+
+		quadTo(center.x + 1 * raster, center.y + 1 * raster, // controllpoint
+				center.x + 1 * raster, center.y - 2 * raster); // Zielpunkt
+		close();
+
+		// Augen
+		addCircle(center.x - 0.5f * raster, center.y - 0.5f * raster, raster * 0.25f, Direction.CW);
+		addCircle(center.x + 0.5f * raster, center.y - 0.5f * raster, raster * 0.25f, Direction.CW);
 
 	}
 
