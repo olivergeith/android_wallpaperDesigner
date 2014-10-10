@@ -1092,13 +1092,16 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 9);
+			final int nr = getRandomInt(0, 10);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
 			final int nr = getRandomInt(1, 5);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Ghosts")) {
 			final int nr = getRandomInt(5, 7);
+			variante = "V" + nr;
+		} else if (variante.equalsIgnoreCase("Mixed Owls")) {
+			final int nr = getRandomInt(7, 10);
 			variante = "V" + nr;
 		}
 		drawSpooky(x, y, paint, radius, variante);
