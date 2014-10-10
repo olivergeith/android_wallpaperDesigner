@@ -10,7 +10,7 @@
 	        android:dialogTitle="@string/patternPicker"
 	        android:defaultValue="Stars"
 	        android:entries="@array/pattern"
-	        android:entryValues="@array/patternValues"
+	        android:entryValues="@array/pattern"
 	        />
 
         <ListPreference

@@ -80,7 +80,6 @@
     <string-array name="pattern">
         <item >Android</item>
         <item >Bubbles</item>
-        <item >Clouds</item>
         <item >Crop Circles</item>
         <item >Dandelion</item>
         <item >Deathstars</item>
@@ -102,54 +101,18 @@
         <item >Roses</item>
         <item >Saw</item>
         <item >Shells</item>
-        <item >Spooky</item>
         <item >Skyline</item>
         <item >Smiley</item>
         <item >Space</item>
+        <item >Spooky</item>
         <item >Star Circles</item>
         <item >Stars</item>
-        <item >Sun</item>
         <item >Text</item>
+        <item >Weather</item>
         <item >Virus Attack</item>
         <item >XmasTrees</item>
         </string-array>
     
-    <string-array name="patternValues">
-        <item >Android</item>
-        <item >Bubbles</item>
-        <item >Clouds</item>
-        <item >Crop Circles</item>
-        <item >Dandelion</item>
-        <item >Deathstars</item>
-        <item >Fish</item>
-        <item >Flowers</item>
-        <item >Gears</item>
-        <item >Geometrical Shapes</item>
-        <item >Hearts</item>
-        <item >Hedgehog</item>
-        <item >Lemons</item>
-        <item >Lines</item>
-        <item >Mandala</item>
-        <item >Maritim</item>
-        <item >PacMan</item>
-        <item >Pillows</item>
-        <item >Planes</item>
-        <item >Rectangles</item>
-        <item >Rings</item>
-        <item >Roses</item>
-        <item >Saw</item>
-        <item >Shells</item>
-        <item >Spooky</item>
-        <item >Skyline</item>
-        <item >Smiley</item>
-        <item >Space</item>
-        <item >Star Circles</item>
-        <item >Stars</item>
-        <item >Sun</item>
-        <item >Text</item>
-        <item >Virus Attack</item>
-        <item >XmasTrees</item>
-        </string-array>
     
     
 

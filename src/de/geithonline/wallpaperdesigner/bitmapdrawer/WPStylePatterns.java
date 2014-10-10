@@ -292,9 +292,6 @@ public class WPStylePatterns extends WPStyle {
 			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
 			bitmapCanvas.drawRect(rect, paint);
 			break;
-		case "Clouds":
-			drawCloud(x, y, paint, radius);
-			break;
 		case "Dandelion":
 			drawDandelion(x, y, paint, radius);
 			break;
@@ -314,8 +311,8 @@ public class WPStylePatterns extends WPStyle {
 		case "Virus Attack":
 			drawVirus(x, y, paint, radius);
 			break;
-		case "Sun":
-			drawSun(x, y, paint, radius);
+		case "Weather":
+			drawWeather(x, y, paint, radius);
 			break;
 		case "Planes":
 			drawPlane(x, y, paint, radius);
@@ -635,9 +632,29 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSun(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(3, 10), new Point(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 36));
+	private void drawWeather(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 2);
+			variant = "V" + nr;
+		}
+		drawWeather(x, y, paint, radius, variant);
+	}
+
+	private void drawWeather(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Sun":
+			path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(3, 10), new Point(x, y), radius, getFilledBoolean());
+			break;
+		case "V2":
+		case "Cloud":
+			path = new CloudPath(new Point(x, y), radius, getFilledBoolean());
+			break;
+		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1064,17 +1081,6 @@ public class WPStylePatterns extends WPStyle {
 			}
 			rotatePath(x, y, path, degr);
 		}
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawCloud(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new CloudPath(new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {

@@ -2,6 +2,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 
 public class CloudPath extends Path {
@@ -13,7 +14,7 @@ public class CloudPath extends Path {
 	 * @param rotate
 	 *            0-2pi
 	 */
-	public CloudPath(final Point center, final float radius) {
+	public CloudPath(final Point center, final float radius, final boolean filled) {
 		super();
 
 		final float x = center.x + radius * 3 / 4;
@@ -46,6 +47,23 @@ public class CloudPath extends Path {
 		arcTo(oval, 270, -180);
 		// lineTo(x, y);
 		close();
+		if (filled) {
+			final PointF p = new PointF(center.x, center.y + radius * 0.25f);
+			addPath(getBlitz(p, radius / 2));
+		}
+	}
+
+	private Path getBlitz(final PointF center, final float radius) {
+		final Path path = new Path();
+		final float raster = radius / 4;
+		path.moveTo(center.x + 0 * raster, center.y - 5 * raster);
+		path.lineTo(center.x - 1 * raster, center.y - 1 * raster);
+		path.lineTo(center.x + 1 * raster, center.y - 1 * raster);
+		path.lineTo(center.x - 1 * raster, center.y + 4 * raster);
+		path.lineTo(center.x - 0 * raster, center.y + 0 * raster);
+		path.lineTo(center.x - 2 * raster, center.y + 0 * raster);
+		path.close();
+		return path;
 	}
 
 }

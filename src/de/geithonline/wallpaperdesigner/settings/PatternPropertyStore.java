@@ -11,7 +11,6 @@ public class PatternPropertyStore {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Android", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
-		patternProperties.put("Clouds", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Crop Circles", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
@@ -73,10 +72,12 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Stars", new PatternProperties(true, true, false, false, true, true));
 		patternProperties.put("Star Circles", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Sun", new PatternProperties(true, true, false, true, false, false));
 
 		patternProperties.put("Text", new PatternProperties(true, false, true, true, false, false, //
 				new CharSequence[] { "Letters", "Numbers", "Custom Text" }));
+
+		patternProperties.put("Weather", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Sun", "Cloud", "Mixed" }));
 
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "Mixed" }));
