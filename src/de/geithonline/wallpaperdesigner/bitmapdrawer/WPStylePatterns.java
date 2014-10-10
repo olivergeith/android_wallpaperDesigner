@@ -1213,7 +1213,28 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new HeartPath(new Point(x, y), radius);
+		String variante = Settings.getSelectedPatternVariant();
+		if (variante.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 2);
+			variante = "V" + nr;
+		}
+		drawHeart(x, y, paint, radius, variante);
+	}
+
+	private void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
+
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+			path = new HeartPath(new Point(x, y), radius, "V1");
+			;
+			break;
+		case "V2":
+			path = new HeartPath(new Point(x, y), radius, "V2");
+			;
+			break;
+		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1305,13 +1326,34 @@ public class WPStylePatterns extends WPStyle {
 	}
 
 	private void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius) {
+		String variante = Settings.getSelectedPatternVariant();
+		if (variante.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 2);
+			variante = "V" + nr;
+		}
+		drawGlossyHeart(x, y, paint, radius, variante);
+
+	}
+
+	private void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final int color = paint.getColor();
 		final int colorBrighter = ColorHelper.brighter2times(color);
 		final int colorDarker = ColorHelper.darker(color);
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int transparent = 0x00FFFFFF;
 		// Heart für dropshadow
-		final Path path = new HeartPath(new Point(x, y), radius);
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+			path = new HeartPath(new Point(x, y), radius, "V1");
+			;
+			break;
+		case "V2":
+			path = new HeartPath(new Point(x, y), radius, "V2");
+			;
+			break;
+		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);

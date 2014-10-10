@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 public class HeartPath extends Path {
 
@@ -12,10 +13,20 @@ public class HeartPath extends Path {
 	 * @param rOuter
 	 *            Radius von 1f bis 5f....
 	 */
-	public HeartPath(final Point center, final float rOuter) {
-		// x(t)=12sin(t)-4sin(3t)
-		// y(t)=13cos(t)-5cos(2t)-2cos(3t)-cos(4t)
+	public HeartPath(final Point center, final float rOuter, final String variante) {
 		super();
+		switch (variante) {
+		default:
+		case "V1":
+			drawHeartV1(center, rOuter);
+			break;
+		case "V2":
+			drawHeartV2(center, rOuter);
+			break;
+		}
+	}
+
+	private void drawHeartV1(final Point center, final float rOuter) {
 		final int radiusfactor = 15;
 		final int ecken = 100;
 		final float angle = (float) (2 * Math.PI / ecken);
@@ -37,4 +48,26 @@ public class HeartPath extends Path {
 		}
 		close();
 	}
+
+	private void drawHeartV2(final Point center, final float radius) {
+		final float raster = radius / 2;
+
+		final RectF oval = new RectF();
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x - 0 * raster;
+		oval.top = center.y - 1 * raster;
+		oval.bottom = center.y + 1 * raster;
+		arcTo(oval, -225, 225);
+
+		oval.left = center.x - 0 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 1 * raster;
+		oval.bottom = center.y + 1 * raster;
+		arcTo(oval, -180, 225);
+
+		lineTo(center.x - 0 * raster, center.y + 2.5f * raster);
+
+		close();
+	}
+
 }
