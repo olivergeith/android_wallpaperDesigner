@@ -1138,6 +1138,10 @@ public class WPStylePatterns extends WPStyle {
 		case "Owl V2":
 			path = new OwlPath(new Point(x, y), radius, "V2");
 			break;
+		case "V10":
+		case "Owl V3":
+			path = new OwlPath(new Point(x, y), radius, "V3");
+			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
