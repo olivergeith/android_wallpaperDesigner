@@ -74,6 +74,7 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
+import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -119,7 +120,6 @@ public class WPStylePatterns extends WPStyle {
 
 		final int anzahlPatterns = Settings.getAnzahlPatterns();
 
-		final int blurLevel1 = anzahlPatterns * 4 / 10;
 		final int blurLevel2 = anzahlPatterns * 6 / 10;
 		final int blurLevel3 = anzahlPatterns * 8 / 10;
 
@@ -168,9 +168,6 @@ public class WPStylePatterns extends WPStyle {
 			drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
-				// if (i == blurLevel1) {
-				// bitmap = BitmapBlurrer.doBlur(bitmap, 7, true);
-				// }
 				if (i == blurLevel2) {
 					bitmap = BitmapBlurrer.doBlur(bitmap, 5, true);
 				}
@@ -215,8 +212,8 @@ public class WPStylePatterns extends WPStyle {
 		case "Spooky":
 			drawSpooky(x, y, paint, radius);
 			break;
-		case "Lemons":
-			drawZitrone(x, y, paint, radius);
+		case "Assorted Shapes":
+			drawAssorted(x, y, paint, radius);
 			break;
 		case "XmasTrees":
 			drawXmasTree(x, y, paint, radius);
@@ -247,9 +244,6 @@ public class WPStylePatterns extends WPStyle {
 		case "Lines":
 			drawLines(x, y, paint, radius);
 			break;
-		case "Crop Circles":
-			drawDotSpiral(x, y, paint, radius);
-			break;
 		case "Shells":
 			drawShell(x, y, paint, radius);
 			break;
@@ -270,17 +264,8 @@ public class WPStylePatterns extends WPStyle {
 				drawSmiley(x, y, paint, radius);
 			}
 			break;
-		case "Android":
-			drawAndroid(x, y, paint, radius);
-			break;
 		case "Fish":
 			drawFisch(x, y, paint, radius);
-			break;
-		case "Pillows":
-			drawPillow(x, y, paint, radius);
-			break;
-		case "Roses":
-			drawRose(x, y, paint, radius);
 			break;
 		case "Flowers":
 			drawFlower(x, y, paint, radius);
@@ -317,14 +302,6 @@ public class WPStylePatterns extends WPStyle {
 		case "Planes":
 			drawPlane(x, y, paint, radius);
 			break;
-		}
-	}
-
-	public void drawRose(final int x, final int y, final Paint paint, final int radius) {
-		bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(new RosePath(new Point(x, y), radius), paint);
 		}
 	}
 
@@ -773,21 +750,6 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 	}
 
-	private void drawDotSpiral(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new DotSpiralPath(3, new Point(x, y), radius, 0);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
-		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
-			mirrorPath(x, y, path);
-		}
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
 	private void drawShell(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Shells Mixed")) {
@@ -898,18 +860,6 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			paint.setStrokeCap(Cap.ROUND);
-			bitmapCanvas.drawPath(path, paint);
-		}
-	}
-
-	private void drawAndroid(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new AndroidPath(new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1092,7 +1042,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 10);
+			final int nr = getRandomInt(0, 11);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
 			final int nr = getRandomInt(1, 5);
@@ -1101,7 +1051,7 @@ public class WPStylePatterns extends WPStyle {
 			final int nr = getRandomInt(5, 7);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Owls")) {
-			final int nr = getRandomInt(7, 10);
+			final int nr = getRandomInt(7, 11);
 			variante = "V" + nr;
 		}
 		drawSpooky(x, y, paint, radius, variante);
@@ -1151,6 +1101,10 @@ public class WPStylePatterns extends WPStyle {
 		case "Owl V3":
 			path = new OwlPath(new Point(x, y), radius, "V3");
 			break;
+		case "V11":
+		case "Owl V4":
+			path = new OwlPath(new Point(x, y), radius, "V4");
+			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
@@ -1161,9 +1115,49 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawZitrone(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new ZitronePath(new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+	private void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 6);
+			variant = "V" + nr;
+		}
+		drawAssorted(x, y, paint, radius, variant);
+	}
+
+	private void drawAssorted(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Lemon":
+			path = new ZitronePath(new Point(x, y), radius);
+			break;
+		case "V2":
+		case "YingYang":
+			path = new YingYangPath(new Point(x, y), radius);
+			break;
+		case "V3":
+		case "Crop Circles":
+			path = new DotSpiralPath(3, new Point(x, y), radius, 0);
+			if (Settings.isRandomRotate() && getRandomBoolean()) {
+				mirrorPath(x, y, path);
+			}
+			break;
+		case "V4":
+		case "Roses":
+			path = new RosePath(new Point(x, y), radius);
+			break;
+		case "V5":
+		case "Pillows":
+			path = new PillowPath(new Point(x, y), radius);
+			break;
+		case "V6":
+		case "Android":
+			path = new AndroidPath(new Point(x, y), radius);
+			break;
+
+		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1201,17 +1195,6 @@ public class WPStylePatterns extends WPStyle {
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawCircle(x, y, radius, paint);
-		}
-	}
-
-	private void drawPillow(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new PillowPath(new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
 		}
 	}
 

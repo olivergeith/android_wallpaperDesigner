@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.shapes;
+package de.geithonline.wallpaperdesigner.shapes.base;
 
 import android.graphics.Path;
 import android.graphics.PointF;

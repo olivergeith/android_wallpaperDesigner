@@ -9,9 +9,9 @@ public class PatternPropertyStore {
 
 	static {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
-		patternProperties.put("Android", new PatternProperties(true, true, false, false, false, false));
+		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Mixed" }));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
-		patternProperties.put("Crop Circles", new PatternProperties(true, true, false, false, false, false));
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
 
@@ -29,8 +29,6 @@ public class PatternPropertyStore {
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "V1", "V2", "Mixed" }));
 		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
-		patternProperties.put("Lemons", new PatternProperties(true, true, false, false, false, false));
-
 		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 
@@ -43,8 +41,6 @@ public class PatternPropertyStore {
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Ghost", "Pacman", "Mixed" }));
 
-		patternProperties.put("Pillows", new PatternProperties(true, true, false, false, false, false));
-
 		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 
@@ -54,15 +50,13 @@ public class PatternPropertyStore {
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rings V1", "Rings V2", "Rings V3", "Rings V4", "Mixed" }));
 
-		patternProperties.put("Roses", new PatternProperties(true, false, false, false, false, false));
-
 		patternProperties.put("Saw", new PatternProperties(true, false, false, true, false, false));
 
 		patternProperties.put("Shells", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "Shells V1", "Shells V2", "Shells V3", "Shells V4", "Shells V5", "Shells V6", "Shells Mixed" }));
 		patternProperties.put("Spooky", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Skull", "Bat V1 (Aarons Cute Design)", "Bat V2", "Bat V3", "Bat V4", "Ghost V1", "Ghost V2", "Owl V1", "Owl V2",
-						"Owl V3", "Mixed", "Mixed Bats", "Mixed Ghosts", "Mixed Owls" }));
+						"Owl V3", "Owl V4", "Mixed", "Mixed Bats", "Mixed Ghosts", "Mixed Owls" }));
 
 		patternProperties.put("Smiley", new PatternProperties(true, true, false, true, false, true));
 

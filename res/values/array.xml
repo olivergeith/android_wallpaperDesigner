@@ -78,9 +78,8 @@
     
     
     <string-array name="pattern">
-        <item >Android</item>
+        <item >Assorted Shapes</item>
         <item >Bubbles</item>
-        <item >Crop Circles</item>
         <item >Dandelion</item>
         <item >Deathstars</item>
         <item >Fish</item>
@@ -89,7 +88,6 @@
         <item >Geometrical Shapes</item>
         <item >Hearts</item>
         <item >Hedgehog</item>
-        <item >Lemons</item>
         <item >Lines</item>
         <item >Mandala</item>
         <item >Maritim</item>
@@ -98,7 +96,6 @@
         <item >Planes</item>
         <item >Rectangles</item>
         <item >Rings</item>
-        <item >Roses</item>
         <item >Saw</item>
         <item >Shells</item>
         <item >Skyline</item>
