@@ -13,20 +13,24 @@ public class HeartPath extends Path {
 	 * @param rOuter
 	 *            Radius von 1f bis 5f....
 	 */
-	public HeartPath(final Point center, final float rOuter, final String variante) {
+	public HeartPath(final Point center, final float rOuter, final boolean inverted, final String variante) {
 		super();
 		switch (variante) {
 		default:
 		case "V1":
-			drawHeartV1(center, rOuter);
+			drawHeartV1(center, rOuter, inverted);
 			break;
 		case "V2":
-			drawHeartV2(center, rOuter);
+			drawHeartV2(center, rOuter, inverted);
 			break;
 		}
 	}
 
-	private void drawHeartV1(final Point center, final float rOuter) {
+	private void drawHeartV1(final Point center, final float rOuter, final boolean inverted) {
+
+		if (inverted) {
+			addCircle(center.x, center.y, rOuter * 1.4f, Direction.CCW);
+		}
 		final int radiusfactor = 15;
 		final int ecken = 100;
 		final float angle = (float) (2 * Math.PI / ecken);
@@ -49,9 +53,8 @@ public class HeartPath extends Path {
 		close();
 	}
 
-	private void drawHeartV2(final Point center, final float radius) {
+	private void drawHeartV2(final Point center, final float radius, final boolean inverted) {
 		final float raster = radius / 2;
-
 		final RectF oval = new RectF();
 		oval.left = center.x - 2 * raster;
 		oval.right = center.x - 0 * raster;
@@ -66,8 +69,11 @@ public class HeartPath extends Path {
 		arcTo(oval, -180, 225);
 
 		lineTo(center.x - 0 * raster, center.y + 2.5f * raster);
-
 		close();
+		if (inverted) {
+			addCircle(center.x, center.y + radius * 0.25f, radius * 1.3f, Direction.CCW);
+			close();
+		}
 	}
 
 }

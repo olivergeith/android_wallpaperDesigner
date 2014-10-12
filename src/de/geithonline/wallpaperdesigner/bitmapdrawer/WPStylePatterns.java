@@ -1135,6 +1135,9 @@ public class WPStylePatterns extends WPStyle {
 		case "V2":
 		case "YingYang":
 			path = new YingYangPath(new Point(x, y), radius);
+			if (Settings.isRandomRotate() && getRandomBoolean()) {
+				mirrorPath(x, y, path);
+			}
 			break;
 		case "V3":
 		case "Crop Circles":
@@ -1213,11 +1216,11 @@ public class WPStylePatterns extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-			path = new HeartPath(new Point(x, y), radius, "V1");
+			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V1");
 			;
 			break;
 		case "V2":
-			path = new HeartPath(new Point(x, y), radius, "V2");
+			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V2");
 			;
 			break;
 		}
@@ -1332,11 +1335,11 @@ public class WPStylePatterns extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-			path = new HeartPath(new Point(x, y), radius, "V1");
+			path = new HeartPath(new Point(x, y), radius, false, "V1");
 			;
 			break;
 		case "V2":
-			path = new HeartPath(new Point(x, y), radius, "V2");
+			path = new HeartPath(new Point(x, y), radius, false, "V2");
 			;
 			break;
 		}
