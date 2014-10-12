@@ -29,6 +29,7 @@ import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FishPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
+import de.geithonline.wallpaperdesigner.shapes.FootprintPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.GhostPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
@@ -1118,7 +1119,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = getRandomInt(0, 7);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1157,6 +1158,13 @@ public class WPStylePatterns extends WPStyle {
 		case "V6":
 		case "Android":
 			path = new AndroidPath(new Point(x, y), radius);
+			break;
+		case "V7":
+		case "Footprint":
+			path = new FootprintPath(new Point(x, y), radius, "V1");
+			if (getRandomBoolean()) {
+				mirrorPath(x, y, path);
+			}
 			break;
 
 		}
