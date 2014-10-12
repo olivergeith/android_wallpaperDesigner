@@ -102,12 +102,12 @@ public class RingPath extends Path {
 	}
 
 	public void drawRingV6(final Point center, final float radius, final float rInner, final boolean filled) {
-		final float raster = radius / 4;
-
 		addCircle(center.x, center.y, radius, Direction.CCW);
 		if (!filled) {
 
 			addPath(new CrossPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW));
+		} else {
+			addRect(center.x - 0.75f * radius, center.y - 0.25f * radius, center.x + 0.75f * radius, center.y + 0.25f * radius, Direction.CW);
 		}
 	}
 
