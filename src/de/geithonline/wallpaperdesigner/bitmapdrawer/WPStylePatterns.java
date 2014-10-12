@@ -65,6 +65,7 @@ import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
+import de.geithonline.wallpaperdesigner.shapes.StarPathV2;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -461,7 +462,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawRing(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = getRandomInt(0, 5);
 			variant = "V" + nr;
 		}
 		drawRing(x, y, paint, radius, variant);
@@ -472,20 +473,28 @@ public class WPStylePatterns extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-		case "Rings V1":
+		case "Rings V1 (Flange)":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V1");
 			break;
 		case "V2":
-		case "Rings V2":
+		case "Rings V2 (Asymetric)":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V2");
 			break;
 		case "V3":
-		case "Rings V3":
+		case "Rings V3 (Concentric)":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
 			break;
 		case "V4":
-		case "Rings V4":
+		case "Rings V4 (Dizzy)":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
+			break;
+		case "V5":
+		case "Rings V5 (Star)":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V5");
+			break;
+		case "V6":
+		case "Rings V6 (Cross)":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V6");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
@@ -1119,7 +1128,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 7);
+			final int nr = getRandomInt(0, 8);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1166,7 +1175,10 @@ public class WPStylePatterns extends WPStyle {
 				mirrorPath(x, y, path);
 			}
 			break;
-
+		case "V8":
+		case "Pentagram":
+			path = new StarPathV2(new PointF(x, y), radius);
+			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);

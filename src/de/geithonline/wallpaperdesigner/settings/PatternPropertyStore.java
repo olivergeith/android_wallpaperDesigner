@@ -10,7 +10,7 @@ public class PatternPropertyStore {
 	static {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
-				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Footprint", "Mixed" }));
+				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Footprint", "Pentagram", "Mixed" }));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
@@ -28,7 +28,9 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "V1", "V2", "Mixed" }));
+
 		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
+
 		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 
@@ -48,7 +50,8 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Normal", "Rounded", "Mixed" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Rings V1", "Rings V2", "Rings V3", "Rings V4", "Mixed" }));
+				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Rings V5 (Star)",
+						"Rings V6 (Cross)", "Mixed" }));
 
 		patternProperties.put("Saw", new PatternProperties(true, false, false, true, false, false));
 
