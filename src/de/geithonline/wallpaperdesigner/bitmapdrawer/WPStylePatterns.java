@@ -509,10 +509,10 @@ public class WPStylePatterns extends WPStyle {
 	private void drawSpace(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 8);
+			final int nr = getRandomInt(0, 9);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed Rockets")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 6);
 			variant = "V" + nr;
 		}
 		drawSpace(x, y, paint, radius, variant);
@@ -543,14 +543,18 @@ public class WPStylePatterns extends WPStyle {
 			path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V5");
 			break;
 		case "V6":
+		case "Rocket V6":
+			path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V6");
+			break;
+		case "V7":
 		case "Ufo V1":
 			path = new UfoPath(new Point(x, y), radius, "Ufo V1", getFilledBoolean());
 			break;
-		case "V7":
+		case "V8":
 		case "Ufo V2":
 			path = new UfoPath(new Point(x, y), radius, "Ufo V2", getFilledBoolean());
 			break;
-		case "V8":
+		case "V9":
 		case "Satellite":
 			path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), "Satellite V1");
 			break;
