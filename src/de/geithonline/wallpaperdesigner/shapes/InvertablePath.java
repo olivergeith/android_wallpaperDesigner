@@ -28,6 +28,9 @@ public class InvertablePath extends Path {
 		case "Gear":
 			drawGear(center, rOuter, rInner, filled);
 			break;
+		case "Crown":
+			drawCrown(center, rOuter, rInner, filled);
+			break;
 		}
 	}
 
@@ -35,7 +38,7 @@ public class InvertablePath extends Path {
 		if (filled) {
 			addCircle(center.x, center.y, rOuter, Direction.CCW);
 		}
-		addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.8f, rOuter * 0.4f, true, 0));
+		addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.85f, rOuter * 0.32f, true, 0));
 	}
 
 	public void drawPlus(final Point center, final float radius, final float rInner, final boolean filled) {
@@ -70,6 +73,13 @@ public class InvertablePath extends Path {
 		// } else {
 		// addRect(center.x - 0.75f * radius, center.y - 0.25f * radius, center.x + 0.75f * radius, center.y + 0.25f * radius, Direction.CW);
 		// }
+	}
+
+	public void drawCrown(final Point center, final float radius, final float rInner, final boolean filled) {
+		if (!filled) {
+			addCircle(center.x, center.y - radius * 0.2f, radius, Direction.CCW);
+		}
+		addPath(new CrownPath(center, radius * 0.85f, "V1"));
 	}
 
 }

@@ -16,7 +16,6 @@ public class MinusPath extends Path {
 				addCircle(center.x, center.y, radius * 1.3f, Direction.CCW);
 			}
 			addRect(center.x - 3 * raster, center.y - 1 * raster, center.x + 3 * raster, center.y + 1 * raster, Direction.CW);
-			;
 		} else {
 			if (!filled) {
 				addCircle(center.x, center.y, radius * 1.3f, Direction.CW);

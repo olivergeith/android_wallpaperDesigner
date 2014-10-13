@@ -466,7 +466,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 7);
+			final int nr = getRandomInt(0, 8);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
 			final int nr = getRandomInt(3, 5);
@@ -508,6 +508,10 @@ public class WPStylePatterns extends WPStyle {
 		case "V7":
 		case "Gear":
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Gear");
+			break;
+		case "V8":
+		case "Crown":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
