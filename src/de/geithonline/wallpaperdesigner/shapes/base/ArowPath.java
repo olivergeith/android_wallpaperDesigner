@@ -12,7 +12,7 @@ public class ArowPath extends Path {
 	private void draw(final PointF center, final float radius, final Direction dir, final boolean filled) {
 		final float raster = radius / 3;
 		if (dir.equals(Direction.CW)) {
-			if (filled) {
+			if (!filled) {
 				addCircle(center.x, center.y, radius * 1.3f, Direction.CCW);
 			}
 			moveTo(center.x + 0 * raster, center.y - 3 * raster);
@@ -24,7 +24,7 @@ public class ArowPath extends Path {
 			lineTo(center.x - 3 * raster, center.y + 1 * raster);
 			close();
 		} else {
-			if (filled) {
+			if (!filled) {
 				addCircle(center.x, center.y, radius * 1.3f, Direction.CW);
 			}
 			moveTo(center.x + 0 * raster, center.y - 3 * raster);

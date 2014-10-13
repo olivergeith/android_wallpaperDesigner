@@ -34,6 +34,7 @@ import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.GhostPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
+import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
 import de.geithonline.wallpaperdesigner.shapes.LuftschlangenPath;
 import de.geithonline.wallpaperdesigner.shapes.MandalaV1Path;
@@ -242,6 +243,9 @@ public class WPStylePatterns extends WPStyle {
 			} else {
 				drawHeart(x, y, paint, radius);
 			}
+			break;
+		case "Invertable Shapes":
+			drawInvertable(x, y, paint, radius);
 			break;
 		case "Lines":
 			drawLines(x, y, paint, radius);
@@ -459,10 +463,66 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
+	private void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
+		String variante = Settings.getSelectedPatternVariant();
+		if (variante.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 7);
+			variante = "V" + nr;
+		} else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
+			final int nr = getRandomInt(3, 5);
+			variante = "V" + nr;
+		}
+
+		drawInvertable(x, y, paint, radius, variante);
+	}
+
+	private void drawInvertable(final int x, final int y, final Paint paint, final int radius, final String variante) {
+
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Heart V1":
+			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V1");
+			break;
+		case "V2":
+		case "Heart V2":
+			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V2");
+			break;
+		case "V3":
+		case "Arrow":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow");
+			break;
+		case "V4":
+		case "Plus":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Plus");
+			break;
+		case "V5":
+		case "Minus":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Minus");
+			break;
+		case "V6":
+		case "Star":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Star");
+			break;
+		case "V7":
+		case "Gear":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Gear");
+			break;
+		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	private void drawRing(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 8);
+			final int nr = getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawRing(x, y, paint, radius, variant);
@@ -487,22 +547,6 @@ public class WPStylePatterns extends WPStyle {
 		case "V4":
 		case "Rings V4 (Dizzy)":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
-			break;
-		case "V5":
-		case "Rings V5 (Star)":
-			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V5");
-			break;
-		case "V6":
-		case "Rings V6 (Cross)":
-			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V6");
-			break;
-		case "V7":
-		case "Rings V7 (Arrow)":
-			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V7");
-			break;
-		case "V8":
-		case "Rings V8 (Gear)":
-			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V8");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
@@ -1248,12 +1292,10 @@ public class WPStylePatterns extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V1");
-			;
+			path = new HeartPath(new Point(x, y), radius, false, "V1");
 			break;
 		case "V2":
-			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V2");
-			;
+			path = new HeartPath(new Point(x, y), radius, false, "V2");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));

@@ -2,9 +2,6 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.shapes.base.ArowPath;
-import de.geithonline.wallpaperdesigner.shapes.base.CrossPath;
 
 public class RingPath extends Path {
 
@@ -23,18 +20,6 @@ public class RingPath extends Path {
 			break;
 		case "V4":
 			drawRingV4(center, rOuter, rInner, filled);
-			break;
-		case "V5":
-			drawRingV5(center, rOuter, rInner, filled);
-			break;
-		case "V6":
-			drawRingV6(center, rOuter, rInner, filled);
-			break;
-		case "V7":
-			drawRingV7(center, rOuter, rInner, filled);
-			break;
-		case "V8":
-			drawRingV8(center, rOuter, rInner, filled);
 			break;
 		}
 	}
@@ -99,37 +84,6 @@ public class RingPath extends Path {
 			dir = !dir;
 		}
 		// }
-	}
-
-	public void drawRingV5(final Point center, final float rOuter, final float rInner, final boolean filled) {
-		addCircle(center.x, center.y, rOuter, Direction.CCW);
-		// if (!filled) {
-		addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.8f, rOuter * 0.4f, true, 0));
-		// }
-	}
-
-	public void drawRingV6(final Point center, final float radius, final float rInner, final boolean filled) {
-		addCircle(center.x, center.y, radius, Direction.CCW);
-		if (!filled) {
-
-			addPath(new CrossPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW));
-		} else {
-			addRect(center.x - 0.75f * radius, center.y - 0.25f * radius, center.x + 0.75f * radius, center.y + 0.25f * radius, Direction.CW);
-		}
-	}
-
-	public void drawRingV7(final Point center, final float radius, final float rInner, final boolean filled) {
-		// if (!filled) {
-		addCircle(center.x, center.y, radius, Direction.CCW);
-		// }
-		addPath(new ArowPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW, false));
-	}
-
-	public void drawRingV8(final Point center, final float radius, final float rInner, final boolean filled) {
-		// if (!filled) {
-		addCircle(center.x, center.y, radius, Direction.CCW);
-		// }
-		addPath(new GearPath(15, center, radius * 0.75f, filled));
 	}
 
 }
