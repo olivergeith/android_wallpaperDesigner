@@ -462,7 +462,7 @@ public class WPStylePatterns extends WPStyle {
 	private void drawRing(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 8);
 			variant = "V" + nr;
 		}
 		drawRing(x, y, paint, radius, variant);
@@ -495,6 +495,14 @@ public class WPStylePatterns extends WPStyle {
 		case "V6":
 		case "Rings V6 (Cross)":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V6");
+			break;
+		case "V7":
+		case "Rings V7 (Arrow)":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V7");
+			break;
+		case "V8":
+		case "Rings V8 (Gear)":
+			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V8");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));

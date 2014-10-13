@@ -51,7 +51,7 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Rings V5 (Star)",
-						"Rings V6 (Cross)", "Mixed" }));
+						"Rings V6 (Cross)", "Rings V7 (Arrow)", "Rings V8 (Gear)", "Mixed" }));
 
 		patternProperties.put("Saw", new PatternProperties(true, false, false, true, false, false));
 

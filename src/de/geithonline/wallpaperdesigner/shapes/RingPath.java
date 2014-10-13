@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.shapes.base.ArowPath;
 import de.geithonline.wallpaperdesigner.shapes.base.CrossPath;
 
 public class RingPath extends Path {
@@ -28,6 +29,12 @@ public class RingPath extends Path {
 			break;
 		case "V6":
 			drawRingV6(center, rOuter, rInner, filled);
+			break;
+		case "V7":
+			drawRingV7(center, rOuter, rInner, filled);
+			break;
+		case "V8":
+			drawRingV8(center, rOuter, rInner, filled);
 			break;
 		}
 	}
@@ -56,49 +63,49 @@ public class RingPath extends Path {
 	public void drawRingV2(final Point center, final float rOuter, final float rInner, final boolean filled) {
 		addCircle(center.x, center.y, rOuter, Direction.CCW);
 
-		if (!filled) {
-			addCircle(center.x, center.y + 0.9f * rOuter - rInner, rInner, Direction.CW);
-		}
+		// if (!filled) {
+		addCircle(center.x, center.y + 0.9f * rOuter - rInner, rInner, Direction.CW);
+		// }
 	}
 
 	public void drawRingV3(final Point center, final float rOuter, final float rInner, final boolean filled) {
 		addCircle(center.x, center.y, rOuter, Direction.CCW);
-		if (!filled) {
-			boolean dir = false;
-			for (int i = 7; i > 0; i--) {
-				final float rad = rOuter * i / 8f;
-				if (dir == true) {
-					addCircle(center.x, center.y, rad, Direction.CCW);
-				} else {
-					addCircle(center.x, center.y, rad, Direction.CW);
-				}
-				dir = !dir;
+		// if (!filled) {
+		boolean dir = false;
+		for (int i = 7; i > 0; i--) {
+			final float rad = rOuter * i / 8f;
+			if (dir == true) {
+				addCircle(center.x, center.y, rad, Direction.CCW);
+			} else {
+				addCircle(center.x, center.y, rad, Direction.CW);
 			}
+			dir = !dir;
 		}
+		// }
 	}
 
 	public void drawRingV4(final Point center, final float rOuter, final float rInner, final boolean filled) {
 		addCircle(center.x, center.y, rOuter, Direction.CCW);
 
-		if (!filled) {
-			boolean dir = false;
-			for (int i = 9; i > 0; i--) {
-				final float rad = rOuter * i / 10f;
-				if (dir == true) {
-					addCircle(center.x, center.y + 0.99f * rOuter - rad, rad, Direction.CCW);
-				} else {
-					addCircle(center.x, center.y + 0.99f * rOuter - rad, rad, Direction.CW);
-				}
-				dir = !dir;
+		// if (!filled) {
+		boolean dir = false;
+		for (int i = 9; i > 0; i--) {
+			final float rad = rOuter * i / 10f;
+			if (dir == true) {
+				addCircle(center.x, center.y + 0.99f * rOuter - rad, rad, Direction.CCW);
+			} else {
+				addCircle(center.x, center.y + 0.99f * rOuter - rad, rad, Direction.CW);
 			}
+			dir = !dir;
 		}
+		// }
 	}
 
 	public void drawRingV5(final Point center, final float rOuter, final float rInner, final boolean filled) {
 		addCircle(center.x, center.y, rOuter, Direction.CCW);
-		if (!filled) {
-			addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.8f, rOuter * 0.4f, true, 0));
-		}
+		// if (!filled) {
+		addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.8f, rOuter * 0.4f, true, 0));
+		// }
 	}
 
 	public void drawRingV6(final Point center, final float radius, final float rInner, final boolean filled) {
@@ -109,6 +116,20 @@ public class RingPath extends Path {
 		} else {
 			addRect(center.x - 0.75f * radius, center.y - 0.25f * radius, center.x + 0.75f * radius, center.y + 0.25f * radius, Direction.CW);
 		}
+	}
+
+	public void drawRingV7(final Point center, final float radius, final float rInner, final boolean filled) {
+		// if (!filled) {
+		addCircle(center.x, center.y, radius, Direction.CCW);
+		// }
+		addPath(new ArowPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW, false));
+	}
+
+	public void drawRingV8(final Point center, final float radius, final float rInner, final boolean filled) {
+		// if (!filled) {
+		addCircle(center.x, center.y, radius, Direction.CCW);
+		// }
+		addPath(new GearPath(15, center, radius * 0.75f, filled));
 	}
 
 }

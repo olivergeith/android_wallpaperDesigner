@@ -32,7 +32,7 @@ public class RocketPath extends Path {
 			break;
 		case "V6":
 		case "Rocket V6":
-			drawRocketV5(center, radius, filled);
+			drawRocketV6(center, radius, filled);
 			break;
 		}
 	}
@@ -357,6 +357,9 @@ public class RocketPath extends Path {
 		lineTo(center.x + 2 * raster, center.y - 3 * raster);
 		lineTo(center.x + 2 * raster, center.y + 2 * raster);
 		lineTo(center.x + 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 1 * raster, center.y + 3 * raster);
+		lineTo(center.x - 2 * raster, center.y + 2 * raster);
+		lineTo(center.x - 2 * raster, center.y - 3 * raster);
 		close();
 		moveTo(center.x + 2 * raster, center.y - 4 * raster);
 		lineTo(center.x + 4 * raster, center.y - 2 * raster);
@@ -371,15 +374,11 @@ public class RocketPath extends Path {
 		addRect(center.x + 8 * raster, center.y + 0 * raster, center.x + 8.3f * raster, center.y + 3 * raster, Direction.CW);
 		// fenster
 		moveTo(center.x + 0 * raster, center.y - 4 * raster);
-		lineTo(center.x + 0 * raster, center.y - 3 * raster);
+		lineTo(center.x - 1 * raster, center.y - 3 * raster);
 		lineTo(center.x + 1 * raster, center.y - 3 * raster);
 		close();
 
-		moveTo(center.x - 0 * raster, center.y - 5 * raster);
-		lineTo(center.x - 2 * raster, center.y - 3 * raster);
-		lineTo(center.x - 2 * raster, center.y + 2 * raster);
-		lineTo(center.x - 1 * raster, center.y + 3 * raster);
-		close();
+		// andere Seite
 		moveTo(center.x - 2 * raster, center.y - 4 * raster);
 		lineTo(center.x - 4 * raster, center.y - 2 * raster);
 		lineTo(center.x - 4 * raster, center.y + 3 * raster);
@@ -391,19 +390,14 @@ public class RocketPath extends Path {
 		lineTo(center.x - 4 * raster, center.y + 4 * raster);
 		close();
 		addRect(center.x - 8.3f * raster, center.y + 0 * raster, center.x - 8 * raster, center.y + 3 * raster, Direction.CCW);
-		// fenster
-		moveTo(center.x - 0 * raster, center.y - 4 * raster);
-		lineTo(center.x - 0 * raster, center.y - 3 * raster);
-		lineTo(center.x - 1 * raster, center.y - 3 * raster);
-		close();
 
-		addRect(center.x - 0.3f * raster, center.y + 1 * raster, center.x + 0 * raster, center.y + 3.3f * raster, Direction.CW);
-		addRect(center.x - 0 * raster, center.y + 1 * raster, center.x + 0.3f * raster, center.y + 3.3f * raster, Direction.CCW);
+		// addRect(center.x - 0.1f * raster, center.y + 1 * raster, center.x + 0 * raster, center.y + 3.3f * raster, Direction.CW);
+		// addRect(center.x - 0 * raster, center.y + 1 * raster, center.x + 0.1f * raster, center.y + 3.3f * raster, Direction.CCW);
 
 		if (filled) {
 			// Raketenstrahl
 			moveTo(center.x - 0.5f * raster, center.y + 3.8f * raster);
-			lineTo(center.x - 0 * raster, center.y + 10 * raster);
+			lineTo(center.x - 0 * raster, center.y + 13 * raster);
 			lineTo(center.x + 0.5f * raster, center.y + 3.8f * raster);
 			close();
 			addRect(center.x + 7.9f * raster, center.y + 4 * raster, center.x + 8 * raster, center.y + 8 * raster, Direction.CCW);
