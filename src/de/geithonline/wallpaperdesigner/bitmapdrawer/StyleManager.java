@@ -7,7 +7,8 @@ public class StyleManager {
 	private static Map<String, IWPStyle> drawer = new HashMap<String, IWPStyle>();
 
 	static {
-		drawer.put("Patterns", new WPStylePatterns());
+		drawer.put("Patterns", new WPStyleRandomPatterns());
+		drawer.put("GeometricPatterns", new WPStyleGeometricPatterns());
 	}
 
 	public static IWPStyle getDrawer(final String name) {

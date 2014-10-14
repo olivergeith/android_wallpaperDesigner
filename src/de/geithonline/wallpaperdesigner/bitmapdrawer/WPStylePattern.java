@@ -3,7 +3,6 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import java.util.Locale;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -79,119 +78,15 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
-import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
-public class WPStylePatterns extends WPStyle {
+public abstract class WPStylePattern extends WPStyle {
 
 	protected int bWidth = 2560;
 	protected int bHeight = 1600;
-	private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	protected final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-	// private final String letters = "AOKP";
-
-	@Override
-	public synchronized Bitmap drawBitmap() {
-		bWidth = Settings.getWidth();
-		bHeight = Settings.getHeight();
-
-		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
-		bitmapCanvas = new Canvas(bitmap);
-		BackgroundDrawer.drawBackground(bitmapCanvas);
-
-		final Bitmap refbitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
-		final Canvas refbitmapCanvas = new Canvas(refbitmap);
-		BackgroundDrawer.drawBackground(refbitmapCanvas);
-
-		// initializing some values depending on BitmapSize
-		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
-		if (maxRadius < 30) {
-			maxRadius = 30;
-		}
-		int minRadius = Math.round(maxRadius * Settings.getPatternMinSizeFactor());
-		if (minRadius < 5) {
-			minRadius = 5;
-		}
-
-		int dropShadowRadius = Math.round(bWidth * 0.01f);
-		if (dropShadowRadius < 5) {
-			dropShadowRadius = 5;
-		}
-
-		final Paint paint = new Paint();
-		paint.setAntiAlias(true);
-
-		final int anzahlPatterns = Settings.getAnzahlPatterns();
-
-		final int blurLevel2 = anzahlPatterns * 6 / 10;
-		final int blurLevel3 = anzahlPatterns * 8 / 10;
-
-		// Zeichnen
-		for (int i = 0; i < anzahlPatterns; i++) {
-			paint.setStyle(Style.FILL);
-			final int radius = getRandomInt(minRadius, maxRadius);
-
-			// random koordinate an der gemalt werden soll
-			final Point point = getRandomPoint();
-			final int x = point.x;
-			final int y = point.y;
-			// davon die aktuelle Farbe
-			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
-
-			if (Settings.isRandomizeBrightness()) {
-				pcolor = randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
-			}
-			if (Settings.isRandomizeColors()) {
-				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
-			}
-			paint.setColor(pcolor);
-
-			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
-
-			switch (Settings.getDropShadowType()) {
-			default:
-			case "No":
-				break;
-			case "Random":
-				final int sx = getRandomInt(0, bWidth - 1);
-				final int sy = getRandomInt(0, bHeight - 1);
-				final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
-				paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
-				break;
-			case "Opposite":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
-				break;
-			case "Darker":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
-				break;
-			case "Select":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
-				break;
-			}
-			drawPattern(x, y, paint, radius, i);
-
-			if (Settings.isBlurPatterns()) {
-				if (i == blurLevel2) {
-					bitmap = BitmapBlurrer.doBlur(bitmap, 5, true);
-				}
-				if (i == blurLevel3) {
-					bitmap = BitmapBlurrer.doBlur(bitmap, 3, true);
-				}
-			}
-		}
-
-		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
-		refbitmap.recycle();
-		return bitmap;
-	}
-
-	private Point getRandomPoint() {
-		final int x = getRandomInt(0, bWidth - 1);
-		final int y = getRandomInt(0, bHeight - 1);
-		return new Point(x, y);
-	}
-
-	private void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
+	protected void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
 		switch (Settings.getSelectedPattern()) {
 		case "Text":
 			drawText(x, y, paint, radius * 2, index);
@@ -325,7 +220,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSaw(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawSaw(final int x, final int y, final Paint paint, final int radius) {
 		final int zaehne = 20;
 		final boolean filled = getFilledBoolean();
 		final boolean flip = getRandomBoolean();
@@ -336,7 +231,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawGear(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGear(final int x, final int y, final Paint paint, final int radius) {
 		final int zaehne = 15;
 		final boolean filled = getFilledBoolean();
 		bitmapCanvas.drawPath(new GearPath(zaehne, new Point(x, y), radius, filled), paint);
@@ -346,7 +241,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private boolean getFilledBoolean() {
+	protected boolean getFilledBoolean() {
 		boolean filled;
 		switch (Settings.getFilledOption()) {
 		default:
@@ -363,7 +258,7 @@ public class WPStylePatterns extends WPStyle {
 		return filled;
 	}
 
-	private void drawDandelion(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawDandelion(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new DandelionPath(new Point(x, y), radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -374,7 +269,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawMaritim(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawMaritim(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 4);
@@ -383,7 +278,7 @@ public class WPStylePatterns extends WPStyle {
 		drawMaritim(x, y, paint, radius, variante);
 	}
 
-	private void drawMaritim(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawMaritim(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -413,7 +308,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 5);
@@ -425,7 +320,7 @@ public class WPStylePatterns extends WPStyle {
 		drawGeometric(x, y, paint, radius, variant);
 	}
 
-	private void drawGeometric(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawGeometric(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -463,7 +358,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 8);
@@ -476,7 +371,7 @@ public class WPStylePatterns extends WPStyle {
 		drawInvertable(x, y, paint, radius, variante);
 	}
 
-	private void drawInvertable(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawInvertable(final int x, final int y, final Paint paint, final int radius, final String variante) {
 
 		Path path;
 		switch (variante) {
@@ -523,7 +418,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawRing(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawRing(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 4);
@@ -532,7 +427,7 @@ public class WPStylePatterns extends WPStyle {
 		drawRing(x, y, paint, radius, variant);
 	}
 
-	private void drawRing(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawRing(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -562,7 +457,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSpace(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawSpace(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 9);
@@ -574,7 +469,7 @@ public class WPStylePatterns extends WPStyle {
 		drawSpace(x, y, paint, radius, variant);
 	}
 
-	private void drawSpace(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawSpace(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -624,7 +519,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawDeathstar(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawDeathstar(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new DeathstarPath(new Point(x, y), radius);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-15, 15));
 		bitmapCanvas.drawPath(path, paint);
@@ -636,7 +531,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawVirus(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawVirus(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 6);
@@ -646,7 +541,7 @@ public class WPStylePatterns extends WPStyle {
 		drawVirus(x, y, paint, radius, variant);
 	}
 
-	private void drawVirus(final int x, final int y, final Paint paint, final int radius, final String variant) {
+	protected void drawVirus(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		Path path;
 		switch (variant) {
 		default:
@@ -679,7 +574,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawWeather(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawWeather(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 2);
@@ -688,7 +583,7 @@ public class WPStylePatterns extends WPStyle {
 		drawWeather(x, y, paint, radius, variant);
 	}
 
-	private void drawWeather(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawWeather(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -711,7 +606,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawPlane(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawPlane(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 3);
@@ -720,7 +615,7 @@ public class WPStylePatterns extends WPStyle {
 		drawPlane(x, y, paint, radius, variant);
 	}
 
-	private void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
+	protected void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		final Path path = new PlanePath(new Point(x, y), radius, variant);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
@@ -731,7 +626,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawFlower(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawFlower(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed V1-V3")) {
 			final int nr = getRandomInt(0, 3);
@@ -743,7 +638,7 @@ public class WPStylePatterns extends WPStyle {
 		drawFlower(x, y, paint, radius, variant);
 	}
 
-	private void drawFlower(final int x, final int y, final Paint paint, final int radius, final String variant) {
+	protected void drawFlower(final int x, final int y, final Paint paint, final int radius, final String variant) {
 
 		Path path;
 		switch (variant) {
@@ -779,7 +674,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawLines(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawLines(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 6);
@@ -789,7 +684,7 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
-	private void drawLines(final int x, final int y, final Paint paint, final int radius, final String variant) {
+	protected void drawLines(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		Path path;
 		switch (variant) {
 		default:
@@ -820,7 +715,7 @@ public class WPStylePatterns extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 	}
 
-	private void drawShell(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawShell(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Shells Mixed")) {
 			final int nr = getRandomInt(0, 6);
@@ -866,7 +761,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawMandala(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawMandala(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 4);
@@ -875,7 +770,7 @@ public class WPStylePatterns extends WPStyle {
 		drawMandala(x, y, paint, radius, variant);
 	}
 
-	private void drawMandala(final int x, final int y, final Paint paint, final int radius, final String variant) {
+	protected void drawMandala(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 		switch (variant) {
 		default:
@@ -906,7 +801,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawPacMan(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 2);
@@ -915,7 +810,7 @@ public class WPStylePatterns extends WPStyle {
 		drawPacMan(x, y, paint, radius, variant);
 	}
 
-	private void drawPacMan(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawPacMan(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final Path path = new PacmanPath(new Point(x, y), radius, variante);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
@@ -927,7 +822,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
@@ -939,7 +834,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawFisch(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawFisch(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 4);
@@ -948,7 +843,7 @@ public class WPStylePatterns extends WPStyle {
 		drawFisch(x, y, paint, radius, variant);
 	}
 
-	private void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final Path path = new FishPath(new Point(x, y), radius, variante);
 
 		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
@@ -965,7 +860,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawText(final int x, final int y, final Paint paint, final int radius, final int index) {
+	protected void drawText(final int x, final int y, final Paint paint, final int radius, final int index) {
 		// Some Paint Inits
 		if (getFilledBoolean()) {
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
@@ -993,7 +888,7 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
-	private void drawCustomText(final int x, final int y, final Paint paint, final int radius, final String text) {
+	protected void drawCustomText(final int x, final int y, final Paint paint, final int radius, final String text) {
 
 		switch (Settings.getTextDrawStyle()) {
 		default:
@@ -1024,7 +919,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
+	protected void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.LEFT);
 		final Path mArc = new Path();
@@ -1041,7 +936,7 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
-	private void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
+	protected void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.CENTER);
 		final Path mArc = new Path();
@@ -1056,7 +951,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
+	protected void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
 		paint.setTextSize(radius);
 		paint.setTextAlign(Align.LEFT);
 		final Path mArc = new Path();
@@ -1077,7 +972,7 @@ public class WPStylePatterns extends WPStyle {
 		return new RectF(x - radius, y - radius, x + radius, y + radius);
 	}
 
-	private void drawStar(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawStar(final int x, final int y, final Paint paint, final int radius) {
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
 		final Path path = new StarPath(arms, new PointF(x, y), radius, radius / 2, true, 0);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
@@ -1089,7 +984,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawRect(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), Settings.getSelectedPatternVariant());
 
 		if (Settings.isRandomRotate()) {
@@ -1109,7 +1004,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 11);
@@ -1127,7 +1022,7 @@ public class WPStylePatterns extends WPStyle {
 		drawSpooky(x, y, paint, radius, variante);
 	}
 
-	private void drawSpooky(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawSpooky(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -1185,7 +1080,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 8);
@@ -1194,7 +1089,7 @@ public class WPStylePatterns extends WPStyle {
 		drawAssorted(x, y, paint, radius, variant);
 	}
 
-	private void drawAssorted(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -1249,7 +1144,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawXmasTree(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawXmasTree(final int x, final int y, final Paint paint, final int radius) {
 		// final Path path = new ZitronePath(new Point(x, y), radius);
 		final Path path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
@@ -1261,7 +1156,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawStarCircles(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawStarCircles(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new StarCirclePath(new PointF(x, y), radius, getFilledBoolean());
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
@@ -1272,7 +1167,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawCircle(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawCircle(final int x, final int y, final Paint paint, final int radius) {
 		bitmapCanvas.drawCircle(x, y, radius, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1281,7 +1176,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawHeart(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 2);
@@ -1290,7 +1185,7 @@ public class WPStylePatterns extends WPStyle {
 		drawHeart(x, y, paint, radius, variante);
 	}
 
-	private void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
 
 		Path path;
 		switch (variante) {
@@ -1311,7 +1206,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void drawGlossyBubble(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGlossyBubble(final int x, final int y, final Paint paint, final int radius) {
 		final int color = paint.getColor();
 		final int colorDarker = ColorHelper.darker(color);
 		final int colorBrighter = ColorHelper.brighter2times(color);
@@ -1335,7 +1230,7 @@ public class WPStylePatterns extends WPStyle {
 		paint.setShader(null);
 	}
 
-	private void drawGlossySmiley(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGlossySmiley(final int x, final int y, final Paint paint, final int radius) {
 		final int color = paint.getColor();
 		final int colorBrighter = ColorHelper.brighter2times(color);
 		final int colorDarker = color;
@@ -1361,7 +1256,7 @@ public class WPStylePatterns extends WPStyle {
 		paint.setShader(null);
 	}
 
-	private void drawGlossyPacman(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGlossyPacman(final int x, final int y, final Paint paint, final int radius) {
 		final int color = paint.getColor();
 		final int colorBrighter = ColorHelper.brighter2times(color);
 		final int colorDarker = ColorHelper.darker2times(color);
@@ -1392,7 +1287,7 @@ public class WPStylePatterns extends WPStyle {
 		paint.setShader(null);
 	}
 
-	private void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
 			final int nr = getRandomInt(0, 2);
@@ -1402,7 +1297,7 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
-	private void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final int color = paint.getColor();
 		final int colorBrighter = ColorHelper.brighter2times(color);
 		final int colorDarker = ColorHelper.darker(color);
@@ -1439,7 +1334,7 @@ public class WPStylePatterns extends WPStyle {
 		paint.setShader(null);
 	}
 
-	private void drawGlossyStar(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGlossyStar(final int x, final int y, final Paint paint, final int radius) {
 		final int color = paint.getColor();
 		final int colorBrighter = ColorHelper.brighter2times(color);
 		final int colorDarker = ColorHelper.darker(color);
@@ -1469,7 +1364,7 @@ public class WPStylePatterns extends WPStyle {
 		paint.setShader(null);
 	}
 
-	private int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
+	protected int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
 		if (Settings.isDynamicColoring()) {
 			return bmp.getPixel(x, y);
 		} else {
@@ -1478,7 +1373,7 @@ public class WPStylePatterns extends WPStyle {
 
 	}
 
-	private void setupPaintForOutline(final Paint paint, final int radius) {
+	protected void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
 		float strokewidth = radius / 15f;
 		if (strokewidth > 3.0f) {
@@ -1501,7 +1396,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void setupPaintForDarkerFont(final Paint paint, final int radius) {
+	protected void setupPaintForDarkerFont(final Paint paint, final int radius) {
 		paint.setStyle(Style.FILL);
 		paint.setShader(null);
 		paint.setShadowLayer(0, 0, 0, 0);
@@ -1512,7 +1407,7 @@ public class WPStylePatterns extends WPStyle {
 		}
 	}
 
-	private void rotatePath(final int x, final int y, final Path path, final int rotate) {
+	protected void rotatePath(final int x, final int y, final Path path, final int rotate) {
 		final Matrix mMatrix = new Matrix();
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);
@@ -1520,7 +1415,7 @@ public class WPStylePatterns extends WPStyle {
 		path.transform(mMatrix);
 	}
 
-	private void mirrorPath(final int x, final int y, final Path path) {
+	protected void mirrorPath(final int x, final int y, final Path path) {
 		final Matrix mMatrix = new Matrix();
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);
