@@ -514,7 +514,7 @@ public class WPStylePatterns extends WPStyle {
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
