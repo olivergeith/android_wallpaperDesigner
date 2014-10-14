@@ -29,6 +29,7 @@ import de.geithonline.wallpaperdesigner.shapes.FishPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
 import de.geithonline.wallpaperdesigner.shapes.FootprintPath;
+import de.geithonline.wallpaperdesigner.shapes.FourSailsPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.GhostPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
@@ -1083,7 +1084,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 8);
+			final int nr = getRandomInt(0, 9);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1133,6 +1134,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V8":
 		case "Pentagram":
 			path = new StarPathV2(new PointF(x, y), radius);
+			break;
+		case "V9":
+		case "4Sails":
+			path = new FourSailsPath(new Point(x, y), radius, "V1");
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
