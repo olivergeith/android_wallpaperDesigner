@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,6 +24,10 @@ import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
 
 public class SettingsIO {
+
+	static String extStorageDirectory = Environment.getExternalStorageDirectory().toString() //
+			+ File.separator + "data" //
+			+ File.separator + "WallpaperDesigner" + File.separator;
 
 	public static void savePreferences(final Activity activity, final SharedPreferences prefs) {
 		final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -63,7 +68,7 @@ public class SettingsIO {
 
 	public static void loadPreferences(final Activity activity, final SharedPreferences prefs) {
 
-		final List<String> preferenzFileNameList = getPreferenzFileNameList(activity);
+		final List<String> preferenzFileNameList = getPreferenzFileNameList();
 
 		if (preferenzFileNameList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
@@ -113,7 +118,7 @@ public class SettingsIO {
 
 	public static void deletePreferences(final Activity activity) {
 
-		final List<String> preferenzFileNameList = getPreferenzFileNameList(activity);
+		final List<String> preferenzFileNameList = getPreferenzFileNameList();
 
 		if (preferenzFileNameList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no backups of preferences you possibly could delete!");
@@ -162,12 +167,13 @@ public class SettingsIO {
 	}
 
 	protected static void deletePreferencesFile(final Activity activity, final String filename) {
-		final File file = new File(activity.getFilesDir(), filename);
+		final File file = new File(getSettingsDir(), filename);
 		file.delete();
+		Toaster.showInfoToast(activity, "Deleted " + filename);
 	}
 
 	private static void savePreferencesToFile(final Activity activity, final SharedPreferences prefs, final String filename) {
-		final File file = new File(activity.getFilesDir(), filename);
+		final File file = new File(getSettingsDir(), filename);
 		try {
 			file.createNewFile();
 			final FileOutputStream fo = new FileOutputStream(file);
@@ -183,7 +189,7 @@ public class SettingsIO {
 	@SuppressWarnings("unchecked")
 	private static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs, final String filename) {
 		Log.i("Loading Settings ", "from " + filename);
-		final File file = new File(activity.getFilesDir(), filename);
+		final File file = new File(getSettingsDir(), filename);
 		if (file.exists()) {
 			try {
 				final FileInputStream fi = new FileInputStream(file);
@@ -224,9 +230,9 @@ public class SettingsIO {
 	 * @param activity
 	 * @return
 	 */
-	public static List<String> getPreferenzFileNameList(final Activity activity) {
+	public static List<String> getPreferenzFileNameList() {
 		final List<String> names = new ArrayList<String>();
-		final File dir = activity.getFilesDir();
+		final File dir = getSettingsDir();
 		if (dir.exists() && dir.isDirectory()) {
 			final File[] prefs = dir.listFiles(new FilenameFilter() {
 
@@ -242,4 +248,10 @@ public class SettingsIO {
 		return names;
 	}
 
+	private static File getSettingsDir() {
+		// Ordner anlegen fals nicht vorhanden
+		final File dir = new File(extStorageDirectory);
+		dir.mkdirs();
+		return dir;
+	}
 }
