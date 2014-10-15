@@ -33,9 +33,9 @@ public class Settings {
 	// ###################################################################
 	// Options Style Selection
 
-	public static String getSelectedStyle() {
-		return "Patterns";
-		// return prefs.getString("stylePicker", "Patterns");
+	public static String getSelectedLayout() {
+		return "Random Layout";
+		// return prefs.getString("layoutPicker", "Random Layout");
 	}
 
 	// ###################################################################

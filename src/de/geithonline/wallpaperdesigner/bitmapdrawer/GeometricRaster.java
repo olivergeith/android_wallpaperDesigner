@@ -1,6 +1,10 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Point;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class GeometricRaster {
 	private final int width;
@@ -13,7 +17,12 @@ public class GeometricRaster {
 	private final int anzW;
 	private final int anzH;
 
-	public GeometricRaster(final int width, final int height, final int radius, final float overlap) {
+	private final List<Point> points = new ArrayList<Point>();
+	private final boolean randomPositioning;
+	private final int anzahlPatterns;
+
+	public GeometricRaster(final int width, final int height, final int radius, final float overlap, final boolean randomPositioning) {
+		this.randomPositioning = randomPositioning;
 		this.width = width;
 		this.height = height;
 		this.radius = radius;
@@ -21,6 +30,18 @@ public class GeometricRaster {
 
 		anzW = width / abstand + 1;
 		anzH = height / abstand + 1;
+
+		for (int w = 0; w < getAnzW(); w++) {
+			for (int h = 0; h < getAnzH(); h++) {
+
+				// random koordinate an der gemalt werden soll
+				final int x = w * getAbstand();
+				final int y = h * getAbstand();
+				final Point p = new Point(x, y);
+				points.add(p);
+			}
+		}
+		anzahlPatterns = points.size();
 	}
 
 	public int getAnzW() {
@@ -33,6 +54,37 @@ public class GeometricRaster {
 
 	public int getAbstand() {
 		return abstand;
+	}
+
+	public Point drawPoint() {
+		if (randomPositioning) {
+			return drawRandomPoint();
+		}
+		return drawNextPoint();
+	}
+
+	public int getAnzahlPatterns() {
+		return anzahlPatterns;
+	}
+
+	public Point drawRandomPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		final int location = Randomizer.getRandomInt(-1, size - 1);
+		final Point p = points.remove(location);
+		return p;
+	}
+
+	public Point drawNextPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		final int location = 0;
+		final Point p = points.remove(location);
+		return p;
 	}
 
 }

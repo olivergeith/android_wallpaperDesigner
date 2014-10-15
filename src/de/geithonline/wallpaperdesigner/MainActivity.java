@@ -187,9 +187,9 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = StyleManager.getDrawer(Settings.getSelectedStyle());
+			drawer = StyleManager.getDrawer(Settings.getSelectedLayout());
 			// drawer.recycleBitmap();
-			Log.i("Geith", "Drawing " + Settings.getSelectedStyle());
+			Log.i("Geith", "Drawing " + Settings.getSelectedLayout());
 			final Bitmap bitmap = drawer.drawBitmap();
 			return bitmap;
 		}

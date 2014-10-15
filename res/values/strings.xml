@@ -50,7 +50,7 @@
     <string name="patternPicker">Pattern</string>
     <string name="patternVariantPicker">Pattern Variant</string>
     <string name="pattern_anzahlPatterns">Number of Patterns to draw</string>
-    <string name="stylePicker">Style</string>
+    <string name="layoutPicker">Layout</string>
     <string name="gradientDirection">Coloring style</string>
     <string name="dynamicColoring">Dynamic Coloring</string>
     <string name="shakeHint">Shake device for new random image!\n...or tap here...</string>

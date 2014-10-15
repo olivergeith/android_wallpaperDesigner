@@ -2,6 +2,32 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
+    <PreferenceCategory  android:title="Layout"/>
+        <ListPreference
+	        android:key="layoutPicker"
+	        android:title="@string/layoutPicker" 
+	        android:dialogTitle="@string/layoutPicker"
+	        android:defaultValue="Random Layout"
+	        android:entries="@array/layout"
+	        android:entryValues="@array/layout"
+	        />
+    
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="anzahlPatterns"
+	        android:title="@string/pattern_anzahlPatterns" 
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="20"
+		    seekbarpreference:maxValue="3000"
+		    android:summary="Draw %1$d Patterns" 
+		    android:defaultValue="1000"
+		    android:dialogMessage="@string/pattern_anzahlPatterns" />
+            
+        <CheckBoxPreference 
+		    android:key="blurPatterns"
+		    android:title="@string/blurPatterns"
+		    android:defaultValue="false"
+		    />
+        
     <PreferenceCategory  android:title="Pattern"/>
 
         <ListPreference
@@ -18,22 +44,6 @@
 	        android:title="@string/patternVariantPicker" 
 	        android:dialogTitle="@string/patternVariantPicker"
 	        />
-        
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="anzahlPatterns"
-	        android:title="@string/pattern_anzahlPatterns" 
-		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="20"
-		    seekbarpreference:maxValue="3000"
-		    android:summary="Draw %1$d Patterns" 
-		    android:defaultValue="1000"
-		    android:dialogMessage="@string/pattern_anzahlPatterns" />
-            
-        <CheckBoxPreference 
-		    android:key="blurPatterns"
-		    android:title="@string/blurPatterns"
-		    android:defaultValue="false"
-		    />
         
          
 		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"

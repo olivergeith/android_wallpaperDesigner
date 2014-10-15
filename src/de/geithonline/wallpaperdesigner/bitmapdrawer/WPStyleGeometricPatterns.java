@@ -4,10 +4,17 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public class WPStyleGeometricPatterns extends WPStylePattern {
+
+	private final boolean randomPositioning;
+
+	public WPStyleGeometricPatterns(final boolean randomPositioning) {
+		this.randomPositioning = randomPositioning;
+	}
 
 	@Override
 	public synchronized Bitmap drawBitmap() {
@@ -40,53 +47,50 @@ public class WPStyleGeometricPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, 0.5f);
-		int i = 0;
+		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, 0.5f, randomPositioning);
 		// Zeichnen
-		for (int w = 0; w < raster.getAnzW(); w++) {
-			for (int h = 0; h < raster.getAnzH(); h++) {
-				paint.setStyle(Style.FILL);
-				final int radius = getRandomInt(minRadius, maxRadius);
+		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
+			paint.setStyle(Style.FILL);
+			final int radius = getRandomInt(minRadius, maxRadius);
 
-				// random koordinate an der gemalt werden soll
-				final int x = w * raster.getAbstand();
-				final int y = h * raster.getAbstand();
-				// davon die aktuelle Farbe
-				int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
+			// random koordinate an der gemalt werden soll
+			final Point p = raster.drawPoint();
+			final int x = p.x;
+			final int y = p.y;
+			// davon die aktuelle Farbe
+			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
 
-				if (Settings.isRandomizeBrightness()) {
-					pcolor = randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
-				}
-				if (Settings.isRandomizeColors()) {
-					pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
-				}
-				paint.setColor(pcolor);
-
-				paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
-
-				switch (Settings.getDropShadowType()) {
-				default:
-				case "No":
-					break;
-				case "Random":
-					final int sx = getRandomInt(0, bWidth - 1);
-					final int sy = getRandomInt(0, bHeight - 1);
-					final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
-					paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
-					break;
-				case "Opposite":
-					paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
-					break;
-				case "Darker":
-					paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
-					break;
-				case "Select":
-					paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
-					break;
-				}
-				drawPattern(x, y, paint, radius, i);
-				i++;
+			if (Settings.isRandomizeBrightness()) {
+				pcolor = randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
 			}
+			if (Settings.isRandomizeColors()) {
+				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
+			}
+			paint.setColor(pcolor);
+
+			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
+
+			switch (Settings.getDropShadowType()) {
+			default:
+			case "No":
+				break;
+			case "Random":
+				final int sx = getRandomInt(0, bWidth - 1);
+				final int sy = getRandomInt(0, bHeight - 1);
+				final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
+				paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
+				break;
+			case "Opposite":
+				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+				break;
+			case "Darker":
+				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
+				break;
+			case "Select":
+				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());
+				break;
+			}
+			drawPattern(x, y, paint, radius, i);
 		}
 
 		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
