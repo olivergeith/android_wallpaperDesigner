@@ -7,6 +7,10 @@ import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class GeometricRaster {
+	public enum POSITIONING {
+		RANDOM, BOOK, TOWER;
+	}
+
 	private final int width;
 	private final int height;
 	private final int radius;
@@ -18,15 +22,16 @@ public class GeometricRaster {
 	private final int anzH;
 
 	private final List<Point> points = new ArrayList<Point>();
-	private final boolean randomPositioning;
 	private final int anzahlPatterns;
+	private final POSITIONING positioning;
 
-	public GeometricRaster(final int width, final int height, final int radius, final float overlap, final boolean randomPositioning) {
-		this.randomPositioning = randomPositioning;
+	public GeometricRaster(final int width, final int height, final int radius, final float overlap, final POSITIONING positioning) {
+
+		this.positioning = positioning;
 		this.width = width;
 		this.height = height;
 		this.radius = radius;
-		abstand = (int) Math.abs(radius * 2 * overlap);
+		abstand = Math.round(radius * 2 * overlap);
 
 		anzW = width / abstand + 2;
 		anzH = height / abstand + 2;
@@ -57,17 +62,22 @@ public class GeometricRaster {
 	}
 
 	public Point drawPoint() {
-		if (randomPositioning) {
+		switch (positioning) {
+		case RANDOM:
 			return drawRandomPoint();
+		default:
+		case BOOK:
+			return drawNextBookPoint();
+		case TOWER:
+			return drawNextTowerPoint();
 		}
-		return drawNextPoint();
 	}
 
 	public int getAnzahlPatterns() {
 		return anzahlPatterns;
 	}
 
-	public Point drawRandomPoint() {
+	private Point drawRandomPoint() {
 		final int size = points.size();
 		if (size == 0) {
 			return new Point(0, 0);
@@ -77,13 +87,30 @@ public class GeometricRaster {
 		return p;
 	}
 
-	public Point drawNextPoint() {
+	private Point drawNextBookPoint() {
 		final int size = points.size();
 		if (size == 0) {
 			return new Point(0, 0);
 		}
 		final int location = 0;
 		final Point p = points.remove(location);
+		top = !top;
+		return p;
+	}
+
+	private boolean top = true;
+
+	private Point drawNextTowerPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		int location = 0;
+		if (top) {
+			location = size - 1;
+		}
+		final Point p = points.remove(location);
+		top = !top;
 		return p;
 	}
 

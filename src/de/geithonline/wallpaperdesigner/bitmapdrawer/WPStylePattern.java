@@ -21,6 +21,7 @@ import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
 import de.geithonline.wallpaperdesigner.shapes.BatPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
+import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
@@ -352,7 +353,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V7":
 		case "Circle":
-			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
+			path = new CirclePath(new Point(x, y), radius, radius / 2, getFilledBoolean());
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));

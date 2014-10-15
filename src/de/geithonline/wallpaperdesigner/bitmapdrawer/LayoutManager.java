@@ -3,13 +3,16 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.geithonline.wallpaperdesigner.bitmapdrawer.GeometricRaster.POSITIONING;
+
 public class LayoutManager {
 	private static Map<String, IWPStyle> drawer = new HashMap<String, IWPStyle>();
 
 	static {
 		drawer.put("Random Layout", new WPStyleRandomPatterns());
-		drawer.put("Geometric Layout", new WPStyleGeometricPatterns(false));
-		drawer.put("Geometric Random Layout", new WPStyleGeometricPatterns(true));
+		drawer.put("Geometric Layout (Book)", new WPStyleGeometricPatterns(POSITIONING.BOOK));
+		drawer.put("Geometric Layout (Tower)", new WPStyleGeometricPatterns(POSITIONING.TOWER));
+		drawer.put("Geometric Layout (Random)", new WPStyleGeometricPatterns(POSITIONING.RANDOM));
 	}
 
 	public static IWPStyle getDrawer(final String name) {

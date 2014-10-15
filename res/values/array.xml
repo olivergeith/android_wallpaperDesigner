@@ -24,8 +24,9 @@
 
     <string-array name="layout">
         <item >Random Layout</item>
-        <item >Geometric Layout</item>
-        <item >Geometric Random Layout</item>
+        <item >Geometric Layout (Book)</item>
+        <item >Geometric Layout (Tower)</item>
+        <item >Geometric Layout (Random)</item>
         </string-array>
     
     <string-array name="hole">

@@ -5,15 +5,16 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.GeometricRaster.POSITIONING;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public class WPStyleGeometricPatterns extends WPStylePattern {
 
-	private final boolean randomPositioning;
+	private final POSITIONING positioning;
 
-	public WPStyleGeometricPatterns(final boolean randomPositioning) {
-		this.randomPositioning = randomPositioning;
+	public WPStyleGeometricPatterns(final POSITIONING positioning) {
+		this.positioning = positioning;
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class WPStyleGeometricPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, Settings.getOverlapping(), randomPositioning);
+		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, Settings.getOverlapping(), positioning);
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
 			paint.setStyle(Style.FILL);
