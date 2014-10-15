@@ -35,7 +35,7 @@ public class LayoutManager {
 	}
 
 	public static boolean supportsOverLay(final String layout) {
-		if (layout.equalsIgnoreCase("Geometric Layout")) {
+		if (layout.contains("Geometric")) {
 			return true;
 		}
 		return false;
