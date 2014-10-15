@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.StyleManager;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.LayoutManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
@@ -187,7 +187,7 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = StyleManager.getDrawer(Settings.getSelectedLayout());
+			drawer = LayoutManager.getDrawer(Settings.getSelectedLayout());
 			// drawer.recycleBitmap();
 			Log.i("Geith", "Drawing " + Settings.getSelectedLayout());
 			final Bitmap bitmap = drawer.drawBitmap();

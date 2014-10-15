@@ -3,7 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StyleManager {
+public class LayoutManager {
 	private static Map<String, IWPStyle> drawer = new HashMap<String, IWPStyle>();
 
 	static {

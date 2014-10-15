@@ -23,8 +23,9 @@
      </string-array>
 
     <string-array name="layout">
-        <item >Patterns</item>
-        <item >GeometricPatterns</item>
+        <item >Random Layout</item>
+        <item >Geometric Layout</item>
+        <item >Geometric Random Layout</item>
         </string-array>
     
     <string-array name="hole">

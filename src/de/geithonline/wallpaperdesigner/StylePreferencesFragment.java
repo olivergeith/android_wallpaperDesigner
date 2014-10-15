@@ -12,6 +12,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.LayoutManager;
 import de.geithonline.wallpaperdesigner.settings.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
@@ -159,8 +160,12 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void handleLayoutSelect(final String selectedLayout) {
 		layoutSelection.setSummary(selectedLayout);
-		// TODO Auto-generated method stub
-
+		final SeekBarPreference overlapping = (SeekBarPreference) findPreference("overlapping");
+		final SeekBarPreference anzahlPatterns = (SeekBarPreference) findPreference("anzahlPatterns");
+		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
+		overlapping.setEnabled(LayoutManager.supportsOverLay(selectedLayout));
+		anzahlPatterns.setEnabled(LayoutManager.supportsAnzahlPatterns(selectedLayout));
+		blurring.setEnabled(LayoutManager.supportsBlurring(selectedLayout));
 	}
 
 	private void handlePatternSelect(final String newPattern) {

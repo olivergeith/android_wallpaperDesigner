@@ -77,6 +77,7 @@
     <string name="numberOfLeafs">How many leafs-arms should the Pattern have?</string>
     <string name="randomLeafCount">Random Number of leafs-arms</string>
     <string name="rotationDegrees">Rotate pattern by degrees</string>
+    <string name="overlapping">Overlap-faktor for patterns</string>
     
     
     
