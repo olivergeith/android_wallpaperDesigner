@@ -1373,8 +1373,8 @@ public abstract class WPStylePattern extends WPStyle {
 
 		int xx = Math.min(x, bWidth - 1);
 		int yy = Math.min(y, bHeight - 1);
-		xx = Math.max(x, 0);
-		yy = Math.max(y, 0);
+		xx = Math.max(xx, 0);
+		yy = Math.max(yy, 0);
 		if (Settings.isDynamicColoring()) {
 			return bmp.getPixel(xx, yy);
 		} else {

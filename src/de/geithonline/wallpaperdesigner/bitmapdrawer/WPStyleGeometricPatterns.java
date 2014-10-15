@@ -47,7 +47,7 @@ public class WPStyleGeometricPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, 0.5f, randomPositioning);
+		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, Settings.getOverlapping(), randomPositioning);
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
 			paint.setStyle(Style.FILL);

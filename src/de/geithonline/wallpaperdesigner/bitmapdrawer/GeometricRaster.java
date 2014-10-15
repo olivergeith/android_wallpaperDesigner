@@ -28,8 +28,8 @@ public class GeometricRaster {
 		this.radius = radius;
 		abstand = (int) Math.abs(radius * 2 * overlap);
 
-		anzW = width / abstand + 1;
-		anzH = height / abstand + 1;
+		anzW = width / abstand + 2;
+		anzH = height / abstand + 2;
 
 		for (int w = 0; w < getAnzW(); w++) {
 			for (int h = 0; h < getAnzH(); h++) {

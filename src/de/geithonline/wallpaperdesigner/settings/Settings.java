@@ -31,11 +31,31 @@ public class Settings {
 	private static Context context;
 
 	// ###################################################################
-	// Options Style Selection
+	// Options Layout Selection
 
 	public static String getSelectedLayout() {
-		return "Random Layout";
-		// return prefs.getString("layoutPicker", "Random Layout");
+		// return "Random Layout";
+		if (prefs == null) {
+			return "Random Layout";
+		}
+		return prefs.getString("layoutPicker", "Random Layout");
+	}
+
+	public static int getAnzahlPatterns() {
+		if (prefs == null) {
+			return 1000;
+		}
+		if (isDebugging()) {
+			return 0;
+		}
+		return prefs.getInt(PATTERN_ANZAHL_PATTERNS, 1000);
+	}
+
+	public static float getOverlapping() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt("overlapping", 50) / 100f;
 	}
 
 	// ###################################################################
@@ -53,16 +73,6 @@ public class Settings {
 			return "none";
 		}
 		return prefs.getString(PATTERN_PATTERN_VARIANT_PICKER, "V1");
-	}
-
-	public static int getAnzahlPatterns() {
-		if (prefs == null) {
-			return 1000;
-		}
-		if (isDebugging()) {
-			return 0;
-		}
-		return prefs.getInt(PATTERN_ANZAHL_PATTERNS, 1000);
 	}
 
 	public static float getPatternSizeFactor() {
