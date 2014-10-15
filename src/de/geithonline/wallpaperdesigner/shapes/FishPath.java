@@ -51,7 +51,7 @@ public class FishPath extends Path {
 	}
 
 	private void drawFisch(final Point center, final float radius) {
-		final float raster = radius / 3;
+		final float raster = radius / 2.5f;
 
 		moveTo(center.x - 1 * raster, center.y + 0 * raster);
 		quadTo(center.x + 1.8f * raster, center.y - 2 * raster, // controllpoint
