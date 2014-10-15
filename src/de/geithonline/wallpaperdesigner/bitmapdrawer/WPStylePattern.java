@@ -1370,10 +1370,15 @@ public abstract class WPStylePattern extends WPStyle {
 	}
 
 	protected int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
+
+		int xx = Math.min(x, bWidth - 1);
+		int yy = Math.min(y, bHeight - 1);
+		xx = Math.max(x, 0);
+		yy = Math.max(y, 0);
 		if (Settings.isDynamicColoring()) {
-			return bmp.getPixel(x, y);
+			return bmp.getPixel(xx, yy);
 		} else {
-			return refbmp.getPixel(x, y);
+			return refbmp.getPixel(xx, yy);
 		}
 
 	}
