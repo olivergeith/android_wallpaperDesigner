@@ -64,6 +64,7 @@ import de.geithonline.wallpaperdesigner.shapes.ShellV6Path;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
+import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPathV2;
@@ -312,10 +313,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 6);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = getRandomInt(0, 7);
 			variant = "V" + nr;
 		}
 		drawGeometric(x, y, paint, radius, variant);
@@ -331,21 +332,25 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V2":
 		case "Square":
-			path = new XEckPath(4, new Point(x, y), radius, 0, getFilledBoolean());
+			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), "Not rounded");
 			break;
 		case "V3":
+		case "Square (rounded)":
+			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), "Rounded");
+			break;
+		case "V4":
 		case "Pentagon":
 			path = new XEckPath(5, new Point(x, y), radius, 0, getFilledBoolean());
 			break;
-		case "V4":
+		case "V5":
 		case "Hexagon":
 			path = new XEckPath(6, new Point(x, y), radius, 0, getFilledBoolean());
 			break;
-		case "V5":
+		case "V6":
 		case "Octagon":
 			path = new XEckPath(8, new Point(x, y), radius, 0, getFilledBoolean());
 			break;
-		case "V6":
+		case "V7":
 		case "Circle":
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
 			break;
