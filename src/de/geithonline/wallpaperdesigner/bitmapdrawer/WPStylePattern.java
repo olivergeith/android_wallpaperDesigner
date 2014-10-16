@@ -337,11 +337,11 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V2":
 		case "Square":
-			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), SQUARE_STYLE.NORMAL);
+			path = new SquarePath(new Point(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.NORMAL);
 			break;
 		case "V3":
 		case "Square (rounded)":
-			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
+			path = new SquarePath(new Point(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
 			break;
 		case "V4":
 		case "Pentagon":
@@ -361,7 +361,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V8":
 		case "Square (Mixed)":
-			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), SQUARE_STYLE.MIXED);
+			path = new SquarePath(new Point(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
@@ -1155,7 +1155,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V10":
 		case "Dice":
-			path = new DicePath(new Point(x, y), radius);
+			path = new DicePath(new Point(x, y), radius * 0.8f);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
