@@ -9,8 +9,10 @@ public class PatternPropertyStore {
 
 	static {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
-		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
-				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Footprint", "Pentagram", "4Sails", "Mixed" }));
+		patternProperties
+				.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
+						new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Footprint", "Pentagram", "4Sails", "Dice",
+								"Mixed" }));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
@@ -24,7 +26,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Gears", new PatternProperties(true, false, false, true, false, false));
 
 		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Pentagon", "Hexagon", "Octagon", "Circle", "Mixed", "Mixed (with Circle)" }));
+				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Mixed",
+						"Mixed (with Circle)" }));
 
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "V1", "V2", "Mixed" }));

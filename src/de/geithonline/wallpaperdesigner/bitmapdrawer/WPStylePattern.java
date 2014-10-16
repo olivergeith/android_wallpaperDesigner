@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
+import de.geithonline.wallpaperdesigner.shapes.DicePath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.FishPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
@@ -66,6 +67,7 @@ import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath;
+import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPathV2;
@@ -319,6 +321,8 @@ public abstract class WPStylePattern extends WPStyle {
 		} else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
 			final int nr = getRandomInt(0, 7);
 			variant = "V" + nr;
+		} else if (variant.equalsIgnoreCase("Square (Mixed)")) {
+			variant = "Square (Mixed)";
 		}
 		drawGeometric(x, y, paint, radius, variant);
 	}
@@ -333,11 +337,11 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V2":
 		case "Square":
-			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), "Not rounded");
+			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), SQUARE_STYLE.NORMAL);
 			break;
 		case "V3":
 		case "Square (rounded)":
-			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), "Rounded");
+			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
 			break;
 		case "V4":
 		case "Pentagon":
@@ -354,6 +358,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V7":
 		case "Circle":
 			path = new CirclePath(new Point(x, y), radius, radius / 2, getFilledBoolean());
+			break;
+		case "V8":
+		case "Square (Mixed)":
+			path = new SquarePath(new Point(x, y), radius * 0.75f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
@@ -1144,6 +1152,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V9":
 		case "4Sails":
 			path = new FourSailsPath(new Point(x, y), radius, "V1");
+			break;
+		case "V10":
+		case "Dice":
+			path = new DicePath(new Point(x, y), radius);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));

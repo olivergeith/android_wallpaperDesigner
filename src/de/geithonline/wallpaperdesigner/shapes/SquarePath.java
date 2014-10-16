@@ -7,14 +7,25 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class SquarePath extends Path {
 
-	public SquarePath(final Point center, final float radius, final boolean filled, final String variant) {
+	public enum SQUARE_STYLE {
+		ROUNDED, NORMAL, MIXED;
+	}
+
+	public SquarePath(final Point center, final float radius, final boolean filled, final SQUARE_STYLE variant) {
 		super();
 
 		boolean rounded = false;
-		if (variant.equalsIgnoreCase("Rounded")) {
+
+		switch (variant) {
+		case ROUNDED:
 			rounded = true;
-		} else if (variant.equalsIgnoreCase("Mixed")) {
+			break;
+		case NORMAL:
+			rounded = false;
+			break;
+		case MIXED:
 			rounded = Randomizer.getRandomBoolean();
+			break;
 		}
 		final RectF rect = new RectF();
 
