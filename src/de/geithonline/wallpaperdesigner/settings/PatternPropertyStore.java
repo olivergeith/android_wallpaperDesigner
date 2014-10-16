@@ -34,8 +34,10 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
 
-		patternProperties.put("Invertable Shapes", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Heart V1", "Heart V2", "Arrow", "Plus", "Minus", "Star", "Gear", "Crown", "Mixed", "Mixed Plus-Minus" }));
+		patternProperties
+				.put("Invertable Shapes", new PatternProperties(true, true, false, true, false, false, //
+						new CharSequence[] { "Heart V1", "Heart V2", "Arrow", "Arrow (round)", "Plus", "Minus", "Star", "Gear", "Crown", "Mixed",
+								"Mixed Plus-Minus" }));
 
 		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));

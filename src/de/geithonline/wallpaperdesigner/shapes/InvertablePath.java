@@ -3,7 +3,8 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.shapes.base.ArowPath;
+import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath;
+import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath.ARROW_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.base.CrossPath;
 import de.geithonline.wallpaperdesigner.shapes.base.MinusPath;
 
@@ -20,7 +21,10 @@ public class InvertablePath extends Path {
 			drawPlus(center, rOuter, rInner, filled);
 			break;
 		case "Arrow":
-			drawArrow(center, rOuter, rInner, filled);
+			drawArrow(center, rOuter, rInner, filled, ARROW_TYPE.STRAIGHT_UP);
+			break;
+		case "Arrow (round)":
+			drawArrow(center, rOuter, rInner, filled, ARROW_TYPE.ROUND);
 			break;
 		case "Minus":
 			drawMinus(center, rOuter, rInner, filled);
@@ -42,20 +46,11 @@ public class InvertablePath extends Path {
 	}
 
 	public void drawPlus(final Point center, final float radius, final float rInner, final boolean filled) {
-		// addCircle(center.x, center.y, radius, Direction.CCW);
-		// if (!filled) {
-
 		addPath(new CrossPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW, filled));
-		// } else {
-		// addRect(center.x - 0.75f * radius, center.y - 0.25f * radius, center.x + 0.75f * radius, center.y + 0.25f * radius, Direction.CW);
-		// }
 	}
 
-	public void drawArrow(final Point center, final float radius, final float rInner, final boolean filled) {
-		// if (!filled) {
-		// addCircle(center.x, center.y, radius, Direction.CCW);
-		// }
-		addPath(new ArowPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW, filled));
+	public void drawArrow(final Point center, final float radius, final float rInner, final boolean filled, final ARROW_TYPE variante) {
+		addPath(new ArrowPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW, filled, variante));
 	}
 
 	public void drawGear(final Point center, final float radius, final float rInner, final boolean filled) {
@@ -66,13 +61,8 @@ public class InvertablePath extends Path {
 	}
 
 	public void drawMinus(final Point center, final float radius, final float rInner, final boolean filled) {
-		// addCircle(center.x, center.y, radius, Direction.CCW);
-		// if (!filled) {
 
 		addPath(new MinusPath(new PointF(center.x, center.y), radius * 0.75f, Direction.CW, filled));
-		// } else {
-		// addRect(center.x - 0.75f * radius, center.y - 0.25f * radius, center.x + 0.75f * radius, center.y + 0.25f * radius, Direction.CW);
-		// }
 	}
 
 	public void drawCrown(final Point center, final float radius, final float rInner, final boolean filled) {

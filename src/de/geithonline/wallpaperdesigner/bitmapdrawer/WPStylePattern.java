@@ -376,10 +376,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 8);
+			final int nr = getRandomInt(0, 9);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
-			final int nr = getRandomInt(3, 5);
+			final int nr = getRandomInt(4, 6);
 			variante = "V" + nr;
 		}
 
@@ -404,22 +404,26 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow");
 			break;
 		case "V4":
+		case "Arrow (round)":
+			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow (round)");
+			break;
+		case "V5":
 		case "Plus":
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Plus");
 			break;
-		case "V5":
+		case "V6":
 		case "Minus":
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Minus");
 			break;
-		case "V6":
+		case "V7":
 		case "Star":
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Star");
 			break;
-		case "V7":
+		case "V8":
 		case "Gear":
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Gear");
 			break;
-		case "V8":
+		case "V9":
 		case "Crown":
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
 			break;
