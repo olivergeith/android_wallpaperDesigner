@@ -83,6 +83,7 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.shapes.base.DropPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public abstract class WPStylePattern extends WPStyle {
@@ -1102,7 +1103,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 9);
+			final int nr = getRandomInt(0, 11);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1160,6 +1161,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V10":
 		case "Dice":
 			path = new DicePath(new Point(x, y), radius * 0.8f);
+			break;
+		case "V11":
+		case "Drop":
+			path = new DropPath(new Point(x, y), radius);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
@@ -1428,16 +1433,24 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 	}
 
-	protected void setupPaintForDarkerFont(final Paint paint, final int radius) {
-		paint.setStyle(Style.FILL);
-		paint.setShader(null);
-		paint.setShadowLayer(0, 0, 0, 0);
-		if (Settings.isCustomOutlineColor()) {
-			paint.setColor(Settings.getCustomOutlineColor());
-		} else {
-			paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
-		}
-	}
+	// protected void setUpPaintForRadialGradient(final int x, final int y, final Paint paint, final int radius) {
+	// final int color = paint.getColor();
+	// final int colorDarker = ColorHelper.darker(color);
+	// final int colorBrighter = ColorHelper.brighter2times(color);
+	// paint.setShadowLayer(5, 0, 0, 0);
+	// paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
+	// }
+	//
+	// protected void setupPaintForDarkerFont(final Paint paint, final int radius) {
+	// paint.setStyle(Style.FILL);
+	// paint.setShader(null);
+	// paint.setShadowLayer(0, 0, 0, 0);
+	// if (Settings.isCustomOutlineColor()) {
+	// paint.setColor(Settings.getCustomOutlineColor());
+	// } else {
+	// paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
+	// }
+	// }
 
 	protected void rotatePath(final int x, final int y, final Path path, final int rotate) {
 		final Matrix mMatrix = new Matrix();
