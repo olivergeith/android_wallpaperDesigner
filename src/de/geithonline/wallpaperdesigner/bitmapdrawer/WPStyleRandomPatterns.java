@@ -101,7 +101,7 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 			}
 		}
 
-		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern());
+		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern() + "/" + Settings.getSelectedPatternVariant());
 		refbitmap.recycle();
 		return bitmap;
 	}

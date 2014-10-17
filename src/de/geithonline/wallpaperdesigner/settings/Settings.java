@@ -222,9 +222,9 @@ public class Settings {
 
 	public static int getMinOpacity() {
 		if (prefs == null) {
-			return 192;
+			return 225;
 		}
-		return prefs.getInt("minOpacity", 128);
+		return prefs.getInt("minOpacity", 225);
 	}
 
 	public static int getMaxOpacity() {
@@ -242,9 +242,9 @@ public class Settings {
 
 	public static int getRandomizeColorRange() {
 		if (prefs == null) {
-			return 32;
+			return 12;
 		}
-		return prefs.getInt("randomizeColorRangeInt", 32);
+		return prefs.getInt("randomizeColorRangeInt", 12);
 	}
 
 	public static boolean isRandomizeBrightness() {
@@ -253,9 +253,9 @@ public class Settings {
 
 	public static int getRandomizeColorBrighnessRange() {
 		if (prefs == null) {
-			return 32;
+			return 12;
 		}
-		return prefs.getInt("randomizeColorBrightnessRangeInt", 32);
+		return prefs.getInt("randomizeColorBrightnessRangeInt", 12);
 	}
 
 	// ###################################################################
@@ -473,13 +473,13 @@ public class Settings {
 			prefs.edit().putString("bHeight", "1600").commit();
 			prefs.edit().putString("sizeSelection", "2560x1600").commit();
 
-			prefs.edit().putInt("randomizeColorRangeInt", 32).commit();
-			// prefs.edit().putInt("randomizeAlphaRangeInt", 30).commit();
-			prefs.edit().putInt("minOpacity", 125).commit();
+			prefs.edit().putInt("randomizeColorRangeInt", 12).commit();
+			prefs.edit().putInt("randomizeColorBrightnessRangeInt", 12).commit();
+			prefs.edit().putInt("minOpacity", 225).commit();
 			prefs.edit().putInt("maxOpacity", 255).commit();
 
-			prefs.edit().putInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -56).commit();
-			prefs.edit().putInt(PATTERN_OUTLINE_DARKNESS_ADJUST, +32).commit();
+			prefs.edit().putInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -88).commit();
+			prefs.edit().putInt(PATTERN_OUTLINE_DARKNESS_ADJUST, +40).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
