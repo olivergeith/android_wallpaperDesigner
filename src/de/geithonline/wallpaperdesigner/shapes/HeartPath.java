@@ -1,11 +1,14 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
 public class HeartPath extends Path {
+
+	public enum HEART_SHAPE {
+		Curvy, Straigth;
+	}
 
 	/**
 	 * @param center
@@ -13,20 +16,20 @@ public class HeartPath extends Path {
 	 * @param rOuter
 	 *            Radius von 1f bis 5f....
 	 */
-	public HeartPath(final Point center, final float rOuter, final boolean inverted, final String variante) {
+	public HeartPath(final PointF center, final float rOuter, final boolean inverted, final HEART_SHAPE variante) {
 		super();
 		switch (variante) {
 		default:
-		case "V1":
+		case Curvy:
 			drawHeartV1(center, rOuter, inverted);
 			break;
-		case "V2":
+		case Straigth:
 			drawHeartV2(center, rOuter, inverted);
 			break;
 		}
 	}
 
-	private void drawHeartV1(final Point center, final float rOuter, final boolean inverted) {
+	private void drawHeartV1(final PointF center, final float rOuter, final boolean inverted) {
 
 		if (inverted) {
 			addCircle(center.x, center.y, rOuter * 1.4f, Direction.CCW);
@@ -53,7 +56,7 @@ public class HeartPath extends Path {
 		close();
 	}
 
-	private void drawHeartV2(final Point center, final float radius, final boolean inverted) {
+	private void drawHeartV2(final PointF center, final float radius, final boolean inverted) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 		oval.left = center.x - 2 * raster;

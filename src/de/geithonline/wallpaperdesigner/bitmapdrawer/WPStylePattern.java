@@ -35,6 +35,7 @@ import de.geithonline.wallpaperdesigner.shapes.FourSailsPath;
 import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.GhostPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
+import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
@@ -399,11 +400,11 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Heart V1":
-			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V1");
+			path = new HeartPath(new PointF(x, y), radius, getFilledBoolean(), HEART_SHAPE.Curvy);
 			break;
 		case "V2":
 		case "Heart V2":
-			path = new HeartPath(new Point(x, y), radius, getFilledBoolean(), "V2");
+			path = new HeartPath(new PointF(x, y), radius, getFilledBoolean(), HEART_SHAPE.Straigth);
 			break;
 		case "V3":
 		case "Arrow":
@@ -1184,7 +1185,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = getRandomInt(0, 5);
 			variant = "V" + nr;
 		}
 		drawChess(x, y, paint, radius, variant);
@@ -1210,12 +1211,16 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Pillow":
 			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Pillow);
 			break;
+		case "V5":
+		case "Heart":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Heart);
+			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius / 2);
+			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
@@ -1267,10 +1272,10 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-			path = new HeartPath(new Point(x, y), radius, false, "V1");
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Curvy);
 			break;
 		case "V2":
-			path = new HeartPath(new Point(x, y), radius, false, "V2");
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Straigth);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
@@ -1384,12 +1389,10 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-			path = new HeartPath(new Point(x, y), radius, false, "V1");
-			;
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Curvy);
 			break;
 		case "V2":
-			path = new HeartPath(new Point(x, y), radius, false, "V2");
-			;
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Straigth);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));

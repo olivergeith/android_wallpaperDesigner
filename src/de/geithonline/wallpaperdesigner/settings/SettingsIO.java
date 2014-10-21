@@ -213,7 +213,10 @@ public class SettingsIO {
 	public static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
 		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " (" + entry.getValue().getClass().getSimpleName() + ")");
 		final String key = entry.getKey();
-
+		// nur Premium nicht lesen
+		if (key.equalsIgnoreCase("muimerp")) {
+			return;
+		}
 		final Class cl = entry.getValue().getClass();
 		if (cl.getSimpleName().equalsIgnoreCase("Integer")) {
 			prefs.edit().putInt(key, (Integer) entry.getValue()).commit();

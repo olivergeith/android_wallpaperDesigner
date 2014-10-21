@@ -5,12 +5,13 @@ import java.util.List;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 
 public class SchachbrettPath extends Path {
 
 	public enum BRETT_SHAPE {
-		Star, Square, Circle, Pillow;
+		Star, Square, Circle, Pillow, Heart;
 	}
 
 	public SchachbrettPath(final PointF center, final float radius, final int count, final BRETT_SHAPE shape) {
@@ -70,6 +71,9 @@ public class SchachbrettPath extends Path {
 				break;
 			case Pillow:
 				path = new PillowPath(p, patternRadius);
+				break;
+			case Heart:
+				path = new HeartPath(new PointF(p.x, p.y - patternRadius * 0.3f), patternRadius, false, HEART_SHAPE.Straigth);
 				break;
 			}
 			addPath(path);

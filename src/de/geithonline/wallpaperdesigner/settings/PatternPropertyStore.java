@@ -14,7 +14,7 @@ public class PatternPropertyStore {
 						"Mixed" }));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
 		patternProperties.put("Chess", new PatternProperties(true, true, false, false, false, false, //
-				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Mixed" }));
+				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Heart", "Mixed" }));
 		patternProperties.put("Dandelion", new PatternProperties(true, false, false, false, false, false));
 		patternProperties.put("Deathstars", new PatternProperties(true, true, false, false, false, false));
 
