@@ -1,7 +1,7 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
+import android.graphics.PointF;
 
 public class PillowPath extends Path {
 
@@ -11,7 +11,7 @@ public class PillowPath extends Path {
 	 * @param radius
 	 *            Radius von 1f bis 5f....
 	 */
-	public PillowPath(final Point center, final float radius) {
+	public PillowPath(final PointF center, final float radius) {
 		super();
 
 		final float raster = radius / 2;

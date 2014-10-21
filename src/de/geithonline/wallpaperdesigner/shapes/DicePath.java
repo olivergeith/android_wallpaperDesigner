@@ -1,7 +1,7 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
+import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -9,12 +9,12 @@ public class DicePath extends Path {
 
 	private static final float DOT_RADIUS = 0.4f;
 
-	public DicePath(final Point center, final float radius) {
+	public DicePath(final PointF center, final float radius) {
 		super();
 		drawDice(center, radius);
 	}
 
-	public void drawDice(final Point center, final float radius) {
+	public void drawDice(final PointF center, final float radius) {
 		addPath(new SquarePath(center, radius, true, SQUARE_STYLE.ROUNDED));
 		final float raster = radius / 1.8f;
 

@@ -1,7 +1,7 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -11,7 +11,7 @@ public class SquarePath extends Path {
 		ROUNDED, NORMAL, MIXED;
 	}
 
-	public SquarePath(final Point center, final float radius, final boolean filled, final SQUARE_STYLE variant) {
+	public SquarePath(final PointF center, final float radius, final boolean filled, final SQUARE_STYLE variant) {
 		super();
 
 		boolean rounded = false;

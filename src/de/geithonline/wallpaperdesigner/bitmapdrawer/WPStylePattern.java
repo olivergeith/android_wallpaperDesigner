@@ -57,6 +57,8 @@ import de.geithonline.wallpaperdesigner.shapes.SailboatPath;
 import de.geithonline.wallpaperdesigner.shapes.SailboatPath2;
 import de.geithonline.wallpaperdesigner.shapes.SatelitePath;
 import de.geithonline.wallpaperdesigner.shapes.SawPath;
+import de.geithonline.wallpaperdesigner.shapes.SchachbrettPath;
+import de.geithonline.wallpaperdesigner.shapes.SchachbrettPath.BRETT_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.ShellV1Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV2Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
@@ -118,6 +120,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Assorted Shapes":
 			drawAssorted(x, y, paint, radius);
+			break;
+		case "Chess":
+			drawChess(x, y, paint, radius);
 			break;
 		case "XmasTrees":
 			drawXmasTree(x, y, paint, radius);
@@ -338,11 +343,11 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V2":
 		case "Square":
-			path = new SquarePath(new Point(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.NORMAL);
+			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.NORMAL);
 			break;
 		case "V3":
 		case "Square (rounded)":
-			path = new SquarePath(new Point(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
+			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
 			break;
 		case "V4":
 		case "Pentagon":
@@ -358,11 +363,11 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V7":
 		case "Circle":
-			path = new CirclePath(new Point(x, y), radius, radius / 2, getFilledBoolean());
+			path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean());
 			break;
 		case "V8":
 		case "Square (Mixed)":
-			path = new SquarePath(new Point(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
+			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
@@ -1137,7 +1142,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V5":
 		case "Pillows":
-			path = new PillowPath(new Point(x, y), radius);
+			path = new PillowPath(new PointF(x, y), radius);
 			break;
 		case "V6":
 		case "Android":
@@ -1160,7 +1165,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V10":
 		case "Dice":
-			path = new DicePath(new Point(x, y), radius * 0.8f);
+			path = new DicePath(new PointF(x, y), radius * 0.8f);
 			break;
 		case "V11":
 		case "Drop":
@@ -1172,6 +1177,45 @@ public abstract class WPStylePattern extends WPStyle {
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 4);
+			variant = "V" + nr;
+		}
+		drawChess(x, y, paint, radius, variant);
+	}
+
+	protected void drawChess(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Square":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Square);
+			break;
+		case "V2":
+		case "Star":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Star);
+			break;
+		case "V3":
+		case "Circle":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Circle);
+			break;
+		case "V4":
+		case "Pillow":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Pillow);
+			break;
+		}
+		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius / 2);
 			bitmapCanvas.drawPath(path, paint);
 		}
 	}
