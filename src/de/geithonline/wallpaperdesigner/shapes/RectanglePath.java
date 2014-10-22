@@ -47,4 +47,44 @@ public class RectanglePath extends Path {
 		}
 
 	}
+
+	public RectanglePath(final Point center, final float width, final float height, final boolean filled, final String variant) {
+		super();
+
+		boolean rounded = false;
+		if (variant.equalsIgnoreCase("Rounded")) {
+			rounded = true;
+		} else if (variant.equalsIgnoreCase("Mixed")) {
+			rounded = Randomizer.getRandomBoolean();
+		}
+
+		final RectF rect = new RectF();
+		rect.left = center.x - width;
+		rect.right = center.x + width;
+		rect.top = center.y - height;
+		rect.bottom = center.y + height;
+
+		if (!rounded) {
+			addRect(rect, Direction.CW);
+		} else {
+			final float cornerRad = width * 0.3f;
+			addRoundRect(rect, cornerRad, cornerRad, Direction.CW);
+		}
+		if (filled) {
+			rect.left = center.x - width / 2;
+			rect.right = center.x + width / 2;
+			rect.top = center.y - height / 2;
+			rect.bottom = center.y + height / 2;
+
+			if (!rounded) {
+				addRect(rect, Direction.CCW);
+			} else {
+				final float cornerRad = width * 0.3f;
+				addRoundRect(rect, cornerRad, cornerRad, Direction.CCW);
+			}
+
+		}
+
+	}
+
 }

@@ -1216,7 +1216,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Heart);
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, 90 * Settings.getRotationDegrees(0, 4));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
