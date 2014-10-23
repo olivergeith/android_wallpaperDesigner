@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class HeartPath extends Path {
 
 	public enum HEART_SHAPE {
-		Curvy, Straigth;
+		Curvy, Straigth, Round;
 	}
 
 	/**
@@ -25,6 +25,9 @@ public class HeartPath extends Path {
 			break;
 		case Straigth:
 			drawHeartV2(center, rOuter, inverted);
+			break;
+		case Round:
+			drawHeartV3(center, rOuter, inverted);
 			break;
 		}
 	}
@@ -72,6 +75,33 @@ public class HeartPath extends Path {
 		arcTo(oval, -180, 225);
 
 		lineTo(center.x - 0 * raster, center.y + 2.5f * raster);
+		close();
+		if (inverted) {
+			addCircle(center.x, center.y + radius * 0.25f, radius * 1.3f, Direction.CCW);
+			close();
+		}
+	}
+
+	private void drawHeartV3(final PointF center, final float radius, final boolean inverted) {
+		final float raster = radius / 2;
+		final RectF oval = new RectF();
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x - 0 * raster;
+		oval.top = center.y - 1 * raster;
+		oval.bottom = center.y + 1 * raster;
+		arcTo(oval, -180, 180);
+
+		oval.left = center.x - 0 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 1 * raster;
+		oval.bottom = center.y + 1 * raster;
+		arcTo(oval, -180, 180);
+
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 2 * raster;
+		arcTo(oval, 0, 180);
 		close();
 		if (inverted) {
 			addCircle(center.x, center.y + radius * 0.25f, radius * 1.3f, Direction.CCW);
