@@ -7,11 +7,13 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath;
+import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath.ARROW_TYPE;
 
 public class SchachbrettPath extends Path {
 
 	public enum BRETT_SHAPE {
-		Star, Square, Circle, Pillow, Heart;
+		Star, Square, Circle, Pillow, Heart, Arrow, Triangle;
 	}
 
 	public SchachbrettPath(final PointF center, final float radius, final int count, final BRETT_SHAPE shape) {
@@ -74,6 +76,12 @@ public class SchachbrettPath extends Path {
 				break;
 			case Heart:
 				path = new HeartPath(new PointF(p.x, p.y - patternRadius * 0.3f), patternRadius, false, HEART_SHAPE.Straigth);
+				break;
+			case Arrow:
+				path = new ArrowPath(p, patternRadius, Direction.CW, true, ARROW_TYPE.STRAIGHT_UP);
+				break;
+			case Triangle:
+				path = new ArrowPath(p, patternRadius, Direction.CW, true, ARROW_TYPE.TRIANGLE);
 				break;
 			}
 			addPath(path);

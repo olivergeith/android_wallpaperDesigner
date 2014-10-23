@@ -1185,7 +1185,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 7);
 			variant = "V" + nr;
 		}
 		drawChess(x, y, paint, radius, variant);
@@ -1214,6 +1214,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V5":
 		case "Heart":
 			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Heart);
+			break;
+		case "V6":
+		case "Arrow":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Arrow);
+			break;
+		case "V7":
+		case "Triangle":
+			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Triangle);
 			break;
 		}
 		rotatePath(x, y, path, 90 * Settings.getRotationDegrees(0, 4));

@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class ArrowPath extends Path {
 
 	public enum ARROW_TYPE {
-		STRAIGHT_UP, ROUND;
+		STRAIGHT_UP, ROUND, TRIANGLE;
 	}
 
 	public ArrowPath(final PointF center, final float radius, final Direction dir, final boolean filled, final ARROW_TYPE variante) {
@@ -18,6 +18,9 @@ public class ArrowPath extends Path {
 			break;
 		case ROUND:
 			drawRoundArrow(center, radius, dir, filled);
+			break;
+		case TRIANGLE:
+			drawTriangleArrow(center, radius, dir, filled);
 			break;
 		}
 	}
@@ -47,6 +50,28 @@ public class ArrowPath extends Path {
 			lineTo(center.x + 1 * raster, center.y + 3 * raster);
 			lineTo(center.x + 1 * raster, center.y + 1 * raster);
 			lineTo(center.x + 3 * raster, center.y + 1 * raster);
+			close();
+		}
+
+	}
+
+	private void drawTriangleArrow(final PointF center, final float radius, final Direction dir, final boolean filled) {
+		final float raster = radius / 2;
+		if (dir.equals(Direction.CW)) {
+			if (!filled) {
+				addCircle(center.x, center.y, radius * 1.3f, Direction.CCW);
+			}
+			moveTo(center.x + 0 * raster, center.y - 2 * raster);
+			lineTo(center.x + 2 * raster, center.y + 2 * raster);
+			lineTo(center.x - 2 * raster, center.y + 2 * raster);
+			close();
+		} else {
+			if (!filled) {
+				addCircle(center.x, center.y, radius * 1.3f, Direction.CW);
+			}
+			moveTo(center.x + 0 * raster, center.y - 2 * raster);
+			lineTo(center.x - 2 * raster, center.y + 2 * raster);
+			lineTo(center.x + 2 * raster, center.y + 2 * raster);
 			close();
 		}
 
