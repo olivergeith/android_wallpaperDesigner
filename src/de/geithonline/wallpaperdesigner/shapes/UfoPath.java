@@ -5,15 +5,19 @@ import android.graphics.Point;
 
 public class UfoPath extends Path {
 
-	public UfoPath(final Point center, final float radius, final String variante, final boolean filled) {
+	public enum UFO_TYPE {
+		UfoV1, UfoV2;
+	}
+
+	public UfoPath(final Point center, final float radius, final UFO_TYPE variante, final boolean filled) {
 		super();
 
 		switch (variante) {
 		default:
-		case "Ufo V1":
+		case UfoV1:
 			drawUFO1(center, radius);
 			break;
-		case "Ufo V2":
+		case UfoV2:
 			drawUFO2(center, radius, filled);
 			break;
 		}

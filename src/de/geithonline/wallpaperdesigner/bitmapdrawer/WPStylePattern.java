@@ -27,6 +27,7 @@ import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
 import de.geithonline.wallpaperdesigner.shapes.DicePath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
+import de.geithonline.wallpaperdesigner.shapes.DropPath;
 import de.geithonline.wallpaperdesigner.shapes.FishPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
@@ -36,7 +37,6 @@ import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.GhostPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
-import de.geithonline.wallpaperdesigner.shapes.DropPath;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
@@ -77,6 +77,7 @@ import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPathV2;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
+import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath2;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath3;
@@ -525,11 +526,11 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V7":
 		case "Ufo V1":
-			path = new UfoPath(new Point(x, y), radius, "Ufo V1", getFilledBoolean());
+			path = new UfoPath(new Point(x, y), radius, UFO_TYPE.UfoV1, getFilledBoolean());
 			break;
 		case "V8":
 		case "Ufo V2":
-			path = new UfoPath(new Point(x, y), radius, "Ufo V2", getFilledBoolean());
+			path = new UfoPath(new Point(x, y), radius, UFO_TYPE.UfoV2, getFilledBoolean());
 			break;
 		case "V9":
 		case "Satellite":
