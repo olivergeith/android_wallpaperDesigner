@@ -297,19 +297,19 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Sailboat V1":
-			path = new SailboatPath(new Point(x, y), radius * 1.5f);
+			path = new SailboatPath(new Point(x, y), radius);
 			break;
 		case "V2":
 		case "Sailboat V2":
-			path = new SailboatPath2(new Point(x, y), radius * 1.2f);
+			path = new SailboatPath2(new Point(x, y), radius);
 			break;
 		case "V3":
 		case "Lighthouse":
-			path = new LighthousePath(new Point(x, y), radius * 1.2f);
+			path = new LighthousePath(new Point(x, y), radius);
 			break;
 		case "V4":
 		case "Anchor":
-			path = new AnkerPath(new Point(x, y), radius * 1.5f);
+			path = new AnkerPath(new Point(x, y), radius);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));

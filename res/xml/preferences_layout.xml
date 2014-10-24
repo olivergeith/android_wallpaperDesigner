@@ -17,7 +17,7 @@
 	        android:title="@string/overlapping" 
 		    seekbarpreference:minValue="10"
 		    seekbarpreference:stepValue="2"
-		    seekbarpreference:maxValue="120"
+		    seekbarpreference:maxValue="150"
 		    android:summary="overlap %1$d (the smaler the number the more overlapping)" 
 		    android:defaultValue="50"
 		    android:dialogMessage="@string/overlapping" />
