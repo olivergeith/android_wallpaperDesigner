@@ -3,10 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath;
-import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath.ARROW_TYPE;
-import de.geithonline.wallpaperdesigner.shapes.base.CrossPath;
-import de.geithonline.wallpaperdesigner.shapes.base.MinusPath;
+import de.geithonline.wallpaperdesigner.shapes.ArrowPath.ARROW_TYPE;
 
 public class InvertablePath extends Path {
 

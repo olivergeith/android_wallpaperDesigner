@@ -5,10 +5,9 @@ import java.util.List;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.shapes.ArrowPath.ARROW_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
-import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath;
-import de.geithonline.wallpaperdesigner.shapes.base.ArrowPath.ARROW_TYPE;
 
 public class SchachbrettPath extends Path {
 

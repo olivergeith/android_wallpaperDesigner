@@ -3,7 +3,6 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.shapes.base.OvalPath;
 
 public class OwlPath extends Path {
 

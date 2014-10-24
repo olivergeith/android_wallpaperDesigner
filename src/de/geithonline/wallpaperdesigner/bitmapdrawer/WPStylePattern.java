@@ -36,6 +36,7 @@ import de.geithonline.wallpaperdesigner.shapes.GearPath;
 import de.geithonline.wallpaperdesigner.shapes.GhostPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
+import de.geithonline.wallpaperdesigner.shapes.DropPath;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
@@ -86,7 +87,6 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
-import de.geithonline.wallpaperdesigner.shapes.base.DropPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 
 public abstract class WPStylePattern extends WPStyle {
