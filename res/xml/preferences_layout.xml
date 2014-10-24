@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
+ 
+    <PreferenceCategory  android:title="Layout"/>
+        <ListPreference
+	        android:key="layoutPicker"
+	        android:title="@string/layoutPicker" 
+	        android:dialogTitle="@string/layoutPicker"
+	        android:defaultValue="Random Layout"
+	        android:entries="@array/layout"
+	        android:entryValues="@array/layout"
+	        />
+    
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="overlapping"
+	        android:title="@string/overlapping" 
+		    seekbarpreference:minValue="10"
+		    seekbarpreference:stepValue="2"
+		    seekbarpreference:maxValue="120"
+		    android:summary="overlap %1$d (the smaler the number the more overlapping)" 
+		    android:defaultValue="50"
+		    android:dialogMessage="@string/overlapping" />
+        
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="anzahlPatterns"
+	        android:title="@string/pattern_anzahlPatterns" 
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="20"
+		    seekbarpreference:maxValue="3000"
+		    android:summary="Draw %1$d Patterns" 
+		    android:defaultValue="1000"
+		    android:dialogMessage="@string/pattern_anzahlPatterns" />
+            
+        <CheckBoxPreference 
+		    android:key="blurPatterns"
+		    android:title="@string/blurPatterns"
+		    android:defaultValue="false"
+		    />
+    	
+</PreferenceScreen>

@@ -17,8 +17,10 @@
     <string name="header_size_summary">Size of Wallpaper...</string>
     <string name="header_colors">Colors-Scheme</string>
     <string name="header_colors_summary">Overall Colors and Stuff...</string>
-    <string name="header_style">Wallpaper Style</string>
-    <string name="header_style_summary">Style-Selection and special Options for Style....</string>
+    <string name="header_style">Pattern Style</string>
+    <string name="header_style_summary">Pattern-Selection and special Options for Pattern....</string>
+    <string name="header_layout">Wallpaper Layout</string>
+    <string name="header_layout_summary">Layout-Selection and special Options for Layout....</string>
     <string name="header_about_options">About</string>
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
 

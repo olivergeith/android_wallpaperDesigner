@@ -12,7 +12,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.LayoutManager;
 import de.geithonline.wallpaperdesigner.settings.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
@@ -32,7 +31,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private SeekBarPreference numberOfLeafs;
 	private SeekBarPreference rotationDegrees;
 	private CheckBoxPreference randomLeafCount;
-	private ListPreference layoutSelection;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -40,7 +38,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
-		layoutSelection = (ListPreference) findPreference("layoutPicker");
 		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
 		patternVariantSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_VARIANT_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.PATTERN_FILLED_OPTION);
@@ -83,15 +80,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
-		layoutSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleLayoutSelect((String) newValue);
-				return true;
-			}
-		});
-
 		patternVariantSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -128,7 +116,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 
 		});
-		handleLayoutSelect(Settings.getSelectedLayout());
 		handlePatternSelect(Settings.getSelectedPattern());
 		handleFilledOptionSelected(Settings.getFilledOption());
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
@@ -156,16 +143,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowColor.setEnabled(newValue.equals("Select"));
 		final Preference dropShadowDarkness = findPreference(Settings.PATTERN_DROPSHADOW_DARKNESS_ADJUST);
 		dropShadowDarkness.setEnabled(newValue.equals("Darker"));
-	}
-
-	private void handleLayoutSelect(final String selectedLayout) {
-		layoutSelection.setSummary(selectedLayout);
-		final SeekBarPreference overlapping = (SeekBarPreference) findPreference("overlapping");
-		final SeekBarPreference anzahlPatterns = (SeekBarPreference) findPreference("anzahlPatterns");
-		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
-		overlapping.setEnabled(LayoutManager.supportsOverLay(selectedLayout));
-		anzahlPatterns.setEnabled(LayoutManager.supportsAnzahlPatterns(selectedLayout));
-		blurring.setEnabled(LayoutManager.supportsBlurring(selectedLayout));
 	}
 
 	private void handlePatternSelect(final String newPattern) {
