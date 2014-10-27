@@ -19,8 +19,13 @@ public class WPStyleGeometricPatterns extends WPStylePattern {
 
 	@Override
 	public synchronized Bitmap drawBitmap() {
-		bWidth = Settings.getWidth();
-		bHeight = Settings.getHeight();
+		return drawBitmap(Settings.getWidth(), Settings.getHeight());
+	}
+
+	@Override
+	public synchronized Bitmap drawBitmap(final int width, final int height) {
+		bWidth = width;
+		bHeight = height;
 
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
