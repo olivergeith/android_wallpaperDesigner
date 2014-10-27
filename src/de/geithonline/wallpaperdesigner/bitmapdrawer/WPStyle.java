@@ -33,7 +33,30 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final Date date = new Date();
 		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		final String timeStamp = dt.format(date);
+		saveBigImage(context, timeStamp);
+		saveSmallImage(context, timeStamp);
+	}
+
+	public synchronized void saveSmallImage(final Context context, final String timeStamp) {
+		final int w = bitmap.getWidth();
+		final int h = bitmap.getHeight();
+
+		final int dw = 128;
+		final int dh = h * dw / w;
+
+		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
+		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(small, "WallpaperDesigner" + File.separator + "previews", "WallpaperDesigner_"
+				+ timeStamp + ".png");
+		rescanMedia(context, imageFile);
+		small.recycle();
+	}
+
+	public synchronized void saveBigImage(final Context context, final String timeStamp) {
 		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(bitmap, "WallpaperDesigner", "WallpaperDesigner_" + timeStamp + ".png");
+		rescanMedia(context, imageFile);
+	}
+
+	private void rescanMedia(final Context context, final File imageFile) {
 		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null, new MediaScannerConnection.OnScanCompletedListener() {
 			@Override
 			public void onScanCompleted(final String path, final Uri uri) {
