@@ -174,13 +174,17 @@ public class SettingsIO {
 
 	private static void savePreferencesToFile(final Activity activity, final SharedPreferences prefs, final String filename) {
 		final File file = new File(getSettingsDir(), filename);
+		savePreferences(prefs, file);
+		Toaster.showInfoToast(activity, "Preferences backed up as " + file.getName());
+	}
+
+	public static void savePreferences(final SharedPreferences prefs, final File file) {
 		try {
 			file.createNewFile();
 			final FileOutputStream fo = new FileOutputStream(file);
 			final ObjectOutputStream o = new ObjectOutputStream(fo);
 			o.writeObject(prefs.getAll());
 			o.close();
-			Toaster.showInfoToast(activity, "Preferences backed up as " + filename);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

@@ -11,6 +11,6 @@ public interface IWPStyle {
 
 	public void recycleBitmap();
 
-	public void save(Context context);
+	public void save(Context context, final boolean withSettings);
 
 }

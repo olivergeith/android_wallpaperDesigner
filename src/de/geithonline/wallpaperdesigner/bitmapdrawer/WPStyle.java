@@ -17,7 +17,9 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
+import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
@@ -29,15 +31,17 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
-	public synchronized void save(final Context context) {
+	public synchronized void save(final Context context, final boolean withSettings) {
 		final Date date = new Date();
 		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		final String timeStamp = dt.format(date);
 		saveBigImage(context, timeStamp);
-		saveSmallImage(context, timeStamp);
+		if (withSettings) {
+			saveSmallImageAndSettings(context, timeStamp);
+		}
 	}
 
-	public synchronized void saveSmallImage(final Context context, final String timeStamp) {
+	public synchronized void saveSmallImageAndSettings(final Context context, final String timeStamp) {
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
@@ -45,14 +49,18 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final int dh = h * dw / w;
 
 		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
-		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(small, "WallpaperDesigner" + File.separator + "previews", "WallpaperDesigner_"
-				+ timeStamp + ".png");
+		final String filename = "WallpaperDesigner_" + timeStamp + ".png";
+		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), filename);
 		rescanMedia(context, imageFile);
 		small.recycle();
+		// Saving corresponding Settings
+		final File settingsFile = new File(imageFile.getAbsolutePath() + ".prefs");
+		SettingsIO.savePreferences(Settings.prefs, settingsFile);
 	}
 
 	public synchronized void saveBigImage(final Context context, final String timeStamp) {
-		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(bitmap, "WallpaperDesigner", "WallpaperDesigner_" + timeStamp + ".png");
+		final String filename = "WallpaperDesigner_" + timeStamp + ".png";
+		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
 		rescanMedia(context, imageFile);
 	}
 

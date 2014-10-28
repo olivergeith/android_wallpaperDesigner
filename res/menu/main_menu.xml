@@ -10,7 +10,14 @@
         android:icon="@android:drawable/ic_menu_save"
         />
     
-
+    <item
+        android:id="@+id/action_save_settings"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/save"
+        android:icon="@drawable/ic_menu_save_seetings"
+        />
+    
     <!-- item
         android:id="@+id/action_generate"
         android:orderInCategory="101"

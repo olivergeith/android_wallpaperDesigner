@@ -15,7 +15,6 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
 
 public class BitmapHelper {
@@ -23,14 +22,11 @@ public class BitmapHelper {
 	/**
 	 * @param bitmap
 	 *            the Bitmap to save
-	 * @param directory
-	 *            the directory under /sdcard/Pictures/<directory>/
 	 * @param filename
 	 *            the filename
 	 */
-	public static File saveBitmap2ExternalStorage(final Bitmap bitmap, final String directory, final String filename) {
-		String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-		extStorageDirectory += File.separator + "Pictures" + File.separator + directory + File.separator;
+	public static File saveBitmap2ExternalStorage(final Bitmap bitmap, final String extStorageDirectory, final String filename) {
+
 		OutputStream outStream = null;
 		// Ordner anlegen fal snicht vorhanden
 		final File out = new File(extStorageDirectory);

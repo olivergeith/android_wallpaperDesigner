@@ -1,6 +1,5 @@
 package de.geithonline.wallpaperdesigner;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
@@ -15,7 +14,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +25,7 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.LayoutManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
+import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 /**
@@ -132,9 +131,17 @@ public class MainActivity extends Activity {
 			dialog.setMessage("Saving...");
 			dialog.show();
 		}
-		String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-		extStorageDirectory += File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
-		Toaster.showInfoToast(this, "Wallpapers are saved to: " + extStorageDirectory);
+		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
+	}
+
+	public synchronized void saveWithSettings() {
+		final BitmapAndSetttingsSaverTask task = new BitmapAndSetttingsSaverTask();
+		task.execute();
+		if (dialog != null) {
+			dialog.setMessage("Saving Image and Settings...");
+			dialog.show();
+		}
+		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
 	}
 
 	@Override
@@ -161,6 +168,10 @@ public class MainActivity extends Activity {
 		// }
 		if (id == R.id.action_save) {
 			save();
+			return true;
+		}
+		if (id == R.id.action_save_settings) {
+			saveWithSettings();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -250,7 +261,30 @@ public class MainActivity extends Activity {
 		@Override
 		protected Integer doInBackground(final Void... params) {
 			if (drawer != null) {
-				drawer.save(getApplicationContext());
+				drawer.save(getApplicationContext(), false);
+			}
+			return 0;
+		}
+
+		@Override
+		protected void onPostExecute(final Integer i) {
+			if (dialog != null) {
+				dialog.cancel();
+			}
+		}
+
+	}
+
+	// ##########################################################
+	class BitmapAndSetttingsSaverTask extends AsyncTask<Void, Void, Integer> {
+
+		public BitmapAndSetttingsSaverTask() {
+		}
+
+		@Override
+		protected Integer doInBackground(final Void... params) {
+			if (drawer != null) {
+				drawer.save(getApplicationContext(), true);
 			}
 			return 0;
 		}
