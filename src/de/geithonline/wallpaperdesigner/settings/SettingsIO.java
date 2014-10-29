@@ -16,11 +16,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
+import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class SettingsIO {
@@ -115,6 +120,71 @@ public class SettingsIO {
 		});
 
 		alert.show();
+
+	}
+
+	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
+
+		final List<SavedPreference> preferenceList = getSavedPreferencesList();
+
+		if (preferenceList.isEmpty()) {
+			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
+			return;
+		}
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final AlertDialog dialog = builder.create();
+
+		dialog.setTitle("Restore current preferences");
+		dialog.setMessage("Select preferences to be restored");
+
+		final ListView listview = new ListView(activity);
+		/** Declaring an ArrayAdapter to set items to ListView */
+		final CustomAdapter adapter = new CustomAdapter(activity, preferenceList);
+		listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listview.setAdapter(adapter);
+		// listview.setItemChecked(0, true);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+				Log.i("Loading Settings ", "from " + position);
+				if (position >= 0) {
+					final SavedPreference pref = preferenceList.get(position);
+					final String filename = pref.getPreferenceFile().getName();
+					if (filename != null) {
+						SettingsIO.loadPreferencesFromFile(activity, prefs, filename);
+					}
+				}
+				dialog.dismiss();
+			}
+		});
+		dialog.setView(listview);
+		// alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		// @Override
+		// public void onClick(final DialogInterface dialog, final int whichButton) {
+		// final int position = listview.getSelectedItemPosition();
+		// Log.i("Loading Settings ", "from " + position);
+		// if (position >= 0) {
+		// final SavedPreference pref = preferenceList.get(position);
+		// final String filename = pref.getPreferenceFile().getName();
+		// if (filename != null) {
+		// SettingsIO.loadPreferencesFromFile(activity, prefs, filename);
+		// }
+		//
+		// }
+		// }
+		//
+		// });
+		//
+		// alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		// @Override
+		// public void onClick(final DialogInterface dialog, final int whichButton) {
+		// // Canceled.
+		// }
+		// });
+
+		dialog.show();
 
 	}
 
@@ -248,7 +318,7 @@ public class SettingsIO {
 			final File[] prefs = dir.listFiles(new FilenameFilter() {
 
 				@Override
-				public boolean accept(final File dir, final String name) {
+				public boolean accept(final File file, final String name) {
 					return name.endsWith(".pref");
 				}
 			});
@@ -257,6 +327,51 @@ public class SettingsIO {
 			}
 		}
 		return names;
+	}
+
+	/**
+	 * Get a list of all preference filenames
+	 * 
+	 * @param activity
+	 * @return
+	 */
+	public static List<File> getPreferenzFileList() {
+		final List<File> names = new ArrayList<File>();
+		final File dir = getSettingsDir();
+		Log.i("SettingsDIR", "Dir = " + dir);
+		if (dir.exists() && dir.isDirectory()) {
+			Log.i("SettingsDIR", "ScanningDir = " + dir);
+			final File[] prefs = dir.listFiles(new FilenameFilter() {
+
+				@Override
+				public boolean accept(final File file, final String name) {
+					return name.endsWith(".pref");
+				}
+			});
+			for (final File fi : prefs) {
+				names.add(fi);
+			}
+			Log.i("SettingsDIR", "Found = " + names.size());
+		}
+		return names;
+	}
+
+	public static List<SavedPreference> getSavedPreferencesList() {
+		final List<SavedPreference> list = new ArrayList<>();
+		final List<File> filenames = getPreferenzFileList();
+		for (final File fi : filenames) {
+			final String absolute = fi.getAbsolutePath();
+			final int pos = absolute.indexOf(".pref");
+			final String bmpFilename = absolute.substring(0, pos);
+			final File bmpFile = new File(bmpFilename);
+			Bitmap bitmap = null;
+			if (bmpFile.exists()) {
+				bitmap = BitmapFileIO.loadBitmap(bmpFilename);
+			}
+			final SavedPreference pref = new SavedPreference(bitmap, fi);
+			list.add(pref);
+		}
+		return list;
 	}
 
 	private static File getSettingsDir() {

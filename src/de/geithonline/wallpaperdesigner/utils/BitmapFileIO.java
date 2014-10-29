@@ -67,6 +67,16 @@ public class BitmapFileIO {
 		return null;
 	}
 
+	/**
+	 * @return Bitmap or null...
+	 */
+	public static Bitmap loadBitmap(final String filePath) {
+		final BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		final Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+		return bitmap;
+	}
+
 	private static int calculateInSampleSize(final BitmapFactory.Options options, final int reqWidth, final int reqHeight) {
 		// Raw height and width of image
 		final int height = options.outHeight;

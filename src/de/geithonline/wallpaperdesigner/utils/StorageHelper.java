@@ -15,9 +15,16 @@ public class StorageHelper {
 				+ File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
 	}
 
+	static String extStorageDirectory = Environment.getExternalStorageDirectory().toString() //
+			+ File.separator + "data" //
+			+ File.separator + "WallpaperDesigner" + File.separator;
+
 	public static String getExternalStorageSettings() {
 		return Environment.getExternalStorageDirectory().toString() //
-				+ File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator + "previews" + File.separator;
+				+ File.separator + "data" //
+				+ File.separator + "WallpaperDesigner" + File.separator;
+		// return Environment.getExternalStorageDirectory().toString() //
+		// + File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator + "previews" + File.separator;
 	}
 
 }

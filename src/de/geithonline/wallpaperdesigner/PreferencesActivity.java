@@ -82,7 +82,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
 			@Override
 			public void onClick(final View v) {
-				SettingsIO.loadPreferences(PreferencesActivity.this, Settings.prefs);
+				SettingsIO.loadPreferencesTheFancyWay(PreferencesActivity.this, Settings.prefs);
 			}
 		});
 		return button;

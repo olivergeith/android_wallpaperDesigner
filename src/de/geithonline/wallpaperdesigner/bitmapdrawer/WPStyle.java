@@ -45,11 +45,12 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
-		final int dw = 128;
+		final int dw = 256;
 		final int dh = h * dw / w;
 
 		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
-		final String filename = "WallpaperDesigner_" + timeStamp + ".png";
+		final String patternname = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
+		final String filename = patternname + " " + timeStamp + ".png";
 		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), filename);
 		rescanMedia(context, imageFile);
 		small.recycle();
