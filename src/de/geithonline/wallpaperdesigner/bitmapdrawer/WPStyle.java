@@ -54,7 +54,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		rescanMedia(context, imageFile);
 		small.recycle();
 		// Saving corresponding Settings
-		final File settingsFile = new File(imageFile.getAbsolutePath() + ".prefs");
+		final File settingsFile = new File(imageFile.getAbsolutePath() + ".pref");
 		SettingsIO.savePreferences(Settings.prefs, settingsFile);
 	}
 

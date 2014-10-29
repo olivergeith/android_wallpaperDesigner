@@ -54,7 +54,7 @@ public class PreferencesActivity extends PreferenceActivity {
 			final Button button = billingManager.getButton();
 			ll.addView(button);
 		}
-		ll.addView(getSaveSettingsButton());
+		// ll.addView(getSaveSettingsButton());
 		ll.addView(getLoadSettingsButton());
 		ll.addView(getDeleteSettingsButton());
 

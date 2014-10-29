@@ -17,7 +17,7 @@ public class StorageHelper {
 
 	public static String getExternalStorageSettings() {
 		return Environment.getExternalStorageDirectory().toString() //
-				+ File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator + "previews";
+				+ File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator + "previews" + File.separator;
 	}
 
 }

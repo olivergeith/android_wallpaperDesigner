@@ -16,18 +16,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
+import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class SettingsIO {
 
-	static String extStorageDirectory = Environment.getExternalStorageDirectory().toString() //
-			+ File.separator + "data" //
-			+ File.separator + "WallpaperDesigner" + File.separator;
+	static String extStorageDirectory = StorageHelper.getExternalStorageSettings();
+
+	// static String extStorageDirectory = Environment.getExternalStorageDirectory().toString() //
+	// + File.separator + "data" //
+	// + File.separator + "WallpaperDesigner" + File.separator;
 
 	public static void savePreferences(final Activity activity, final SharedPreferences prefs) {
 		final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -240,7 +242,9 @@ public class SettingsIO {
 	public static List<String> getPreferenzFileNameList() {
 		final List<String> names = new ArrayList<String>();
 		final File dir = getSettingsDir();
+		Log.i("SettingsDIR", "Dir = " + dir);
 		if (dir.exists() && dir.isDirectory()) {
+			Log.i("SettingsDIR", "ScanningDir = " + dir);
 			final File[] prefs = dir.listFiles(new FilenameFilter() {
 
 				@Override
