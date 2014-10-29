@@ -14,15 +14,12 @@ import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
@@ -31,97 +28,6 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 public class SettingsIO {
 
 	static String extStorageDirectory = StorageHelper.getExternalStorageSettings();
-
-	// static String extStorageDirectory = Environment.getExternalStorageDirectory().toString() //
-	// + File.separator + "data" //
-	// + File.separator + "WallpaperDesigner" + File.separator;
-
-	public static void savePreferences(final Activity activity, final SharedPreferences prefs) {
-		final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-
-		alert.setTitle("Backup current preferences");
-		alert.setMessage("Enter the name for this preferences");
-
-		// Set an EditText view to get user input
-		final EditText input = new EditText(activity);
-		input.setMaxLines(1);
-		input.setText("Settings.pref");
-		alert.setView(input);
-
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				String filename = input.getText().toString();
-				if (filename != null && filename.length() > 0) {
-					if (!filename.endsWith(".pref")) {
-						filename = filename + ".pref";
-					}
-					savePreferencesToFile(activity, prefs, filename);
-				}
-
-			}
-		});
-
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				// Canceled.
-			}
-		});
-
-		alert.show();
-
-	}
-
-	public static void loadPreferences(final Activity activity, final SharedPreferences prefs) {
-
-		final List<String> preferenzFileNameList = getPreferenzFileNameList();
-
-		if (preferenzFileNameList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
-			return;
-		}
-
-		final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-
-		alert.setTitle("Restore current preferences");
-		alert.setMessage("Select preferences to be restored");
-
-		final ListView listview = new ListView(activity);
-		/** Declaring an ArrayAdapter to set items to ListView */
-		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity.getBaseContext(), android.R.layout.simple_list_item_single_choice,
-				preferenzFileNameList);
-		listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		listview.setAdapter(adapter);
-		listview.setItemChecked(0, true);
-		alert.setView(listview);
-
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				final int position = listview.getCheckedItemPosition();
-				Log.i("Loading Settings ", "from " + position);
-				if (position >= 0) {
-					final String filename = preferenzFileNameList.get(position);
-					if (filename != null) {
-						SettingsIO.loadPreferencesFromFile(activity, prefs, filename);
-					}
-
-				}
-			}
-
-		});
-
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				// Canceled.
-			}
-		});
-
-		alert.show();
-
-	}
 
 	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
 
@@ -160,94 +66,54 @@ public class SettingsIO {
 			}
 		});
 		dialog.setView(listview);
-		// alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		// @Override
-		// public void onClick(final DialogInterface dialog, final int whichButton) {
-		// final int position = listview.getSelectedItemPosition();
-		// Log.i("Loading Settings ", "from " + position);
-		// if (position >= 0) {
-		// final SavedPreference pref = preferenceList.get(position);
-		// final String filename = pref.getPreferenceFile().getName();
-		// if (filename != null) {
-		// SettingsIO.loadPreferencesFromFile(activity, prefs, filename);
-		// }
-		//
-		// }
-		// }
-		//
-		// });
-		//
-		// alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-		// @Override
-		// public void onClick(final DialogInterface dialog, final int whichButton) {
-		// // Canceled.
-		// }
-		// });
-
 		dialog.show();
 
 	}
 
-	public static void deletePreferences(final Activity activity) {
+	public static void deletePreferencesTheFancyWay(final Activity activity) {
 
-		final List<String> preferenzFileNameList = getPreferenzFileNameList();
+		final List<SavedPreference> preferenceList = getSavedPreferencesList();
 
-		if (preferenzFileNameList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no backups of preferences you possibly could delete!");
+		if (preferenceList.isEmpty()) {
+			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
 			return;
 		}
 
-		final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final AlertDialog dialog = builder.create();
 
-		alert.setTitle("Delete backup of preferences");
-		alert.setMessage("Select preferences to be deleted");
+		dialog.setTitle("Delete backup of preferences");
+		dialog.setMessage("Select preferences to be deleted");
 
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
-		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity.getBaseContext(), android.R.layout.simple_list_item_single_choice,
-				preferenzFileNameList);
+		final CustomAdapter adapter = new CustomAdapter(activity, preferenceList);
 		listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listview.setAdapter(adapter);
-		listview.setItemChecked(0, true);
-		alert.setView(listview);
+		// listview.setItemChecked(0, true);
+		listview.setOnItemClickListener(new OnItemClickListener() {
 
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				final int position = listview.getCheckedItemPosition();
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Loading Settings ", "from " + position);
 				if (position >= 0) {
-					final String filename = preferenzFileNameList.get(position);
-					if (filename != null) {
-						SettingsIO.deletePreferencesFile(activity, filename);
-					}
-
+					final SavedPreference pref = preferenceList.get(position);
+					SettingsIO.deletePreferencesFile(pref);
 				}
-			}
-
-		});
-
-		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				// Canceled.
+				dialog.dismiss();
 			}
 		});
 
-		alert.show();
+		dialog.setView(listview);
+		dialog.show();
 
 	}
 
-	protected static void deletePreferencesFile(final Activity activity, final String filename) {
-		final File file = new File(getSettingsDir(), filename);
-		file.delete();
-		Toaster.showInfoToast(activity, "Deleted " + filename);
-	}
-
-	private static void savePreferencesToFile(final Activity activity, final SharedPreferences prefs, final String filename) {
-		final File file = new File(getSettingsDir(), filename);
-		savePreferences(prefs, file);
-		Toaster.showInfoToast(activity, "Preferences backed up as " + file.getName());
+	private static void deletePreferencesFile(final SavedPreference pref) {
+		pref.getPreferenceFile().delete();
+		if (pref.getBitmap() != null) {
+			pref.getBmpFile().delete();
+		}
 	}
 
 	public static void savePreferences(final SharedPreferences prefs, final File file) {
@@ -356,7 +222,7 @@ public class SettingsIO {
 		return names;
 	}
 
-	public static List<SavedPreference> getSavedPreferencesList() {
+	private static List<SavedPreference> getSavedPreferencesList() {
 		final List<SavedPreference> list = new ArrayList<>();
 		final List<File> filenames = getPreferenzFileList();
 		for (final File fi : filenames) {
@@ -368,7 +234,7 @@ public class SettingsIO {
 			if (bmpFile.exists()) {
 				bitmap = BitmapFileIO.loadBitmap(bmpFilename);
 			}
-			final SavedPreference pref = new SavedPreference(bitmap, fi);
+			final SavedPreference pref = new SavedPreference(bitmap, fi, bmpFile);
 			list.add(pref);
 		}
 		return list;

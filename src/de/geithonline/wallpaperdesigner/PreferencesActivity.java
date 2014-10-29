@@ -62,18 +62,18 @@ public class PreferencesActivity extends PreferenceActivity {
 		setListFooter(ll);
 	}
 
-	private Button getSaveSettingsButton() {
-		final Button button = new Button(PreferencesActivity.this);
-		button.setText("Backup Preferences...");
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(final View v) {
-				SettingsIO.savePreferences(PreferencesActivity.this, Settings.prefs);
-			}
-		});
-		return button;
-	}
+	// private Button getSaveSettingsButton() {
+	// final Button button = new Button(PreferencesActivity.this);
+	// button.setText("Backup Preferences...");
+	// button.setOnClickListener(new OnClickListener() {
+	//
+	// @Override
+	// public void onClick(final View v) {
+	// SettingsIO.savePreferences(PreferencesActivity.this, Settings.prefs);
+	// }
+	// });
+	// return button;
+	// }
 
 	private Button getLoadSettingsButton() {
 		final Button button = new Button(PreferencesActivity.this);
@@ -95,7 +95,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
 			@Override
 			public void onClick(final View v) {
-				SettingsIO.deletePreferences(PreferencesActivity.this);
+				SettingsIO.deletePreferencesTheFancyWay(PreferencesActivity.this);
 			}
 		});
 		return button;

@@ -13,4 +13,6 @@ public interface IWPStyle {
 
 	public void save(Context context, final boolean withSettings);
 
+	public void saveSmallImageAndSettings(final Context context);
+
 }

@@ -31,17 +31,25 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
-	public synchronized void save(final Context context, final boolean withSettings) {
+	public synchronized void save(final Context context, final boolean saveSettings) {
 		final Date date = new Date();
 		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		final String timeStamp = dt.format(date);
 		saveBigImage(context, timeStamp);
-		if (withSettings) {
-			saveSmallImageAndSettings(context, timeStamp);
+		if (saveSettings) {
+			saveSmallImageAndSettings(context);
+		} else {
+
 		}
 	}
 
-	public synchronized void saveSmallImageAndSettings(final Context context, final String timeStamp) {
+	@SuppressLint("SimpleDateFormat")
+	@Override
+	public synchronized void saveSmallImageAndSettings(final Context context) {
+		final Date date = new Date();
+		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		final String timeStamp = dt.format(date);
+
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
