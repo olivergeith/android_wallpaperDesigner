@@ -1327,7 +1327,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawHeart(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = getRandomInt(0, 5);
 			variante = "V" + nr;
 		}
 		drawHeart(x, y, paint, radius, variante);
@@ -1349,6 +1349,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Round":
 		case "V3":
 			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Round);
+			break;
+		case "Peek":
+		case "V4":
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Peek);
+			break;
+		case "Lovely":
+		case "V5":
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Lovely);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
@@ -1444,11 +1452,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = getRandomInt(0, 5);
 			variante = "V" + nr;
 		}
 		drawGlossyHeart(x, y, paint, radius, variante);
-
 	}
 
 	protected void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
@@ -1472,6 +1479,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Round":
 		case "V3":
 			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Round);
+			break;
+		case "Peek":
+		case "V4":
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Peek);
+			break;
+		case "Lovely":
+		case "V5":
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Lovely);
 			break;
 		}
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));

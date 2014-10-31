@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class HeartPath extends Path {
 
 	public enum HEART_SHAPE {
-		Curvy, Straigth, Round;
+		Curvy, Straigth, Round, Peek, Lovely;
 	}
 
 	/**
@@ -28,6 +28,12 @@ public class HeartPath extends Path {
 			break;
 		case Round:
 			drawHeartV3(center, rOuter, inverted);
+			break;
+		case Peek:
+			drawHeartV4(center, rOuter, inverted);
+			break;
+		case Lovely:
+			drawHeartV5(center, rOuter, inverted);
 			break;
 		}
 	}
@@ -105,6 +111,62 @@ public class HeartPath extends Path {
 		close();
 		if (inverted) {
 			addCircle(center.x, center.y + radius * 0.25f, radius * 1.3f, Direction.CCW);
+			close();
+		}
+	}
+
+	private void drawHeartV4(final PointF center, final float radius, final boolean inverted) {
+		final float raster = radius / 2;
+		final RectF oval = new RectF();
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x - 0 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -180, 180);
+
+		oval.left = center.x - 0 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -180, 180);
+
+		cubicTo(center.x + 2 * raster, center.y + 0 * raster, // CP1
+				center.x + 0 * raster, center.y + 0.5f * raster, // CP2
+				center.x + 0 * raster, center.y + 2 * raster);
+		cubicTo(center.x - 0 * raster, center.y + 0.5f * raster, // CP1
+				center.x - 2 * raster, center.y + 0 * raster, // CP2
+				center.x - 2 * raster, center.y - 1 * raster);
+		close();
+		if (inverted) {
+			addCircle(center.x, center.y, radius * 1.3f, Direction.CCW);
+			close();
+		}
+	}
+
+	private void drawHeartV5(final PointF center, final float radius, final boolean inverted) {
+		final float raster = radius / 2;
+		final RectF oval = new RectF();
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x - 0 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -180, 180);
+
+		oval.left = center.x - 0 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -180, 180);
+
+		cubicTo(center.x + 2 * raster, center.y + 0 * raster, // CP1
+				center.x + 1 * raster, center.y + 1.0f * raster, // CP2
+				center.x + 0 * raster, center.y + 1.5f * raster);
+		cubicTo(center.x - 1 * raster, center.y + 1.0f * raster, // CP1
+				center.x - 2 * raster, center.y + 0 * raster, // CP2
+				center.x - 2 * raster, center.y - 1 * raster);
+		close();
+		if (inverted) {
+			addCircle(center.x, center.y, radius * 1.3f, Direction.CCW);
 			close();
 		}
 	}

@@ -31,7 +31,7 @@ public class PatternPropertyStore {
 						"Mixed (with Circle)" }));
 
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Curvy", "Straigth", "Round", "Mixed" }));
+				new CharSequence[] { "Curvy", "Straigth", "Round", "Peek", "Lovely", "Mixed" }));
 
 		patternProperties.put("Hedgehog", new PatternProperties(true, true, false, true, false, false));
 
