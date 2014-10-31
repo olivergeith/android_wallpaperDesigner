@@ -1,8 +1,6 @@
 package de.geithonline.wallpaperdesigner.utils;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -18,30 +16,6 @@ import android.os.Build;
 import android.util.Log;
 
 public class BitmapHelper {
-
-	/**
-	 * @param bitmap
-	 *            the Bitmap to save
-	 * @param filename
-	 *            the filename
-	 */
-	public static File saveBitmap2ExternalStorage(final Bitmap bitmap, final String extStorageDirectory, final String filename) {
-
-		OutputStream outStream = null;
-		// Ordner anlegen fal snicht vorhanden
-		final File out = new File(extStorageDirectory);
-		out.mkdirs();
-		Log.i("GEITH", "Writing Bitmap to " + extStorageDirectory + filename);
-		final File file = new File(extStorageDirectory, filename);
-		try {
-			outStream = new FileOutputStream(file);
-			bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-			outStream.flush();
-			outStream.close();
-		} catch (final Exception e) {
-		}
-		return file;
-	}
 
 	public static Bitmap rotate(final Bitmap bitmap, final float winkel) {
 		final Matrix matrix = new Matrix();

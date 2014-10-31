@@ -27,8 +27,6 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class SettingsIO {
 
-	static String extStorageDirectory = StorageHelper.getExternalStorageSettings();
-
 	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
 
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
@@ -152,7 +150,7 @@ public class SettingsIO {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
+	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
 		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " (" + entry.getValue().getClass().getSimpleName() + ")");
 		final String key = entry.getKey();
 		// nur Premium nicht lesen
@@ -175,33 +173,7 @@ public class SettingsIO {
 	 * @param activity
 	 * @return
 	 */
-	public static List<String> getPreferenzFileNameList() {
-		final List<String> names = new ArrayList<String>();
-		final File dir = getSettingsDir();
-		Log.i("SettingsDIR", "Dir = " + dir);
-		if (dir.exists() && dir.isDirectory()) {
-			Log.i("SettingsDIR", "ScanningDir = " + dir);
-			final File[] prefs = dir.listFiles(new FilenameFilter() {
-
-				@Override
-				public boolean accept(final File file, final String name) {
-					return name.endsWith(".pref");
-				}
-			});
-			for (final File fi : prefs) {
-				names.add(fi.getName());
-			}
-		}
-		return names;
-	}
-
-	/**
-	 * Get a list of all preference filenames
-	 * 
-	 * @param activity
-	 * @return
-	 */
-	public static List<File> getPreferenzFileList() {
+	private static List<File> getPreferenzFileList() {
 		final List<File> names = new ArrayList<File>();
 		final File dir = getSettingsDir();
 		Log.i("SettingsDIR", "Dir = " + dir);
@@ -242,7 +214,7 @@ public class SettingsIO {
 
 	private static File getSettingsDir() {
 		// Ordner anlegen fals nicht vorhanden
-		final File dir = new File(extStorageDirectory);
+		final File dir = new File(StorageHelper.getExternalStorageSettings());
 		dir.mkdirs();
 		return dir;
 	}

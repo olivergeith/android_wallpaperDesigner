@@ -6,7 +6,6 @@ import java.io.OutputStream;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.util.Log;
 
 public class BitmapFileIO {
@@ -14,20 +13,17 @@ public class BitmapFileIO {
 	/**
 	 * @param bitmap
 	 *            the Bitmap to save
-	 * @param subfolderInPictures
-	 *            the directory under /sdcard/Pictures/<subfolder>/
 	 * @param filename
 	 *            the filename
 	 */
-	public static File saveBitmap(final Bitmap bitmap, final String subfolderInPictures, final String filename) {
-		String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-		extStorageDirectory += File.separator + "Pictures" + File.separator + subfolderInPictures + File.separator;
+	public static File saveBitmap2ExternalStorage(final Bitmap bitmap, final String dir, final String filename) {
+
 		OutputStream outStream = null;
-		// Ordner anlegen fals nicht vorhanden
-		final File out = new File(extStorageDirectory);
+		// Ordner anlegen fal snicht vorhanden
+		final File out = new File(dir);
 		out.mkdirs();
-		Log.i("GEITH", "Writing Bitmap to " + extStorageDirectory + filename);
-		final File file = new File(extStorageDirectory, filename);
+		Log.i("GEITH", "Writing Bitmap to " + dir + filename);
+		final File file = new File(dir, filename);
 		try {
 			outStream = new FileOutputStream(file);
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);

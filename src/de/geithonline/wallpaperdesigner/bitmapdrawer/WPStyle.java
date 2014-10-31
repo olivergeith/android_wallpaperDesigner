@@ -18,7 +18,7 @@ import android.net.Uri;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
-import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
+import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public abstract class WPStyle extends ColorProvider implements IWPStyle {
@@ -59,7 +59,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
 		final String patternname = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
 		final String filename = patternname + " " + timeStamp + ".png";
-		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), filename);
+		final File imageFile = BitmapFileIO.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), filename);
 		rescanMedia(context, imageFile);
 		small.recycle();
 		// Saving corresponding Settings
@@ -69,7 +69,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 	public synchronized void saveBigImage(final Context context, final String timeStamp) {
 		final String filename = "WallpaperDesigner_" + timeStamp + ".png";
-		final File imageFile = BitmapHelper.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
+		final File imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
 		rescanMedia(context, imageFile);
 	}
 
