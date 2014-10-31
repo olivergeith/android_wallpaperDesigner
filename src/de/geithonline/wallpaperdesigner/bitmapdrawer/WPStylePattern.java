@@ -52,6 +52,8 @@ import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
+import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ASPECT;
+import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ROUNDED;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
 import de.geithonline.wallpaperdesigner.shapes.RocketPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
@@ -1012,7 +1014,51 @@ public abstract class WPStylePattern extends WPStyle {
 	}
 
 	protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), Settings.getSelectedPatternVariant());
+		final String variante = Settings.getSelectedPatternVariant();
+		drawRect(x, y, paint, radius, variante);
+	}
+
+	protected void drawRect(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Random Height":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.RANDOM);
+			break;
+		case "V2":
+		case "Random Height (Rounded)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.RANDOM);
+			break;
+		case "V3":
+		case "Random Height (Mixed)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.RANDOM);
+			break;
+		case "V4":
+		case "4-3 Height":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_3_4);
+			break;
+		case "V5":
+		case "4-3 Height (Rounded)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_3_4);
+			break;
+		case "V6":
+		case "4-3 Height (Mixed)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_3_4);
+			break;
+		case "V7":
+		case "1-2 Height":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_1_2);
+			break;
+		case "V8":
+		case "1-2 Height (Rounded)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_1_2);
+			break;
+		case "V9":
+		case "1-2 Height (Mixed)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
+			break;
+		}
 
 		if (Settings.isRandomRotate()) {
 			rotatePath(x, y, path, Settings.getRotationDegrees(0, 180));

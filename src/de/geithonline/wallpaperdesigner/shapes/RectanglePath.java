@@ -7,17 +7,44 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RectanglePath extends Path {
 
-	public RectanglePath(final Point center, final float radius, final boolean filled, final String variant) {
+	public enum RECT_ROUNDED {
+		ROUNDED, NORMAL, MIXED;
+	}
+
+	public enum RECT_ASPECT {
+		RANDOM, ASPECT_3_4, ASPECT_1_2;
+	}
+
+	public RectanglePath(final Point center, final float radius, final boolean filled, final RECT_ROUNDED round, final RECT_ASPECT aspect) {
 		super();
 
 		boolean rounded = false;
-		if (variant.equalsIgnoreCase("Rounded")) {
+		switch (round) {
+		case ROUNDED:
 			rounded = true;
-		} else if (variant.equalsIgnoreCase("Mixed")) {
+			break;
+		case NORMAL:
+			rounded = false;
+			break;
+		case MIXED:
 			rounded = Randomizer.getRandomBoolean();
+			break;
 		}
 
-		final int height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
+		int height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
+		switch (aspect) {
+		default:
+		case RANDOM:
+			height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
+			break;
+		case ASPECT_3_4:
+			height = (int) (radius * 3 / 4);
+			break;
+		case ASPECT_1_2:
+			height = (int) (radius * 1 / 2);
+			break;
+		}
+
 		final RectF rect = new RectF();
 
 		rect.left = center.x - radius;
@@ -31,7 +58,7 @@ public class RectanglePath extends Path {
 			final float cornerRad = radius * 0.3f;
 			addRoundRect(rect, cornerRad, cornerRad, Direction.CW);
 		}
-		if (filled) {
+		if (!filled) {
 			rect.left = center.x - radius / 2;
 			rect.right = center.x + radius / 2;
 			rect.top = center.y - height / 2;
@@ -43,7 +70,6 @@ public class RectanglePath extends Path {
 				final float cornerRad = radius * 0.3f;
 				addRoundRect(rect, cornerRad, cornerRad, Direction.CCW);
 			}
-
 		}
 
 	}

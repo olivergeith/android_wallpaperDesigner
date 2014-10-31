@@ -56,7 +56,9 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Normal", "Rounded", "Mixed" }));
+				new CharSequence[] { "Random Height", "Random Height (Rounded)", "Random Height (Mixed)",//
+						"4-3 Height", "4-3 Height (Rounded)", "4-3 Height (Mixed)", //
+						"1-2 Height", "1-2 Height (Rounded)", "1-2 Height (Mixed)" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Mixed" }));
