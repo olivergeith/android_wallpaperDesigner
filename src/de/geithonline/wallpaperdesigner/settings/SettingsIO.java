@@ -39,7 +39,7 @@ public class SettingsIO {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Restore current preferences");
+		dialog.setTitle("Restore Preferences");
 		dialog.setMessage("Select preferences to be restored");
 
 		final ListView listview = new ListView(activity);
@@ -80,7 +80,7 @@ public class SettingsIO {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Delete backup of preferences");
+		dialog.setTitle("Delete Preferences");
 		dialog.setMessage("Select preferences to be deleted");
 
 		final ListView listview = new ListView(activity);
@@ -93,7 +93,7 @@ public class SettingsIO {
 
 			@Override
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-				Log.i("Loading Settings ", "from " + position);
+				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
 					final SavedPreference pref = preferenceList.get(position);
 					SettingsIO.deletePreferencesFile(pref);

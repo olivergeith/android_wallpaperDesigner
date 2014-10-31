@@ -1059,15 +1059,15 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V10":
-		case "Golden Cut Height":
+		case "Golden Ratio Height":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		case "V11":
-		case "Golden Cut Height (Rounded)":
+		case "Golden Ratio Height (Rounded)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		case "V12":
-		case "Golden Cut Height (Mixed)":
+		case "Golden Ratio Height (Mixed)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		}
