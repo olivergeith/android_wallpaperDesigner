@@ -57,6 +57,7 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Random Height", "Random Height (Rounded)", "Random Height (Mixed)",//
+						"Golden Cut Height", "Golden Cut Height (Rounded)", "Golden Cut Height (Mixed)", //
 						"4-3 Height", "4-3 Height (Rounded)", "4-3 Height (Mixed)", //
 						"1-2 Height", "1-2 Height (Rounded)", "1-2 Height (Mixed)" }));
 

@@ -12,7 +12,7 @@ public class RectanglePath extends Path {
 	}
 
 	public enum RECT_ASPECT {
-		RANDOM, ASPECT_3_4, ASPECT_1_2;
+		RANDOM, ASPECT_3_4, ASPECT_1_2, ASPECT_GOLDEN_CUT;
 	}
 
 	public RectanglePath(final Point center, final float radius, final boolean filled, final RECT_ROUNDED round, final RECT_ASPECT aspect) {
@@ -38,10 +38,13 @@ public class RectanglePath extends Path {
 			height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
 			break;
 		case ASPECT_3_4:
-			height = (int) (radius * 3 / 4);
+			height = (int) (radius * 0.75f);
 			break;
 		case ASPECT_1_2:
-			height = (int) (radius * 1 / 2);
+			height = (int) (radius * 0.5f);
+			break;
+		case ASPECT_GOLDEN_CUT:
+			height = (int) (radius * 0.618f);
 			break;
 		}
 
