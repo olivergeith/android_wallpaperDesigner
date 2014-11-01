@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class HeartPath extends Path {
 
 	public enum HEART_SHAPE {
-		Curvy, Straigth, Round, Peek, Lovely;
+		Curvy, Straigth, Round, Peek, Lovely, Asymetric;
 	}
 
 	/**
@@ -21,24 +21,27 @@ public class HeartPath extends Path {
 		switch (variante) {
 		default:
 		case Curvy:
-			drawHeartV1(center, rOuter, inverted);
+			drawHeartCurvy(center, rOuter, inverted);
 			break;
 		case Straigth:
-			drawHeartV2(center, rOuter, inverted);
+			drawHeartStraight(center, rOuter, inverted);
 			break;
 		case Round:
-			drawHeartV3(center, rOuter, inverted);
+			drawHeartRound(center, rOuter, inverted);
 			break;
 		case Peek:
-			drawHeartV4(center, rOuter, inverted);
+			drawHeartPeek(center, rOuter, inverted);
 			break;
 		case Lovely:
-			drawHeartV5(center, rOuter, inverted);
+			drawHeartLovely(center, rOuter, inverted);
+			break;
+		case Asymetric:
+			drawHeartAsymetric(center, rOuter, inverted);
 			break;
 		}
 	}
 
-	private void drawHeartV1(final PointF center, final float rOuter, final boolean inverted) {
+	private void drawHeartCurvy(final PointF center, final float rOuter, final boolean inverted) {
 
 		if (inverted) {
 			addCircle(center.x, center.y, rOuter * 1.4f, Direction.CCW);
@@ -65,7 +68,7 @@ public class HeartPath extends Path {
 		close();
 	}
 
-	private void drawHeartV2(final PointF center, final float radius, final boolean inverted) {
+	private void drawHeartStraight(final PointF center, final float radius, final boolean inverted) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 		oval.left = center.x - 2 * raster;
@@ -88,7 +91,7 @@ public class HeartPath extends Path {
 		}
 	}
 
-	private void drawHeartV3(final PointF center, final float radius, final boolean inverted) {
+	private void drawHeartRound(final PointF center, final float radius, final boolean inverted) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 		oval.left = center.x - 2 * raster;
@@ -115,7 +118,7 @@ public class HeartPath extends Path {
 		}
 	}
 
-	private void drawHeartV4(final PointF center, final float radius, final boolean inverted) {
+	private void drawHeartPeek(final PointF center, final float radius, final boolean inverted) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 		oval.left = center.x - 2 * raster;
@@ -143,7 +146,7 @@ public class HeartPath extends Path {
 		}
 	}
 
-	private void drawHeartV5(final PointF center, final float radius, final boolean inverted) {
+	private void drawHeartLovely(final PointF center, final float radius, final boolean inverted) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 		oval.left = center.x - 2 * raster;
@@ -162,6 +165,34 @@ public class HeartPath extends Path {
 				center.x + 1 * raster, center.y + 1.0f * raster, // CP2
 				center.x + 0 * raster, center.y + 1.5f * raster);
 		cubicTo(center.x - 1 * raster, center.y + 1.0f * raster, // CP1
+				center.x - 2 * raster, center.y + 0 * raster, // CP2
+				center.x - 2 * raster, center.y - 1 * raster);
+		close();
+		if (inverted) {
+			addCircle(center.x, center.y, radius * 1.3f, Direction.CCW);
+			close();
+		}
+	}
+
+	private void drawHeartAsymetric(final PointF center, final float radius, final boolean inverted) {
+		final float raster = radius / 2;
+		final RectF oval = new RectF();
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x - 0 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -180, 180);
+
+		oval.left = center.x - 0 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -180, 180);
+
+		cubicTo(center.x + 2 * raster, center.y + 0 * raster, // CP1
+				center.x - 0 * raster, center.y + 0.5f * raster, // CP2
+				center.x - 0.5f * raster, center.y + 2 * raster);
+		cubicTo(center.x - 0 * raster, center.y + 0.5f * raster, // CP1
 				center.x - 2 * raster, center.y + 0 * raster, // CP2
 				center.x - 2 * raster, center.y - 1 * raster);
 		close();

@@ -23,11 +23,11 @@ public class StarCirclePath extends Path {
 			p.x = (float) (center.x + Math.cos(i * angle) * r);
 			p.y = (float) (center.y + Math.sin(i * angle) * r);
 			final float ro = r * 0.35f;
-			addPath(new StarPath(5, p, ro, ro / 2, true, 0));
+			addPath(new StarPath(5, p, ro, ro / 2, true));
 		}
 		if (filled) {
 			final float ri = rOuter * 0.7f;
-			addPath(new StarPath(5, center, ri, ri / 2, true, 0));
+			addPath(new StarPath(5, center, ri, ri / 2, true));
 		}
 	}
 }

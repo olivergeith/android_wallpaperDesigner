@@ -65,7 +65,7 @@ public class SchachbrettPath extends Path {
 				path = new SquarePath(p, patternRadius, true, SQUARE_STYLE.NORMAL);
 				break;
 			case Star:
-				path = new StarPath(5, p, patternRadius, patternRadius / 2, true, (float) Math.PI * 0 / 180);
+				path = new StarPath(5, p, patternRadius, patternRadius / 2, true);
 				break;
 			case Circle:
 				path = new CirclePath(p, patternRadius, patternRadius, true);

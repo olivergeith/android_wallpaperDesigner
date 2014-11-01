@@ -39,7 +39,7 @@ public class InvertablePath extends Path {
 		if (filled) {
 			addCircle(center.x, center.y, rOuter, Direction.CCW);
 		}
-		addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.85f, rOuter * 0.32f, true, 0));
+		addPath(new StarPath(5, new PointF(center.x, center.y), rOuter * 0.85f, rOuter * 0.32f, true));
 	}
 
 	public void drawPlus(final Point center, final float radius, final float rInner, final boolean filled) {

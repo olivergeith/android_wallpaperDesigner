@@ -4,9 +4,9 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 
-public class StarPathV2 extends Path {
+public class PentagramPath extends Path {
 
-	public StarPathV2(final PointF center, final float rOuter) {
+	public PentagramPath(final PointF center, final float rOuter) {
 		super();
 		final int arms = 5;
 		final float angle = (float) (4 * Math.PI / arms);

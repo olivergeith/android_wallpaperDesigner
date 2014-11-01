@@ -48,6 +48,7 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
+import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
@@ -76,7 +77,7 @@ import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
-import de.geithonline.wallpaperdesigner.shapes.StarPathV2;
+import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
@@ -1002,8 +1003,17 @@ public abstract class WPStylePattern extends WPStyle {
 	}
 
 	protected void drawStar(final int x, final int y, final Paint paint, final int radius) {
+		String variante = Settings.getSelectedPatternVariant();
+		if (variante.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 3);
+			variante = "V" + nr;
+		}
+		drawStar(x, y, paint, radius, variante);
+	}
+
+	protected void drawStar(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new StarPath(arms, new PointF(x, y), radius, radius / 2, true, 0);
+		final Path path = getStarPath(x, y, radius, variante, arms);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1011,6 +1021,26 @@ public abstract class WPStylePattern extends WPStyle {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
+	}
+
+	private Path getStarPath(final int x, final int y, final int radius, final String variante, final int arms) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Normal":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.NORMAL);
+			break;
+		case "V2":
+		case "Outline":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.OUTLINE);
+			break;
+		case "V3":
+		case "Spikey":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.SPIKEY);
+			break;
+		}
+		return path;
 	}
 
 	protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
@@ -1217,7 +1247,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V8":
 		case "Pentagram":
-			path = new StarPathV2(new PointF(x, y), radius);
+			path = new PentagramPath(new PointF(x, y), radius);
 			break;
 		case "V9":
 		case "4Sails":
@@ -1327,7 +1357,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawHeart(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 6);
 			variante = "V" + nr;
 		}
 		drawHeart(x, y, paint, radius, variante);
@@ -1335,6 +1365,17 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
 
+		final Path path = getHeartPath(x, y, radius, variante);
+		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	private Path getHeartPath(final int x, final int y, final int radius, final String variante) {
 		Path path;
 		switch (variante) {
 		default:
@@ -1358,14 +1399,12 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V5":
 			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Lovely);
 			break;
+		case "Asymetric":
+		case "V6":
+			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Asymetric);
+			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
-		}
+		return path;
 	}
 
 	protected void drawGlossyBubble(final int x, final int y, final Paint paint, final int radius) {
@@ -1452,7 +1491,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawGlossyHeart(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 5);
+			final int nr = getRandomInt(0, 6);
 			variante = "V" + nr;
 		}
 		drawGlossyHeart(x, y, paint, radius, variante);
@@ -1465,30 +1504,7 @@ public abstract class WPStylePattern extends WPStyle {
 		final int whitehalftransparent = 0x88FFFFFF;
 		final int transparent = 0x00FFFFFF;
 		// Heart für dropshadow
-		Path path;
-		switch (variante) {
-		default:
-		case "Curvy":
-		case "V1":
-			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Curvy);
-			break;
-		case "Straigth":
-		case "V2":
-			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Straigth);
-			break;
-		case "Round":
-		case "V3":
-			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Round);
-			break;
-		case "Peek":
-		case "V4":
-			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Peek);
-			break;
-		case "Lovely":
-		case "V5":
-			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Lovely);
-			break;
-		}
+		final Path path = getHeartPath(x, y, radius, variante);
 		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
@@ -1508,6 +1524,15 @@ public abstract class WPStylePattern extends WPStyle {
 	}
 
 	protected void drawGlossyStar(final int x, final int y, final Paint paint, final int radius) {
+		String variante = Settings.getSelectedPatternVariant();
+		if (variante.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 3);
+			variante = "V" + nr;
+		}
+		drawGlossyStar(x, y, paint, radius, variante);
+	}
+
+	protected void drawGlossyStar(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final int color = paint.getColor();
 		final int colorBrighter = ColorHelper.brighter2times(color);
 		final int colorDarker = ColorHelper.darker(color);
@@ -1516,7 +1541,7 @@ public abstract class WPStylePattern extends WPStyle {
 		final int transparent = 0x00FFFFFF;
 		// Star
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = new StarPath(arms, new PointF(x, y), radius, radius / 2, true, 0);
+		final Path path = getStarPath(x, y, radius, variante, arms);
 		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
 
 		bitmapCanvas.drawPath(path, paint);

@@ -40,7 +40,7 @@ public class XmasTreePath extends Path {
 		final PointF c = new PointF();
 		c.x = center.x;
 		c.y = center.y - 5.4f * raster;
-		addPath(new StarPath(6, c, raster, raster / 2, true, 0f));
+		addPath(new StarPath(6, c, raster, raster / 2, true));
 
 		if (!filled) {
 			addCircle(center.x - 2 * raster, center.y + 2.5f * raster, raster / 2, Direction.CCW);
