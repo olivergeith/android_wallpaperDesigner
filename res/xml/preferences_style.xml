@@ -147,9 +147,9 @@
 	        <de.geithonline.android.basics.preferences.SeekBarPreference
 	            android:key="patternSizeAdjust"
 		        android:title="@string/patternSizeAdjust" 
-			    seekbarpreference:minValue="30"
+			    seekbarpreference:minValue="20"
 			    seekbarpreference:stepValue="5"
-			    seekbarpreference:maxValue="300"
+			    seekbarpreference:maxValue="500"
 			    android:defaultValue="100"
 			    android:summary="%1$d percent" 
 			    android:dialogMessage="@string/patternSizeAdjust" />
