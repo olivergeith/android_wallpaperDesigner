@@ -57,18 +57,23 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final int dh = h * dw / w;
 
 		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
-		final String patternname = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
-		final String filename = patternname + " " + timeStamp + ".png";
-		final File imageFile = BitmapFileIO.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), filename);
-		rescanMedia(context, imageFile);
+
+		// Generate Filename
+		final String pattern = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
+		final String layout = Settings.getSelectedLayout();
+		final String pngFilename = pattern + "\n" + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_PNG;
+
+		final File pngFile = BitmapFileIO.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), pngFilename);
+		rescanMedia(context, pngFile);
 		small.recycle();
 		// Saving corresponding Settings
-		final File settingsFile = new File(imageFile.getAbsolutePath() + ".pref");
+		final String prefFileName = SettingsIO.replaceExtension(pngFile.getAbsolutePath(), SettingsIO.EXTENSION_PNG, SettingsIO.EXTENSION_PREF);
+		final File settingsFile = new File(prefFileName);
 		SettingsIO.savePreferences(Settings.prefs, settingsFile);
 	}
 
 	public synchronized void saveBigImage(final Context context, final String timeStamp) {
-		final String filename = "WallpaperDesigner_" + timeStamp + ".png";
+		final String filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_PNG;
 		final File imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
 		rescanMedia(context, imageFile);
 	}

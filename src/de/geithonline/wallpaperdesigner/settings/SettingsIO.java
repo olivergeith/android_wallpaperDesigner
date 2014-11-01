@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -27,6 +29,10 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class SettingsIO {
 
+	public static final String EXTENSION_PNG = ".png";
+	public static final String EXTENSION_PREF = ".pref";
+	public static final String MARKER = " (+++)_";
+
 	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
 
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
@@ -39,8 +45,8 @@ public class SettingsIO {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Restore Preferences");
-		dialog.setMessage("Select preferences to be restored");
+		dialog.setTitle("Restore Settings");
+		dialog.setMessage("Select Settings to be restored");
 
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
@@ -73,15 +79,15 @@ public class SettingsIO {
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
+			Toaster.showErrorToast(activity, "There are no Settings to restore!");
 			return;
 		}
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Delete Preferences");
-		dialog.setMessage("Select preferences to be deleted");
+		dialog.setTitle("Delete Settings");
+		dialog.setMessage("Select Settings to be deleted");
 
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
@@ -140,7 +146,7 @@ public class SettingsIO {
 					// Log.i("map values", entry.getKey() + ": " + entry.getValue().toString() + ": " + entry.getValue().getClass());
 					writeEntry(entry, prefs);
 				}
-				Toaster.showInfoToast(activity, "Preferences restored from " + filename);
+				Toaster.showInfoToast(activity, "Settings restored from " + filename);
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {
 				e.printStackTrace();
@@ -183,9 +189,17 @@ public class SettingsIO {
 
 				@Override
 				public boolean accept(final File file, final String name) {
-					return name.endsWith(".pref");
+					return name.endsWith(EXTENSION_PREF);
 				}
 			});
+			// Sort by Modyfied
+			Arrays.sort(prefs, new Comparator<File>() {
+				@Override
+				public int compare(final File f1, final File f2) {
+					return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+				}
+			});
+
 			for (final File fi : prefs) {
 				names.add(fi);
 			}
@@ -195,21 +209,47 @@ public class SettingsIO {
 	}
 
 	private static List<SavedPreference> getSavedPreferencesList() {
-		final List<SavedPreference> list = new ArrayList<>();
-		final List<File> filenames = getPreferenzFileList();
-		for (final File fi : filenames) {
-			final String absolute = fi.getAbsolutePath();
-			final int pos = absolute.indexOf(".pref");
-			final String bmpFilename = absolute.substring(0, pos);
+		final List<SavedPreference> savedPrefsList = new ArrayList<>();
+		final List<File> prefs = getPreferenzFileList();
+		for (final File fi : prefs) {
+			final String prefFilename = fi.getAbsolutePath();
+
+			final String bmpFilename = replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_PNG);
 			final File bmpFile = new File(bmpFilename);
 			Bitmap bitmap = null;
+
 			if (bmpFile.exists()) {
 				bitmap = BitmapFileIO.loadBitmap(bmpFilename);
 			}
 			final SavedPreference pref = new SavedPreference(bitmap, fi, bmpFile);
-			list.add(pref);
+			savedPrefsList.add(pref);
 		}
-		return list;
+		return savedPrefsList;
+	}
+
+	public static String replaceExtension(final String filename, final String extension, final String newExtension) {
+		String bmpFilename;
+		final int pos = filename.indexOf(extension);
+		if (pos == -1) {
+			// EXtension nicht gefunden
+			bmpFilename = filename + newExtension;
+		} else {
+			bmpFilename = filename.substring(0, pos) + newExtension;
+		}
+		return bmpFilename;
+	}
+
+	public static String stripTimestamp(final String filename) {
+		String out;
+		final int pos = filename.indexOf(MARKER);
+		if (pos == -1) {
+			// EXtension nicht gefunden
+			out = filename;
+		} else {
+			out = filename.substring(0, pos);
+		}
+		return out;
+
 	}
 
 	private static File getSettingsDir() {

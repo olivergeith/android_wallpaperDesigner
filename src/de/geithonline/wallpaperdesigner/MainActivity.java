@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
 		final BitmapSaverTask task = new BitmapSaverTask();
 		task.execute();
 		if (dialog != null) {
-			dialog.setMessage("Saving...");
+			dialog.setMessage("Saving Image...");
 			dialog.show();
 		}
 		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());

@@ -1023,51 +1023,51 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variante) {
 		default:
 		case "V1":
-		case "Random Height":
+		case "Random Ratio":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.RANDOM);
 			break;
 		case "V2":
-		case "Random Height (Rounded)":
+		case "Random Ratio (Rounded)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.RANDOM);
 			break;
 		case "V3":
-		case "Random Height (Mixed)":
+		case "Random Ratio (Mixed)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.RANDOM);
 			break;
 		case "V4":
-		case "4-3 Height":
+		case "4-3 Ratio":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_3_4);
 			break;
 		case "V5":
-		case "4-3 Height (Rounded)":
+		case "4-3 Ratio (Rounded)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_3_4);
 			break;
 		case "V6":
-		case "4-3 Height (Mixed)":
+		case "4-3 Ratio (Mixed)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_3_4);
 			break;
 		case "V7":
-		case "1-2 Height":
+		case "1-2 Ratio":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V8":
-		case "1-2 Height (Rounded)":
+		case "1-2 Ratio (Rounded)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V9":
-		case "1-2 Height (Mixed)":
+		case "1-2 Ratio (Mixed)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V10":
-		case "Golden Ratio Height":
+		case "Golden Ratio":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		case "V11":
-		case "Golden Ratio Height (Rounded)":
+		case "Golden Ratio (Rounded)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		case "V12":
-		case "Golden Ratio Height (Mixed)":
+		case "Golden Ratio (Mixed)":
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		}

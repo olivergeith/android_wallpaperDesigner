@@ -77,7 +77,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
 	private Button getLoadSettingsButton() {
 		final Button button = new Button(PreferencesActivity.this);
-		button.setText("Restore Preferences...");
+		button.setText("Restore Settings...");
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -90,7 +90,7 @@ public class PreferencesActivity extends PreferenceActivity {
 
 	private Button getDeleteSettingsButton() {
 		final Button button = new Button(PreferencesActivity.this);
-		button.setText("Delete a Preferences-Backup...");
+		button.setText("Delete Settings...");
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
