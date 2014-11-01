@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
+import de.geithonline.wallpaperdesigner.settings.Settings.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
@@ -159,8 +160,11 @@ public class SettingsIO {
 	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
 		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " (" + entry.getValue().getClass().getSimpleName() + ")");
 		final String key = entry.getKey();
-		// nur Premium nicht lesen
+		// ein paar Keys nicht lesen!
 		if (key.equalsIgnoreCase("muimerp")) {
+			return;
+		}
+		if (key.equalsIgnoreCase("sortOrder")) {
 			return;
 		}
 		final Class cl = entry.getValue().getClass();
@@ -179,8 +183,8 @@ public class SettingsIO {
 	 * @param activity
 	 * @return
 	 */
-	private static List<File> getPreferenzFileList() {
-		final List<File> names = new ArrayList<File>();
+	private static List<File> getPreferenzFileList(final SORT_ORDER sortOrder) {
+		final List<File> prefFileList = new ArrayList<File>();
 		final File dir = getSettingsDir();
 		Log.i("SettingsDIR", "Dir = " + dir);
 		if (dir.exists() && dir.isDirectory()) {
@@ -192,25 +196,40 @@ public class SettingsIO {
 					return name.endsWith(EXTENSION_PREF);
 				}
 			});
-			// Sort by Modyfied
-			Arrays.sort(prefs, new Comparator<File>() {
-				@Override
-				public int compare(final File f1, final File f2) {
-					return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-				}
-			});
+
+			switch (sortOrder) {
+			default:
+			case LAST_MODYFIED:
+				// Sort by Modyfied
+				Arrays.sort(prefs, new Comparator<File>() {
+					@Override
+					public int compare(final File f1, final File f2) {
+						return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+					}
+				});
+				break;
+			case ALPHA:
+				// Sort by Name
+				Arrays.sort(prefs, new Comparator<File>() {
+					@Override
+					public int compare(final File f1, final File f2) {
+						return f1.getName().compareTo(f2.getName());
+					}
+				});
+				break;
+			}
 
 			for (final File fi : prefs) {
-				names.add(fi);
+				prefFileList.add(fi);
 			}
-			Log.i("SettingsDIR", "Found = " + names.size());
+			Log.i("SettingsDIR", "Found = " + prefFileList.size());
 		}
-		return names;
+		return prefFileList;
 	}
 
 	private static List<SavedPreference> getSavedPreferencesList() {
 		final List<SavedPreference> savedPrefsList = new ArrayList<>();
-		final List<File> prefs = getPreferenzFileList();
+		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
 		for (final File fi : prefs) {
 			final String prefFilename = fi.getAbsolutePath();
 

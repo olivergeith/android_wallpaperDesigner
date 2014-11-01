@@ -55,7 +55,17 @@
         </Preference>
 	    </PreferenceCategory>
 	    
-    <PreferenceCategory android:title="Special internal Options">
+    <PreferenceCategory android:title="General Options">
+        <ListPreference
+	        android:key="sortOrder"
+	        android:title="@string/sortOrder" 
+	        android:dialogTitle="@string/sortOrder"
+	        android:defaultValue="Last Modified"
+	        android:entries="@array/sortOrder"
+	        android:entryValues="@array/sortOrder"
+	        />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Internal Options">
 	    <Preference 
 		    android:key="premium"
     		android:defaultValue="false"
@@ -67,12 +77,6 @@
 		    android:title="Debugging"
 		    android:summary="Do not use this! No patterns will be drawn, if you tick this!" 
             />
-	    <!-- CheckBoxPreference 
-		    android:key="debug2"
-    		android:defaultValue="false"
-		    android:title="DebuggingMessages" 
-            /-->
-	    
     </PreferenceCategory>
-
+    
 </PreferenceScreen>

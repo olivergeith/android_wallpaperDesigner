@@ -30,6 +30,33 @@ public class Settings {
 	public static SharedPreferences prefs;
 	private static Context context;
 
+	public enum SORT_ORDER {
+		ALPHA, LAST_MODYFIED;
+	}
+
+	// ###################################################################
+	// Other Stuff
+	public static SORT_ORDER getSortOrderForSavedSettings() {
+		// return "Random Layout";
+		final String sort = getSortOrder();
+		switch (sort) {
+		default:
+		case "Last Modified":
+			return SORT_ORDER.LAST_MODYFIED;
+		case "Alphabetically":
+			return SORT_ORDER.ALPHA;
+		}
+	}
+
+	public static String getSortOrder() {
+		// return "Random Layout";
+		if (prefs == null) {
+			return "Last Modified";
+		}
+		final String sort = prefs.getString("sortOrder", "Last Modified");
+		return sort;
+	}
+
 	// ###################################################################
 	// Options Layout Selection
 
@@ -460,6 +487,7 @@ public class Settings {
 			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
+			prefs.edit().putString("sortOrder", "Last Modified").commit();
 			prefs.edit().putString("stylePicker", "Patterns").commit();
 			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();

@@ -80,6 +80,7 @@
     <string name="randomLeafCount">Random Number of leafs-arms</string>
     <string name="rotationDegrees">Rotate pattern by degrees</string>
     <string name="overlapping">Overlap-faktor for patterns</string>
+    <string name="sortOrder">Sort-Order for saved Settings-List</string>
     
     
     

@@ -10,7 +10,7 @@
 	        android:dialogTitle="@string/gradientDirection"
 	        android:defaultValue="4-Color Gradient from corners"
 	        android:entries="@array/directions"
-	        android:entryValues="@array/directionsValues"
+	        android:entryValues="@array/directions"
 	        />
 
         <ListPreference

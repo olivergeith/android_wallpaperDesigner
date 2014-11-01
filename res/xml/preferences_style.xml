@@ -33,7 +33,7 @@
 			        android:dialogTitle="@string/filledOption"
 			        android:defaultValue="Not filled"
 			        android:entries="@array/hole"
-			        android:entryValues="@array/holeValues"
+			        android:entryValues="@array/hole"
 			        />
    		        <CheckBoxPreference 
 		            android:key="glossy"
@@ -112,7 +112,7 @@
 			        android:dialogTitle="@string/textDrawStyle"
 			        android:defaultValue="Round"
 			        android:entries="@array/textDrawStyle"
-			        android:entryValues="@array/textDrawStyleValues"
+			        android:entryValues="@array/textDrawStyle"
 			        />
 		        <PreferenceCategory  android:title="Leafs-Arms Options"/>
 		        <CheckBoxPreference 

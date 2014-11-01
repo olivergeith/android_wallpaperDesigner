@@ -2,19 +2,39 @@ package de.geithonline.wallpaperdesigner;
 
 import android.appwidget.AppWidgetManager;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class AboutFragment extends PreferenceFragment {
+
+	private ListPreference sortOrder;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		addPreferencesFromResource(R.xml.preferences_about);
+
+		sortOrder = (ListPreference) findPreference("sortOrder");
+		sortOrder.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleSortOrder((String) newValue);
+				return true;
+			}
+
+		});
+		handleSortOrder(Settings.getSortOrder());
 
 		getIdOfCurrentWidget(savedInstanceState);
-
-		addPreferencesFromResource(R.xml.preferences_about);
 		setSpecialThings();
+	}
+
+	private void handleSortOrder(final String newValue) {
+		sortOrder.setSummary(newValue);
 	}
 
 	private int getIdOfCurrentWidget(final Bundle savedInstanceState) {
