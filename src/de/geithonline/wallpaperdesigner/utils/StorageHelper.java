@@ -7,37 +7,35 @@ import android.os.Environment;
 import android.util.Log;
 
 public class StorageHelper {
+	public final static String DIR_SDCARD = Environment.getExternalStorageDirectory().toString();
+	public final static File PATH_SDCARD = Environment.getExternalStorageDirectory();
 
-	private final static String imagesDir = Environment.getExternalStorageDirectory().toString() //
-			+ File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
+	private final static String imagesDir = DIR_SDCARD + File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File imagesDirFile = new File(imagesDir);
-
-	private final static String settingsDir = Environment.getExternalStorageDirectory().toString() //
-			+ File.separator + "data" //
-			+ File.separator + "WallpaperDesigner" + File.separator;
+	private final static String settingsDir = DIR_SDCARD + File.separator + "data" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File settingsDirFile = new File(settingsDir);
+	private final static File noMedia = new File(settingsDir, ".nomedia");
 
 	static {
+		if (!imagesDirFile.exists()) {
+			imagesDirFile.mkdirs();
+		}
 		if (!settingsDirFile.exists()) {
 			settingsDirFile.mkdirs();
 		}
-		final File noMedia = new File(settingsDir, ".nomedia");
+		// Nomedia anlegen
 		if (!noMedia.exists()) {
 			try {
-				Log.i("StorageHelper", "Creating .NoMedia: " + noMedia.getAbsolutePath());
+				Log.i("StorageHelper", "Creating .nomedia: " + noMedia.getAbsolutePath());
 				noMedia.createNewFile();
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
 		}
-		if (!imagesDirFile.exists()) {
-			imagesDirFile.mkdirs();
-		}
-
 	}
 
 	public static String getExternalStorage() {
-		return Environment.getExternalStorageDirectory().toString();
+		return DIR_SDCARD;
 	}
 
 	public static String getExternalStorageImages() {
