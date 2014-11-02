@@ -3,7 +3,6 @@ package de.geithonline.wallpaperdesigner.settings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,7 +37,7 @@ public class SettingsIO {
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no backups of preferences to restore!");
+			Toaster.showErrorToast(activity, "There are no Settings to restore!");
 			return;
 		}
 
@@ -79,7 +78,7 @@ public class SettingsIO {
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no Settings to restore!");
+			Toaster.showErrorToast(activity, "There are no Settings to delete!");
 			return;
 		}
 
@@ -102,7 +101,7 @@ public class SettingsIO {
 				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
 					final SavedPreference pref = preferenceList.get(position);
-					SettingsIO.deletePreferencesFile(pref);
+					SettingsIO.deletePreferencesFileAndBitmap(pref);
 				}
 				dialog.dismiss();
 			}
@@ -113,7 +112,7 @@ public class SettingsIO {
 
 	}
 
-	private static void deletePreferencesFile(final SavedPreference pref) {
+	private static void deletePreferencesFileAndBitmap(final SavedPreference pref) {
 		pref.getPreferenceFile().delete();
 		if (pref.getBitmap() != null) {
 			pref.getBmpFile().delete();
@@ -146,7 +145,7 @@ public class SettingsIO {
 					// Log.i("map values", entry.getKey() + ": " + entry.getValue().toString() + ": " + entry.getValue().getClass());
 					writeEntry(entry, prefs);
 				}
-				Toaster.showInfoToast(activity, "Settings restored from " + filename);
+				Toaster.showInfoToast(activity, "Settings restored from " + stripTimestamp(filename));
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {
 				e.printStackTrace();
@@ -179,40 +178,28 @@ public class SettingsIO {
 	/**
 	 * Get a list of all preference filenames
 	 * 
-	 * @param activity
+	 * @param sortOrder
 	 * @return
 	 */
 	private static List<File> getPreferenzFileList(final SORT_ORDER sortOrder) {
-		final List<File> prefFileList = new ArrayList<File>();
 		final File dir = getSettingsDir();
 		Log.i("SettingsDIR", "Dir = " + dir);
-		if (dir.exists() && dir.isDirectory()) {
-			Log.i("SettingsDIR", "ScanningDir = " + dir);
-			final File[] prefs = dir.listFiles(new FilenameFilter() {
-
-				@Override
-				public boolean accept(final File file, final String name) {
-					return name.endsWith(EXTENSION_PREF);
-				}
-			});
-
-			FileIOHelper.sortFileArray(sortOrder, prefs);
-
-			for (final File fi : prefs) {
-				prefFileList.add(fi);
-			}
-			Log.i("SettingsDIR", "Found = " + prefFileList.size());
-		}
+		final List<File> prefFileList = FileIOHelper.getFileList(dir, EXTENSION_PREF, sortOrder);
 		return prefFileList;
 	}
 
+	/**
+	 * Get a List of all {@link SavedPreference}
+	 * 
+	 * @return
+	 */
 	private static List<SavedPreference> getSavedPreferencesList() {
 		final List<SavedPreference> savedPrefsList = new ArrayList<>();
 		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
 		for (final File fi : prefs) {
 			final String prefFilename = fi.getAbsolutePath();
 
-			final String bmpFilename = replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_PNG);
+			final String bmpFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_PNG);
 			final File bmpFile = new File(bmpFilename);
 			Bitmap bitmap = null;
 
@@ -223,18 +210,6 @@ public class SettingsIO {
 			savedPrefsList.add(pref);
 		}
 		return savedPrefsList;
-	}
-
-	public static String replaceExtension(final String filename, final String extension, final String newExtension) {
-		String bmpFilename;
-		final int pos = filename.indexOf(extension);
-		if (pos == -1) {
-			// EXtension nicht gefunden
-			bmpFilename = filename + newExtension;
-		} else {
-			bmpFilename = filename.substring(0, pos) + newExtension;
-		}
-		return bmpFilename;
 	}
 
 	public static String stripTimestamp(final String filename) {

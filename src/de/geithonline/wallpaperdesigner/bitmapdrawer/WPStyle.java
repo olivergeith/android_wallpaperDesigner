@@ -19,6 +19,7 @@ import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
+import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public abstract class WPStyle extends ColorProvider implements IWPStyle {
@@ -67,7 +68,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		rescanMedia(context, pngFile);
 		small.recycle();
 		// Saving corresponding Settings
-		final String prefFileName = SettingsIO.replaceExtension(pngFile.getAbsolutePath(), SettingsIO.EXTENSION_PNG, SettingsIO.EXTENSION_PREF);
+		final String prefFileName = FileIOHelper.replaceExtension(pngFile.getAbsolutePath(), SettingsIO.EXTENSION_PNG, SettingsIO.EXTENSION_PREF);
 		final File settingsFile = new File(prefFileName);
 		SettingsIO.savePreferences(Settings.prefs, settingsFile);
 	}

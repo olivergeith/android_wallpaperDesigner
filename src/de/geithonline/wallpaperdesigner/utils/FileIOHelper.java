@@ -1,8 +1,13 @@
 package de.geithonline.wallpaperdesigner.utils;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+
+import android.util.Log;
 
 public class FileIOHelper {
 
@@ -41,6 +46,57 @@ public class FileIOHelper {
 			});
 			break;
 		}
+	}
+
+	/**
+	 * Get a list of all preference filenames
+	 * 
+	 * @param activity
+	 * @return
+	 */
+	public static List<File> getFileList(final File dir, final String extension, final SORT_ORDER sortOrder) {
+		final List<File> fileList = new ArrayList<File>();
+		Log.i("FileList", "Dir = " + dir);
+		if (dir != null && dir.exists() && dir.isDirectory()) {
+			Log.i("FileList", "ScanningDir = " + dir);
+			// Extension angegeben...dann filtern...
+			File[] files;
+			if (extension != null) {
+				files = dir.listFiles(new FilenameFilter() {
+
+					@Override
+					public boolean accept(final File file, final String name) {
+						return name.endsWith(extension);
+					}
+				});
+			} else {
+				files = dir.listFiles();
+			}
+
+			// Sort Files
+			if (files != null && sortOrder != null) {
+				FileIOHelper.sortFileArray(sortOrder, files);
+			}
+
+			// Putting it into a List
+			for (final File fi : files) {
+				fileList.add(fi);
+			}
+			Log.i("FileList", "Found = " + fileList.size());
+		}
+		return fileList;
+	}
+
+	public static String replaceExtension(final String filename, final String extension, final String newExtension) {
+		String bmpFilename;
+		final int pos = filename.indexOf(extension);
+		if (pos == -1) {
+			// EXtension nicht gefunden
+			bmpFilename = filename + newExtension;
+		} else {
+			bmpFilename = filename.substring(0, pos) + newExtension;
+		}
+		return bmpFilename;
 	}
 
 }
