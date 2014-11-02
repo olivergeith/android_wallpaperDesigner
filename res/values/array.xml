@@ -37,6 +37,7 @@
 
     <string-array name="sortOrder">
         <item >Last Modified</item>
+        <item >Last Modified (Descending)</item>
         <item >Alphabetically</item>
     </string-array>
     

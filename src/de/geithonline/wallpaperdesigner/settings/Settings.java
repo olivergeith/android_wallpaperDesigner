@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
+import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
@@ -30,10 +31,6 @@ public class Settings {
 	public static SharedPreferences prefs;
 	private static Context context;
 
-	public enum SORT_ORDER {
-		ALPHA, LAST_MODYFIED;
-	}
-
 	// ###################################################################
 	// Other Stuff
 	public static SORT_ORDER getSortOrderForSavedSettings() {
@@ -42,7 +39,9 @@ public class Settings {
 		switch (sort) {
 		default:
 		case "Last Modified":
-			return SORT_ORDER.LAST_MODYFIED;
+			return SORT_ORDER.LAST_MODIFIED;
+		case "Last Modified (Descending)":
+			return SORT_ORDER.LAST_MODIFIED_DESCENDING;
 		case "Alphabetically":
 			return SORT_ORDER.ALPHA;
 		}

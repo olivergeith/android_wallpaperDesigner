@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,8 +22,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
-import de.geithonline.wallpaperdesigner.settings.Settings.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
+import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
+import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class SettingsIO {
@@ -197,27 +196,7 @@ public class SettingsIO {
 				}
 			});
 
-			switch (sortOrder) {
-			default:
-			case LAST_MODYFIED:
-				// Sort by Modyfied
-				Arrays.sort(prefs, new Comparator<File>() {
-					@Override
-					public int compare(final File f1, final File f2) {
-						return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-					}
-				});
-				break;
-			case ALPHA:
-				// Sort by Name
-				Arrays.sort(prefs, new Comparator<File>() {
-					@Override
-					public int compare(final File f1, final File f2) {
-						return f1.getName().compareTo(f2.getName());
-					}
-				});
-				break;
-			}
+			FileIOHelper.sortFileArray(sortOrder, prefs);
 
 			for (final File fi : prefs) {
 				prefFileList.add(fi);
