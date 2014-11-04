@@ -8,7 +8,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class GeometricRaster {
 	public enum POSITIONING {
-		RANDOM, BOOK, TOWER;
+		RANDOM, BOOK, BOOK_REVERSE, TOWER;
 	}
 
 	private final int width;
@@ -68,6 +68,8 @@ public class GeometricRaster {
 		default:
 		case BOOK:
 			return drawNextBookPoint();
+		case BOOK_REVERSE:
+			return drawNextBookPointBackward();
 		case TOWER:
 			return drawNextTowerPoint();
 		}
@@ -94,7 +96,16 @@ public class GeometricRaster {
 		}
 		final int location = 0;
 		final Point p = points.remove(location);
-		top = !top;
+		return p;
+	}
+
+	private Point drawNextBookPointBackward() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		final int location = size - 1;
+		final Point p = points.remove(location);
 		return p;
 	}
 

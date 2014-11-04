@@ -11,6 +11,7 @@ public class LayoutManager {
 	static {
 		drawer.put("Random Layout", new WPStyleRandomPatterns());
 		drawer.put("Geometric Layout (Book)", new WPStyleGeometricPatterns(POSITIONING.BOOK));
+		drawer.put("Geometric Layout (Book Reverse)", new WPStyleGeometricPatterns(POSITIONING.BOOK_REVERSE));
 		drawer.put("Geometric Layout (Tower)", new WPStyleGeometricPatterns(POSITIONING.TOWER));
 		drawer.put("Geometric Layout (Random)", new WPStyleGeometricPatterns(POSITIONING.RANDOM));
 	}
