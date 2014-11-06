@@ -6,59 +6,40 @@ import java.util.List;
 import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class GeometricRaster {
-	public enum POSITIONING {
-		RANDOM, BOOK, BOOK_REVERSE, TOWER;
+public class CircularRaster {
+	public enum POSITIONING_CIRCLE {
+		RANDOM, INNER, OUTER;
 	}
-
-	private final int width;
-	private final int height;
-	private final int radius;
-
-	private final Point currentPos = new Point(0, 0);
-	private final int abstand;
-
-	private final int anzW;
-	private final int anzH;
 
 	private final List<Point> points = new ArrayList<Point>();
 	private final int anzahlPatterns;
-	private final POSITIONING positioning;
+	private final POSITIONING_CIRCLE positioning;
 
-	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING positioning) {
+	public CircularRaster(final int width, final int height, final int radius, final float overlap, final POSITIONING_CIRCLE positioning) {
 
 		this.positioning = positioning;
-		this.width = width;
-		this.height = height;
-		this.radius = patternRadius;
-		abstand = Math.round(patternRadius * 2 * overlap);
 
-		anzW = width / abstand + 2;
-		anzH = height / abstand + 2;
+		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4);
 
-		for (int w = 0; w < getAnzW(); w++) {
-			for (int h = 0; h < getAnzH(); h++) {
+		final int radiusStep = Math.round(radius * 2 * overlap);
+		final int anzRinge = maximumRadius / radiusStep;
 
-				// random koordinate an der gemalt werden soll
-				final int x = w * getAbstand();
-				final int y = h * getAbstand();
-				final Point p = new Point(x, y);
+		final Point center = new Point(width / 2, height / 2);
+		points.add(center);
+		for (int ring = 1; ring <= anzRinge; ring++) {
+			final float r = ring * radiusStep;
+			final int ecken = (int) (Math.PI * 2 * r);
+			final float angle = (float) (Math.PI / ecken) * 2;
+			for (int ecke = 0; ecke < ecken; ecke++) {
+				final Point p = new Point();
+
+				p.x = (int) (center.x + Math.cos(ecke * angle) * r);
+				p.y = (int) (center.y + Math.sin(ecke * angle) * r);
 				points.add(p);
 			}
 		}
+
 		anzahlPatterns = points.size();
-	}
-
-	public int getAnzW() {
-		return anzW;
-	}
-
-	public int getAnzH() {
-		return anzH;
-	}
-
-	public int getAbstand() {
-		return abstand;
 	}
 
 	public Point drawPoint() {
@@ -66,12 +47,10 @@ public class GeometricRaster {
 		case RANDOM:
 			return drawRandomPoint();
 		default:
-		case BOOK:
-			return drawNextBookPoint();
-		case BOOK_REVERSE:
-			return drawNextBookPointBackward();
-		case TOWER:
-			return drawNextTowerPoint();
+		case OUTER:
+			return drawNextPoint();
+		case INNER:
+			return drawNextPointBackward();
 		}
 	}
 
@@ -89,7 +68,7 @@ public class GeometricRaster {
 		return p;
 	}
 
-	private Point drawNextBookPoint() {
+	private Point drawNextPoint() {
 		final int size = points.size();
 		if (size == 0) {
 			return new Point(0, 0);
@@ -99,7 +78,7 @@ public class GeometricRaster {
 		return p;
 	}
 
-	private Point drawNextBookPointBackward() {
+	private Point drawNextPointBackward() {
 		final int size = points.size();
 		if (size == 0) {
 			return new Point(0, 0);
