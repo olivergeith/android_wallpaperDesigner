@@ -2,11 +2,12 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class RandomPath extends Path {
+public class PaperPath extends Path {
 
-	public RandomPath(final Point center, final int xmax, final int ymax, final int maxsteps, final int maxsteplength, final boolean rectangular) {
+	public PaperPath(final Point center, final int width, final int height, final int maxsteps, final int maxsteplength, final boolean rectangular) {
 		super();
 
 		final Point p = new Point(center);
@@ -19,8 +20,8 @@ public class RandomPath extends Path {
 			if (p.x < 0) {
 				p.x = -p.x;
 			}
-			if (p.x > xmax) {
-				p.x = xmax - (p.x - xmax);
+			if (p.x > width) {
+				p.x = width - (p.x - width);
 			}
 			if (rectangular) {
 				lineTo(p.x, p.y);
@@ -30,12 +31,19 @@ public class RandomPath extends Path {
 			if (p.y < 0) {
 				p.y = -p.y;
 			}
-			if (p.y > ymax) {
-				p.y = ymax - (p.y - ymax);
+			if (p.y > height) {
+				p.y = height - (p.y - height);
 			}
 			lineTo(p.x, p.y);
 		}
 
+	}
+
+	private int calcDistance(final PointF p1, final PointF p2) {
+		final float w = p2.x - p1.x;
+		final float h = p2.y - p1.y;
+		final float dist = (float) Math.sqrt(w * w + h * h);
+		return Math.round(dist);
 	}
 
 }
