@@ -2,6 +2,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.Point;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RandomPath extends Path {
 
@@ -40,8 +41,8 @@ public class RandomPath extends Path {
 		moveTo(p.x, p.y);
 
 		for (int i = 0; i < maxsteps; i++) {
-			final int stepX = getRandomInt(-maxsteplength, maxsteplength);
-			final int stepY = getRandomInt(-maxsteplength, maxsteplength);
+			final int stepX = Randomizer.getRandomInt(-maxsteplength, maxsteplength);
+			final int stepY = Randomizer.getRandomInt(-maxsteplength, maxsteplength);
 			p.x = p.x + stepX;
 			if (p.x < 0) {
 				p.x = -p.x;
@@ -63,24 +64,6 @@ public class RandomPath extends Path {
 			lineTo(p.x, p.y);
 		}
 
-	}
-
-	public static float getRandomFloat(final float min, final float max) {
-		final float mRandom = (float) (min + Math.random() * (max - min));
-		return mRandom;
-	}
-
-	public static int getRandomInt(final int min, final int max) {
-		final int mRandom = min + (int) Math.ceil(Math.random() * (max - min));
-		return mRandom;
-	}
-
-	public static boolean getRandomBoolean() {
-		final int mRandom = (int) Math.round(Math.random() * 1);
-		if (mRandom == 1) {
-			return true;
-		}
-		return false;
 	}
 
 }

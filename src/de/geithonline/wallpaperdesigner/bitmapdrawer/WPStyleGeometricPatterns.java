@@ -8,6 +8,7 @@ import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.GeometricRaster.POSITIONING;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class WPStyleGeometricPatterns extends WPStylePattern {
 
@@ -67,10 +68,10 @@ public class WPStyleGeometricPatterns extends WPStylePattern {
 			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
 
 			if (Settings.isRandomizeBrightness()) {
-				pcolor = randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
+				pcolor = Randomizer.randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
 			}
 			if (Settings.isRandomizeColors()) {
-				pcolor = randomizeColor(pcolor, Settings.getRandomizeColorRange());
+				pcolor = Randomizer.randomizeColor(pcolor, Settings.getRandomizeColorRange());
 			}
 			paint.setColor(pcolor);
 
