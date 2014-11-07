@@ -233,6 +233,13 @@ public class Settings {
 		return col;
 	}
 
+	public static float getDropShadowRadiusAdjustment() {
+		if (prefs == null) {
+			return 1f;
+		}
+		return prefs.getInt("dropShadowRadiusAdjustment", 100) / 100f;
+	}
+
 	// ###################################################################
 	// Options Pattern Style (Alpha)
 	// public static boolean isRandomizeAlpha() {
@@ -504,6 +511,7 @@ public class Settings {
 			prefs.edit().putInt("randomizeColorBrightnessRangeInt", 12).commit();
 			prefs.edit().putInt("minOpacity", 225).commit();
 			prefs.edit().putInt("maxOpacity", 255).commit();
+			prefs.edit().putInt("dropShadowRadiusAdjustment", 100).commit();
 
 			prefs.edit().putInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -88).commit();
 			prefs.edit().putInt(PATTERN_OUTLINE_DARKNESS_ADJUST, +40).commit();
