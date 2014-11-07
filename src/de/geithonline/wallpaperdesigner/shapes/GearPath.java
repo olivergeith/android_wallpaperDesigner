@@ -13,7 +13,7 @@ public class GearPath extends Path {
 		final float angle = (float) (2 * Math.PI / (arms * 4));
 
 		int c = 0;
-		for (int i = 0; i <= arms; i++) {
+		for (int i = 0; i < arms; i++) {
 			for (int j = 0; j < 4; j++) {
 				float r;
 				switch (j) {
