@@ -143,6 +143,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowColor.setEnabled(newValue.equals("Select"));
 		final Preference dropShadowDarkness = findPreference(Settings.PATTERN_DROPSHADOW_DARKNESS_ADJUST);
 		dropShadowDarkness.setEnabled(newValue.equals("Darker"));
+		final SeekBarPreference dropShadowRadiusAdjustment = (SeekBarPreference) findPreference("dropShadowRadiusAdjustment");
+		dropShadowRadiusAdjustment.setEnabled(!newValue.equals("No"));
+
 	}
 
 	private void handlePatternSelect(final String newPattern) {

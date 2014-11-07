@@ -68,7 +68,7 @@
     <string name="randomRotate">Random Rotation</string>
     <string name="customOutlineColor">Custom Outline Color</string>
     <string name="colorOutline">Outline Color</string>
-    <string name="filledOption">Filled or not filled ;-)</string>
+    <string name="filledOption">Filled or not filled Patterns...</string>
     <string name="patternSizeAdjust">Pattern Size Adjustment</string>
     <string name="patternMinSizeAdjust">Min. PatternSize relativ to max. PatternSize</string>
     <string name="textPattern">Content of Text Pattern</string>
@@ -81,6 +81,7 @@
     <string name="rotationDegrees">Rotate pattern by degrees</string>
     <string name="overlapping">Overlap-faktor for patterns</string>
     <string name="sortOrder">Sort-Order for saved Settings-List</string>
+    <string name="dropShadowRadiusAdjustment">Adjustment of DropShadow Radius</string>
     
     
     

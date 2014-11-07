@@ -1633,4 +1633,13 @@ public abstract class WPStylePattern extends WPStyle {
 		mMatrix.postScale(-1f, 1f, x, y);
 		path.transform(mMatrix);
 	}
+
+	protected int getDropShadowRadius() {
+		int dropShadowRadius = Math.round(bWidth * 0.01f * Settings.getDropShadowRadiusAdjustment());
+		if (dropShadowRadius < 5) {
+			dropShadowRadius = 5;
+		}
+		return dropShadowRadius;
+	}
+
 }

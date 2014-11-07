@@ -48,10 +48,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			minRadius = 5;
 		}
 
-		int dropShadowRadius = Math.round(bWidth * 0.01f);
-		if (dropShadowRadius < 5) {
-			dropShadowRadius = 5;
-		}
+		final int dropShadowRadius = getDropShadowRadius();
 
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
