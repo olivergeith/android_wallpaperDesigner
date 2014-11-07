@@ -28,6 +28,9 @@
         <item >Geometric Layout (Book Reverse)</item>
         <item >Geometric Layout (Tower)</item>
         <item >Geometric Layout (Random)</item>
+        <item >Circular Layout (Inner to Outer)</item>
+        <item >Circular Layout (Outer to Inner)</item>
+        <item >Circular Layout (Random)</item>
         </string-array>
     
     <string-array name="hole">

@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.bitmapdrawer;
+package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,20 +6,10 @@ import java.util.List;
 import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class GeometricRaster {
-	public enum POSITIONING {
+public class GeometricRaster implements IRaster {
+	protected enum POSITIONING {
 		RANDOM, BOOK, BOOK_REVERSE, TOWER;
 	}
-
-	private final int width;
-	private final int height;
-	private final int radius;
-
-	private final Point currentPos = new Point(0, 0);
-	private final int abstand;
-
-	private final int anzW;
-	private final int anzH;
 
 	private final List<Point> points = new ArrayList<Point>();
 	private final int anzahlPatterns;
@@ -28,20 +18,17 @@ public class GeometricRaster {
 	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING positioning) {
 
 		this.positioning = positioning;
-		this.width = width;
-		this.height = height;
-		this.radius = patternRadius;
-		abstand = Math.round(patternRadius * 2 * overlap);
+		final int abstand = Math.round(patternRadius * 2 * overlap);
 
-		anzW = width / abstand + 2;
-		anzH = height / abstand + 2;
+		final int anzW = width / abstand + 2;
+		final int anzH = height / abstand + 2;
 
-		for (int w = 0; w < getAnzW(); w++) {
-			for (int h = 0; h < getAnzH(); h++) {
+		for (int w = 0; w < anzW; w++) {
+			for (int h = 0; h < anzH; h++) {
 
 				// random koordinate an der gemalt werden soll
-				final int x = w * getAbstand();
-				final int y = h * getAbstand();
+				final int x = w * abstand;
+				final int y = h * abstand;
 				final Point p = new Point(x, y);
 				points.add(p);
 			}
@@ -49,19 +36,8 @@ public class GeometricRaster {
 		anzahlPatterns = points.size();
 	}
 
-	public int getAnzW() {
-		return anzW;
-	}
-
-	public int getAnzH() {
-		return anzH;
-	}
-
-	public int getAbstand() {
-		return abstand;
-	}
-
-	public Point drawPoint() {
+	@Override
+	public Point drawNextPoint() {
 		switch (positioning) {
 		case RANDOM:
 			return drawRandomPoint();
@@ -75,6 +51,7 @@ public class GeometricRaster {
 		}
 	}
 
+	@Override
 	public int getAnzahlPatterns() {
 		return anzahlPatterns;
 	}

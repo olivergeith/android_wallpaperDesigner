@@ -5,16 +5,18 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.GeometricRaster.POSITIONING;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.IRaster;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory.RasterPositioning;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class WPStyleGeometricPatterns extends WPStylePattern {
+public class WPStyleRasteredPatterns extends WPStylePattern {
 
-	private final POSITIONING positioning;
+	private final RasterPositioning positioning;
 
-	public WPStyleGeometricPatterns(final POSITIONING positioning) {
+	public WPStyleRasteredPatterns(final RasterPositioning positioning) {
 		this.positioning = positioning;
 	}
 
@@ -54,14 +56,15 @@ public class WPStyleGeometricPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final GeometricRaster raster = new GeometricRaster(bWidth, bHeight, maxRadius, Settings.getOverlapping(), positioning);
+		final IRaster raster = RasterFactory.getRaster(positioning, width, height, maxRadius, Settings.getOverlapping());
+
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
 
 			// random koordinate an der gemalt werden soll
-			final Point p = raster.drawPoint();
+			final Point p = raster.drawNextPoint();
 			final int x = p.x;
 			final int y = p.y;
 			// davon die aktuelle Farbe
