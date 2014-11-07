@@ -1,5 +1,6 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.CIRCLE_TYPE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.POSITIONING_CIRCLE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.GeometricRaster.POSITIONING;
 
@@ -8,7 +9,8 @@ public class RasterFactory {
 	public enum RasterPositioning {
 
 		GEOMETRIC_RANDOM, GEOMETRIC_BOOK, GEOMETRIC_BOOK_REVERSE, GEOMETRIC_TOWER, //
-		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER;
+		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER, //
+		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER;
 	}
 
 	public static IRaster getRaster(final RasterPositioning positioning, final int width, final int height, final int patternRadius, final float overlap) {
@@ -23,11 +25,17 @@ public class RasterFactory {
 		case GEOMETRIC_TOWER:
 			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER);
 		case CIRCULAR_RANDOM:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM);
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case CIRCULAR_INNER:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER);
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case CIRCULAR_OUTER:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER);
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+		case HALF_CIRCULAR_RANDOM:
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.HALF);
+		case HALF_CIRCULAR_INNER:
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.HALF);
+		case HALF_CIRCULAR_OUTER:
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.HALF);
 		}
 	}
 }

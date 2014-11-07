@@ -20,6 +20,10 @@ public class LayoutManager {
 		drawer.put("Circular Layout (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_OUTER));
 		drawer.put("Circular Layout (Random)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_RANDOM));
 
+		drawer.put("Half Circle Layout (Inner to Outer)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_INNER));
+		drawer.put("Half Circle Layout (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_OUTER));
+		drawer.put("Half Circle Layout (Random)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_RANDOM));
+
 	}
 
 	public static IWPStyle getDrawer(final String name) {
@@ -45,7 +49,7 @@ public class LayoutManager {
 	}
 
 	public static boolean supportsOverLay(final String layout) {
-		if (layout.contains("Geometric") || layout.contains("Circular")) {
+		if (layout.contains("Geometric") || layout.contains("Circ")) {
 			return true;
 		}
 		return false;
