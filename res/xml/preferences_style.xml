@@ -228,14 +228,6 @@
 		    android:summary="%1$d" 
 		    android:dialogMessage="@string/dropShadowDarknessAdjust" 
 		    />
-        
-        
-	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="colorDropShadow"
-	        android:title="@string/colorDropShadow" 
-	        android:defaultValue="@integer/COLOR_BLACK"
-	        />
-    
 	    <de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="dropShadowRadiusAdjustment"
 	        android:title="@string/dropShadowRadiusAdjustment" 
@@ -245,6 +237,14 @@
 		    android:summary="%1$d percent" 
 		    android:defaultValue="100"
 		    android:dialogMessage="@string/dropShadowRadiusAdjustment" />
+        
+        
+	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="colorDropShadow"
+	        android:title="@string/colorDropShadow" 
+	        android:defaultValue="@integer/COLOR_BLACK"
+	        />
+    
 	    
     
     <PreferenceCategory  android:title="Help and Howto"/>

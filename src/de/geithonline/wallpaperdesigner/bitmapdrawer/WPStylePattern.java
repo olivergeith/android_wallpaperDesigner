@@ -45,6 +45,8 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV1Path;
 import de.geithonline.wallpaperdesigner.shapes.MandalaV2Path;
 import de.geithonline.wallpaperdesigner.shapes.MandalaV3Path;
 import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
+import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
+import de.geithonline.wallpaperdesigner.shapes.MaterialPath.MATERIAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
@@ -190,15 +192,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Mandala":
 			drawMandala(x, y, paint, radius);
 			break;
-		case "Skyline":
-			final RectF rect = new RectF(x - radius, y, x + radius, bHeight);
-			bitmapCanvas.drawRect(rect, paint);
-			break;
 		case "Dandelion":
 			drawDandelion(x, y, paint, radius);
 			break;
 		case "Maritim":
 			drawMaritim(x, y, paint, radius);
+			break;
+		case "Material":
+			drawMaterial(x, y, paint, radius);
 			break;
 		case "Rectangles":
 			drawRect(x, y, paint, radius);
@@ -1041,6 +1042,32 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		}
 		return path;
+	}
+
+	private void drawMaterial(final int x, final int y, final Paint paint, final int radius) {
+		final String variante = Settings.getSelectedPatternVariant();
+		drawMaterial(x, y, paint, radius, variante);
+	}
+
+	private void drawMaterial(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Stripe":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.STIPE);
+			break;
+		case "V2":
+		case "Skyline":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.SKYLINE);
+			break;
+		}
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
 	}
 
 	protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
