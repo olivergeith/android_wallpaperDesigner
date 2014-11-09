@@ -55,4 +55,11 @@ public class LayoutManager {
 		return false;
 	}
 
+	public static boolean supportsUpsideDown(final String layout) {
+		if (layout.contains("Geometric")) {
+			return true;
+		}
+		return false;
+	}
+
 }

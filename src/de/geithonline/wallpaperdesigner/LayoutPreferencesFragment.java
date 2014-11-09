@@ -44,9 +44,11 @@ public class LayoutPreferencesFragment extends PreferenceFragment implements OnS
 		final SeekBarPreference overlapping = (SeekBarPreference) findPreference("overlapping");
 		final SeekBarPreference anzahlPatterns = (SeekBarPreference) findPreference("anzahlPatterns");
 		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
+		final CheckBoxPreference upsideDown = (CheckBoxPreference) findPreference("upsideDown");
 		overlapping.setEnabled(LayoutManager.supportsOverLay(selectedLayout));
 		anzahlPatterns.setEnabled(LayoutManager.supportsAnzahlPatterns(selectedLayout));
 		blurring.setEnabled(LayoutManager.supportsBlurring(selectedLayout));
+		upsideDown.setEnabled(LayoutManager.supportsUpsideDown(selectedLayout));
 	}
 
 	@Override

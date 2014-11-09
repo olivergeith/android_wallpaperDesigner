@@ -82,7 +82,7 @@
     <string name="overlapping">Overlap-faktor for patterns</string>
     <string name="sortOrder">Sort-Order for saved Settings-List</string>
     <string name="dropShadowRadiusAdjustment">Drop Shadow Radius Adjustment</string>
+    <string name="upsideDown">Positioning in Rows (clicked) or Columns</string>
     
-    
-    
+   
 </resources>

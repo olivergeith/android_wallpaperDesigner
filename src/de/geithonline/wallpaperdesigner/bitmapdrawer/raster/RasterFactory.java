@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.CIRCLE_TYPE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.POSITIONING_CIRCLE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.GeometricRaster.POSITIONING;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class RasterFactory {
 
@@ -17,13 +18,13 @@ public class RasterFactory {
 		switch (positioning) {
 		default:
 		case GEOMETRIC_RANDOM:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.RANDOM);
+			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.RANDOM, Settings.isUpsideDown());
 		case GEOMETRIC_BOOK:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK);
+			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK, Settings.isUpsideDown());
 		case GEOMETRIC_BOOK_REVERSE:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK_REVERSE);
+			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK_REVERSE, Settings.isUpsideDown());
 		case GEOMETRIC_TOWER:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER);
+			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER, Settings.isUpsideDown());
 		case CIRCULAR_RANDOM:
 			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case CIRCULAR_INNER:

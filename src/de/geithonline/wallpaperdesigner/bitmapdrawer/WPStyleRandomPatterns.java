@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -45,7 +46,14 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final int anzahlPatterns = Settings.getAnzahlPatterns();
+		int anzahlPatterns = Settings.getAnzahlPatterns();
+		if (Settings.getSelectedPatternVariant().equalsIgnoreCase("Stripe")) {
+			// reduce Anzahl Patterns to maximum 200
+			if (anzahlPatterns > 200) {
+				anzahlPatterns = 200;
+				Log.i("Patterns", "Anzahl Patterns reduced to 200 because of choosen Stripe Pattern!");
+			}
+		}
 
 		final int blurLevel2 = anzahlPatterns * 6 / 10;
 		final int blurLevel3 = anzahlPatterns * 8 / 10;

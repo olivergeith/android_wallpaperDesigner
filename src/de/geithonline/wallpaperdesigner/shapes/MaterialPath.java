@@ -16,7 +16,7 @@ public class MaterialPath extends Path {
 		switch (type) {
 		default:
 		case STIPE:
-			drawStripeV2(center, radius, bWidth, bHeight);
+			drawStripe(center, radius, bWidth, bHeight);
 			break;
 		case SKYLINE:
 			drawSkyline(center, radius, bWidth, bHeight);

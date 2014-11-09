@@ -84,6 +84,20 @@ public class Settings {
 		return prefs.getInt("overlapping", 50) / 100f;
 	}
 
+	public static boolean isBlurPatterns() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(PATTERN_BLUR, false);
+	}
+
+	public static boolean isUpsideDown() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean("upsideDown", false);
+	}
+
 	// ###################################################################
 	// Options Pattern Style
 
@@ -139,13 +153,6 @@ public class Settings {
 			return 0;
 		}
 		return prefs.getInt("rotationDegrees", 0);
-	}
-
-	public static boolean isBlurPatterns() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(PATTERN_BLUR, false);
 	}
 
 	public static boolean isGlossy() {

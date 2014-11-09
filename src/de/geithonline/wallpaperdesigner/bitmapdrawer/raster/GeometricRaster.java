@@ -15,7 +15,8 @@ public class GeometricRaster implements IRaster {
 	private final int anzahlPatterns;
 	private final POSITIONING positioning;
 
-	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING positioning) {
+	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING positioning,
+			final boolean upsidedown) {
 
 		this.positioning = positioning;
 		final int abstand = Math.round(patternRadius * 2 * overlap);
@@ -23,14 +24,25 @@ public class GeometricRaster implements IRaster {
 		final int anzW = width / abstand + 2;
 		final int anzH = height / abstand + 2;
 
-		for (int w = 0; w < anzW; w++) {
+		if (!upsidedown) {
 			for (int h = 0; h < anzH; h++) {
-
-				// random koordinate an der gemalt werden soll
-				final int x = w * abstand;
-				final int y = h * abstand;
-				final Point p = new Point(x, y);
-				points.add(p);
+				for (int w = 0; w < anzW; w++) {
+					// random koordinate an der gemalt werden soll
+					final int x = w * abstand;
+					final int y = h * abstand;
+					final Point p = new Point(x, y);
+					points.add(p);
+				}
+			}
+		} else {
+			for (int w = 0; w < anzW; w++) {
+				for (int h = 0; h < anzH; h++) {
+					// random koordinate an der gemalt werden soll
+					final int x = w * abstand;
+					final int y = h * abstand;
+					final Point p = new Point(x, y);
+					points.add(p);
+				}
 			}
 		}
 		anzahlPatterns = points.size();
