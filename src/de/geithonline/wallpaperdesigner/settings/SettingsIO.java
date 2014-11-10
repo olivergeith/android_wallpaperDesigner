@@ -165,6 +165,32 @@ public class SettingsIO {
 		if (key.equalsIgnoreCase("sortOrder")) {
 			return;
 		}
+		// Spezialbehandlung für alten LayoutPicker
+		if (key.equals("layoutPicker")) {
+			final String val = entry.getValue().toString();
+			Log.i("layoutPicker found", " --> " + entry.getValue().toString() + ")");
+			final int pos = val.indexOf(" (");
+			if (pos > 0) {
+				final String mainLayout = val.substring(0, pos);
+				if (mainLayout.startsWith("Geo")) {
+					prefs.edit().putString("mainlayouts", "Geometric Grid").commit();
+					Log.i("layoutPicker found", " Putting --> Geometric Grid");
+				} else if (mainLayout.startsWith("Circular")) {
+					prefs.edit().putString("mainlayouts", "Circular").commit();
+					Log.i("layoutPicker found", " Putting --> Circular");
+				} else if (mainLayout.startsWith("Half")) {
+					prefs.edit().putString("mainlayouts", "Half Circle").commit();
+					Log.i("layoutPicker found", " Putting --> Half Circle");
+				}
+				final int posEnd = val.indexOf(")");
+				final String mainLayoutVariante = val.substring(pos + 2, posEnd);
+				prefs.edit().putString("mainlayoutVariants", mainLayoutVariante).commit();
+				Log.i("layoutPicker found", " Putting Variante --> " + mainLayoutVariante);
+			} else {
+				prefs.edit().putString("mainlayouts", "Random Layout").commit();
+				prefs.edit().putString("mainlayoutVariants", "None").commit();
+			}
+		}
 		final Class cl = entry.getValue().getClass();
 		if (cl.getSimpleName().equalsIgnoreCase("Integer")) {
 			prefs.edit().putInt(key, (Integer) entry.getValue()).commit();
