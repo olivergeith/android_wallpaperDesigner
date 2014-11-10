@@ -8,7 +8,7 @@ import android.graphics.RectF;
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE;
+		SKYLINE, STIPE, ARC1, ARC2;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -17,6 +17,12 @@ public class MaterialPath extends Path {
 		default:
 		case STIPE:
 			drawStripe(center, radius, bWidth, bHeight);
+			break;
+		case ARC1:
+			drawArcV1(center, radius, bWidth, bHeight);
+			break;
+		case ARC2:
+			drawArcV2(center, radius, bWidth, bHeight);
 			break;
 		case SKYLINE:
 			drawSkyline(center, radius, bWidth, bHeight);
@@ -75,6 +81,47 @@ public class MaterialPath extends Path {
 		path.computeBounds(bounds, true);
 		mMatrix.postRotate(rotate, x, y);
 		path.transform(mMatrix);
+	}
+
+	private void drawArcV1(final Point center, final float radius, final int bWidth, final int bHeight) {
+		final Point circleCenter = new Point();
+		int circleRadius = 0;
+		if (flip == true) {
+			circleCenter.x = 0;
+			circleCenter.y = bHeight;
+			circleRadius = center.x;
+		} else {
+			circleCenter.x = 0; // bWidth;
+			circleCenter.y = 0; // bHeight;
+			circleRadius = bWidth - center.x;
+		}
+
+		addCircle(circleCenter.x, circleCenter.y, circleRadius + radius, Direction.CW);
+		addCircle(circleCenter.x, circleCenter.y, circleRadius - radius, Direction.CCW);
+		flip = !flip;
+	}
+
+	private void drawArcV2(final Point center, final float radius, final int bWidth, final int bHeight) {
+		final Point circleCenter = new Point();
+		int circleRadius = 0;
+		if (flip == true) {
+			circleCenter.x = 0;
+			circleCenter.y = bHeight;
+			circleRadius = center.x;
+		} else {
+			circleCenter.x = bWidth;
+			circleCenter.y = bHeight;
+			circleRadius = bWidth - center.x;
+		}
+
+		addCircle(circleCenter.x, circleCenter.y, circleRadius + radius, Direction.CW);
+		addCircle(circleCenter.x, circleCenter.y, circleRadius - radius, Direction.CCW);
+		flip = !flip;
+	}
+
+	private int calcDistance(final Point p1, final Point p2) {
+		final double sqrt = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+		return (int) Math.round(sqrt);
 	}
 
 }

@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.CIRCLE_TYPE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.POSITIONING_CIRCLE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.GeometricRaster.POSITIONING;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.MaterialRaster.MATERIAL_POSITIONING;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class RasterFactory {
@@ -10,6 +11,7 @@ public class RasterFactory {
 	public enum RasterPositioning {
 
 		GEOMETRIC_RANDOM, GEOMETRIC_BOOK, GEOMETRIC_BOOK_REVERSE, GEOMETRIC_TOWER, //
+		MATERIAL_RANDOM, MATERIAL_BOOK, MATERIAL_BOOK_REVERSE, MATERIAL_TOWER, //
 		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER, //
 		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER;
 	}
@@ -37,6 +39,12 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.HALF);
 		case HALF_CIRCULAR_OUTER:
 			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.HALF);
+
+		case MATERIAL_RANDOM:
+			return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.RANDOM);
+		case MATERIAL_TOWER:
+			return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.TOWER);
+
 		}
 	}
 }

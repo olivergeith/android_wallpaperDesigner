@@ -25,12 +25,19 @@ public class LayoutManagerV2 {
 		drawer.put("Half Circle (Inner to Outer)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_INNER));
 		drawer.put("Half Circle (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_OUTER));
 		drawer.put("Half Circle (Random)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_RANDOM));
+		drawer.put("Material Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_BOOK));
+		drawer.put("Material Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_BOOK_REVERSE));
+		drawer.put("Material Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_TOWER));
+		drawer.put("Material Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_RANDOM));
 
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, //
 				null));
 		layoutProperties.put("Geometric Grid", new LayoutProperties(false, false, true, true, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Random" }));
+
+		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, //
+				new CharSequence[] { "Tower", "Random" }));
 
 		layoutProperties.put("Circular", new LayoutProperties(false, false, true, true, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
