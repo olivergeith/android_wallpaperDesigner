@@ -59,12 +59,20 @@ public class Settings {
 	// ###################################################################
 	// Options Layout Selection
 
-	public static String getSelectedLayout() {
+	public static String getSelectedMainLayout() {
 		// return "Random Layout";
 		if (prefs == null) {
 			return "Random Layout";
 		}
-		return prefs.getString("layoutPicker", "Random Layout");
+		return prefs.getString("mainlayouts", "Random Layout");
+	}
+
+	public static String getSelectedMainLayoutVariante() {
+		// return "Random Layout";
+		if (prefs == null) {
+			return "None";
+		}
+		return prefs.getString("mainlayoutVariants", "None");
 	}
 
 	public static int getAnzahlPatterns() {

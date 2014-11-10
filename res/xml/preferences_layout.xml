@@ -4,14 +4,19 @@
  
     <PreferenceCategory  android:title="Layout"/>
         <ListPreference
-	        android:key="layoutPicker"
-	        android:title="@string/layoutPicker" 
-	        android:dialogTitle="@string/layoutPicker"
+	        android:key="mainlayouts"
+	        android:title="@string/mainlayouts" 
+	        android:dialogTitle="@string/mainlayouts"
 	        android:defaultValue="Random Layout"
-	        android:entries="@array/layout"
-	        android:entryValues="@array/layout"
+	        android:entries="@array/mainlayouts"
+	        android:entryValues="@array/mainlayouts"
 	        />
-    
+        <ListPreference
+	        android:key="mainlayoutVariants"
+	        android:title="@string/mainlayoutVariants" 
+	        android:dialogTitle="@string/mainlayoutVariants"
+	        />
+        
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="overlapping"
 	        android:title="@string/overlapping" 

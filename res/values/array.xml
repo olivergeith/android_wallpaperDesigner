@@ -22,6 +22,14 @@
         <item >640x480</item>
      </string-array>
 
+    <string-array name="mainlayouts">
+        <item >Random Layout</item>
+        <item >Geometric Grid</item>
+        <item >Circular</item>
+        <item >Half Circle</item>
+        </string-array>
+    
+    
     <string-array name="layout">
         <item >Random Layout</item>
         <item >Geometric Layout (Book)</item>
