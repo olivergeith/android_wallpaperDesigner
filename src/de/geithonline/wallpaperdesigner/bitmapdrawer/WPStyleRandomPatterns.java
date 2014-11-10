@@ -47,11 +47,11 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 		paint.setAntiAlias(true);
 
 		int anzahlPatterns = Settings.getAnzahlPatterns();
-		if (Settings.getSelectedPatternVariant().equalsIgnoreCase("Stripe")) {
+		if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
 			// reduce Anzahl Patterns to maximum 200
 			if (anzahlPatterns > 200) {
 				anzahlPatterns = 200;
-				Log.i("Patterns", "Anzahl Patterns reduced to 200 because of choosen Stripe Pattern!");
+				Log.i("Patterns", "Anzahl Patterns reduced to 200 because of choosen Material Pattern!");
 			}
 		}
 
