@@ -8,7 +8,7 @@ import android.graphics.RectF;
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, ARC1, ARC2;
+		SKYLINE, STIPE, ARC1, ARC2, EDGY_BARS;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -26,6 +26,9 @@ public class MaterialPath extends Path {
 			break;
 		case SKYLINE:
 			drawSkyline(center, radius, bWidth, bHeight);
+			break;
+		case EDGY_BARS:
+			drawEdgyBars(center, radius, bWidth, bHeight);
 			break;
 		}
 	}
@@ -58,21 +61,40 @@ public class MaterialPath extends Path {
 		flip = !flip;
 	}
 
-	private void drawStripeV2(final Point center, final float radius, final int bWidth, final int bHeight) {
+	private void drawEdgyBars(final Point center, final float radius, final int bWidth, final int bHeight) {
+		int drehwinkel = 0;
+		int rectLength = 0;
 
-		final float diagonal = (float) Math.sqrt(bWidth * bWidth + bHeight * bHeight);
+		// Quadranten berechnen
+		if (center.x < bWidth / 2) {
+			if (center.y < bHeight / 2) // obere linke ecke
+			{
+				rectLength = (int) (Math.max(center.x, center.y) + radius);
+				drehwinkel = -45;
+			} else // untere linke ecke
+			{
+				rectLength = (int) (Math.max(center.x, bHeight - center.y) + radius);
+				drehwinkel = -135;
+			}
+
+		} else {
+			if (center.y < bHeight / 2) // obere rechte ecke
+			{
+				rectLength = (int) (Math.max(bWidth - center.x, center.y) + radius);
+				drehwinkel = 45;
+			} else // untere rechte ecke
+			{
+				rectLength = (int) (Math.max(bWidth - center.x, bHeight - center.y) + radius);
+				drehwinkel = 135;
+			}
+		}
 
 		final Path p = new Path();
-		final RectF rect = new RectF(center.x - radius * 0.7f, center.y - diagonal, center.x + radius * 0.7f, center.y + diagonal);
+		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y);
 		p.addRect(rect, Direction.CW);
 
-		if (flip == true) {
-			rotatePath(center.x, center.y, p, 45);
-		} else {
-			rotatePath(center.x, center.y, p, 135);
-		}
+		rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
-		flip = !flip;
 	}
 
 	protected void rotatePath(final int x, final int y, final Path path, final int rotate) {
