@@ -1073,6 +1073,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Edgy Bars":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.EDGY_BARS);
 			break;
+		case "V6":
+		case "Rotating Bars":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_BARS);
+			break;
 		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline

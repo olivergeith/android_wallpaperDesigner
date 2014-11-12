@@ -8,7 +8,7 @@ import android.graphics.RectF;
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, ARC1, ARC2, EDGY_BARS;
+		SKYLINE, STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -29,6 +29,9 @@ public class MaterialPath extends Path {
 			break;
 		case EDGY_BARS:
 			drawEdgyBars(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_BARS:
+			drawRotatingBars(center, radius, bWidth, bHeight);
 			break;
 		}
 	}
@@ -98,40 +101,32 @@ public class MaterialPath extends Path {
 		addPath(p);
 	}
 
-	private void drawEdgyBarsV2(final Point center, final float radius, final int bWidth, final int bHeight) {
-		int drehwinkel = 0;
-		int rectLength = 0;
+	private void drawRotatingBars(final Point center, final float radius, final int bWidth, final int bHeight) {
+		if (center.x == bWidth / 2 && center.y == bHeight / 2) {
+			return;
+		}
+		int winkel = 0;
+		int rectLength = Math.round(bWidth * 1.5f);
 		final RectF rect;
 
-		// Quadranten berechnen
-		if (center.x < bWidth / 2) {
-			if (center.y < bHeight / 2) // obere linke ecke
-			{
-				rectLength = (int) (Math.max(center.x, center.y) + radius);
-				drehwinkel = -45;
-			} else // untere linke ecke
-			{
-				rectLength = (int) (Math.max(center.x, bHeight - center.y) + radius);
-				drehwinkel = -135;
-			}
-		} else {
-			if (center.y < bHeight / 2) // obere rechte ecke
-			{
-				rectLength = (int) (Math.max(bWidth - center.x, center.y) + radius);
-				drehwinkel = 45;
-			} else // untere rechte ecke
-			{
-				rectLength = (int) (Math.max(bWidth - center.x, bHeight - center.y) + radius);
-				drehwinkel = 135;
-			}
-		}
+		final float distTCenterX = bWidth / 2 - center.x;
+		final float distTCenterY = bHeight / 2 - center.y;
+		final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
 
+		winkel = (int) (alpha * 180 / Math.PI);
+
+		// Log.i("Winkel", "Alpha = " + alpha + " Winkel= " + winkel);
 		final Path p = new Path();
 		rectLength = Math.round(rectLength * 1.5f);
-		rect = new RectF(center.x, center.y - rectLength, center.x + rectLength, center.y);
+		if (center.x > bWidth / 2) {
+			rect = new RectF(center.x, center.y - radius, center.x + rectLength, center.y + radius);
+		} else {
+			rect = new RectF(center.x - rectLength, center.y - radius, center.x, center.y + radius);
+		}
+
 		p.addRect(rect, Direction.CW);
 
-		rotatePath(center.x, center.y, p, drehwinkel);
+		rotatePath(center.x, center.y, p, winkel);
 		addPath(p);
 	}
 
