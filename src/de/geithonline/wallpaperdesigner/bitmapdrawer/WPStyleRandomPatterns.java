@@ -49,9 +49,9 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 		int anzahlPatterns = Settings.getAnzahlPatterns();
 		if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
 			// reduce Anzahl Patterns to maximum 200
-			if (anzahlPatterns > 200) {
-				anzahlPatterns = 200;
-				Log.i("Patterns", "Anzahl Patterns reduced to 200 because of choosen Material Pattern!");
+			if (anzahlPatterns > 300) {
+				anzahlPatterns = 300;
+				Log.i("Patterns", "Anzahl Patterns reduced to 300 because of choosen Material Pattern!");
 			}
 		}
 

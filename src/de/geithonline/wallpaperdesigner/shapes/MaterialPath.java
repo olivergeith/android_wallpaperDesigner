@@ -90,7 +90,45 @@ public class MaterialPath extends Path {
 		}
 
 		final Path p = new Path();
+		rectLength = Math.round(rectLength * 1.5f);
 		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y);
+		p.addRect(rect, Direction.CW);
+
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
+	}
+
+	private void drawEdgyBarsV2(final Point center, final float radius, final int bWidth, final int bHeight) {
+		int drehwinkel = 0;
+		int rectLength = 0;
+		final RectF rect;
+
+		// Quadranten berechnen
+		if (center.x < bWidth / 2) {
+			if (center.y < bHeight / 2) // obere linke ecke
+			{
+				rectLength = (int) (Math.max(center.x, center.y) + radius);
+				drehwinkel = -45;
+			} else // untere linke ecke
+			{
+				rectLength = (int) (Math.max(center.x, bHeight - center.y) + radius);
+				drehwinkel = -135;
+			}
+		} else {
+			if (center.y < bHeight / 2) // obere rechte ecke
+			{
+				rectLength = (int) (Math.max(bWidth - center.x, center.y) + radius);
+				drehwinkel = 45;
+			} else // untere rechte ecke
+			{
+				rectLength = (int) (Math.max(bWidth - center.x, bHeight - center.y) + radius);
+				drehwinkel = 135;
+			}
+		}
+
+		final Path p = new Path();
+		rectLength = Math.round(rectLength * 1.5f);
+		rect = new RectF(center.x, center.y - rectLength, center.x + rectLength, center.y);
 		p.addRect(rect, Direction.CW);
 
 		rotatePath(center.x, center.y, p, drehwinkel);
@@ -138,6 +176,7 @@ public class MaterialPath extends Path {
 
 		addCircle(circleCenter.x, circleCenter.y, circleRadius + radius, Direction.CW);
 		addCircle(circleCenter.x, circleCenter.y, circleRadius - radius, Direction.CCW);
+
 		flip = !flip;
 	}
 
