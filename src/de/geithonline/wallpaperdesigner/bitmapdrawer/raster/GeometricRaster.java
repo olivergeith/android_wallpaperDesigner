@@ -8,7 +8,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class GeometricRaster implements IRaster {
 	protected enum POSITIONING {
-		RANDOM, BOOK, BOOK_REVERSE, TOWER;
+		RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER;
 	}
 
 	private final List<Point> points = new ArrayList<Point>();
@@ -60,6 +60,8 @@ public class GeometricRaster implements IRaster {
 			return drawNextBookPointBackward();
 		case TOWER:
 			return drawNextTowerPoint();
+		case CENTER:
+			return drawNextCenterPoint();
 		}
 	}
 
@@ -109,6 +111,17 @@ public class GeometricRaster implements IRaster {
 		if (top) {
 			location = size - 1;
 		}
+		final Point p = points.remove(location);
+		top = !top;
+		return p;
+	}
+
+	private Point drawNextCenterPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		final int location = Math.round(size / 2); // aus der mitte nehmen
 		final Point p = points.remove(location);
 		top = !top;
 		return p;

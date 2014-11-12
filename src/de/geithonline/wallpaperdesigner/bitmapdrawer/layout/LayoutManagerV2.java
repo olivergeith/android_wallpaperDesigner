@@ -18,6 +18,7 @@ public class LayoutManagerV2 {
 		drawer.put("Geometric Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_BOOK));
 		drawer.put("Geometric Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_BOOK_REVERSE));
 		drawer.put("Geometric Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_TOWER));
+		drawer.put("Geometric Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_CENTER));
 		drawer.put("Geometric Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_RANDOM));
 		drawer.put("Circular (Inner to Outer)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_INNER));
 		drawer.put("Circular (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_OUTER));
@@ -34,7 +35,7 @@ public class LayoutManagerV2 {
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, //
 				null));
 		layoutProperties.put("Geometric Grid", new LayoutProperties(false, false, true, true, //
-				new CharSequence[] { "Book", "Book Reverse", "Tower", "Random" }));
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, //
 				new CharSequence[] { "Tower", "Random" }));
