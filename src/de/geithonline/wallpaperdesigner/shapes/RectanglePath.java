@@ -77,41 +77,48 @@ public class RectanglePath extends Path {
 
 	}
 
-	public RectanglePath(final Point center, final float width, final float height, final boolean filled, final String variant) {
+	public RectanglePath(final Point center, final float radius, final boolean filled, final RECT_ROUNDED round) {
 		super();
 
 		boolean rounded = false;
-		if (variant.equalsIgnoreCase("Rounded")) {
+		switch (round) {
+		case ROUNDED:
 			rounded = true;
-		} else if (variant.equalsIgnoreCase("Mixed")) {
+			break;
+		case NORMAL:
+			rounded = false;
+			break;
+		case MIXED:
 			rounded = Randomizer.getRandomBoolean();
+			break;
 		}
 
+		final int height = (int) (radius * 0.2f);
+
 		final RectF rect = new RectF();
-		rect.left = center.x - width;
-		rect.right = center.x + width;
-		rect.top = center.y - height;
-		rect.bottom = center.y + height;
+
+		rect.left = center.x - height;
+		rect.right = center.x + height;
+		rect.top = center.y - 2 * radius;
+		rect.bottom = center.y;
 
 		if (!rounded) {
 			addRect(rect, Direction.CW);
 		} else {
-			final float cornerRad = width * 0.3f;
+			final float cornerRad = radius * 0.3f;
 			addRoundRect(rect, cornerRad, cornerRad, Direction.CW);
 		}
-		if (filled) {
-			rect.left = center.x - width / 2;
-			rect.right = center.x + width / 2;
-			rect.top = center.y - height / 2;
-			rect.bottom = center.y + height / 2;
-
+		if (!filled) {
+			rect.left = center.x - height / 2;
+			rect.right = center.x + height / 2;
+			rect.top = center.y - 2 * radius + radius / 2;
+			rect.bottom = center.y - radius / 2;
 			if (!rounded) {
 				addRect(rect, Direction.CCW);
 			} else {
-				final float cornerRad = width * 0.3f;
+				final float cornerRad = radius * 0.3f;
 				addRoundRect(rect, cornerRad, cornerRad, Direction.CCW);
 			}
-
 		}
 
 	}

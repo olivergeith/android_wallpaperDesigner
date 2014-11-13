@@ -377,6 +377,18 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Square (Mixed)":
 			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
+		case "V9":
+		case "Rectangle":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL);
+			break;
+		case "V10":
+		case "Rectangle (rounded)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
+			break;
+		case "V11":
+		case "Rectangle (Mixed)":
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED);
+			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);

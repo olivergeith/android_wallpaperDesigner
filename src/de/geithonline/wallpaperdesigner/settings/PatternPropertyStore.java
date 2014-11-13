@@ -27,8 +27,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Gears", new PatternProperties(true, false, false, true, false, false));
 
 		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Mixed",
-						"Mixed (with Circle)" }));
+				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Rectangle",
+						"Rectangle (rounded)", "Rectangle (Mixed)", "Mixed", "Mixed (with Circle)" }));
 
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Curvy", "Straigth", "Round", "Peek", "Lovely", "Asymetric", "Mixed" }));
