@@ -8,7 +8,7 @@ import android.graphics.RectF;
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS;
+		SKYLINE, STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -32,6 +32,9 @@ public class MaterialPath extends Path {
 			break;
 		case ROTATING_BARS:
 			drawRotatingBars(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_TRIANGLES:
+			drawRotatingTriangles(center, radius, bWidth, bHeight);
 			break;
 		}
 	}
@@ -106,7 +109,7 @@ public class MaterialPath extends Path {
 			return;
 		}
 		int winkel = 0;
-		int rectLength = Math.round(bWidth * 1.5f);
+		final int rectLength = Math.round(bWidth * 0.6f);
 		final RectF rect;
 
 		final float distTCenterX = bWidth / 2 - center.x;
@@ -117,7 +120,6 @@ public class MaterialPath extends Path {
 
 		// Log.i("Winkel", "Alpha = " + alpha + " Winkel= " + winkel);
 		final Path p = new Path();
-		rectLength = Math.round(rectLength * 1.5f);
 		if (center.x > bWidth / 2) {
 			rect = new RectF(center.x, center.y - radius, center.x + rectLength, center.y + radius);
 		} else {
@@ -135,8 +137,7 @@ public class MaterialPath extends Path {
 			return;
 		}
 		int winkel = 0;
-		int rectLength = Math.round(bWidth * 1.5f);
-		final RectF rect;
+		final int rectLength = Math.round(bWidth * 0.6f);
 
 		final float distTCenterX = bWidth / 2 - center.x;
 		final float distTCenterY = bHeight / 2 - center.y;
@@ -146,14 +147,19 @@ public class MaterialPath extends Path {
 
 		// Log.i("Winkel", "Alpha = " + alpha + " Winkel= " + winkel);
 		final Path p = new Path();
-		rectLength = Math.round(rectLength * 1.5f);
 		if (center.x > bWidth / 2) {
-			rect = new RectF(center.x, center.y - radius, center.x + rectLength, center.y + radius);
+			p.moveTo(center.x, center.y + radius / 3);
+			p.lineTo(center.x, center.y - radius / 3);
+			p.lineTo(center.x + rectLength, center.y - radius * 2);
+			p.lineTo(center.x + rectLength, center.y + radius * 2);
+			p.close();
 		} else {
-			rect = new RectF(center.x - rectLength, center.y - radius, center.x, center.y + radius);
+			p.moveTo(center.x, center.y + radius / 3);
+			p.lineTo(center.x, center.y - radius / 3);
+			p.lineTo(center.x - rectLength, center.y - radius * 2);
+			p.lineTo(center.x - rectLength, center.y + radius * 2);
+			p.close();
 		}
-
-		p.addRect(rect, Direction.CW);
 
 		rotatePath(center.x, center.y, p, winkel);
 		addPath(p);

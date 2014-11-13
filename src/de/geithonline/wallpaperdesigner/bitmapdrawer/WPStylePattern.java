@@ -1107,6 +1107,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Rotating Bars":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_BARS);
 			break;
+		case "V7":
+		case "Rotating Triangles":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_TRIANGLES);
+			break;
 		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
