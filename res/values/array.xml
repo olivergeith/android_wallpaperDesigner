@@ -30,21 +30,6 @@
         <item >Material Grid</item>
         </string-array>
     
-    
-    <string-array name="layout">
-        <item >Random Layout</item>
-        <item >Geometric Layout (Book)</item>
-        <item >Geometric Layout (Book Reverse)</item>
-        <item >Geometric Layout (Tower)</item>
-        <item >Geometric Layout (Random)</item>
-        <item >Circular Layout (Inner to Outer)</item>
-        <item >Circular Layout (Outer to Inner)</item>
-        <item >Circular Layout (Random)</item>
-        <item >Half Circle Layout (Inner to Outer)</item>
-        <item >Half Circle Layout (Outer to Inner)</item>
-        <item >Half Circle Layout (Random)</item>
-        </string-array>
-    
     <string-array name="hole">
         <item >Filled</item>
         <item >Not filled</item>
@@ -56,6 +41,12 @@
         <item >Last Modified (Descending)</item>
         <item >Alphabetically</item>
     </string-array>
+
+    <string-array name="rotatingStyle">
+        <item >Fixed</item>
+        <item >Random</item>
+        <item >Around Point</item>
+        </string-array>
     
     
     

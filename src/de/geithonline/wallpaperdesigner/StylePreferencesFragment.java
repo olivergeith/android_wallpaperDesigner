@@ -31,6 +31,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private SeekBarPreference numberOfLeafs;
 	private SeekBarPreference rotationDegrees;
 	private CheckBoxPreference randomLeafCount;
+	private ListPreference rotatingStyle;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		numberOfLeafs = (SeekBarPreference) findPreference(Settings.NUMBER_OF_LEAFS);
 		randomLeafCount = (CheckBoxPreference) findPreference(Settings.RANDOM_LEAF_COUNT);
 		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
+		rotatingStyle = (ListPreference) findPreference("rotatingStyle");
 
 		maxOpacity.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -107,6 +109,16 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 		});
 
+		rotatingStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleRotatingStyleSelected((String) newValue);
+				return true;
+			}
+
+		});
+
 		dropShadowType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -121,7 +133,13 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
 		handlePatternTextChanged(Settings.getText());
 		handleTextDrawStyleSelected(Settings.getTextDrawStyle());
+		handleRotatingStyleSelected(Settings.getRotationStyle());
 		enableProFeatures();
+	}
+
+	private void handleRotatingStyleSelected(final String newValue) {
+		rotatingStyle.setSummary(newValue);
+		rotationDegrees.setEnabled(newValue.equals("Fixed") || newValue.equals("Around Point"));
 	}
 
 	protected void handleTextDrawStyleSelected(final String newValue) {
@@ -153,12 +171,12 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.PATTERN_GLOSSY);
 		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE);
 		final CheckBoxPreference outlineneverTransparent = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE_NEVER_TRANSPARENT);
-		final CheckBoxPreference rotate = (CheckBoxPreference) findPreference(Settings.PATTERN_RANDOM_ROTATE);
 		glossy.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
 		outline.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
 		outlineneverTransparent.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		rotate.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
 		rotationDegrees.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+		rotationDegrees.setEnabled(Settings.getRotationStyle().equals("Fixed"));
+		rotatingStyle.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
 		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
 		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
 		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));

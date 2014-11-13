@@ -144,24 +144,37 @@ public class Settings {
 		return prefs.getString(PATTERN_FILLED_OPTION, "Not filled");
 	}
 
-	public static boolean isRandomRotate() {
+	// ###################################################################
+	// Rotating
+
+	public static String getRotationStyle() {
 		if (prefs == null) {
-			return false;
+			return "Fixed";
 		}
-		return prefs.getBoolean(PATTERN_RANDOM_ROTATE, false);
+		return prefs.getString("rotatingStyle", "Fixed");
 	}
 
-	// ###################################################################
-	// Wallpater Size
+	public static boolean isRandomRotate() {
+		return getRotationStyle().equals("Random");
+	}
+
+	@Deprecated
 	public static int getRotationDegrees(final int randomMin, final int randomMax) {
 		if (isRandomRotate()) {
 			return Randomizer.getRandomInt(randomMin - 1, randomMax);
 		}
+		return getFixedRotationDegrees();
+	}
+
+	public static int getFixedRotationDegrees() {
 		if (prefs == null) {
 			return 0;
 		}
 		return prefs.getInt("rotationDegrees", 0);
 	}
+
+	// ###################################################################
+	// Special Settings
 
 	public static boolean isGlossy() {
 		if (prefs == null) {
@@ -533,6 +546,8 @@ public class Settings {
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
+			prefs.edit().putString("rotatingStyle", "Fixed").commit();
+
 		}
 	}
 

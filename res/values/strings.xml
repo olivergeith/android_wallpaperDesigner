@@ -85,6 +85,6 @@
     <string name="sortOrder">Sort-Order for saved Settings-List</string>
     <string name="dropShadowRadiusAdjustment">Drop Shadow Radius Adjustment</string>
     <string name="upsideDown">Ordering Rows (clicked) or Columns</string>
-    
+    <string name="rotatingStyle">Rotating Style</string>
    
 </resources>

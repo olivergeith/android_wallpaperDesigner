@@ -191,6 +191,18 @@ public class SettingsIO {
 				prefs.edit().putString("mainlayoutVariants", "None").commit();
 			}
 		}
+		// Spezialbehandlung für alten randomRotate
+		if (key.equals("randomRotate")) {
+			final boolean rota = (Boolean) entry.getValue();
+			if (rota == true) {
+				prefs.edit().putString("rotatingStyle", "Random").commit();
+				Log.i("randomRotate found", " Putting ---> Random");
+			} else {
+				prefs.edit().putString("rotatingStyle", "Fixed").commit();
+				Log.i("randomRotate found", " Putting ---> fixed");
+			}
+		}
+
 		final Class cl = entry.getValue().getClass();
 		if (cl.getSimpleName().equalsIgnoreCase("Integer")) {
 			prefs.edit().putInt(key, (Integer) entry.getValue()).commit();

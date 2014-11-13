@@ -16,6 +16,7 @@ import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
@@ -94,6 +95,7 @@ import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public abstract class WPStylePattern extends WPStyle {
 
@@ -228,7 +230,7 @@ public abstract class WPStylePattern extends WPStyle {
 		if (getFilledBoolean()) {
 			mirrorPath(x, y, path);
 		}
-		rotatePath(x, y + radius / 2, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y + radius / 2, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isOutline()) {
@@ -316,7 +318,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AnkerPath(new Point(x, y), radius);
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -376,7 +378,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -440,7 +442,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -479,7 +481,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -541,7 +543,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), "Satellite V1");
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
+		rotatePath(x, y, path, getRotationDegrees(-45, 45, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -552,7 +554,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawDeathstar(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new DeathstarPath(new Point(x, y), radius);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-15, 15));
+		rotatePath(x, y, path, getRotationDegrees(-15, 15, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -595,7 +597,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new VirusPath6(new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -627,7 +629,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new CloudPath(new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -648,7 +650,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		final Path path = new PlanePath(new Point(x, y), radius, variant);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -696,7 +698,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -778,7 +780,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			mirrorPath(x, y, path);
@@ -818,7 +820,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new MandalaV4Path(3, new Point(x, y), radius);
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			mirrorPath(x, y, path);
@@ -843,7 +845,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawPacMan(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final Path path = new PacmanPath(new Point(x, y), radius, variante);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -855,7 +857,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -877,7 +879,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final Path path = new FishPath(new Point(x, y), radius, variante);
 
-		rotatePath(x, y, path, Settings.getRotationDegrees(-45, 45));
+		rotatePath(x, y, path, getRotationDegrees(-45, 45, bWidth, bHeight, new Point(x, y)));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			mirrorPath(x, y, path);
@@ -1015,7 +1017,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawStar(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
 		final Path path = getStarPath(x, y, radius, variante, arms);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
+		rotatePath(x, y, path, getRotationDegrees(0, 360 / arms, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1146,9 +1148,9 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 
 		if (Settings.isRandomRotate()) {
-			rotatePath(x, y, path, Settings.getRotationDegrees(0, 180));
+			rotatePath(x, y, path, getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y)));
 		} else {
-			int degr = Settings.getRotationDegrees(0, 180);
+			int degr = getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y));
 			if (getRandomBoolean()) {
 				degr = degr + 90;
 			}
@@ -1229,7 +1231,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new OwlPath(new Point(x, y), radius, "V4");
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1305,7 +1307,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new DropPath(new Point(x, y), radius);
 			break;
 		}
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360));
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1356,7 +1358,9 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Triangle);
 			break;
 		}
-		rotatePath(x, y, path, 90 * Settings.getRotationDegrees(0, 4));
+		if (Settings.isRandomRotate()) {
+			rotatePath(x, y, path, 90 * getRandomInt(-1, 4));
+		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1368,7 +1372,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawXmasTree(final int x, final int y, final Paint paint, final int radius) {
 		// final Path path = new ZitronePath(new Point(x, y), radius);
 		final Path path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1379,7 +1383,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawStarCircles(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = new StarCirclePath(new PointF(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1409,7 +1413,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
 
 		final Path path = getHeartPath(x, y, radius, variante);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1481,7 +1485,7 @@ public abstract class WPStylePattern extends WPStyle {
 		final int whitehalftransparent = 0xAAFFFFFF;
 		final int transparent = 0x00FFFFFF;
 		final Path path = new SmileyPath(new Point(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		// Bubble
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
@@ -1512,7 +1516,7 @@ public abstract class WPStylePattern extends WPStyle {
 			variant = "V" + nr;
 		}
 		final Path path = new PacmanPath(new Point(x, y), radius, variant);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		// Bubble
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShader(new RadialGradient(x, y, radius * 2, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
@@ -1548,7 +1552,7 @@ public abstract class WPStylePattern extends WPStyle {
 		final int transparent = 0x00FFFFFF;
 		// Heart für dropshadow
 		final Path path = getHeartPath(x, y, radius, variante);
-		rotatePath(x, y, path, Settings.getRotationDegrees(-30, 30));
+		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
 		// Heart
@@ -1585,7 +1589,7 @@ public abstract class WPStylePattern extends WPStyle {
 		// Star
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
 		final Path path = getStarPath(x, y, radius, variante, arms);
-		rotatePath(x, y, path, Settings.getRotationDegrees(0, 360 / arms));
+		rotatePath(x, y, path, getRotationDegrees(0, 360 / arms, bWidth, bHeight, new Point(x, y)));
 
 		bitmapCanvas.drawPath(path, paint);
 		paint.setShadowLayer(0, 0, 0, 0);
@@ -1685,4 +1689,23 @@ public abstract class WPStylePattern extends WPStyle {
 		return dropShadowRadius;
 	}
 
+	public static int getRotationDegrees(final int randomMin, final int randomMax, final int bWidth, final int bHeight, final Point center) {
+		switch (Settings.getRotationStyle()) {
+		default:
+		case "Fixed":
+			return Settings.getFixedRotationDegrees();
+		case "Random":
+			return Randomizer.getRandomInt(randomMin - 1, randomMax);
+		case "Around Point":
+			final float distTCenterX = bWidth / 2 - center.x;
+			final float distTCenterY = bHeight / 2 - center.y;
+			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
+			int winkel = (int) (alpha * 180 / Math.PI);
+			Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
+			if (center.x < bWidth / 2) {
+				winkel = winkel + 180;
+			}
+			return winkel + 90 + Settings.getFixedRotationDegrees();
+		}
+	}
 }

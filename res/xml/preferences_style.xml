@@ -42,12 +42,14 @@
 		            />
 			    
 		        <PreferenceCategory  android:title="Rotating"/>
-			    <CheckBoxPreference 
-		            android:key="randomRotate"
-		            android:title="@string/randomRotate"
-		            android:defaultValue="false"
-		            android:disableDependentsState="true"
-		            />
+			    <ListPreference
+			        android:key="rotatingStyle"
+			        android:title="@string/rotatingStyle" 
+			        android:dialogTitle="@string/rotatingStyle"
+			        android:defaultValue="Fixed"
+			        android:entries="@array/rotatingStyle"
+			        android:entryValues="@array/rotatingStyle"
+			        />
    		        <de.geithonline.android.basics.preferences.SeekBarPreference
 		            android:key="rotationDegrees"
 			        android:title="@string/rotationDegrees" 
@@ -57,7 +59,6 @@
 				    android:defaultValue="0"
 				    android:summary="%1$d" 
 				    android:dialogMessage="@string/rotationDegrees" 
-		            android:dependency="randomRotate"
 				    />
 			    		    
 		
