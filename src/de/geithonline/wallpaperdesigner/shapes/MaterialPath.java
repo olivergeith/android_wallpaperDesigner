@@ -130,6 +130,35 @@ public class MaterialPath extends Path {
 		addPath(p);
 	}
 
+	private void drawRotatingTriangles(final Point center, final float radius, final int bWidth, final int bHeight) {
+		if (center.x == bWidth / 2 && center.y == bHeight / 2) {
+			return;
+		}
+		int winkel = 0;
+		int rectLength = Math.round(bWidth * 1.5f);
+		final RectF rect;
+
+		final float distTCenterX = bWidth / 2 - center.x;
+		final float distTCenterY = bHeight / 2 - center.y;
+		final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
+
+		winkel = (int) (alpha * 180 / Math.PI);
+
+		// Log.i("Winkel", "Alpha = " + alpha + " Winkel= " + winkel);
+		final Path p = new Path();
+		rectLength = Math.round(rectLength * 1.5f);
+		if (center.x > bWidth / 2) {
+			rect = new RectF(center.x, center.y - radius, center.x + rectLength, center.y + radius);
+		} else {
+			rect = new RectF(center.x - rectLength, center.y - radius, center.x, center.y + radius);
+		}
+
+		p.addRect(rect, Direction.CW);
+
+		rotatePath(center.x, center.y, p, winkel);
+		addPath(p);
+	}
+
 	protected void rotatePath(final int x, final int y, final Path path, final int rotate) {
 		final Matrix mMatrix = new Matrix();
 		final RectF bounds = new RectF();

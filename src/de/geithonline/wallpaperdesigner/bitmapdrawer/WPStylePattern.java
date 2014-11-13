@@ -16,7 +16,6 @@ import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
@@ -82,6 +81,7 @@ import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
+import de.geithonline.wallpaperdesigner.shapes.TrianglePath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -379,15 +379,31 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V9":
 		case "Rectangle":
+			if (x == bWidth / 2 && y == bHeight / 2) {
+				return;
+			}
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL);
 			break;
 		case "V10":
 		case "Rectangle (rounded)":
+			if (x == bWidth / 2 && y == bHeight / 2) {
+				return;
+			}
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
 			break;
 		case "V11":
 		case "Rectangle (Mixed)":
+			if (x == bWidth / 2 && y == bHeight / 2) {
+				return;
+			}
 			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED);
+			break;
+		case "V12":
+		case "Long Triangle":
+			if (x == bWidth / 2 && y == bHeight / 2) {
+				return;
+			}
+			path = new TrianglePath(new PointF(x, y), radius, getFilledBoolean());
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -1713,7 +1729,7 @@ public abstract class WPStylePattern extends WPStyle {
 			final float distTCenterY = bHeight / 2 - center.y;
 			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
 			int winkel = (int) (alpha * 180 / Math.PI);
-			Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
+			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
 			if (center.x < bWidth / 2) {
 				winkel = winkel + 180;
 			}

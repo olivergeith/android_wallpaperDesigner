@@ -93,13 +93,13 @@ public class RectanglePath extends Path {
 			break;
 		}
 
-		final int height = (int) (radius * 0.2f);
+		final int height = (int) (radius * 6);
 
 		final RectF rect = new RectF();
 
-		rect.left = center.x - height;
-		rect.right = center.x + height;
-		rect.top = center.y - 2 * radius;
+		rect.left = center.x - radius;
+		rect.right = center.x + radius;
+		rect.top = center.y - height;
 		rect.bottom = center.y;
 
 		if (!rounded) {
@@ -109,10 +109,10 @@ public class RectanglePath extends Path {
 			addRoundRect(rect, cornerRad, cornerRad, Direction.CW);
 		}
 		if (!filled) {
-			rect.left = center.x - height / 2;
-			rect.right = center.x + height / 2;
-			rect.top = center.y - 2 * radius + radius / 2;
-			rect.bottom = center.y - radius / 2;
+			rect.left = center.x - radius / 2;
+			rect.right = center.x + radius / 2;
+			rect.top = center.y - height * 3 / 4;
+			rect.bottom = center.y - height / 4;
 			if (!rounded) {
 				addRect(rect, Direction.CCW);
 			} else {
