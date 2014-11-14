@@ -3,9 +3,9 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 
-public class TrianglePath extends Path {
+public class TriangleAsymetricPath extends Path {
 
-	public TrianglePath(final PointF center, final float radius, final boolean filled) {
+	public TriangleAsymetricPath(final PointF center, final float radius, final boolean filled) {
 		addPath(drawTriangle(center, radius, Direction.CW));
 		if (!filled) {
 			addPath(drawTriangle(new PointF(center.x, center.y - radius * 2), radius / 2, Direction.CCW));

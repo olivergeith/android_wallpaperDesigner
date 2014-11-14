@@ -48,12 +48,15 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath.MATERIAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
+import de.geithonline.wallpaperdesigner.shapes.OvalAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
+import de.geithonline.wallpaperdesigner.shapes.RautePath;
+import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ASPECT;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ROUNDED;
@@ -81,7 +84,7 @@ import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
-import de.geithonline.wallpaperdesigner.shapes.TrianglePath;
+import de.geithonline.wallpaperdesigner.shapes.TriangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -141,6 +144,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Geometrical Shapes":
 			drawGeometric(x, y, paint, radius);
+			break;
+		case "Geometrical (long) Shapes":
+			drawGeometricMore(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -377,33 +383,51 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Square (Mixed)":
 			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
-		case "V9":
+		}
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	protected void drawGeometricMore(final int x, final int y, final Paint paint, final int radius) {
+		final String variant = Settings.getSelectedPatternVariant();
+		drawGeometricMore(x, y, paint, radius, variant);
+	}
+
+	protected void drawGeometricMore(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		if (x == bWidth / 2 && y == bHeight / 2) {
+			return;
+		}
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
 		case "Rectangle":
-			if (x == bWidth / 2 && y == bHeight / 2) {
-				return;
-			}
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL);
+			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.NORMAL);
 			break;
-		case "V10":
+		case "V2":
 		case "Rectangle (rounded)":
-			if (x == bWidth / 2 && y == bHeight / 2) {
-				return;
-			}
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
+			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
 			break;
-		case "V11":
+		case "V3":
 		case "Rectangle (Mixed)":
-			if (x == bWidth / 2 && y == bHeight / 2) {
-				return;
-			}
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED);
+			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.MIXED);
 			break;
-		case "V12":
-		case "Long Triangle":
-			if (x == bWidth / 2 && y == bHeight / 2) {
-				return;
-			}
-			path = new TrianglePath(new PointF(x, y), radius, getFilledBoolean());
+		case "V4":
+		case "Triangle":
+			path = new TriangleAsymetricPath(new PointF(x, y), radius, getFilledBoolean());
+			break;
+		case "V5":
+		case "Oval":
+			path = new OvalAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean());
+			break;
+		case "V6":
+		case "Diamond":
+			path = new RautePath(new PointF(x, y), radius, radius * 6, getFilledBoolean());
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

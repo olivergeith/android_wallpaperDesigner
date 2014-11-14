@@ -3,19 +3,12 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ROUNDED;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class RectanglePath extends Path {
+public class RectangleAsymetricPath extends Path {
 
-	public enum RECT_ROUNDED {
-		ROUNDED, NORMAL, MIXED;
-	}
-
-	public enum RECT_ASPECT {
-		RANDOM, ASPECT_3_4, ASPECT_1_2, ASPECT_GOLDEN_CUT;
-	}
-
-	public RectanglePath(final Point center, final float radius, final boolean filled, final RECT_ROUNDED round, final RECT_ASPECT aspect) {
+	public RectangleAsymetricPath(final Point center, final float radius, final int height, final boolean filled, final RECT_ROUNDED round) {
 		super();
 
 		boolean rounded = false;
@@ -31,29 +24,12 @@ public class RectanglePath extends Path {
 			break;
 		}
 
-		int height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
-		switch (aspect) {
-		default:
-		case RANDOM:
-			height = (int) (radius * Randomizer.getRandomFloat(0.1f, 0.8f));
-			break;
-		case ASPECT_3_4:
-			height = (int) (radius * 0.75f);
-			break;
-		case ASPECT_1_2:
-			height = (int) (radius * 0.5f);
-			break;
-		case ASPECT_GOLDEN_CUT:
-			height = (int) (radius * 0.618f);
-			break;
-		}
-
 		final RectF rect = new RectF();
 
 		rect.left = center.x - radius;
 		rect.right = center.x + radius;
 		rect.top = center.y - height;
-		rect.bottom = center.y + height;
+		rect.bottom = center.y;
 
 		if (!rounded) {
 			addRect(rect, Direction.CW);
@@ -64,9 +40,8 @@ public class RectanglePath extends Path {
 		if (!filled) {
 			rect.left = center.x - radius / 2;
 			rect.right = center.x + radius / 2;
-			rect.top = center.y - height / 2;
-			rect.bottom = center.y + height / 2;
-
+			rect.top = center.y - height * 3 / 4;
+			rect.bottom = center.y - height / 4;
 			if (!rounded) {
 				addRect(rect, Direction.CCW);
 			} else {
