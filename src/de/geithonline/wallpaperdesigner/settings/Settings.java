@@ -1,5 +1,6 @@
 package de.geithonline.wallpaperdesigner.settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
+import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
 	public static final String NUMBER_OF_LEAFS = "numberOfLeafs";
@@ -507,9 +509,14 @@ public class Settings {
 	 * 
 	 * @param preferences
 	 */
-	public static void initPrefs(final SharedPreferences preferences, final Context ctx) {
+	public static void initPrefs(final SharedPreferences preferences, final Context ctx, final Activity activity) {
 		context = ctx;
 		prefs = preferences;
+		if (prefs.getBoolean("sampleSettingsUnziped", false) == false) {
+			Log.i("GEITH", "Unzipping Sample Settings...");
+			ZipHelper.unzipSettings(activity, ctx);
+			prefs.edit().putBoolean("sampleSettingsUnziped", true).commit();
+		}
 		if (prefs.getBoolean("firstrun", true)) {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();

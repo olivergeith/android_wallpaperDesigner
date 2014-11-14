@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		Settings.initPrefs(prefs, getApplicationContext());
+		Settings.initPrefs(prefs, getApplicationContext(), this);
 		// prefs.registerOnSharedPreferenceChangeListener(this);
 		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 		shakeHint = (TextView) findViewById(R.id.shakeHint);

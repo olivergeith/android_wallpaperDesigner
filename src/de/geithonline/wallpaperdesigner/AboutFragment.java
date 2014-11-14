@@ -5,17 +5,29 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class AboutFragment extends PreferenceFragment {
 
 	private ListPreference sortOrder;
+	private Preference unzipSettings;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_about);
+		unzipSettings = findPreference("unzipSettings");
+		unzipSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				ZipHelper.unzipSettings(getActivity(), getActivity().getApplicationContext());
+				return false;
+			}
+		});
 
 		sortOrder = (ListPreference) findPreference("sortOrder");
 		sortOrder.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {

@@ -77,6 +77,10 @@
 		    android:title="Debugging"
 		    android:summary="Do not use this! No patterns will be drawn, if you tick this!" 
             />
-    </PreferenceCategory>
+	    <Preference 
+		    android:key="unzipSettings"
+		    android:title="Unzip Sample Settings" 
+            />
+        </PreferenceCategory>
     
 </PreferenceScreen>
