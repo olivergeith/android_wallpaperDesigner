@@ -429,6 +429,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Diamond":
 			path = new RautePath(new PointF(x, y), radius, radius * 6, getFilledBoolean());
 			break;
+		case "V7":
+		case "Drop":
+			path = new DropPath(new Point(x, y), radius, radius * 6, getFilledBoolean());
+			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
