@@ -1111,6 +1111,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Rotating Triangles":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_TRIANGLES);
 			break;
+		case "V8":
+		case "Half Stripe":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.HALF_STIPE);
+			break;
 		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline

@@ -4,11 +4,12 @@ import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES;
+		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -17,6 +18,9 @@ public class MaterialPath extends Path {
 		default:
 		case STIPE:
 			drawStripe(center, radius, bWidth, bHeight);
+			break;
+		case HALF_STIPE:
+			drawHalfStripe(center, radius, bWidth, bHeight);
 			break;
 		case ARC1:
 			drawArcV1(center, radius, bWidth, bHeight);
@@ -47,24 +51,48 @@ public class MaterialPath extends Path {
 	private static boolean flip = true;
 
 	private void drawStripe(final Point center, final float radius, final int bWidth, final int bHeight) {
-		if (flip == true) {
-			final float x = center.x + center.y;
-			final float y = center.y + center.x;
-			moveTo(x - radius, 0);
-			lineTo(x + radius, 0);
-			lineTo(0, y + radius);
-			lineTo(0, y - radius);
-			close();
+		int drehwinkel = 0;
+		final int rectLength = bWidth;
+		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + rectLength);
+
+		if (flip) {
+			drehwinkel = 45;
 		} else {
-			final float x1 = center.x - center.y;
-			final float x2 = center.x + (bHeight - center.y);
-			moveTo(x1 - radius, 0);
-			lineTo(x1 + radius, 0);
-			lineTo(x2 + radius, bHeight);
-			lineTo(x2 - radius, bHeight);
-			close();
+			drehwinkel = -45;
 		}
+
+		final Path p = new Path();
+		p.addRect(rect, Direction.CW);
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
 		flip = !flip;
+	}
+
+	private void drawHalfStripe(final Point center, final float radius, final int bWidth, final int bHeight) {
+		int drehwinkel = 0;
+		final int rectLength = bHeight;
+		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + 2 * radius);
+
+		if (center.y < bHeight / 2) // oberen
+		{
+			if (Randomizer.getRandomBoolean()) {
+				drehwinkel = 45;
+			} else {
+				drehwinkel = -45;
+			}
+		} else // unteren
+		{
+			if (Randomizer.getRandomBoolean()) {
+				drehwinkel = 135;
+			} else {
+				drehwinkel = -135;
+			}
+		}
+
+		final Path p = new Path();
+		p.addRect(rect, Direction.CW);
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
 	}
 
 	private void drawEdgyBars(final Point center, final float radius, final int bWidth, final int bHeight) {
