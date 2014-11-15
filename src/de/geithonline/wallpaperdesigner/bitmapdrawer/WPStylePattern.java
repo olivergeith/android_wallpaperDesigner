@@ -18,6 +18,7 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
+import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
 import de.geithonline.wallpaperdesigner.shapes.BatPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
@@ -1307,7 +1308,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 11);
+			final int nr = getRandomInt(0, 12);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1345,7 +1346,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V6":
 		case "Android":
-			path = new AndroidPath(new Point(x, y), radius);
+			path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.ANDROID);
 			break;
 		case "V7":
 		case "Footprint":
@@ -1370,6 +1371,11 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Drop":
 			path = new DropPath(new Point(x, y), radius);
 			break;
+		case "V12":
+		case "Ikae Robot":
+			path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.IKEA);
+			break;
+
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);

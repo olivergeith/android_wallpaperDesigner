@@ -10,8 +10,8 @@ public class PatternPropertyStore {
 	static {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
-				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Footprint", "Pentagram", "4Sails", "Dice", "Drop",
-						"Mixed" }));
+				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot", "Footprint", "Pentagram", "4Sails",
+						"Dice", "Drop", "Mixed" }));
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true));
 		patternProperties.put("Chess", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Heart", "Arrow", "Triangle", "Mixed" }));

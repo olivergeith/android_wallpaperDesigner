@@ -26,7 +26,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference filledOption;
 	private EditTextPreference textPattern;
 	private ListPreference textDrawStyle;
-	private SeekBarPreference minOpacity;
 	private SeekBarPreference maxOpacity;
 	private SeekBarPreference numberOfLeafs;
 	private SeekBarPreference rotationDegrees;
@@ -46,7 +45,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
 		textPattern = (EditTextPreference) findPreference(Settings.PATTERN_TEXT);
 
-		minOpacity = (SeekBarPreference) findPreference("minOpacity");
 		maxOpacity = (SeekBarPreference) findPreference("maxOpacity");
 		numberOfLeafs = (SeekBarPreference) findPreference(Settings.NUMBER_OF_LEAFS);
 		randomLeafCount = (CheckBoxPreference) findPreference(Settings.RANDOM_LEAF_COUNT);
