@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, DROP, TAG;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, DROP, TAG, KNIFE, KNIFE_V2;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -37,6 +37,12 @@ public class AsymetricLongPath extends Path {
 			break;
 		case TAG:
 			drawTag(center, radius, height, filled);
+			break;
+		case KNIFE:
+			drawKnife(center, radius, height, filled);
+			break;
+		case KNIFE_V2:
+			drawKnifeV2(center, radius, height, filled);
 			break;
 		}
 
@@ -219,6 +225,41 @@ public class AsymetricLongPath extends Path {
 			addCircle(center.x, center.y - radius, radius * 2 / 3, Direction.CCW);
 		}
 
+	}
+
+	// ##################################################################################
+	private void drawKnife(final PointF center, final float radius, final int height, final boolean filled) {
+		moveTo(center.x, center.y);
+		quadTo(center.x - radius, center.y - radius, // controllpoint
+				center.x - radius, center.y - height + radius); // Zielpunkt
+		lineTo(center.x, center.y - height);
+		lineTo(center.x + radius, center.y - height + radius);
+		quadTo(center.x + radius, center.y - radius, // controllpoint
+				center.x, center.y); // Zielpunkt
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height + radius, radius / 2, Direction.CCW);
+		}
+	}
+
+	// ##################################################################################
+	private void drawKnifeV2(final PointF center, final float radius, final int height, final boolean filled) {
+		final RectF oval = new RectF();
+		oval.left = center.x - radius;
+		oval.right = center.x + radius;
+		oval.top = center.y - height;
+		oval.bottom = center.y - height + 2 * radius;
+
+		moveTo(center.x, center.y);
+		quadTo(center.x - radius, center.y - radius, // controllpoint
+				center.x - radius, center.y - height + radius); // Zielpunkt
+		arcTo(oval, 180, 180);
+		quadTo(center.x + radius, center.y - radius, // controllpoint
+				center.x, center.y); // Zielpunkt
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height + radius, radius / 2, Direction.CCW);
+		}
 	}
 
 }
