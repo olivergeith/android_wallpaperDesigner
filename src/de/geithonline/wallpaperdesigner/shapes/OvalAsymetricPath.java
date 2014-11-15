@@ -9,6 +9,11 @@ public class OvalAsymetricPath extends Path {
 	public OvalAsymetricPath(final Point center, final float radius, final int height, final boolean filled) {
 		super();
 
+		drawOval(center, radius, height, filled);
+
+	}
+
+	private void drawOval(final Point center, final float radius, final int height, final boolean filled) {
 		final RectF rect = new RectF();
 
 		rect.left = center.x - radius;
@@ -24,7 +29,6 @@ public class OvalAsymetricPath extends Path {
 			rect.bottom = center.y - height / 4;
 			addOval(rect, Direction.CCW);
 		}
-
 	}
 
 }
