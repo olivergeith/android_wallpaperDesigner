@@ -30,35 +30,4 @@ public class DropPath extends Path {
 
 	}
 
-	public DropPath(final Point center, final float radius, final int height, final boolean filled) {
-		drawLongDrop(center, radius, height, filled);
-	}
-
-	private void drawLongDrop(final Point center, final float radius, final int height, final boolean filled) {
-		final RectF oval = new RectF();
-		oval.left = center.x - radius;
-		oval.right = center.x + radius;
-		oval.top = center.y - 2 * radius;
-		oval.bottom = center.y;
-
-		moveTo(center.x, center.y - height);
-		cubicTo(center.x, center.y - height + 4 * radius, // CP1
-				center.x + radius, center.y - 2 * radius, // CP2
-				center.x + radius, center.y - radius);
-		arcTo(oval, 0, 180);
-		cubicTo(center.x - radius, center.y - 2 * radius, // CP1
-				center.x, center.y - height + 4 * radius, // CP2
-				center.x, center.y - height);
-		close();
-
-		if (!filled) {
-			oval.left = center.x - radius / 2;
-			oval.right = center.x + radius / 2;
-			oval.top = center.y - 2 * radius + radius / 2;
-			oval.bottom = center.y - radius / 2;
-			addCircle(center.x, center.y - radius, radius * 2 / 3, Direction.CCW);
-		}
-
-	}
-
 }

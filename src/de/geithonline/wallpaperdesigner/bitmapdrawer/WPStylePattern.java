@@ -20,6 +20,8 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
+import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath;
+import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath.ASYMETRIC_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.BatPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
@@ -49,14 +51,12 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath.MATERIAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
-import de.geithonline.wallpaperdesigner.shapes.OvalAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
-import de.geithonline.wallpaperdesigner.shapes.RautePath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ASPECT;
@@ -85,7 +85,6 @@ import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
-import de.geithonline.wallpaperdesigner.shapes.TriangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -420,19 +419,35 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V4":
 		case "Triangle":
-			path = new TriangleAsymetricPath(new PointF(x, y), radius, getFilledBoolean());
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE);
 			break;
 		case "V5":
 		case "Oval":
-			path = new OvalAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean());
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.OVAL);
 			break;
 		case "V6":
 		case "Diamond":
-			path = new RautePath(new PointF(x, y), radius, radius * 6, getFilledBoolean());
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.RAUTE);
 			break;
 		case "V7":
+		case "Dragon":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN);
+			break;
+		case "V8":
+		case "Dragon (upsidedown)":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN_UPSIDEDOWN);
+			break;
+		case "V9":
 		case "Drop":
-			path = new DropPath(new Point(x, y), radius, radius * 6, getFilledBoolean());
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DROP);
+			break;
+		case "V10":
+		case "Lense":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE);
+			break;
+		case "V11":
+		case "Tag":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TAG);
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -1772,7 +1787,7 @@ public abstract class WPStylePattern extends WPStyle {
 			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
 			int winkel = (int) (alpha * 180 / Math.PI);
 			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
-			if (center.x < bWidth / 2) {
+			if (center.x <= bWidth / 2) {
 				winkel = winkel + 180;
 			}
 			return winkel + 90 + Settings.getFixedRotationDegrees();
