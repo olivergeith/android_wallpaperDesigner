@@ -446,16 +446,48 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE);
 			break;
 		case "V11":
+		case "Lense V2":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V2);
+			break;
+		case "V12":
+		case "Lense V3":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V3);
+			break;
+		case "V13":
 		case "Tag":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TAG);
 			break;
-		case "V12":
+		case "V14":
 		case "Knife":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE);
 			break;
-		case "V13":
+		case "V15":
 		case "Knife V2":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V2);
+			break;
+		case "V16":
+		case "Knife V3":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V3);
+			break;
+		case "V17":
+		case "Cross":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS);
+			break;
+		case "V18":
+		case "Double Cross":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DOUBLE_CROSS);
+			break;
+		case "V19":
+		case "Sperm":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
+			break;
+		case "V20":
+		case "Virus":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
+			break;
+		case "V21":
+		case "Virus V2":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
