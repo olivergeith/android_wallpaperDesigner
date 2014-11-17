@@ -6,6 +6,7 @@ import java.util.List;
 import android.graphics.Path;
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.shapes.ArrowPath.ARROW_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 
@@ -68,7 +69,7 @@ public class SchachbrettPath extends Path {
 				path = new StarPath(5, p, patternRadius, patternRadius / 2, true);
 				break;
 			case Circle:
-				path = new CirclePath(p, patternRadius, patternRadius, true);
+				path = new CirclePath(p, patternRadius, patternRadius, true, CIRCLE_STYLE.CIRCLE);
 				break;
 			case Pillow:
 				path = new PillowPath(p, patternRadius);

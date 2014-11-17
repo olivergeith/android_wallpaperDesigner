@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath.ASYMETRIC_STYLE
 import de.geithonline.wallpaperdesigner.shapes.BatPath;
 import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
+import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DeathstarPath;
@@ -377,9 +378,13 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V7":
 		case "Circle":
-			path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean());
+			path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.CIRCLE);
 			break;
 		case "V8":
+		case "Half Circle":
+			path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.HALF_CIRCLE);
+			break;
+		case "V9":
 		case "Square (Mixed)":
 			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
