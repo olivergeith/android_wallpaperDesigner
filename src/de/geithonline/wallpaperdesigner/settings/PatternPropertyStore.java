@@ -61,6 +61,9 @@ public class PatternPropertyStore {
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Ghost", "Pacman", "Mixed" }));
 
+		patternProperties.put("Pillows", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "3 Edge Pillow", "4 Edge Pillow", "5 Edge Pillow", "6 Edge Pillow", "Mixed" }));
+
 		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 

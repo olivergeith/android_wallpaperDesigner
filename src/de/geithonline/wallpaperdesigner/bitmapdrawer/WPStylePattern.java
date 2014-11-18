@@ -185,6 +185,9 @@ public abstract class WPStylePattern extends WPStyle {
 				drawPacMan(x, y, paint, radius);
 			}
 			break;
+		case "Pillows":
+			drawPillow(x, y, paint, radius);
+			break;
 		case "Smiley":
 			if (Settings.isGlossy()) {
 				drawGlossySmiley(x, y, paint, radius);
@@ -1402,7 +1405,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V5":
 		case "Pillows":
-			path = new PillowPath(new PointF(x, y), radius);
+			path = new PillowPath(4, new PointF(x, y), radius);
 			break;
 		case "V6":
 		case "Android":
@@ -1436,6 +1439,45 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.IKEA);
 			break;
 
+		}
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 4);
+			variant = "V" + nr;
+		}
+		drawPillow(x, y, paint, radius, variant);
+	}
+
+	protected void drawPillow(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "3 Edge Pillow":
+			path = new PillowPath(3, new PointF(x, y), radius);
+			break;
+		case "V2":
+		case "4 Edge Pillow":
+			path = new PillowPath(4, new PointF(x, y), radius);
+			break;
+		case "V3":
+		case "5 Edge Pillow":
+			path = new PillowPath(5, new PointF(x, y), radius);
+			break;
+		case "V4":
+		case "6 Edge Pillow":
+			path = new PillowPath(6, new PointF(x, y), radius);
+			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);

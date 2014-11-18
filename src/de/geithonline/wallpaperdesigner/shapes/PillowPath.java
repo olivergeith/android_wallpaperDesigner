@@ -39,9 +39,10 @@ public class PillowPath extends Path {
 		drawPillow(arms, center, radius);
 	}
 
-	private void drawPillow(final int arms, final PointF center, final float radius) {
+	private void drawPillow(final int arms, final PointF center, float radius) {
+		radius = radius * 1.5f;
 		final float angle = (float) (2 * Math.PI / (arms));
-		final float cpRadius = radius * 0.3f;
+		final float cpRadius = radius * (arms - 1) * 0.1f;
 		for (int i = 0; i <= arms; i++) {
 			final Point cp = new Point();
 			final Point p = new Point();

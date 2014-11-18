@@ -150,7 +150,7 @@
 		        android:title="@string/patternSizeAdjust" 
 			    seekbarpreference:minValue="20"
 			    seekbarpreference:stepValue="5"
-			    seekbarpreference:maxValue="500"
+			    seekbarpreference:maxValue="700"
 			    android:defaultValue="100"
 			    android:summary="%1$d percent" 
 			    android:dialogMessage="@string/patternSizeAdjust" />
