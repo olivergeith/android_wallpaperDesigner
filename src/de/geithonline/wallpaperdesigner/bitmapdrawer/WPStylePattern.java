@@ -1453,7 +1453,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 8);
+			final int nr = getRandomInt(0, 9);
 			variant = "V" + nr;
 		}
 		drawPillow(x, y, paint, radius, variant);
