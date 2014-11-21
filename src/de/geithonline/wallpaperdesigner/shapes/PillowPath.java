@@ -3,8 +3,116 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 public class PillowPath extends Path {
+
+	public enum PILLOW_TYPE {
+		PLEKTRUM, FINGERNAIL, TREKY, YINGYANG, PEEEK;
+	}
+
+	/**
+	 * @param center
+	 *            center Point
+	 * @param radius
+	 *            Radius von 1f bis 5f....
+	 */
+	public PillowPath(final PointF center, final float radius, final PILLOW_TYPE type) {
+		super();
+
+		switch (type) {
+		default:
+		case PLEKTRUM:
+			drawPlektrum(center, radius);
+			break;
+		case FINGERNAIL:
+			drawFingerNail(center, radius);
+			break;
+		case TREKY:
+			drawTreky(center, radius);
+			break;
+		case YINGYANG:
+			drawYingYang(center, radius);
+			break;
+		case PEEEK:
+			drawPeeek(center, radius);
+			break;
+		}
+	}
+
+	private void drawPlektrum(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x - 2 * raster, center.y + 2 * raster);
+		quadTo(center.x - 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 0 * raster, center.y - 2 * raster); // Zielpunkt
+		quadTo(center.x + 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 2 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x + 0 * raster, center.y + 3 * raster, // controllpoint
+				center.x - 2 * raster, center.y + 2 * raster); // Zielpunkt
+		close();
+	}
+
+	private void drawFingerNail(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x - 2 * raster, center.y + 2 * raster);
+		quadTo(center.x - 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 0 * raster, center.y - 2 * raster); // Zielpunkt
+		quadTo(center.x + 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 2 * raster, center.y + 2 * raster); // Zielpunkt
+		quadTo(center.x + 0 * raster, center.y + 1 * raster, // controllpoint
+				center.x - 2 * raster, center.y + 2 * raster); // Zielpunkt
+		close();
+	}
+
+	private void drawTreky(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x - 2 * raster, center.y + 2 * raster);
+		quadTo(center.x - 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 0 * raster, center.y - 2 * raster); // Zielpunkt
+		quadTo(center.x + 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 2 * raster, center.y + 1 * raster); // Zielpunkt
+		quadTo(center.x + 1 * raster, center.y - 1 * raster, // controllpoint
+				center.x - 2 * raster, center.y + 2 * raster); // Zielpunkt
+		close();
+	}
+
+	private void drawYingYang(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x + 0 * raster, center.y - 2 * raster);
+		final RectF oval = new RectF();
+		oval.left = center.x - 1 * raster;
+		oval.right = center.x + 1 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, -90, 180);
+		oval.left = center.x - 1 * raster;
+		oval.right = center.x + 1 * raster;
+		oval.top = center.y + 0 * raster;
+		oval.bottom = center.y + 2 * raster;
+		arcTo(oval, -90, -180);
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 2 * raster;
+		arcTo(oval, 90, 180);
+		close();
+	}
+
+	private void drawPeeek(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x + 0 * raster, center.y + 2 * raster);
+		quadTo(center.x + 0 * raster, center.y - 0 * raster, // controllpoint
+				center.x + 2 * raster, center.y - 0 * raster); // Zielpunkt
+		final RectF oval = new RectF();
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 2 * raster;
+		arcTo(oval, 0, -180);
+		quadTo(center.x + 0 * raster, center.y - 0 * raster, // controllpoint
+				center.x + 0 * raster, center.y + 2 * raster); // Zielpunkt
+		close();
+	}
 
 	/**
 	 * @param center
@@ -14,7 +122,6 @@ public class PillowPath extends Path {
 	 */
 	public PillowPath(final PointF center, final float radius) {
 		super();
-
 		final float raster = radius / 2;
 		moveTo(center.x - 2 * raster, center.y - 2 * raster);
 		quadTo(center.x + 0 * raster, center.y - 1 * raster, // controllpoint

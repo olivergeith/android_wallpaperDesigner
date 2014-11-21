@@ -56,6 +56,7 @@ import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
+import de.geithonline.wallpaperdesigner.shapes.PillowPath.PILLOW_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
@@ -1452,7 +1453,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = getRandomInt(0, 8);
 			variant = "V" + nr;
 		}
 		drawPillow(x, y, paint, radius, variant);
@@ -1477,6 +1478,26 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V4":
 		case "6 Edge Pillow":
 			path = new PillowPath(6, new PointF(x, y), radius);
+			break;
+		case "V5":
+		case "Plectrum":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PLEKTRUM);
+			break;
+		case "V6":
+		case "Fingernail":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.FINGERNAIL);
+			break;
+		case "V7":
+		case "Treky":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.TREKY);
+			break;
+		case "V8":
+		case "YingYang":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.YINGYANG);
+			break;
+		case "V9":
+		case "Peeek":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PEEEK);
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
