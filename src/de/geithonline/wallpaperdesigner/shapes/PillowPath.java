@@ -8,7 +8,7 @@ import android.graphics.RectF;
 public class PillowPath extends Path {
 
 	public enum PILLOW_TYPE {
-		PLEKTRUM, FINGERNAIL, TREKY, YINGYANG, PEEEK;
+		PLEKTRUM, FINGERNAIL, TREKY, YINGYANG, PEEEK, ARMOR, MESSER;
 	}
 
 	/**
@@ -36,6 +36,12 @@ public class PillowPath extends Path {
 			break;
 		case PEEEK:
 			drawPeeek(center, radius);
+			break;
+		case ARMOR:
+			drawArmor(center, radius);
+			break;
+		case MESSER:
+			drawMesser(center, radius);
 			break;
 		}
 	}
@@ -111,6 +117,47 @@ public class PillowPath extends Path {
 		arcTo(oval, 0, -180);
 		quadTo(center.x + 0 * raster, center.y - 0 * raster, // controllpoint
 				center.x + 0 * raster, center.y + 2 * raster); // Zielpunkt
+		close();
+	}
+
+	private void drawArmor(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x + 0 * raster, center.y + 2 * raster);
+		quadTo(center.x + 0 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 2 * raster, center.y - 1 * raster); // Zielpunkt
+		quadTo(center.x + 1 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 1 * raster, center.y - 2 * raster); // Zielpunkt
+
+		quadTo(center.x + 0 * raster, center.y - 1 * raster, // controllpoint
+				center.x - 1 * raster, center.y - 2 * raster); // Zielpunkt
+
+		quadTo(center.x - 1 * raster, center.y - 1 * raster, // controllpoint
+				center.x - 2 * raster, center.y - 1 * raster); // Zielpunkt
+
+		quadTo(center.x + 0 * raster, center.y - 1 * raster, // controllpoint
+				center.x + 0 * raster, center.y + 2 * raster); // Zielpunkt
+		close();
+	}
+
+	private void drawMesser(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x + 0 * raster, center.y + 1 * raster);
+		quadTo(center.x + 2 * raster, center.y + 1 * raster, // controllpoint
+				center.x + 2 * raster, center.y - 1 * raster); // Zielpunkt
+		final RectF oval = new RectF();
+		oval.left = center.x - 0 * raster;
+		oval.right = center.x + 2 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 0 * raster;
+		arcTo(oval, 0, 180);
+
+		quadTo(center.x - 2 * raster, center.y - 1 * raster, // controllpoint
+				center.x - 2 * raster, center.y + 1 * raster); // Zielpunkt
+		oval.left = center.x - 2 * raster;
+		oval.right = center.x + 0 * raster;
+		oval.top = center.y - 0 * raster;
+		oval.bottom = center.y + 2 * raster;
+		arcTo(oval, 180, 180);
 		close();
 	}
 

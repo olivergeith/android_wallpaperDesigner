@@ -1453,7 +1453,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 9);
+			final int nr = getRandomInt(0, 11);
 			variant = "V" + nr;
 		}
 		drawPillow(x, y, paint, radius, variant);
@@ -1498,6 +1498,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V9":
 		case "Peeek":
 			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PEEEK);
+			break;
+		case "V10":
+		case "Armor":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.ARMOR);
+			break;
+		case "V11":
+		case "Messer":
+			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.MESSER);
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
