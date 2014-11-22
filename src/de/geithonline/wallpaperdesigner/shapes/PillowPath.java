@@ -8,7 +8,7 @@ import android.graphics.RectF;
 public class PillowPath extends Path {
 
 	public enum PILLOW_TYPE {
-		PLEKTRUM, FINGERNAIL, TREKY, YINGYANG, PEEEK, ARMOR, MESSER;
+		PLEKTRUM, FINGERNAIL, TREKY, YINGYANG, PEEEK, ARMOR, MESSER, BLAZON;
 	}
 
 	/**
@@ -42,6 +42,9 @@ public class PillowPath extends Path {
 			break;
 		case MESSER:
 			drawMesser(center, radius);
+			break;
+		case BLAZON:
+			drawWappen(center, radius);
 			break;
 		}
 	}
@@ -158,6 +161,22 @@ public class PillowPath extends Path {
 		oval.top = center.y - 0 * raster;
 		oval.bottom = center.y + 2 * raster;
 		arcTo(oval, 180, 180);
+		close();
+	}
+
+	private void drawWappen(final PointF center, final float radius) {
+		final float raster = radius / 2;
+		moveTo(center.x + 0 * raster, center.y + 2 * raster);
+		quadTo(center.x + 2 * raster, center.y + 1 * raster, // controllpoint
+				center.x + 2 * raster, center.y - 1 * raster); // Zielpunkt
+
+		quadTo(center.x + 0.5f * raster, center.y - 1 * raster, // controllpoint
+				center.x + 0 * raster, center.y - 2 * raster); // Zielpunkt
+		quadTo(center.x - 0.5f * raster, center.y - 1 * raster, // controllpoint
+				center.x - 2 * raster, center.y - 1 * raster); // Zielpunkt
+
+		quadTo(center.x - 2 * raster, center.y + 1 * raster, // controllpoint
+				center.x + 0 * raster, center.y + 2 * raster); // Zielpunkt
 		close();
 	}
 
