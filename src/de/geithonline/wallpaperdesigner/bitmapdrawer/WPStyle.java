@@ -62,7 +62,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		// Generate Filename
 		final String pattern = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
 		final String layout = Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")";
-		final String pngFilename = pattern + "\n" + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_PNG;
+		final String pngFilename = pattern + " " + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_PNG;
 
 		final File pngFile = BitmapFileIO.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), pngFilename);
 		rescanMedia(context, pngFile);

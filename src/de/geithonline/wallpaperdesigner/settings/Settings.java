@@ -504,6 +504,8 @@ public class Settings {
 		return prefs.getBoolean("muimerp", false);
 	}
 
+	private static final int CURRENT_SETTINGS_VERSION = 2;
+
 	/**
 	 * Initializes some preferences on first run with defaults
 	 * 
@@ -512,10 +514,12 @@ public class Settings {
 	public static void initPrefs(final SharedPreferences preferences, final Context ctx, final Activity activity) {
 		context = ctx;
 		prefs = preferences;
-		if (prefs.getBoolean("sampleSettingsUnziped", false) == false) {
+		if (prefs.getInt("sampleSettingsVersion", 0) < CURRENT_SETTINGS_VERSION) {
 			Log.i("GEITH", "Unzipping Sample Settings...");
 			ZipHelper.unzipSettings(activity, ctx);
-			prefs.edit().putBoolean("sampleSettingsUnziped", true).commit();
+			prefs.edit().putInt("sampleSettingsVersion", CURRENT_SETTINGS_VERSION).commit();
+		} else {
+			Log.i("GEITH", "Sample Settings already unzipped...Nothing to do!");
 		}
 		if (prefs.getBoolean("firstrun", true)) {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");

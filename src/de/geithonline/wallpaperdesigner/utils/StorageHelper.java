@@ -15,6 +15,12 @@ public class StorageHelper {
 	private final static String settingsDir = DIR_SDCARD + File.separator + "data" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File settingsDirFile = new File(settingsDir);
 	private final static File noMedia = new File(settingsDir, ".nomedia");
+	private final static String downloadDir = DIR_SDCARD + File.separator + "Download" + File.separator;
+	private final static File downloadDirFile = new File(downloadDir);
+
+	public static File getDownloaddirfile() {
+		return downloadDirFile;
+	}
 
 	static {
 		if (!imagesDirFile.exists()) {
@@ -22,6 +28,9 @@ public class StorageHelper {
 		}
 		if (!settingsDirFile.exists()) {
 			settingsDirFile.mkdirs();
+		}
+		if (!downloadDirFile.exists()) {
+			downloadDirFile.mkdirs();
 		}
 		// Nomedia anlegen
 		if (!noMedia.exists()) {
@@ -40,6 +49,10 @@ public class StorageHelper {
 
 	public static String getExternalStorageImages() {
 		return imagesDir;
+	}
+
+	public static String getExternalStorageDownload() {
+		return downloadDir;
 	}
 
 	public static String getExternalStorageSettings() {
