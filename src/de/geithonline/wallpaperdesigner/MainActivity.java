@@ -3,9 +3,7 @@ package de.geithonline.wallpaperdesigner;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
@@ -15,16 +13,13 @@ import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.transition.Explode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
@@ -49,13 +44,12 @@ public class MainActivity extends Activity {
 	private TextView settingsButton;
 	private TextView setWallButton;
 
-	@SuppressLint("InlinedApi")
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-		}
+		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+		// getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+		// }
 		setContentView(R.layout.activity_main);
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
@@ -189,21 +183,19 @@ public class MainActivity extends Activity {
 	/**
 	 * Startet den Settings Dialog
 	 */
-	@SuppressLint("NewApi")
-	@SuppressWarnings("unchecked")
 	private void startSettings() {
 		// Check if we're running on Android 5.0 or higher
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			// Call some material design APIs here
-			getWindow().setExitTransition(new Explode());
-			final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
-			startActivityForResult(intent, REQUEST_CODE_PREFERENCES, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-		} else {
-			// Call some material design APIs here
-			final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
-			startActivityForResult(intent, REQUEST_CODE_PREFERENCES);
+		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+		// // Call some material design APIs here
+		// getWindow().setExitTransition(new Explode());
+		// final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
+		// startActivityForResult(intent, REQUEST_CODE_PREFERENCES, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+		// } else {
+		// Call some material design APIs here
+		final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
+		startActivityForResult(intent, REQUEST_CODE_PREFERENCES);
 
-		}
+		// }
 	}
 
 	// ##########################################################
