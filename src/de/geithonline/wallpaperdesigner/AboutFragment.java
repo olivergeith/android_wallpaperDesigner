@@ -8,12 +8,13 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.utils.ZipHelper;
+import de.geithonline.wallpaperdesigner.settings.SettingsDownloader;
 
 public class AboutFragment extends PreferenceFragment {
 
 	private ListPreference sortOrder;
 	private Preference unzipSettings;
+	private Preference unzipSettingsV2;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -24,9 +25,20 @@ public class AboutFragment extends PreferenceFragment {
 
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				ZipHelper.unzipSettings(getActivity(), getActivity().getApplicationContext());
+				SettingsDownloader.startDownloadFile1(getActivity());
 				return false;
 			}
+
+		});
+		unzipSettingsV2 = findPreference("unzipSettingsV2");
+		unzipSettingsV2.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				SettingsDownloader.startDownloadFile2(getActivity());
+				return false;
+			}
+
 		});
 
 		sortOrder = (ListPreference) findPreference("sortOrder");
@@ -44,6 +56,10 @@ public class AboutFragment extends PreferenceFragment {
 		getIdOfCurrentWidget(savedInstanceState);
 		setSpecialThings();
 	}
+
+	// private void unzipRawZip() {
+	// ZipHelper.unzipSettings(getActivity(), getActivity().getApplicationContext());
+	// }
 
 	private void handleSortOrder(final String newValue) {
 		sortOrder.setSummary(newValue);

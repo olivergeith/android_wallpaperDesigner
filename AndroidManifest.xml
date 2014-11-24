@@ -8,6 +8,8 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
+    <!-- For downloading Settings from Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- For Accessing Gallery images -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- For Writing Debug images -->

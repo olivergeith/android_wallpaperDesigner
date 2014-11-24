@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
-import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
 	public static final String NUMBER_OF_LEAFS = "numberOfLeafs";
@@ -514,13 +513,13 @@ public class Settings {
 	public static void initPrefs(final SharedPreferences preferences, final Context ctx, final Activity activity) {
 		context = ctx;
 		prefs = preferences;
-		if (prefs.getInt("sampleSettingsVersion", 0) < CURRENT_SETTINGS_VERSION) {
-			Log.i("GEITH", "Unzipping Sample Settings...");
-			ZipHelper.unzipSettings(activity, ctx);
-			prefs.edit().putInt("sampleSettingsVersion", CURRENT_SETTINGS_VERSION).commit();
-		} else {
-			Log.i("GEITH", "Sample Settings already unzipped...Nothing to do!");
-		}
+		// if (prefs.getInt("sampleSettingsVersion", 0) < CURRENT_SETTINGS_VERSION) {
+		// Log.i("GEITH", "Unzipping Sample Settings...");
+		// ZipHelper.unzipSettings(activity, ctx);
+		// prefs.edit().putInt("sampleSettingsVersion", CURRENT_SETTINGS_VERSION).commit();
+		// } else {
+		// Log.i("GEITH", "Sample Settings already unzipped...Nothing to do!");
+		// }
 		if (prefs.getBoolean("firstrun", true)) {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();

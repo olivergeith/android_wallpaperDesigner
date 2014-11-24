@@ -37,7 +37,7 @@ public class Toaster {
 		text.setText(msg);
 
 		final Toast toast = new Toast(activity.getApplicationContext());
-		toast.setGravity(Gravity.BOTTOM, 0, 0);
+		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setView(layout);
 		toast.show();

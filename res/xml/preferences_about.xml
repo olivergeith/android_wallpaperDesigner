@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
  
+    <PreferenceCategory android:title="Extras!!!">
+	    <Preference 
+		    android:key="unzipSettings"
+		    android:title="Download Example Settings"
+		    android:summary="download lots of example Settings! Find them under 'Restore Settings' (-button on main preference screen)!" 
+            />
+	    <Preference 
+	        android:key="unzipSettingsV2"
+		    android:title="Download Example Settings (even More!)"
+		    android:summary="download even more example Settings!" 
+            />
+	    </PreferenceCategory>
+    
+    <ListPreference
+	        android:key="sortOrder"
+	        android:title="@string/sortOrder" 
+	        android:dialogTitle="@string/sortOrder"
+	        android:defaultValue="Last Modified"
+	        android:entries="@array/sortOrder"
+	        android:entryValues="@array/sortOrder"
+	        />
+    	    	    
     <PreferenceCategory android:title="@string/app_name">
-
+	    <Preference 
+		    android:key="premium"
+    		android:defaultValue="false"
+		    android:title="Premium" 
+            />
         
   	    <Preference 
 		    android:key="applink"
@@ -55,31 +81,12 @@
         </Preference>
 	    </PreferenceCategory>
 	    
-    <PreferenceCategory android:title="General Options">
-        <ListPreference
-	        android:key="sortOrder"
-	        android:title="@string/sortOrder" 
-	        android:dialogTitle="@string/sortOrder"
-	        android:defaultValue="Last Modified"
-	        android:entries="@array/sortOrder"
-	        android:entryValues="@array/sortOrder"
-	        />
-    </PreferenceCategory>
     <PreferenceCategory android:title="Internal Options">
-	    <Preference 
-		    android:key="premium"
-    		android:defaultValue="false"
-		    android:title="Premium" 
-            />
         <CheckBoxPreference 
 		    android:key="debug"
     		android:defaultValue="false"
 		    android:title="Debugging"
 		    android:summary="Do not use this! No patterns will be drawn, if you tick this!" 
-            />
-	    <Preference 
-		    android:key="unzipSettings"
-		    android:title="Unzip Sample Settings" 
             />
         </PreferenceCategory>
     

@@ -14,48 +14,50 @@ import android.content.Context;
 import android.util.Log;
 
 public class ZipHelper {
-	public static void unzip(final String zipFile, String unzipLocation) {
-		if (!unzipLocation.endsWith(File.separator)) {
-			unzipLocation = unzipLocation + File.separator;
+	public static void unzip(final String zipFile, String outPath) {
+		if (!outPath.endsWith(File.separator)) {
+			outPath = outPath + File.separator;
 		}
 		try {
 			final FileInputStream fin = new FileInputStream(zipFile);
-			final ZipInputStream zin = new ZipInputStream(fin);
-			ZipEntry ze = null;
-			while ((ze = zin.getNextEntry()) != null) {
-				Log.v("Decompress", "Unzipping " + ze.getName());
+			final ZipInputStream zis = new ZipInputStream(fin);
+			ZipEntry entry = null;
 
-				if (ze.isDirectory()) {
-					dirChecker(ze.getName(), unzipLocation);
-				} else {
-					final FileOutputStream fout = new FileOutputStream(unzipLocation + ze.getName());
-					for (int c = zin.read(); c != -1; c = zin.read()) {
-						fout.write(c);
+			while ((entry = zis.getNextEntry()) != null) {
+				Log.v("Decompress", "Unzipping " + entry.getName());
+				if (entry.isDirectory()) {
+					final File f = new File(outPath, entry.getName());
+					if (!f.exists()) {
+						f.mkdirs();
 					}
-					zin.closeEntry();
-					fout.close();
-				}
+				} else {
+					int size;
+					final byte[] buffer = new byte[2048];
 
+					final File f = new File(outPath, entry.getName());
+					final FileOutputStream fos = new FileOutputStream(f);
+					final BufferedOutputStream bos = new BufferedOutputStream(fos, buffer.length);
+
+					while ((size = zis.read(buffer, 0, buffer.length)) != -1) {
+						bos.write(buffer, 0, size);
+					}
+					bos.flush();
+					bos.close();
+				}
 			}
-			zin.close();
+
+			zis.close();
+			fin.close();
 		} catch (final Exception e) {
 			Log.e("Decompress", "unzip", e);
 		}
 
 	}
 
-	private static void dirChecker(final String dir, final String unzipLocation) {
-		final File f = new File(unzipLocation + dir);
-
-		if (!f.isDirectory()) {
-			f.mkdirs();
-		}
-	}
-
 	public static void unzipSettings(final Activity activity, final Context context) {
 		Toaster.showInfoToast(activity, "Extracting Sample Settings!");
-		final int settingsID = de.geithonline.wallpaperdesigner.R.raw.settings;
-		unzipResourceRawFiles(context, settingsID);
+		// final int settingsID = de.geithonline.wallpaperdesigner.R.raw.settings;
+		// unzipResourceRawFiles(context, settingsID);
 	}
 
 	public static void unzipResourceRawFiles(final Context context, final int fileResID) {
