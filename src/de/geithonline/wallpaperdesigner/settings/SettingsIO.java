@@ -136,6 +136,7 @@ public class SettingsIO {
 			final ObjectOutputStream o = new ObjectOutputStream(fo);
 			o.writeObject(prefs.getAll());
 			o.close();
+			fo.close();
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -151,6 +152,7 @@ public class SettingsIO {
 				final ObjectInputStream o = new ObjectInputStream(fi);
 				final Map<String, ?> settings = (Map<String, ?>) o.readObject();
 				o.close();
+				fi.close();
 				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
 					// Log.i("map values", entry.getKey() + ": " + entry.getValue().toString() + ": " + entry.getValue().getClass());
 					writeEntry(entry, prefs);
@@ -160,6 +162,8 @@ public class SettingsIO {
 			} catch (final IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
+		} else {
+			Log.i("Loading Settings ", "File not exists! " + filename);
 		}
 		return null;
 	}
@@ -265,13 +269,16 @@ public class SettingsIO {
 				final String jpgFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_JPG);
 				final File pngFile = new File(pngFilename);
 				final File jpgFile = new File(jpgFilename);
+				File imgFile = jpgFile;
 				Bitmap bitmap = null;
 				if (jpgFile.exists()) {
 					bitmap = BitmapFileIO.loadBitmap(jpgFilename);
+					imgFile = jpgFile;
 				} else if (pngFile.exists()) {
 					bitmap = BitmapFileIO.loadBitmap(pngFilename);
+					imgFile = pngFile;
 				}
-				final SavedPreference pref = new SavedPreference(bitmap, fi, pngFile);
+				final SavedPreference pref = new SavedPreference(bitmap, fi, imgFile);
 				savedPrefsList.add(pref);
 			}
 		}
