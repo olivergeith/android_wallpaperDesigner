@@ -14,8 +14,11 @@ import java.util.zip.ZipInputStream;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 
@@ -26,11 +29,23 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	private static String msg;
 
 	public static void startDownloadFile1(final Activity activity) {
-		startDownload(activity, "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0Bjrnea3dfazBOcGw1MTg", "WPD_settings_V1.zip");
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)", "Download Example Settings", new OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				startDownload(activity, "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0Bjrnea3dfazBOcGw1MTg",
+						"WPD_settings_V1.zip");
+			}
+		});
 	}
 
 	public static void startDownloadFile2(final Activity activity) {
-		startDownload(activity, "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0BjrneT0xhRHhlZ3R4RlU", "WPD_settings_V2.zip");
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (4.3 MB)", "Download Example Settings", new OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				startDownload(activity, "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0BjrneT0xhRHhlZ3R4RlU",
+						"WPD_settings_V2.zip");
+			}
+		});
 	}
 
 	private static void startDownload(final Activity activity, final String url, final String destinationFileName) {
