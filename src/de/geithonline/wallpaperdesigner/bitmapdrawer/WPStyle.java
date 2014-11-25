@@ -62,20 +62,31 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		// Generate Filename
 		final String pattern = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
 		final String layout = Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")";
-		final String pngFilename = pattern + " " + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_PNG;
+		final String jpgFilename = pattern + " " + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_JPG;
 
-		final File pngFile = BitmapFileIO.saveBitmap2ExternalStorage(small, StorageHelper.getExternalStorageSettings(), pngFilename);
-		rescanMedia(context, pngFile);
+		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, StorageHelper.getExternalStorageSettings(), jpgFilename, 80);
+		rescanMedia(context, smallJpgFile);
 		small.recycle();
 		// Saving corresponding Settings
-		final String prefFileName = FileIOHelper.replaceExtension(pngFile.getAbsolutePath(), SettingsIO.EXTENSION_PNG, SettingsIO.EXTENSION_PREF);
+		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(), SettingsIO.EXTENSION_JPG, SettingsIO.EXTENSION_PREF);
 		final File settingsFile = new File(prefFileName);
 		SettingsIO.savePreferences(Settings.prefs, settingsFile);
 	}
 
 	public synchronized void saveBigImage(final Context context, final String timeStamp) {
-		final String filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_PNG;
-		final File imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
+		String filename;
+		File imageFile;
+		switch (Settings.getImageOutputFormat()) {
+		default:
+		case PNG:
+			filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_PNG;
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
+			break;
+		case JPG:
+			filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_JPG;
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorageImages(), filename, Settings.getJpgCompression());
+			break;
+		}
 		rescanMedia(context, imageFile);
 	}
 

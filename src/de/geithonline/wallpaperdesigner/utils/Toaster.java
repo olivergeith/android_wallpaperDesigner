@@ -24,6 +24,8 @@ public class Toaster {
 	}
 
 	private static void showToast(final int typ, final Activity activity, final String msg) {
+		final int heightPixels = DisplayHelper.getDisplayHeight(activity);
+
 		final LayoutInflater inflater = activity.getLayoutInflater();
 		final View layout = inflater.inflate(R.layout.info_toast_layout, (ViewGroup) activity.findViewById(R.id.toast_layout_root));
 		final ImageView image = (ImageView) layout.findViewById(R.id.image);
@@ -37,9 +39,10 @@ public class Toaster {
 		text.setText(msg);
 
 		final Toast toast = new Toast(activity.getApplicationContext());
-		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.setGravity(Gravity.CENTER, 0, heightPixels / 4);
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setView(layout);
 		toast.show();
 	}
+
 }

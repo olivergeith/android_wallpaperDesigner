@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.WindowManager;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -31,6 +29,35 @@ public class Settings {
 	public static final String PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
 	private static Context context;
+
+	public enum IMAGE_OUTPUT_FORMAT {
+		PNG, JPG;
+	}
+
+	public static int getJpgCompression() {
+		if (prefs == null) {
+			return 95;
+		}
+		return prefs.getInt("jpgCompression", 95);
+	}
+
+	public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
+		switch (getImageFormat()) {
+		default:
+		case "jpg":
+			return IMAGE_OUTPUT_FORMAT.JPG;
+		case "png":
+			return IMAGE_OUTPUT_FORMAT.PNG;
+		}
+	}
+
+	public static String getImageFormat() {
+		if (prefs == null) {
+			return "jpg";
+		}
+		final String imageFormat = prefs.getString("imageFormat", "jpg");
+		return imageFormat;
+	}
 
 	// ###################################################################
 	// Other Stuff
@@ -475,13 +502,6 @@ public class Settings {
 
 	// ###################################################################
 	// General stuff
-	public static DisplayMetrics getDisplayMetrics() {
-		final DisplayMetrics metrics = new DisplayMetrics();
-		final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		wm.getDefaultDisplay().getMetrics(metrics);
-		return metrics;
-	}
-
 	public static boolean isDebuggingMessages() {
 		if (prefs == null) {
 			return false;
@@ -503,7 +523,7 @@ public class Settings {
 		return prefs.getBoolean("muimerp", false);
 	}
 
-	private static final int CURRENT_SETTINGS_VERSION = 2;
+	// private static final int CURRENT_SETTINGS_VERSION = 2;
 
 	/**
 	 * Initializes some preferences on first run with defaults
@@ -557,7 +577,8 @@ public class Settings {
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
 			prefs.edit().putString("rotatingStyle", "Fixed").commit();
-
+			prefs.edit().putString("imageFormat", "jpg").commit();
+			prefs.edit().putInt("jpgCompression", 95).commit();
 		}
 	}
 

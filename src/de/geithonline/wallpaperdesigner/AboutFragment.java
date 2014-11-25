@@ -15,11 +15,26 @@ public class AboutFragment extends PreferenceFragment {
 	private ListPreference sortOrder;
 	private Preference unzipSettings;
 	private Preference unzipSettingsV2;
+	private Preference imageFormat;
+
+	// private SeekBarPreference jpgCompression;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_about);
+
+		// jpgCompression = (SeekBarPreference) findPreference("jpgCompression");
+		// jpgCompression.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		//
+		// @Override
+		// public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+		// handleJpgCompression((int) newValue);
+		// return true;
+		// }
+		//
+		// });
+
 		unzipSettings = findPreference("unzipSettings");
 		unzipSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
@@ -51,18 +66,33 @@ public class AboutFragment extends PreferenceFragment {
 			}
 
 		});
+		imageFormat = findPreference("imageFormat");
+		imageFormat.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleImageFormat((String) newValue);
+				return true;
+			}
+
+		});
+		handleImageFormat(Settings.getImageFormat());
 		handleSortOrder(Settings.getSortOrder());
 
 		getIdOfCurrentWidget(savedInstanceState);
 		setSpecialThings();
 	}
 
-	// private void unzipRawZip() {
-	// ZipHelper.unzipSettings(getActivity(), getActivity().getApplicationContext());
+	// protected void handleJpgCompression(int newValue) {
+	//
 	// }
 
 	private void handleSortOrder(final String newValue) {
 		sortOrder.setSummary(newValue);
+	}
+
+	private void handleImageFormat(final String newValue) {
+		imageFormat.setSummary(newValue);
 	}
 
 	private int getIdOfCurrentWidget(final Bundle savedInstanceState) {

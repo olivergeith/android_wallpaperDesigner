@@ -35,6 +35,30 @@ public class BitmapFileIO {
 	}
 
 	/**
+	 * @param bitmap
+	 *            the Bitmap to save
+	 * @param filename
+	 *            the filename
+	 */
+	public static File saveBitmap2ExternalStorageAsJPG(final Bitmap bitmap, final String dir, final String filename, final int compression) {
+
+		OutputStream outStream = null;
+		// Ordner anlegen fal snicht vorhanden
+		final File out = new File(dir);
+		out.mkdirs();
+		Log.i("GEITH", "Writing Jpg to " + dir + filename);
+		final File file = new File(dir, filename);
+		try {
+			outStream = new FileOutputStream(file);
+			bitmap.compress(Bitmap.CompressFormat.JPEG, compression, outStream);
+			outStream.flush();
+			outStream.close();
+		} catch (final Exception e) {
+		}
+		return file;
+	}
+
+	/**
 	 * @return Bitmap or null...
 	 */
 	public static Bitmap loadBitmapAnScale(final String filePath, final int width, final int height) {

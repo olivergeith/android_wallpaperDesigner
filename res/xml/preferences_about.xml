@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+ xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
     <PreferenceCategory android:title="Extras!!!">
 	    <Preference 
@@ -22,6 +23,25 @@
 	        android:entries="@array/sortOrder"
 	        android:entryValues="@array/sortOrder"
 	        />
+    <ListPreference
+	        android:key="imageFormat"
+	        android:title="@string/imageFormat" 
+	        android:dialogTitle="@string/imageFormat"
+	        android:defaultValue="png"
+	        android:entries="@array/imageFormat"
+	        android:entryValues="@array/imageFormat"
+	        />
+     <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="jpgCompression"
+	        android:title="@string/jpgCompression" 
+		    seekbarpreference:minValue="50"
+		    seekbarpreference:stepValue="1"
+		    seekbarpreference:maxValue="100"
+		    android:defaultValue="95"
+		    android:summary="%1$d (Bigger number = better quality)" 
+		    android:dialogMessage="@string/jpgCompression" 
+		    />
+    
     	    	    
     <PreferenceCategory android:title="@string/app_name">
 	    <Preference 

@@ -53,4 +53,19 @@ public class Alerter {
 		bld.create().show();
 	}
 
+	public static void alertYesNo(final Activity activity, final String msg, final String title, final DialogInterface.OnClickListener yesListener) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(title);
+		builder.setMessage(msg);
+		builder.setPositiveButton("YES", yesListener);
+		builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				dialog.dismiss();
+			}
+		});
+
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
 }

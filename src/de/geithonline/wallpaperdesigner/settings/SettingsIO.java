@@ -13,6 +13,8 @@ import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -21,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import de.geithonline.android.basics.utils.Toaster;
+import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
@@ -29,6 +32,7 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 public class SettingsIO {
 
 	public static final String EXTENSION_PNG = ".png";
+	public static final String EXTENSION_JPG = ".jpg";
 	public static final String EXTENSION_PREF = ".pref";
 	public static final String MARKER = " (+++)_";
 
@@ -101,7 +105,13 @@ public class SettingsIO {
 				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
 					final SavedPreference pref = preferenceList.get(position);
-					SettingsIO.deletePreferencesFileAndBitmap(pref);
+					Alerter.alertYesNo(activity, "Dou you want really want to delete the Settings?", "Delete Settings", new OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog, final int which) {
+							SettingsIO.deletePreferencesFileAndBitmap(pref);
+						}
+					});
+
 				}
 				dialog.dismiss();
 			}
@@ -163,6 +173,9 @@ public class SettingsIO {
 			return;
 		}
 		if (key.equalsIgnoreCase("sortOrder")) {
+			return;
+		}
+		if (key.equalsIgnoreCase("imageFormat")) {
 			return;
 		}
 		// Spezialbehandlung für alten LayoutPicker
@@ -227,26 +240,42 @@ public class SettingsIO {
 	}
 
 	/**
+	 * Cache
+	 */
+	private static List<SavedPreference> savedPrefsList = new ArrayList<>();
+
+	/**
 	 * Get a List of all {@link SavedPreference}
 	 * 
 	 * @return
 	 */
 	private static List<SavedPreference> getSavedPreferencesList() {
-		final List<SavedPreference> savedPrefsList = new ArrayList<>();
+
 		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
-		for (final File fi : prefs) {
-			final String prefFilename = fi.getAbsolutePath();
 
-			final String bmpFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_PNG);
-			final File bmpFile = new File(bmpFilename);
-			Bitmap bitmap = null;
+		final int currentSize = savedPrefsList.size();
+		final int aktuallSize = prefs.size();
+		if (currentSize != aktuallSize) {
+			Log.i("PrefList", "Preflist needs to be reloaded");
+			savedPrefsList = new ArrayList<>();
+			for (final File fi : prefs) {
+				final String prefFilename = fi.getAbsolutePath();
 
-			if (bmpFile.exists()) {
-				bitmap = BitmapFileIO.loadBitmap(bmpFilename);
+				final String pngFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_PNG);
+				final String jpgFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_JPG);
+				final File pngFile = new File(pngFilename);
+				final File jpgFile = new File(jpgFilename);
+				Bitmap bitmap = null;
+				if (jpgFile.exists()) {
+					bitmap = BitmapFileIO.loadBitmap(jpgFilename);
+				} else if (pngFile.exists()) {
+					bitmap = BitmapFileIO.loadBitmap(pngFilename);
+				}
+				final SavedPreference pref = new SavedPreference(bitmap, fi, pngFile);
+				savedPrefsList.add(pref);
 			}
-			final SavedPreference pref = new SavedPreference(bitmap, fi, bmpFile);
-			savedPrefsList.add(pref);
 		}
+
 		return savedPrefsList;
 	}
 
