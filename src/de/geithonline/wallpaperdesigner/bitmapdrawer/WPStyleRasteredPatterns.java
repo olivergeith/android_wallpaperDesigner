@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
+import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.IRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory.RasterPositioning;
@@ -15,13 +16,15 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class WPStyleRasteredPatterns extends WPStylePattern {
 
 	private final RasterPositioning positioning;
+	private BitmapWorkerTask task;
 
 	public WPStyleRasteredPatterns(final RasterPositioning positioning) {
 		this.positioning = positioning;
 	}
 
 	@Override
-	public synchronized Bitmap drawBitmap() {
+	public synchronized Bitmap drawBitmap(final BitmapWorkerTask bitmapWorkerTask) {
+		task = bitmapWorkerTask;
 		return drawBitmap(Settings.getWidth(), Settings.getHeight());
 	}
 
@@ -53,10 +56,14 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final IRaster raster = RasterFactory.getRaster(positioning, width, height, maxRadius, Settings.getOverlapping());
+		final IRaster raster = RasterFactory
+				.getRaster(positioning, width, height, maxRadius, Settings.getOverlapping());
+
+		task.settingMax(raster.getAnzahlPatterns());
 
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
+			task.settingProgress(i);
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
 
@@ -88,10 +95,12 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 				paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
 				break;
 			case "Opposite":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+				paint.setShadowLayer(dropShadowRadius, 0, 0,
+						getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
 				break;
 			case "Darker":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
+				paint.setShadowLayer(dropShadowRadius, 0, 0,
+						ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
 				break;
 			case "Select":
 				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());

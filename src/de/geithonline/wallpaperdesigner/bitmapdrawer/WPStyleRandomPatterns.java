@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -13,8 +14,11 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class WPStyleRandomPatterns extends WPStylePattern {
 
+	private BitmapWorkerTask task;
+
 	@Override
-	public synchronized Bitmap drawBitmap() {
+	public synchronized Bitmap drawBitmap(final BitmapWorkerTask bitmapWorkerTask) {
+		task = bitmapWorkerTask;
 		return drawBitmap(Settings.getWidth(), Settings.getHeight());
 	}
 
@@ -58,8 +62,10 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 		final int blurLevel2 = anzahlPatterns * 6 / 10;
 		final int blurLevel3 = anzahlPatterns * 8 / 10;
 
+		task.settingMax(anzahlPatterns);
 		// Zeichnen
 		for (int i = 0; i < anzahlPatterns; i++) {
+			task.settingProgress(i);
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
 
@@ -91,10 +97,12 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 				paint.setShadowLayer(dropShadowRadius, 0, 0, scolor);
 				break;
 			case "Opposite":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+				paint.setShadowLayer(dropShadowRadius, 0, 0,
+						getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
 				break;
 			case "Darker":
-				paint.setShadowLayer(dropShadowRadius, 0, 0, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
+				paint.setShadowLayer(dropShadowRadius, 0, 0,
+						ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
 				break;
 			case "Select":
 				paint.setShadowLayer(dropShadowRadius, 0, 0, Settings.getDropShadowColor());

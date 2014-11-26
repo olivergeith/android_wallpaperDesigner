@@ -81,10 +81,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		dialog = new ProgressDialog(this);
-		dialog.setIndeterminate(true);
-		dialog.setCancelable(false);
-
 		initSensors();
 
 		generate();
@@ -104,46 +100,54 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		dialog.dismiss();
-		dialog = null;
+		if (dialog != null) {
+			dialog.dismiss();
+			dialog = null;
+		}
 		super.onDestroy();
 	}
 
 	public synchronized void setWallpaper() {
 		final WallpaperSettingTask task = new WallpaperSettingTask();
 		task.execute();
-		if (dialog != null) {
-			dialog.setMessage("Setting Wallpaper...");
-			dialog.show();
-		}
+		dialog = new ProgressDialog(this);
+		dialog.setIndeterminate(true);
+		dialog.setCancelable(false);
+		dialog.setMessage("Setting Wallpaper...");
+		dialog.show();
 	}
 
 	public synchronized void generate() {
 		final BitmapWorkerTask task = new BitmapWorkerTask(wallpaperView);
 		task.execute();
-		if (dialog != null) {
-			dialog.setMessage("Rendering...");
-			dialog.show();
-		}
+		dialog = new ProgressDialog(this);
+		dialog.setCancelable(false);
+		dialog.setMessage("Rendering...");
+		dialog.setIndeterminate(false);
+		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		dialog.setProgress(0);
+		dialog.show();
 	}
 
 	public synchronized void save() {
 		final BitmapSaverTask task = new BitmapSaverTask();
 		task.execute();
-		if (dialog != null) {
-			dialog.setMessage("Saving Image...");
-			dialog.show();
-		}
+		dialog = new ProgressDialog(this);
+		dialog.setIndeterminate(true);
+		dialog.setCancelable(false);
+		dialog.setMessage("Saving Image...");
+		dialog.show();
 		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
 	}
 
 	public synchronized void saveWithSettings() {
 		final BitmapAndSetttingsSaverTask task = new BitmapAndSetttingsSaverTask();
 		task.execute();
-		if (dialog != null) {
-			dialog.setMessage("Saving Image and Settings...");
-			dialog.show();
-		}
+		dialog = new ProgressDialog(this);
+		dialog.setIndeterminate(true);
+		dialog.setCancelable(false);
+		dialog.setMessage("Saving Image and Settings...");
+		dialog.show();
 		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
 	}
 
@@ -189,7 +193,8 @@ public class MainActivity extends Activity {
 		// // Call some material design APIs here
 		// getWindow().setExitTransition(new Explode());
 		// final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
-		// startActivityForResult(intent, REQUEST_CODE_PREFERENCES, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+		// startActivityForResult(intent, REQUEST_CODE_PREFERENCES,
+		// ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 		// } else {
 		// Call some material design APIs here
 		final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
@@ -199,7 +204,7 @@ public class MainActivity extends Activity {
 	}
 
 	// ##########################################################
-	class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
+	public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
 		private final WeakReference<TouchImageView> imageViewReference;
 
 		public BitmapWorkerTask(final TouchImageView imageView) {
@@ -211,11 +216,26 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
+			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(),
+					Settings.getSelectedMainLayoutVariante());
 			// drawer.recycleBitmap();
-			Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
-			final Bitmap bitmap = drawer.drawBitmap();
+			Log.i("Geith",
+					"Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante()
+							+ ")");
+
+			final Bitmap bitmap = drawer.drawBitmap(this);
 			return bitmap;
+		}
+
+		public void settingMax(final int max) {
+			if (dialog != null) {
+				dialog.setMax(max);
+			}
+		}
+
+		public void settingProgress(final int p) {
+			publishProgress(p);
+
 		}
 
 		// Once complete, see if ImageView is still around and set bitmap.
@@ -232,6 +252,15 @@ public class MainActivity extends Activity {
 				dialog.cancel();
 			}
 		}
+
+		@Override
+		protected void onProgressUpdate(final Integer... values) {
+			// Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
+			if (dialog != null) {
+				dialog.setProgress(values[0]);
+			}
+		}
+
 	}
 
 	private void exit() {
@@ -328,7 +357,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+				SensorManager.SENSOR_DELAY_UI);
 	}
 
 	@Override

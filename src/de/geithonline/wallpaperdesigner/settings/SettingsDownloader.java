@@ -24,28 +24,30 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 public class SettingsDownloader extends AsyncTask<String, String, String> {
 
+	private static final String URL_SETTINGS_1 = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0Bjrnea3dfazBOcGw1MTg";
+	private static final String URL_SETTINGS_2 = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0BjrneT0xhRHhlZ3R4RlU";
 	private static Activity activi;
 	private static ProgressDialog dialog;
 	private static String msg;
 
 	public static void startDownloadFile1(final Activity activity) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)", "Download Example Settings", new OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				startDownload(activity, "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0Bjrnea3dfazBOcGw1MTg",
-						"WPD_settings_V1.zip");
-			}
-		});
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)",
+				"Download Example Settings", new OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int which) {
+						startDownload(activity, URL_SETTINGS_1, "WPD_settings_V1.zip");
+					}
+				});
 	}
 
 	public static void startDownloadFile2(final Activity activity) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (4.3 MB)", "Download Example Settings", new OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				startDownload(activity, "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0BjrneT0xhRHhlZ3R4RlU",
-						"WPD_settings_V2.zip");
-			}
-		});
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (4.3 MB)",
+				"Download Example Settings", new OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int which) {
+						startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
+					}
+				});
 	}
 
 	private static void startDownload(final Activity activity, final String url, final String destinationFileName) {
@@ -142,7 +144,8 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 		if (dialog != null) {
 			dialog.cancel();
 		}
-		Toaster.showInfoToast(activi, "Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
+		Toaster.showInfoToast(activi,
+				"Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
 	}
 
 	public static void unzip(final String zipFile, String outPath) {
