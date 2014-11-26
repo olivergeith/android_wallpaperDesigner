@@ -72,15 +72,17 @@ public class Settings {
 			return SORT_ORDER.LAST_MODIFIED_DESCENDING;
 		case "Alphabetically":
 			return SORT_ORDER.ALPHA;
+		case "Timestamp in Filename":
+			return SORT_ORDER.FILENAME_TIMESTAMP;
 		}
 	}
 
 	public static String getSortOrder() {
 		// return "Random Layout";
 		if (prefs == null) {
-			return "Last Modified";
+			return "Timestamp in Filename";
 		}
-		final String sort = prefs.getString("sortOrder", "Last Modified");
+		final String sort = prefs.getString("sortOrder", "Timestamp in Filename");
 		return sort;
 	}
 
@@ -551,7 +553,7 @@ public class Settings {
 			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
-			prefs.edit().putString("sortOrder", "Last Modified").commit();
+			prefs.edit().putString("sortOrder", "Timestamp in Filename").commit();
 			prefs.edit().putString("stylePicker", "Patterns").commit();
 			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();

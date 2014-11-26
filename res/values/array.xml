@@ -40,7 +40,8 @@
         <item >Last Modified</item>
         <item >Last Modified (Descending)</item>
         <item >Alphabetically</item>
-    </string-array>
+        <item >Timestamp in Filename</item>
+        </string-array>
 
     <string-array name="imageFormat">
         <item >png</item>

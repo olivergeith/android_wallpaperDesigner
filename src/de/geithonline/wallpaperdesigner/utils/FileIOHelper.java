@@ -12,7 +12,7 @@ import android.util.Log;
 public class FileIOHelper {
 
 	public enum SORT_ORDER {
-		ALPHA, LAST_MODIFIED, LAST_MODIFIED_DESCENDING;
+		ALPHA, LAST_MODIFIED, LAST_MODIFIED_DESCENDING, FILENAME_TIMESTAMP;
 	}
 
 	public static void sortFileArray(final SORT_ORDER sortOrder, final File[] fileArray) {
@@ -45,7 +45,34 @@ public class FileIOHelper {
 				}
 			});
 			break;
+		case FILENAME_TIMESTAMP:
+			// Sort by Name
+			Arrays.sort(fileArray, new Comparator<File>() {
+				@Override
+				public int compare(final File f1, final File f2) {
+					final String t1 = getTimestampInFileName(f1.getName());
+					final String t2 = getTimestampInFileName(f2.getName());
+
+					return -t1.compareTo(t2);
+				}
+			});
+			break;
 		}
+	}
+
+	public static final String MARKER = " (+++)_";
+
+	public static String getTimestampInFileName(final String filename) {
+		String out;
+		final int pos = filename.indexOf(MARKER);
+		if (pos == -1) {
+			// EXtension nicht gefunden
+			out = filename;
+		} else {
+			out = filename.substring(pos);
+		}
+		return out;
+
 	}
 
 	/**

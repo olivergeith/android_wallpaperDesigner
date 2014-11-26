@@ -306,6 +306,19 @@ public class SettingsIO {
 
 	}
 
+	public static String getTimestampInFileName(final String filename) {
+		String out;
+		final int pos = filename.indexOf(MARKER);
+		if (pos == -1) {
+			// EXtension nicht gefunden
+			out = filename;
+		} else {
+			out = filename.substring(0, pos);
+		}
+		return out;
+
+	}
+
 	private static File getSettingsDir() {
 		// Ordner anlegen fals nicht vorhanden
 		final File dir = new File(StorageHelper.getExternalStorageSettings());
