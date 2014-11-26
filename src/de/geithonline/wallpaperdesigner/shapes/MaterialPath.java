@@ -174,9 +174,9 @@ public class MaterialPath extends Path {
 		int rotateWinkel = 0;
 		final float archWinkel;
 		if (randWinkel) {
-			archWinkel = Randomizer.getRandomFloat((float) Math.PI / 4, (float) Math.PI / 2);
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.2f, (float) Math.PI * 0.7f);
 		} else {
-			archWinkel = (float) Math.PI / 4;
+			archWinkel = (float) Math.PI * 0.25f;
 		}
 		final float archWinkelDeg = (float) (archWinkel * 180 / Math.PI);
 
