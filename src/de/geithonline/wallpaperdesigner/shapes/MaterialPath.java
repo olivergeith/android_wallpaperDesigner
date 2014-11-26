@@ -9,7 +9,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES;
+		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -39,6 +39,12 @@ public class MaterialPath extends Path {
 			break;
 		case ROTATING_TRIANGLES:
 			drawRotatingTriangles(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_ARCHES_RANDOM_SIZE:
+			drawRotatingArches(center, radius, bWidth, bHeight, true);
+			break;
+		case ROTATING_QUARTER_ARCHES:
+			drawRotatingArches(center, radius, bWidth, bHeight, false);
 			break;
 		}
 	}
@@ -158,6 +164,63 @@ public class MaterialPath extends Path {
 
 		rotatePath(center.x, center.y, p, winkel);
 		addPath(p);
+	}
+
+	private void drawRotatingArches(final Point center, final float radius, final int bWidth, final int bHeight, final boolean randWinkel) {
+		if (center.x == bWidth / 2 && center.y == bHeight / 2) {
+			return;
+		}
+		final Path path = new Path();
+		int rotateWinkel = 0;
+		final float archWinkel;
+		if (randWinkel) {
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI / 4, (float) Math.PI / 2);
+		} else {
+			archWinkel = (float) Math.PI / 4;
+		}
+		final float archWinkelDeg = (float) (archWinkel * 180 / Math.PI);
+
+		final Point imageCenter = new Point(bWidth / 2, bHeight / 2);
+		final float distTCenterX = bWidth / 2 - center.x;
+		final float distTCenterY = bHeight / 2 - center.y;
+		final float distCenter = (float) Math.sqrt(distTCenterX * distTCenterX + distTCenterY * distTCenterY);
+		final float rotateAlpha = (float) Math.atan(distTCenterY / distTCenterX);
+		rotateWinkel = (int) (rotateAlpha * 180 / Math.PI);
+
+		final Point p = new Point();
+		final Point p2 = new Point();
+		final RectF oval = new RectF();
+
+		float rad = distCenter;
+		p.x = (int) (imageCenter.x + Math.cos(-archWinkel) * rad);
+		p.y = (int) (imageCenter.y + Math.sin(-archWinkel) * rad);
+		path.moveTo(p.x, p.y);
+		// path.addCircle(p.x, p.y, radius / 10, Direction.CW);
+		oval.left = imageCenter.x - rad;
+		oval.right = imageCenter.x + rad;
+		oval.top = imageCenter.y - rad;
+		oval.bottom = imageCenter.y + rad;
+		path.arcTo(oval, -archWinkelDeg, 2 * archWinkelDeg);
+
+		rad = distCenter + 2 * radius;
+		p2.x = (int) (bWidth / 2 + Math.cos(archWinkel) * rad);
+		p2.y = (int) (bHeight / 2 + Math.sin(archWinkel) * rad);
+		path.lineTo(p2.x, p2.y);
+		oval.left = imageCenter.x - rad;
+		oval.right = imageCenter.x + rad;
+		oval.top = imageCenter.y - rad;
+		oval.bottom = imageCenter.y + rad;
+		path.arcTo(oval, archWinkelDeg, -2 * archWinkelDeg);
+
+		path.lineTo(p.x, p.y);
+		path.close();
+		if (center.x > bWidth / 2) {
+			rotatePath(imageCenter.x, imageCenter.y, path, rotateWinkel);
+		} else {
+			rotatePath(imageCenter.x, imageCenter.y, path, rotateWinkel + 180);
+		}
+
+		addPath(path);
 	}
 
 	private void drawRotatingTriangles(final Point center, final float radius, final int bWidth, final int bHeight) {

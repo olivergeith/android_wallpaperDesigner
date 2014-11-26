@@ -56,7 +56,8 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Sailboat V1", "Sailboat V2", "Lighthouse", "Anchor", "Mixed" }));
 
 		patternProperties.put("Material", new PatternProperties(true, false, false, false, false, false, //
-				new CharSequence[] { "Stripe", "Half Stripe", "Arc 1", "Arc 2", "Skyline", "Edgy Bars", "Rotating Bars", "Rotating Triangles" }));
+				new CharSequence[] { "Stripe", "Half Stripe", "Arc 1", "Arc 2", "Skyline", "Edgy Bars", "Rotating Bars", "Rotating Triangles",
+						"Rotating Arches (random arches)", "Rotating Arches (quarter arches)" }));
 
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Ghost", "Pacman", "Mixed" }));
