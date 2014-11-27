@@ -9,7 +9,8 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES;
+		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, //
+		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
@@ -41,10 +42,10 @@ public class MaterialPath extends Path {
 			drawRotatingTriangles(center, radius, bWidth, bHeight);
 			break;
 		case ROTATING_ARCHES_RANDOM_SIZE:
-			drawRotatingArches(center, radius, bWidth, bHeight, true);
-			break;
 		case ROTATING_QUARTER_ARCHES:
-			drawRotatingArches(center, radius, bWidth, bHeight, false);
+		case ROTATING_HALF_ARCHES:
+		case ROTATING_THREE_QUARTER_ARCHES:
+			drawRotatingArches(center, radius, bWidth, bHeight, type);
 			break;
 		}
 	}
@@ -166,18 +167,29 @@ public class MaterialPath extends Path {
 		addPath(p);
 	}
 
-	private void drawRotatingArches(final Point center, final float radius, final int bWidth, final int bHeight, final boolean randWinkel) {
+	private void drawRotatingArches(final Point center, final float radius, final int bWidth, final int bHeight, final MATERIAL_TYPE arctype) {
 		if (center.x == bWidth / 2 && center.y == bHeight / 2) {
 			return;
 		}
 		final Path path = new Path();
 		int rotateWinkel = 0;
 		final float archWinkel;
-		if (randWinkel) {
+		switch (arctype) {
+		default:
+		case ROTATING_ARCHES_RANDOM_SIZE:
 			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.2f, (float) Math.PI * 0.7f);
-		} else {
+			break;
+		case ROTATING_QUARTER_ARCHES:
 			archWinkel = (float) Math.PI * 0.25f;
+			break;
+		case ROTATING_HALF_ARCHES:
+			archWinkel = (float) Math.PI * 0.5f;
+			break;
+		case ROTATING_THREE_QUARTER_ARCHES:
+			archWinkel = (float) Math.PI * 0.75f;
+			break;
 		}
+
 		final float archWinkelDeg = (float) (archWinkel * 180 / Math.PI);
 
 		final Point imageCenter = new Point(bWidth / 2, bHeight / 2);

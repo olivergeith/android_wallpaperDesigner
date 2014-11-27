@@ -1216,6 +1216,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Rotating Arches (quarter arches)":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_QUARTER_ARCHES);
 			break;
+		case "V11":
+		case "Rotating Arches (half arches)":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_HALF_ARCHES);
+			break;
+		case "V12":
+		case "Rotating Arches (3-quarter arches)":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_THREE_QUARTER_ARCHES);
+			break;
 		}
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
