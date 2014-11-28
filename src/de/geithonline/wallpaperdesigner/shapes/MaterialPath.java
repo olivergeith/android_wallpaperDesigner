@@ -177,16 +177,19 @@ public class MaterialPath extends Path {
 		switch (arctype) {
 		default:
 		case ROTATING_ARCHES_RANDOM_SIZE:
-			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.2f, (float) Math.PI * 0.7f);
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.1f, (float) Math.PI * 0.9f);
 			break;
 		case ROTATING_QUARTER_ARCHES:
-			archWinkel = (float) Math.PI * 0.25f;
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.15f, (float) Math.PI * 0.33f);
+			// archWinkel = (float) Math.PI * 0.25f;
 			break;
 		case ROTATING_HALF_ARCHES:
-			archWinkel = (float) Math.PI * 0.5f;
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.4f, (float) Math.PI * 0.6f);
+			// archWinkel = (float) Math.PI * 0.5f;
 			break;
 		case ROTATING_THREE_QUARTER_ARCHES:
-			archWinkel = (float) Math.PI * 0.75f;
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.65f, (float) Math.PI * 0.85f);
+			// archWinkel = (float) Math.PI * 0.75f;
 			break;
 		}
 
