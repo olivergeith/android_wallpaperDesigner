@@ -20,7 +20,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
-import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 public class SettingsDownloader extends AsyncTask<String, String, String> {
 
@@ -29,6 +28,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	private static Activity activi;
 	private static ProgressDialog dialog;
 	private static String msg;
+	private String errorMessage = "";
 
 	public static void startDownloadFile1(final Activity activity) {
 		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)",
@@ -112,10 +112,10 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 		} catch (final Exception e) {
 			Log.e("ANDRO_ASYNC", "Error downloading File " + aurl[0]);
 			Log.e("ANDRO_ASYNC", "Error downloading File " + e.getMessage());
+			errorMessage = "Error with File " + aurl[0] + " " + e.getMessage();
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Toaster.showErrorToast(activi, "Error downloading File " + aurl[0] + " " + e.getMessage());
 		}
 		return null;
 
@@ -136,16 +136,27 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 
 	@Override
 	protected void onPostExecute(final String localFile) {
-		Log.i("ANDRO_ASYNC", "File downloaded: " + localFile);
-		final String outPath = StorageHelper.getExternalStorageSettings();
-		dialog.setMessage("Unzipping " + localFile);
-		unzip(localFile, outPath);
-		dialog.setMessage("Done !");
-		if (dialog != null) {
-			dialog.cancel();
+		if (localFile != null) {
+			Log.i("ANDRO_ASYNC", "File downloaded: " + localFile);
+			final String outPath = StorageHelper.getExternalStorageSettings();
+			dialog.setMessage("Unzipping " + localFile);
+			unzip(localFile, outPath);
+			dialog.setMessage("Done !");
+			if (dialog != null) {
+				dialog.cancel();
+			}
+			Alerter.alertInfo(activi,
+					"Example-Settings downloaded successfully!!!\n\nHint: Use Button 'Restore Settings' to use them!");
+			// Toaster.showInfoToast(activi,
+			// "Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
+		} else {
+			if (dialog != null) {
+				dialog.cancel();
+			}
+			Alerter.alertError(activi, "Error downloading Example-Settings!!!\n\n" + errorMessage
+					+ "\n\nInternet connection available?");
+			// Toaster.showErrorToast(activi, "Error downloading Example-Settings!!!\n" + errorMessage);
 		}
-		Toaster.showInfoToast(activi,
-				"Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
 	}
 
 	public static void unzip(final String zipFile, String outPath) {
