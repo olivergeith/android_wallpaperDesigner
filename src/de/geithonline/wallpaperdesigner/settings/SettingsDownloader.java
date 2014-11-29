@@ -31,23 +31,21 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	private String errorMessage = "";
 
 	public static void startDownloadFile1(final Activity activity) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)",
-				"Download Example Settings", new OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int which) {
-						startDownload(activity, URL_SETTINGS_1, "WPD_settings_V1.zip");
-					}
-				});
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)", "Download Example Settings", new OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				startDownload(activity, URL_SETTINGS_1, "WPD_settings_V1.zip");
+			}
+		});
 	}
 
 	public static void startDownloadFile2(final Activity activity) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (4.3 MB)",
-				"Download Example Settings", new OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int which) {
-						startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
-					}
-				});
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (4.3 MB)", "Download Example Settings", new OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
+			}
+		});
 	}
 
 	private static void startDownload(final Activity activity, final String url, final String destinationFileName) {
@@ -123,7 +121,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 
 	@Override
 	protected void onProgressUpdate(final String... progress) {
-		Log.d("ANDRO_ASYNC", progress[0]);
+		// Log.d("ANDRO_ASYNC", progress[0]);
 		if (progress[0].startsWith("-")) {
 			final int p = Integer.parseInt(progress[0].substring(1));
 			dialog.setMessage(msg + "\n" + p / 100 / 1000 + "kB");
@@ -131,7 +129,6 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			final int p = Integer.parseInt(progress[0]);
 			dialog.setProgress(p);
 		}
-		// dialog.setMessage(msg + "\n" + progress[0] + "%");
 	}
 
 	@Override
@@ -145,16 +142,14 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertInfo(activi,
-					"Example-Settings downloaded successfully!!!\n\nHint: Use Button 'Restore Settings' to use them!");
+			Alerter.alertInfo(activi, "Example-Settings downloaded successfully!!!\n\nHint: Use Button 'Restore Settings' to use them!");
 			// Toaster.showInfoToast(activi,
 			// "Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
 		} else {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertError(activi, "Error downloading Example-Settings!!!\n\n" + errorMessage
-					+ "\n\nInternet connection available?");
+			Alerter.alertError(activi, "Error downloading Example-Settings!!!\n\n" + errorMessage + "\n\nInternet connection available?");
 			// Toaster.showErrorToast(activi, "Error downloading Example-Settings!!!\n" + errorMessage);
 		}
 	}

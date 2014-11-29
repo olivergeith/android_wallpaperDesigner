@@ -563,9 +563,9 @@ public class Settings {
 			prefs.edit().putBoolean("randomizeDropShadowColor", true).commit();
 			prefs.edit().putInt("colorDropShadow", Color.BLACK).commit();
 
-			prefs.edit().putString("bWidth", "2560").commit();
-			prefs.edit().putString("bHeight", "1600").commit();
-			prefs.edit().putString("sizeSelection", "2560x1600").commit();
+			prefs.edit().putString("bWidth", "1920").commit();
+			prefs.edit().putString("bHeight", "1200").commit();
+			prefs.edit().putString("sizeSelection", "1920x1200").commit();
 
 			prefs.edit().putInt("randomizeColorRangeInt", 12).commit();
 			prefs.edit().putInt("randomizeColorBrightnessRangeInt", 12).commit();

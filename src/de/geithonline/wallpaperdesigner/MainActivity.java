@@ -216,12 +216,9 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(),
-					Settings.getSelectedMainLayoutVariante());
+			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
 			// drawer.recycleBitmap();
-			Log.i("Geith",
-					"Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante()
-							+ ")");
+			Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
 
 			final Bitmap bitmap = drawer.drawBitmap(this);
 			return bitmap;
@@ -244,8 +241,26 @@ public class MainActivity extends Activity {
 			if (imageViewReference != null && bitmap != null) {
 				final TouchImageView imageView = imageViewReference.get();
 				if (imageView != null) {
-					imageView.setImageBitmap(bitmap);
+					final int w = bitmap.getWidth();
+					final int h = bitmap.getHeight();
+					// if bitmap ist too big for open GL GL_MAX_TEXTURE_SIZE
+					final int maxTexturesize = 2048;
+					if (w <= maxTexturesize && h <= maxTexturesize) {
+						imageView.setImageBitmap(bitmap);
+					} else {
+						Log.i("SCALING Image for view", "Image bigger than GL_MAX_TEXTURE_SIZE -> resizing it");
+						if (w > h) {
+							final int nh = bitmap.getHeight() * maxTexturesize / bitmap.getWidth();
+							final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxTexturesize, nh, true);
+							imageView.setImageBitmap(scaled);
+						} else {
+							final int nw = bitmap.getWidth() * maxTexturesize / bitmap.getHeight();
+							final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, nw, maxTexturesize, true);
+							imageView.setImageBitmap(scaled);
+						}
+					}
 					imageView.fit2Screen();
+
 				}
 			}
 			if (dialog != null) {
@@ -357,8 +372,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_UI);
+		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
 	}
 
 	@Override
