@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -40,6 +40,9 @@ public class AsymetricLongPath extends Path {
 			break;
 		case DROP:
 			drawLongDrop(center, radius, height, filled);
+			break;
+		case LONG_HEART:
+			drawLongHeart(center, radius, height, filled);
 			break;
 		case TAG:
 			drawTag(center, radius, height, filled);
@@ -252,6 +255,38 @@ public class AsymetricLongPath extends Path {
 
 		if (!filled) {
 			addCircle(center.x, center.y - radius, radius * 2 / 3, Direction.CCW);
+		}
+
+	}
+
+	// ##################################################################################
+	private void drawLongHeart(final PointF center, final float radius, final int height, final boolean filled) {
+		final RectF oval = new RectF();
+
+		moveTo(center.x, center.y);
+		cubicTo(center.x, center.y - height, // CP1
+				center.x - radius, center.y - height + radius, // CP2
+				center.x - radius, center.y - height);
+
+		oval.left = center.x - radius;
+		oval.right = center.x;
+		oval.top = center.y - height - radius / 2;
+		oval.bottom = center.y - height + radius / 2;
+		arcTo(oval, -180, 180);
+		oval.left = center.x;
+		oval.right = center.x + radius;
+		oval.top = center.y - height - radius / 2;
+		oval.bottom = center.y - height + radius / 2;
+		arcTo(oval, -180, 180);
+
+		cubicTo(center.x + radius, center.y - height + radius, // CP1
+				center.x, center.y - height, // CP2
+				center.x, center.y);
+		close();
+
+		if (!filled) {
+			addCircle(center.x - radius / 2, center.y - height, radius / 3, Direction.CCW);
+			addCircle(center.x + radius / 2, center.y - height, radius / 3, Direction.CCW);
 		}
 
 	}
