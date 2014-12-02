@@ -460,6 +460,7 @@ public class Settings {
 		}
 		return test.equalsIgnoreCase("4-Color Gradient from corners") //
 				|| test.equalsIgnoreCase("4-Colors in corners")//
+				|| test.equalsIgnoreCase("4 Color Sweep Gradient (Half Arch)")//
 				|| test.equalsIgnoreCase("4 Color Sweep Gradient");
 	}
 

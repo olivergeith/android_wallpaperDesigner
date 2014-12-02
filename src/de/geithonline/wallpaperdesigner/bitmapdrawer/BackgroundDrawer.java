@@ -30,9 +30,12 @@ public class BackgroundDrawer {
 		case "Linear Gradient bottomleft-topright":
 
 		case "Radial Gradient":
+		case "Radial Gradient (Half Arch)":
+		case "4 Color Sweep Gradient (Half Arch)":
 		case "4 Color Sweep Gradient":
 			drawLinearGradientBackground(canvas);
 			break;
+
 		case "4-Color Gradient from corners":
 			draw4ColorCornerGradientBackground(canvas);
 			break;
@@ -50,7 +53,7 @@ public class BackgroundDrawer {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final int radius = (int) Math.sqrt(width * width + height * height) / 2;
+		int radius = (int) Math.sqrt(width * width + height * height) / 2;
 
 		switch (Settings.getGradientDirection()) {
 		default:
@@ -84,11 +87,21 @@ public class BackgroundDrawer {
 		case "Radial Gradient":
 			paint.setShader(new RadialGradient(width / 2, height / 2, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
+		case "Radial Gradient (Half Arch)":
+			radius = (int) Math.sqrt(width / 2 * width / 2 + height * height);
+			paint.setShader(new RadialGradient(width / 2, height, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
+			break;
 		case "4 Color Sweep Gradient":
 			final int colorsSweep[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Settings.getBackgroundColor3(),
 					Settings.getBackgroundColor4(), Settings.getBackgroundColor1() };
 			final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
 			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+			break;
+		case "4 Color Sweep Gradient (Half Arch)":
+			final int colorsSweep2[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(), Settings.getBackgroundColor3(),
+					Settings.getBackgroundColor4() };
+			final float distancesSweep2[] = { 0.5f, 0.66f, 0.82f, 1.0f };
+			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
 			break;
 		}
 		return paint;

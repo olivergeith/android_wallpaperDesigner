@@ -1921,7 +1921,7 @@ public abstract class WPStylePattern extends WPStyle {
 			return Settings.getFixedRotationDegrees();
 		case "Random":
 			return Randomizer.getRandomInt(randomMin - 1, randomMax);
-		case "Around Point":
+		case "Around Point": {
 			final float distTCenterX = bWidth / 2 - center.x;
 			final float distTCenterY = bHeight / 2 - center.y;
 			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
@@ -1931,6 +1931,18 @@ public abstract class WPStylePattern extends WPStyle {
 				winkel = winkel + 180;
 			}
 			return winkel + 90 + Settings.getFixedRotationDegrees();
+		}
+		case "Around Bottom": {
+			final float distTCenterX = bWidth / 2 - center.x;
+			final float distTCenterY = bHeight - center.y;
+			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
+			int winkel = (int) (alpha * 180 / Math.PI);
+			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
+			if (center.x <= bWidth / 2) {
+				winkel = winkel + 180;
+			}
+			return winkel + 90 + Settings.getFixedRotationDegrees();
+		}
 		}
 	}
 }
