@@ -23,7 +23,9 @@
     <string name="header_layout_summary">Layout-Selection and special Options for Layout....</string>
     <string name="header_about_options">About</string>
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
-
+    <string name="header_globalsettings">Global Settings</string>
+    <string name="header_globalsettings_summary">App global settings....</string>
+    
     <string name="category_background">Background</string>
     <string name="category_size">Wallpaper Size</string>
     
@@ -75,7 +77,7 @@
     <string name="patternMinSizeAdjust">Min. PatternSize relativ to max. PatternSize</string>
     <string name="textPattern">Content of Text Pattern</string>
     <string name="textDrawStyle">How to draw Text</string>
-    <string name="anzColors">How Many Colors in Gradient</string>
+    <string name="anzColors">How many Colors in Gradient</string>
     <string name="blurPatterns">Blur patterns in Background</string>
     
     <string name="numberOfLeafs">How many leafs-arms should the Pattern have?</string>

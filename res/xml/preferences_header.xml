@@ -25,7 +25,12 @@
             android:summary="@string/header_colors_summary" />
     
     
-
+    <header android:fragment="de.geithonline.wallpaperdesigner.GlobalSettingsFragment"
+            android:icon="@drawable/globalsettings"
+            android:title="@string/header_globalsettings"
+            android:summary="@string/header_globalsettings_summary"
+            />
+    
 
     <header android:fragment="de.geithonline.wallpaperdesigner.AboutFragment"
             android:icon="@drawable/about"

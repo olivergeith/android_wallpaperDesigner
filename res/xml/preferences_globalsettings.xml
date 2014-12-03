@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+ xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
+ 
+    <PreferenceCategory android:title="General Options"/>
+		<ListPreference
+	        android:key="sortOrder"
+	        android:title="@string/sortOrder" 
+	        android:dialogTitle="@string/sortOrder"
+	        android:defaultValue="Last Modified"
+	        android:entries="@array/sortOrder"
+	        android:entryValues="@array/sortOrder"
+	        />
+    	<ListPreference
+	        android:key="imageFormat"
+	        android:title="@string/imageFormat" 
+	        android:dialogTitle="@string/imageFormat"
+	        android:defaultValue="png"
+	        android:entries="@array/imageFormat"
+	        android:entryValues="@array/imageFormat"
+	        />
+     	<de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="jpgCompression"
+	        android:title="@string/jpgCompression" 
+		    seekbarpreference:minValue="50"
+		    seekbarpreference:stepValue="1"
+		    seekbarpreference:maxValue="100"
+		    android:defaultValue="95"
+		    android:summary="%1$d (Bigger number = better quality)" 
+		    android:dialogMessage="@string/jpgCompression" 
+		    />
+    
+        <CheckBoxPreference 
+		    android:key="hexValues"
+    		android:defaultValue="false"
+		    android:title="HexValues in Color-Picker"
+		    android:summary="Enable Hexvalue Input in Colorpicker" 
+            />
+     		    	    
+    <PreferenceCategory android:title="Extras !!!"/>
+	    <Preference 
+		    android:key="unzipSettings"
+		    android:title="Download Example Settings"
+		    android:summary="download lots of example Settings! Find them under 'Restore Settings' (-button on main preference screen)!" 
+            />
+	    <Preference 
+	        android:key="unzipSettingsV2"
+		    android:title="Download Example Settings (even More!)"
+		    android:summary="download even more example Settings!" 
+            />
+        
+</PreferenceScreen>
