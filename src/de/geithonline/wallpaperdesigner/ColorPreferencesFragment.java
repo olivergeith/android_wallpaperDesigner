@@ -43,7 +43,7 @@ public class ColorPreferencesFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				final int anz = Integer.parseInt((String) newValue);
-				handleAnzColorsSelection(anz);
+				handleSelection(Settings.getGradientDirection(), anz);
 				return true;
 			}
 		});
@@ -51,28 +51,23 @@ public class ColorPreferencesFragment extends PreferenceFragment {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleGradientSelection((String) newValue);
+				handleSelection((String) newValue, Settings.getAnzahlGradientColors());
 				return true;
 			}
 		});
-		handleGradientSelection(Settings.getGradientDirection());
-		handleAnzColorsSelection(Settings.getAnzahlGradientColors());
-		enableProFeatures();
+		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 	}
 
-	private void handleGradientSelection(final String selection) {
+	private void handleSelection(final String selection, final int anzahl) {
 		gradientDirection.setSummary(selection);
 		anzColors.setEnabled(!Settings.is4ColorGradient(selection));
+		anzColors.setSummary("" + anzahl);
 		if (Settings.is4ColorGradient(selection)) {
 			enableColors(4);
+			anzColors.setSummary("" + 4);
 		} else {
 			enableColors(Settings.getAnzahlGradientColors());
 		}
-	}
-
-	private void handleAnzColorsSelection(final int anzahl) {
-		anzColors.setSummary("" + anzahl);
-		enableColors(anzahl);
 	}
 
 	private void enableColors(final int anzahl) {
@@ -92,9 +87,6 @@ public class ColorPreferencesFragment extends PreferenceFragment {
 			color4.setEnabled(true);
 			break;
 		}
-	}
-
-	private void enableProFeatures() {
 	}
 
 }
