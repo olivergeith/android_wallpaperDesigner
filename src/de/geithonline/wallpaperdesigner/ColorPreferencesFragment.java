@@ -5,6 +5,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
+import de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -14,16 +15,26 @@ public class ColorPreferencesFragment extends PreferenceFragment {
 
 	private ListPreference gradientDirection;
 	private ListPreference anzColors;
-	private Preference color3;
-	private Preference color4;
+	private ColorPickerPreference color1;
+	private ColorPickerPreference color2;
+	private ColorPickerPreference color3;
+	private ColorPickerPreference color4;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
-		color3 = findPreference("color3_plain_bgrnd");
-		color4 = findPreference("color4_plain_bgrnd");
+		color1 = (ColorPickerPreference) findPreference("color_plain_bgrnd");
+		color2 = (ColorPickerPreference) findPreference("color2_plain_bgrnd");
+		color3 = (ColorPickerPreference) findPreference("color3_plain_bgrnd");
+		color4 = (ColorPickerPreference) findPreference("color4_plain_bgrnd");
+
+		color1.setHexValueEnabled(Settings.isHexValueEnabled());
+		color2.setHexValueEnabled(Settings.isHexValueEnabled());
+		color3.setHexValueEnabled(Settings.isHexValueEnabled());
+		color4.setHexValueEnabled(Settings.isHexValueEnabled());
+
 		gradientDirection = (ListPreference) findPreference("gradientDirection");
 		anzColors = (ListPreference) findPreference("anzColors");
 
@@ -67,19 +78,19 @@ public class ColorPreferencesFragment extends PreferenceFragment {
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
-			case 2:
-				color3.setEnabled(false);
-				color4.setEnabled(false);
-				break;
-			case 3:
-				color3.setEnabled(true);
-				color4.setEnabled(false);
-				break;
-			default:
-			case 4:
-				color3.setEnabled(true);
-				color4.setEnabled(true);
-				break;
+		case 2:
+			color3.setEnabled(false);
+			color4.setEnabled(false);
+			break;
+		case 3:
+			color3.setEnabled(true);
+			color4.setEnabled(false);
+			break;
+		default:
+		case 4:
+			color3.setEnabled(true);
+			color4.setEnabled(true);
+			break;
 		}
 	}
 

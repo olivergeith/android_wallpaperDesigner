@@ -105,13 +105,12 @@ public class SettingsIO {
 				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
 					final SavedPreference pref = preferenceList.get(position);
-					Alerter.alertYesNo(activity, "Dou you want really want to delete the Settings?", "Delete Settings",
-							new OnClickListener() {
-								@Override
-								public void onClick(final DialogInterface dialog, final int which) {
-									SettingsIO.deletePreferencesFileAndBitmap(pref);
-								}
-							});
+					Alerter.alertYesNo(activity, "Dou you want really want to delete the Settings?", "Delete Settings", new OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog, final int which) {
+							SettingsIO.deletePreferencesFileAndBitmap(pref);
+						}
+					});
 
 				}
 				dialog.dismiss();
@@ -144,8 +143,7 @@ public class SettingsIO {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs,
-			final String filename) {
+	private static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs, final String filename) {
 		Log.i("Loading Settings ", "from " + filename);
 		final File file = new File(getSettingsDir(), filename);
 		if (file.exists()) {
@@ -173,8 +171,7 @@ public class SettingsIO {
 
 	@SuppressWarnings("rawtypes")
 	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
-		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " ("
-				+ entry.getValue().getClass().getSimpleName() + ")");
+		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " (" + entry.getValue().getClass().getSimpleName() + ")");
 		final String key = entry.getKey();
 		// ein paar Keys nicht lesen!
 		if (key.equalsIgnoreCase("muimerp")) {
@@ -187,6 +184,9 @@ public class SettingsIO {
 			return;
 		}
 		if (key.equalsIgnoreCase("jpgCompression")) {
+			return;
+		}
+		if (key.equalsIgnoreCase("hexValues")) {
 			return;
 		}
 		// Spezialbehandlung für alten LayoutPicker

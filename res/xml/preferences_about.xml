@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
-    <PreferenceCategory android:title="Extras!!!">
+    <PreferenceCategory android:title="Extras !!!"/>
 	    <Preference 
 		    android:key="unzipSettings"
 		    android:title="Download Example Settings"
@@ -13,9 +13,9 @@
 		    android:title="Download Example Settings (even More!)"
 		    android:summary="download even more example Settings!" 
             />
-	    </PreferenceCategory>
     
-    <ListPreference
+    <PreferenceCategory android:title="General Options"/>
+		<ListPreference
 	        android:key="sortOrder"
 	        android:title="@string/sortOrder" 
 	        android:dialogTitle="@string/sortOrder"
@@ -23,7 +23,7 @@
 	        android:entries="@array/sortOrder"
 	        android:entryValues="@array/sortOrder"
 	        />
-    <ListPreference
+    	<ListPreference
 	        android:key="imageFormat"
 	        android:title="@string/imageFormat" 
 	        android:dialogTitle="@string/imageFormat"
@@ -31,7 +31,7 @@
 	        android:entries="@array/imageFormat"
 	        android:entryValues="@array/imageFormat"
 	        />
-     <de.geithonline.android.basics.preferences.SeekBarPreference
+     	<de.geithonline.android.basics.preferences.SeekBarPreference
             android:key="jpgCompression"
 	        android:title="@string/jpgCompression" 
 		    seekbarpreference:minValue="50"
@@ -42,7 +42,13 @@
 		    android:dialogMessage="@string/jpgCompression" 
 		    />
     
-    	    	    
+        <CheckBoxPreference 
+		    android:key="hexValues"
+    		android:defaultValue="false"
+		    android:title="HexValues in Color-Picker"
+		    android:summary="Enable Hexvalue Input in Colorpicker" 
+            />
+     		    	    
     <PreferenceCategory android:title="@string/app_name">
 	    <Preference 
 		    android:key="premium"

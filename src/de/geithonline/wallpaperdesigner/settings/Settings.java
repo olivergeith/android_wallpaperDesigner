@@ -503,6 +503,13 @@ public class Settings {
 		return prefs.getBoolean("dynamicColoring", false);
 	}
 
+	public static boolean isHexValueEnabled() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean("hexValues", false);
+	}
+
 	// ###################################################################
 	// General stuff
 	public static boolean isDebuggingMessages() {
