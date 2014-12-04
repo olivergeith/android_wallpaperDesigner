@@ -8,13 +8,12 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsDownloader;
 
 public class GlobalSettingsFragment extends PreferenceFragment {
 
 	private ListPreference sortOrder;
 	private Preference unzipSettings;
-	private Preference unzipSettingsV2;
+	// private Preference unzipSettingsV2;
 	private Preference imageFormat;
 
 	@Override
@@ -36,16 +35,16 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 			}
 
 		});
-		unzipSettingsV2 = findPreference("unzipSettingsV2");
-		unzipSettingsV2.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-			@Override
-			public boolean onPreferenceClick(final Preference preference) {
-				SettingsDownloader.startDownloadFile2(getActivity());
-				return false;
-			}
-
-		});
+		// unzipSettingsV2 = findPreference("unzipSettingsV2");
+		// unzipSettingsV2.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		//
+		// @Override
+		// public boolean onPreferenceClick(final Preference preference) {
+		// SettingsDownloader.startDownloadFile2(getActivity());
+		// return false;
+		// }
+		//
+		// });
 
 		sortOrder = (ListPreference) findPreference("sortOrder");
 		sortOrder.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {

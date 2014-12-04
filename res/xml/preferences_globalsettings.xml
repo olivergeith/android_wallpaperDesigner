@@ -41,12 +41,7 @@
 	    <Preference 
 		    android:key="unzipSettings"
 		    android:title="Download Example Settings"
-		    android:summary="download lots of example Settings! Find them under 'Restore Settings' (-button on main preference screen)!" 
-            />
-	    <Preference 
-	        android:key="unzipSettingsV2"
-		    android:title="Download Example Settings (even More!)"
-		    android:summary="download even more example Settings!" 
+		    android:summary="download lots of example Settings! Find them later under 'Restore Settings' (-button on main preference screen)!" 
             />
         
 </PreferenceScreen>

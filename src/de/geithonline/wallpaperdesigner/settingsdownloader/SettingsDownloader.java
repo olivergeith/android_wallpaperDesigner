@@ -30,26 +30,27 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	private static String msg;
 	private String errorMessage = "";
 
-	public static void startDownloadFile1(final Activity activity) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (1.9 MB)", "Download Example Settings", new OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				startDownload(activity, URL_SETTINGS_1, "WPD_settings_V1.zip");
-			}
-		});
-	}
-
-	public static void startDownloadFile2(final Activity activity) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings? (4.3 MB)", "Download Example Settings", new OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
-			}
-		});
-	}
+	// public static void startDownloadFile1(final Activity activity) {
+	// Alerter.alertYesNo(activity, "Do you want to download additional predefined Settings? (1.9 MB)", "Download Example Settings", new OnClickListener() {
+	// @Override
+	// public void onClick(final DialogInterface dialog, final int which) {
+	// startDownload(activity, URL_SETTINGS_1, "WPD_settings_V1.zip");
+	// }
+	// });
+	// }
+	//
+	// public static void startDownloadFile2(final Activity activity) {
+	// Alerter.alertYesNo(activity, "Do you want to download additional predefined Settings? (4.3 MB)", "Download Example Settings", new OnClickListener() {
+	// @Override
+	// public void onClick(final DialogInterface dialog, final int which) {
+	// startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
+	// }
+	// });
+	// }
 
 	public static void startDownloadFile(final Activity activity, final String url) {
-		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings?", "Download Example Settings", new OnClickListener() {
+		final String name = url.substring(url.indexOf(".com") + 5);
+		Alerter.alertYesNo(activity, "Download " + name + " ?", "Download Example Settings", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				startDownload(activity, url, "settings.zip");
