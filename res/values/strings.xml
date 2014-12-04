@@ -9,10 +9,8 @@
     <string name="Copyright">Copyright by Oliver Geith</string>
     <string name="exit">Exit</string>
     <string name="debugging">Debugging</string>
-
     <string name="the_logo">The Logo</string>
     <string name="color">Color</string>
-    
     <string name="header_size">Wallpaper Size</string>
     <string name="header_size_summary">Size of Wallpaper...</string>
     <string name="header_colors">Colors-Scheme</string>
@@ -25,15 +23,11 @@
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
     <string name="header_globalsettings">Global Settings</string>
     <string name="header_globalsettings_summary">App global settings....</string>
-    
     <string name="category_background">Background</string>
     <string name="category_size">Wallpaper Size</string>
-    
     <string name="category_patterns">Special Settings - Patterns-Style</string>
     <string name="category_squares">Special Settings - Squares-Style</string>
-    
     <string name="enable_gradient_background">Enable Gradient Background</string>
-    
     <string name="settings">Settings</string>
     <string name="generate">Generate</string>
     <string name="save">Save</string>
@@ -68,7 +62,6 @@
     <string name="outlineNeverTransparentSummary">If set, the outline is not transparent, even if the pattern is transparent! If not set, the outline has the same alpha/transparency like its pattern!</string>
     <string name="outlineDarknessAdjust">Color Brightness Offset of Outline?</string>
     <string name="dropShadowDarknessAdjust">Color Brightness Offset of DropShadow?</string>
-    
     <string name="randomRotate">Random Rotation</string>
     <string name="customOutlineColor">Custom Outline Color</string>
     <string name="colorOutline">Outline Color</string>
@@ -79,7 +72,6 @@
     <string name="textDrawStyle">How to draw Text</string>
     <string name="anzColors">How many Colors in Gradient</string>
     <string name="blurPatterns">Blur patterns in Background</string>
-    
     <string name="numberOfLeafs">How many leafs-arms should the Pattern have?</string>
     <string name="randomLeafCount">Random Number of leafs-arms</string>
     <string name="rotationDegrees">Rotate pattern by degrees</string>
@@ -90,5 +82,6 @@
     <string name="rotatingStyle">Rotating Style</string>
     <string name="imageFormat">Format of images</string>
     <string name="jpgCompression">Compression-Rate of JPGs</string>
-    
+    <string name="title_activity_remote_settings_view">Download Example Settings</string>
+
 </resources>

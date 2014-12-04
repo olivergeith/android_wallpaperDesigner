@@ -1,5 +1,6 @@
 package de.geithonline.wallpaperdesigner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -7,7 +8,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.SettingsDownloader;
+import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsDownloader;
 
 public class GlobalSettingsFragment extends PreferenceFragment {
 
@@ -26,7 +27,11 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsDownloader.startDownloadFile1(getActivity());
+				final Intent intent = new Intent(getActivity(), RemoteSettingsView.class);
+				startActivityForResult(intent, 1);
+
+				// RemoteSettingsBrowser.loadRemoteWebSite(getActivity());
+				// SettingsDownloader.startDownloadFile1(getActivity());
 				return false;
 			}
 

@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.settings;
+package de.geithonline.wallpaperdesigner.settingsdownloader;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -44,6 +44,15 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
+			}
+		});
+	}
+
+	public static void startDownloadFile(final Activity activity, final String url) {
+		Alerter.alertYesNo(activity, "Dou you want to download additional predefined Settings?", "Download Example Settings", new OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				startDownload(activity, url, "settings.zip");
 			}
 		});
 	}

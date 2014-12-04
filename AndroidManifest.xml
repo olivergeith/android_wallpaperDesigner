@@ -32,8 +32,8 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:largeHeap="true" >
-      <activity
-            android:name="de.geithonline.wallpaperdesigner.PreferencesActivity"
+        <activity
+            android:name=".PreferencesActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.BatteryLWP" >
@@ -41,15 +41,19 @@
                 <action android:name="de.geithonline.wallpaperdesigner.PreferencesActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-      </activity>
-      <activity
-            android:name="de.geithonline.wallpaperdesigner.MainActivity"
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-      </activity>
+        </activity>
+        <activity
+            android:name=".RemoteSettingsView"
+            android:label="@string/title_activity_remote_settings_view" >
+        </activity>
     </application>
 
 </manifest>
