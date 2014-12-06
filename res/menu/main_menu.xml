@@ -1,15 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="de.geithonline.wallpaperdesigner.MainActivity" >
-<!--     
-    <item
-        android:id="@+id/menu_item_share"
-        android:orderInCategory="99"
-        android:showAsAction="always"
-        android:title="@string/share"
-        android:icon="@android:drawable/ic_menu_share"
-        />
-    -->
     <item
         android:id="@+id/action_save"
         android:orderInCategory="100"
@@ -34,6 +25,7 @@
         android:orderInCategory="99"
         android:showAsAction="withText"
         android:title="@string/share"
+        android:icon="@android:drawable/ic_menu_share"
         android:actionProviderClass="android.widget.ShareActionProvider" />
    <!--     
     

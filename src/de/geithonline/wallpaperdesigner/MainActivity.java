@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -22,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
@@ -152,6 +154,31 @@ public class MainActivity extends Activity {
 		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onMenuOpened(int, android.view.Menu)
+	 * 
+	 * Wird gebraucht um im overflow Menu die Icons anzuzeigen!!!
+	 */
+	@Override
+	public boolean onMenuOpened(final int featureId, final Menu menu) {
+		if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+			if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+				try {
+					final Method m = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+					m.setAccessible(true);
+					m.invoke(menu, true);
+				} catch (final NoSuchMethodException e) {
+					Log.e("ERROR", "onMenuOpened", e);
+				} catch (final Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return super.onMenuOpened(featureId, menu);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -210,8 +237,12 @@ public class MainActivity extends Activity {
 			Log.i("URI", "Uri = " + uri);
 			final Intent shareIntent = new Intent();
 			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Shared from the Wallpaper Designer");
 			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 			shareIntent.setType("image/jpeg");
+			shareIntent.putExtra(Intent.EXTRA_TEXT,
+					"Created with the Wallpaper Designer : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner");
+
 			// startActivity(Intent.createChooser(shareIntent, "Share to..."));
 			if (mShareActionProvider != null) {
 				mShareActionProvider.setShareIntent(shareIntent);
