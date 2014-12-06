@@ -1,5 +1,6 @@
 package de.geithonline.wallpaperdesigner;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
@@ -12,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,10 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
@@ -43,6 +47,7 @@ public class MainActivity extends Activity {
 	private TextView shakeHint;
 	private TextView settingsButton;
 	private TextView setWallButton;
+	private ShareActionProvider mShareActionProvider;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -82,11 +87,7 @@ public class MainActivity extends Activity {
 		});
 
 		initSensors();
-
 		generate();
-
-		if (savedInstanceState == null) {
-		}
 	}
 
 	@Override
@@ -155,6 +156,22 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_menu, menu);
+
+		// Locate MenuItem with ShareActionProvider
+		final MenuItem shareItem = menu.findItem(R.id.menu_item_share);
+		// Fetch and store ShareActionProvider
+		mShareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
+		// if (mShareActionProvider != null) {
+		// final Intent shareIntent = new Intent();
+		// // shareIntent.setAction(Intent.ACTION_SEND);
+		// // shareIntent.setType("text/plain");
+		// // // shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Shared from the Wallpaper Designer");
+		// // shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner");
+		// shareIntent.setAction(Intent.ACTION_SEND);
+		// // shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+		// shareIntent.setType("image/jpeg");
+		// mShareActionProvider.setShareIntent(shareIntent);
+		// }
 		return true;
 	}
 
@@ -165,14 +182,6 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		final int id = item.getItemId();
 		Log.i("Geith", "id=" + id);
-		// if (id == R.id.action_settings) {
-		// startSettings();
-		// return true;
-		// }
-		// if (id == R.id.action_generate) {
-		// generate();
-		// return true;
-		// }
 		if (id == R.id.action_save) {
 			save();
 			return true;
@@ -181,26 +190,41 @@ public class MainActivity extends Activity {
 			saveWithSettings();
 			return true;
 		}
+		if (id == R.id.menu_item_share) {
+			shareImage();
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	// Call to update the share intent
+	private void shareImage() {
+		// Save tmp image
+		final Bitmap bitmap = drawer.getBitmap();
+		if (bitmap != null) {
+			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorage(), "wpd_tmp.jpg",
+					Settings.getJpgCompression());
+
+			final Uri uri = Uri.fromFile(imageFile);
+			// Uri.parse("file://" + imageFile.getAbsolutePath());
+			Log.i("URI", "Uri = " + uri);
+			final Intent shareIntent = new Intent();
+			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+			shareIntent.setType("image/jpeg");
+			// startActivity(Intent.createChooser(shareIntent, "Share to..."));
+			if (mShareActionProvider != null) {
+				mShareActionProvider.setShareIntent(shareIntent);
+			}
+		}
 	}
 
 	/**
 	 * Startet den Settings Dialog
 	 */
 	private void startSettings() {
-		// Check if we're running on Android 5.0 or higher
-		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-		// // Call some material design APIs here
-		// getWindow().setExitTransition(new Explode());
-		// final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
-		// startActivityForResult(intent, REQUEST_CODE_PREFERENCES,
-		// ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-		// } else {
-		// Call some material design APIs here
 		final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
 		startActivityForResult(intent, REQUEST_CODE_PREFERENCES);
-
-		// }
 	}
 
 	// ##########################################################

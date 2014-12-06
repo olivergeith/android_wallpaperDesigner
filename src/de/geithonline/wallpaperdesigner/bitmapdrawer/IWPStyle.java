@@ -16,4 +16,6 @@ public interface IWPStyle {
 
 	public void saveSmallImageAndSettings(final Context context);
 
+	public Bitmap getBitmap();
+
 }

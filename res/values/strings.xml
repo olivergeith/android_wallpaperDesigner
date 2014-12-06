@@ -31,6 +31,8 @@
     <string name="settings">Settings</string>
     <string name="generate">Generate</string>
     <string name="save">Save</string>
+    <string name="saveSettings">Save Settings</string>
+    <string name="share">Share</string>
     <string name="randomizeAlpha">Randomize Alpha</string>
     <string name="randomizeColor">Randomize Color</string>
     <string name="randomizeDropShadowColor">Randomize DropShadowColor</string>

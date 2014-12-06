@@ -46,7 +46,7 @@ public class BitmapFileIO {
 		// Ordner anlegen fal snicht vorhanden
 		final File out = new File(dir);
 		out.mkdirs();
-		Log.i("GEITH", "Writing Jpg to " + dir + filename);
+		Log.i("GEITH", "Writing Jpg to " + dir + "/" + filename);
 		final File file = new File(dir, filename);
 		try {
 			outStream = new FileOutputStream(file);
