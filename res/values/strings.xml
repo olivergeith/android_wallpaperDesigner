@@ -12,13 +12,13 @@
     <string name="the_logo">The Logo</string>
     <string name="color">Color</string>
     <string name="header_size">Wallpaper Size</string>
-    <string name="header_size_summary">Size of Wallpaper...</string>
+    <string name="header_size_summary">Dimensions of Wallpaper</string>
     <string name="header_colors">Colors-Scheme</string>
-    <string name="header_colors_summary">Overall Colors and Stuff...</string>
+    <string name="header_colors_summary">Colors / Colorlayout....</string>
     <string name="header_style">Pattern Style</string>
-    <string name="header_style_summary">Pattern-Selection and special Options for Pattern....</string>
+    <string name="header_style_summary">Pattern-Selection and Pattern-Options....</string>
     <string name="header_layout">Wallpaper Layout</string>
-    <string name="header_layout_summary">Layout-Selection and special Options for Layout....</string>
+    <string name="header_layout_summary">Layout-Selection and Layout-Options....</string>
     <string name="header_about_options">About</string>
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
     <string name="header_globalsettings">Global Settings</string>
@@ -57,7 +57,7 @@
     <string name="mainlayoutVariants">Layout Variant</string>
     <string name="gradientDirection">Coloring style</string>
     <string name="dynamicColoring">Dynamic Coloring</string>
-    <string name="shakeHint">Shake device for new random image!\n...or tap here...</string>
+    <string name="shakeHint">Shake device for new random image!\n - or tap here - </string>
     <string name="Settings">Settings</string>
     <string name="setasWallpaper">Set Wallpaper</string>
     <string name="glossy">Glossy Effect</string>
@@ -69,7 +69,7 @@
     <string name="randomRotate">Random Rotation</string>
     <string name="customOutlineColor">Custom Outline Color</string>
     <string name="colorOutline">Outline Color</string>
-    <string name="filledOption">Filled or not filled Patterns...</string>
+    <string name="filledOption">Filled Patterns</string>
     <string name="patternSizeAdjust">Pattern Size Adjustment</string>
     <string name="patternMinSizeAdjust">Min. PatternSize relativ to max. PatternSize</string>
     <string name="textPattern">Content of Text Pattern</string>
@@ -84,7 +84,7 @@
     <string name="dropShadowRadiusAdjustment">Drop Shadow Radius Adjustment</string>
     <string name="upsideDown">Ordering Rows (clicked) or Columns</string>
     <string name="rotatingStyle">Rotating Style</string>
-    <string name="imageFormat">Format of images</string>
+    <string name="imageFormat">Image-Format</string>
     <string name="jpgCompression">Compression-Rate of JPGs</string>
     <string name="title_activity_remote_settings_view">Download Example Settings</string>
 
