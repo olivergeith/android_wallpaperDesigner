@@ -22,29 +22,28 @@
   
     <item
         android:id="@+id/menu_item_share"
-        android:orderInCategory="99"
+        android:orderInCategory="102"
         android:showAsAction="withText"
         android:title="@string/share"
         android:icon="@android:drawable/ic_menu_share"
         android:actionProviderClass="android.widget.ShareActionProvider" />
-   <!--     
-    
+   
+<!--     
     <item
         android:id="@+id/action_generate"
-        android:orderInCategory="101"
-        android:showAsAction="always"
+        android:orderInCategory="103"
+        android:showAsAction="withText"
         android:title="@string/generate"
         android:icon="@drawable/dice"
         
         />
-     -->
-    <!-- item
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="102"
-        android:showAsAction="always"
+        android:orderInCategory="104"
+        android:showAsAction="withText"
         android:title="@string/settings"
         android:icon="@android:drawable/ic_menu_preferences"
-        /-->
+        />
     
-    
+     -->
 </menu>

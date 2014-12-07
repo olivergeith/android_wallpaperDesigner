@@ -221,6 +221,14 @@ public class MainActivity extends Activity {
 			shareImage();
 			return true;
 		}
+		// if (id == R.id.action_generate) {
+		// generate();
+		// return true;
+		// }
+		// if (id == R.id.action_settings) {
+		// startSettings();
+		// return true;
+		// }
 		return super.onOptionsItemSelected(item);
 	}
 

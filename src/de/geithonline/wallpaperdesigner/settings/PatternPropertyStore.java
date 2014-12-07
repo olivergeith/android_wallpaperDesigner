@@ -69,6 +69,9 @@ public class PatternPropertyStore {
 		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 
+		patternProperties.put("Puzzle", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
+
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Random Ratio", "Random Ratio (Rounded)", "Random Ratio (Mixed)",//
 						"Golden Ratio", "Golden Ratio (Rounded)", "Golden Ratio (Mixed)", //

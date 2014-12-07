@@ -58,6 +58,8 @@ import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath.PILLOW_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
+import de.geithonline.wallpaperdesigner.shapes.PuzzlePath;
+import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
@@ -189,6 +191,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Pillows":
 			drawPillow(x, y, paint, radius);
+			break;
+		case "Puzzle":
+			drawPuzzle(x, y, paint, radius);
 			break;
 		case "Smiley":
 			if (Settings.isGlossy()) {
@@ -1393,6 +1398,40 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 	}
 
+	protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius) {
+		final String variant = Settings.getSelectedPatternVariant();
+		drawPuzzle(x, y, paint, radius, variant);
+	}
+
+	protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "Mixed":
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM);
+			break;
+		case "Manneken":
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN);
+			break;
+		case "Top-Right":
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS);
+			break;
+		case "Cross":
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ);
+			break;
+		case "All":
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL);
+			break;
+		}
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
@@ -1463,7 +1502,6 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Ikae Robot":
 			path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.IKEA);
 			break;
-
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
