@@ -29,6 +29,7 @@ public class PreferencesActivity extends PreferenceActivity {
 				|| SizePreferencesFragment.class.getName().equals(fragmentName) //
 				|| StylePreferencesFragment.class.getName().equals(fragmentName) //
 				|| LayoutPreferencesFragment.class.getName().equals(fragmentName) //
+				|| ExampleSettingsFragment.class.getName().equals(fragmentName) //
 				|| GlobalSettingsFragment.class.getName().equals(fragmentName) //
 				|| ColorPreferencesFragment.class.getName().equals(fragmentName);
 	}

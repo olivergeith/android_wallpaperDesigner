@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+ xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
+    	    
+    <PreferenceCategory android:title="Extras !!!"/>
+	    <Preference 
+		    android:key="unzipSettings"
+		    android:title="Download Example Settings"
+		    android:summary="download lots of example Settings! Find them later under 'Restore Settings' (-button on main preference screen)!" 
+            />
+        
+</PreferenceScreen>

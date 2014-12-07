@@ -23,6 +23,8 @@
     <string name="header_about_options_summary">Info, Links and more about this App....</string>
     <string name="header_globalsettings">Global Settings</string>
     <string name="header_globalsettings_summary">App global settings....</string>
+    <string name="header_examplesettings">Example Settings</string>
+    <string name="header_examplesettings_summary">Downlod example settings....</string>
     <string name="category_background">Background</string>
     <string name="category_size">Wallpaper Size</string>
     <string name="category_patterns">Special Settings - Patterns-Style</string>

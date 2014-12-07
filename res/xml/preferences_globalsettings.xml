@@ -36,12 +36,5 @@
 		    android:title="HexValues in Color-Picker"
 		    android:summary="Enable Hexvalue Input in Colorpicker" 
             />
-     		    	    
-    <PreferenceCategory android:title="Extras !!!"/>
-	    <Preference 
-		    android:key="unzipSettings"
-		    android:title="Download Example Settings"
-		    android:summary="download lots of example Settings! Find them later under 'Restore Settings' (-button on main preference screen)!" 
-            />
-        
+         
 </PreferenceScreen>

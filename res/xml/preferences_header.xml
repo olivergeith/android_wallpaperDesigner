@@ -31,7 +31,12 @@
             android:summary="@string/header_globalsettings_summary"
             />
     
-
+    <header android:fragment="de.geithonline.wallpaperdesigner.ExampleSettingsFragment"
+            android:icon="@drawable/examplesettings"
+            android:title="@string/header_examplesettings"
+            android:summary="@string/header_examplesettings_summary"
+            />
+    
     <header android:fragment="de.geithonline.wallpaperdesigner.AboutFragment"
             android:icon="@drawable/about"
             android:title="@string/header_about_options"
