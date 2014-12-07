@@ -12,7 +12,7 @@
     <string name="the_logo">The Logo</string>
     <string name="color">Color</string>
     <string name="header_size">Wallpaper Size</string>
-    <string name="header_size_summary">Dimensions of Wallpaper</string>
+    <string name="header_size_summary">Dimensions of Wallpaper....</string>
     <string name="header_colors">Colors-Scheme</string>
     <string name="header_colors_summary">Colors / Colorlayout....</string>
     <string name="header_style">Pattern Style</string>

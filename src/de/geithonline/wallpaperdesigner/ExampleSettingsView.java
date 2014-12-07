@@ -1,6 +1,7 @@
 package de.geithonline.wallpaperdesigner;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -8,20 +9,40 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import de.geithonline.android.basics.utils.Alerter;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsDownloader;
 
-public class RemoteSettingsView extends Activity {
+public class ExampleSettingsView extends Activity {
 
 	private static final String SETTINGS_URL = "http://olivergeith.bplaced.com/settingslist.html";
+	private static final String PREMIUM_SETTINGS_URL = "http://olivergeith.bplaced.com/settingslist_premium.html";
 	private WebView web;
+	private boolean premium;
+
+	protected String getURL(final boolean premium) {
+		if (premium) {
+			return PREMIUM_SETTINGS_URL;
+		}
+		return SETTINGS_URL;
+	}
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
+		final Intent intent = getIntent();
+		premium = intent.getExtras().getBoolean("Premium");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_remote_settings_view);
+		setContentView(R.layout.activity_example_settings_view);
+		onCreate(getURL(premium));
+	}
+
+	protected void onCreate(final String url) {
+		if (premium) {
+			setTitle(getTitle() + " (Premium)");
+		}
 		web = (WebView) findViewById(R.id.webView);
 		web.setWebViewClient(new LinkInterceptor());
-		web.loadUrl(SETTINGS_URL);
+		web.loadUrl(url);
 		final WebSettings settings = web.getSettings();
 		settings.setUseWideViewPort(true);
 		settings.setLoadWithOverviewMode(true);
@@ -33,7 +54,7 @@ public class RemoteSettingsView extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.remote_settings_view, menu);
+		// getMenuInflater().inflate(R.menu.example_settings_view, menu);
 		return true;
 	}
 
@@ -55,8 +76,15 @@ public class RemoteSettingsView extends Activity {
 
 		@Override
 		public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
+			// Zeigen wie die Premium Settings? Und sind wir NICHT Premium User?
+			// Dann Downloaden wir nicht ;-)
+			// Aber geben eine Messagebox aus!
+			if (premium && !Settings.isPremium()) {
+				Alerter.alertInfo(ExampleSettingsView.this, "Sorry! This is only downloadable for Premium Users!");
+				return true;
+			}
 			Log.i("Webview", "Url Clicked is:" + url);
-			SettingsDownloader.startDownloadFile(RemoteSettingsView.this, url);
+			SettingsDownloader.startDownloadFile(ExampleSettingsView.this, url);
 			return true;
 		}
 

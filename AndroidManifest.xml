@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RemoteSettingsView"
+            android:name=".ExampleSettingsView"
             android:label="@string/title_activity_remote_settings_view" >
         </activity>
     </application>

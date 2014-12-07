@@ -5,8 +5,15 @@
     <PreferenceCategory android:title="Download example Settings"/>
 	    <Preference 
 		    android:key="unzipSettings"
-		    android:title="Download Example Settings"
+		    android:icon="@drawable/examplesettings"
+		    android:title="Example Settings"
 		    android:summary="download lots of example Settings! Find them later under 'Restore Settings' (-button on main preference screen)!" 
             />
-        
+	    <Preference 
+		    android:key="unzipSettingsPremium"
+		    android:icon="@drawable/examplesettings_premium"
+		    android:title="Premium Example Settings"
+		    android:summary="Download even more example Settings! Only for Premium Users!" 
+            />
+	    
 </PreferenceScreen>

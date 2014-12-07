@@ -23,30 +23,10 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class SettingsDownloader extends AsyncTask<String, String, String> {
 
-	private static final String URL_SETTINGS_1 = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0Bjrnea3dfazBOcGw1MTg";
-	private static final String URL_SETTINGS_2 = "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B4E0uB0BjrneT0xhRHhlZ3R4RlU";
 	private static Activity activi;
 	private static ProgressDialog dialog;
 	private static String msg;
 	private String errorMessage = "";
-
-	// public static void startDownloadFile1(final Activity activity) {
-	// Alerter.alertYesNo(activity, "Do you want to download additional predefined Settings? (1.9 MB)", "Download Example Settings", new OnClickListener() {
-	// @Override
-	// public void onClick(final DialogInterface dialog, final int which) {
-	// startDownload(activity, URL_SETTINGS_1, "WPD_settings_V1.zip");
-	// }
-	// });
-	// }
-	//
-	// public static void startDownloadFile2(final Activity activity) {
-	// Alerter.alertYesNo(activity, "Do you want to download additional predefined Settings? (4.3 MB)", "Download Example Settings", new OnClickListener() {
-	// @Override
-	// public void onClick(final DialogInterface dialog, final int which) {
-	// startDownload(activity, URL_SETTINGS_2, "WPD_settings_V2.zip");
-	// }
-	// });
-	// }
 
 	public static void startDownloadFile(final Activity activity, final String url) {
 		final String name = url.substring(url.indexOf(".com") + 5);

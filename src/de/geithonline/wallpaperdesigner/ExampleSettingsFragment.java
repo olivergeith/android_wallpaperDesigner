@@ -9,6 +9,7 @@ import android.preference.PreferenceFragment;
 public class ExampleSettingsFragment extends PreferenceFragment {
 
 	private Preference unzipSettings;
+	private Preference unzipSettingsPremium;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -19,7 +20,18 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		unzipSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				final Intent intent = new Intent(getActivity(), RemoteSettingsView.class);
+				final Intent intent = new Intent(getActivity(), ExampleSettingsView.class);
+				intent.putExtra("Premium", false);
+				startActivityForResult(intent, 1);
+				return false;
+			}
+		});
+		unzipSettingsPremium = findPreference("unzipSettingsPremium");
+		unzipSettingsPremium.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				final Intent intent = new Intent(getActivity(), ExampleSettingsView.class);
+				intent.putExtra("Premium", true);
 				startActivityForResult(intent, 1);
 				return false;
 			}
