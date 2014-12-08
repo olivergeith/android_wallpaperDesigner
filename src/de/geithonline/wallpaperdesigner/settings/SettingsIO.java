@@ -41,15 +41,15 @@ public class SettingsIO {
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no Settings to restore!");
+			Toaster.showErrorToast(activity, "There are no Designs to restore!");
 			return;
 		}
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Restore Settings");
-		dialog.setMessage("Select Settings to be restored");
+		dialog.setTitle("Restore Design");
+		dialog.setMessage("Select Design to be restored");
 
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
@@ -82,15 +82,15 @@ public class SettingsIO {
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no Settings to delete!");
+			Toaster.showErrorToast(activity, "There are no Designs to delete!");
 			return;
 		}
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 
-		dialog.setTitle("Delete Settings");
-		dialog.setMessage("Select Settings to be deleted");
+		dialog.setTitle("Delete Design");
+		dialog.setMessage("Select Design to be deleted");
 
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
@@ -105,7 +105,7 @@ public class SettingsIO {
 				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
 					final SavedPreference pref = preferenceList.get(position);
-					Alerter.alertYesNo(activity, "Dou you want really want to delete the Settings?", "Delete Settings", new OnClickListener() {
+					Alerter.alertYesNo(activity, "Dou you want really want to delete the Design?", "Delete Design", new OnClickListener() {
 						@Override
 						public void onClick(final DialogInterface dialog, final int which) {
 							SettingsIO.deletePreferencesFileAndBitmap(pref);
@@ -158,7 +158,7 @@ public class SettingsIO {
 					// entry.getValue().getClass());
 					writeEntry(entry, prefs);
 				}
-				Toaster.showInfoToast(activity, "Settings restored from " + stripTimestamp(filename));
+				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {
 				e.printStackTrace();

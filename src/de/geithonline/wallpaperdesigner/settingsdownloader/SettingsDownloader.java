@@ -30,7 +30,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 
 	public static void startDownloadFile(final Activity activity, final String url) {
 		final String name = url.substring(url.indexOf(".com") + 5);
-		Alerter.alertYesNo(activity, "Download " + name + " ?", "Download Example Settings", new OnClickListener() {
+		Alerter.alertYesNo(activity, "Download " + name + " ?", "Download Example Designs", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				startDownload(activity, url, "settings.zip");
@@ -39,14 +39,12 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	}
 
 	private static void startDownload(final Activity activity, final String url, final String destinationFileName) {
-		// final String url = "http://www.geith-online.de/wpd/WPD_settings_V1.zip";
-		// final String url = "http://www.geith-online.de/wpd/WPD_settings_V2.zip";
 		activi = activity;
 		dialog = new ProgressDialog(activity);
 		dialog.setIndeterminate(false);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setProgressNumberFormat(null);
-		msg = "Downloading from Google Drive\n" + destinationFileName;
+		msg = "Downloading \n" + destinationFileName;
 		dialog.setMessage(msg);
 		dialog.setProgress(0);
 		dialog.setMax(100);
@@ -132,14 +130,14 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertInfo(activi, "Example-Settings downloaded successfully!!!\n\nHint: Use Button 'Restore Settings' to use them!");
+			Alerter.alertInfo(activi, "Example-Designs downloaded successfully!!!\n\nHint: Use 'Restore Desing' to use them!");
 			// Toaster.showInfoToast(activi,
 			// "Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
 		} else {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertError(activi, "Error downloading Example-Settings!!!\n\n" + errorMessage + "\n\nInternet connection available?");
+			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage + "\n\nInternet connection available?");
 			// Toaster.showErrorToast(activi, "Error downloading Example-Settings!!!\n" + errorMessage);
 		}
 	}

@@ -2,18 +2,31 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
     	    
-    <PreferenceCategory android:title="Download example Settings"/>
+    <PreferenceCategory android:title="Download example Designs"/>
 	    <Preference 
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"
-		    android:title="Example Settings"
-		    android:summary="download lots of example Settings! Find them later under 'Restore Settings' (-button on main preference screen)!" 
+		    android:title="Example Designs"
+		    android:summary="download lots of example Designs! Find them later under 'Restore Design'!" 
             />
 	    <Preference 
 		    android:key="unzipSettingsPremium"
 		    android:icon="@drawable/examplesettings_premium"
-		    android:title="Premium Example Settings"
-		    android:summary="Download even more example Settings! Only for Premium Users!" 
+		    android:title="Premium Example Designs"
+		    android:summary="Download even more example Designs! Only for Premium Users!" 
             />
-	    
+
+	<PreferenceCategory android:title="Manage Designs"/>
+	    <Preference 
+		    android:key="loadSettings"
+		    android:title="Restore Design"
+		    android:summary="Restore one of your designs" 
+            />
+	    <Preference 
+		    android:key="deleteSettings"
+		    android:title="Delete Design"
+		    android:summary="Delete one of your designs" 
+            />
+	    		
+	    	    
 </PreferenceScreen>

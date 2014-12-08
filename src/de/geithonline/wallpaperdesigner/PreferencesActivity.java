@@ -8,13 +8,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 
 public class PreferencesActivity extends PreferenceActivity {
 
@@ -55,53 +52,40 @@ public class PreferencesActivity extends PreferenceActivity {
 		if (!isPremium) {
 			final Button button = billingManager.getButton();
 			ll.addView(button);
+			// set view with buttons to the list footer
+			setListFooter(ll);
 		}
 		// ll.addView(getSaveSettingsButton());
-		ll.addView(getLoadSettingsButton());
-		ll.addView(getDeleteSettingsButton());
-
-		// set view with buttons to the list footer
-		setListFooter(ll);
+		// ll.addView(getLoadSettingsButton());
+		// ll.addView(getDeleteSettingsButton());
+		// setListFooter(ll);
 	}
 
-	// private Button getSaveSettingsButton() {
+	// private Button getLoadSettingsButton() {
 	// final Button button = new Button(PreferencesActivity.this);
-	// button.setText("Backup Preferences...");
+	// button.setText("Restore Settings...");
 	// button.setOnClickListener(new OnClickListener() {
 	//
 	// @Override
 	// public void onClick(final View v) {
-	// SettingsIO.savePreferences(PreferencesActivity.this, Settings.prefs);
+	// SettingsIO.loadPreferencesTheFancyWay(PreferencesActivity.this, Settings.prefs);
 	// }
 	// });
 	// return button;
 	// }
-
-	private Button getLoadSettingsButton() {
-		final Button button = new Button(PreferencesActivity.this);
-		button.setText("Restore Settings...");
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(final View v) {
-				SettingsIO.loadPreferencesTheFancyWay(PreferencesActivity.this, Settings.prefs);
-			}
-		});
-		return button;
-	}
-
-	private Button getDeleteSettingsButton() {
-		final Button button = new Button(PreferencesActivity.this);
-		button.setText("Delete Settings...");
-		button.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(final View v) {
-				SettingsIO.deletePreferencesTheFancyWay(PreferencesActivity.this);
-			}
-		});
-		return button;
-	}
+	//
+	// private Button getDeleteSettingsButton() {
+	// final Button button = new Button(PreferencesActivity.this);
+	// button.setText("Delete Settings...");
+	// button.setOnClickListener(new OnClickListener() {
+	//
+	// @Override
+	// public void onClick(final View v) {
+	// SettingsIO.deletePreferencesTheFancyWay(PreferencesActivity.this);
+	// }
+	// });
+	// return button;
+	// }
 
 	/**
 	 * Populate the activity with the top-level headers.
