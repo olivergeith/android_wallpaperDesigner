@@ -14,15 +14,15 @@
             android:title="@string/header_style"
             android:summary="@string/header_style_summary" />
     
-    <header android:fragment="de.geithonline.wallpaperdesigner.SizePreferencesFragment"
-            android:icon="@drawable/size"
-            android:title="@string/header_size"
-            android:summary="@string/header_size_summary" />
-    
     <header android:fragment="de.geithonline.wallpaperdesigner.ColorPreferencesFragment"
             android:icon="@drawable/color"
             android:title="@string/header_colors"
             android:summary="@string/header_colors_summary" />
+    
+    <header android:fragment="de.geithonline.wallpaperdesigner.SizePreferencesFragment"
+            android:icon="@drawable/size"
+            android:title="@string/header_size"
+            android:summary="@string/header_size_summary" />
     
     
     <header android:fragment="de.geithonline.wallpaperdesigner.GlobalSettingsFragment"
