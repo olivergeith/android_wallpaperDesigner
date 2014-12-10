@@ -11,30 +11,47 @@ public class PuzzlePath extends Path {
 		RANDOM, MANNEKEN, OBEN_RECHTS, KREUZ, ALL;
 	}
 
-	public PuzzlePath(final Point center, final float radius, final PUZZLE_TYPE type) {
+	public enum PUZZLE_CONNECTION {
+		NORMAL, CIRCLE;
+	}
+
+	public PuzzlePath(final Point center, final float radius, final PUZZLE_TYPE type, final PUZZLE_CONNECTION connection) {
 		switch (type) {
 		default:
 		case RANDOM:
-			drawPuzzle(center, radius, Randomizer.getRandomBoolean(), Randomizer.getRandomBoolean(), Randomizer.getRandomBoolean(),
-					Randomizer.getRandomBoolean());
+			drawPuzzle(center, radius, Randomizer.getRandomBoolean(), Randomizer.getRandomBoolean(),
+					Randomizer.getRandomBoolean(), Randomizer.getRandomBoolean());
 			break;
 		case MANNEKEN:
-			drawPuzzle(center, radius, true, false, false, false);
+			drawPuzzle(center, radius, true, false, false, false, connection);
 			break;
 		case OBEN_RECHTS:
-			drawPuzzle(center, radius, true, true, false, false);
+			drawPuzzle(center, radius, true, true, false, false, connection);
 			break;
 		case KREUZ:
-			drawPuzzle(center, radius, false, false, false, false);
+			drawPuzzle(center, radius, false, false, false, false, connection);
 			break;
 		case ALL:
-			drawPuzzle(center, radius, true, true, true, true);
+			drawPuzzle(center, radius, true, true, true, true, connection);
 			break;
 		}
 	}
 
-	private void drawPuzzle(final Point center, final float radius, final boolean obenOut, final boolean rechtsOut, final boolean untenOut,
-			final boolean linksOut) {
+	private void drawPuzzle(final Point center, final float radius, final boolean obenOut, final boolean rechtsOut,
+			final boolean untenOut, final boolean linksOut, final PUZZLE_CONNECTION connection) {
+		switch (connection) {
+		default:
+		case NORMAL:
+			drawPuzzle(center, radius, obenOut, rechtsOut, untenOut, linksOut);
+			break;
+		case CIRCLE:
+			drawPuzzleDotConnector(center, radius, obenOut, rechtsOut, untenOut, linksOut);
+			break;
+		}
+	}
+
+	private void drawPuzzle(final Point center, final float radius, final boolean obenOut, final boolean rechtsOut,
+			final boolean untenOut, final boolean linksOut) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 
@@ -88,6 +105,61 @@ public class PuzzlePath extends Path {
 		}
 		lineTo(center.x - 2 * raster, center.y - 2 * raster);
 		// close();
+	}
+
+	private void drawPuzzleDotConnector(final Point center, final float radius, final boolean obenOut,
+			final boolean rechtsOut, final boolean untenOut, final boolean linksOut) {
+		final float raster = radius / 2;
+		final RectF oval = new RectF();
+
+		moveTo(center.x - 2 * raster, center.y - 2 * raster);
+		lineTo(center.x - 1 * raster, center.y - 2 * raster);
+
+		oval.left = center.x - 1 * raster;
+		oval.right = center.x + 1 * raster;
+		oval.top = center.y - 3 * raster;
+		oval.bottom = center.y - 1 * raster;
+		arcTo(oval, -180, -180);
+		lineTo(center.x + 2 * raster, center.y - 2 * raster);
+		lineTo(center.x + 2 * raster, center.y - 1 * raster);
+
+		oval.left = center.x + 1 * raster;
+		oval.right = center.x + 3 * raster;
+		oval.top = center.y - 1 * raster;
+		oval.bottom = center.y + 1 * raster;
+		arcTo(oval, -90, -180);
+		lineTo(center.x + 2 * raster, center.y + 2 * raster);
+		lineTo(center.x + 1 * raster, center.y + 2 * raster);
+
+		oval.left = center.x - 1 * raster;
+		oval.right = center.x + 1 * raster;
+		oval.top = center.y + 1 * raster;
+		oval.bottom = center.y + 3 * raster;
+		arcTo(oval, 0, -180);
+		lineTo(center.x - 2 * raster, center.y + 2 * raster);
+		lineTo(center.x - 2 * raster, center.y + 1 * raster);
+
+		oval.left = center.x - 3 * raster;
+		oval.right = center.x - 1 * raster;
+		oval.top = center.y - 1 * raster;
+		oval.bottom = center.y + 1 * raster;
+		arcTo(oval, 90, -180);
+		lineTo(center.x - 2 * raster, center.y - 2 * raster);
+		close();
+
+		final float radiusCircles = raster * 0.8f;
+		if (obenOut) {
+			addCircle(center.x - 0 * raster, center.y - 2 * raster, radiusCircles, Direction.CW);
+		}
+		if (rechtsOut) {
+			addCircle(center.x + 2 * raster, center.y - 0 * raster, radiusCircles, Direction.CW);
+		}
+		if (untenOut) {
+			addCircle(center.x + 0 * raster, center.y + 2 * raster, radiusCircles, Direction.CW);
+		}
+		if (linksOut) {
+			addCircle(center.x - 2 * raster, center.y + 0 * raster, radiusCircles, Direction.CW);
+		}
 	}
 
 }

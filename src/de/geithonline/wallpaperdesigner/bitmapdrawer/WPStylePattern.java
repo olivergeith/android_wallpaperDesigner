@@ -59,6 +59,7 @@ import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath.PILLOW_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath;
+import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_CONNECTION;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
@@ -193,7 +194,10 @@ public abstract class WPStylePattern extends WPStyle {
 			drawPillow(x, y, paint, radius);
 			break;
 		case "Puzzle":
-			drawPuzzle(x, y, paint, radius);
+			drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.NORMAL);
+			break;
+		case "Puzzle (Circle Connector)":
+			drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.CIRCLE);
 			break;
 		case "Smiley":
 			if (Settings.isGlossy()) {
@@ -413,7 +417,8 @@ public abstract class WPStylePattern extends WPStyle {
 		drawGeometricMore(x, y, paint, radius, variant);
 	}
 
-	protected void drawGeometricMore(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawGeometricMore(final int x, final int y, final Paint paint, final int radius,
+			final String variante) {
 		if (x == bWidth / 2 && y == bHeight / 2) {
 			return;
 		}
@@ -422,19 +427,23 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Rectangle":
-			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.NORMAL);
+			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(),
+					RECT_ROUNDED.NORMAL);
 			break;
 		case "V2":
 		case "Rectangle (rounded)":
-			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
+			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(),
+					RECT_ROUNDED.ROUNDED);
 			break;
 		case "V3":
 		case "Rectangle (Mixed)":
-			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.MIXED);
+			path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(),
+					RECT_ROUNDED.MIXED);
 			break;
 		case "V4":
 		case "Triangle":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.TRIANGLE);
 			break;
 		case "V5":
 		case "Oval":
@@ -442,15 +451,18 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V6":
 		case "Diamond":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.RAUTE);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.RAUTE);
 			break;
 		case "V7":
 		case "Dragon":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.DRACHEN);
 			break;
 		case "V8":
 		case "Dragon (upsidedown)":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN_UPSIDEDOWN);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.DRACHEN_UPSIDEDOWN);
 			break;
 		case "V9":
 		case "Drop":
@@ -458,15 +470,18 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V10":
 		case "Lense":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.LENSE);
 			break;
 		case "V11":
 		case "Lense V2":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V2);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.LENSE_V2);
 			break;
 		case "V12":
 		case "Lense V3":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V3);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.LENSE_V3);
 			break;
 		case "V13":
 		case "Tag":
@@ -474,39 +489,48 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V14":
 		case "Knife":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+					ASYMETRIC_STYLE.KNIFE);
 			break;
 		case "V15":
 		case "Knife V2":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V2);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+					ASYMETRIC_STYLE.KNIFE_V2);
 			break;
 		case "V16":
 		case "Knife V3":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V3);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+					ASYMETRIC_STYLE.KNIFE_V3);
 			break;
 		case "V17":
 		case "Cross":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.CROSS);
 			break;
 		case "V18":
 		case "Double Cross":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DOUBLE_CROSS);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.DOUBLE_CROSS);
 			break;
 		case "V19":
 		case "Sperm":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+					ASYMETRIC_STYLE.SPERM);
 			break;
 		case "V20":
 		case "Virus":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+					ASYMETRIC_STYLE.VIRUS);
 			break;
 		case "V21":
 		case "Virus V2":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+					ASYMETRIC_STYLE.VIRUS_V2);
 			break;
 		case "V22":
 		case "Long Heart":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.LONG_HEART);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+					ASYMETRIC_STYLE.LONG_HEART);
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -811,19 +835,24 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variant) {
 		default:
 		case "V1":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, "Circle Filling");
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+					getFilledBoolean(), 1.0f, "Circle Filling");
 			break;
 		case "V2":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, "Circle Filling");
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+					getFilledBoolean(), 0.8f, "Circle Filling");
 			break;
 		case "V3":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0, "V3");
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+					getFilledBoolean(), 0, "V3");
 			break;
 		case "V4":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f, "Inner Flower");
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+					getFilledBoolean(), 1.0f, "Inner Flower");
 			break;
 		case "V5":
-			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f, "Inner Flower");
+			path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+					getFilledBoolean(), 0.8f, "Inner Flower");
 			break;
 		case "V6":
 			path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
@@ -899,7 +928,8 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new ShellV1Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
 		case "Shells V2":
-			path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f, ShellV2Path.VARIANTE_OUTER, getFilledBoolean());
+			path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f,
+					ShellV2Path.VARIANTE_OUTER, getFilledBoolean());
 			break;
 		case "Shells V3":
 			path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
@@ -1207,35 +1237,43 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V5":
 		case "Edgy Bars":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.EDGY_BARS);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.EDGY_BARS);
 			break;
 		case "V6":
 		case "Rotating Bars":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_BARS);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.ROTATING_BARS);
 			break;
 		case "V7":
 		case "Rotating Triangles":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_TRIANGLES);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.ROTATING_TRIANGLES);
 			break;
 		case "V8":
 		case "Half Stripe":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.HALF_STIPE);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.HALF_STIPE);
 			break;
 		case "V9":
 		case "Rotating Arches (random arches)":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_ARCHES_RANDOM_SIZE);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.ROTATING_ARCHES_RANDOM_SIZE);
 			break;
 		case "V10":
 		case "Rotating Arches (quarter arches)":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_QUARTER_ARCHES);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.ROTATING_QUARTER_ARCHES);
 			break;
 		case "V11":
 		case "Rotating Arches (half arches)":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_HALF_ARCHES);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.ROTATING_HALF_ARCHES);
 			break;
 		case "V12":
 		case "Rotating Arches (3-quarter arches)":
-			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ROTATING_THREE_QUARTER_ARCHES);
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.ROTATING_THREE_QUARTER_ARCHES);
 			break;
 		}
 		bitmapCanvas.drawPath(path, paint);
@@ -1257,51 +1295,63 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Random Ratio":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.RANDOM);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+					RECT_ASPECT.RANDOM);
 			break;
 		case "V2":
 		case "Random Ratio (Rounded)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.RANDOM);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+					RECT_ASPECT.RANDOM);
 			break;
 		case "V3":
 		case "Random Ratio (Mixed)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.RANDOM);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+					RECT_ASPECT.RANDOM);
 			break;
 		case "V4":
 		case "4-3 Ratio":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_3_4);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+					RECT_ASPECT.ASPECT_3_4);
 			break;
 		case "V5":
 		case "4-3 Ratio (Rounded)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_3_4);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+					RECT_ASPECT.ASPECT_3_4);
 			break;
 		case "V6":
 		case "4-3 Ratio (Mixed)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_3_4);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+					RECT_ASPECT.ASPECT_3_4);
 			break;
 		case "V7":
 		case "1-2 Ratio":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_1_2);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+					RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V8":
 		case "1-2 Ratio (Rounded)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_1_2);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+					RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V9":
 		case "1-2 Ratio (Mixed)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+					RECT_ASPECT.ASPECT_1_2);
 			break;
 		case "V10":
 		case "Golden Ratio":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+					RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		case "V11":
 		case "Golden Ratio (Rounded)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+					RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		case "V12":
 		case "Golden Ratio (Mixed)":
-			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+			path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+					RECT_ASPECT.ASPECT_GOLDEN_CUT);
 			break;
 		}
 
@@ -1398,29 +1448,31 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 	}
 
-	protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius,
+			final PUZZLE_CONNECTION puzzleConnection) {
 		final String variant = Settings.getSelectedPatternVariant();
-		drawPuzzle(x, y, paint, radius, variant);
+		drawPuzzle(x, y, paint, radius, variant, puzzleConnection);
 	}
 
-	protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius, final String variante,
+			final PUZZLE_CONNECTION puzzleConnection) {
 		Path path;
 		switch (variante) {
 		default:
 		case "Mixed":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM, puzzleConnection);
 			break;
 		case "Manneken":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN, puzzleConnection);
 			break;
 		case "Top-Right":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS, puzzleConnection);
 			break;
 		case "Cross":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ, puzzleConnection);
 			break;
 		case "All":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL, puzzleConnection);
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -1733,7 +1785,8 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
 		bitmapCanvas.drawCircle(x, y, radius, paint);
 		// Glossy glow
-		paint.setShader(new LinearGradient(x, y - radius, x, y, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
+		paint.setShader(new LinearGradient(x, y - radius, x, y, whitehalftransparent, transparent,
+				Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 		final RectF oval = new RectF(x - radius * 3 / 4, y - radius, x + radius * 3 / 4, y);
 		bitmapCanvas.drawOval(oval, paint);
@@ -1759,7 +1812,8 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
-		paint.setShader(new LinearGradient(x, y - radius, x, y, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
+		paint.setShader(new LinearGradient(x, y - radius, x, y, whitehalftransparent, transparent,
+				Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 		final RectF oval = new RectF(x - radius * 3 / 4, y - radius, x + radius * 3 / 4, y);
 		bitmapCanvas.drawOval(oval, paint);
@@ -1790,7 +1844,8 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setShadowLayer(0, 0, 0, 0);
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
-		paint.setShader(new LinearGradient(x, y - radius * 0.95f, x, y - radius * 0.2f, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
+		paint.setShader(new LinearGradient(x, y - radius * 0.95f, x, y - radius * 0.2f, whitehalftransparent,
+				transparent, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 		final RectF oval = new RectF(x - radius * 6 / 10, y - radius * 0.95f, x + radius * 6 / 10, y - radius * 0.2f);
 		bitmapCanvas.drawOval(oval, paint);
@@ -1826,7 +1881,8 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
-		paint.setShader(new LinearGradient(x - radius * 2 / 3, y - radius * 2 / 3, x, y, whitehalftransparent, transparent, Shader.TileMode.CLAMP));
+		paint.setShader(new LinearGradient(x - radius * 2 / 3, y - radius * 2 / 3, x, y, whitehalftransparent,
+				transparent, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 		bitmapCanvas.drawPath(path, paint);
 		// Ring
@@ -1865,7 +1921,8 @@ public abstract class WPStylePattern extends WPStyle {
 		// Glossy glow
 		final int colors[] = { whitehalftransparent, whitequartertransparent, transparent };
 		final float dists[] = { 0f, 0.35f, 0.355f };
-		paint.setShader(new LinearGradient(x - radius * 1 / 2, y - radius * 1 / 2, x + radius, y + radius, colors, dists, Shader.TileMode.CLAMP));
+		paint.setShader(new LinearGradient(x - radius * 1 / 2, y - radius * 1 / 2, x + radius, y + radius, colors,
+				dists, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1956,7 +2013,8 @@ public abstract class WPStylePattern extends WPStyle {
 		return dropShadowRadius;
 	}
 
-	public static int getRotationDegrees(final int randomMin, final int randomMax, final int bWidth, final int bHeight, final Point center) {
+	public static int getRotationDegrees(final int randomMin, final int randomMax, final int bWidth, final int bHeight,
+			final Point center) {
 		switch (Settings.getRotationStyle()) {
 		default:
 		case "Fixed":
