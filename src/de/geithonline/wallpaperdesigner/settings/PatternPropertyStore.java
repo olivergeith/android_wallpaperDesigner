@@ -8,7 +8,8 @@ public class PatternPropertyStore {
 	private static final Map<String, PatternProperties> patternProperties = new HashMap<String, PatternProperties>();
 
 	static {
-		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
+		// new PatternProperties(outline, randomrotate, text, filled, leaf,
+		// glossy)
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot",
 						"Footprint", "Pentagram", "4Sails", "Dice", "Drop", "Mixed" }));
@@ -70,10 +71,13 @@ public class PatternPropertyStore {
 		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 
-		patternProperties.put("Puzzle", new PatternProperties(true, true, false, false, false, false, //
+		patternProperties.put("Puzzle", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
-		patternProperties.put("Puzzle (Circle Connector)", new PatternProperties(true, true, false, false, false,
-				false, //
+		patternProperties.put("Puzzle (Circle Connector)", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
+		patternProperties.put("Puzzle (Square)", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
+		patternProperties.put("Puzzle (Square Connector)", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, false, //

@@ -199,6 +199,12 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Puzzle (Circle Connector)":
 			drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.CIRCLE);
 			break;
+		case "Puzzle (Square)":
+			drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.RECT_NORMAL);
+			break;
+		case "Puzzle (Square Connector)":
+			drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.SQUARE);
+			break;
 		case "Smiley":
 			if (Settings.isGlossy()) {
 				drawGlossySmiley(x, y, paint, radius);
@@ -1460,19 +1466,20 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variante) {
 		default:
 		case "Mixed":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM, puzzleConnection);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM, puzzleConnection, getFilledBoolean());
 			break;
 		case "Manneken":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN, puzzleConnection);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN, puzzleConnection, getFilledBoolean());
 			break;
 		case "Top-Right":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS, puzzleConnection);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS, puzzleConnection,
+					getFilledBoolean());
 			break;
 		case "Cross":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ, puzzleConnection);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ, puzzleConnection, getFilledBoolean());
 			break;
 		case "All":
-			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL, puzzleConnection);
+			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL, puzzleConnection, getFilledBoolean());
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -1970,22 +1977,26 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 	}
 
-	// protected void setUpPaintForRadialGradient(final int x, final int y, final Paint paint, final int radius) {
+	// protected void setUpPaintForRadialGradient(final int x, final int y,
+	// final Paint paint, final int radius) {
 	// final int color = paint.getColor();
 	// final int colorDarker = ColorHelper.darker(color);
 	// final int colorBrighter = ColorHelper.brighter2times(color);
 	// paint.setShadowLayer(5, 0, 0, 0);
-	// paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
+	// paint.setShader(new RadialGradient(x, y, radius, colorBrighter,
+	// colorDarker, Shader.TileMode.CLAMP));
 	// }
 	//
-	// protected void setupPaintForDarkerFont(final Paint paint, final int radius) {
+	// protected void setupPaintForDarkerFont(final Paint paint, final int
+	// radius) {
 	// paint.setStyle(Style.FILL);
 	// paint.setShader(null);
 	// paint.setShadowLayer(0, 0, 0, 0);
 	// if (Settings.isCustomOutlineColor()) {
 	// paint.setColor(Settings.getCustomOutlineColor());
 	// } else {
-	// paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
+	// paint.setColor(ColorHelper.changeBrightness(paint.getColor(),
+	// Settings.getOutlineDarkness()));
 	// }
 	// }
 
