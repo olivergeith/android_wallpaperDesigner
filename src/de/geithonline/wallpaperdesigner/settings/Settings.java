@@ -28,10 +28,34 @@ public class Settings {
 	public static final String PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
 	public static final String PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
-	private static Context context;
+
+	// private static Context context;
 
 	public enum IMAGE_OUTPUT_FORMAT {
 		PNG, JPG;
+	}
+
+	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
+	public static final String DEFAULT_SHARE_TEXT = "Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner";
+
+	public static String getShareText() {
+		if (prefs == null) {
+			return DEFAULT_SHARE_TEXT;
+		}
+		String p = prefs.getString("shareText", DEFAULT_SHARE_TEXT);
+		if (p.isEmpty())
+			p = DEFAULT_SHARE_TEXT;
+		return p;
+	}
+
+	public static String getShareSubject() {
+		if (prefs == null) {
+			return DEFAULT_SHARE_SUBJECT;
+		}
+		String p = prefs.getString("shareSubject", DEFAULT_SHARE_SUBJECT);
+		if (p.isEmpty())
+			p = DEFAULT_SHARE_SUBJECT;
+		return p;
 	}
 
 	public static int getJpgCompression() {
@@ -541,12 +565,14 @@ public class Settings {
 	 * @param preferences
 	 */
 	public static void initPrefs(final SharedPreferences preferences, final Context ctx, final Activity activity) {
-		context = ctx;
+		// context = ctx;
 		prefs = preferences;
-		// if (prefs.getInt("sampleSettingsVersion", 0) < CURRENT_SETTINGS_VERSION) {
+		// if (prefs.getInt("sampleSettingsVersion", 0) <
+		// CURRENT_SETTINGS_VERSION) {
 		// Log.i("GEITH", "Unzipping Sample Settings...");
 		// ZipHelper.unzipSettings(activity, ctx);
-		// prefs.edit().putInt("sampleSettingsVersion", CURRENT_SETTINGS_VERSION).commit();
+		// prefs.edit().putInt("sampleSettingsVersion",
+		// CURRENT_SETTINGS_VERSION).commit();
 		// } else {
 		// Log.i("GEITH", "Sample Settings already unzipped...Nothing to do!");
 		// }

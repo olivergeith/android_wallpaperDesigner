@@ -192,8 +192,10 @@ public class MainActivity extends Activity {
 		// final Intent shareIntent = new Intent();
 		// // shareIntent.setAction(Intent.ACTION_SEND);
 		// // shareIntent.setType("text/plain");
-		// // // shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Shared from the Wallpaper Designer");
-		// // shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner");
+		// // // shareIntent.putExtra(Intent.EXTRA_SUBJECT,
+		// "Shared from the Wallpaper Designer");
+		// // shareIntent.putExtra(Intent.EXTRA_TEXT,
+		// "https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner");
 		// shareIntent.setAction(Intent.ACTION_SEND);
 		// // shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 		// shareIntent.setType("image/jpeg");
@@ -237,19 +239,18 @@ public class MainActivity extends Activity {
 		// Save tmp image
 		final Bitmap bitmap = drawer.getBitmap();
 		if (bitmap != null) {
-			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorage(), "wpd_tmp.jpg",
-					Settings.getJpgCompression());
+			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap,
+					StorageHelper.getExternalStorage(), "wpd_tmp.jpg", Settings.getJpgCompression());
 
 			final Uri uri = Uri.fromFile(imageFile);
 			// Uri.parse("file://" + imageFile.getAbsolutePath());
 			Log.i("URI", "Uri = " + uri);
 			final Intent shareIntent = new Intent();
 			shareIntent.setAction(Intent.ACTION_SEND);
-			shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Shared from the Wallpaper Designer");
+			shareIntent.putExtra(Intent.EXTRA_SUBJECT, Settings.getShareSubject());
 			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 			shareIntent.setType("image/jpeg");
-			shareIntent.putExtra(Intent.EXTRA_TEXT,
-					"Created with the Wallpaper Designer : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner");
+			shareIntent.putExtra(Intent.EXTRA_TEXT, Settings.getShareText());
 
 			// startActivity(Intent.createChooser(shareIntent, "Share to..."));
 			if (mShareActionProvider != null) {
@@ -279,9 +280,12 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
+			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(),
+					Settings.getSelectedMainLayoutVariante());
 			// drawer.recycleBitmap();
-			Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
+			Log.i("Geith",
+					"Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante()
+							+ ")");
 
 			final Bitmap bitmap = drawer.drawBitmap(this);
 			return bitmap;
@@ -435,7 +439,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+				SensorManager.SENSOR_DELAY_UI);
 	}
 
 	@Override

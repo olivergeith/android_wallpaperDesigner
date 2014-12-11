@@ -36,5 +36,19 @@
 		    android:title="HexValues in Color-Picker"
 		    android:summary="Enable Hexvalue Input in Colorpicker" 
             />
+        
+        <EditTextPreference
+		    android:key="shareSubject"
+    		android:defaultValue="Shared from the Wallpaper Designer"
+		    android:title="@string/shareSubject" 
+    		android:dialogTitle="@string/shareSubject"
+         	/>
+        <EditTextPreference
+		    android:key="shareText"
+    		android:defaultValue="Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner"
+		    android:title="@string/shareText" 
+    		android:dialogTitle="@string/shareText"
+         	/>
+        
          
 </PreferenceScreen>
