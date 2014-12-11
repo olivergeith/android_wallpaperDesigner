@@ -15,11 +15,14 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 	private Preference imageFormat;
 	private EditTextPreference shareText;
 	private EditTextPreference shareSubject;
+	private Preference jpgCompression;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_globalsettings);
+
+		jpgCompression = findPreference("jpgCompression");
 
 		shareText = (EditTextPreference) findPreference("shareText");
 		shareText.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -103,6 +106,6 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 
 	private void handleImageFormat(final String newValue) {
 		imageFormat.setSummary(newValue);
+		jpgCompression.setEnabled(newValue.equals("jpg"));
 	}
-
 }
