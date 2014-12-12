@@ -3,6 +3,9 @@ package de.geithonline.wallpaperdesigner.utils;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Build;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
@@ -267,8 +270,8 @@ public class BitmapBlurrer {
 	}
 
 	/*
-	 * This method was copied from http://stackoverflow.com/a/10028267/694378. The only modifications I've made are to remove a couple of Log statements which
-	 * could slow things down slightly.
+	 * This method was copied from http://stackoverflow.com/a/10028267/694378. The only modifications I've made are to
+	 * remove a couple of Log statements which could slow things down slightly.
 	 */
 	public Bitmap fastblur2(final Bitmap sentBitmap, final int radius) {
 
@@ -733,6 +736,34 @@ public class BitmapBlurrer {
 		bitmap.setPixels(pix, 0, w, 0, 0, w, h);
 
 		return (bitmap);
+	}
+
+	public static Bitmap blurWithMaskFilter(final Bitmap src, final float blurRadius) {
+		final int width = src.getWidth();
+		final int height = src.getHeight();
+
+		BlurMaskFilter blurMaskFilter;
+		final Paint paintBlur = new Paint();
+
+		final Bitmap dest = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+		final Canvas canvas = new Canvas(dest);
+
+		// Create background in White
+		final Bitmap alpha = src.extractAlpha();
+		paintBlur.setColor(0xFFFFFFFF);
+		canvas.drawBitmap(alpha, 0, 0, paintBlur);
+
+		// Create outer blur, in White
+		blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.OUTER);
+		paintBlur.setMaskFilter(blurMaskFilter);
+		canvas.drawBitmap(alpha, 0, 0, paintBlur);
+
+		// Create inner blur
+		blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.INNER);
+		paintBlur.setMaskFilter(blurMaskFilter);
+		canvas.drawBitmap(src, 0, 0, paintBlur);
+
+		return dest;
 	}
 
 }
