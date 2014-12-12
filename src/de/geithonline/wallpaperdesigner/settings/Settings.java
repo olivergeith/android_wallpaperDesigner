@@ -10,6 +10,11 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_SORT_ORDER = "sortOrder";
+	public static final String KEY_IMAGE_FORMAT = "imageFormat";
+	public static final String KEY_JPG_COMPRESSION = "jpgCompression";
+	public static final String KEY_SHARE_SUBJECT = "shareSubject";
+	public static final String KEY_SHARE_TEXT = "shareText";
 	public static final String NUMBER_OF_LEAFS = "numberOfLeafs";
 	public static final String RANDOM_LEAF_COUNT = "randomLeafCount";
 	public static final String PATTERN_DROPSHADOW_DARKNESS_ADJUST = "dropShadowDarknessAdjust";
@@ -42,9 +47,11 @@ public class Settings {
 		if (prefs == null) {
 			return DEFAULT_SHARE_TEXT;
 		}
-		String p = prefs.getString("shareText", DEFAULT_SHARE_TEXT);
-		if (p.isEmpty())
+		String p = prefs.getString(KEY_SHARE_TEXT, DEFAULT_SHARE_TEXT);
+		if (p.isEmpty()) {
 			p = DEFAULT_SHARE_TEXT;
+			Settings.prefs.edit().putString(KEY_SHARE_TEXT, Settings.DEFAULT_SHARE_TEXT).apply();
+		}
 		return p;
 	}
 
@@ -52,9 +59,11 @@ public class Settings {
 		if (prefs == null) {
 			return DEFAULT_SHARE_SUBJECT;
 		}
-		String p = prefs.getString("shareSubject", DEFAULT_SHARE_SUBJECT);
-		if (p.isEmpty())
+		String p = prefs.getString(KEY_SHARE_SUBJECT, DEFAULT_SHARE_SUBJECT);
+		if (p.isEmpty()) {
 			p = DEFAULT_SHARE_SUBJECT;
+			Settings.prefs.edit().putString(KEY_SHARE_SUBJECT, Settings.DEFAULT_SHARE_SUBJECT).apply();
+		}
 		return p;
 	}
 
@@ -62,7 +71,7 @@ public class Settings {
 		if (prefs == null) {
 			return 95;
 		}
-		return prefs.getInt("jpgCompression", 95);
+		return prefs.getInt(KEY_JPG_COMPRESSION, 95);
 	}
 
 	public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
@@ -79,7 +88,7 @@ public class Settings {
 		if (prefs == null) {
 			return "jpg";
 		}
-		final String imageFormat = prefs.getString("imageFormat", "jpg");
+		final String imageFormat = prefs.getString(KEY_IMAGE_FORMAT, "jpg");
 		return imageFormat;
 	}
 
@@ -106,7 +115,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Timestamp in Filename";
 		}
-		final String sort = prefs.getString("sortOrder", "Timestamp in Filename");
+		final String sort = prefs.getString(KEY_SORT_ORDER, "Timestamp in Filename");
 		return sort;
 	}
 
@@ -587,7 +596,7 @@ public class Settings {
 			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
-			prefs.edit().putString("sortOrder", "Timestamp in Filename").commit();
+			prefs.edit().putString(KEY_SORT_ORDER, "Timestamp in Filename").commit();
 			prefs.edit().putString("stylePicker", "Patterns").commit();
 			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
 			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
@@ -613,8 +622,8 @@ public class Settings {
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
 			prefs.edit().putString("rotatingStyle", "Fixed").commit();
-			prefs.edit().putString("imageFormat", "jpg").commit();
-			prefs.edit().putInt("jpgCompression", 95).commit();
+			prefs.edit().putString(KEY_IMAGE_FORMAT, "jpg").commit();
+			prefs.edit().putInt(KEY_JPG_COMPRESSION, 95).commit();
 		}
 	}
 

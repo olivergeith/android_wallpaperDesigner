@@ -22,9 +22,9 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_globalsettings);
 
-		jpgCompression = findPreference("jpgCompression");
+		jpgCompression = findPreference(Settings.KEY_JPG_COMPRESSION);
 
-		shareText = (EditTextPreference) findPreference("shareText");
+		shareText = (EditTextPreference) findPreference(Settings.KEY_SHARE_TEXT);
 		shareText.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -34,7 +34,7 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 			}
 
 		});
-		shareSubject = (EditTextPreference) findPreference("shareSubject");
+		shareSubject = (EditTextPreference) findPreference(Settings.KEY_SHARE_SUBJECT);
 		shareSubject.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -45,7 +45,7 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 
 		});
 
-		sortOrder = (ListPreference) findPreference("sortOrder");
+		sortOrder = (ListPreference) findPreference(Settings.KEY_SORT_ORDER);
 		sortOrder.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -55,7 +55,7 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 			}
 
 		});
-		imageFormat = findPreference("imageFormat");
+		imageFormat = findPreference(Settings.KEY_IMAGE_FORMAT);
 		imageFormat.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -68,16 +68,6 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 		handleImageFormat(Settings.getImageFormat());
 		handleSortOrder(Settings.getSortOrder());
 
-		String pref = Settings.prefs.getString("shareSubject", "");
-		if (pref.isEmpty()) {
-			Log.i("GLOBAL Settings", "shareSubject uses default");
-			Settings.prefs.edit().putString("shareSubject", Settings.DEFAULT_SHARE_SUBJECT).apply();
-		}
-		pref = Settings.prefs.getString("shareText", "");
-		if (pref.isEmpty()) {
-			Log.i("GLOBAL Settings", "shareText uses default");
-			Settings.prefs.edit().putString("shareText", Settings.DEFAULT_SHARE_TEXT).apply();
-		}
 		handleShareSubjectChanged(Settings.getShareSubject());
 		handleShareTextChanged(Settings.getShareText());
 	}
