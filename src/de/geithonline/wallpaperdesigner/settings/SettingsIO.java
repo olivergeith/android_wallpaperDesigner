@@ -38,7 +38,7 @@ public class SettingsIO {
 
 	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
 
-		final List<SavedPreference> preferenceList = getSavedPreferencesList();
+		final List<SavedDesign> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to restore!");
@@ -63,7 +63,7 @@ public class SettingsIO {
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Loading Settings ", "from " + position);
 				if (position >= 0) {
-					final SavedPreference pref = preferenceList.get(position);
+					final SavedDesign pref = preferenceList.get(position);
 					final String filename = pref.getPreferenceFile().getName();
 					if (filename != null) {
 						SettingsIO.loadPreferencesFromFile(activity, prefs, filename);
@@ -79,7 +79,7 @@ public class SettingsIO {
 
 	public static void deletePreferencesTheFancyWay(final Activity activity) {
 
-		final List<SavedPreference> preferenceList = getSavedPreferencesList();
+		final List<SavedDesign> preferenceList = getSavedPreferencesList();
 
 		if (preferenceList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to delete!");
@@ -104,13 +104,14 @@ public class SettingsIO {
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
-					final SavedPreference pref = preferenceList.get(position);
-					Alerter.alertYesNo(activity, "Dou you want really want to delete the Design?", "Delete Design", new OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int which) {
-							SettingsIO.deletePreferencesFileAndBitmap(pref);
-						}
-					});
+					final SavedDesign pref = preferenceList.get(position);
+					Alerter.alertYesNo(activity, "Dou you want really want to delete the Design?", "Delete Design",
+							new OnClickListener() {
+								@Override
+								public void onClick(final DialogInterface dialog, final int which) {
+									SettingsIO.deletePreferencesFileAndBitmap(pref);
+								}
+							});
 
 				}
 				dialog.dismiss();
@@ -122,7 +123,7 @@ public class SettingsIO {
 
 	}
 
-	private static void deletePreferencesFileAndBitmap(final SavedPreference pref) {
+	private static void deletePreferencesFileAndBitmap(final SavedDesign pref) {
 		pref.getPreferenceFile().delete();
 		if (pref.getBitmap() != null) {
 			pref.getBmpFile().delete();
@@ -143,7 +144,8 @@ public class SettingsIO {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs, final String filename) {
+	private static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs,
+			final String filename) {
 		Log.i("Loading Settings ", "from " + filename);
 		final File file = new File(getSettingsDir(), filename);
 		if (file.exists()) {
@@ -154,7 +156,8 @@ public class SettingsIO {
 				o.close();
 				fi.close();
 				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
-					// Log.i("map values", entry.getKey() + ": " + entry.getValue().toString() + ": " +
+					// Log.i("map values", entry.getKey() + ": " +
+					// entry.getValue().toString() + ": " +
 					// entry.getValue().getClass());
 					writeEntry(entry, prefs);
 				}
@@ -171,7 +174,8 @@ public class SettingsIO {
 
 	@SuppressWarnings("rawtypes")
 	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
-		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " (" + entry.getValue().getClass().getSimpleName() + ")");
+		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " ("
+				+ entry.getValue().getClass().getSimpleName() + ")");
 		final String key = entry.getKey();
 		// ein paar Keys nicht lesen!
 		if (key.equalsIgnoreCase("muimerp")) {
@@ -253,14 +257,14 @@ public class SettingsIO {
 	/**
 	 * Cache
 	 */
-	private static List<SavedPreference> savedPrefsList = new ArrayList<>();
+	private static List<SavedDesign> savedPrefsList = new ArrayList<>();
 
 	/**
-	 * Get a List of all {@link SavedPreference}
+	 * Get a List of all {@link SavedDesign}
 	 * 
 	 * @return
 	 */
-	private static List<SavedPreference> getSavedPreferencesList() {
+	public static List<SavedDesign> getSavedPreferencesList() {
 
 		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
 
@@ -285,7 +289,7 @@ public class SettingsIO {
 					bitmap = BitmapFileIO.loadBitmap(pngFilename);
 					imgFile = pngFile;
 				}
-				final SavedPreference pref = new SavedPreference(bitmap, fi, imgFile);
+				final SavedDesign pref = new SavedDesign(bitmap, fi, imgFile);
 				savedPrefsList.add(pref);
 			}
 		}

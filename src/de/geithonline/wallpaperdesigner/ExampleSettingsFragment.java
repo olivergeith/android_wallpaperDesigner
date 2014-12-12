@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 
 public class ExampleSettingsFragment extends PreferenceFragment {
@@ -52,7 +51,10 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		loadSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.loadPreferencesTheFancyWay(getActivity(), Settings.prefs);
+				final Intent intent = new Intent(getActivity(), DesignDisplay.class);
+				startActivityForResult(intent, 1);
+				// SettingsIO.loadPreferencesTheFancyWay(getActivity(),
+				// Settings.prefs);
 				return false;
 			}
 		});
