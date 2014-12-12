@@ -14,10 +14,10 @@ import de.geithonline.wallpaperdesigner.R;
 
 public class CustomAdapter extends BaseAdapter {
 	Context context;
-	private final List<SavedDesign> preferenceList;
+	private final List<SavedPreference> preferenceList;
 	private static LayoutInflater inflater = null;
 
-	public CustomAdapter(final Activity mainActivity, final List<SavedDesign> preferences) {
+	public CustomAdapter(final Activity mainActivity, final List<SavedPreference> preferences) {
 		context = mainActivity;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		preferenceList = preferences;

@@ -5,6 +5,4 @@
 	<color name="COLOR_BLACK_TRANSPARENT_192">#C0000000</color>
 	<color name="COLOR_BLACK_TRANSPARENT_128">#80000000</color>
 	<color name="COLOR_BLACK_NOTTRANSPARENT">#FF000000</color>
-	<color name="photo_tint">#88101010</color>
-	
 </resources>
