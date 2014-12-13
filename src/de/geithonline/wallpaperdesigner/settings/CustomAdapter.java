@@ -45,10 +45,9 @@ public class CustomAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
-		// TODO Auto-generated method stub
 		final Holder holder = new Holder();
 		View rowView;
-		rowView = inflater.inflate(R.layout.custom_adapter, null);
+		rowView = inflater.inflate(R.layout.custom_adapter2, null);
 		holder.textview = (TextView) rowView.findViewById(R.id.textView1);
 		holder.imgView = (ImageView) rowView.findViewById(R.id.imageView1);
 		final String text = SettingsIO.stripTimestamp(preferenceList.get(position).getPreferenceFile().getName());
@@ -65,7 +64,8 @@ public class CustomAdapter extends BaseAdapter {
 		// rowView.setOnClickListener(new OnClickListener() {
 		// @Override
 		// public void onClick(final View v) {
-		// Toast.makeText(context, "You Clicked Position " + position, Toast.LENGTH_LONG).show();
+		// Toast.makeText(context, "You Clicked Position " + position,
+		// Toast.LENGTH_LONG).show();
 		// }
 		// });
 		return rowView;

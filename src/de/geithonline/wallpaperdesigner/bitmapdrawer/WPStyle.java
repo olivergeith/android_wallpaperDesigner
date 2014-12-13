@@ -60,7 +60,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
-		final int dw = 256;
+		final int dw = 800;
 		final int dh = h * dw / w;
 
 		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
@@ -70,11 +70,13 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final String layout = Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")";
 		final String jpgFilename = pattern + " " + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_JPG;
 
-		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, StorageHelper.getExternalStorageSettings(), jpgFilename, 80);
+		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small,
+				StorageHelper.getExternalStorageSettings(), jpgFilename, 80);
 		rescanMedia(context, smallJpgFile);
 		small.recycle();
 		// Saving corresponding Settings
-		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(), SettingsIO.EXTENSION_JPG, SettingsIO.EXTENSION_PREF);
+		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(),
+				SettingsIO.EXTENSION_JPG, SettingsIO.EXTENSION_PREF);
 		final File settingsFile = new File(prefFileName);
 		SettingsIO.savePreferences(Settings.prefs, settingsFile);
 	}
@@ -86,23 +88,26 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		default:
 		case PNG:
 			filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_PNG;
-			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(), filename);
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(),
+					filename);
 			break;
 		case JPG:
 			filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_JPG;
-			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorageImages(), filename, Settings.getJpgCompression());
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorageImages(),
+					filename, Settings.getJpgCompression());
 			break;
 		}
 		rescanMedia(context, imageFile);
 	}
 
 	private void rescanMedia(final Context context, final File imageFile) {
-		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null, new MediaScannerConnection.OnScanCompletedListener() {
-			@Override
-			public void onScanCompleted(final String path, final Uri uri) {
-				Log.i("FILESAVE", "Scanned " + path);
-			}
-		});
+		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null,
+				new MediaScannerConnection.OnScanCompletedListener() {
+					@Override
+					public void onScanCompleted(final String path, final Uri uri) {
+						Log.i("FILESAVE", "Scanned " + path);
+					}
+				});
 	}
 
 	@Override
@@ -119,7 +124,8 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 			if (dropShadowRadius < 3) {
 				dropShadowRadius = 3;
 			}
-			final String text = patternName + " - Created with 'The Wallpaper Designer' ...please get the Premium Version, to remove this text :-)";
+			final String text = patternName
+					+ " - Created with 'The Wallpaper Designer' ...please get the Premium Version, to remove this text :-)";
 			final Paint paint = new Paint();
 			paint.setAntiAlias(true);
 			paint.setColor(Color.WHITE);
