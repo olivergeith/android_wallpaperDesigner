@@ -1,7 +1,5 @@
 package de.geithonline.wallpaperdesigner;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -16,7 +14,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 /**
  * This fragment shows the preferences for the first header.
  */
-public class LayoutPreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+public class LayoutPreferencesFragment extends PreferenceFragment {
 
 	private ListPreference mainlayouts;
 	private ListPreference mainlayoutVariants;
@@ -25,8 +23,6 @@ public class LayoutPreferencesFragment extends PreferenceFragment implements OnS
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_layout);
-
-		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		mainlayouts = (ListPreference) findPreference("mainlayouts");
 		mainlayoutVariants = (ListPreference) findPreference("mainlayoutVariants");
 
@@ -90,12 +86,4 @@ public class LayoutPreferencesFragment extends PreferenceFragment implements OnS
 		mainlayoutVariants.setSummary(variante);
 	}
 
-	@Override
-	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-		switch (key) {
-		default:
-			break;
-		}
-
-	}
 }

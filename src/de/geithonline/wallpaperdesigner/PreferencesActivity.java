@@ -8,6 +8,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,8 +33,20 @@ public class PreferencesActivity extends PreferenceActivity {
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(final MenuItem item) {
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// initialize Settings if not already done
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -68,7 +81,8 @@ public class PreferencesActivity extends PreferenceActivity {
 	//
 	// @Override
 	// public void onClick(final View v) {
-	// SettingsIO.loadPreferencesTheFancyWay(PreferencesActivity.this, Settings.prefs);
+	// SettingsIO.loadPreferencesTheFancyWay(PreferencesActivity.this,
+	// Settings.prefs);
 	// }
 	// });
 	// return button;

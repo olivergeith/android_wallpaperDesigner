@@ -1,60 +1,87 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="de.geithonline.wallpaperdesigner.MainActivity"
-    tools:ignore="MergeRootFrame" >
+    android:layout_height="match_parent" 
+    android:layout_marginRight="4dp">
 
-    <de.geithonline.wallpaperdesigner.TouchImageView
-        android:id="@+id/wallpaperview"
-        android:layout_width="wrap_content"
-        android:layout_height="422dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/about" 
+    <!-- Framelayout to display Fragments
+
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+ -->
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="de.geithonline.wallpaperdesigner.MainActivity"
+        tools:ignore="MergeRootFrame" >
+
+        <de.geithonline.wallpaperdesigner.TouchImageView
+            android:id="@+id/wallpaperview"
+            android:layout_width="wrap_content"
+            android:layout_height="422dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/about" />
+
+        <TextView
+            android:id="@+id/shakeHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:drawableTop="@drawable/dice"
+            android:gravity="center"
+            android:text="@string/shakeHint" />
+
+        <TextView
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableTop="@android:drawable/ic_menu_preferences"
+            android:gravity="center"
+            android:text="@string/Settings" />
+
+        <TextView
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableTop="@android:drawable/ic_menu_set_as"
+            android:gravity="center"
+            android:text="@string/setasWallpaper" />
+    </RelativeLayout>
+
+    <!-- Listview to display slider menu -->
+
+    <ListView
+        android:id="@+id/list_slidermenu"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#111"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0dp"
+        android:paddingRight="4dp"
         
-        />
-    
-    
-    <TextView
-        android:id="@+id/shakeHint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="8dp"
-        android:drawableTop="@drawable/dice"
-        android:gravity="center"
-        android:text="@string/shakeHint"
-        />
+         />
 
-    <TextView
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:drawableTop="@android:drawable/ic_menu_preferences"
-        android:gravity="center"
-        android:text="@string/Settings" />
-
-    <TextView
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:drawableTop="@android:drawable/ic_menu_set_as"
-        android:gravity="center"
-        android:text="@string/setasWallpaper" />
-
-    
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

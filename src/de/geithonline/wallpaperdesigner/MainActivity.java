@@ -11,6 +11,7 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -18,17 +19,24 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
+import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
@@ -50,17 +58,71 @@ public class MainActivity extends Activity {
 	private TextView settingsButton;
 	private TextView setWallButton;
 	private ShareActionProvider mShareActionProvider;
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private CharSequence mTitle;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-		// getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-		// }
+
 		setContentView(R.layout.activity_main);
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
 		// prefs.registerOnSharedPreferenceChangeListener(this);
+
+		// Drawer einbinden!
+		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,
+				R.string.drawer_close) {
+
+			/** Called when a drawer has settled in a completely closed state. */
+			@Override
+			public void onDrawerClosed(final View view) {
+				super.onDrawerClosed(view);
+				getActionBar().setTitle(getTitle());
+				invalidateOptionsMenu(); // creates call to
+											// onPrepareOptionsMenu()
+			}
+
+			/** Called when a drawer has settled in a completely open state. */
+			@Override
+			public void onDrawerOpened(final View drawerView) {
+				super.onDrawerOpened(drawerView);
+				getActionBar().setTitle("Choose Design");
+				mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
+				invalidateOptionsMenu(); // creates call to
+											// onPrepareOptionsMenu()
+			}
+		};
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
+
+		// Set the drawer toggle as the DrawerListener
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+				Log.i("Loading Settings ", "from " + position);
+				if (position >= 0) {
+					final File file = (File) mDrawerList.getAdapter().getItem(position);
+					final String filename = file.getName();
+					if (filename != null) {
+						SettingsIO.loadPreferencesFromFile(MainActivity.this, prefs, filename);
+						generate();
+					}
+				}
+				mDrawerLayout.closeDrawers();
+			}
+		});
+
+		// Set the adapter for the list view
+		// mDrawerLayout.openDrawer(mDrawerList);
+
 		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 		shakeHint = (TextView) findViewById(R.id.shakeHint);
 		shakeHint.setOnClickListener(new OnClickListener() {
@@ -90,6 +152,19 @@ public class MainActivity extends Activity {
 
 		initSensors();
 		generate();
+	}
+
+	@Override
+	protected void onPostCreate(final Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(final Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
@@ -223,14 +298,19 @@ public class MainActivity extends Activity {
 			shareImage();
 			return true;
 		}
-		// if (id == R.id.action_generate) {
-		// generate();
-		// return true;
-		// }
-		// if (id == R.id.action_settings) {
-		// startSettings();
-		// return true;
-		// }
+		if (id == R.id.action_generate) {
+			generate();
+			return true;
+		}
+		if (id == R.id.action_settings) {
+			startSettings();
+			return true;
+		}
+
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+
 		return super.onOptionsItemSelected(item);
 	}
 

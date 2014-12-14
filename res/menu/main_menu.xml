@@ -28,7 +28,7 @@
         android:icon="@android:drawable/ic_menu_share"
         android:actionProviderClass="android.widget.ShareActionProvider" />
    
-<!--     
+     
     <item
         android:id="@+id/action_generate"
         android:orderInCategory="103"
@@ -45,5 +45,4 @@
         android:icon="@android:drawable/ic_menu_preferences"
         />
     
-     -->
 </menu>
