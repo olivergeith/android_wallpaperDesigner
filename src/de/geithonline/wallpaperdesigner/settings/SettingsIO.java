@@ -267,10 +267,7 @@ public class SettingsIO {
 	public static List<SavedPreference> getSavedPreferencesList() {
 
 		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
-
-		final int currentSize = savedPrefsList.size();
-		final int aktuallSize = prefs.size();
-		if (currentSize != aktuallSize) {
+		if (numberOfPreferenzfilesChanged(prefs)) {
 			Log.i("PrefList", "Preflist needs to be reloaded");
 			savedPrefsList = new ArrayList<>();
 			for (final File fi : prefs) {
@@ -295,6 +292,19 @@ public class SettingsIO {
 		}
 
 		return savedPrefsList;
+	}
+
+	public static boolean numberOfPreferenzfilesChanged() {
+		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
+		return numberOfPreferenzfilesChanged(prefs);
+	}
+
+	public static boolean numberOfPreferenzfilesChanged(final List<File> prefs) {
+		final int currentSize = savedPrefsList.size();
+		final int aktuallSize = prefs.size();
+		if (currentSize != aktuallSize)
+			return true;
+		return false;
 	}
 
 	public static String stripTimestamp(final String filename) {

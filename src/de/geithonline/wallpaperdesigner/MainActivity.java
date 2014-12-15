@@ -46,6 +46,7 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
  * @author Oliver
  * 
  */
+@SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
 	// Konstanten
 	private static final int REQUEST_CODE_PREFERENCES = 1;
@@ -61,7 +62,6 @@ public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private CharSequence mTitle;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -71,9 +71,11 @@ public class MainActivity extends Activity {
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
 		// prefs.registerOnSharedPreferenceChangeListener(this);
+		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 
 		// Drawer einbinden!
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+		mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
@@ -83,8 +85,7 @@ public class MainActivity extends Activity {
 			public void onDrawerClosed(final View view) {
 				super.onDrawerClosed(view);
 				getActionBar().setTitle(getTitle());
-				invalidateOptionsMenu(); // creates call to
-											// onPrepareOptionsMenu()
+				invalidateOptionsMenu();
 			}
 
 			/** Called when a drawer has settled in a completely open state. */
@@ -93,18 +94,15 @@ public class MainActivity extends Activity {
 				super.onDrawerOpened(drawerView);
 				getActionBar().setTitle("Choose Design");
 				mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
-				invalidateOptionsMenu(); // creates call to
-											// onPrepareOptionsMenu()
+				invalidateOptionsMenu();
 			}
 		};
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-
 		// Set the drawer toggle as the DrawerListener
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Loading Settings ", "from " + position);
@@ -120,10 +118,6 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// Set the adapter for the list view
-		// mDrawerLayout.openDrawer(mDrawerList);
-
-		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 		shakeHint = (TextView) findViewById(R.id.shakeHint);
 		shakeHint.setOnClickListener(new OnClickListener() {
 
