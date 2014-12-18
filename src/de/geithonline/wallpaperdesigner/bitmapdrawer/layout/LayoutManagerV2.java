@@ -41,10 +41,10 @@ public class LayoutManagerV2 {
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, //
 				new CharSequence[] { "Tower", "Random", "Center" }));
-		layoutProperties.put("Circular", new LayoutProperties(false, false, true, true, //
+		layoutProperties.put("Circular", new LayoutProperties(false, false, true, false, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 
-		layoutProperties.put("Half Circle", new LayoutProperties(false, false, true, true, //
+		layoutProperties.put("Half Circle", new LayoutProperties(false, false, true, false, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 	}
 
