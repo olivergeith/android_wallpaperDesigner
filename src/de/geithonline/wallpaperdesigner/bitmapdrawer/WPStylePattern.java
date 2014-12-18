@@ -1225,58 +1225,54 @@ public abstract class WPStylePattern extends WPStyle {
 		Path path;
 		switch (variante) {
 		default:
-		case "V1":
 		case "Stripe":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.STIPE);
 			break;
-		case "V2":
+		case "Stripe V2":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.STIPE_V2);
+			break;
+		case "Stripe V3":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.STIPE_V3);
+			break;
 		case "Arc 1":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC1);
 			break;
-		case "V3":
 		case "Arc 2":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC2);
 			break;
-		case "V4":
 		case "Skyline":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.SKYLINE);
 			break;
-		case "V5":
 		case "Edgy Bars":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.EDGY_BARS);
 			break;
-		case "V6":
 		case "Rotating Bars":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_BARS);
 			break;
-		case "V7":
 		case "Rotating Triangles":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_TRIANGLES);
 			break;
-		case "V8":
 		case "Half Stripe":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.HALF_STIPE);
 			break;
-		case "V9":
 		case "Rotating Arches (random arches)":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_ARCHES_RANDOM_SIZE);
 			break;
-		case "V10":
 		case "Rotating Arches (quarter arches)":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_QUARTER_ARCHES);
 			break;
-		case "V11":
 		case "Rotating Arches (half arches)":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_HALF_ARCHES);
 			break;
-		case "V12":
 		case "Rotating Arches (3-quarter arches)":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_THREE_QUARTER_ARCHES);

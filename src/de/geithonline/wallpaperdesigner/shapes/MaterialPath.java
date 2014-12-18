@@ -10,44 +10,54 @@ public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
 		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, //
-		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES;
+		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES, STIPE_V2, STIPE_V3;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth,
 			final int bHeight, final MATERIAL_TYPE type) {
 		super();
 		switch (type) {
-			default:
-			case STIPE:
-				drawStripe(center, radius, bWidth, bHeight);
-				break;
-			case HALF_STIPE:
-				drawHalfStripe(center, radius, bWidth, bHeight);
-				break;
-			case ARC1:
-				drawArcV1(center, radius, bWidth, bHeight);
-				break;
-			case ARC2:
-				drawArcV2(center, radius, bWidth, bHeight);
-				break;
-			case SKYLINE:
-				drawSkyline(center, radius, bWidth, bHeight);
-				break;
-			case EDGY_BARS:
-				drawEdgyBars(center, radius, bWidth, bHeight);
-				break;
-			case ROTATING_BARS:
-				drawRotatingBars(center, radius, bWidth, bHeight);
-				break;
-			case ROTATING_TRIANGLES:
-				drawRotatingTriangles(center, radius, bWidth, bHeight);
-				break;
-			case ROTATING_ARCHES_RANDOM_SIZE:
-			case ROTATING_QUARTER_ARCHES:
-			case ROTATING_HALF_ARCHES:
-			case ROTATING_THREE_QUARTER_ARCHES:
-				drawRotatingArches(center, radius, bWidth, bHeight, type);
-				break;
+		default:
+		case STIPE:
+			drawStripe(center, radius, bWidth, bHeight);
+			break;
+		case STIPE_V2:
+			// drawNewStripe(center, radius, bWidth, bHeight,
+			// Settings.getFixedRotationDegrees());
+			drawStripeV2(center, radius, bWidth, bHeight, 30);
+			break;
+		case STIPE_V3:
+			// drawNewStripe(center, radius, bWidth, bHeight,
+			// Settings.getFixedRotationDegrees());
+			drawStripeV3(center, radius, bWidth, bHeight, 45);
+			break;
+		case HALF_STIPE:
+			drawHalfStripe(center, radius, bWidth, bHeight);
+			break;
+		case ARC1:
+			drawArcV1(center, radius, bWidth, bHeight);
+			break;
+		case ARC2:
+			drawArcV2(center, radius, bWidth, bHeight);
+			break;
+		case SKYLINE:
+			drawSkyline(center, radius, bWidth, bHeight);
+			break;
+		case EDGY_BARS:
+			drawEdgyBars(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_BARS:
+			drawRotatingBars(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_TRIANGLES:
+			drawRotatingTriangles(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_ARCHES_RANDOM_SIZE:
+		case ROTATING_QUARTER_ARCHES:
+		case ROTATING_HALF_ARCHES:
+		case ROTATING_THREE_QUARTER_ARCHES:
+			drawRotatingArches(center, radius, bWidth, bHeight, type);
+			break;
 		}
 	}
 
@@ -60,7 +70,7 @@ public class MaterialPath extends Path {
 
 	private void drawStripe(final Point center, final float radius, final int bWidth, final int bHeight) {
 		int drehwinkel = 0;
-		final int rectLength = bWidth;
+		final float rectLength = bWidth * 1.5f;
 		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + rectLength);
 
 		if (flip) {
@@ -76,7 +86,7 @@ public class MaterialPath extends Path {
 		flip = !flip;
 	}
 
-	private void drawNewStripe(final Point center, final float radius, final int bWidth, final int bHeight,
+	private void drawStripeV2(final Point center, final float radius, final int bWidth, final int bHeight,
 			final int rotation) {
 		int drehwinkel = rotation;
 		final float rectLength = bWidth * 1.5f;
@@ -91,6 +101,27 @@ public class MaterialPath extends Path {
 		rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 		flip = !flip;
+	}
+
+	private static int fli = 0;
+
+	private void drawStripeV3(final Point center, final float radius, final int bWidth, final int bHeight,
+			final int rotation) {
+		int drehwinkel = rotation;
+		final float rectLength = bWidth * 1.3f;
+		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + rectLength);
+
+		if (fli == 0 || fli == 1) {
+			drehwinkel = rotation + 90;
+		}
+
+		final Path p = new Path();
+		p.addRect(rect, Direction.CW);
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
+		fli = fli + 1;
+		if (fli == 4)
+			fli = 0;
 	}
 
 	private void drawHalfStripe(final Point center, final float radius, final int bWidth, final int bHeight) {
@@ -194,22 +225,22 @@ public class MaterialPath extends Path {
 		int rotateWinkel = 0;
 		final float archWinkel;
 		switch (arctype) {
-			default:
-			case ROTATING_ARCHES_RANDOM_SIZE:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.1f, (float) Math.PI * 0.9f);
-				break;
-			case ROTATING_QUARTER_ARCHES:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.15f, (float) Math.PI * 0.33f);
-				// archWinkel = (float) Math.PI * 0.25f;
-				break;
-			case ROTATING_HALF_ARCHES:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.4f, (float) Math.PI * 0.6f);
-				// archWinkel = (float) Math.PI * 0.5f;
-				break;
-			case ROTATING_THREE_QUARTER_ARCHES:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.65f, (float) Math.PI * 0.85f);
-				// archWinkel = (float) Math.PI * 0.75f;
-				break;
+		default:
+		case ROTATING_ARCHES_RANDOM_SIZE:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.1f, (float) Math.PI * 0.9f);
+			break;
+		case ROTATING_QUARTER_ARCHES:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.15f, (float) Math.PI * 0.33f);
+			// archWinkel = (float) Math.PI * 0.25f;
+			break;
+		case ROTATING_HALF_ARCHES:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.4f, (float) Math.PI * 0.6f);
+			// archWinkel = (float) Math.PI * 0.5f;
+			break;
+		case ROTATING_THREE_QUARTER_ARCHES:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.65f, (float) Math.PI * 0.85f);
+			// archWinkel = (float) Math.PI * 0.75f;
+			break;
 		}
 
 		final float archWinkelDeg = (float) (archWinkel * 180 / Math.PI);
