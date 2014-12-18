@@ -8,14 +8,15 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class MaterialRaster implements IRaster {
 	protected enum MATERIAL_POSITIONING {
-		RANDOM, TOWER;
+		RANDOM, TOWER, CENTER;
 	}
 
 	private final List<Point> points = new ArrayList<Point>();
 	private final int anzahlPatterns;
 	private final MATERIAL_POSITIONING positioning;
 
-	public MaterialRaster(final int width, final int height, final int patternRadius, final float overlap, final MATERIAL_POSITIONING positioning) {
+	public MaterialRaster(final int width, final int height, final int patternRadius, final float overlap,
+			final MATERIAL_POSITIONING positioning) {
 
 		this.positioning = positioning;
 		final int abstand = Math.round(patternRadius * 2 * overlap);
@@ -40,11 +41,13 @@ public class MaterialRaster implements IRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (positioning) {
-		case RANDOM:
-			return drawRandomPoint();
-		default:
-		case TOWER:
-			return drawNextTowerPoint();
+			case RANDOM:
+				return drawRandomPoint();
+			default:
+			case TOWER:
+				return drawNextTowerPoint();
+			case CENTER:
+				return drawNextCenterTowerPoint();
 		}
 	}
 

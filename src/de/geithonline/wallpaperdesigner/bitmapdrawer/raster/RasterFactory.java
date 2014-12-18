@@ -11,41 +11,57 @@ public class RasterFactory {
 	public enum RasterPositioning {
 
 		GEOMETRIC_RANDOM, GEOMETRIC_BOOK, GEOMETRIC_BOOK_REVERSE, GEOMETRIC_TOWER, GEOMETRIC_CENTER, //
-		MATERIAL_RANDOM, MATERIAL_BOOK, MATERIAL_BOOK_REVERSE, MATERIAL_TOWER, //
+		MATERIAL_RANDOM, MATERIAL_BOOK, MATERIAL_BOOK_REVERSE, MATERIAL_TOWER, MATERIAL_CENTER, //
 		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER, //
 		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER;
 	}
 
-	public static IRaster getRaster(final RasterPositioning positioning, final int width, final int height, final int patternRadius, final float overlap) {
+	public static IRaster getRaster(final RasterPositioning positioning, final int width, final int height,
+			final int patternRadius, final float overlap) {
 		switch (positioning) {
-		default:
-		case GEOMETRIC_RANDOM:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.RANDOM, Settings.isUpsideDown());
-		case GEOMETRIC_BOOK:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK, Settings.isUpsideDown());
-		case GEOMETRIC_BOOK_REVERSE:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK_REVERSE, Settings.isUpsideDown());
-		case GEOMETRIC_TOWER:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER, Settings.isUpsideDown());
-		case GEOMETRIC_CENTER:
-			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.CENTER, Settings.isUpsideDown());
-		case CIRCULAR_RANDOM:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-		case CIRCULAR_INNER:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-		case CIRCULAR_OUTER:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-		case HALF_CIRCULAR_RANDOM:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.HALF);
-		case HALF_CIRCULAR_INNER:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.HALF);
-		case HALF_CIRCULAR_OUTER:
-			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.HALF);
+			default:
+			case GEOMETRIC_RANDOM:
+				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.RANDOM,
+						Settings.isUpsideDown());
+			case GEOMETRIC_BOOK:
+				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK,
+						Settings.isUpsideDown());
+			case GEOMETRIC_BOOK_REVERSE:
+				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK_REVERSE,
+						Settings.isUpsideDown());
+			case GEOMETRIC_TOWER:
+				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER,
+						Settings.isUpsideDown());
+			case GEOMETRIC_CENTER:
+				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.CENTER,
+						Settings.isUpsideDown());
 
-		case MATERIAL_RANDOM:
-			return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.RANDOM);
-		case MATERIAL_TOWER:
-			return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.TOWER);
+			case CIRCULAR_RANDOM:
+				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM,
+						CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+			case CIRCULAR_INNER:
+				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER,
+						CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+			case CIRCULAR_OUTER:
+				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER,
+						CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+
+			case HALF_CIRCULAR_RANDOM:
+				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM,
+						CIRCLE_TYPE.HALF);
+			case HALF_CIRCULAR_INNER:
+				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER,
+						CIRCLE_TYPE.HALF);
+			case HALF_CIRCULAR_OUTER:
+				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER,
+						CIRCLE_TYPE.HALF);
+
+			case MATERIAL_RANDOM:
+				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.RANDOM);
+			case MATERIAL_TOWER:
+				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.TOWER);
+			case MATERIAL_CENTER:
+				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.CENTER);
 
 		}
 	}
