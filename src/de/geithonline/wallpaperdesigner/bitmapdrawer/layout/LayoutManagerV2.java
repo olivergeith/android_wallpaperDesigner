@@ -40,7 +40,7 @@ public class LayoutManagerV2 {
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, //
-				new CharSequence[] { "Tower", "Random", "Center" }));
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 		layoutProperties.put("Circular", new LayoutProperties(false, false, true, false, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 

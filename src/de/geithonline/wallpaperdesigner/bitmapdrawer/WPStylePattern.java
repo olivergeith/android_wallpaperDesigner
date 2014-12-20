@@ -1264,6 +1264,14 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.HALF_STIPE);
 			break;
+		case "Half Stripe V2":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.HALF_STIPE_V2);
+			break;
+		case "Half Stripe V3":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.HALF_STIPE_V3);
+			break;
 		case "Rotating Arches (random arches)":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.ROTATING_ARCHES_RANDOM_SIZE);

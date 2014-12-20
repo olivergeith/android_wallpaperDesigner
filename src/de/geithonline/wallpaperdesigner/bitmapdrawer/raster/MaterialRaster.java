@@ -8,7 +8,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class MaterialRaster implements IRaster {
 	protected enum MATERIAL_POSITIONING {
-		RANDOM, TOWER, CENTER;
+		RANDOM, TOWER, CENTER, BOOK, BOOK_REVERSE;
 	}
 
 	private final List<Point> points = new ArrayList<Point>();
@@ -41,13 +41,17 @@ public class MaterialRaster implements IRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (positioning) {
-			case RANDOM:
-				return drawRandomPoint();
-			default:
-			case TOWER:
-				return drawNextTowerPoint();
-			case CENTER:
-				return drawNextCenterTowerPoint();
+		case RANDOM:
+			return drawRandomPoint();
+		default:
+		case TOWER:
+			return drawNextTowerPoint();
+		case CENTER:
+			return drawNextCenterTowerPoint();
+		case BOOK:
+			return drawNextBookPoint();
+		case BOOK_REVERSE:
+			return drawNextBookPointBackward();
 		}
 	}
 
@@ -66,25 +70,25 @@ public class MaterialRaster implements IRaster {
 		return p;
 	}
 
-	// private Point drawNextBookPoint() {
-	// final int size = points.size();
-	// if (size == 0) {
-	// return new Point(0, 0);
-	// }
-	// final int location = 0;
-	// final Point p = points.remove(location);
-	// return p;
-	// }
-	//
-	// private Point drawNextBookPointBackward() {
-	// final int size = points.size();
-	// if (size == 0) {
-	// return new Point(0, 0);
-	// }
-	// final int location = size - 1;
-	// final Point p = points.remove(location);
-	// return p;
-	// }
+	private Point drawNextBookPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		final int location = 0;
+		final Point p = points.remove(location);
+		return p;
+	}
+
+	private Point drawNextBookPointBackward() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		final int location = size - 1;
+		final Point p = points.remove(location);
+		return p;
+	}
 
 	private boolean top = true;
 

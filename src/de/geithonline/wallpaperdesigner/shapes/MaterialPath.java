@@ -11,7 +11,7 @@ public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
 		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, ARC3, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, //
-		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES, STIPE_V2, STIPE_V3;
+		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES, STIPE_V2, STIPE_V3, HALF_STIPE_V2, HALF_STIPE_V3;
 	}
 
 	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth,
@@ -23,17 +23,19 @@ public class MaterialPath extends Path {
 			drawStripe(center, radius, bWidth, bHeight);
 			break;
 		case STIPE_V2:
-			// drawNewStripe(center, radius, bWidth, bHeight,
-			// Settings.getFixedRotationDegrees());
 			drawStripeV2(center, radius, bWidth, bHeight, 30);
 			break;
 		case STIPE_V3:
-			// drawNewStripe(center, radius, bWidth, bHeight,
-			// Settings.getFixedRotationDegrees());
 			drawStripeV3(center, radius, bWidth, bHeight, 45);
 			break;
 		case HALF_STIPE:
 			drawHalfStripe(center, radius, bWidth, bHeight);
+			break;
+		case HALF_STIPE_V2:
+			drawHalfStripe2(center, radius, bWidth, bHeight, 45);
+			break;
+		case HALF_STIPE_V3:
+			drawHalfStripe2(center, radius, bWidth, bHeight, 30);
 			break;
 		case ARC1:
 			drawArcV1(center, radius, bWidth, bHeight);
@@ -150,6 +152,37 @@ public class MaterialPath extends Path {
 			}
 		}
 
+		final Path p = new Path();
+		p.addRect(rect, Direction.CW);
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
+	}
+
+	private void drawHalfStripe2(final Point center, final float radius, final int bWidth, final int bHeight,
+			final int rotation) {
+		int drehwinkel = 0;
+		final float rectLength = bHeight * 2f;
+		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + 1 * radius);
+		switch (flippy) {
+		default:
+		case 0:
+			drehwinkel = 0 + rotation;
+			break;
+		case 1:
+			drehwinkel = 90 + rotation;
+			break;
+		case 2:
+			drehwinkel = 180 + rotation;
+			break;
+		case 3:
+			drehwinkel = 270 + rotation;
+			break;
+		}
+
+		flippy++;
+		if (flippy == 4) {
+			flippy = 0;
+		}
 		final Path p = new Path();
 		p.addRect(rect, Direction.CW);
 		rotatePath(center.x, center.y, p, drehwinkel);
