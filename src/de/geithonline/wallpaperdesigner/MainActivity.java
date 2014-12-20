@@ -93,7 +93,9 @@ public class MainActivity extends Activity {
 			public void onDrawerOpened(final View drawerView) {
 				super.onDrawerOpened(drawerView);
 				getActionBar().setTitle("Choose Design");
-				mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
+				if (SettingsIO.isDesignListNeedsReload()) {
+					mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
+				}
 				invalidateOptionsMenu();
 			}
 		};

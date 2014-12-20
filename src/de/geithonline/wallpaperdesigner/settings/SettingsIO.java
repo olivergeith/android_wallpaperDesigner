@@ -36,6 +36,8 @@ public class SettingsIO {
 	public static final String EXTENSION_PREF = ".pref";
 	public static final String MARKER = " (+++)_";
 
+	private static boolean designListNeedsReload = true;
+
 	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
 
 		final List<SavedPreference> preferenceList = getSavedPreferencesList();
@@ -110,6 +112,7 @@ public class SettingsIO {
 								@Override
 								public void onClick(final DialogInterface dialog, final int which) {
 									SettingsIO.deletePreferencesFileAndBitmap(pref);
+									setDesignListNeedsReload(true);
 								}
 							});
 
@@ -138,6 +141,7 @@ public class SettingsIO {
 			o.writeObject(prefs.getAll());
 			o.close();
 			fo.close();
+			setDesignListNeedsReload(true);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -265,9 +269,9 @@ public class SettingsIO {
 	 * @return
 	 */
 	public static List<SavedPreference> getSavedPreferencesList() {
-
+		// müssen wir die Liste neu laden?
 		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
-		if (numberOfPreferenzfilesChanged(prefs)) {
+		if (numberOfPreferenzfilesChanged(prefs) || designListNeedsReload == true) {
 			Log.i("PrefList", "Preflist needs to be reloaded");
 			savedPrefsList = new ArrayList<>();
 			for (final File fi : prefs) {
@@ -290,7 +294,7 @@ public class SettingsIO {
 				savedPrefsList.add(pref);
 			}
 		}
-
+		setDesignListNeedsReload(false);
 		return savedPrefsList;
 	}
 
@@ -302,8 +306,9 @@ public class SettingsIO {
 	public static boolean numberOfPreferenzfilesChanged(final List<File> prefs) {
 		final int currentSize = savedPrefsList.size();
 		final int aktuallSize = prefs.size();
-		if (currentSize != aktuallSize)
+		if (currentSize != aktuallSize) {
 			return true;
+		}
 		return false;
 	}
 
@@ -338,5 +343,13 @@ public class SettingsIO {
 		final File dir = new File(StorageHelper.getExternalStorageSettings());
 		dir.mkdirs();
 		return dir;
+	}
+
+	public static boolean isDesignListNeedsReload() {
+		return designListNeedsReload;
+	}
+
+	public static void setDesignListNeedsReload(final boolean designListIsUnschanged) {
+		SettingsIO.designListNeedsReload = designListIsUnschanged;
 	}
 }
