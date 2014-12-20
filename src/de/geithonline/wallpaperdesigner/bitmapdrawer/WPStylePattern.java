@@ -1242,6 +1242,9 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Arc 2":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC2);
 			break;
+		case "Arc 3":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC3);
+			break;
 		case "Skyline":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.SKYLINE);
 			break;

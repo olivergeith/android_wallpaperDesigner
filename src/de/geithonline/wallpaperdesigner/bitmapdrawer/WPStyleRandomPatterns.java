@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -52,6 +53,7 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 
 		int anzahlPatterns = Settings.getAnzahlPatterns();
 		if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
+			MaterialPath.initFlippy();
 			// reduce Anzahl Patterns to maximum 200
 			if (anzahlPatterns > 300) {
 				anzahlPatterns = 300;

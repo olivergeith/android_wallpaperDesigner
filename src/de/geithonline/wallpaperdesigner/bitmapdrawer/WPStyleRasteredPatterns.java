@@ -10,6 +10,7 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.IRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory.RasterPositioning;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -61,6 +62,9 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 
 		task.settingMax(raster.getAnzahlPatterns());
 
+		if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
+			MaterialPath.initFlippy();
+		}
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
 			task.settingProgress(i);

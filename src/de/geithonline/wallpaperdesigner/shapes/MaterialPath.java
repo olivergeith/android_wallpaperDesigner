@@ -4,12 +4,13 @@ import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class MaterialPath extends Path {
 
 	public enum MATERIAL_TYPE {
-		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, //
+		SKYLINE, STIPE, HALF_STIPE, ARC1, ARC2, ARC3, EDGY_BARS, ROTATING_BARS, ROTATING_TRIANGLES, //
 		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES, STIPE_V2, STIPE_V3;
 	}
 
@@ -39,6 +40,9 @@ public class MaterialPath extends Path {
 			break;
 		case ARC2:
 			drawArcV2(center, radius, bWidth, bHeight);
+			break;
+		case ARC3:
+			drawArcV3(center, radius, bWidth, bHeight);
 			break;
 		case SKYLINE:
 			drawSkyline(center, radius, bWidth, bHeight);
@@ -120,8 +124,9 @@ public class MaterialPath extends Path {
 		rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 		fli = fli + 1;
-		if (fli == 4)
+		if (fli == 4) {
 			fli = 0;
+		}
 	}
 
 	private void drawHalfStripe(final Point center, final float radius, final int bWidth, final int bHeight) {
@@ -364,6 +369,50 @@ public class MaterialPath extends Path {
 		addCircle(circleCenter.x, circleCenter.y, circleRadius - radius, Direction.CCW);
 
 		flip = !flip;
+	}
+
+	private static int flippy = initFlippy();
+
+	public static int initFlippy() {
+		final int i = Randomizer.getRandomInt(-1, 3);
+		Log.i("Flippy", "init with:" + i);
+		return i;
+	}
+
+	private void drawArcV3(final Point center, final float radius, final int bWidth, final int bHeight) {
+		Point circleCenter = new Point();
+		final Point centerUL = new Point(0, bHeight);
+		final Point centerUR = new Point(bWidth, bHeight);
+		final Point centerOR = new Point(bWidth, 0);
+		final Point centerOL = new Point(0, 0);
+		int circleRadius = 0;
+		switch (flippy) {
+		default:
+		case 0:
+			circleCenter = centerUL;
+			circleRadius = center.x;
+			break;
+		case 1:
+			circleCenter = centerUR;
+			circleRadius = bWidth - center.x;
+			break;
+		case 2:
+			circleCenter = centerOR;
+			circleRadius = center.x;
+			break;
+		case 3:
+			circleCenter = centerOL;
+			circleRadius = bWidth - center.x;
+			break;
+		}
+
+		addCircle(circleCenter.x, circleCenter.y, circleRadius + radius, Direction.CW);
+		addCircle(circleCenter.x, circleCenter.y, circleRadius - radius, Direction.CCW);
+		flippy++;
+		if (flippy == 4) {
+			flippy = 0;
+		}
+
 	}
 
 	private int calcDistance(final Point p1, final Point p2) {
