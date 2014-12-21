@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onDrawerClosed(final View view) {
 				super.onDrawerClosed(view);
-				getActionBar().setTitle(getTitle());
+				// getActionBar().setTitle(getTitle());
 				invalidateOptionsMenu();
 			}
 
@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onDrawerOpened(final View drawerView) {
 				super.onDrawerOpened(drawerView);
-				getActionBar().setTitle("Choose Design");
+				// getActionBar().setTitle("Choose Design");
 				if (SettingsIO.isDesignListNeedsReload()) {
 					mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
 				}
