@@ -22,6 +22,9 @@ public class PatternPropertyStore {
 		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "V1", "V2", "Shark V1", "Shark V2", "Mixed" }));
 
+		patternProperties.put("Flipped", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Triangle", "Triangle V2", "Square", "Rectangle" }));
+
 		patternProperties.put("Flowers", new PatternProperties(true, true, false, true, true, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "Mixed V1-V3", "Mixed V4-V5" }));
 

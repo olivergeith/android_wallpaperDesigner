@@ -33,6 +33,8 @@ import de.geithonline.wallpaperdesigner.shapes.DicePath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.DropPath;
 import de.geithonline.wallpaperdesigner.shapes.FishPath;
+import de.geithonline.wallpaperdesigner.shapes.FlippedPath;
+import de.geithonline.wallpaperdesigner.shapes.FlippedPath.FLIPPED_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.FlowerPath;
 import de.geithonline.wallpaperdesigner.shapes.FlowerV2Path;
 import de.geithonline.wallpaperdesigner.shapes.FootprintPath;
@@ -147,6 +149,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Star Circles":
 			drawStarCircles(x, y, paint, radius);
+			break;
+		case "Flipped":
+			drawFlipped(x, y, paint, radius);
 			break;
 		case "Geometrical Shapes":
 			drawGeometric(x, y, paint, radius);
@@ -346,6 +351,37 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		}
 		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	protected void drawFlipped(final int x, final int y, final Paint paint, final int radius) {
+		final String variant = Settings.getSelectedPatternVariant();
+		drawFlipped(x, y, paint, radius, variant);
+	}
+
+	protected void drawFlipped(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "Triangle":
+			path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.TRIANGLE);
+			break;
+		case "Triangle V2":
+			path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.TRIANGLE_V2);
+			break;
+		case "Square":
+			path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.SQUARE);
+			break;
+		case "Rectangle":
+			path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.RECTANGLE);
+			break;
+		}
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
