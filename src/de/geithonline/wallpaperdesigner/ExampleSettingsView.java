@@ -9,9 +9,9 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import de.geithonline.android.basics.utils.Alerter;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsDownloader;
+import de.geithonline.wallpaperdesigner.utils.Alerter;
 
 public class ExampleSettingsView extends Activity {
 
