@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import de.geithonline.android.basics.preferences.R;
+import de.geithonline.wallpaperdesigner.R;
 
 public class Toaster {
 
@@ -27,7 +27,8 @@ public class Toaster {
 		final int heightPixels = DisplayHelper.getDisplayHeight(activity);
 
 		final LayoutInflater inflater = activity.getLayoutInflater();
-		final View layout = inflater.inflate(R.layout.info_toast_layout, (ViewGroup) activity.findViewById(R.id.toast_layout_root));
+		final View layout = inflater.inflate(R.layout.info_toast_layout,
+				(ViewGroup) activity.findViewById(R.id.toast_layout_root));
 		final ImageView image = (ImageView) layout.findViewById(R.id.image);
 
 		if (typ == TYPE_ERROR) {
