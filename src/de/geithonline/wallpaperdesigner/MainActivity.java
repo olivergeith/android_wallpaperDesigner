@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
+import de.geithonline.wallpaperdesigner.settings.SavedPreference;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
@@ -76,7 +78,7 @@ public class MainActivity extends Activity {
 
 		// Drawer einbinden!
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-		mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
+		updateDrawer();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
@@ -95,7 +97,7 @@ public class MainActivity extends Activity {
 				super.onDrawerOpened(drawerView);
 				// getActionBar().setTitle("Choose Design");
 				if (SettingsIO.isDesignListNeedsReload()) {
-					mDrawerList.setAdapter(new CustomAdapter(MainActivity.this, SettingsIO.getSavedPreferencesList()));
+					updateDrawer();
 				}
 				invalidateOptionsMenu();
 			}
@@ -204,6 +206,11 @@ public class MainActivity extends Activity {
 		dialog.show();
 	}
 
+	public synchronized void updateDrawer() {
+		final DesignsLoaderTask task = new DesignsLoaderTask(mDrawerList);
+		task.execute();
+	}
+
 	public synchronized void save() {
 		final BitmapSaverTask task = new BitmapSaverTask();
 		task.execute();
@@ -224,6 +231,7 @@ public class MainActivity extends Activity {
 		dialog.setMessage("Saving Image and Settings...");
 		dialog.show();
 		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
+		updateDrawer();
 	}
 
 	/*
@@ -474,6 +482,38 @@ public class MainActivity extends Activity {
 			}
 		}
 
+	}
+
+	// ##########################################################
+	public class DesignsLoaderTask extends AsyncTask<Void, Void, List<SavedPreference>> {
+		private final WeakReference<ListView> weekListViewRef;
+
+		public DesignsLoaderTask(final ListView imageView) {
+			// Use a WeakReference to ensure the ImageView can be garbage
+			// collected
+			weekListViewRef = new WeakReference<ListView>(imageView);
+		}
+
+		// Load List background.
+		@Override
+		protected List<SavedPreference> doInBackground(final Void... params) {
+			final List<SavedPreference> savedPreferencesList = SettingsIO.getSavedPreferencesList();
+			return savedPreferencesList;
+		}
+
+		// Once complete.....
+		@Override
+		protected void onPostExecute(final List<SavedPreference> savedPreferencesList) {
+			if (weekListViewRef != null && savedPreferencesList != null) {
+				final ListView list = weekListViewRef.get();
+				if (list != null) {
+					list.setAdapter(new CustomAdapter(MainActivity.this, savedPreferencesList));
+				}
+			}
+			if (dialog != null) {
+				dialog.cancel();
+			}
+		}
 	}
 
 	// ##########################################################
