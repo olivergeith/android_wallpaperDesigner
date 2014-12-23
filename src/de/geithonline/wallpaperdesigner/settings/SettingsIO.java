@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -163,7 +164,7 @@ public class SettingsIO {
 					// Log.i("map values", entry.getKey() + ": " +
 					// entry.getValue().toString() + ": " +
 					// entry.getValue().getClass());
-					writeEntry(entry, prefs);
+					writeEntry(entry, prefs, settings.keySet());
 				}
 				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
 				return settings;
@@ -177,7 +178,7 @@ public class SettingsIO {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs) {
+	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs, final Set<String> keyset) {
 		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " ("
 				+ entry.getValue().getClass().getSimpleName() + ")");
 		final String key = entry.getKey();
@@ -197,46 +198,45 @@ public class SettingsIO {
 		if (key.equalsIgnoreCase("hexValues")) {
 			return;
 		}
-		// // Spezialbehandlung für alten LayoutPicker
-		// if (key.equals("layoutPicker")) {
-		// final String val = entry.getValue().toString();
-		// Log.i("layoutPicker found", " --> " + entry.getValue().toString() +
-		// ")");
-		// final int pos = val.indexOf(" (");
-		// if (pos > 0) {
-		// final String mainLayout = val.substring(0, pos);
-		// if (mainLayout.startsWith("Geo")) {
-		// prefs.edit().putString("mainlayouts", "Geometric Grid").commit();
-		// Log.i("layoutPicker found", " Putting --> Geometric Grid");
-		// } else if (mainLayout.startsWith("Circular")) {
-		// prefs.edit().putString("mainlayouts", "Circular").commit();
-		// Log.i("layoutPicker found", " Putting --> Circular");
-		// } else if (mainLayout.startsWith("Half")) {
-		// prefs.edit().putString("mainlayouts", "Half Circle").commit();
-		// Log.i("layoutPicker found", " Putting --> Half Circle");
-		// }
-		// final int posEnd = val.indexOf(")");
-		// final String mainLayoutVariante = val.substring(pos + 2, posEnd);
-		// prefs.edit().putString("mainlayoutVariants",
-		// mainLayoutVariante).commit();
-		// Log.i("layoutPicker found", " Putting Variante --> " +
-		// mainLayoutVariante);
-		// } else {
-		// prefs.edit().putString("mainlayouts", "Random Layout").commit();
-		// prefs.edit().putString("mainlayoutVariants", "None").commit();
-		// }
-		// }
-		// // Spezialbehandlung für alten randomRotate
-		// if (key.equals("randomRotate")) {
-		// final boolean rota = (Boolean) entry.getValue();
-		// if (rota == true) {
-		// prefs.edit().putString("rotatingStyle", "Random").commit();
-		// Log.i("randomRotate found", " Putting ---> Random");
-		// } else {
-		// prefs.edit().putString("rotatingStyle", "Fixed").commit();
-		// Log.i("randomRotate found", " Putting ---> fixed");
-		// }
-		// }
+		// Spezialbehandlung für alten LayoutPicker
+		if (key.equals("layoutPicker") && !keyset.contains(Settings.KEY_MAINLAYOUTS)) {
+			final String val = entry.getValue().toString();
+			Log.i("layoutPicker found", " --> " + entry.getValue().toString() + ")");
+			final int pos = val.indexOf(" (");
+			if (pos > 0) {
+				final String mainLayout = val.substring(0, pos);
+				if (mainLayout.startsWith("Geo")) {
+					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Geometric Grid").commit();
+					Log.i("layoutPicker found", " Putting --> Geometric Grid");
+				} else if (mainLayout.startsWith("Circular")) {
+					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Circular").commit();
+					Log.i("layoutPicker found", " Putting --> Circular");
+				} else if (mainLayout.startsWith("Half")) {
+					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Half Circle").commit();
+					Log.i("layoutPicker found", " Putting --> Half Circle");
+				}
+				final int posEnd = val.indexOf(")");
+				final String mainLayoutVariante = val.substring(pos + 2, posEnd);
+				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, mainLayoutVariante).commit();
+				Log.i("layoutPicker found", " Putting Variante --> " + mainLayoutVariante);
+			} else {
+				prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Random Layout").commit();
+				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, "None").commit();
+			}
+			return;
+		}
+		// Spezialbehandlung für alten randomRotate
+		if (key.equals("randomRotate") && !keyset.contains("rotatingStyle")) {
+			final boolean rota = (Boolean) entry.getValue();
+			if (rota == true) {
+				prefs.edit().putString("rotatingStyle", "Random").commit();
+				Log.i("randomRotate found", " Putting ---> Random");
+			} else {
+				prefs.edit().putString("rotatingStyle", "Fixed").commit();
+				Log.i("randomRotate found", " Putting ---> fixed");
+			}
+			return;
+		}
 
 		final Class cl = entry.getValue().getClass();
 		if (cl.getSimpleName().equalsIgnoreCase("Integer")) {

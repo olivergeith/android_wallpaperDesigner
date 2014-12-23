@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_MAINLAYOUT_VARIANTS = "mainlayoutVariants";
+	public static final String KEY_MAINLAYOUTS = "mainlayouts";
 	public static final String KEY_SORT_ORDER = "sortOrder";
 	public static final String KEY_IMAGE_FORMAT = "imageFormat";
 	public static final String KEY_JPG_COMPRESSION = "jpgCompression";
@@ -127,7 +129,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Random Layout";
 		}
-		return prefs.getString("mainlayouts", "Random Layout");
+		return prefs.getString(KEY_MAINLAYOUTS, "Random Layout");
 	}
 
 	public static String getSelectedMainLayoutVariante() {
@@ -135,7 +137,7 @@ public class Settings {
 		if (prefs == null) {
 			return "None";
 		}
-		return prefs.getString("mainlayoutVariants", "None");
+		return prefs.getString(KEY_MAINLAYOUT_VARIANTS, "None");
 	}
 
 	public static int getAnzahlPatterns() {
