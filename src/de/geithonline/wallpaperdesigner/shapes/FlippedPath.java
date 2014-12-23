@@ -2,6 +2,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class FlippedPath extends Path {
@@ -35,7 +36,9 @@ public class FlippedPath extends Path {
 			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
 					Direction.CCW);
 		}
-		switch (Randomizer.getRandomInt(0, 4)) {
+		final int i = Randomizer.getRandomInt(0, 4);
+		Log.i("int", "=" + i);
+		switch (i) {
 		default:
 		case 1:
 			moveTo(center.x - 1 * raster, center.y - 1 * raster);
@@ -58,7 +61,7 @@ public class FlippedPath extends Path {
 		case 4:
 			moveTo(center.x - 1 * raster, center.y + 1 * raster);
 			lineTo(center.x - 1 * raster, center.y - 1 * raster);
-			lineTo(center.x + 1 * raster, center.y - 1 * raster);
+			lineTo(center.x + 1 * raster, center.y + 1 * raster);
 			close();
 			break;
 		}
