@@ -1,14 +1,16 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
+import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class FlippedPath extends Path {
 
 	public enum FLIPPED_STYLE {
-		TRIANGLE, SQUARE, RECTANGLE, TRIANGLE_V2;
+		TRIANGLE, SQUARE, RECTANGLE, TRIANGLE_V2, QUARTER_ARC, QUARTER_ARC_V2;
 	}
 
 	public FlippedPath(final PointF center, final float radius, final boolean filled, final FLIPPED_STYLE style) {
@@ -25,6 +27,12 @@ public class FlippedPath extends Path {
 			break;
 		case RECTANGLE:
 			drawRectangle(center, radius, filled);
+			break;
+		case QUARTER_ARC:
+			drawQuarterArch(center, radius, filled);
+			break;
+		case QUARTER_ARC_V2:
+			drawQuarterArch2(center, radius, filled);
 			break;
 		}
 	}
@@ -103,6 +111,46 @@ public class FlippedPath extends Path {
 		}
 	}
 
+	private void drawQuarterArch(final PointF center, final float radius, final boolean filled) {
+		final float raster = radius / 1;
+
+		if (!filled) {
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
+					Direction.CCW);
+		}
+
+		final Path p = new Path();
+		p.moveTo(center.x - 1 * raster, center.y - 1 * raster);
+		p.lineTo(center.x + 1 * raster, center.y - 1 * raster);
+		p.quadTo(center.x + 1 * raster, center.y + 1 * raster, // CP
+				center.x - 1 * raster, center.y + 1 * raster);
+		p.close();
+
+		final int drehwinkel = Randomizer.getRandomInt(-1, 3) * 90;
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
+	}
+
+	private void drawQuarterArch2(final PointF center, final float radius, final boolean filled) {
+		final float raster = radius / 1;
+
+		if (!filled) {
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
+					Direction.CCW);
+		}
+
+		final Path p = new Path();
+		p.moveTo(center.x - 1 * raster, center.y - 1 * raster);
+		p.lineTo(center.x + 1 * raster, center.y - 1 * raster);
+		p.quadTo(center.x - 1 * raster, center.y - 1 * raster, // CP
+				center.x - 1 * raster, center.y + 1 * raster);
+		p.close();
+
+		final int drehwinkel = Randomizer.getRandomInt(-1, 3) * 90;
+		rotatePath(center.x, center.y, p, drehwinkel);
+		addPath(p);
+	}
+
 	private void drawSquare(final PointF center, final float radius, final boolean filled) {
 		final float raster = radius / 1;
 
@@ -157,6 +205,14 @@ public class FlippedPath extends Path {
 					Direction.CW);
 			break;
 		}
+	}
+
+	protected void rotatePath(final float x, final float y, final Path path, final int rotate) {
+		final Matrix mMatrix = new Matrix();
+		final RectF bounds = new RectF();
+		path.computeBounds(bounds, true);
+		mMatrix.postRotate(rotate, x, y);
+		path.transform(mMatrix);
 	}
 
 }
