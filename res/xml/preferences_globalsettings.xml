@@ -19,6 +19,15 @@
 		    android:summary="Enable Hexvalue Input in Colorpicker" 
             />
 
+        <ListPreference
+	        android:key="appTheme"
+	        android:title="@string/appTheme" 
+	        android:dialogTitle="@string/appTheme"
+	        android:defaultValue="Dark"
+	        android:entries="@array/theme"
+	        android:entryValues="@array/theme"
+	        />
+        
     <PreferenceCategory android:title="Wallpaper saving"/>
         <ListPreference
 	        android:key="imageFormat"

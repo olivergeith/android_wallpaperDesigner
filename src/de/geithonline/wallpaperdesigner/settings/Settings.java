@@ -96,6 +96,25 @@ public class Settings {
 
 	// ###################################################################
 	// Other Stuff
+
+	public static String getAppTheme() {
+		if (prefs == null) {
+			return "Dark";
+		}
+		final String s = prefs.getString("appTheme", "Dark");
+		return s;
+	}
+
+	public static int getTheme() {
+		switch (getAppTheme()) {
+		default:
+		case "Dark":
+			return R.style.AppThemeDark;
+		case "Light":
+			return R.style.AppThemeLight;
+		}
+	}
+
 	public static SORT_ORDER getSortOrderForSavedSettings() {
 		// return "Random Layout";
 		final String sort = getSortOrder();

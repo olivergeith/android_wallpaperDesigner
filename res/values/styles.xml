@@ -4,7 +4,7 @@
     	<item name="android:windowBackground">@color/COLOR_BLACK_NOTTRANSPARENT</item>
     </style>
     
-        <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <style name="AppThemeLight" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
     </style>
         <style name="AppThemeDark" parent="android:Theme.Holo">

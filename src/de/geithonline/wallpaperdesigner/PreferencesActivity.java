@@ -45,12 +45,12 @@ public class PreferencesActivity extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 		// initialize Settings if not already done
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
+		setTheme(Settings.getTheme());
+		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		billingManager = new BillingManager(this);
 		final boolean isPremium = billingManager.isPremium();

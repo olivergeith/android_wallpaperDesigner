@@ -65,11 +65,12 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.activity_main);
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
+		setTheme(Settings.getTheme());
+
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 		// prefs.registerOnSharedPreferenceChangeListener(this);
 		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
 

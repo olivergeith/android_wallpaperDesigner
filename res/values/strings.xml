@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_version">3.1</string>
-    <string name="app_name">Wallpaper Designer V3.1</string>
-    <string name="wallpaper_description">Wallpaper Designer V3.1</string>
+    <string name="app_version">3.2</string>
+    <string name="app_name">Wallpaper Designer V3.2</string>
+    <string name="wallpaper_description">Wallpaper Designer V3.2</string>
     <string name="premium_only">Premium Version only</string>
     <string name="about">About</string>
     <string name="Copyright">Copyright by Oliver Geith</string>
@@ -90,6 +90,7 @@
     <string name="shareSubject">Subject when sharing a wallpaper</string>
     <string name="shareText">Text when sharing a wallpaper</string>
     <string name="drawer_open">Open Drawer</string>
-        <string name="drawer_close">Close Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="appTheme">Theme (restart APP after changing)</string>
     
 </resources>

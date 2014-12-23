@@ -11,6 +11,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class GlobalSettingsFragment extends PreferenceFragment {
 
+	private ListPreference appTheme;
 	private ListPreference sortOrder;
 	private Preference imageFormat;
 	private EditTextPreference shareText;
@@ -55,6 +56,17 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 			}
 
 		});
+		appTheme = (ListPreference) findPreference("appTheme");
+		appTheme.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleAppTheme((String) newValue);
+				return true;
+			}
+
+		});
+
 		imageFormat = findPreference(Settings.KEY_IMAGE_FORMAT);
 		imageFormat.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -67,9 +79,14 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 		});
 		handleImageFormat(Settings.getImageFormat());
 		handleSortOrder(Settings.getSortOrder());
+		handleAppTheme(Settings.getAppTheme());
 
 		handleShareSubjectChanged(Settings.getShareSubject());
 		handleShareTextChanged(Settings.getShareText());
+	}
+
+	protected void handleAppTheme(final String newValue) {
+		appTheme.setSummary(newValue);
 	}
 
 	protected void handleShareSubjectChanged(String newValue) {
