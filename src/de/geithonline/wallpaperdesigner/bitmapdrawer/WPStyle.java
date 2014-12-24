@@ -1,8 +1,6 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -39,9 +37,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 	@SuppressLint("SimpleDateFormat")
 	@Override
 	public synchronized void save(final Context context, final boolean saveSettings) {
-		final Date date = new Date();
-		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
-		final String timeStamp = dt.format(date);
+		final String timeStamp = SettingsIO.getTimeStampForFile();
 		saveBigImage(context, timeStamp);
 		if (saveSettings) {
 			saveSmallImageAndSettings(context);
@@ -50,13 +46,9 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		}
 	}
 
-	@SuppressLint("SimpleDateFormat")
 	@Override
 	public synchronized void saveSmallImageAndSettings(final Context context) {
-		final Date date = new Date();
-		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss");
-		final String timeStamp = dt.format(date);
-
+		final String timeStamp = SettingsIO.getTimeStampForFile();
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 

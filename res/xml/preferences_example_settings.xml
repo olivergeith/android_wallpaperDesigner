@@ -20,13 +20,43 @@
 	    <Preference 
 		    android:key="loadSettings"
 		    android:title="Restore Design"
+		    android:icon="@android:drawable/ic_menu_set_as"
 		    android:summary="Restore one of your designs" 
+            />
+	    <Preference 
+		    android:key="mailSettings"
+		    android:title="Email Design"
+		    android:icon="@android:drawable/ic_menu_send"
+		    android:summary="Email one of your designs to a friend" 
             />
 	    <Preference 
 		    android:key="deleteSettings"
 		    android:title="Delete Design"
+		    android:icon="@android:drawable/ic_menu_delete"
 		    android:summary="Delete one of your designs" 
             />
-	    		
+
+	<PreferenceCategory android:title="Manage ALL Designs at once"/>
+	    <Preference 
+		    android:key="backupALLDesigns"
+		    android:title="Backup all Designs"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Backup all your designs into a zip-File" 
+            />
+
+	    <Preference 
+		    android:key="shareALLDesignsViaEmail"
+		    android:title="Share all Designs via eMail"
+		    android:icon="@android:drawable/ic_menu_share"
+		    android:summary="Share all your designs via eMail" 
+            />
+	    	    
+	    <Preference 
+		    android:key="deleteALLDesigns"
+		    android:title="Delete ALL Designs !!!!"
+		    android:icon="@android:drawable/ic_delete"
+		    android:summary="Delete all your designs....ATTENTION!!!" 
+            />
+	    	    	    	    		
 	    	    
 </PreferenceScreen>

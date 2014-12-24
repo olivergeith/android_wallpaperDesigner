@@ -27,7 +27,8 @@ public class Alerter {
 		alert(typ, activity, msg, null, null);
 	}
 
-	private static void alert(final int typ, final Activity activity, final String msg, final String buttontext, final String url) {
+	private static void alert(final int typ, final Activity activity, final String msg, final String buttontext,
+			final String url) {
 		final AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		bld.setMessage(msg);
 		if (typ == TYPE_ERROR) {
@@ -53,10 +54,12 @@ public class Alerter {
 		bld.create().show();
 	}
 
-	public static void alertYesNo(final Activity activity, final String msg, final String title, final DialogInterface.OnClickListener yesListener) {
+	public static void alertYesNo(final Activity activity, final String msg, final String title,
+			final DialogInterface.OnClickListener yesListener) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(title);
 		builder.setMessage(msg);
+		builder.setIcon(android.R.drawable.ic_menu_help);
 		builder.setPositiveButton("YES", yesListener);
 		builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 			@Override
@@ -68,4 +71,23 @@ public class Alerter {
 		final AlertDialog alert = builder.create();
 		alert.show();
 	}
+
+	public static void alertYesNoUrgent(final Activity activity, final String msg, final String title,
+			final DialogInterface.OnClickListener yesListener) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(title);
+		builder.setMessage(msg);
+		builder.setIcon(android.R.drawable.ic_dialog_alert);
+		builder.setPositiveButton("YES", yesListener);
+		builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				dialog.dismiss();
+			}
+		});
+
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
+
 }

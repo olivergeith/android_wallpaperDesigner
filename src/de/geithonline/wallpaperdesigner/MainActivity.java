@@ -37,7 +37,7 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
 import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
-import de.geithonline.wallpaperdesigner.settings.SavedPreference;
+import de.geithonline.wallpaperdesigner.settings.SavedDesign;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
@@ -486,7 +486,7 @@ public class MainActivity extends Activity {
 	}
 
 	// ##########################################################
-	public class DesignsLoaderTask extends AsyncTask<Void, Void, List<SavedPreference>> {
+	public class DesignsLoaderTask extends AsyncTask<Void, Void, List<SavedDesign>> {
 		private final WeakReference<ListView> weekListViewRef;
 
 		public DesignsLoaderTask(final ListView imageView) {
@@ -497,14 +497,14 @@ public class MainActivity extends Activity {
 
 		// Load List background.
 		@Override
-		protected List<SavedPreference> doInBackground(final Void... params) {
-			final List<SavedPreference> savedPreferencesList = SettingsIO.getSavedPreferencesList();
+		protected List<SavedDesign> doInBackground(final Void... params) {
+			final List<SavedDesign> savedPreferencesList = SettingsIO.getSavedPreferencesList();
 			return savedPreferencesList;
 		}
 
 		// Once complete.....
 		@Override
-		protected void onPostExecute(final List<SavedPreference> savedPreferencesList) {
+		protected void onPostExecute(final List<SavedDesign> savedPreferencesList) {
 			if (weekListViewRef != null && savedPreferencesList != null) {
 				final ListView list = weekListViewRef.get();
 				if (list != null) {
