@@ -36,6 +36,7 @@ import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
+import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.SavedPreference;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
@@ -78,7 +79,6 @@ public class MainActivity extends Activity {
 
 		// Drawer einbinden!
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-		updateDrawer();
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
 					final File file = (File) mDrawerList.getAdapter().getItem(position);
 					final String filename = file.getName();
 					if (filename != null) {
-						SettingsIO.loadPreferencesFromFile(MainActivity.this, prefs, filename);
+						PreferenceIO.loadPreferencesFromFile(MainActivity.this, prefs, filename);
 						generate();
 					}
 				}
@@ -151,6 +151,7 @@ public class MainActivity extends Activity {
 
 		initSensors();
 		generate();
+		updateDrawer();
 	}
 
 	@Override

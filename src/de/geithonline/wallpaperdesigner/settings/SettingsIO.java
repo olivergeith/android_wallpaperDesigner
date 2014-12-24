@@ -1,16 +1,11 @@
 package de.geithonline.wallpaperdesigner.settings;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,7 +31,6 @@ public class SettingsIO {
 	public static final String EXTENSION_JPG = ".jpg";
 	public static final String EXTENSION_PREF = ".pref";
 	public static final String MARKER = " (+++)_";
-
 	private static boolean designListNeedsReload = true;
 
 	public static void loadPreferencesTheFancyWay(final Activity activity, final SharedPreferences prefs) {
@@ -69,7 +63,7 @@ public class SettingsIO {
 					final SavedPreference pref = preferenceList.get(position);
 					final String filename = pref.getPreferenceFile().getName();
 					if (filename != null) {
-						SettingsIO.loadPreferencesFromFile(activity, prefs, filename);
+						PreferenceIO.loadPreferencesFromFile(activity, prefs, filename);
 					}
 				}
 				dialog.dismiss();
@@ -113,7 +107,6 @@ public class SettingsIO {
 								@Override
 								public void onClick(final DialogInterface dialog, final int which) {
 									SettingsIO.deletePreferencesFileAndBitmap(pref);
-									setDesignListNeedsReload(true);
 								}
 							});
 
@@ -132,6 +125,7 @@ public class SettingsIO {
 		if (pref.getBitmap() != null) {
 			pref.getBmpFile().delete();
 		}
+		setDesignListNeedsReload(true);
 	}
 
 	public static void savePreferences(final SharedPreferences prefs, final File file) {
@@ -145,106 +139,6 @@ public class SettingsIO {
 			setDesignListNeedsReload(true);
 		} catch (final IOException e) {
 			e.printStackTrace();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs,
-			final String filename) {
-		Log.i("Loading Settings ", "from " + filename);
-		final File file = new File(getSettingsDir(), filename);
-		if (file.exists()) {
-			try {
-				final FileInputStream fi = new FileInputStream(file);
-				final ObjectInputStream o = new ObjectInputStream(fi);
-				final Map<String, ?> settings = (Map<String, ?>) o.readObject();
-				o.close();
-				fi.close();
-				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
-					// Log.i("map values", entry.getKey() + ": " +
-					// entry.getValue().toString() + ": " +
-					// entry.getValue().getClass());
-					writeEntry(entry, prefs, settings.keySet());
-				}
-				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
-				return settings;
-			} catch (final IOException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		} else {
-			Log.i("Loading Settings ", "File not exists! " + filename);
-		}
-		return null;
-	}
-
-	@SuppressWarnings("rawtypes")
-	private static void writeEntry(final Entry<String, ?> entry, final SharedPreferences prefs, final Set<String> keyset) {
-		Log.i("Writing back preferences", entry.getKey() + " --> " + entry.getValue().toString() + " ("
-				+ entry.getValue().getClass().getSimpleName() + ")");
-		final String key = entry.getKey();
-		// ein paar Keys nicht lesen!
-		if (key.equalsIgnoreCase("muimerp")) {
-			return;
-		}
-		if (key.equalsIgnoreCase("sortOrder")) {
-			return;
-		}
-		if (key.equalsIgnoreCase("imageFormat")) {
-			return;
-		}
-		if (key.equalsIgnoreCase("jpgCompression")) {
-			return;
-		}
-		if (key.equalsIgnoreCase("hexValues")) {
-			return;
-		}
-		// Spezialbehandlung für alten LayoutPicker
-		if (key.equals("layoutPicker") && !keyset.contains(Settings.KEY_MAINLAYOUTS)) {
-			final String val = entry.getValue().toString();
-			Log.i("layoutPicker found", " --> " + entry.getValue().toString() + ")");
-			final int pos = val.indexOf(" (");
-			if (pos > 0) {
-				final String mainLayout = val.substring(0, pos);
-				if (mainLayout.startsWith("Geo")) {
-					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Geometric Grid").commit();
-					Log.i("layoutPicker found", " Putting --> Geometric Grid");
-				} else if (mainLayout.startsWith("Circular")) {
-					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Circular").commit();
-					Log.i("layoutPicker found", " Putting --> Circular");
-				} else if (mainLayout.startsWith("Half")) {
-					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Half Circle").commit();
-					Log.i("layoutPicker found", " Putting --> Half Circle");
-				}
-				final int posEnd = val.indexOf(")");
-				final String mainLayoutVariante = val.substring(pos + 2, posEnd);
-				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, mainLayoutVariante).commit();
-				Log.i("layoutPicker found", " Putting Variante --> " + mainLayoutVariante);
-			} else {
-				prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Random Layout").commit();
-				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, "None").commit();
-			}
-			return;
-		}
-		// Spezialbehandlung für alten randomRotate
-		if (key.equals("randomRotate") && !keyset.contains("rotatingStyle")) {
-			final boolean rota = (Boolean) entry.getValue();
-			if (rota == true) {
-				prefs.edit().putString("rotatingStyle", "Random").commit();
-				Log.i("randomRotate found", " Putting ---> Random");
-			} else {
-				prefs.edit().putString("rotatingStyle", "Fixed").commit();
-				Log.i("randomRotate found", " Putting ---> fixed");
-			}
-			return;
-		}
-
-		final Class cl = entry.getValue().getClass();
-		if (cl.getSimpleName().equalsIgnoreCase("Integer")) {
-			prefs.edit().putInt(key, (Integer) entry.getValue()).commit();
-		} else if (cl.getSimpleName().equalsIgnoreCase("Boolean")) {
-			prefs.edit().putBoolean(key, (Boolean) entry.getValue()).commit();
-		} else if (cl.getSimpleName().equalsIgnoreCase("String")) {
-			prefs.edit().putString(key, (String) entry.getValue()).commit();
 		}
 	}
 
@@ -315,19 +209,6 @@ public class SettingsIO {
 		return false;
 	}
 
-	public static String stripTimestamp(final String filename) {
-		String out;
-		final int pos = filename.indexOf(MARKER);
-		if (pos == -1) {
-			// EXtension nicht gefunden
-			out = filename;
-		} else {
-			out = filename.substring(0, pos);
-		}
-		return out;
-
-	}
-
 	public static String getTimestampInFileName(final String filename) {
 		String out;
 		final int pos = filename.indexOf(MARKER);
@@ -352,7 +233,7 @@ public class SettingsIO {
 		return designListNeedsReload;
 	}
 
-	public static void setDesignListNeedsReload(final boolean designListIsUnschanged) {
-		SettingsIO.designListNeedsReload = designListIsUnschanged;
+	public static void setDesignListNeedsReload(final boolean needsReload) {
+		SettingsIO.designListNeedsReload = needsReload;
 	}
 }

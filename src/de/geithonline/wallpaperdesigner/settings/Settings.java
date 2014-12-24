@@ -10,6 +10,9 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_MUIMERP = "muimerp";
+	public static final String KEY_HEX_VALUES = "hexValues";
+	public static final String KEY_APP_THEME = "appTheme";
 	public static final String KEY_MAINLAYOUT_VARIANTS = "mainlayoutVariants";
 	public static final String KEY_MAINLAYOUTS = "mainlayouts";
 	public static final String KEY_SORT_ORDER = "sortOrder";
@@ -17,23 +20,23 @@ public class Settings {
 	public static final String KEY_JPG_COMPRESSION = "jpgCompression";
 	public static final String KEY_SHARE_SUBJECT = "shareSubject";
 	public static final String KEY_SHARE_TEXT = "shareText";
-	public static final String NUMBER_OF_LEAFS = "numberOfLeafs";
-	public static final String RANDOM_LEAF_COUNT = "randomLeafCount";
-	public static final String PATTERN_DROPSHADOW_DARKNESS_ADJUST = "dropShadowDarknessAdjust";
-	public static final String PATTERN_OUTLINE_DARKNESS_ADJUST = "outlineDarknessAdjust";
-	public static final String PATTERN_OUTLINE_NEVER_TRANSPARENT = "outlineNeverTransparent";
-	public static final String PATTERN_TEXT = "textPattern";
-	public static final String PATTERN_TEXT_DRAW_STYLE = "textDrawStyle";
-	public static final String PATTERN_FILLED_OPTION = "filledOption";
-	public static final String PATTERN_RANDOM_ROTATE = "randomRotate";
-	public static final String PATTERN_OUTLINE = "outline";
-	public static final String PATTERN_GLOSSY = "glossy";
-	public static final String PATTERN_PATTERN_PICKER = "pattern_patternPicker";
-	public static final String PATTERN_PATTERN_VARIANT_PICKER = "pattern_patternVariantPicker";
-	public static final String PATTERN_ANZAHL_PATTERNS = "anzahlPatterns";
-	public static final String PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
-	public static final String PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
-	public static final String PATTERN_BLUR = "blurPatterns";
+	public static final String KEY_NUMBER_OF_LEAFS = "numberOfLeafs";
+	public static final String KEY_RANDOM_LEAF_COUNT = "randomLeafCount";
+	public static final String KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST = "dropShadowDarknessAdjust";
+	public static final String KEY_PATTERN_OUTLINE_DARKNESS_ADJUST = "outlineDarknessAdjust";
+	public static final String KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT = "outlineNeverTransparent";
+	public static final String KEY_PATTERN_TEXT = "textPattern";
+	public static final String KEY_PATTERN_TEXT_DRAW_STYLE = "textDrawStyle";
+	public static final String KEY_PATTERN_FILLED_OPTION = "filledOption";
+	public static final String KEY_PATTERN_RANDOM_ROTATE = "randomRotate";
+	public static final String KEY_PATTERN_OUTLINE = "outline";
+	public static final String KEY_PATTERN_GLOSSY = "glossy";
+	public static final String KEY_PATTERN_PATTERN_PICKER = "pattern_patternPicker";
+	public static final String KEY_PATTERN_PATTERN_VARIANT_PICKER = "pattern_patternVariantPicker";
+	public static final String KEY_PATTERN_ANZAHL_PATTERNS = "anzahlPatterns";
+	public static final String KEY_PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
+	public static final String KEY_PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
+	public static final String KEY_PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
 
 	// private static Context context;
@@ -101,7 +104,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Dark";
 		}
-		final String s = prefs.getString("appTheme", "Dark");
+		final String s = prefs.getString(KEY_APP_THEME, "Dark");
 		return s;
 	}
 
@@ -166,7 +169,7 @@ public class Settings {
 		if (isDebugging()) {
 			return 0;
 		}
-		return prefs.getInt(PATTERN_ANZAHL_PATTERNS, 1000);
+		return prefs.getInt(KEY_PATTERN_ANZAHL_PATTERNS, 1000);
 	}
 
 	public static float getOverlapping() {
@@ -180,7 +183,7 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return prefs.getBoolean(PATTERN_BLUR, false);
+		return prefs.getBoolean(KEY_PATTERN_BLUR, false);
 	}
 
 	public static boolean isUpsideDown() {
@@ -197,14 +200,14 @@ public class Settings {
 		if (prefs == null) {
 			return "Virus Attack";
 		}
-		return prefs.getString(PATTERN_PATTERN_PICKER, "Virus Attack");
+		return prefs.getString(KEY_PATTERN_PATTERN_PICKER, "Virus Attack");
 	}
 
 	public static String getSelectedPatternVariant() {
 		if (prefs == null) {
 			return "none";
 		}
-		return prefs.getString(PATTERN_PATTERN_VARIANT_PICKER, "V1");
+		return prefs.getString(KEY_PATTERN_PATTERN_VARIANT_PICKER, "V1");
 	}
 
 	public static float getPatternSizeFactor() {
@@ -225,7 +228,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Not filled";
 		}
-		return prefs.getString(PATTERN_FILLED_OPTION, "Not filled");
+		return prefs.getString(KEY_PATTERN_FILLED_OPTION, "Not filled");
 	}
 
 	// ###################################################################
@@ -264,21 +267,21 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return prefs.getBoolean(PATTERN_GLOSSY, false);
+		return prefs.getBoolean(KEY_PATTERN_GLOSSY, false);
 	}
 
 	public static boolean isOutline() {
 		if (prefs == null) {
 			return true;
 		}
-		return prefs.getBoolean(PATTERN_OUTLINE, true);
+		return prefs.getBoolean(KEY_PATTERN_OUTLINE, true);
 	}
 
 	public static boolean isOutlineNeverTransparent() {
 		if (prefs == null) {
 			return false;
 		}
-		return prefs.getBoolean(PATTERN_OUTLINE_NEVER_TRANSPARENT, false);
+		return prefs.getBoolean(KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT, false);
 	}
 
 	public static boolean isCustomOutlineColor() {
@@ -300,28 +303,28 @@ public class Settings {
 		if (prefs == null) {
 			return -48;
 		}
-		return prefs.getInt(PATTERN_OUTLINE_DARKNESS_ADJUST, -48);
+		return prefs.getInt(KEY_PATTERN_OUTLINE_DARKNESS_ADJUST, -48);
 	}
 
 	public static int getDropShadowDarkness() {
 		if (prefs == null) {
 			return -48;
 		}
-		return prefs.getInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -48);
+		return prefs.getInt(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -48);
 	}
 
 	public static String getText() {
 		if (prefs == null) {
 			return "The Wallpaper Designer";
 		}
-		return prefs.getString(PATTERN_TEXT, "The Wallpaper Designer");
+		return prefs.getString(KEY_PATTERN_TEXT, "The Wallpaper Designer");
 	}
 
 	public static String getTextDrawStyle() {
 		if (prefs == null) {
 			return "Round";
 		}
-		return prefs.getString(PATTERN_TEXT_DRAW_STYLE, "Round");
+		return prefs.getString(KEY_PATTERN_TEXT_DRAW_STYLE, "Round");
 	}
 
 	// ###################################################################
@@ -330,7 +333,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Darker";
 		}
-		return prefs.getString(PATTERN_DROPSHADOW_TYPE, "Darker");
+		return prefs.getString(KEY_PATTERN_DROPSHADOW_TYPE, "Darker");
 	}
 
 	public static boolean isDropShadow() {
@@ -412,14 +415,14 @@ public class Settings {
 		if (prefs == null) {
 			return 5;
 		}
-		return prefs.getInt(NUMBER_OF_LEAFS, 5);
+		return prefs.getInt(KEY_NUMBER_OF_LEAFS, 5);
 	}
 
 	private static boolean isRandomLeafCount() {
 		if (prefs == null) {
 			return false;
 		}
-		return prefs.getBoolean(RANDOM_LEAF_COUNT, false);
+		return prefs.getBoolean(KEY_RANDOM_LEAF_COUNT, false);
 	}
 
 	// ###################################################################
@@ -561,7 +564,7 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return prefs.getBoolean("hexValues", false);
+		return prefs.getBoolean(KEY_HEX_VALUES, false);
 	}
 
 	// ###################################################################
@@ -584,7 +587,7 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return prefs.getBoolean("muimerp", false);
+		return prefs.getBoolean(KEY_MUIMERP, false);
 	}
 
 	// private static final int CURRENT_SETTINGS_VERSION = 2;
@@ -619,10 +622,10 @@ public class Settings {
 
 			prefs.edit().putString(KEY_SORT_ORDER, "Timestamp in Filename").commit();
 			prefs.edit().putString("stylePicker", "Patterns").commit();
-			prefs.edit().putString(PATTERN_PATTERN_PICKER, "Virus Attack").commit();
-			prefs.edit().putInt(PATTERN_ANZAHL_PATTERNS, 1000).commit();
+			prefs.edit().putString(KEY_PATTERN_PATTERN_PICKER, "Virus Attack").commit();
+			prefs.edit().putInt(KEY_PATTERN_ANZAHL_PATTERNS, 1000).commit();
 
-			prefs.edit().putBoolean(PATTERN_BLUR, false).commit();
+			prefs.edit().putBoolean(KEY_PATTERN_BLUR, false).commit();
 			prefs.edit().putBoolean("dropShadow", true).commit();
 			prefs.edit().putBoolean("randomizeDropShadowColor", true).commit();
 			prefs.edit().putInt("colorDropShadow", Color.BLACK).commit();
@@ -637,11 +640,11 @@ public class Settings {
 			prefs.edit().putInt("maxOpacity", 255).commit();
 			prefs.edit().putInt("dropShadowRadiusAdjustment", 100).commit();
 
-			prefs.edit().putInt(PATTERN_DROPSHADOW_DARKNESS_ADJUST, -88).commit();
-			prefs.edit().putInt(PATTERN_OUTLINE_DARKNESS_ADJUST, +40).commit();
+			prefs.edit().putInt(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -88).commit();
+			prefs.edit().putInt(KEY_PATTERN_OUTLINE_DARKNESS_ADJUST, +40).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
-			prefs.edit().putBoolean(PATTERN_OUTLINE, true).commit();
+			prefs.edit().putBoolean(KEY_PATTERN_OUTLINE, true).commit();
 			prefs.edit().putString("rotatingStyle", "Fixed").commit();
 			prefs.edit().putString(KEY_IMAGE_FORMAT, "jpg").commit();
 			prefs.edit().putInt(KEY_JPG_COMPRESSION, 95).commit();

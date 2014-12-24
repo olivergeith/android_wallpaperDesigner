@@ -55,7 +55,7 @@ public class CustomAdapter extends BaseAdapter {
 		rowView = inflater.inflate(R.layout.custom_adapter2, null);
 		holder.textview = (TextView) rowView.findViewById(R.id.textView1);
 		holder.imgView = (ImageView) rowView.findViewById(R.id.imageView1);
-		final String text = SettingsIO.stripTimestamp(preferenceList.get(position).getPreferenceFile().getName());
+		final String text = PreferenceIO.stripTimestamp(preferenceList.get(position).getPreferenceFile().getName());
 		holder.textview.setText(text);
 		// Wenn Bild vorhanden nur bild anzeigen
 		if (preferenceList.get(position).getBitmap() != null) {

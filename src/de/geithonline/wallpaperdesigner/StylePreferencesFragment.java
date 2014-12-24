@@ -38,16 +38,16 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
-		patternSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_PICKER);
-		patternVariantSelection = (ListPreference) findPreference(Settings.PATTERN_PATTERN_VARIANT_PICKER);
-		filledOption = (ListPreference) findPreference(Settings.PATTERN_FILLED_OPTION);
-		textDrawStyle = (ListPreference) findPreference(Settings.PATTERN_TEXT_DRAW_STYLE);
-		dropShadowType = (ListPreference) findPreference(Settings.PATTERN_DROPSHADOW_TYPE);
-		textPattern = (EditTextPreference) findPreference(Settings.PATTERN_TEXT);
+		patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
+		patternVariantSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER);
+		filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
+		textDrawStyle = (ListPreference) findPreference(Settings.KEY_PATTERN_TEXT_DRAW_STYLE);
+		dropShadowType = (ListPreference) findPreference(Settings.KEY_PATTERN_DROPSHADOW_TYPE);
+		textPattern = (EditTextPreference) findPreference(Settings.KEY_PATTERN_TEXT);
 
 		maxOpacity = (SeekBarPreference) findPreference("maxOpacity");
-		numberOfLeafs = (SeekBarPreference) findPreference(Settings.NUMBER_OF_LEAFS);
-		randomLeafCount = (CheckBoxPreference) findPreference(Settings.RANDOM_LEAF_COUNT);
+		numberOfLeafs = (SeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
+		randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
 		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
 		rotatingStyle = (ListPreference) findPreference("rotatingStyle");
 
@@ -155,9 +155,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	public void handleDropShadowTypeSelection(final String newValue) {
 		dropShadowType.setSummary(newValue);
-		final Preference dropShadowColor = findPreference(Settings.PATTERN_DROPSHADOW_COLOR);
+		final Preference dropShadowColor = findPreference(Settings.KEY_PATTERN_DROPSHADOW_COLOR);
 		dropShadowColor.setEnabled(newValue.equals("Select"));
-		final Preference dropShadowDarkness = findPreference(Settings.PATTERN_DROPSHADOW_DARKNESS_ADJUST);
+		final Preference dropShadowDarkness = findPreference(Settings.KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST);
 		dropShadowDarkness.setEnabled(newValue.equals("Darker"));
 		final SeekBarPreference dropShadowRadiusAdjustment = (SeekBarPreference) findPreference("dropShadowRadiusAdjustment");
 		dropShadowRadiusAdjustment.setEnabled(!newValue.equals("No"));
@@ -166,9 +166,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void handlePatternSelect(final String newPattern) {
 		patternSelection.setSummary(newPattern);
-		final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.PATTERN_GLOSSY);
-		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE);
-		final CheckBoxPreference outlineneverTransparent = (CheckBoxPreference) findPreference(Settings.PATTERN_OUTLINE_NEVER_TRANSPARENT);
+		final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_GLOSSY);
+		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_OUTLINE);
+		final CheckBoxPreference outlineneverTransparent = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT);
 		glossy.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
 		outline.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
 		outlineneverTransparent.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
