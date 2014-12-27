@@ -27,6 +27,7 @@ import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.EMailHelper;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
+import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
@@ -186,6 +187,7 @@ public class SettingsIO {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				ZipHelper.zipFileAtPath(getSettingsDir().getAbsolutePath(), outzip.getAbsolutePath());
+				MediaScannerHelper.rescanMedia(activity, outzip);
 				if (sendmail) {
 					sendFileViaEmail(activity, outzip.getAbsolutePath(), toOliver);
 				}

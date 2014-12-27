@@ -82,7 +82,6 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0dp"
         android:paddingRight="4dp"
-        
          />
 
 </android.support.v4.widget.DrawerLayout>

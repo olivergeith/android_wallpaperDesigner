@@ -11,14 +11,12 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
+import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public abstract class WPStyle extends ColorProvider implements IWPStyle {
@@ -64,7 +62,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small,
 				StorageHelper.getExternalStorageSettings(), jpgFilename, 80);
-		rescanMedia(context, smallJpgFile);
+		MediaScannerHelper.rescanMedia(context, smallJpgFile);
 		small.recycle();
 		// Saving corresponding Settings
 		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(),
@@ -89,17 +87,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 					filename, Settings.getJpgCompression());
 			break;
 		}
-		rescanMedia(context, imageFile);
-	}
-
-	private void rescanMedia(final Context context, final File imageFile) {
-		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null,
-				new MediaScannerConnection.OnScanCompletedListener() {
-					@Override
-					public void onScanCompleted(final String path, final Uri uri) {
-						Log.i("FILESAVE", "Scanned " + path);
-					}
-				});
+		MediaScannerHelper.rescanMedia(context, imageFile);
 	}
 
 	@Override

@@ -19,7 +19,7 @@
 	<PreferenceCategory android:title="Manage Designs"/>
 	    <Preference 
 		    android:key="loadSettings"
-		    android:title="Restore Design"
+		    android:title="Load Design"
 		    android:icon="@android:drawable/ic_menu_set_as"
 		    android:summary="Restore one of your designs" 
             />
