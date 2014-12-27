@@ -10,6 +10,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.Path.Direction;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RadialGradient;
@@ -54,6 +55,8 @@ import de.geithonline.wallpaperdesigner.shapes.MandalaV4Path;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath.MATERIAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.NiceFlowerPath;
+import de.geithonline.wallpaperdesigner.shapes.OvalPath;
+import de.geithonline.wallpaperdesigner.shapes.OvalPath.OVAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.OwlPath;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath;
 import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
@@ -403,7 +406,7 @@ public abstract class WPStylePattern extends WPStyle {
 			final int nr = getRandomInt(0, 6);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
-			final int nr = getRandomInt(0, 7);
+			final int nr = getRandomInt(0, 9);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Square (Mixed)")) {
 			variant = "Square (Mixed)";
@@ -444,10 +447,22 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.CIRCLE);
 			break;
 		case "V8":
+		case "Oval":
+			path = new OvalPath(new PointF(x, y), radius / 2, radius, Direction.CW, OVAL_TYPE.NORMAL);
+			break;
+		case "V9":
+		case "Oval (random width)":
+			path = new OvalPath(new PointF(x, y), radius * 0.8f, radius, Direction.CW, OVAL_TYPE.RANDOM_WIDTH);
+			break;
+		case "V10":
+		case "Oval (random)":
+			path = new OvalPath(new PointF(x, y), radius * 0.8f, radius, Direction.CW, OVAL_TYPE.RANDOM);
+			break;
+		case "V11":
 		case "Half Circle":
 			path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.HALF_CIRCLE);
 			break;
-		case "V9":
+		case "V12":
 		case "Square (Mixed)":
 			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;

@@ -295,7 +295,6 @@ public class BitmapBlurrer {
 		blurMaskFilter = new BlurMaskFilter(blurRadius, BlurMaskFilter.Blur.INNER);
 		paintBlur.setMaskFilter(blurMaskFilter);
 		canvas.drawBitmap(src, 0, 0, paintBlur);
-
 		return dest;
 	}
 
