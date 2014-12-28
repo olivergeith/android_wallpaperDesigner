@@ -10,6 +10,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -29,6 +30,11 @@ public class BitmapHelper {
 		m.preScale(1, -1);
 		final Bitmap dst = Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), m, true);
 		return dst;
+	}
+
+	public static Bitmap crop(final Bitmap sourceBitmap, final Rect rect) {
+		final Bitmap cropped = Bitmap.createBitmap(sourceBitmap, rect.left, rect.top, rect.width(), rect.height());
+		return cropped;
 	}
 
 	public static Drawable resizeToIcon(final Bitmap bitmap, final int width, final int height) {
@@ -70,8 +76,10 @@ public class BitmapHelper {
 	 *            -180 bis 180
 	 * @return
 	 */
-	public static Bitmap getColorFilteredBitmap(final Bitmap inBitmap, final int brightness, final int contrast, final int saturation, final int hue) {
-		final Bitmap outBitmap = Bitmap.createBitmap(inBitmap.getWidth(), inBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+	public static Bitmap getColorFilteredBitmap(final Bitmap inBitmap, final int brightness, final int contrast,
+			final int saturation, final int hue) {
+		final Bitmap outBitmap = Bitmap
+				.createBitmap(inBitmap.getWidth(), inBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 		final Canvas c = new Canvas(outBitmap);
 		final Paint paint = new Paint();
 		paint.setColorFilter(ColorFilterGenerator.adjustColor(brightness, contrast, saturation, hue));
