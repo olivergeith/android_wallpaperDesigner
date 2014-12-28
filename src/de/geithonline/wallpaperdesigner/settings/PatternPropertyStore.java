@@ -8,8 +8,7 @@ public class PatternPropertyStore {
 	private static final Map<String, PatternProperties> patternProperties = new HashMap<String, PatternProperties>();
 
 	static {
-		// new PatternProperties(outline, randomrotate, text, filled, leaf,
-		// glossy)
+		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot",
 						"Footprint", "Pentagram", "4Sails", "Dice", "Drop", "Mixed" }));
@@ -113,8 +112,8 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Rocket V6",
 						"Ufo V1", "Ufo V2", "Satellite", "Mixed Rockets", "Mixed" }));
 
-		patternProperties.put("Stars", new PatternProperties(true, true, false, false, true, true, //
-				new CharSequence[] { "Nomral", "Outline", "Spikey", "Mixed" }));
+		patternProperties.put("Stars", new PatternProperties(true, true, false, true, true, true, //
+				new CharSequence[] { "Nomral", "Spikey", "Star Circle", "Mixed" }));
 		patternProperties.put("Star Circles", new PatternProperties(true, true, false, true, false, false));
 
 		patternProperties.put("Text", new PatternProperties(true, false, true, true, false, false, //
@@ -126,7 +125,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "Mixed" }));
 
-		patternProperties.put("XmasTrees", new PatternProperties(true, true, false, true, false, false));
+		patternProperties.put("Xmas", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Tree" }));
 
 	}
 

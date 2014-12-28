@@ -91,7 +91,6 @@ import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
-import de.geithonline.wallpaperdesigner.shapes.StarCirclePath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
@@ -146,12 +145,6 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Chess":
 			drawChess(x, y, paint, radius);
-			break;
-		case "XmasTrees":
-			drawXmasTree(x, y, paint, radius);
-			break;
-		case "Star Circles":
-			drawStarCircles(x, y, paint, radius);
 			break;
 		case "Flipped":
 			drawFlipped(x, y, paint, radius);
@@ -256,6 +249,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Planes":
 			drawPlane(x, y, paint, radius);
+			break;
+		case "Xmas":
+			drawXmas(x, y, paint, radius);
 			break;
 		}
 	}
@@ -1244,7 +1240,22 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawStar(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = getStarPath(x, y, radius, variante, arms);
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Normal":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.NORMAL, getFilledBoolean());
+			break;
+		case "V2":
+		case "Spikey":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.SPIKEY, getFilledBoolean());
+			break;
+		case "V3":
+		case "Star Circle":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.STAR_CIRCLE, getFilledBoolean());
+			break;
+		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360 / arms, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
@@ -1252,26 +1263,6 @@ public abstract class WPStylePattern extends WPStyle {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
-	}
-
-	private Path getStarPath(final int x, final int y, final int radius, final String variante, final int arms) {
-		Path path;
-		switch (variante) {
-		default:
-		case "V1":
-		case "Normal":
-			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.NORMAL);
-			break;
-		case "V2":
-		case "Outline":
-			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.OUTLINE);
-			break;
-		case "V3":
-		case "Spikey":
-			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.SPIKEY);
-			break;
-		}
-		return path;
 	}
 
 	private void drawMaterial(final int x, final int y, final Paint paint, final int radius) {
@@ -1760,21 +1751,25 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 	}
 
-	protected void drawXmasTree(final int x, final int y, final Paint paint, final int radius) {
-		// final Path path = new ZitronePath(new Point(x, y), radius);
-		final Path path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
-		bitmapCanvas.drawPath(path, paint);
-		// Outline
-		if (Settings.isOutline()) {
-			setupPaintForOutline(paint, radius);
-			bitmapCanvas.drawPath(path, paint);
+	protected void drawXmas(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 1);
+			variant = "V" + nr;
 		}
+		drawXmas(x, y, paint, radius, variant);
 	}
 
-	protected void drawStarCircles(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = new StarCirclePath(new PointF(x, y), radius, getFilledBoolean());
-		rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+	protected void drawXmas(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Tree":
+			path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
+			break;
+		}
+		rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -1968,7 +1963,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawGlossyStar(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = getRandomInt(0, 4);
 			variante = "V" + nr;
 		}
 		drawGlossyStar(x, y, paint, radius, variante);
@@ -1983,7 +1978,22 @@ public abstract class WPStylePattern extends WPStyle {
 		final int transparent = 0x00FFFFFF;
 		// Star
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = getStarPath(x, y, radius, variante, arms);
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Normal":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.NORMAL, getFilledBoolean());
+			break;
+		case "V2":
+		case "Spikey":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.SPIKEY, getFilledBoolean());
+			break;
+		case "V3":
+		case "Star Circle":
+			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.STAR_CIRCLE, getFilledBoolean());
+			break;
+		}
 		rotatePath(x, y, path, getRotationDegrees(0, 360 / arms, bWidth, bHeight, new Point(x, y)));
 
 		bitmapCanvas.drawPath(path, paint);
