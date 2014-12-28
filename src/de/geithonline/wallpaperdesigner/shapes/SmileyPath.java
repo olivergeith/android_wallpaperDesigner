@@ -5,8 +5,25 @@ import android.graphics.Point;
 
 public class SmileyPath extends Path {
 
-	public SmileyPath(final Point center, final float radius, final boolean sad) {
+	public enum SMILEY_TYPE {
+		HAPPY, SAD;
+	}
+
+	public SmileyPath(final Point center, final float radius, final SMILEY_TYPE type) {
 		super();
+		switch (type) {
+		default:
+		case HAPPY:
+			drawSmiley(center, radius, false);
+			break;
+		case SAD:
+			drawSmiley(center, radius, true);
+			break;
+
+		}
+	}
+
+	public void drawSmiley(final Point center, final float radius, final boolean sad) {
 		// Kopf
 		addCircle(center.x, center.y, radius, Direction.CW);
 		// Augen

@@ -3,19 +3,25 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
-import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class DeathstarPath extends Path {
+public class StarwarsPath extends Path {
 
-	public DeathstarPath(final Point center, final float radius) {
+	public enum STARWARS_TYPE {
+		DEATHSTAR, R2D2;
+	}
+
+	public StarwarsPath(final Point center, final float radius, final STARWARS_TYPE type) {
 		super();
 
-		if (Randomizer.getRandomBoolean()) {
+		switch (type) {
+		default:
+		case DEATHSTAR:
 			drawDeathStar(center, radius);
-		} else {
+			break;
+		case R2D2:
 			drawR2D2(center, radius);
+			break;
 		}
-
 	}
 
 	private void drawR2D2(final Point center, final float radius) {
