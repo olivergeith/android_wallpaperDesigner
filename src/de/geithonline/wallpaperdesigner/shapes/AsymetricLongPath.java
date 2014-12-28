@@ -7,10 +7,11 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN;
 	}
 
-	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
+	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled,
+			final ASYMETRIC_STYLE style) {
 
 		switch (style) {
 		default:
@@ -70,6 +71,12 @@ public class AsymetricLongPath extends Path {
 			break;
 		case VIRUS_V2:
 			drawVirus(16, center, radius, height, filled);
+			break;
+		case CHAIN_CIRCLE:
+			drawCircleChain(center, radius, height, filled);
+			break;
+		case CHAIN_CIRCLE_UPSIDEDOWN:
+			drawCircleChain2(center, radius, height, filled);
 			break;
 		}
 
@@ -425,7 +432,8 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawVirus(final int arms, final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawVirus(final int arms, final PointF center, final float radius, final int height,
+			final boolean filled) {
 
 		final PointF circlecenter = new PointF(center.x, center.y - height + radius);
 		final float angle = (float) (2 * Math.PI / (arms));
@@ -454,4 +462,32 @@ public class AsymetricLongPath extends Path {
 		}
 	}
 
+	// ##################################################################################
+	private void drawCircleChain(final PointF center, final float radius, final int height, final boolean filled) {
+
+		final PointF p = new PointF(center.x, center.y);
+		float offset = 0;
+		final int length = 6;
+		for (int i = 0; i < length; i++) {
+			final float r = radius * (length - i) / length;
+			p.y = center.y - offset;
+			addCircle(p.x, p.y, r, Direction.CCW);
+			offset = offset + 2 * r;
+		}
+	}
+
+	// ##################################################################################
+	private void drawCircleChain2(final PointF center, final float radius, final int height, final boolean filled) {
+
+		final PointF p = new PointF(center.x, center.y);
+		float offset = 0;
+		final int length = 6;
+		for (int i = 0; i < length; i++) {
+			final float r = radius * (1 + i) / length;
+			p.y = center.y - offset;
+			addCircle(p.x, p.y, r, Direction.CCW);
+			final float r2 = radius * (2 + i) / length;
+			offset = offset + 2 * r2;
+		}
+	}
 }

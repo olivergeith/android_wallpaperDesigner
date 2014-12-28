@@ -43,7 +43,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", "Triangle", "Oval",
 						"Diamond", "Dragon", "Dragon (upsidedown)", "Drop", "Lense", "Lense V2", "Lense V3", "Tag",
 						"Knife", "Knife V2", "Knife V3", "Cross", "Double Cross", "Sperm", "Virus", "Virus V2",
-						"Long Heart" }));
+						"Long Heart", "Circle Chain", "Circle Chain (upsidedown)" }));
 
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //

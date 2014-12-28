@@ -565,6 +565,16 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
 					ASYMETRIC_STYLE.LONG_HEART);
 			break;
+		case "V23":
+		case "Circle Chain":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+					ASYMETRIC_STYLE.CHAIN_CIRCLE);
+			break;
+		case "V24":
+		case "Circle Chain (upsidedown)":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+					ASYMETRIC_STYLE.CHAIN_CIRCLE_UPSIDEDOWN);
+			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
