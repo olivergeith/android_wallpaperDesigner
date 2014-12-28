@@ -1,10 +1,9 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
-import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class FlippedPath extends Path {
@@ -127,7 +126,7 @@ public class FlippedPath extends Path {
 		p.close();
 
 		final int drehwinkel = Randomizer.getRandomInt(-1, 3) * 90;
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
 
@@ -147,7 +146,7 @@ public class FlippedPath extends Path {
 		p.close();
 
 		final int drehwinkel = Randomizer.getRandomInt(-1, 3) * 90;
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
 
@@ -205,14 +204,6 @@ public class FlippedPath extends Path {
 					Direction.CW);
 			break;
 		}
-	}
-
-	protected void rotatePath(final float x, final float y, final Path path, final int rotate) {
-		final Matrix mMatrix = new Matrix();
-		final RectF bounds = new RectF();
-		path.computeBounds(bounds, true);
-		mMatrix.postRotate(rotate, x, y);
-		path.transform(mMatrix);
 	}
 
 }

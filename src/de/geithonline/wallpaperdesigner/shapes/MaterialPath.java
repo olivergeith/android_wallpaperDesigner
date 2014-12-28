@@ -1,10 +1,10 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
-import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class MaterialPath extends Path {
@@ -87,7 +87,7 @@ public class MaterialPath extends Path {
 
 		final Path p = new Path();
 		p.addRect(rect, Direction.CW);
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 		flip = !flip;
 	}
@@ -104,7 +104,7 @@ public class MaterialPath extends Path {
 
 		final Path p = new Path();
 		p.addRect(rect, Direction.CW);
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 		flip = !flip;
 	}
@@ -123,7 +123,7 @@ public class MaterialPath extends Path {
 
 		final Path p = new Path();
 		p.addRect(rect, Direction.CW);
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 		fli = fli + 1;
 		if (fli == 4) {
@@ -154,7 +154,7 @@ public class MaterialPath extends Path {
 
 		final Path p = new Path();
 		p.addRect(rect, Direction.CW);
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
 
@@ -185,7 +185,7 @@ public class MaterialPath extends Path {
 		}
 		final Path p = new Path();
 		p.addRect(rect, Direction.CW);
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
 
@@ -222,7 +222,7 @@ public class MaterialPath extends Path {
 		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y);
 		p.addRect(rect, Direction.CW);
 
-		rotatePath(center.x, center.y, p, drehwinkel);
+		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
 
@@ -250,7 +250,7 @@ public class MaterialPath extends Path {
 
 		p.addRect(rect, Direction.CW);
 
-		rotatePath(center.x, center.y, p, winkel);
+		PathHelper.rotatePath(center.x, center.y, p, winkel);
 		addPath(p);
 	}
 
@@ -318,9 +318,9 @@ public class MaterialPath extends Path {
 		path.lineTo(p.x, p.y);
 		path.close();
 		if (center.x > bWidth / 2) {
-			rotatePath(imageCenter.x, imageCenter.y, path, rotateWinkel);
+			PathHelper.rotatePath(imageCenter.x, imageCenter.y, path, rotateWinkel);
 		} else {
-			rotatePath(imageCenter.x, imageCenter.y, path, rotateWinkel + 180);
+			PathHelper.rotatePath(imageCenter.x, imageCenter.y, path, rotateWinkel + 180);
 		}
 
 		addPath(path);
@@ -355,16 +355,8 @@ public class MaterialPath extends Path {
 			p.close();
 		}
 
-		rotatePath(center.x, center.y, p, winkel);
+		PathHelper.rotatePath(center.x, center.y, p, winkel);
 		addPath(p);
-	}
-
-	protected void rotatePath(final int x, final int y, final Path path, final int rotate) {
-		final Matrix mMatrix = new Matrix();
-		final RectF bounds = new RectF();
-		path.computeBounds(bounds, true);
-		mMatrix.postRotate(rotate, x, y);
-		path.transform(mMatrix);
 	}
 
 	private void drawArcV1(final Point center, final float radius, final int bWidth, final int bHeight) {
@@ -446,11 +438,6 @@ public class MaterialPath extends Path {
 			flippy = 0;
 		}
 
-	}
-
-	private int calcDistance(final Point p1, final Point p2) {
-		final double sqrt = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-		return (int) Math.round(sqrt);
 	}
 
 }
