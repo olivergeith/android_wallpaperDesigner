@@ -67,6 +67,9 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 		task.settingMax(anzahlPatterns);
 		// Zeichnen
 		for (int i = 0; i < anzahlPatterns; i++) {
+			if (i % 100 == 0) {
+				System.gc();
+			}
 			task.settingProgress(i);
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
@@ -114,9 +117,11 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 
 			if (Settings.isBlurPatterns()) {
 				if (i == blurLevel2) {
+					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, 5, true);
 				}
 				if (i == blurLevel3) {
+					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, 3, true);
 				}
 			}

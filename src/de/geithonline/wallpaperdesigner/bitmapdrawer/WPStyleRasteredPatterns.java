@@ -67,6 +67,9 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		}
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
+			if (i % 100 == 0) {
+				System.gc();
+			}
 			task.settingProgress(i);
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
