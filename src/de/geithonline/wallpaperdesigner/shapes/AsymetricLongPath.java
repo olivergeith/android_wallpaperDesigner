@@ -472,6 +472,9 @@ public class AsymetricLongPath extends Path {
 			final float r = radius * (length - i) / length;
 			p.y = center.y - offset;
 			addCircle(p.x, p.y, r, Direction.CCW);
+			if (!filled) {
+				addCircle(p.x, p.y, r * 0.6f, Direction.CW);
+			}
 			offset = offset + 2 * r;
 		}
 	}
@@ -486,6 +489,9 @@ public class AsymetricLongPath extends Path {
 			final float r = radius * (1 + i) / length;
 			p.y = center.y - offset;
 			addCircle(p.x, p.y, r, Direction.CCW);
+			if (!filled) {
+				addCircle(p.x, p.y, r * 0.6f, Direction.CW);
+			}
 			final float r2 = radius * (2 + i) / length;
 			offset = offset + 2 * r2;
 		}
