@@ -41,6 +41,7 @@ import de.geithonline.wallpaperdesigner.settings.SavedDesign;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
+import de.geithonline.wallpaperdesigner.utils.DebugHelper;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
@@ -418,6 +419,9 @@ public class MainActivity extends Activity {
 			}
 			if (dialog != null) {
 				dialog.cancel();
+				if (Settings.isDebugging()) {
+					shakeHint.setText(DebugHelper.getMemoryInfo());
+				}
 			}
 		}
 
@@ -428,7 +432,6 @@ public class MainActivity extends Activity {
 				dialog.setProgress(values[0]);
 			}
 		}
-
 	}
 
 	private void exit() {

@@ -31,6 +31,7 @@ public class PreferenceIO {
 		ignoreKeys.add(Settings.KEY_SHARE_SUBJECT);
 		ignoreKeys.add(Settings.KEY_SHARE_TEXT);
 		ignoreKeys.add(Settings.KEY_APP_THEME);
+		ignoreKeys.add("debug");
 	}
 
 	@SuppressWarnings("unchecked")

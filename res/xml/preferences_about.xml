@@ -65,7 +65,7 @@
 		    android:key="debug"
     		android:defaultValue="false"
 		    android:title="Debugging"
-		    android:summary="Do not use this! No patterns will be drawn, if you tick this!" 
+		    android:summary="Do not use this! This enables some internal debugging infomation..." 
             />
         </PreferenceCategory>
     
