@@ -166,9 +166,9 @@ public class Settings {
 		if (prefs == null) {
 			return 1000;
 		}
-		if (isDebugging()) {
-			return 0;
-		}
+		// if (isDebugging()) {
+		// return 0;
+		// }
 		return prefs.getInt(KEY_PATTERN_ANZAHL_PATTERNS, 1000);
 	}
 
