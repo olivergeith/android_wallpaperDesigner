@@ -226,9 +226,9 @@ public class Settings {
 
 	public static String getFilledOption() {
 		if (prefs == null) {
-			return "Not filled";
+			return "Filled";
 		}
-		return prefs.getString(KEY_PATTERN_FILLED_OPTION, "Not filled");
+		return prefs.getString(KEY_PATTERN_FILLED_OPTION, "Filled");
 	}
 
 	// ###################################################################
@@ -613,39 +613,38 @@ public class Settings {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();
 			// init colors
-			prefs.edit().putInt("color_plain_bgrnd", 0xff820000).commit();
-			prefs.edit().putInt("color2_plain_bgrnd", 0xfff2e518).commit();
-			prefs.edit().putInt("color3_plain_bgrnd", 0xff008200).commit();
-			prefs.edit().putInt("color4_plain_bgrnd", 0xff014f81).commit();
+			prefs.edit().putInt("color_plain_bgrnd", 0xffffc700).commit();
+			prefs.edit().putInt("color2_plain_bgrnd", 0xff329a00).commit();
+			prefs.edit().putInt("color3_plain_bgrnd", 0xff0060af).commit();
+			prefs.edit().putInt("color4_plain_bgrnd", 0xffcd0077).commit();
 			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString(KEY_SORT_ORDER, "Timestamp in Filename").commit();
-			prefs.edit().putString("stylePicker", "Patterns").commit();
-			prefs.edit().putString(KEY_PATTERN_PATTERN_PICKER, "Virus Attack").commit();
+			prefs.edit().putString(KEY_PATTERN_PATTERN_PICKER, "Geometrical Shapes").commit();
+			prefs.edit().putString(KEY_PATTERN_PATTERN_VARIANT_PICKER, "Square (rounded)").commit();
 			prefs.edit().putInt(KEY_PATTERN_ANZAHL_PATTERNS, 1000).commit();
+			prefs.edit().putString(KEY_PATTERN_FILLED_OPTION, "Filled").commit();
 
 			prefs.edit().putBoolean(KEY_PATTERN_BLUR, false).commit();
-			prefs.edit().putBoolean("dropShadow", true).commit();
-			prefs.edit().putBoolean("randomizeDropShadowColor", true).commit();
 			prefs.edit().putInt("colorDropShadow", Color.BLACK).commit();
-
+			prefs.edit().putInt("patternMinSizeAdjust", 50).commit();
 			prefs.edit().putString("bWidth", "1920").commit();
 			prefs.edit().putString("bHeight", "1200").commit();
 			prefs.edit().putString("sizeSelection", "1920x1200").commit();
 
-			prefs.edit().putInt("randomizeColorRangeInt", 12).commit();
-			prefs.edit().putInt("randomizeColorBrightnessRangeInt", 12).commit();
+			prefs.edit().putInt("randomizeColorRangeInt", 20).commit();
+			prefs.edit().putInt("randomizeColorBrightnessRangeInt", 24).commit();
 			prefs.edit().putInt("minOpacity", 225).commit();
 			prefs.edit().putInt("maxOpacity", 255).commit();
-			prefs.edit().putInt("dropShadowRadiusAdjustment", 100).commit();
+			prefs.edit().putInt("dropShadowRadiusAdjustment", 250).commit();
 
-			prefs.edit().putInt(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -88).commit();
+			prefs.edit().putInt(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -104).commit();
 			prefs.edit().putInt(KEY_PATTERN_OUTLINE_DARKNESS_ADJUST, +40).commit();
 
 			prefs.edit().putInt("colorOutline", Color.BLACK).commit();
 			prefs.edit().putBoolean(KEY_PATTERN_OUTLINE, true).commit();
-			prefs.edit().putString("rotatingStyle", "Fixed").commit();
+			prefs.edit().putString("rotatingStyle", "Random").commit();
 			prefs.edit().putString(KEY_IMAGE_FORMAT, "jpg").commit();
 			prefs.edit().putInt(KEY_JPG_COMPRESSION, 95).commit();
 		}
