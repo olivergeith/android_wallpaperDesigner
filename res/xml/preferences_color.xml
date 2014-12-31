@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
  
-    <PreferenceCategory 
-        android:title="@string/category_background">
+    <PreferenceCategory android:title="@string/category_background"/>
 
         <ListPreference
 	        android:key="gradientDirection"
@@ -46,7 +45,13 @@
 	        android:summary="4. Color"
 	        android:defaultValue="@integer/COLOR_BLACK"
 	        />
+
+	    <de.geithonline.android.basics.preferences.IconOnlyPreference
+		    android:key="colorPreview"
+			/>
 	    
+    <PreferenceCategory android:title="Special Coloring Options"/>
+	    	    
         <CheckBoxPreference 
             android:key="dynamicColoring"
             android:title="@string/dynamicColoring"
@@ -54,8 +59,4 @@
             android:defaultValue="false"
             />
         
-        
-	    
-    </PreferenceCategory>
-    	
 </PreferenceScreen>
