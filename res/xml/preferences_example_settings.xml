@@ -7,7 +7,7 @@
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"
 		    android:title="Example Designs"
-		    android:summary="download lots of example Designs! Find them later under 'Restore Design'!" 
+		    android:summary="download lots of example Designs! Find them later in the drawer on the left side of the main screen!" 
             />
 	    <Preference 
 		    android:key="unzipSettingsPremium"
@@ -17,12 +17,14 @@
             />
 
 	<PreferenceCategory android:title="Manage Designs"/>
-	    <Preference 
+<!-- 
+		    <Preference 
 		    android:key="loadSettings"
 		    android:title="Load Design"
 		    android:icon="@android:drawable/ic_menu_set_as"
 		    android:summary="Restore one of your designs" 
             />
+             -->
 	    <Preference 
 		    android:key="mailSettings"
 		    android:title="Email Design"
@@ -43,7 +45,13 @@
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Backup all your designs into a zip-File" 
             />
-
+	    <Preference 
+		    android:key="restoreDesigns"
+		    android:title="Restore Designs"
+		    android:icon="@android:drawable/ic_menu_upload"
+		    android:summary="Restore designs from a zip-File" 
+            />
+	    
 	    <Preference 
 		    android:key="shareALLDesignsViaEmail"
 		    android:title="Share all Designs via eMail"

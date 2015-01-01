@@ -11,10 +11,11 @@ import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 public class ExampleSettingsFragment extends PreferenceFragment {
 
 	private Preference shareALLDesigns;
+	private Preference restoreDesigns;
 	private Preference backupALLDesigns;
 	private Preference deleteALLDesigns;
 	private Preference deleteSettings;
-	private Preference loadSettings;
+	// private Preference loadSettings;
 	private Preference unzipSettings;
 	private Preference unzipSettingsPremium;
 	private Preference mailSettings;
@@ -69,6 +70,14 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 				return false;
 			}
 		});
+		restoreDesigns = findPreference("restoreDesigns");
+		restoreDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				SettingsIO.restoreDesignsFromZip(getActivity(), false);
+				return false;
+			}
+		});
 
 		shareALLDesigns = findPreference("shareALLDesignsViaEmail");
 		shareALLDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -79,14 +88,14 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
-		loadSettings = findPreference("loadSettings");
-		loadSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.loadDesignTheFancyWay(getActivity(), Settings.prefs);
-				return false;
-			}
-		});
+		// loadSettings = findPreference("loadSettings");
+		// loadSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		// @Override
+		// public boolean onPreferenceClick(final Preference preference) {
+		// SettingsIO.loadDesignTheFancyWay(getActivity(), Settings.prefs);
+		// return false;
+		// }
+		// });
 		mailSettings = findPreference("mailSettings");
 		mailSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override

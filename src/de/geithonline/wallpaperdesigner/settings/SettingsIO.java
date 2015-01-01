@@ -2,6 +2,7 @@ package de.geithonline.wallpaperdesigner.settings;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
@@ -34,6 +35,7 @@ import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class SettingsIO {
 
+	public static final String EXTENSION_ZIP = ".zip";
 	public static final String EXTENSION_PNG = ".png";
 	public static final String EXTENSION_JPG = ".jpg";
 	public static final String EXTENSION_PREF = ".pref";
@@ -82,7 +84,7 @@ public class SettingsIO {
 
 	}
 
-	public static ListView createListviewOfAllDesigns(final Activity activity, final List<SavedDesign> designList) {
+	private static ListView createListviewOfAllDesigns(final Activity activity, final List<SavedDesign> designList) {
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
 		final CustomAdapter adapter = new CustomAdapter(activity, designList);
@@ -227,6 +229,7 @@ public class SettingsIO {
 						for (final SavedDesign design : designList) {
 							SettingsIO.deletePreferencesFileAndBitmap(design);
 						}
+						setDesignListNeedsReload(true);
 					}
 				});
 	}
@@ -359,6 +362,128 @@ public class SettingsIO {
 		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
 		final String timeStamp = dt.format(date);
 		return timeStamp;
+	}
+
+	// #########################################################################
+	// restoring designs from zip
+	// #########################################################################
+
+	public static void restoreDesignsFromZip(final Activity activity, final boolean fromDownload) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final AlertDialog dialog = builder.create();
+		if (fromDownload) {
+			dialog.setTitle("Restore Designs from shared Zip");
+		} else {
+			dialog.setTitle("Restore Designs from Backup Zip");
+		}
+		dialog.setMessage("Restore alle Designs from one of your backup-zips");
+
+		final ListView listview = createListviewOfAllBackupZips(activity, fromDownload);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+				Log.i("Restoring zip Settings ", "from " + position);
+				if (position >= 0) {
+					final File file = (File) parent.getAdapter().getItem(position);
+					Alerter.alertYesNo(activity, "Dou you want really want to restore all designs from this Zip?\n"
+							+ file.getName(), "Restore Designs from Zip", new OnClickListener() {
+						@Override
+						public void onClick(final DialogInterface dialog, final int which) {
+							// deleteALLDesignsWithoutAsking(activity);
+							ZipHelper.unzip(file.getAbsolutePath(), //
+									StorageHelper.getExtstorageDataDirFile().getAbsolutePath());
+							setDesignListNeedsReload(true);
+						}
+					});
+
+				}
+				dialog.dismiss();
+			}
+		});
+		dialog.setView(listview);
+		dialog.show();
+
+	}
+
+	private static ListView createListviewOfAllBackupZips(final Activity activity, final boolean fromDownload) {
+		final ListView listview = new ListView(activity);
+		/** Declaring an ArrayAdapter to set items to ListView */
+		final CustomAdapterFiles adapter = new CustomAdapterFiles(activity, getAllDesignBackupZips(fromDownload));
+		listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+		listview.setAdapter(adapter);
+		return listview;
+	}
+
+	/**
+	 * Get a list of all preference filenames *.pref files
+	 * 
+	 * @param fromDownload
+	 * 
+	 * @param sortOrder
+	 * @return
+	 */
+	private static List<File> getAllDesignBackupZips(final boolean fromDownload) {
+		File dir;
+		if (fromDownload) {
+			dir = StorageHelper.getDownloaddirfile();
+		} else {
+			dir = StorageHelper.getExtstorageDataDirFile();
+		}
+		Log.i("Data DIR", "Dir = " + dir);
+		final List<File> zipBackups = getZipFileListFromLocalDataDir(dir);
+		return zipBackups;
+	}
+
+	/**
+	 * Delete all designs
+	 * 
+	 * @param activity
+	 */
+	private static void deleteALLDesignsWithoutAsking(final Activity activity) {
+
+		final List<SavedDesign> designList = getSavedPreferencesList();
+		if (designList.isEmpty()) {
+			// Toaster.showErrorToast(activity, "There are no Designs to delete!");
+			return;
+		}
+		for (final SavedDesign design : designList) {
+			SettingsIO.deletePreferencesFileAndBitmap(design);
+		}
+		setDesignListNeedsReload(true);
+	}
+
+	/**
+	 * Get a list of all preference filenames
+	 * 
+	 * @param activity
+	 * @return
+	 */
+	private static List<File> getZipFileListFromLocalDataDir(final File dir) {
+		final List<File> fileList = new ArrayList<File>();
+		Log.i("FileList", "Dir = " + dir);
+		if (dir != null && dir.exists() && dir.isDirectory()) {
+			Log.i("FileList", "ScanningDir = " + dir);
+			// Extension angegeben...dann filtern...
+			final File[] files = dir.listFiles(new FilenameFilter() {
+
+				@Override
+				public boolean accept(final File file, final String name) {
+					return name.endsWith(EXTENSION_ZIP) && name.startsWith("WPD_");
+				}
+			});
+
+			// Sort Files
+			if (files != null) {
+				FileIOHelper.sortFileArray(SORT_ORDER.LAST_MODIFIED_DESCENDING, files);
+			}
+			// Putting it into a List
+			for (final File fi : files) {
+				fileList.add(fi);
+			}
+			Log.i("FileList", "Found = " + fileList.size());
+		}
+		return fileList;
 	}
 
 }
