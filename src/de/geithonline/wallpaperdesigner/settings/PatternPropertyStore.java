@@ -20,7 +20,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Chess", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Heart", "Arrow", "Triangle", "Mixed" }));
 
-		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, false, //
+		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "V1", "V2", "Shark V1", "Shark V2", "Mixed" }));
 
 		patternProperties.put("Flipped",
@@ -28,7 +28,7 @@ public class PatternPropertyStore {
 						new CharSequence[] { "Triangle", "Triangle V2", "Square", "Rectangle", "Quarter Arc",
 								"Quarter Arc V2" }));
 
-		patternProperties.put("Flowers", new PatternProperties(true, true, false, true, true, false, //
+		patternProperties.put("Flowers", new PatternProperties(true, true, false, true, true, true, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "Mixed V1-V3", "Mixed V4-V5" }));
 
 		patternProperties.put("Gears-Saws", new PatternProperties(true, false, false, true, true, true, //
@@ -79,13 +79,13 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
 
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
-		patternProperties.put("Puzzle", new PatternProperties(true, true, false, true, false, false, //
+		patternProperties.put("Puzzle", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
-		patternProperties.put("Puzzle (Circle Connector)", new PatternProperties(true, true, false, true, false, false, //
+		patternProperties.put("Puzzle (Circle Connector)", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
-		patternProperties.put("Puzzle (Square)", new PatternProperties(true, true, false, true, false, false, //
+		patternProperties.put("Puzzle (Square)", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
-		patternProperties.put("Puzzle (Square Connector)", new PatternProperties(true, true, false, true, false, false, //
+		patternProperties.put("Puzzle (Square Connector)", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, true, //
@@ -94,7 +94,7 @@ public class PatternPropertyStore {
 						"4-3 Ratio", "4-3 Ratio (Rounded)", "4-3 Ratio (Mixed)", //
 						"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)" }));
 
-		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, false, //
+		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)",
 						"Rings V4 (Dizzy)", "Mixed" }));
 
@@ -127,7 +127,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "Mixed" }));
 
-		patternProperties.put("Xmas", new PatternProperties(true, true, false, true, false, false, //
+		patternProperties.put("Xmas", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Tree" }));
 
 	}

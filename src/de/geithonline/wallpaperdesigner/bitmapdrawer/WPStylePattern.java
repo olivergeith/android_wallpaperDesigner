@@ -684,6 +684,10 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
+		// Glossy
+		if (Settings.isGlossy()) {
+			drawGlossyPathStarStyle(x, y, paint, radius, path);
+		}
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
@@ -930,6 +934,10 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
+		// Glossy
+		if (Settings.isGlossy()) {
+			drawGlossyPathStarStyle(x, y, paint, radius, path);
+		}
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
@@ -1099,7 +1107,10 @@ public abstract class WPStylePattern extends WPStyle {
 			PathHelper.mirrorPathLeftRight(x, y, path);
 		}
 		bitmapCanvas.drawPath(path, paint);
-
+		// Glossy
+		if (Settings.isGlossy()) {
+			drawGlossyPathCenterGlow(x, y, paint, radius, path);
+		}
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
@@ -1518,6 +1529,10 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
+		// Glossy
+		if (Settings.isGlossy()) {
+			drawGlossyPathStarStyle(x, y, paint, radius, path);
+		}
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
@@ -1789,6 +1804,10 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
+		// Glossy
+		if (Settings.isGlossy()) {
+			drawGlossyPathStarStyle(x, y, paint, radius, path);
+		}
 		// Outline
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
