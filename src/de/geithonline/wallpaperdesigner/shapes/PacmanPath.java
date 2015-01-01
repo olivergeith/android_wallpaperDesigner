@@ -6,22 +6,24 @@ import android.graphics.RectF;
 
 public class PacmanPath extends Path {
 
-	public PacmanPath(final Point center, final float radius) {
-		super();
-
-		drawGhost(center, radius);
+	public enum PACMAN_STYLE {
+		GHOST, PACMAN;
 	}
 
-	public PacmanPath(final Point center, final float radius, final String variante) {
+	// public PacmanPath(final Point center, final float radius) {
+	// super();
+	//
+	// drawGhost(center, radius);
+	// }
+
+	public PacmanPath(final Point center, final float radius, final PACMAN_STYLE style) {
 		super();
-		switch (variante) {
+		switch (style) {
 		default:
-		case "V1":
-		case "Ghost":
+		case GHOST:
 			drawGhost(center, radius);
 			break;
-		case "V2":
-		case "Pacman":
+		case PACMAN:
 			drawPacman(center, radius);
 			break;
 		}
