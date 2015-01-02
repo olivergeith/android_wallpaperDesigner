@@ -1,5 +1,9 @@
 package de.geithonline.wallpaperdesigner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
@@ -31,6 +35,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private IconOnlyPreference colorPreview;
 	private Bitmap bitmap;
 
+	private List<String> keys = new ArrayList<String>();
+
 	@Override
 	public void onDestroy() {
 		if (bitmap != null) {
@@ -41,6 +47,14 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
+		keys = new ArrayList<String>();
+		keys.add("color_plain_bgrnd");
+		keys.add("color2_plain_bgrnd");
+		keys.add("color3_plain_bgrnd");
+		keys.add("color4_plain_bgrnd");
+		keys.add("gradientDirection");
+		keys.add("anzColors");
+
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
@@ -86,24 +100,31 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		Log.i("ColorPreferenceFragment", "onPreference Change for " + key);
-		drawBackGroundImage();
+		if (keys.contains(key)) {
+			Log.i("ColorPreferenceFragment", "drawing BackgroundIcon ");
+			drawBackGroundImage();
+		}
 	}
 
 	private void drawBackGroundImage() {
-		Log.i("ColorPreferenceFragment", "drawing BackgroundIcon ");
 		final int w = Settings.getBWidth();
 		final int h = Settings.getBHeight();
-		final int bWidth = DisplayHelper.getDisplayWidth(getActivity()) / 2;
-		final int bHeight = (bWidth * h) / w;
-		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
-		final Canvas bitmapCanvas = new Canvas(bitmap);
-		BackgroundDrawer.drawBackground(bitmapCanvas);
-		colorPreview.setTitle("Preview");
-		// final Drawable icon = BitmapHelper.bitmapToIcon(bitmap);
-		if (bitmap != null) {
-			colorPreview.setImage(bitmap);
+		final Activity activity = getActivity();
+		if (activity != null) {
+			final int bWidth = DisplayHelper.getDisplayWidth(activity) / 2;
+			final int bHeight = (bWidth * h) / w;
+			bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
+			final Canvas bitmapCanvas = new Canvas(bitmap);
+			BackgroundDrawer.drawBackground(bitmapCanvas);
+			colorPreview.setTitle("Preview");
+			// final Drawable icon = BitmapHelper.bitmapToIcon(bitmap);
+			if (bitmap != null) {
+				colorPreview.setImage(bitmap);
+			} else {
+				Log.e("ColorPreferenceFragment", "drawing BackgroundIcon -Bitmap was null!!");
+			}
 		} else {
-			Log.i("ColorPreferenceFragment", "drawing BackgroundIcon -Bitmap was null!!");
+			Log.w("ColorPreferenceFragment", "not drawing BackgroundIcon --> Activity was null ");
 		}
 	}
 
@@ -137,5 +158,4 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			break;
 		}
 	}
-
 }
