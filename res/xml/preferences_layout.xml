@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
- 
-    <PreferenceCategory  android:title="Layout"/>
-        <ListPreference
-	        android:key="mainlayouts"
-	        android:title="@string/mainlayouts" 
-	        android:dialogTitle="@string/mainlayouts"
-	        android:defaultValue="Random Layout"
-	        android:entries="@array/mainlayouts"
-	        android:entryValues="@array/mainlayouts"
-	        />
-        <ListPreference
-	        android:key="mainlayoutVariants"
-	        android:title="@string/mainlayoutVariants" 
-	        android:dialogTitle="@string/mainlayoutVariants"
-	        />
-        
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="overlapping"
-	        android:title="@string/overlapping" 
-		    seekbarpreference:minValue="10"
-		    seekbarpreference:stepValue="2"
-		    seekbarpreference:maxValue="200"
-		    android:summary="overlap %1$d (the smaler the number the more overlapping)" 
-		    android:defaultValue="50"
-		    android:dialogMessage="@string/overlapping" />
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
 
-        <CheckBoxPreference 
-		    android:key="upsideDown"
-		    android:title="@string/upsideDown"
-		    android:defaultValue="false"
-		    />
-        
-        
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="anzahlPatterns"
-	        android:title="@string/pattern_anzahlPatterns" 
-		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="20"
-		    seekbarpreference:maxValue="3000"
-		    android:summary="Draw %1$d Patterns" 
-		    android:defaultValue="1000"
-		    android:dialogMessage="@string/pattern_anzahlPatterns" />
-            
-        <CheckBoxPreference 
-		    android:key="blurPatterns"
-		    android:title="@string/blurPatterns"
-		    android:defaultValue="false"
-		    />
-    	
+    <PreferenceCategory android:title="Layout" />
+
+    <ListPreference
+        android:defaultValue="Random Layout"
+        android:dialogTitle="@string/mainlayouts"
+        android:entries="@array/mainlayouts"
+        android:entryValues="@array/mainlayouts"
+        android:key="mainlayouts"
+        android:title="@string/mainlayouts" />
+    <ListPreference
+        android:dialogTitle="@string/mainlayoutVariants"
+        android:key="mainlayoutVariants"
+        android:title="@string/mainlayoutVariants" />
+
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="50"
+        android:dialogMessage="@string/overlapping"
+        android:key="overlapping"
+        android:summary="overlap %1$d (the smaler the number the more overlapping)"
+        android:title="@string/overlapping"
+        seekbarpreference:maxValue="200"
+        seekbarpreference:minValue="10"
+        seekbarpreference:stepValue="2" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="upsideDown"
+        android:title="@string/upsideDown" />
+
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="1000"
+        android:dialogMessage="@string/pattern_anzahlPatterns"
+        android:key="anzahlPatterns"
+        android:summary="Draw %1$d Patterns"
+        android:title="@string/pattern_anzahlPatterns"
+        seekbarpreference:maxValue="3000"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="20" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="blurPatterns"
+        android:title="@string/blurPatterns" />
+
+    <!--
+    <Preference
+        android:icon="@drawable/about"
+        android:title="HowTo: Geometric Layouts" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://plus.google.com/117464431803849545973/posts/CiFzayUo4nZ" />
+    </Preference>
+    -->
+
 </PreferenceScreen>

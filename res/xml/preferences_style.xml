@@ -1,311 +1,337 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
-        
-    <PreferenceCategory  android:title="Pattern"/>
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceCategory android:title="Pattern" />
+
+    <ListPreference
+        android:defaultValue="Stars"
+        android:dialogTitle="@string/patternPicker"
+        android:entries="@array/pattern"
+        android:entryValues="@array/pattern"
+        android:key="pattern_patternPicker"
+        android:title="@string/patternPicker" />
+    <ListPreference
+        android:dialogTitle="@string/patternVariantPicker"
+        android:key="pattern_patternVariantPicker"
+        android:title="@string/patternVariantPicker" />
+
+    <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################    -->
+    <PreferenceCategory android:title="Pattern Options" />
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="dropshadowSettings"
+        android:title="Dropshadow..." >
+        <PreferenceCategory android:title="DropShadow" />
 
         <ListPreference
-	        android:key="pattern_patternPicker"
-	        android:title="@string/patternPicker" 
-	        android:dialogTitle="@string/patternPicker"
-	        android:defaultValue="Stars"
-	        android:entries="@array/pattern"
-	        android:entryValues="@array/pattern"
-	        />
-
-        <ListPreference
-	        android:key="pattern_patternVariantPicker"
-	        android:title="@string/patternVariantPicker" 
-	        android:dialogTitle="@string/patternVariantPicker"
-	        />
-        
-         
-		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-			    android:key="specialPatternSettings"
-			    android:title="Special Settings for selected Pattern"
-			    android:summary="Glossy Effect, Outline, Text, Filling ..."
-			    android:icon="@android:drawable/ic_menu_preferences"
-			    >
-		    	<PreferenceCategory  android:title="Assorted Options"/>
-			    <ListPreference
-			        android:key="filledOption"
-			        android:title="@string/filledOption" 
-			        android:dialogTitle="@string/filledOption"
-			        android:defaultValue="Not filled"
-			        android:entries="@array/hole"
-			        android:entryValues="@array/hole"
-			        />
-		    	<PreferenceCategory  android:title="Glossy Options"/>
-			    <CheckBoxPreference 
-		            android:key="glossy"
-		            android:title="@string/glossy"
-		            android:defaultValue="false"
-		            />
-   		        <de.geithonline.android.basics.preferences.SeekBarPreference
-		            android:key="glossyCenterGlowBrightness"
-			        android:title="@string/glossyCenterGlowBrightness" 
-				    seekbarpreference:minValue="8"
-				    seekbarpreference:stepValue="4"
-				    seekbarpreference:maxValue="128"
-				    android:defaultValue="64"
-				    android:summary="%1$d" 
-				    android:dialogMessage="@string/glossyCenterGlowBrightness" 
-		            android:dependency="glossy"
-				    />
-   		        <de.geithonline.android.basics.preferences.SeekBarPreference
-		            android:key="glossyCenterGlowOuterDarkness"
-			        android:title="@string/glossyCenterGlowOuterDarkness" 
-				    seekbarpreference:minValue="-128"
-				    seekbarpreference:stepValue="4"
-				    seekbarpreference:maxValue="-8"
-				    android:defaultValue="-32"
-				    android:summary="%1$d" 
-				    android:dialogMessage="@string/glossyCenterGlowOuterDarkness" 
-		            android:dependency="glossy"
-				    />
-   		        <de.geithonline.android.basics.preferences.SeekBarPreference
-		            android:key="glossyReflectionBrightness"
-			        android:title="@string/glossyReflectionBrightness" 
-				    seekbarpreference:minValue="8"
-				    seekbarpreference:stepValue="4"
-				    seekbarpreference:maxValue="128"
-				    android:defaultValue="32"
-				    android:summary="%1$d" 
-				    android:dialogMessage="@string/glossyReflectionBrightness" 
-		            android:dependency="glossy"
-				    />
-   		        		        		        			    
-		        <PreferenceCategory  android:title="Rotating"/>
-			    <ListPreference
-			        android:key="rotatingStyle"
-			        android:title="@string/rotatingStyle" 
-			        android:dialogTitle="@string/rotatingStyle"
-			        android:defaultValue="Fixed"
-			        android:entries="@array/rotatingStyle"
-			        android:entryValues="@array/rotatingStyle"
-			        />
-   		        <de.geithonline.android.basics.preferences.SeekBarPreference
-		            android:key="rotationDegrees"
-			        android:title="@string/rotationDegrees" 
-				    seekbarpreference:minValue="-180"
-				    seekbarpreference:stepValue="5"
-				    seekbarpreference:maxValue="180"
-				    android:defaultValue="0"
-				    android:summary="%1$d" 
-				    android:dialogMessage="@string/rotationDegrees" 
-				    />
-			    		    
-		
-		    	<PreferenceCategory  android:title="Outline Options"/>
-  		            <CheckBoxPreference 
-		            android:key="outline"
-		            android:title="@string/outline"
-		            android:defaultValue="true"
-		            />
-		        <CheckBoxPreference 
-		            android:key="outlineNeverTransparent"
-		            android:title="@string/outlineNeverTransparent"
-		            android:summary="@string/outlineNeverTransparentSummary"
-		            android:defaultValue="false"
-		            android:dependency="outline"
-		            />
-		        <de.geithonline.android.basics.preferences.SeekBarPreference
-		            android:key="outlineDarknessAdjust"
-			        android:title="@string/outlineDarknessAdjust" 
-				    seekbarpreference:minValue="-192"
-				    seekbarpreference:stepValue="8"
-				    seekbarpreference:maxValue="192"
-				    android:defaultValue="-48"
-				    android:summary="%1$d" 
-				    android:dialogMessage="@string/outlineDarknessAdjust" 
-		            android:dependency="outline"
-				    />
-		        
-		        <CheckBoxPreference 
-		            android:key="customOutlineColor"
-		            android:title="@string/customOutlineColor"
-		            android:defaultValue="false"
-		            android:dependency="outline"
-		            />
-		        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-		        	android:key="colorOutline"
-		        	android:title="@string/colorOutline" 
-		        	android:defaultValue="@integer/COLOR_BLACK"
-		            android:dependency="customOutlineColor"
-		        	/>
-
-		        <PreferenceCategory  android:title="Custom Text Options"/>
-		        <EditTextPreference
-				    android:key="textPattern"
-		    		android:defaultValue="The Wallpaper Designer"
-				    android:title="@string/textPattern" 
-		    		android:dialogTitle="@string/textPattern"
-		         	/>
-		        <ListPreference
-			        android:key="textDrawStyle"
-			        android:title="@string/textDrawStyle" 
-			        android:dialogTitle="@string/textDrawStyle"
-			        android:defaultValue="Round"
-			        android:entries="@array/textDrawStyle"
-			        android:entryValues="@array/textDrawStyle"
-			        />
-		        <PreferenceCategory  android:title="Leafs-Arms Options"/>
-		        <CheckBoxPreference 
-		            android:key="randomLeafCount"
-		            android:title="@string/randomLeafCount"
-		            android:defaultValue="false"
-		            android:disableDependentsState="true"
-		            />
-   		        <de.geithonline.android.basics.preferences.SeekBarPreference
-		            android:key="numberOfLeafs"
-			        android:title="@string/numberOfLeafs" 
-				    seekbarpreference:minValue="4"
-				    seekbarpreference:stepValue="1"
-				    seekbarpreference:maxValue="10"
-				    android:defaultValue="5"
-				    android:summary="%1$d" 
-				    android:dialogMessage="@string/numberOfLeafs" 
-		            android:dependency="randomLeafCount"
-				    />
-		        		        		        		        
-		    </PreferenceScreen>
-		        		
-    
-    <PreferenceCategory android:title="Randomizer Settings"/>
-        
-		<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-			    android:key="specialPatternSizeSettings"
-			    android:title="Sizes of Patterns"
-			    android:summary="Size of pattern and range of randomization of size"
-			    android:icon="@android:drawable/ic_menu_sort_by_size"
-			    >
-	        <de.geithonline.android.basics.preferences.SeekBarPreference
-	            android:key="patternSizeAdjust"
-		        android:title="@string/patternSizeAdjust" 
-			    seekbarpreference:minValue="20"
-			    seekbarpreference:stepValue="5"
-			    seekbarpreference:maxValue="700"
-			    android:defaultValue="100"
-			    android:summary="%1$d percent" 
-			    android:dialogMessage="@string/patternSizeAdjust" />
-	
-	        <de.geithonline.android.basics.preferences.SeekBarPreference
-	            android:key="patternMinSizeAdjust"
-		        android:title="@string/patternMinSizeAdjust" 
-			    seekbarpreference:minValue="5"
-			    seekbarpreference:stepValue="5"
-			    seekbarpreference:maxValue="100"
-			    android:defaultValue="10"
-			    android:summary="Minimum Pattern size is %1$d percent of maximum Pattern Size" 
-			    android:dialogMessage="@string/patternMinSizeAdjust" />
-		</PreferenceScreen>
-        
-
-		<de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="randomizeColorRangeInt"
-	        android:title="@string/randomizeColorRange" 
-		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="4"
-		    seekbarpreference:maxValue="160"
-		    android:summary="%1$d" 
-		    android:defaultValue="32"
-		    android:dialogMessage="@string/randomizeColorRange" />
-		<de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="randomizeColorBrightnessRangeInt"
-	        android:title="@string/randomizeColorBrightnessRangeInt" 
-		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="4"
-		    seekbarpreference:maxValue="160"
-		    android:summary="%1$d" 
-		    android:defaultValue="32"
-		    android:dialogMessage="@string/randomizeColorBrightnessRangeInt" />
-				
-		<de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="maxOpacity"
-	        android:title="@string/maxOpacity" 
-		    seekbarpreference:minValue="15"
-		    seekbarpreference:stepValue="5"
-		    seekbarpreference:maxValue="255"
-		    android:defaultValue="255"
-		    android:summary="%1$d" 
-		    android:dialogMessage="@string/maxOpacity" />
-
-		<de.geithonline.android.basics.preferences.SeekBarPreference
-            android:key="minOpacity"
-	        android:title="@string/minOpacity" 
-		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="5"
-		    seekbarpreference:maxValue="255"
-		    android:defaultValue="128"
-		    android:summary="%1$d" 
-		    android:dialogMessage="@string/minOpacity" />
-				
-		
-		
-    <PreferenceCategory android:title="DropShadow"/>
-		
-		<ListPreference
-	        android:key="pattern_dropShadowType"
-	        android:title="@string/dropShadow" 
-	        android:dialogTitle="@string/dropShadow"
-	        android:defaultValue="Darker"
-	        android:entries="@array/dropShadowType"
-	        android:entryValues="@array/dropShadowTypeValues"
-	        />
+            android:defaultValue="Darker"
+            android:dialogTitle="@string/dropShadow"
+            android:entries="@array/dropShadowType"
+            android:entryValues="@array/dropShadowTypeValues"
+            android:key="pattern_dropShadowType"
+            android:title="@string/dropShadow" />
 
         <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="-48"
+            android:dialogMessage="@string/dropShadowDarknessAdjust"
             android:key="dropShadowDarknessAdjust"
-	        android:title="@string/dropShadowDarknessAdjust" 
-		    seekbarpreference:minValue="-192"
-		    seekbarpreference:stepValue="8"
-		    seekbarpreference:maxValue="192"
-		    android:defaultValue="-48"
-		    android:summary="%1$d" 
-		    android:dialogMessage="@string/dropShadowDarknessAdjust" 
-		    />
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:summary="%1$d"
+            android:title="@string/dropShadowDarknessAdjust"
+            seekbarpreference:maxValue="192"
+            seekbarpreference:minValue="-192"
+            seekbarpreference:stepValue="8" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dialogMessage="@string/dropShadowRadiusAdjustment"
             android:key="dropShadowRadiusAdjustment"
-	        android:title="@string/dropShadowRadiusAdjustment" 
-		    seekbarpreference:minValue="10"
-		    seekbarpreference:stepValue="10"
-		    seekbarpreference:maxValue="1000"
-		    android:summary="%1$d percent" 
-		    android:defaultValue="100"
-		    android:dialogMessage="@string/dropShadowRadiusAdjustment" />
-        
-        
-	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="colorDropShadow"
-	        android:title="@string/colorDropShadow" 
-	        android:defaultValue="@integer/COLOR_BLACK"
-	        />
-    
-	    
-    
-    <PreferenceCategory  android:title="Help and Howto"/>
-	    
-	    <Preference 
-	        android:title="HowTo: DropShadow" 
-	        android:icon="@drawable/about"
-	        >
-            <intent android:action="android.intent.action.VIEW"
+            android:summary="%1$d percent"
+            android:title="@string/dropShadowRadiusAdjustment"
+            seekbarpreference:maxValue="1000"
+            seekbarpreference:minValue="10"
+            seekbarpreference:stepValue="10" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_BLACK"
+            android:key="colorDropShadow"
+            android:title="@string/colorDropShadow" />
+
+        <!--
+        <PreferenceCategory android:title="Help and Howto" />
+        <Preference
+            android:icon="@drawable/about"
+            android:title="HowTo: DropShadow" >
+            <intent
+                android:action="android.intent.action.VIEW"
                 android:data="https://plus.google.com/117464431803849545973/posts/hpEBPDvjL97" />
-        </Preference>
-	    <Preference 
-	        android:title="HowTo: Randomize Color Range" 
-	        android:icon="@drawable/about"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://plus.google.com/117464431803849545973/posts/gxYmzHFTfpX" />
-        </Preference>
-	    <Preference 
-	        android:title="HowTo: Geometric Layouts" 
-	        android:icon="@drawable/about"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://plus.google.com/117464431803849545973/posts/CiFzayUo4nZ" />
-        </Preference>
-	    	    
-        
-    	
+        </Preference>
+        -->
+    </PreferenceScreen>
+
+    <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################    -->
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="glossyPatternSettings"
+        android:title="Glossy Effect..." >
+        <PreferenceCategory android:title="Glossy Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="glossy"
+            android:title="@string/glossy" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="64"
+            android:dependency="glossy"
+            android:dialogMessage="@string/glossyCenterGlowBrightness"
+            android:key="glossyCenterGlowBrightness"
+            android:summary="%1$d"
+            android:title="@string/glossyCenterGlowBrightness"
+            seekbarpreference:maxValue="128"
+            seekbarpreference:minValue="8"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="-32"
+            android:dependency="glossy"
+            android:dialogMessage="@string/glossyCenterGlowOuterDarkness"
+            android:key="glossyCenterGlowOuterDarkness"
+            android:summary="%1$d"
+            android:title="@string/glossyCenterGlowOuterDarkness"
+            seekbarpreference:maxValue="-8"
+            seekbarpreference:minValue="-128"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="32"
+            android:dependency="glossy"
+            android:dialogMessage="@string/glossyReflectionBrightness"
+            android:key="glossyReflectionBrightness"
+            android:summary="%1$d"
+            android:title="@string/glossyReflectionBrightness"
+            seekbarpreference:maxValue="128"
+            seekbarpreference:minValue="8"
+            seekbarpreference:stepValue="4" />
+    </PreferenceScreen>
+
+    <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################    -->
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="ratatingPatternSettings"
+        android:title="Rotating..." >
+        <PreferenceCategory android:title="Rotating" />
+
+        <ListPreference
+            android:defaultValue="Fixed"
+            android:dialogTitle="@string/rotatingStyle"
+            android:entries="@array/rotatingStyle"
+            android:entryValues="@array/rotatingStyle"
+            android:key="rotatingStyle"
+            android:title="@string/rotatingStyle" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="0"
+            android:dialogMessage="@string/rotationDegrees"
+            android:key="rotationDegrees"
+            android:summary="%1$d"
+            android:title="@string/rotationDegrees"
+            seekbarpreference:maxValue="180"
+            seekbarpreference:minValue="-180"
+            seekbarpreference:stepValue="5" />
+    </PreferenceScreen>
+
+    <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################    -->
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="outlineSettings"
+        android:title="Outline..." >
+        <PreferenceCategory android:title="Outline Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="outline"
+            android:title="@string/outline" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="outline"
+            android:key="outlineNeverTransparent"
+            android:summary="@string/outlineNeverTransparentSummary"
+            android:title="@string/outlineNeverTransparent" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="-48"
+            android:dependency="outline"
+            android:dialogMessage="@string/outlineDarknessAdjust"
+            android:key="outlineDarknessAdjust"
+            android:summary="%1$d"
+            android:title="@string/outlineDarknessAdjust"
+            seekbarpreference:maxValue="192"
+            seekbarpreference:minValue="-192"
+            seekbarpreference:stepValue="8" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="outline"
+            android:key="customOutlineColor"
+            android:title="@string/customOutlineColor" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_BLACK"
+            android:dependency="customOutlineColor"
+            android:key="colorOutline"
+            android:title="@string/colorOutline" />
+    </PreferenceScreen>
+
+    <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################    -->
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="assortedPatternSettings"
+        android:summary="Filling, Text, Number of leafs/arms ..."
+        android:title="Assorted Options..." >
+        <PreferenceCategory android:title="Assorted Options" />
+
+        <ListPreference
+            android:defaultValue="Not filled"
+            android:dialogTitle="@string/filledOption"
+            android:entries="@array/hole"
+            android:entryValues="@array/hole"
+            android:key="filledOption"
+            android:title="@string/filledOption" />
+
+        <PreferenceCategory android:title="Custom Text Options" />
+
+        <EditTextPreference
+            android:defaultValue="The Wallpaper Designer"
+            android:dialogTitle="@string/textPattern"
+            android:key="textPattern"
+            android:title="@string/textPattern" />
+
+        <ListPreference
+            android:defaultValue="Round"
+            android:dialogTitle="@string/textDrawStyle"
+            android:entries="@array/textDrawStyle"
+            android:entryValues="@array/textDrawStyle"
+            android:key="textDrawStyle"
+            android:title="@string/textDrawStyle" />
+
+        <PreferenceCategory android:title="Leafs-Arms Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="randomLeafCount"
+            android:title="@string/randomLeafCount" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="5"
+            android:dependency="randomLeafCount"
+            android:dialogMessage="@string/numberOfLeafs"
+            android:key="numberOfLeafs"
+            android:summary="%1$d"
+            android:title="@string/numberOfLeafs"
+            seekbarpreference:maxValue="10"
+            seekbarpreference:minValue="4"
+            seekbarpreference:stepValue="1" />
+    </PreferenceScreen>
+
+    <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################    -->
+    <PreferenceCategory android:title="Randomizer Settings" />
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:key="specialPatternSizeSettings"
+        android:summary="Size of pattern and range of randomization of size"
+        android:title="Sizes of Patterns..." >
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dialogMessage="@string/patternSizeAdjust"
+            android:key="patternSizeAdjust"
+            android:summary="%1$d percent"
+            android:title="@string/patternSizeAdjust"
+            seekbarpreference:maxValue="700"
+            seekbarpreference:minValue="20"
+            seekbarpreference:stepValue="5" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="10"
+            android:dialogMessage="@string/patternMinSizeAdjust"
+            android:key="patternMinSizeAdjust"
+            android:summary="Minimum Pattern size is %1$d percent of maximum Pattern Size"
+            android:title="@string/patternMinSizeAdjust"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="5"
+            seekbarpreference:stepValue="5" />
+    </PreferenceScreen>
+
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="32"
+        android:dialogMessage="@string/randomizeColorRange"
+        android:key="randomizeColorRangeInt"
+        android:summary="%1$d"
+        android:title="@string/randomizeColorRange"
+        seekbarpreference:maxValue="160"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="4" />
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="32"
+        android:dialogMessage="@string/randomizeColorBrightnessRangeInt"
+        android:key="randomizeColorBrightnessRangeInt"
+        android:summary="%1$d"
+        android:title="@string/randomizeColorBrightnessRangeInt"
+        seekbarpreference:maxValue="160"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="4" />
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="255"
+        android:dialogMessage="@string/maxOpacity"
+        android:key="maxOpacity"
+        android:summary="%1$d"
+        android:title="@string/maxOpacity"
+        seekbarpreference:maxValue="255"
+        seekbarpreference:minValue="15"
+        seekbarpreference:stepValue="5" />
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="128"
+        android:dialogMessage="@string/minOpacity"
+        android:key="minOpacity"
+        android:summary="%1$d"
+        android:title="@string/minOpacity"
+        seekbarpreference:maxValue="255"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="5" />
+
+
+    <!--
+    <PreferenceCategory android:title="Help and Howto" />
+    <Preference
+        android:icon="@drawable/about"
+        android:title="HowTo: Randomize Color Range" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://plus.google.com/117464431803849545973/posts/gxYmzHFTfpX" />
+    </Preference>
+    -->
+
 </PreferenceScreen>

@@ -9,7 +9,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
 import de.geithonline.wallpaperdesigner.settings.PatternPropertyStore;
@@ -179,8 +178,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
 		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
 		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
-		final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
-		specialSettings.setEnabled(PatternPropertyStore.hasPatternSpecialSettings(newPattern));
+		// final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
+		// specialSettings.setEnabled(PatternPropertyStore.hasPatternSpecialSettings(newPattern));
 		numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 		randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 

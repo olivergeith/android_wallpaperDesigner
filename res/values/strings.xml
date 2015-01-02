@@ -43,7 +43,7 @@
     <string name="randomizeAlphaRange">Randomize Alpha Range</string>
     <string name="minOpacity">Minimum Opacity of patterns</string>
     <string name="maxOpacity">Maximum Opacity of patterns</string>
-    <string name="dropShadow">Drop Shadow</string>
+    <string name="dropShadow">Drop Shadow Style</string>
     <string name="bWidth">Wallpaper Width</string>
     <string name="bHeight">Wallpaper Height</string>
     <string name="sizeSelection">Wallpaper Size</string>
