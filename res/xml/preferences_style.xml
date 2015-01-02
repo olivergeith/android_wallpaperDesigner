@@ -97,7 +97,7 @@
             android:summary="%1$d"
             android:title="@string/glossyCenterGlowBrightness"
             seekbarpreference:maxValue="128"
-            seekbarpreference:minValue="8"
+            seekbarpreference:minValue="-128"
             seekbarpreference:stepValue="4" />
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="-32"
@@ -106,7 +106,7 @@
             android:key="glossyCenterGlowOuterDarkness"
             android:summary="%1$d"
             android:title="@string/glossyCenterGlowOuterDarkness"
-            seekbarpreference:maxValue="-8"
+            seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
             seekbarpreference:stepValue="4" />
         <de.geithonline.android.basics.preferences.SeekBarPreference
@@ -116,8 +116,8 @@
             android:key="glossyReflectionBrightness"
             android:summary="%1$d"
             android:title="@string/glossyReflectionBrightness"
-            seekbarpreference:maxValue="128"
-            seekbarpreference:minValue="8"
+            seekbarpreference:maxValue="160"
+            seekbarpreference:minValue="4"
             seekbarpreference:stepValue="4" />
     </PreferenceScreen>
 

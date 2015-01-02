@@ -257,7 +257,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -303,7 +303,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -426,7 +426,7 @@ public abstract class WPStylePattern extends WPStyle {
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 			// drawGlossyPathCenterGlow(x, y, paint, radius, path);
 		}
 		// Outline
@@ -641,7 +641,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -687,7 +687,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -756,7 +756,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -808,7 +808,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathTopLeftReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.TOP_LEFT);
 		}
 
 		// Outline
@@ -848,7 +848,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 
 		// Outline
@@ -877,7 +877,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -937,7 +937,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1034,7 +1034,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1110,7 +1110,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathTopLeftReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.TOP_LEFT);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1404,7 +1404,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 			// drawGlossyPathCenterGlow(x, y, paint, radius, path);
 		}
 		// Outline
@@ -1488,7 +1488,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1532,7 +1532,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1639,7 +1639,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1717,7 +1717,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1807,7 +1807,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1825,7 +1825,7 @@ public abstract class WPStylePattern extends WPStyle {
 		final Path path = new CirclePath(new PointF(x, y), radius, radius / 2, true, CIRCLE_STYLE.CIRCLE);
 		bitmapCanvas.drawCircle(x, y, radius, paint);
 		if (Settings.isGlossy()) {
-			drawGlossyPathBubbleStyle(x, y, paint, radius, path, GLOSSY_OVAL.BIG);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.BIG_OVAL);
 		}
 		// outline
 		if (Settings.isOutline()) {
@@ -1863,7 +1863,7 @@ public abstract class WPStylePattern extends WPStyle {
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isGlossy()) {
-			drawGlossyPathBubbleStyle(x, y, paint, radius, path, GLOSSY_OVAL.BIG);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.BIG_OVAL);
 		}
 		// Ring
 		if (Settings.isOutline()) {
@@ -1903,7 +1903,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
-			drawGlossyPathBubbleStyle(x, y, paint, radius, path, GLOSSY_OVAL.SMALL);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.SMALL_OVAL);
 		}
 		// Ring
 		if (Settings.isOutline()) {
@@ -1959,8 +1959,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
-			drawGlossyPathTopLeftReflection(x, y, paint, radius, path);
-			// drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.TOP_LEFT);
 		}
 		// outline
 		if (Settings.isOutline()) {
@@ -2005,7 +2004,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
-			drawGlossyPathDiagonalReflection(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_TYLE.DIAGONAL);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -2170,51 +2169,40 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setStyle(Style.FILL);
 	}
 
-	public void drawGlossyPathTopLeftReflection(final int x, final int y, final Paint paint, final int radius,
-			final Path path) {
-		// innner glow
-
-		setupPaintShaderCenterGlow(x, y, paint, radius);
-		bitmapCanvas.drawPath(path, paint);
-		// Glossy glow von rechts oben
-		setupPaintShaderForTopLeftReflection(x, y, paint, radius);
-		bitmapCanvas.drawPath(path, paint);
-		paint.setShader(null);
+	public enum GLOSSY_REFLECTIONS_TYLE {
+		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE;
 	}
 
-	public enum GLOSSY_OVAL {
-		SMALL, BIG;
-	}
-
-	public void drawGlossyPathBubbleStyle(final int x, final int y, final Paint paint, final int radius,
-			final Path path, final GLOSSY_OVAL ovalStyle) {
+	public void drawGlossyPath(final int x, final int y, final Paint paint, final int radius, final Path path,
+			final GLOSSY_REFLECTIONS_TYLE reflectionStyle) {
 		setupPaintShaderCenterGlow(x, y, paint, radius);
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy glow
 		RectF oval;
-		switch (ovalStyle) {
+		switch (reflectionStyle) {
 		default:
-		case BIG:
+		case BIG_OVAL:
 			oval = new RectF(x - radius * 3 / 4, y - radius, x + radius * 3 / 4, y);
+			setupPaintShaderForOval(x, y, paint, oval);
+			bitmapCanvas.drawOval(oval, paint);
 			break;
-		case SMALL:
+		case SMALL_OVAL:
 			oval = new RectF(x - radius * 6 / 10, y - radius * 0.95f, x + radius * 6 / 10, y - radius * 0.2f);
+			setupPaintShaderForOval(x, y, paint, oval);
+			bitmapCanvas.drawOval(oval, paint);
+			break;
+		case DIAGONAL:
+			setupPaintShaderDiagonalReflection(x, y, paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+			break;
+		case TOP_LEFT:
+			// Glossy glow von rechts oben
+			setupPaintShaderForTopLeftReflection(x, y, paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+			break;
+		case NONE:
 			break;
 		}
-		setupPaintShaderForOval(x, y, paint, oval);
-		bitmapCanvas.drawOval(oval, paint);
-		paint.setShader(null);
-	}
-
-	public void drawGlossyPathDiagonalReflection(final int x, final int y, final Paint paint, final int radius,
-			final Path path) {
-
-		setupPaintShaderCenterGlow(x, y, paint, radius);
-		bitmapCanvas.drawPath(path, paint);
-		// Glossy glow
-
-		setupPaintShaderDiagonalReflection(x, y, paint, radius);
-		bitmapCanvas.drawPath(path, paint);
 		paint.setShader(null);
 	}
 
