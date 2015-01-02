@@ -10,6 +10,9 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	private static final String KEY_GLOSSY_REFLECTION_BRIGHTNESS = "glossyReflectionBrightness";
+	private static final String KEY_GLOSSY_CENTER_GLOW_OUTER_DARKNESS = "glossyCenterGlowOuterDarkness";
+	public static final String KEY_GLOSSY_CENTER_GLOW_BRIGHTNESS = "glossyCenterGlowBrightness";
 	public static final String KEY_MUIMERP = "muimerp";
 	public static final String KEY_HEX_VALUES = "hexValues";
 	public static final String KEY_APP_THEME = "appTheme";
@@ -268,6 +271,27 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(KEY_PATTERN_GLOSSY, false);
+	}
+
+	public static int getGlossyCenterGlowBrighness() {
+		if (prefs == null) {
+			return 64;
+		}
+		return prefs.getInt(KEY_GLOSSY_CENTER_GLOW_BRIGHTNESS, 64);
+	}
+
+	public static int getGlossyCenterGlowOuterDarkness() {
+		if (prefs == null) {
+			return -32;
+		}
+		return prefs.getInt(KEY_GLOSSY_CENTER_GLOW_OUTER_DARKNESS, -32);
+	}
+
+	public static int getGlossyReflectionBrightness() {
+		if (prefs == null) {
+			return 64;
+		}
+		return prefs.getInt(KEY_GLOSSY_REFLECTION_BRIGHTNESS, 64);
 	}
 
 	public static boolean isOutline() {

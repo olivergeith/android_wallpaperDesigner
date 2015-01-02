@@ -35,12 +35,46 @@
 			        android:entries="@array/hole"
 			        android:entryValues="@array/hole"
 			        />
-   		        <CheckBoxPreference 
+		    	<PreferenceCategory  android:title="Glossy Options"/>
+			    <CheckBoxPreference 
 		            android:key="glossy"
 		            android:title="@string/glossy"
 		            android:defaultValue="false"
 		            />
-			    
+   		        <de.geithonline.android.basics.preferences.SeekBarPreference
+		            android:key="glossyCenterGlowBrightness"
+			        android:title="@string/glossyCenterGlowBrightness" 
+				    seekbarpreference:minValue="8"
+				    seekbarpreference:stepValue="4"
+				    seekbarpreference:maxValue="128"
+				    android:defaultValue="64"
+				    android:summary="%1$d" 
+				    android:dialogMessage="@string/glossyCenterGlowBrightness" 
+		            android:dependency="glossy"
+				    />
+   		        <de.geithonline.android.basics.preferences.SeekBarPreference
+		            android:key="glossyCenterGlowOuterDarkness"
+			        android:title="@string/glossyCenterGlowOuterDarkness" 
+				    seekbarpreference:minValue="-128"
+				    seekbarpreference:stepValue="4"
+				    seekbarpreference:maxValue="-8"
+				    android:defaultValue="-32"
+				    android:summary="%1$d" 
+				    android:dialogMessage="@string/glossyCenterGlowOuterDarkness" 
+		            android:dependency="glossy"
+				    />
+   		        <de.geithonline.android.basics.preferences.SeekBarPreference
+		            android:key="glossyReflectionBrightness"
+			        android:title="@string/glossyReflectionBrightness" 
+				    seekbarpreference:minValue="8"
+				    seekbarpreference:stepValue="4"
+				    seekbarpreference:maxValue="128"
+				    android:defaultValue="32"
+				    android:summary="%1$d" 
+				    android:dialogMessage="@string/glossyReflectionBrightness" 
+		            android:dependency="glossy"
+				    />
+   		        		        		        			    
 		        <PreferenceCategory  android:title="Rotating"/>
 			    <ListPreference
 			        android:key="rotatingStyle"

@@ -61,6 +61,10 @@
     <string name="Settings">Settings</string>
     <string name="setasWallpaper">Set Wallpaper</string>
     <string name="glossy">Glossy Effect</string>
+    <string name="glossyCenterGlowBrightness">Brightness of patterns center</string>
+    <string name="glossyCenterGlowOuterDarkness">Darkness of patterns outer regions</string>
+    <string name="glossyReflectionBrightness">Brightness of reflection</string>
+    
     <string name="outline">Outline</string>
     <string name="outlineNeverTransparent">Outline is never transparent</string>
     <string name="outlineNeverTransparentSummary">If set, the outline is not transparent, even if the pattern is transparent! If not set, the outline has the same alpha/transparency like its pattern!</string>

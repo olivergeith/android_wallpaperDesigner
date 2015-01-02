@@ -137,7 +137,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void handleRotatingStyleSelected(final String newValue) {
 		rotatingStyle.setSummary(newValue);
-		rotationDegrees.setEnabled(newValue.equals("Fixed") || newValue.equals("Around Point") || newValue.equals("Around Bottom"));
+		rotationDegrees.setEnabled(newValue.equals("Fixed") || newValue.equals("Around Point")
+				|| newValue.equals("Around Bottom"));
 	}
 
 	protected void handleTextDrawStyleSelected(final String newValue) {
