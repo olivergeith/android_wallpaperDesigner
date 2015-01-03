@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -19,6 +20,7 @@ import de.geithonline.android.basics.preferences.IconOnlyPreference;
 import de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.BackgroundDrawer;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.DisplayHelper;
 
 /**
@@ -34,6 +36,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private ColorPickerPreference color4;
 	private IconOnlyPreference colorPreview;
 	private Bitmap bitmap;
+	private Preference loadSettings;
 
 	private List<String> keys = new ArrayList<String>();
 
@@ -93,6 +96,15 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 		});
+		loadSettings = findPreference("loadSettings");
+		loadSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				SettingsIO.loadDesignTheFancyWay(getActivity(), Settings.prefs, true);
+				return false;
+			}
+		});
+
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawBackGroundImage();
 	}

@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT = "randomizeColorBrightnessRangeInt";
+	public static final String KEY_RANDOMIZE_COLOR_RANGE_INT = "randomizeColorRangeInt";
 	private static final String KEY_RENDER_ON_SETTINGS_EXIT = "renderOnSettingsExit";
 	public static final String KEY_COLORS_ANZAHL = "anzColors";
 	public static final String KEY_COLOR_GRADIENT_DIRECTION = "gradientDirection";
@@ -423,7 +425,7 @@ public class Settings {
 		if (prefs == null) {
 			return 12;
 		}
-		return prefs.getInt("randomizeColorRangeInt", 12);
+		return prefs.getInt(KEY_RANDOMIZE_COLOR_RANGE_INT, 12);
 	}
 
 	public static boolean isRandomizeBrightness() {
@@ -434,7 +436,7 @@ public class Settings {
 		if (prefs == null) {
 			return 12;
 		}
-		return prefs.getInt("randomizeColorBrightnessRangeInt", 12);
+		return prefs.getInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 12);
 	}
 
 	// ###################################################################
@@ -671,8 +673,8 @@ public class Settings {
 			prefs.edit().putString("bHeight", "1200").commit();
 			prefs.edit().putString("sizeSelection", "1920x1200").commit();
 
-			prefs.edit().putInt("randomizeColorRangeInt", 20).commit();
-			prefs.edit().putInt("randomizeColorBrightnessRangeInt", 24).commit();
+			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_RANGE_INT, 20).commit();
+			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 24).commit();
 			prefs.edit().putInt("minOpacity", 225).commit();
 			prefs.edit().putInt("maxOpacity", 255).commit();
 			prefs.edit().putInt("dropShadowRadiusAdjustment", 250).commit();

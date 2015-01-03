@@ -104,8 +104,13 @@ public class SettingsIO {
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
-		dialog.setTitle("Restore Design");
-		dialog.setMessage("Select Design to be restored");
+		if (onlyColors) {
+			dialog.setTitle("Restore Colors from Design");
+			dialog.setMessage("Select Design");
+		} else {
+			dialog.setTitle("Restore Design");
+			dialog.setMessage("Select Design");
+		}
 
 		final ListView listview = createListviewOfAllDesigns(activity, designList);
 		listview.setOnItemClickListener(new OnItemClickListener() {

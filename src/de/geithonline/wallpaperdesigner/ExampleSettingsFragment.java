@@ -15,7 +15,6 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference backupALLDesigns;
 	private Preference deleteALLDesigns;
 	private Preference deleteSettings;
-	// private Preference loadSettings;
 	private Preference unzipSettings;
 	private Preference unzipSettingsPremium;
 	private Preference mailSettings;
@@ -88,14 +87,6 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
-		// loadSettings = findPreference("loadSettings");
-		// loadSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-		// @Override
-		// public boolean onPreferenceClick(final Preference preference) {
-		// SettingsIO.loadDesignTheFancyWay(getActivity(), Settings.prefs);
-		// return false;
-		// }
-		// });
 		mailSettings = findPreference("mailSettings");
 		mailSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override

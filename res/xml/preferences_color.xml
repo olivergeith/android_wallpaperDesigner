@@ -50,6 +50,15 @@
 		    android:key="colorPreview"
 			/>
 	    
+	    
+		<Preference 
+		    android:key="loadSettings"
+		    android:title="Restore only Colors from Design"
+		    android:icon="@android:drawable/ic_menu_set_as"
+		    android:summary="Restore ONLY the colors from one of your designs" 
+            />
+	    
+	    
     <PreferenceCategory android:title="Special Coloring Options"/>
 	    	    
         <CheckBoxPreference 

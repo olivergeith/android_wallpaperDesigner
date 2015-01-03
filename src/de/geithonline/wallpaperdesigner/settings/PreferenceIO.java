@@ -41,7 +41,8 @@ public class PreferenceIO {
 		colorKeys.add(Settings.KEY_COLOR4);
 		colorKeys.add(Settings.KEY_COLOR_GRADIENT_DIRECTION);
 		colorKeys.add(Settings.KEY_COLORS_ANZAHL);
-
+		colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_RANGE_INT);
+		colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
 	}
 
 	/**
@@ -67,8 +68,10 @@ public class PreferenceIO {
 				fi.close();
 				// Looping over Map
 				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
-					if (onlyColors && colorKeys.contains(entry.getKey())) {
-						writeEntry(entry, prefs, settings.keySet());
+					if (onlyColors) {
+						if (colorKeys.contains(entry.getKey())) {
+							writeEntry(entry, prefs, settings.keySet());
+						}
 					} else {
 						writeEntry(entry, prefs, settings.keySet());
 					}
