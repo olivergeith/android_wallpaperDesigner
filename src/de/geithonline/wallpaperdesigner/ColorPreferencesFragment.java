@@ -101,7 +101,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				SettingsIO.loadDesignTheFancyWay(getActivity(), Settings.prefs, true);
-				return false;
+				return true;
 			}
 		});
 
@@ -115,6 +115,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		if (keys.contains(key)) {
 			Log.i("ColorPreferenceFragment", "drawing BackgroundIcon ");
 			drawBackGroundImage();
+			handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		}
 	}
 
@@ -150,6 +151,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		} else {
 			enableColors(anzahl);
 		}
+		color1.update();
+		color2.update();
+		color3.update();
+		color4.update();
 	}
 
 	private void enableColors(final int anzahl) {
