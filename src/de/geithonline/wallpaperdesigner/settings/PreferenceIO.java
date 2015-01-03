@@ -22,6 +22,8 @@ public class PreferenceIO {
 	public static final String MARKER = " (+++)_";
 	private static List<String> ignoreKeys = new ArrayList<String>();
 
+	private static List<String> colorKeys = new ArrayList<String>();
+
 	static {
 		ignoreKeys.add(Settings.KEY_MUIMERP);
 		ignoreKeys.add(Settings.KEY_SORT_ORDER);
@@ -32,11 +34,27 @@ public class PreferenceIO {
 		ignoreKeys.add(Settings.KEY_SHARE_TEXT);
 		ignoreKeys.add(Settings.KEY_APP_THEME);
 		ignoreKeys.add("debug");
+
+		colorKeys.add(Settings.KEY_COLOR1);
+		colorKeys.add(Settings.KEY_COLOR2);
+		colorKeys.add(Settings.KEY_COLOR3);
+		colorKeys.add(Settings.KEY_COLOR4);
+		colorKeys.add(Settings.KEY_COLOR_GRADIENT_DIRECTION);
+		colorKeys.add(Settings.KEY_COLORS_ANZAHL);
+
 	}
 
+	/**
+	 * @param activity
+	 * @param prefs
+	 * @param filename
+	 * @param onlyColors
+	 *            when true only colors are loaded
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs,
-			final String filename) {
+			final String filename, final boolean onlyColors) {
 		Log.i(LOG_TAG, "Loading Settings from " + filename);
 		final File file = new File(getSettingsDir(), filename);
 		if (file.exists()) {
@@ -49,7 +67,11 @@ public class PreferenceIO {
 				fi.close();
 				// Looping over Map
 				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
-					writeEntry(entry, prefs, settings.keySet());
+					if (onlyColors && colorKeys.contains(entry.getKey())) {
+						writeEntry(entry, prefs, settings.keySet());
+					} else {
+						writeEntry(entry, prefs, settings.keySet());
+					}
 				}
 				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
 				return settings;

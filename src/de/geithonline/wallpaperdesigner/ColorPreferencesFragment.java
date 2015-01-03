@@ -48,12 +48,12 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		keys = new ArrayList<String>();
-		keys.add("color_plain_bgrnd");
-		keys.add("color2_plain_bgrnd");
-		keys.add("color3_plain_bgrnd");
-		keys.add("color4_plain_bgrnd");
-		keys.add("gradientDirection");
-		keys.add("anzColors");
+		keys.add(Settings.KEY_COLOR1);
+		keys.add(Settings.KEY_COLOR2);
+		keys.add(Settings.KEY_COLOR3);
+		keys.add(Settings.KEY_COLOR4);
+		keys.add(Settings.KEY_COLOR_GRADIENT_DIRECTION);
+		keys.add(Settings.KEY_COLORS_ANZAHL);
 
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);

@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
 					final File file = (File) mDrawerList.getAdapter().getItem(position);
 					final String filename = file.getName();
 					if (filename != null) {
-						PreferenceIO.loadPreferencesFromFile(MainActivity.this, prefs, filename);
+						PreferenceIO.loadPreferencesFromFile(MainActivity.this, prefs, filename, false);
 						generate();
 					}
 				}

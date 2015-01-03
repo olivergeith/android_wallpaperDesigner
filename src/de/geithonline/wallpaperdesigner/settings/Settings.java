@@ -10,8 +10,14 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
-	private static final String KEY_GLOSSY_REFLECTION_BRIGHTNESS = "glossyReflectionBrightness";
-	private static final String KEY_GLOSSY_CENTER_GLOW_OUTER_DARKNESS = "glossyCenterGlowOuterDarkness";
+	public static final String KEY_COLORS_ANZAHL = "anzColors";
+	public static final String KEY_COLOR_GRADIENT_DIRECTION = "gradientDirection";
+	public static final String KEY_COLOR4 = "color4_plain_bgrnd";
+	public static final String KEY_COLOR3 = "color3_plain_bgrnd";
+	public static final String KEY_COLOR2 = "color2_plain_bgrnd";
+	public static final String KEY_COLOR1 = "color_plain_bgrnd";
+	public static final String KEY_GLOSSY_REFLECTION_BRIGHTNESS = "glossyReflectionBrightness";
+	public static final String KEY_GLOSSY_CENTER_GLOW_OUTER_DARKNESS = "glossyCenterGlowOuterDarkness";
 	public static final String KEY_GLOSSY_CENTER_GLOW_BRIGHTNESS = "glossyCenterGlowBrightness";
 	public static final String KEY_MUIMERP = "muimerp";
 	public static final String KEY_HEX_VALUES = "hexValues";
@@ -524,14 +530,14 @@ public class Settings {
 		if (prefs == null) {
 			return "4-Color Gradient from corners";
 		}
-		return prefs.getString("gradientDirection", "4-Color Gradient from corners");
+		return prefs.getString(KEY_COLOR_GRADIENT_DIRECTION, "4-Color Gradient from corners");
 	}
 
 	public static int getAnzahlGradientColors() {
 		if (prefs == null) {
 			return 4;
 		}
-		return Integer.parseInt(prefs.getString("anzColors", "4"));
+		return Integer.parseInt(prefs.getString(KEY_COLORS_ANZAHL, "4"));
 	}
 
 	// Background Color
@@ -549,7 +555,7 @@ public class Settings {
 		if (prefs == null) {
 			return R.integer.COLOR_BLACK;
 		}
-		final int col = prefs.getInt("color_plain_bgrnd", R.integer.COLOR_BLACK);
+		final int col = prefs.getInt(KEY_COLOR1, R.integer.COLOR_BLACK);
 		return col;
 	}
 
@@ -557,7 +563,7 @@ public class Settings {
 		if (prefs == null) {
 			return R.integer.COLOR_WHITE;
 		}
-		final int col = prefs.getInt("color2_plain_bgrnd", R.integer.COLOR_WHITE);
+		final int col = prefs.getInt(KEY_COLOR2, R.integer.COLOR_WHITE);
 		return col;
 	}
 
@@ -565,7 +571,7 @@ public class Settings {
 		if (prefs == null) {
 			return Color.BLUE;
 		}
-		final int col = prefs.getInt("color3_plain_bgrnd", Color.BLUE);
+		final int col = prefs.getInt(KEY_COLOR3, Color.BLUE);
 		return col;
 	}
 
@@ -573,7 +579,7 @@ public class Settings {
 		if (prefs == null) {
 			return Color.YELLOW;
 		}
-		final int col = prefs.getInt("color4_plain_bgrnd", Color.YELLOW);
+		final int col = prefs.getInt(KEY_COLOR4, Color.YELLOW);
 		return col;
 	}
 
@@ -637,11 +643,11 @@ public class Settings {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();
 			// init colors
-			prefs.edit().putInt("color_plain_bgrnd", 0xffffc700).commit();
-			prefs.edit().putInt("color2_plain_bgrnd", 0xff329a00).commit();
-			prefs.edit().putInt("color3_plain_bgrnd", 0xff0060af).commit();
-			prefs.edit().putInt("color4_plain_bgrnd", 0xffcd0077).commit();
-			prefs.edit().putString("gradientDirection", "4-Color Gradient from corners").commit();
+			prefs.edit().putInt(KEY_COLOR1, 0xffffc700).commit();
+			prefs.edit().putInt(KEY_COLOR2, 0xff329a00).commit();
+			prefs.edit().putInt(KEY_COLOR3, 0xff0060af).commit();
+			prefs.edit().putInt(KEY_COLOR4, 0xffcd0077).commit();
+			prefs.edit().putString(KEY_COLOR_GRADIENT_DIRECTION, "4-Color Gradient from corners").commit();
 			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString(KEY_SORT_ORDER, "Timestamp in Filename").commit();

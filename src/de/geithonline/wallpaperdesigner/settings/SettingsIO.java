@@ -93,7 +93,8 @@ public class SettingsIO {
 		return listview;
 	}
 
-	public static void loadDesignTheFancyWay(final Activity activity, final SharedPreferences prefs) {
+	public static void loadDesignTheFancyWay(final Activity activity, final SharedPreferences prefs,
+			final boolean onlyColors) {
 
 		final List<SavedDesign> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
@@ -116,7 +117,7 @@ public class SettingsIO {
 					final SavedDesign design = designList.get(position);
 					final String filename = design.getPreferenceFile().getName();
 					if (filename != null) {
-						PreferenceIO.loadPreferencesFromFile(activity, prefs, filename);
+						PreferenceIO.loadPreferencesFromFile(activity, prefs, filename, onlyColors);
 					}
 				}
 				dialog.dismiss();
