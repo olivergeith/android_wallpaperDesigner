@@ -19,6 +19,14 @@
 		    android:summary="Enable Hexvalue Input in Colorpicker" 
             />
 
+        <CheckBoxPreference 
+		    android:key="renderOnSettingsExit"
+    		android:defaultValue="true"
+		    android:title="New image, on leaving settings"
+		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
+            />
+        
+        
         <ListPreference
 	        android:key="appTheme"
 	        android:title="@string/appTheme" 

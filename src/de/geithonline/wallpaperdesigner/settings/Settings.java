@@ -10,6 +10,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	private static final String KEY_RENDER_ON_SETTINGS_EXIT = "renderOnSettingsExit";
 	public static final String KEY_COLORS_ANZAHL = "anzColors";
 	public static final String KEY_COLOR_GRADIENT_DIRECTION = "gradientDirection";
 	public static final String KEY_COLOR4 = "color4_plain_bgrnd";
@@ -595,6 +596,13 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(KEY_HEX_VALUES, false);
+	}
+
+	public static boolean isRenderingOnSettingsExit() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean(KEY_RENDER_ON_SETTINGS_EXIT, true);
 	}
 
 	// ###################################################################

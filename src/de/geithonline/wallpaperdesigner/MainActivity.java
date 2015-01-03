@@ -172,7 +172,9 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		if (requestCode == REQUEST_CODE_PREFERENCES) {
 			Log.i("MENU", "Coming beack from Settings...generating...");
-			generate();
+			if (Settings.isRenderingOnSettingsExit()) {
+				generate();
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
