@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_BGRND_COLOR2 = "bgrnd_color2";
+	public static final String KEY_BGRND_COLOR1 = "bgrnd_color1";
 	public static final String KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT = "sameBackgroundAsPatternGradient";
 	public static final String KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT = "randomizeColorBrightnessRangeInt";
 	public static final String KEY_RANDOMIZE_COLOR_RANGE_INT = "randomizeColorRangeInt";
@@ -563,7 +565,7 @@ public class Settings {
 				|| test.equalsIgnoreCase("4 Color Sweep Gradient");
 	}
 
-	public static int getBackgroundColor1() {
+	public static int getPatternColor1() {
 		if (prefs == null) {
 			return R.integer.COLOR_BLACK;
 		}
@@ -571,7 +573,7 @@ public class Settings {
 		return col;
 	}
 
-	public static int getBackgroundColor2() {
+	public static int getPatternColor2() {
 		if (prefs == null) {
 			return R.integer.COLOR_WHITE;
 		}
@@ -579,7 +581,7 @@ public class Settings {
 		return col;
 	}
 
-	public static int getBackgroundColor3() {
+	public static int getPatternColor3() {
 		if (prefs == null) {
 			return Color.BLUE;
 		}
@@ -587,11 +589,27 @@ public class Settings {
 		return col;
 	}
 
-	public static int getBackgroundColor4() {
+	public static int getPatternColor4() {
 		if (prefs == null) {
 			return Color.YELLOW;
 		}
 		final int col = prefs.getInt(KEY_COLOR4, Color.YELLOW);
+		return col;
+	}
+
+	public static int getBackGrndColor1() {
+		if (prefs == null) {
+			return Color.DKGRAY;
+		}
+		final int col = prefs.getInt(KEY_BGRND_COLOR1, Color.DKGRAY);
+		return col;
+	}
+
+	public static int getBackGrndColor2() {
+		if (prefs == null) {
+			return Color.BLACK;
+		}
+		final int col = prefs.getInt(KEY_BGRND_COLOR2, Color.BLACK);
 		return col;
 	}
 

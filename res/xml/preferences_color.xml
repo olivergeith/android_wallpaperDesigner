@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
  
-    <PreferenceCategory android:title="Image Background Color"/>
-    
-    <CheckBoxPreference 
-            android:key="sameBackgroundAsPatternGradient"
-            android:title="@string/sameBackgroundAsPatternGradient"
-            android:summary="The Background of the image is colored like the Pattern Layout Colors."
-            android:defaultValue="true"
-            />
-    
-    
     <PreferenceCategory android:title="@string/category_background"/>
 
         <ListPreference
@@ -60,14 +50,37 @@
 		    android:key="colorPreview"
 			/>
 	    
-	    
 		<Preference 
 		    android:key="loadSettings"
 		    android:title="Restore only Colors from Design"
 		    android:icon="@android:drawable/ic_menu_set_as"
 		    android:summary="Restore ONLY the colors from one of your designs" 
             />
-	    
+
+	<PreferenceCategory android:title="Image Background Color"/>
+    
+    	<CheckBoxPreference 
+            android:key="sameBackgroundAsPatternGradient"
+            android:title="@string/sameBackgroundAsPatternGradient"
+            android:summary="The Background of the image is colored like the Pattern Layout Colors."
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+            />
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="bgrnd_color1"
+	        android:title="@string/color" 
+	        android:summary="1. Background Color"
+	        android:defaultValue="@integer/COLOR_DARKGRAY"
+			android:dependency="sameBackgroundAsPatternGradient"
+	        />
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+	        android:key="bgrnd_color2"
+	        android:title="@string/color" 
+	        android:summary="2. Background Color"
+	        android:defaultValue="@integer/COLOR_BLACK"
+			android:dependency="sameBackgroundAsPatternGradient"
+	        />
+        				    
 	    
     <PreferenceCategory android:title="Special Coloring Options"/>
 	    	    

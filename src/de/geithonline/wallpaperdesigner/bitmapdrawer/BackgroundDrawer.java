@@ -58,12 +58,10 @@ public class BackgroundDrawer {
 		final int cHeight = canvas.getHeight();
 		final RectF r = new RectF(0, 0, cWidth, cHeight);
 		final Paint paint = new Paint();
-		final int dark = 32;
-		paint.setColor(Color.rgb(dark, dark, dark));
+		final int colors[] = { Settings.getBackGrndColor1(), Settings.getBackGrndColor2() };
+		final float distances[] = { 0.0f, 1.0f };
+		paint.setShader(new LinearGradient(0, 0, 0, cHeight, colors, distances, Shader.TileMode.MIRROR));
 		canvas.drawRect(r, paint);
-
-		// drawWhiteRoundReflection(canvas, cWidth, cHeight, r);
-		// drawSunBeams(canvas, cWidth, cHeight, r);
 	}
 
 	private static Paint getBackgroundPaint(final int width, final int height) {
@@ -115,14 +113,14 @@ public class BackgroundDrawer {
 					Shader.TileMode.MIRROR));
 			break;
 		case "4 Color Sweep Gradient":
-			final int colorsSweep[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(),
-					Settings.getBackgroundColor3(), Settings.getBackgroundColor4(), Settings.getBackgroundColor1() };
+			final int colorsSweep[] = { Settings.getPatternColor1(), Settings.getPatternColor2(),
+					Settings.getPatternColor3(), Settings.getPatternColor4(), Settings.getPatternColor1() };
 			final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
 			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
 			break;
 		case "4 Color Sweep Gradient (Half Arch)":
-			final int colorsSweep2[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(),
-					Settings.getBackgroundColor3(), Settings.getBackgroundColor4() };
+			final int colorsSweep2[] = { Settings.getPatternColor1(), Settings.getPatternColor2(),
+					Settings.getPatternColor3(), Settings.getPatternColor4() };
 			final float distancesSweep2[] = { 0.5f, 0.66f, 0.82f, 1.0f };
 			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
 			break;
@@ -131,11 +129,10 @@ public class BackgroundDrawer {
 	}
 
 	private static int[] getColors() {
-		final int colors2[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2() };
-		final int colors3[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(),
-				Settings.getBackgroundColor3() };
-		final int colors4[] = { Settings.getBackgroundColor1(), Settings.getBackgroundColor2(),
-				Settings.getBackgroundColor3(), Settings.getBackgroundColor4() };
+		final int colors2[] = { Settings.getPatternColor1(), Settings.getPatternColor2() };
+		final int colors3[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3() };
+		final int colors4[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(),
+				Settings.getPatternColor4() };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
 		default:
@@ -149,11 +146,10 @@ public class BackgroundDrawer {
 	}
 
 	private static int[] getColorsReverse() {
-		final int colors2[] = { Settings.getBackgroundColor2(), Settings.getBackgroundColor1() };
-		final int colors3[] = { Settings.getBackgroundColor3(), Settings.getBackgroundColor2(),
-				Settings.getBackgroundColor1() };
-		final int colors4[] = { Settings.getBackgroundColor4(), Settings.getBackgroundColor3(),
-				Settings.getBackgroundColor2(), Settings.getBackgroundColor1() };
+		final int colors2[] = { Settings.getPatternColor2(), Settings.getPatternColor1() };
+		final int colors3[] = { Settings.getPatternColor3(), Settings.getPatternColor2(), Settings.getPatternColor1() };
+		final int colors4[] = { Settings.getPatternColor4(), Settings.getPatternColor3(), Settings.getPatternColor2(),
+				Settings.getPatternColor1() };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
 		default:
@@ -246,10 +242,10 @@ public class BackgroundDrawer {
 	public static void draw4ColorBackground(final Canvas canvas) {
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
-		final int c1 = Settings.getBackgroundColor1();
-		final int c2 = Settings.getBackgroundColor2();
-		final int c3 = Settings.getBackgroundColor3();
-		final int c4 = Settings.getBackgroundColor4();
+		final int c1 = Settings.getPatternColor1();
+		final int c2 = Settings.getPatternColor2();
+		final int c3 = Settings.getPatternColor3();
+		final int c4 = Settings.getPatternColor4();
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 		paint.setColor(c1);
@@ -289,10 +285,10 @@ public class BackgroundDrawer {
 		// final int c2 = Color.GREEN;
 		// final int c3 = Color.YELLOW;
 		// final int c4 = Color.BLUE;
-		final int c1 = Settings.getBackgroundColor1();
-		final int c2 = Settings.getBackgroundColor2();
-		final int c3 = Settings.getBackgroundColor3();
-		final int c4 = Settings.getBackgroundColor4();
+		final int c1 = Settings.getPatternColor1();
+		final int c2 = Settings.getPatternColor2();
+		final int c3 = Settings.getPatternColor3();
+		final int c4 = Settings.getPatternColor4();
 		final int levels = 100;
 		final float sqW = (float) cWidth / (float) levels;
 		final float sqH = (float) cHeight / (float) levels;

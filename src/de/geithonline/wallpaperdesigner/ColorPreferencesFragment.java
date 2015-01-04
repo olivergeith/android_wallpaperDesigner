@@ -106,7 +106,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		});
 
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
-		drawBackGroundImage();
+		drawPatternLayoutColorsImage();
 	}
 
 	@Override
@@ -114,12 +114,12 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		Log.i("ColorPreferenceFragment", "onPreference Change for " + key);
 		if (keys.contains(key)) {
 			Log.i("ColorPreferenceFragment", "drawing BackgroundIcon ");
-			drawBackGroundImage();
+			drawPatternLayoutColorsImage();
 			handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		}
 	}
 
-	private void drawBackGroundImage() {
+	private void drawPatternLayoutColorsImage() {
 		final int w = Settings.getBWidth();
 		final int h = Settings.getBHeight();
 		final Activity activity = getActivity();
