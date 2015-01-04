@@ -67,15 +67,24 @@ public class PreferenceIO {
 				o.close();
 				fi.close();
 				// Looping over Map
+				final Set<String> keySet = settings.keySet();
+
 				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
 					if (onlyColors) {
 						if (colorKeys.contains(entry.getKey())) {
-							writeEntry(entry, prefs, settings.keySet());
+							writeEntry(entry, prefs, keySet);
 						}
 					} else {
-						writeEntry(entry, prefs, settings.keySet());
+						writeEntry(entry, prefs, keySet);
 					}
 				}
+				// Spezialbehandlung für alte Designs, die diesen Key noch nicht enthalten
+				if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
+					Log.i(LOG_TAG, "Key not contained-> setting it to default: "
+							+ Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
+					prefs.edit().putBoolean(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
+				}
+
 				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {

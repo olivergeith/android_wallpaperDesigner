@@ -96,5 +96,6 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
     <string name="appTheme">Theme (restart APP after changing)</string>
+    <string name="sameBackgroundAsPatternGradient">Background like Pattern-Color-Layout</string>
     
 </resources>

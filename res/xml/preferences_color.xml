@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
  
+    <PreferenceCategory android:title="Image Background Color"/>
+    
+    <CheckBoxPreference 
+            android:key="sameBackgroundAsPatternGradient"
+            android:title="@string/sameBackgroundAsPatternGradient"
+            android:summary="The Background of the image is colored like the Pattern Layout Colors."
+            android:defaultValue="true"
+            />
+    
+    
     <PreferenceCategory android:title="@string/category_background"/>
 
         <ListPreference

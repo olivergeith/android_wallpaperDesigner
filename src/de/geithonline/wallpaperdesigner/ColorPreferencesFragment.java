@@ -128,7 +128,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			final int bHeight = (bWidth * h) / w;
 			bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 			final Canvas bitmapCanvas = new Canvas(bitmap);
-			BackgroundDrawer.drawBackground(bitmapCanvas);
+			BackgroundDrawer.drawBackground(bitmapCanvas, true);
 			colorPreview.setTitle("Preview");
 			// final Drawable icon = BitmapHelper.bitmapToIcon(bitmap);
 			if (bitmap != null) {

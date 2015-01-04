@@ -10,9 +10,10 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT = "sameBackgroundAsPatternGradient";
 	public static final String KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT = "randomizeColorBrightnessRangeInt";
 	public static final String KEY_RANDOMIZE_COLOR_RANGE_INT = "randomizeColorRangeInt";
-	private static final String KEY_RENDER_ON_SETTINGS_EXIT = "renderOnSettingsExit";
+	public static final String KEY_RENDER_ON_SETTINGS_EXIT = "renderOnSettingsExit";
 	public static final String KEY_COLORS_ANZAHL = "anzColors";
 	public static final String KEY_COLOR_GRADIENT_DIRECTION = "gradientDirection";
 	public static final String KEY_COLOR4 = "color4_plain_bgrnd";
@@ -529,6 +530,14 @@ public class Settings {
 
 	// ###################################################################
 	// Background Color
+
+	public static boolean isSameGradientAsPatterns() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean(KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
+	}
+
 	public static String getGradientDirection() {
 		if (prefs == null) {
 			return "4-Color Gradient from corners";
@@ -687,6 +696,7 @@ public class Settings {
 			prefs.edit().putString("rotatingStyle", "Random").commit();
 			prefs.edit().putString(KEY_IMAGE_FORMAT, "jpg").commit();
 			prefs.edit().putInt(KEY_JPG_COMPRESSION, 95).commit();
+			prefs.edit().putBoolean(KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
 		}
 	}
 

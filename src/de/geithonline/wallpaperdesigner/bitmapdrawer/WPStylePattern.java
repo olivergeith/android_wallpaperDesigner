@@ -2022,7 +2022,7 @@ public abstract class WPStylePattern extends WPStyle {
 		int yy = Math.min(y, bHeight - 1);
 		xx = Math.max(xx, 0);
 		yy = Math.max(yy, 0);
-		if (Settings.isDynamicColoring()) {
+		if (Settings.isDynamicColoring() && Settings.isSameGradientAsPatterns()) {
 			return bmp.getPixel(xx, yy);
 		} else {
 			return refbmp.getPixel(xx, yy);
