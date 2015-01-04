@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_DROP_SHADOW_OFFSET_Y = "dropShadowOffsetY";
+	public static final String KEY_DROP_SHADOW_OFFSET_X = "dropShadowOffsetX";
 	public static final String KEY_BGRND_COLOR2 = "bgrnd_color2";
 	public static final String KEY_BGRND_COLOR1 = "bgrnd_color1";
 	public static final String KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT = "sameBackgroundAsPatternGradient";
@@ -347,6 +349,20 @@ public class Settings {
 			return -48;
 		}
 		return prefs.getInt(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -48);
+	}
+
+	public static int getDropShadowOffsetX() {
+		if (prefs == null) {
+			return 0;
+		}
+		return prefs.getInt(KEY_DROP_SHADOW_OFFSET_X, 0);
+	}
+
+	public static int getDropShadowOffsetY() {
+		if (prefs == null) {
+			return 0;
+		}
+		return prefs.getInt(KEY_DROP_SHADOW_OFFSET_Y, 0);
 	}
 
 	public static String getText() {

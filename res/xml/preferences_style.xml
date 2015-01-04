@@ -56,6 +56,26 @@
             seekbarpreference:minValue="10"
             seekbarpreference:stepValue="10" />
 
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:dialogMessage="@string/dropShadowOffsetX"
+            android:key="dropShadowOffsetX"
+            android:summary="%1$d pixel"
+            android:title="@string/dropShadowOffsetX"
+            android:defaultValue="0"
+            seekbarpreference:maxValue="50"
+            seekbarpreference:minValue="-50"
+            seekbarpreference:stepValue="1" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:dialogMessage="@string/dropShadowOffsetY"
+            android:key="dropShadowOffsetY"
+            android:summary="%1$d pixel"
+            android:title="@string/dropShadowOffsetY"
+            android:defaultValue="0"
+            seekbarpreference:maxValue="50"
+            seekbarpreference:minValue="-50"
+            seekbarpreference:stepValue="1" />
+        
+        
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             android:defaultValue="@integer/COLOR_BLACK"
             android:key="colorDropShadow"

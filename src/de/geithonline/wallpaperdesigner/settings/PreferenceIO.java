@@ -84,6 +84,11 @@ public class PreferenceIO {
 							+ Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
 					prefs.edit().putBoolean(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
 				}
+				if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
+					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_DROP_SHADOW_OFFSET_X);
+					prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_X, 0).commit();
+					prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_Y, 0).commit();
+				}
 
 				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
 				return settings;

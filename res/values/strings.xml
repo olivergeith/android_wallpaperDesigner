@@ -97,5 +97,7 @@
     <string name="drawer_close">Close Drawer</string>
     <string name="appTheme">Theme (restart APP after changing)</string>
     <string name="sameBackgroundAsPatternGradient">Background like Color-Layout of patterns</string>
+    <string name="dropShadowOffsetX">X-Offset of Dropshadow</string>
+    <string name="dropShadowOffsetY">Y-Offset of Dropshadow</string>
     
 </resources>
