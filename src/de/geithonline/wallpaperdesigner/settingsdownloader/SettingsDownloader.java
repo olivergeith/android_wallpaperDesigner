@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.settings.SettingsIO;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
@@ -130,14 +131,15 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertInfo(activi, "Example-Designs downloaded successfully!!!\n\nHint: Use 'Restore Desing' to use them!");
-			// Toaster.showInfoToast(activi,
-			// "Example-Settings downloaded successfully!!!\nHint: Use Button 'Restore Settings' to use them!");
+			Alerter.alertInfo(activi,
+					"Example-Designs downloaded successfully!!!\n\nHint: Use 'Restore Desing' to use them!");
+			SettingsIO.setDesignListNeedsReload(true);
 		} else {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage + "\n\nInternet connection available?");
+			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage
+					+ "\n\nInternet connection available?");
 			// Toaster.showErrorToast(activi, "Error downloading Example-Settings!!!\n" + errorMessage);
 		}
 	}
