@@ -10,7 +10,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
-	public static final String KEY_REFLECTION_STYLE = "reflectionStyle";
+	public static final String KEY_GLOSSY_REFLECTION_STYLE = "reflectionStyle";
 	public static final String KEY_DROP_SHADOW_OFFSET_Y = "dropShadowOffsetY";
 	public static final String KEY_DROP_SHADOW_OFFSET_X = "dropShadowOffsetX";
 	public static final String KEY_BGRND_COLOR2 = "bgrnd_color2";
@@ -64,7 +64,7 @@ public class Settings {
 	}
 
 	public enum GLOSSY_REFLECTIONS_STYLE {
-		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED;
+		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_V2;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -103,11 +103,11 @@ public class Settings {
 
 	public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
 		switch (getImageFormat()) {
-			default:
-			case "jpg":
-				return IMAGE_OUTPUT_FORMAT.JPG;
-			case "png":
-				return IMAGE_OUTPUT_FORMAT.PNG;
+		default:
+		case "jpg":
+			return IMAGE_OUTPUT_FORMAT.JPG;
+		case "png":
+			return IMAGE_OUTPUT_FORMAT.PNG;
 		}
 	}
 
@@ -132,11 +132,11 @@ public class Settings {
 
 	public static int getTheme() {
 		switch (getAppTheme()) {
-			default:
-			case "Dark":
-				return R.style.AppThemeDark;
-			case "Light":
-				return R.style.AppThemeLight;
+		default:
+		case "Dark":
+			return R.style.AppThemeDark;
+		case "Light":
+			return R.style.AppThemeLight;
 		}
 	}
 
@@ -144,15 +144,15 @@ public class Settings {
 		// return "Random Layout";
 		final String sort = getSortOrder();
 		switch (sort) {
-			default:
-			case "Last Modified":
-				return SORT_ORDER.LAST_MODIFIED;
-			case "Last Modified (Descending)":
-				return SORT_ORDER.LAST_MODIFIED_DESCENDING;
-			case "Alphabetically":
-				return SORT_ORDER.ALPHA;
-			case "Timestamp in Filename":
-				return SORT_ORDER.FILENAME_TIMESTAMP;
+		default:
+		case "Last Modified":
+			return SORT_ORDER.LAST_MODIFIED;
+		case "Last Modified (Descending)":
+			return SORT_ORDER.LAST_MODIFIED_DESCENDING;
+		case "Alphabetically":
+			return SORT_ORDER.ALPHA;
+		case "Timestamp in Filename":
+			return SORT_ORDER.FILENAME_TIMESTAMP;
 		}
 	}
 
@@ -315,13 +315,15 @@ public class Settings {
 
 	public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
 		switch (getGlossyReflectionStyleString()) {
-			default:
-			case "Diagonal":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
-			case "Diagonal (curved)":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
-			case "Topleft":
-				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+		default:
+		case "Diagonal":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
+		case "Diagonal V2":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_V2;
+		case "Diagonal (curved)":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+		case "Topleft":
+			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
 		}
 	}
 
@@ -329,7 +331,7 @@ public class Settings {
 		if (prefs == null) {
 			return "Diagonal";
 		}
-		final String imageFormat = prefs.getString(KEY_REFLECTION_STYLE, "Diagonal");
+		final String imageFormat = prefs.getString(KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
 		return imageFormat;
 	}
 
@@ -522,25 +524,25 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-			case "customSize":
-				return getBWidth();
-			default:
-			case "2560x1600":
-				return 2560;
-			case "1920x1200":
-				return 1920;
-			case "1920x1080":
-				return 1920;
-			case "1080x1920":
-				return 1080;
-			case "1280x720":
-				return 1280;
-			case "1024x768":
-				return 1024;
-			case "960x800":
-				return 960;
-			case "640x480":
-				return 640;
+		case "customSize":
+			return getBWidth();
+		default:
+		case "2560x1600":
+			return 2560;
+		case "1920x1200":
+			return 1920;
+		case "1920x1080":
+			return 1920;
+		case "1080x1920":
+			return 1080;
+		case "1280x720":
+			return 1280;
+		case "1024x768":
+			return 1024;
+		case "960x800":
+			return 960;
+		case "640x480":
+			return 640;
 		}
 	}
 
@@ -555,25 +557,25 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-			case "customSize":
-				return getBHeight();
-			default:
-			case "2560x1600":
-				return 1600;
-			case "1920x1200":
-				return 1200;
-			case "1920x1080":
-				return 1080;
-			case "1080x1920":
-				return 1920;
-			case "1280x720":
-				return 720;
-			case "1024x768":
-				return 768;
-			case "960x800":
-				return 800;
-			case "640x480":
-				return 480;
+		case "customSize":
+			return getBHeight();
+		default:
+		case "2560x1600":
+			return 1600;
+		case "1920x1200":
+			return 1200;
+		case "1920x1080":
+			return 1080;
+		case "1080x1920":
+			return 1920;
+		case "1280x720":
+			return 720;
+		case "1024x768":
+			return 768;
+		case "960x800":
+			return 800;
+		case "640x480":
+			return 480;
 		}
 	}
 

@@ -89,6 +89,10 @@ public class PreferenceIO {
 					prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_X, 0).commit();
 					prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_Y, 0).commit();
 				}
+				if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
+					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_REFLECTION_STYLE);
+					prefs.edit().putString(Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal").commit();
+				}
 
 				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
 				return settings;

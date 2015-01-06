@@ -44,6 +44,7 @@
 
     <string-array name="reflectionstyle">
         <item >Diagonal</item>
+        <item >Diagonal V2</item>
         <item >Diagonal (curved)</item>
         <item >Topleft</item>
         </string-array>

@@ -38,7 +38,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
-		reflectionStyle = (ListPreference) findPreference(Settings.KEY_REFLECTION_STYLE);
+		reflectionStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_REFLECTION_STYLE);
 		patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
 		patternVariantSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
