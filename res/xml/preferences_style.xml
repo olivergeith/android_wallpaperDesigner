@@ -129,6 +129,16 @@
             seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
             seekbarpreference:stepValue="4" />
+       
+        <ListPreference
+            android:dependency="glossy"
+            android:defaultValue="Diagonal"
+            android:dialogTitle="@string/reflectionStyle"
+            android:entries="@array/reflectionstyle"
+            android:entryValues="@array/reflectionstyle"
+            android:key="reflectionStyle"
+            android:title="@string/reflectionStyle" />
+        
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="32"
             android:dependency="glossy"
@@ -139,6 +149,7 @@
             seekbarpreference:maxValue="160"
             seekbarpreference:minValue="4"
             seekbarpreference:stepValue="4" />
+        
     </PreferenceScreen>
 
     <!--

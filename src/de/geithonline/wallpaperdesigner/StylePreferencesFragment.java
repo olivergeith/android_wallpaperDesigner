@@ -19,6 +19,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
  */
 public class StylePreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
+	private ListPreference reflectionStyle;
 	private ListPreference patternSelection;
 	private ListPreference patternVariantSelection;
 	private ListPreference dropShadowType;
@@ -37,6 +38,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+		reflectionStyle = (ListPreference) findPreference(Settings.KEY_REFLECTION_STYLE);
 		patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
 		patternVariantSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
@@ -68,6 +70,15 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 
+		});
+
+		reflectionStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleReflectionStyleSelect((String) newValue);
+				return true;
+			}
 		});
 
 		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -125,6 +136,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 
 		});
+		handleReflectionStyleSelect(Settings.getGlossyReflectionStyleString());
 		handlePatternSelect(Settings.getSelectedPattern());
 		handleFilledOptionSelected(Settings.getFilledOption());
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
@@ -142,7 +154,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	protected void handleTextDrawStyleSelected(final String newValue) {
 		textDrawStyle.setSummary(newValue);
+	}
 
+	protected void handleReflectionStyleSelect(final String newValue) {
+		reflectionStyle.setSummary(newValue);
 	}
 
 	private void handlePatternTextChanged(final String newValue) {
@@ -221,8 +236,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		switch (key) {
-		default:
-			break;
+			default:
+				break;
 		}
 
 	}

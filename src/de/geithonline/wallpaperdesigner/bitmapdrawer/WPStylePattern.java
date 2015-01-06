@@ -18,6 +18,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
@@ -2193,10 +2194,6 @@ public abstract class WPStylePattern extends WPStyle {
 				y, //
 				colors, dists, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
-	}
-
-	public enum GLOSSY_REFLECTIONS_STYLE {
-		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED;
 	}
 
 	public void drawGlossyPath(final int x, final int y, final Paint paint, final int radius, final Path path,

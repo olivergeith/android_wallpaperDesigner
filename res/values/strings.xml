@@ -99,5 +99,5 @@
     <string name="sameBackgroundAsPatternGradient">Background like Color-Layout of patterns</string>
     <string name="dropShadowOffsetX">X-Offset of Dropshadow</string>
     <string name="dropShadowOffsetY">Y-Offset of Dropshadow</string>
-    
+    <string name="reflectionStyle">Style of Reflection</string>
 </resources>

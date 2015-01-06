@@ -10,6 +10,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_REFLECTION_STYLE = "reflectionStyle";
 	public static final String KEY_DROP_SHADOW_OFFSET_Y = "dropShadowOffsetY";
 	public static final String KEY_DROP_SHADOW_OFFSET_X = "dropShadowOffsetX";
 	public static final String KEY_BGRND_COLOR2 = "bgrnd_color2";
@@ -60,6 +61,10 @@ public class Settings {
 
 	public enum IMAGE_OUTPUT_FORMAT {
 		PNG, JPG;
+	}
+
+	public enum GLOSSY_REFLECTIONS_STYLE {
+		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -278,7 +283,7 @@ public class Settings {
 	}
 
 	// ###################################################################
-	// Special Settings
+	// Special Settings Glossy
 
 	public static boolean isGlossy() {
 		if (prefs == null) {
@@ -308,6 +313,28 @@ public class Settings {
 		return prefs.getInt(KEY_GLOSSY_REFLECTION_BRIGHTNESS, 64);
 	}
 
+	public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
+		switch (getGlossyReflectionStyleString()) {
+			default:
+			case "Diagonal":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
+			case "Diagonal (curved)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+			case "Topleft":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+		}
+	}
+
+	public static String getGlossyReflectionStyleString() {
+		if (prefs == null) {
+			return "Diagonal";
+		}
+		final String imageFormat = prefs.getString(KEY_REFLECTION_STYLE, "Diagonal");
+		return imageFormat;
+	}
+
+	// ###################################################################
+	// Special Settings
 	public static boolean isOutline() {
 		if (prefs == null) {
 			return true;
