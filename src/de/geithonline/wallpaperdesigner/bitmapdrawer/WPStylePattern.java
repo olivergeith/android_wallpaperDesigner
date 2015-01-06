@@ -1111,7 +1111,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
-			drawGlossyPath(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
 		}
 		// Outline
 		if (Settings.isOutline()) {
@@ -1960,7 +1960,7 @@ public abstract class WPStylePattern extends WPStyle {
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
-			drawGlossyPath(x, y, paint, radius, path);
+			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
 		}
 		// outline
 		if (Settings.isOutline()) {
@@ -2168,6 +2168,19 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setStyle(Style.FILL);
 	}
 
+	public void setupPaintShaderCurvedFromTopReflection(final int x, final int y, final Paint paint, final int radius) {
+		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
+		final int transparent = Color.argb(0, 255, 255, 255);
+		final int colors[] = { transparent, transparent, white2, transparent };
+		final float dists[] = { 0f, 0.45f, 0.6f, 0.601f };
+		paint.setShader(new RadialGradient(//
+				x, //
+				y - 3.0f * radius, //
+				radius * 5, //
+				colors, dists, Shader.TileMode.CLAMP));
+		paint.setStyle(Style.FILL);
+	}
+
 	public void setupPaintShaderForOval(final int x, final int y, final Paint paint, final RectF oval) {
 		int brigntness = Settings.getGlossyReflectionBrightness() * 2;
 		if (brigntness > 255) {
@@ -2233,6 +2246,10 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case DIAGONAL_CURVED:
 			setupPaintShaderDiagonalCurvedReflection(x, y, paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+			break;
+		case CURVED_FROM_TOP:
+			setupPaintShaderCurvedFromTopReflection(x, y, paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 			break;
 		case TOP_LEFT:

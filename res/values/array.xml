@@ -5,23 +5,14 @@
         <item >2560x1600</item>
         <item >1920x1200</item>
         <item >1920x1080</item>
-        <item >1280x720</item>
-        <item >1024x768</item>
-        <item >960x800</item>
-        <item >640x480</item>
-    </string-array>
-    
-    <string-array name="sizesValues">
-        <item >customSize</item>
-        <item >2560x1600</item>
-        <item >1920x1200</item>
-        <item >1920x1080</item>
         <item >1080x1920</item>
         <item >1280x720</item>
         <item >1024x768</item>
         <item >960x800</item>
+        <item >480x800</item>
         <item >640x480</item>
-     </string-array>
+    </string-array>
+    
 
     <string-array name="mainlayouts">
         <item >Random Layout</item>
@@ -46,6 +37,7 @@
         <item >Diagonal</item>
         <item >Diagonal V2</item>
         <item >Diagonal (curved)</item>
+        <item >Curved from top</item>
         <item >Topleft</item>
         </string-array>
     

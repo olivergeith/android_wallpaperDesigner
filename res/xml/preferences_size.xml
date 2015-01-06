@@ -10,7 +10,7 @@
             android:summary="@string/sizeSelection_summary" 
 	        android:dialogTitle="@string/sizeSelection"
 	        android:entries="@array/sizes"
-	        android:entryValues="@array/sizesValues"
+	        android:entryValues="@array/sizes"
 	        android:key="sizeSelection"
 	        />
  

@@ -64,7 +64,7 @@ public class Settings {
 	}
 
 	public enum GLOSSY_REFLECTIONS_STYLE {
-		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_V2;
+		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_V2, CURVED_FROM_TOP;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -322,6 +322,8 @@ public class Settings {
 			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_V2;
 		case "Diagonal (curved)":
 			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+		case "Curved from top":
+			return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
 		case "Topleft":
 			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
 		}
@@ -527,22 +529,23 @@ public class Settings {
 		case "customSize":
 			return getBWidth();
 		default:
-		case "2560x1600":
-			return 2560;
-		case "1920x1200":
-			return 1920;
-		case "1920x1080":
-			return 1920;
-		case "1080x1920":
-			return 1080;
-		case "1280x720":
-			return 1280;
-		case "1024x768":
-			return 1024;
-		case "960x800":
-			return 960;
-		case "640x480":
-			return 640;
+			return getWidthFromSizeString(s);
+			// case "2560x1600":
+			// return 2560;
+			// case "1920x1200":
+			// return 1920;
+			// case "1920x1080":
+			// return 1920;
+			// case "1080x1920":
+			// return 1080;
+			// case "1280x720":
+			// return 1280;
+			// case "1024x768":
+			// return 1024;
+			// case "960x800":
+			// return 960;
+			// case "640x480":
+			// return 640;
 		}
 	}
 
@@ -560,22 +563,23 @@ public class Settings {
 		case "customSize":
 			return getBHeight();
 		default:
-		case "2560x1600":
-			return 1600;
-		case "1920x1200":
-			return 1200;
-		case "1920x1080":
-			return 1080;
-		case "1080x1920":
-			return 1920;
-		case "1280x720":
-			return 720;
-		case "1024x768":
-			return 768;
-		case "960x800":
-			return 800;
-		case "640x480":
-			return 480;
+			return getHeightFromSizeString(s);
+			// case "2560x1600":
+			// return 1600;
+			// case "1920x1200":
+			// return 1200;
+			// case "1920x1080":
+			// return 1080;
+			// case "1080x1920":
+			// return 1920;
+			// case "1280x720":
+			// return 720;
+			// case "1024x768":
+			// return 768;
+			// case "960x800":
+			// return 800;
+			// case "640x480":
+			// return 480;
 		}
 	}
 
