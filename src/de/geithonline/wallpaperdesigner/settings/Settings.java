@@ -550,6 +550,16 @@ public class Settings {
 		}
 	}
 
+	private static int getWidthFromSizeString(final String s) {
+		final String w = s.substring(0, s.indexOf("x"));
+		return Integer.parseInt(w);
+	}
+
+	private static int getHeightFromSizeString(final String s) {
+		final String h = s.substring(s.indexOf("x") + 1);
+		return Integer.parseInt(h);
+	}
+
 	// ###################################################################
 	// Background Color
 
