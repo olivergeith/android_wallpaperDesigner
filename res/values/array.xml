@@ -41,8 +41,12 @@
         <item >Dark</item>
         <item >Light</item>
     </string-array>
-    
-    
+
+    <string-array name="reflectionstyle">
+        <item >Diagonal</item>
+        <item >Diagonal (curved)</item>
+        <item >Topleft</item>
+        </string-array>
     
     <string-array name="sortOrder">
         <item >Last Modified</item>
