@@ -10,6 +10,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_GLOSSY_GLOW_STYLE = "glowStyle";
 	public static final String KEY_GLOSSY_REFLECTION_STYLE = "reflectionStyle";
 	public static final String KEY_DROP_SHADOW_OFFSET_Y = "dropShadowOffsetY";
 	public static final String KEY_DROP_SHADOW_OFFSET_X = "dropShadowOffsetX";
@@ -64,7 +65,11 @@ public class Settings {
 	}
 
 	public enum GLOSSY_REFLECTIONS_STYLE {
-		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_45GRAD, CURVED_FROM_TOP, DIAGONAL_FLIPPED, DIAGONAL_45GRAD_FLIPPED, TOP_GLOW, BOTTOM_GLOW;
+		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_45GRAD, CURVED_FROM_TOP, DIAGONAL_FLIPPED, DIAGONAL_45GRAD_FLIPPED, TOP_GLOW, BOTTOM_GLOW, DIAGONAL_CURVED_V2, TOP_LEFT_V2;
+	}
+
+	public enum GLOSSY_GLOW_STYLE {
+		CENTER, HORIZONTAL;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -326,10 +331,14 @@ public class Settings {
 			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
 		case "Diagonal (curved)":
 			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+		case "Diagonal (curved) V2":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
 		case "Curved from top":
 			return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
 		case "Topleft":
 			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+		case "Topleft V2":
+			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
 		case "Big Oval":
 			return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
 		case "Small Oval":
@@ -345,8 +354,26 @@ public class Settings {
 		if (prefs == null) {
 			return "Diagonal";
 		}
-		final String imageFormat = prefs.getString(KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
-		return imageFormat;
+		final String style = prefs.getString(KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
+		return style;
+	}
+
+	public static GLOSSY_GLOW_STYLE getGlossyGlowStyle() {
+		switch (getGlossyGlowStyleString()) {
+		default:
+		case "Center":
+			return GLOSSY_GLOW_STYLE.CENTER;
+		case "Horizontal":
+			return GLOSSY_GLOW_STYLE.HORIZONTAL;
+		}
+	}
+
+	public static String getGlossyGlowStyleString() {
+		if (prefs == null) {
+			return "Center";
+		}
+		final String style = prefs.getString(KEY_GLOSSY_GLOW_STYLE, "Center");
+		return style;
 	}
 
 	// ###################################################################

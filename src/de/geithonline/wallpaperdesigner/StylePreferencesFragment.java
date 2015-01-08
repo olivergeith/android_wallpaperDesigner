@@ -31,6 +31,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private SeekBarPreference rotationDegrees;
 	private CheckBoxPreference randomLeafCount;
 	private ListPreference rotatingStyle;
+	private ListPreference glowStyle;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		reflectionStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_REFLECTION_STYLE);
+		glowStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_GLOW_STYLE);
 		patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
 		patternVariantSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER);
 		filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
@@ -77,6 +79,15 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				handleReflectionStyleSelect((String) newValue);
+				return true;
+			}
+		});
+
+		glowStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleGlowStyleSelect((String) newValue);
 				return true;
 			}
 		});
@@ -136,6 +147,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			}
 
 		});
+		handleGlowStyleSelect(Settings.getGlossyGlowStyleString());
 		handleReflectionStyleSelect(Settings.getGlossyReflectionStyleString());
 		handlePatternSelect(Settings.getSelectedPattern());
 		handleFilledOptionSelected(Settings.getFilledOption());
@@ -158,6 +170,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	protected void handleReflectionStyleSelect(final String newValue) {
 		reflectionStyle.setSummary(newValue);
+	}
+
+	protected void handleGlowStyleSelect(final String newValue) {
+		glowStyle.setSummary(newValue);
 	}
 
 	private void handlePatternTextChanged(final String newValue) {
@@ -236,8 +252,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		switch (key) {
-			default:
-				break;
+		default:
+			break;
 		}
 
 	}

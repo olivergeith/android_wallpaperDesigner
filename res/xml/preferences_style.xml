@@ -109,6 +109,16 @@
             android:key="glossy"
             android:title="@string/glossy" />
 
+        <PreferenceCategory android:title="Glow Options" />
+        <ListPreference
+            android:dependency="glossy"
+            android:defaultValue="Center"
+            android:dialogTitle="@string/glowStyle"
+            android:entries="@array/glowstyle"
+            android:entryValues="@array/glowstyle"
+            android:key="glowStyle"
+            android:title="@string/glowStyle" />
+        
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="64"
             android:dependency="glossy"
@@ -130,6 +140,7 @@
             seekbarpreference:minValue="-128"
             seekbarpreference:stepValue="4" />
        
+        <PreferenceCategory android:title="Reflection Options" />
         <ListPreference
             android:dependency="glossy"
             android:defaultValue="Diagonal"

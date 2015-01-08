@@ -61,9 +61,11 @@
     <string name="Settings">Settings</string>
     <string name="setasWallpaper">Set Wallpaper</string>
     <string name="glossy">Glossy Effect</string>
-    <string name="glossyCenterGlowBrightness">Brightness of patterns center</string>
-    <string name="glossyCenterGlowOuterDarkness">Darkness of patterns outer regions</string>
-    <string name="glossyReflectionBrightness">Brightness of reflection</string>
+    <string name="glossyCenterGlowBrightness">Brightness of Patterns center</string>
+    <string name="glossyCenterGlowOuterDarkness">Darkness of Patterns outer regions</string>
+    <string name="glossyReflectionBrightness">Brightness of Reflection</string>
+    <string name="reflectionStyle">Style of Reflection</string>
+    <string name="glowStyle">Style of Glow</string>
     
     <string name="outline">Outline</string>
     <string name="outlineNeverTransparent">Outline is never transparent</string>
@@ -99,5 +101,4 @@
     <string name="sameBackgroundAsPatternGradient">Background like Color-Layout of patterns</string>
     <string name="dropShadowOffsetX">X-Offset of Dropshadow</string>
     <string name="dropShadowOffsetY">Y-Offset of Dropshadow</string>
-    <string name="reflectionStyle">Style of Reflection</string>
 </resources>

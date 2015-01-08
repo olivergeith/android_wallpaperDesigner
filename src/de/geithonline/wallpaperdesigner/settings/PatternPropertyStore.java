@@ -32,7 +32,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "Mixed V1-V3", "Mixed V4-V5" }));
 
 		patternProperties.put("Gears-Saws", new PatternProperties(true, false, false, true, true, true, //
-				new CharSequence[] { "Gear", "Saw", "Mixed" }));
+				new CharSequence[] { "Gear", "Saw", "Star Gear", "Mixed" }));
 
 		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon",

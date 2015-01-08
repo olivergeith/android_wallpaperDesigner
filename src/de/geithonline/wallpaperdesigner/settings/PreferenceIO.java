@@ -78,23 +78,31 @@ public class PreferenceIO {
 						writeEntry(entry, prefs, keySet);
 					}
 				}
-				// Spezialbehandlung für alte Designs, die diesen Key noch nicht enthalten
-				if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
-					Log.i(LOG_TAG, "Key not contained-> setting it to default: "
-							+ Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
-					prefs.edit().putBoolean(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
+				// Spezialbehandlung für alte Designs, die diese Keys noch nicht enthalten
+				// und auch nur wenn nicht only Colors
+				if (!onlyColors) {
+					if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
+								+ Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
+						prefs.edit().putBoolean(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
+					}
+					if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
+								+ Settings.KEY_DROP_SHADOW_OFFSET_X);
+						prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_X, 0).commit();
+						prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_Y, 0).commit();
+					}
+					if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
+								+ Settings.KEY_GLOSSY_REFLECTION_STYLE);
+						prefs.edit().putString(Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal").commit();
+					}
+					if (!keySet.contains(Settings.KEY_GLOSSY_GLOW_STYLE)) {
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_GLOW_STYLE);
+						prefs.edit().putString(Settings.KEY_GLOSSY_GLOW_STYLE, "Center").commit();
+					}
 				}
-				if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
-					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_DROP_SHADOW_OFFSET_X);
-					prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_X, 0).commit();
-					prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_Y, 0).commit();
-				}
-				if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
-					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_REFLECTION_STYLE);
-					prefs.edit().putString(Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal").commit();
-				}
-
-				Toaster.showInfoToast(activity, "Design restored from " + stripTimestamp(filename));
+				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {
 				e.printStackTrace();

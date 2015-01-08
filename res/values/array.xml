@@ -39,11 +39,19 @@
         <item >Diagonal 45°</item>
         <item >Diagonal 45° (flipped)</item>
         <item >Diagonal (curved)</item>
+        <item >Diagonal (curved) V2</item>
         <item >Curved from top</item>
         <item >Topleft</item>
+        <item >Topleft V2</item>
         <item >Top Glow </item>
         <item >None </item>
         </string-array>
+
+    <string-array name="glowstyle">
+        <item >Center</item>
+        <item >Horizontal</item>
+        </string-array>
+    
     
     <string-array name="sortOrder">
         <item >Last Modified</item>
