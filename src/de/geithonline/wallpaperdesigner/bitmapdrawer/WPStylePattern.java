@@ -381,11 +381,11 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V2":
 		case "Square":
-			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.NORMAL);
+			path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.NORMAL);
 			break;
 		case "V3":
 		case "Square (rounded)":
-			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
+			path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
 			break;
 		case "V4":
 		case "Pentagon":
@@ -421,7 +421,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V12":
 		case "Square (Mixed)":
-			path = new SquarePath(new PointF(x, y), radius * 0.8f, getFilledBoolean(), SQUARE_STYLE.MIXED);
+			path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.MIXED);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -2116,7 +2116,7 @@ public abstract class WPStylePattern extends WPStyle {
 	// Glossy drawing
 	// ##########################################################################
 
-	public void setupPaintShaderCenterGlow(final int x, final int y, final Paint paint, final int radius) {
+	private static void setupPaintShaderCenterGlow(final int x, final int y, final Paint paint, final int radius) {
 		final int colorBrighter = ColorHelper.changeBrightness(paint.getColor(),
 				Settings.getGlossyCenterGlowBrighness());
 		final int colorDarker = ColorHelper.changeBrightness(paint.getColor(),
@@ -2125,58 +2125,77 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setShader(new RadialGradient(x, y, radius, colorBrighter, colorDarker, Shader.TileMode.CLAMP));
 	}
 
-	public void setupPaintShaderDiagonalReflection(final int x, final int y, final Paint paint, final int radius) {
+	private void setupPaintShaderDiagonalReflection(final int x, final int y, final Paint paint, final int radius,
+			final boolean flipped) {
+		final int white = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
+		final int transparent = Color.argb(0, 255, 255, 255);
+		final int colors[] = { transparent, white, transparent };
+		final float dists[] = { 0f, 0.5f, 0.51f };
+		if (!flipped) {
+			paint.setShader(new LinearGradient(//
+					x - radius, //
+					y - radius * 2 / 3, //
+					x + radius, //
+					y + radius * 2 / 3, //
+					colors, dists, Shader.TileMode.CLAMP));
+		} else {
+			paint.setShader(new LinearGradient(//
+					x + radius, //
+					y + radius * 2 / 3, //
+					x - radius, //
+					y - radius * 2 / 3, //
+					colors, dists, Shader.TileMode.CLAMP));
+		}
+		paint.setStyle(Style.FILL);
+	}
+
+	private void setupPaintShaderDiagonalReflectionV2(final int x, final int y, final Paint paint, final int radius,
+			final boolean flipped) {
 		final int white1 = Color.argb(0, 255, 255, 255);
 		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
 		final int transparent = Color.argb(0, 255, 255, 255);
 		final int colors[] = { white1, white2, transparent };
 		final float dists[] = { 0f, 0.5f, 0.51f };
-		paint.setShader(new LinearGradient(//
-				x - radius, //
-				y - radius * 2 / 3, //
-				x + radius, //
-				y + radius * 2 / 3, //
-				colors, dists, Shader.TileMode.CLAMP));
+		if (!flipped) {
+			paint.setShader(new LinearGradient(//
+					x - radius, //
+					y - radius, //
+					x + radius, //
+					y + radius, //
+					colors, dists, Shader.TileMode.CLAMP));
+		} else {
+			paint.setShader(new LinearGradient(//
+					x + radius, //
+					y + radius, //
+					x - radius, //
+					y - radius, //
+					colors, dists, Shader.TileMode.CLAMP));
+		}
 		paint.setStyle(Style.FILL);
 	}
 
-	public void setupPaintShaderDiagonalReflectionV2(final int x, final int y, final Paint paint, final int radius) {
-		final int white1 = Color.argb(0, 255, 255, 255);
-		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
-		final int transparent = Color.argb(0, 255, 255, 255);
-		final int colors[] = { white1, white2, transparent };
-		final float dists[] = { 0f, 0.5f, 0.51f };
-		paint.setShader(new LinearGradient(//
-				x - radius, //
-				y - radius, //
-				x + radius, //
-				y + radius, //
-				colors, dists, Shader.TileMode.CLAMP));
-		paint.setStyle(Style.FILL);
-	}
-
-	public void setupPaintShaderDiagonalCurvedReflection(final int x, final int y, final Paint paint, final int radius) {
+	private void setupPaintShaderDiagonalCurvedReflection(final int x, final int y, final Paint paint, final int radius) {
 		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
 		final int transparent = Color.argb(0, 255, 255, 255);
 		final int colors[] = { transparent, transparent, white2, transparent };
-		final float dists[] = { 0f, 0.39f, 0.55f, 0.551f };
+		final float dists[] = { 0f, 0.66f, 0.99f, 1f };
 		paint.setShader(new RadialGradient(//
 				x - 3.0f * radius, //
 				y - 1.5f * radius, //
-				radius * 6, //
+				radius * 3.4f, //
 				colors, dists, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 	}
 
-	public void setupPaintShaderCurvedFromTopReflection(final int x, final int y, final Paint paint, final int radius) {
+	private void setupPaintShaderCurvedFromTopReflection(final int x, final int y, final Paint paint, final int radius) {
 		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
 		final int transparent = Color.argb(0, 255, 255, 255);
 		final int colors[] = { transparent, transparent, white2, transparent };
-		final float dists[] = { 0f, 0.45f, 0.6f, 0.601f };
+		final float dists[] = { 0f, 0.66f, 0.99f, 1.0f };
 		paint.setShader(new RadialGradient(//
 				x, //
 				y - 3.0f * radius, //
-				radius * 5, //
+				radius * 2.8f, //
 				colors, dists, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 	}
@@ -2193,6 +2212,42 @@ public abstract class WPStylePattern extends WPStyle {
 				Shader.TileMode.CLAMP));
 		// final PorterDuffXfermode xfermode = new PorterDuffXfermode(Mode.SRC_IN);
 		// paint.setXfermode(xfermode);
+		paint.setStyle(Style.FILL);
+	}
+
+	public void setupPaintShaderForTopGlow(final int x, final int y, final Paint paint, final int radius) {
+		int brigntness = Settings.getGlossyReflectionBrightness() * 2;
+		if (brigntness > 255) {
+			brigntness = 255;
+		}
+		final int white = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
+		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness() * 2 / 3, 255, 255, 255);
+		final int transparent = Color.argb(0, 255, 255, 255);
+		final int colors[] = { white, white2, transparent };
+		final float dists[] = { 0f, 0.5f, 1f };
+		paint.setShader(new RadialGradient(//
+				x, //
+				y - radius * 0.5f, //
+				radius * 0.5f, //
+				colors, dists, Shader.TileMode.CLAMP));
+		paint.setStyle(Style.FILL);
+	}
+
+	public void setupPaintShaderForBottomGlow(final int x, final int y, final Paint paint, final int radius) {
+		int brigntness = Settings.getGlossyReflectionBrightness() * 2;
+		if (brigntness > 255) {
+			brigntness = 255;
+		}
+		final int white = Color.argb(Settings.getGlossyReflectionBrightness(), 255, 255, 255);
+		final int white2 = Color.argb(Settings.getGlossyReflectionBrightness() * 2 / 3, 255, 255, 255);
+		final int transparent = Color.argb(0, 255, 255, 255);
+		final int colors[] = { white, white2, transparent };
+		final float dists[] = { 0f, 0.5f, 1f };
+		paint.setShader(new RadialGradient(//
+				x, //
+				y + radius * 0.8f, //
+				radius * 0.5f, //
+				colors, dists, Shader.TileMode.CLAMP));
 		paint.setStyle(Style.FILL);
 	}
 
@@ -2226,6 +2281,14 @@ public abstract class WPStylePattern extends WPStyle {
 		RectF oval;
 		switch (reflectionStyle) {
 		default:
+		case TOP_GLOW:
+			setupPaintShaderForTopGlow(x, y, paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+			break;
+		case BOTTOM_GLOW:
+			setupPaintShaderForBottomGlow(x, y, paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+			break;
 		case BIG_OVAL:
 			oval = new RectF(x - radius * 3 / 4, y - radius, x + radius * 3 / 4, y);
 			setupPaintShaderForOval(x, y, paint, oval);
@@ -2237,11 +2300,19 @@ public abstract class WPStylePattern extends WPStyle {
 			bitmapCanvas.drawOval(oval, paint);
 			break;
 		case DIAGONAL:
-			setupPaintShaderDiagonalReflection(x, y, paint, radius);
+			setupPaintShaderDiagonalReflection(x, y, paint, radius, false);
 			bitmapCanvas.drawPath(path, paint);
 			break;
-		case DIAGONAL_V2:
-			setupPaintShaderDiagonalReflectionV2(x, y, paint, radius);
+		case DIAGONAL_FLIPPED:
+			setupPaintShaderDiagonalReflection(x, y, paint, radius, true);
+			bitmapCanvas.drawPath(path, paint);
+			break;
+		case DIAGONAL_45GRAD:
+			setupPaintShaderDiagonalReflectionV2(x, y, paint, radius, false);
+			bitmapCanvas.drawPath(path, paint);
+			break;
+		case DIAGONAL_45GRAD_FLIPPED:
+			setupPaintShaderDiagonalReflectionV2(x, y, paint, radius, true);
 			bitmapCanvas.drawPath(path, paint);
 			break;
 		case DIAGONAL_CURVED:

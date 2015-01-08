@@ -35,10 +35,14 @@
 
     <string-array name="reflectionstyle">
         <item >Diagonal</item>
-        <item >Diagonal V2</item>
+        <item >Diagonal (flipped)</item>
+        <item >Diagonal 45°</item>
+        <item >Diagonal 45° (flipped)</item>
         <item >Diagonal (curved)</item>
         <item >Curved from top</item>
         <item >Topleft</item>
+        <item >Top Glow </item>
+        <item >None </item>
         </string-array>
     
     <string-array name="sortOrder">

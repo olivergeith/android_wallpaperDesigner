@@ -64,7 +64,7 @@ public class Settings {
 	}
 
 	public enum GLOSSY_REFLECTIONS_STYLE {
-		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_V2, CURVED_FROM_TOP;
+		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_45GRAD, CURVED_FROM_TOP, DIAGONAL_FLIPPED, DIAGONAL_45GRAD_FLIPPED, TOP_GLOW, BOTTOM_GLOW;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -318,14 +318,26 @@ public class Settings {
 		default:
 		case "Diagonal":
 			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
-		case "Diagonal V2":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_V2;
+		case "Diagonal (flipped)":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
+		case "Diagonal 45°":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
+		case "Diagonal 45° (flipped)":
+			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
 		case "Diagonal (curved)":
 			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
 		case "Curved from top":
 			return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
 		case "Topleft":
 			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+		case "Big Oval":
+			return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
+		case "Small Oval":
+			return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
+		case "Top Glow":
+			return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
+		case "None":
+			return GLOSSY_REFLECTIONS_STYLE.NONE;
 		}
 	}
 
@@ -530,22 +542,6 @@ public class Settings {
 			return getBWidth();
 		default:
 			return getWidthFromSizeString(s);
-			// case "2560x1600":
-			// return 2560;
-			// case "1920x1200":
-			// return 1920;
-			// case "1920x1080":
-			// return 1920;
-			// case "1080x1920":
-			// return 1080;
-			// case "1280x720":
-			// return 1280;
-			// case "1024x768":
-			// return 1024;
-			// case "960x800":
-			// return 960;
-			// case "640x480":
-			// return 640;
 		}
 	}
 
@@ -564,22 +560,6 @@ public class Settings {
 			return getBHeight();
 		default:
 			return getHeightFromSizeString(s);
-			// case "2560x1600":
-			// return 1600;
-			// case "1920x1200":
-			// return 1200;
-			// case "1920x1080":
-			// return 1080;
-			// case "1080x1920":
-			// return 1920;
-			// case "1280x720":
-			// return 720;
-			// case "1024x768":
-			// return 768;
-			// case "960x800":
-			// return 800;
-			// case "640x480":
-			// return 480;
 		}
 	}
 
