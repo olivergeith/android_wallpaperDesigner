@@ -19,13 +19,14 @@
     <!--
     ###########################################################################
     ################################################################################
-    ############################################################################    -->
+    ############################################################################
+    -->
     <PreferenceCategory android:title="Pattern Options" />
 
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:key="dropshadowSettings"
+        android:key="dropshadowScreen"
         android:title="Dropshadow..." >
         <PreferenceCategory android:title="DropShadow" />
 
@@ -55,27 +56,25 @@
             seekbarpreference:maxValue="1000"
             seekbarpreference:minValue="10"
             seekbarpreference:stepValue="10" />
-
         <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="0"
             android:dialogMessage="@string/dropShadowOffsetX"
             android:key="dropShadowOffsetX"
             android:summary="%1$d pixel"
             android:title="@string/dropShadowOffsetX"
-            android:defaultValue="0"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="-50"
             seekbarpreference:stepValue="1" />
         <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="0"
             android:dialogMessage="@string/dropShadowOffsetY"
             android:key="dropShadowOffsetY"
             android:summary="%1$d pixel"
             android:title="@string/dropShadowOffsetY"
-            android:defaultValue="0"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="-50"
             seekbarpreference:stepValue="1" />
-        
-        
+
         <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
             android:defaultValue="@integer/COLOR_BLACK"
             android:key="colorDropShadow"
@@ -89,36 +88,38 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://plus.google.com/117464431803849545973/posts/hpEBPDvjL97" />
-        </Preference>
+        </Preference>
         -->
     </PreferenceScreen>
 
     <!--
     ###########################################################################
     ################################################################################
-    ############################################################################    -->
+    ############################################################################
+    -->
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:key="glossyPatternSettings"
-        android:title="Glossy Effect..." >
+        android:key="glossyScreen"
+        android:title="Glossy Effect..."
+        >
         <PreferenceCategory android:title="Glossy Options" />
-
+        
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="glossy"
             android:title="@string/glossy" />
-
         <PreferenceCategory android:title="Glow Options" />
+
         <ListPreference
-            android:dependency="glossy"
             android:defaultValue="Center"
+            android:dependency="glossy"
             android:dialogTitle="@string/glowStyle"
             android:entries="@array/glowstyle"
             android:entryValues="@array/glowstyle"
             android:key="glowStyle"
             android:title="@string/glowStyle" />
-        
+
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="64"
             android:dependency="glossy"
@@ -139,17 +140,18 @@
             seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
             seekbarpreference:stepValue="4" />
-       
+
         <PreferenceCategory android:title="Reflection Options" />
+
         <ListPreference
-            android:dependency="glossy"
             android:defaultValue="Diagonal"
+            android:dependency="glossy"
             android:dialogTitle="@string/reflectionStyle"
             android:entries="@array/reflectionstyle"
             android:entryValues="@array/reflectionstyle"
             android:key="reflectionStyle"
             android:title="@string/reflectionStyle" />
-        
+
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="32"
             android:dependency="glossy"
@@ -160,17 +162,17 @@
             seekbarpreference:maxValue="160"
             seekbarpreference:minValue="4"
             seekbarpreference:stepValue="4" />
-        
     </PreferenceScreen>
 
     <!--
     ###########################################################################
     ################################################################################
-    ############################################################################    -->
+    ############################################################################
+    -->
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:key="ratatingPatternSettings"
+        android:key="ratatingScreen"
         android:title="Rotating..." >
         <PreferenceCategory android:title="Rotating" />
 
@@ -196,11 +198,12 @@
     <!--
     ###########################################################################
     ################################################################################
-    ############################################################################    -->
+    ############################################################################
+    -->
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:key="outlineSettings"
+        android:key="outlineScreen"
         android:title="Outline..." >
         <PreferenceCategory android:title="Outline Options" />
 
@@ -242,11 +245,12 @@
     <!--
     ###########################################################################
     ################################################################################
-    ############################################################################    -->
+    ############################################################################
+    -->
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:key="assortedPatternSettings"
+        android:key="assortedScreen"
         android:summary="Filling, Text, Number of leafs/arms ..."
         android:title="Assorted Options..." >
         <PreferenceCategory android:title="Assorted Options" />
@@ -298,9 +302,8 @@
     <!--
     ###########################################################################
     ################################################################################
-    ############################################################################    -->
-    <PreferenceCategory android:title="Randomizer Settings" />
-
+    ############################################################################
+    -->
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_sort_by_size"
@@ -326,54 +329,55 @@
             seekbarpreference:minValue="5"
             seekbarpreference:stepValue="5" />
     </PreferenceScreen>
-
-    <de.geithonline.android.basics.preferences.SeekBarPreference
-        android:defaultValue="32"
-        android:dialogMessage="@string/randomizeColorRange"
-        android:key="randomizeColorRangeInt"
-        android:summary="%1$d"
-        android:title="@string/randomizeColorRange"
-        seekbarpreference:maxValue="160"
-        seekbarpreference:minValue="0"
-        seekbarpreference:stepValue="4" />
-    <de.geithonline.android.basics.preferences.SeekBarPreference
-        android:defaultValue="32"
-        android:dialogMessage="@string/randomizeColorBrightnessRangeInt"
-        android:key="randomizeColorBrightnessRangeInt"
-        android:summary="%1$d"
-        android:title="@string/randomizeColorBrightnessRangeInt"
-        seekbarpreference:maxValue="160"
-        seekbarpreference:minValue="0"
-        seekbarpreference:stepValue="4" />
-    <de.geithonline.android.basics.preferences.SeekBarPreference
-        android:defaultValue="255"
-        android:dialogMessage="@string/maxOpacity"
-        android:key="maxOpacity"
-        android:summary="%1$d"
-        android:title="@string/maxOpacity"
-        seekbarpreference:maxValue="255"
-        seekbarpreference:minValue="15"
-        seekbarpreference:stepValue="5" />
-    <de.geithonline.android.basics.preferences.SeekBarPreference
-        android:defaultValue="128"
-        android:dialogMessage="@string/minOpacity"
-        android:key="minOpacity"
-        android:summary="%1$d"
-        android:title="@string/minOpacity"
-        seekbarpreference:maxValue="255"
-        seekbarpreference:minValue="0"
-        seekbarpreference:stepValue="5" />
-
-
+    
     <!--
-    <PreferenceCategory android:title="Help and Howto" />
-    <Preference
-        android:icon="@drawable/about"
-        android:title="HowTo: Randomize Color Range" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="https://plus.google.com/117464431803849545973/posts/gxYmzHFTfpX" />
-    </Preference>
+    ###########################################################################
+    ################################################################################
+    ############################################################################
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="ColorRandomizingSettings"
+        android:title="Color Randomizing..." >
+        <PreferenceCategory android:title="Color Randomizing..." />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="32"
+            android:dialogMessage="@string/randomizeColorRange"
+            android:key="randomizeColorRangeInt"
+            android:summary="%1$d"
+            android:title="@string/randomizeColorRange"
+            seekbarpreference:maxValue="160"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="32"
+            android:dialogMessage="@string/randomizeColorBrightnessRangeInt"
+            android:key="randomizeColorBrightnessRangeInt"
+            android:summary="%1$d"
+            android:title="@string/randomizeColorBrightnessRangeInt"
+            seekbarpreference:maxValue="160"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="255"
+            android:dialogMessage="@string/maxOpacity"
+            android:key="maxOpacity"
+            android:summary="%1$d"
+            android:title="@string/maxOpacity"
+            seekbarpreference:maxValue="255"
+            seekbarpreference:minValue="15"
+            seekbarpreference:stepValue="5" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="128"
+            android:dialogMessage="@string/minOpacity"
+            android:key="minOpacity"
+            android:summary="%1$d"
+            android:title="@string/minOpacity"
+            seekbarpreference:maxValue="255"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="5" />
+    </PreferenceScreen>
     -->
 
 </PreferenceScreen>

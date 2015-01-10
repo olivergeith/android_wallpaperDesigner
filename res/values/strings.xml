@@ -13,7 +13,7 @@
     <string name="color">Color</string>
     <string name="header_size">Wallpaper Size</string>
     <string name="header_size_summary">Dimensions of Wallpaper....</string>
-    <string name="header_colors">Colors-Scheme</string>
+    <string name="header_colors">Color Scheme</string>
     <string name="header_colors_summary">Colors / Colorlayout....</string>
     <string name="header_style">Pattern Style</string>
     <string name="header_style_summary">Pattern-Selection and Pattern-Options....</string>
@@ -25,7 +25,6 @@
     <string name="header_globalsettings_summary">App global settings....</string>
     <string name="header_examplesettings">Designs</string>
     <string name="header_examplesettings_summary">Downlod, restore and manage Designs....</string>
-    <string name="category_background">Color Layout for patterns</string>
     <string name="category_size">Wallpaper Size</string>
     <string name="category_patterns">Special Settings - Patterns-Style</string>
     <string name="category_squares">Special Settings - Squares-Style</string>
@@ -98,7 +97,10 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
     <string name="appTheme">Theme (restart APP after changing)</string>
-    <string name="sameBackgroundAsPatternGradient">Background like Color-Layout of patterns</string>
+    <string name="sameBackgroundAsPatternGradient">Background like Color for Patterns</string>
+    <string name="category_background">Color for Patterns</string>
     <string name="dropShadowOffsetX">X-Offset of Dropshadow</string>
     <string name="dropShadowOffsetY">Y-Offset of Dropshadow</string>
+    <string name="loadColors">Restore Colors from other Design</string>
+    <string name="loadColorsSummary">Restore ONLY colors from another Design</string>
 </resources>

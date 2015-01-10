@@ -1,94 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
- 
-    <PreferenceCategory android:title="@string/category_background"/>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
 
-        <ListPreference
-	        android:key="gradientDirection"
-	        android:title="@string/gradientDirection" 
-	        android:dialogTitle="@string/gradientDirection"
-	        android:defaultValue="4-Color Gradient from corners"
-	        android:entries="@array/directions"
-	        android:entryValues="@array/directions"
-	        />
-
-        <ListPreference
-	        android:key="anzColors"
-	        android:title="@string/anzColors" 
-	        android:dialogTitle="@string/anzColors"
-	        android:defaultValue="4"
-	        android:entries="@array/anzColors"
-	        android:entryValues="@array/anzColorsValues"
-	        />
-        
-        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="color_plain_bgrnd"
-	        android:title="@string/color" 
-	        android:summary="1. Color"
-	        android:defaultValue="@integer/COLOR_RED"
-	        />
-	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="color2_plain_bgrnd"
-	        android:title="@string/color" 
-	        android:summary="2. Color"
-	        android:defaultValue="@integer/COLOR_ORANGE"
-	        />
-	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="color3_plain_bgrnd"
-	        android:title="@string/color" 
-	        android:summary="3. Color"
-	        android:defaultValue="@integer/COLOR_GREEN"
-	        />
-	    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="color4_plain_bgrnd"
-	        android:title="@string/color" 
-	        android:summary="4. Color"
-	        android:defaultValue="@integer/COLOR_BLACK"
-	        />
-
-	    <de.geithonline.android.basics.preferences.IconOnlyPreference
-		    android:key="colorPreview"
-			/>
-	    
-		<Preference 
-		    android:key="loadSettings"
-		    android:title="Restore only Colors from Design"
-		    android:icon="@android:drawable/ic_menu_set_as"
-		    android:summary="Restore ONLY the colors from one of your designs" 
-            />
-
-	<PreferenceCategory android:title="Image Background Color"/>
+    <PreferenceCategory android:title="@string/category_background" />
+   <!--
+    ###########################################################################
+    ################################################################################
+    ############################################################################
+    -->
     
-    	<CheckBoxPreference 
-            android:key="sameBackgroundAsPatternGradient"
-            android:title="@string/sameBackgroundAsPatternGradient"
-            android:summary="The Background of the image is colored like the Pattern Layout Colors."
-            android:defaultValue="true"
-            android:disableDependentsState="true"
-            />
-        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="bgrnd_color1"
-	        android:title="@string/color" 
-	        android:summary="1. Background Color"
-	        android:defaultValue="@integer/COLOR_DARKGRAY"
-			android:dependency="sameBackgroundAsPatternGradient"
-	        />
-        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
-	        android:key="bgrnd_color2"
-	        android:title="@string/color" 
-	        android:summary="2. Background Color"
-	        android:defaultValue="@integer/COLOR_BLACK"
-			android:dependency="sameBackgroundAsPatternGradient"
-	        />
-        				    
-	    
-    <PreferenceCategory android:title="Special Coloring Options"/>
-	    	    
-        <CheckBoxPreference 
-            android:key="dynamicColoring"
-            android:title="@string/dynamicColoring"
-            android:summary="Hard to explain, what this does...check it out and try to see the difference...if checked, the colors are mixed a little bit more! "
+    <ListPreference
+        android:defaultValue="4-Color Gradient from corners"
+        android:dialogTitle="@string/gradientDirection"
+        android:entries="@array/directions"
+        android:entryValues="@array/directions"
+        android:key="gradientDirection"
+        android:title="@string/gradientDirection" />
+    <ListPreference
+        android:defaultValue="4"
+        android:dialogTitle="@string/anzColors"
+        android:entries="@array/anzColors"
+        android:entryValues="@array/anzColorsValues"
+        android:key="anzColors"
+        android:title="@string/anzColors" />
+
+    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+        android:defaultValue="@integer/COLOR_RED"
+        android:key="color_plain_bgrnd"
+        android:summary="1. Color"
+        android:title="@string/color" />
+    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+        android:defaultValue="@integer/COLOR_ORANGE"
+        android:key="color2_plain_bgrnd"
+        android:summary="2. Color"
+        android:title="@string/color" />
+    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+        android:defaultValue="@integer/COLOR_GREEN"
+        android:key="color3_plain_bgrnd"
+        android:summary="3. Color"
+        android:title="@string/color" />
+    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+        android:defaultValue="@integer/COLOR_BLACK"
+        android:key="color4_plain_bgrnd"
+        android:summary="4. Color"
+        android:title="@string/color" />
+
+        <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="ColorRandomizingSettings"
+        android:title="Color Randomizing..." >
+        <PreferenceCategory android:title="Color Randomizing..." />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="32"
+            android:dialogMessage="@string/randomizeColorRange"
+            android:key="randomizeColorRangeInt"
+            android:summary="%1$d"
+            android:title="@string/randomizeColorRange"
+            seekbarpreference:maxValue="160"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="32"
+            android:dialogMessage="@string/randomizeColorBrightnessRangeInt"
+            android:key="randomizeColorBrightnessRangeInt"
+            android:summary="%1$d"
+            android:title="@string/randomizeColorBrightnessRangeInt"
+            seekbarpreference:maxValue="160"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="255"
+            android:dialogMessage="@string/maxOpacity"
+            android:key="maxOpacity"
+            android:summary="%1$d"
+            android:title="@string/maxOpacity"
+            seekbarpreference:maxValue="255"
+            seekbarpreference:minValue="15"
+            seekbarpreference:stepValue="5" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="128"
+            android:dialogMessage="@string/minOpacity"
+            android:key="minOpacity"
+            android:summary="%1$d"
+            android:title="@string/minOpacity"
+            seekbarpreference:maxValue="255"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="5" />
+
+        <CheckBoxPreference
             android:defaultValue="false"
-            />
-        
+            android:key="dynamicColoring"
+            android:summary="Hard to explain, what this does...check it out and try to see the difference...if checked, the colors are mixed a little bit more! "
+            android:title="@string/dynamicColoring" />
+    </PreferenceScreen>
+    
+    <!-- 
+    <de.geithonline.android.basics.preferences.IconOnlyPreference android:key="colorPreview" />
+     -->
+    <PreferenceCategory android:title="Image Background Color" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:disableDependentsState="true"
+        android:key="sameBackgroundAsPatternGradient"
+        android:summary="The Background of the image is colored like the Pattern Layout Colors."
+        android:title="@string/sameBackgroundAsPatternGradient" />
+
+    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+        android:defaultValue="@integer/COLOR_DARKGRAY"
+        android:dependency="sameBackgroundAsPatternGradient"
+        android:key="bgrnd_color1"
+        android:summary="1. Background Color"
+        android:title="@string/color" />
+    <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+        android:defaultValue="@integer/COLOR_BLACK"
+        android:dependency="sameBackgroundAsPatternGradient"
+        android:key="bgrnd_color2"
+        android:summary="2. Background Color"
+        android:title="@string/color" />
+
+    <PreferenceCategory android:title="Advanced" />
+    <Preference
+        android:icon="@android:drawable/ic_menu_set_as"
+        android:key="loadColors"
+        android:summary="@string/loadColorsSummary"
+        android:title="@string/loadColors" />
+ 
 </PreferenceScreen>

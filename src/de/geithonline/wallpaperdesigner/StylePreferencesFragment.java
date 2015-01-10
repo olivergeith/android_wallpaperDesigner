@@ -9,6 +9,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
 import de.geithonline.wallpaperdesigner.settings.PatternPropertyStore;
@@ -26,7 +27,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference filledOption;
 	private EditTextPreference textPattern;
 	private ListPreference textDrawStyle;
-	private SeekBarPreference maxOpacity;
 	private SeekBarPreference numberOfLeafs;
 	private SeekBarPreference rotationDegrees;
 	private CheckBoxPreference randomLeafCount;
@@ -48,21 +48,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowType = (ListPreference) findPreference(Settings.KEY_PATTERN_DROPSHADOW_TYPE);
 		textPattern = (EditTextPreference) findPreference(Settings.KEY_PATTERN_TEXT);
 
-		maxOpacity = (SeekBarPreference) findPreference("maxOpacity");
 		numberOfLeafs = (SeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
 		randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
 		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
 		rotatingStyle = (ListPreference) findPreference("rotatingStyle");
-
-		maxOpacity.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleMaxOpacityChange((int) newValue);
-				return true;
-			}
-
-		});
 
 		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -201,20 +190,19 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void handlePatternSelect(final String newPattern) {
 		patternSelection.setSummary(newPattern);
-		final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_GLOSSY);
-		final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_OUTLINE);
-		final CheckBoxPreference outlineneverTransparent = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT);
-		glossy.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
-		outline.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		outlineneverTransparent.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		rotationDegrees.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
-		rotationDegrees.setEnabled(Settings.getRotationStyle().equals("Fixed"));
-		rotatingStyle.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+		// final CheckBoxPreference glossy = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_GLOSSY);
+		// final CheckBoxPreference outline = (CheckBoxPreference) findPreference(Settings.KEY_PATTERN_OUTLINE);
+		// final CheckBoxPreference outlineneverTransparent = (CheckBoxPreference)
+		// findPreference(Settings.KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT);
+		// glossy.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
+		// outline.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
+		// outlineneverTransparent.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
+		// rotationDegrees.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+		// rotationDegrees.setEnabled(Settings.getRotationStyle().equals("Fixed"));
+		// rotatingStyle.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
 		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
 		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
 		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
-		// final PreferenceScreen specialSettings = (PreferenceScreen) findPreference("specialPatternSettings");
-		// specialSettings.setEnabled(PatternPropertyStore.hasPatternSpecialSettings(newPattern));
 		numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 		randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 
@@ -240,6 +228,18 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			patternVariantSelection.setSummary("not available");
 		}
 
+		// Screens enablen oder disablen
+		final PreferenceScreen glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
+		glossyScreen.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
+		final PreferenceScreen ratatingScreen = (PreferenceScreen) findPreference("ratatingScreen");
+		ratatingScreen.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+		final PreferenceScreen outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
+		outlineScreen.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
+		final PreferenceScreen assortedScreen = (PreferenceScreen) findPreference("assortedScreen");
+		assortedScreen.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern) //
+				|| PatternPropertyStore.hasPatternFilledOption(newPattern)//
+				|| PatternPropertyStore.hasNumberOfLeafsOption(newPattern)//
+		);
 	}
 
 	protected void handlePatternVariantSelect(final String newVariant) {
@@ -256,14 +256,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			break;
 		}
 
-	}
-
-	private void handleMaxOpacityChange(final int newValue) {
-		Log.i("Geith", "NewVal = " + newValue);
-		if (newValue < Settings.prefs.getInt("minOpacity", 128)) {
-			Settings.prefs.edit().putInt("minOpacity", newValue).commit();
-
-		}
 	}
 
 }
