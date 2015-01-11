@@ -210,7 +210,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="outline"
-            android:title="@string/outline" />
+            android:title="@string/outline"
+            android:summary="@string/outlineSummary" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:dependency="outline"
