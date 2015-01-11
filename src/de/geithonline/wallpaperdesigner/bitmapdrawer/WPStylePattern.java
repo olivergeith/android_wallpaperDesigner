@@ -17,6 +17,7 @@ import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
@@ -2040,9 +2041,10 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
-		float strokewidth = radius / 15f;
-		if (strokewidth > 3.0f) {
-			strokewidth = 3;
+		float strokewidth = radius / 45f * Settings.getOutlineThicknessAdjustment();
+		Log.i("outline", "Thickness = " + strokewidth);
+		if (strokewidth > Settings.getOutlineThicknessLimit()) {
+			strokewidth = Settings.getOutlineThicknessLimit();
 		}
 		if (strokewidth < 1.0f) {
 			strokewidth = 0;

@@ -42,7 +42,7 @@
             android:defaultValue="-48"
             android:dialogMessage="@string/dropShadowDarknessAdjust"
             android:key="dropShadowDarknessAdjust"
-            android:summary="%1$d"
+            android:summary="%1$d (negativ=darker, positiv=brighter)"
             android:title="@string/dropShadowDarknessAdjust"
             seekbarpreference:maxValue="192"
             seekbarpreference:minValue="-192"
@@ -125,7 +125,7 @@
             android:dependency="glossy"
             android:dialogMessage="@string/glossyCenterGlowBrightness"
             android:key="glossyCenterGlowBrightness"
-            android:summary="%1$d"
+            android:summary="%1$d (negativ=darker, positiv=brighter)"
             android:title="@string/glossyCenterGlowBrightness"
             seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
@@ -135,7 +135,7 @@
             android:dependency="glossy"
             android:dialogMessage="@string/glossyCenterGlowOuterDarkness"
             android:key="glossyCenterGlowOuterDarkness"
-            android:summary="%1$d"
+            android:summary="%1$d (negativ=darker, positiv=brighter)"
             android:title="@string/glossyCenterGlowOuterDarkness"
             seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
@@ -188,7 +188,7 @@
             android:defaultValue="0"
             android:dialogMessage="@string/rotationDegrees"
             android:key="rotationDegrees"
-            android:summary="%1$d"
+            android:summary="%1$d°"
             android:title="@string/rotationDegrees"
             seekbarpreference:maxValue="180"
             seekbarpreference:minValue="-180"
@@ -219,11 +219,33 @@
             android:title="@string/outlineNeverTransparent" />
 
         <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dependency="outline"
+            android:dialogMessage="@string/outlineThicknessAdjust"
+            android:key="outlineThicknessAdjust"
+            android:summary="%1$d percent"
+            android:title="@string/outlineThicknessAdjust"
+            seekbarpreference:maxValue="800"
+            seekbarpreference:minValue="10"
+            seekbarpreference:stepValue="5" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="3"
+            android:dependency="outline"
+            android:dialogMessage="@string/outlineThicknessLimit"
+            android:key="outlineThicknessLimit"
+            android:summary="%1$d pixel (outline will never be thicken than this)"
+            android:title="@string/outlineThicknessLimit"
+            seekbarpreference:maxValue="25"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+        
+        <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="-48"
             android:dependency="outline"
             android:dialogMessage="@string/outlineDarknessAdjust"
             android:key="outlineDarknessAdjust"
-            android:summary="%1$d"
+            android:summary="%1$d (negativ=darker, positiv=brighter)"
             android:title="@string/outlineDarknessAdjust"
             seekbarpreference:maxValue="192"
             seekbarpreference:minValue="-192"

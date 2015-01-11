@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_OUTLINE_THICKNESS_LIMIT = "outlineThicknessLimit";
+	public static final String KEY_OUTLINE_THICKNESS_ADJUST = "outlineThicknessAdjust";
 	public static final String KEY_GLOSSY_GLOW_STYLE = "glowStyle";
 	public static final String KEY_GLOSSY_REFLECTION_STYLE = "reflectionStyle";
 	public static final String KEY_DROP_SHADOW_OFFSET_Y = "dropShadowOffsetY";
@@ -412,6 +414,20 @@ public class Settings {
 			return -48;
 		}
 		return prefs.getInt(KEY_PATTERN_OUTLINE_DARKNESS_ADJUST, -48);
+	}
+
+	public static float getOutlineThicknessAdjustment() {
+		if (prefs == null) {
+			return 1f;
+		}
+		return prefs.getInt(KEY_OUTLINE_THICKNESS_ADJUST, 100) / 100f;
+	}
+
+	public static int getOutlineThicknessLimit() {
+		if (prefs == null) {
+			return 3;
+		}
+		return prefs.getInt(KEY_OUTLINE_THICKNESS_LIMIT, 3);
 	}
 
 	public static int getDropShadowDarkness() {

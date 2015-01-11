@@ -101,6 +101,11 @@ public class PreferenceIO {
 						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_GLOW_STYLE);
 						prefs.edit().putString(Settings.KEY_GLOSSY_GLOW_STYLE, "Center").commit();
 					}
+					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_ADJUST)) {
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
+								+ Settings.KEY_OUTLINE_THICKNESS_ADJUST);
+						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_ADJUST, 100).commit();
+					}
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;

@@ -271,7 +271,7 @@ public class BackgroundDrawer {
 		final int cHeight = canvas.getHeight();
 		final Paint paint = new Paint();
 		// paint.setAntiAlias(true);
-		paint.setShader(new SweepGradient(-50, -50, getColors(), getDistancesCornerSweep()));
+		paint.setShader(new SweepGradient(0, 0, getColors(), getDistancesCornerSweep()));
 
 		final Rect r = new Rect(0, 0, cWidth, cHeight);
 		canvas.drawRect(r, paint);
