@@ -66,7 +66,7 @@
     <string name="reflectionStyle">Reflection Style</string>
     <string name="glowStyle">Glow Style</string>
     
-    <string name="outline">Outline</string>
+    <string name="outline">Draw Outline</string>
     <string name="outlineSummary">Outline thickness is proportional to pattern size. The bigger the pattern, the thicker the outline!</string>
     <string name="outlineNeverTransparent">Outline is never transparent</string>
     <string name="outlineNeverTransparentSummary">If set, the outline is not transparent, even if the pattern is transparent! If not set, the outline has the same alpha/transparency like its pattern!</string>

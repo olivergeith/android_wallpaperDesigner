@@ -109,7 +109,7 @@ public class PreferenceIO {
 					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
 						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
 								+ Settings.KEY_OUTLINE_THICKNESS_LIMIT);
-						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_ADJUST, 3).commit();
+						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3).commit();
 					}
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));

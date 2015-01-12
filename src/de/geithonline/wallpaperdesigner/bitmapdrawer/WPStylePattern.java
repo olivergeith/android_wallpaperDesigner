@@ -17,7 +17,6 @@ import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
@@ -792,7 +791,7 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variant) {
 		default:
 		case "V1":
-			path = new VirusPath(new Point(x, y), radius);
+			path = new VirusPath(new Point(x, y), radius, getFilledBoolean());
 			break;
 		case "V2":
 			path = new VirusPath2(new Point(x, y), radius, 13, getFilledBoolean());
@@ -2042,7 +2041,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
 		float strokewidth = radius / 45f * Settings.getOutlineThicknessAdjustment();
-		Log.i("outline", "Thickness = " + strokewidth);
+		// Log.i("outline", "Thickness = " + strokewidth);
 		if (strokewidth > Settings.getOutlineThicknessLimit()) {
 			strokewidth = Settings.getOutlineThicknessLimit();
 		}
