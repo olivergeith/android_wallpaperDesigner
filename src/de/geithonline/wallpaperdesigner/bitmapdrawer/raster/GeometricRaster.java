@@ -15,8 +15,8 @@ public class GeometricRaster implements IRaster {
 	private final int anzahlPatterns;
 	private final POSITIONING positioning;
 
-	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING positioning,
-			final boolean upsidedown) {
+	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap,
+			final POSITIONING positioning, final boolean upsidedown) {
 
 		this.positioning = positioning;
 		final int abstand = Math.round(patternRadius * 2 * overlap);
@@ -123,7 +123,6 @@ public class GeometricRaster implements IRaster {
 		}
 		final int location = Math.round(size / 2); // aus der mitte nehmen
 		final Point p = points.remove(location);
-		top = !top;
 		return p;
 	}
 

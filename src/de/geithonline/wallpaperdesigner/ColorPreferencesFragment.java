@@ -142,8 +142,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	}
 
 	private void drawPreviewImages() {
-		final int w = Settings.getBWidth();
-		final int h = Settings.getBHeight();
+		final int w = Settings.getWidth();
+		final int h = Settings.getHeight();
 		final Activity activity = getActivity();
 		if (activity != null) {
 			final int bWidth = DisplayHelper.getDisplayWidth(activity) / 10;

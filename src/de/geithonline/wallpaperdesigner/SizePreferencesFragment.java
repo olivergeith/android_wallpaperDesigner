@@ -31,8 +31,8 @@ public class SizePreferencesFragment extends PreferenceFragment implements OnSha
 		bHeight = (EditTextPreference) findPreference("bHeight");
 		final String selectSize = Settings.getSizeSelection();
 		sizeSelection.setSummary(selectSize);
-		bWidth.setSummary("" + Settings.getBWidth());
-		bHeight.setSummary("" + Settings.getBHeight());
+		bWidth.setSummary("" + Settings.getCustomWidth());
+		bHeight.setSummary("" + Settings.getCustomHeight());
 		bWidth.setEnabled(selectSize.equals("customSize"));
 		bHeight.setEnabled(selectSize.equals("customSize"));
 

@@ -582,17 +582,17 @@ public class Settings {
 		final String s = getSizeSelection();
 		switch (s) {
 		case "customSize":
-			return getBWidth();
+			return getCustomWidth();
 		default:
 			return getWidthFromSizeString(s);
 		}
 	}
 
-	public static int getBWidth() {
+	public static int getCustomWidth() {
 		return Integer.valueOf(prefs.getString("bWidth", "2560"));
 	}
 
-	public static int getBHeight() {
+	public static int getCustomHeight() {
 		return Integer.valueOf(prefs.getString("bHeight", "1600"));
 	}
 
@@ -600,7 +600,7 @@ public class Settings {
 		final String s = getSizeSelection();
 		switch (s) {
 		case "customSize":
-			return getBHeight();
+			return getCustomHeight();
 		default:
 			return getHeightFromSizeString(s);
 		}
