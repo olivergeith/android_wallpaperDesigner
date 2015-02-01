@@ -13,15 +13,15 @@ public class CircularRaster implements IRaster {
 	}
 
 	protected enum CIRCLE_TYPE {
-		HALF, FULL, FULL_RANDOM_STARWINKEL, SPIRAL;
+		HALF, FULL_RANDOM_STARWINKEL, SPIRAL;
 	}
 
 	private final List<Point> points = new ArrayList<Point>();
 	private final int anzahlPatterns;
 	private final POSITIONING_CIRCLE positioning;
 
-	public CircularRaster(final int width, final int height, final int radius, final float overlap, final POSITIONING_CIRCLE positioning,
-			final CIRCLE_TYPE circleType) {
+	public CircularRaster(final int width, final int height, final int radius, final float overlap,
+			final POSITIONING_CIRCLE positioning, final CIRCLE_TYPE circleType) {
 
 		this.positioning = positioning;
 
@@ -30,9 +30,9 @@ public class CircularRaster implements IRaster {
 		case HALF:
 			calculateHalfRings(width, height, radius, overlap);
 			break;
-		case FULL:
-			calculateCenteredRings(width, height, radius, overlap);
-			break;
+		// case FULL:
+		// calculateCenteredRings(width, height, radius, overlap);
+		// break;
 		case FULL_RANDOM_STARWINKEL:
 			calculateCenteredRingsRandomStartWinkel(width, height, radius, overlap);
 			break;
@@ -45,31 +45,31 @@ public class CircularRaster implements IRaster {
 		Log.i("CIRCULAR RASTER", "Anzahl Points = " + anzahlPatterns);
 	}
 
-	private void calculateCenteredRings(final int width, final int height, final int radius, final float overlap) {
-		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4);
-
-		final int radiusStep = Math.round(radius * 2 * overlap);
-		final int anzRinge = maximumRadius / radiusStep;
-
-		final Point center = new Point(width / 2, height / 2);
-		points.add(center);
-		Log.i("CIRCULAR RASTER", "Anzahl Ringe = " + anzRinge);
-		for (int ring = 1; ring <= anzRinge; ring++) {
-			final float r = ring * radiusStep;
-			final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
-			final float winkelProEcke = (float) (Math.PI / ecken) * 2;
-			Log.i("CIRCULAR RASTER", "Anzahl Rcken = " + ecken);
-			final float startWinkel = 0;
-			for (int ecke = 0; ecke < ecken; ecke++) {
-
-				final Point p = new Point();
-
-				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke + startWinkel) * r);
-				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke + startWinkel) * r);
-				points.add(p);
-			}
-		}
-	}
+	// private void calculateCenteredRings(final int width, final int height, final int radius, final float overlap) {
+	// final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4);
+	//
+	// final int radiusStep = Math.round(radius * 2 * overlap);
+	// final int anzRinge = maximumRadius / radiusStep + 1;
+	//
+	// final Point center = new Point(width / 2, height / 2);
+	// points.add(center);
+	// Log.i("CIRCULAR RASTER", "Anzahl Ringe = " + anzRinge);
+	// for (int ring = 1; ring <= anzRinge; ring++) {
+	// final float r = ring * radiusStep;
+	// final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
+	// final float winkelProEcke = (float) (Math.PI / ecken) * 2;
+	// Log.i("CIRCULAR RASTER", ring + " Anzahl Ecken = " + ecken);
+	// final float startWinkel = 0;
+	// for (int ecke = 0; ecke < ecken; ecke++) {
+	//
+	// final Point p = new Point();
+	//
+	// p.x = (int) (center.x + Math.cos(ecke * winkelProEcke + startWinkel) * r);
+	// p.y = (int) (center.y + Math.sin(ecke * winkelProEcke + startWinkel) * r);
+	// points.add(p);
+	// }
+	// }
+	// }
 
 	private void calculateHalfRings(final int width, final int height, final int radius, final float overlap) {
 		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height);
@@ -79,12 +79,12 @@ public class CircularRaster implements IRaster {
 
 		final Point center = new Point(width / 2, height);
 		points.add(center);
-		Log.i("CIRCULAR RASTER", "Anzahl Ringe = " + anzRinge);
+		Log.i("Half Ring RASTER", "Anzahl Ringe = " + anzRinge);
 		for (int ring = 1; ring <= anzRinge; ring++) {
 			final float r = ring * radiusStep;
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
 			final float winkelProEcke = (float) (Math.PI / ecken) * 2;
-			Log.i("CIRCULAR RASTER", "Anzahl Rcken = " + ecken);
+			Log.i("Half Ring RASTER", "Anzahl Rcken = " + ecken);
 			final float startWinkel = (float) (Math.PI / 2);
 			for (int ecke = 0; ecke < ecken; ecke++) {
 
@@ -97,11 +97,12 @@ public class CircularRaster implements IRaster {
 		}
 	}
 
-	private void calculateCenteredRingsRandomStartWinkel(final int width, final int height, final int radius, final float overlap) {
+	private void calculateCenteredRingsRandomStartWinkel(final int width, final int height, final int radius,
+			final float overlap) {
 		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4);
 
 		final int radiusStep = Math.round(radius * 2 * overlap);
-		final int anzRinge = maximumRadius / radiusStep;
+		final int anzRinge = maximumRadius / radiusStep + 1;
 
 		final Point center = new Point(width / 2, height / 2);
 		points.add(center);
@@ -110,7 +111,7 @@ public class CircularRaster implements IRaster {
 			final float r = ring * radiusStep;
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
 			final float winkelProEcke = (float) (Math.PI / ecken) * 2;
-			Log.i("CIRCULAR RASTER", "Anzahl Rcken = " + ecken);
+			Log.i("CIRCULAR RASTER", "Anzahl Ecken = " + ecken);
 			final float startWinkel = Randomizer.getRandomFloat(0, (float) Math.PI * 2);
 			for (int ecke = 0; ecke < ecken; ecke++) {
 
