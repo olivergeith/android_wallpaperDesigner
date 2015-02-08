@@ -12,7 +12,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot",
 						"Footprint", "Pentagram", "4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar",
-						"R2D2", "Mixed" }));
+						"R2D2", "Cornered Square", "Mixed" }));
 
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true, //
 				new CharSequence[] { "Bubble" }));

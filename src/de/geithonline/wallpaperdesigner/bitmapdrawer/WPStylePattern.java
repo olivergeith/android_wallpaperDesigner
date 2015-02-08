@@ -91,6 +91,7 @@ import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath.SMILEY_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
+import de.geithonline.wallpaperdesigner.shapes.SquareCornered;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
@@ -1555,7 +1556,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 16);
+			final int nr = getRandomInt(0, 17);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1640,6 +1641,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V16":
 		case "R2D2":
 			path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.R2D2);
+			break;
+		case "V17":
+		case "Cornered Square":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean());
 			break;
 
 		}
