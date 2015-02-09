@@ -12,7 +12,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot",
 						"Footprint", "Pentagram", "4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar",
-						"R2D2", "Cornered Square", "Mixed" }));
+						"R2D2", "Mixed" }));
 
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true, //
 				new CharSequence[] { "Bubble" }));
@@ -113,6 +113,10 @@ public class PatternPropertyStore {
 		patternProperties.put("Space", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Rocket V6",
 						"Ufo V1", "Ufo V2", "Satellite", "Mixed Rockets", "Mixed" }));
+
+		patternProperties.put("Square", new PatternProperties(true, true, false, true, false, true, //
+				new CharSequence[] { "Square (round inner corner)", "Square (round inner corner V2)",
+						"Square (square inner corner)", "Square (line corner)" }));
 
 		patternProperties.put("Stars", new PatternProperties(true, true, false, true, true, true, //
 				new CharSequence[] { "Nomral", "Spikey", "Star Circle", "Mixed" }));

@@ -92,6 +92,7 @@ import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath.SMILEY_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.SquareCornered;
+import de.geithonline.wallpaperdesigner.shapes.SquareCornered.CORNERED_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
@@ -187,6 +188,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Stars":
 			drawStar(x, y, paint, radius);
+			break;
+		case "Square":
+			drawSquare(x, y, paint, radius);
 			break;
 		case "Text":
 			drawText(x, y, paint, radius * 2, index);
@@ -1556,7 +1560,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 17);
+			final int nr = getRandomInt(0, 16);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1642,11 +1646,49 @@ public abstract class WPStylePattern extends WPStyle {
 		case "R2D2":
 			path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.R2D2);
 			break;
-		case "V17":
-		case "Cornered Square":
-			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean());
-			break;
+		}
+		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		// Glossy
+		if (Settings.isGlossy()) {
+			drawGlossyPath(x, y, paint, radius, path);
+		}
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
 
+	protected void drawSquare(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 4);
+			variant = "V" + nr;
+		}
+		drawSquare(x, y, paint, radius, variant);
+	}
+
+	protected void drawSquare(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Square (round inner corner)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUND);
+			break;
+		case "V2":
+		case "Square (square inner corner)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.RECT);
+			break;
+		case "V3":
+		case "Square (line corner)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.LINE);
+			break;
+		case "V4":
+		case "Square (round inner corner V2)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUND2);
+			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
