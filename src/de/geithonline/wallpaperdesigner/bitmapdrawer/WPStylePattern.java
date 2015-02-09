@@ -1689,6 +1689,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Square (round inner corner V2)":
 			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUND2);
 			break;
+		case "V5":
+		case "Square (circle corner)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CIRCLE);
+			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);

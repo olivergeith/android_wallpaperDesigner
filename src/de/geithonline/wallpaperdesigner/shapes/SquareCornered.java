@@ -2,12 +2,13 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 
 public class SquareCornered extends Path {
 
 	public enum CORNERED_STYLE {
-		ROUND, ROUND2, RECT, LINE;
+		ROUND, ROUND2, RECT, LINE, CIRCLE;
 	}
 
 	/**
@@ -25,6 +26,9 @@ public class SquareCornered extends Path {
 			break;
 		case ROUND2:
 			drawSquareROUND2(center, radius, filled);
+			break;
+		case CIRCLE:
+			drawSquareCIRCLE(center, radius, filled);
 			break;
 		case RECT:
 			drawSquareRECT(center, radius, filled);
@@ -84,7 +88,7 @@ public class SquareCornered extends Path {
 		close();
 
 		if (!filled) {
-			final Path path = new SquareCornered(center, radius / 2, true, CORNERED_STYLE.ROUND);
+			final Path path = new SquareCornered(center, radius / 2, true, CORNERED_STYLE.ROUND2);
 			PathHelper.mirrorPathLeftRight(center.x, center.y, path);
 			addPath(path);
 		}
@@ -137,6 +141,48 @@ public class SquareCornered extends Path {
 
 		if (!filled) {
 			final Path path = new SquareCornered(center, radius / 2, true, CORNERED_STYLE.RECT);
+			PathHelper.mirrorPathLeftRight(center.x, center.y, path);
+			addPath(path);
+		}
+
+	}
+
+	private void drawSquareCIRCLE(final PointF center, final float radius, final boolean filled) {
+		final float raster = radius / 3;
+		final RectF oval = new RectF();
+
+		moveTo(center.x - 2 * raster, center.y - 3 * raster);
+		lineTo(center.x + 2 * raster, center.y - 3 * raster);
+		oval.left = center.x + 1 * raster;
+		oval.right = center.x + 3 * raster;
+		oval.top = center.y - 3 * raster;
+		oval.bottom = center.y - 1 * raster;
+		arcTo(oval, 270, -270);
+
+		lineTo(center.x + 3 * raster, center.y + 2 * raster);
+		oval.left = center.x + 1 * raster;
+		oval.right = center.x + 3 * raster;
+		oval.top = center.y + 1 * raster;
+		oval.bottom = center.y + 3 * raster;
+		arcTo(oval, 0, -270);
+
+		lineTo(center.x - 2 * raster, center.y + 3 * raster);
+		oval.left = center.x - 3 * raster;
+		oval.right = center.x - 1 * raster;
+		oval.top = center.y + 1 * raster;
+		oval.bottom = center.y + 3 * raster;
+		arcTo(oval, 90, -270);
+
+		lineTo(center.x - 3 * raster, center.y - 2 * raster);
+		oval.left = center.x - 3 * raster;
+		oval.right = center.x - 1 * raster;
+		oval.top = center.y - 3 * raster;
+		oval.bottom = center.y - 1 * raster;
+		arcTo(oval, 180, -270);
+		close();
+
+		if (!filled) {
+			final Path path = new SquareCornered(center, radius / 2, true, CORNERED_STYLE.CIRCLE);
 			PathHelper.mirrorPathLeftRight(center.x, center.y, path);
 			addPath(path);
 		}
