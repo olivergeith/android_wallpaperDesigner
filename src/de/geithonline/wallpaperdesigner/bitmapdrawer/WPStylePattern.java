@@ -1675,23 +1675,35 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Square (round inner corner)":
-			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUND);
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_ROUND);
 			break;
 		case "V2":
 		case "Square (square inner corner)":
-			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.RECT);
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_RECT);
 			break;
 		case "V3":
 		case "Square (line corner)":
-			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.LINE);
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.DIAGONAL_LINE);
 			break;
 		case "V4":
 		case "Square (round inner corner V2)":
-			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUND2);
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_ROUND2);
 			break;
 		case "V5":
 		case "Square (circle corner)":
 			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CIRCLE);
+			break;
+		case "V6":
+		case "Square (outer circle corner)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.OUTER_CIRCLE);
+			break;
+		case "V7":
+		case "Square (rounded)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUNDED);
+			break;
+		case "V8":
+		case "Square (castel)":
+			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CASTEL);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

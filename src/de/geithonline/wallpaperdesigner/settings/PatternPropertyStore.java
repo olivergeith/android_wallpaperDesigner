@@ -116,7 +116,8 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Square", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Square (round inner corner)", "Square (round inner corner V2)",
-						"Square (square inner corner)", "Square (line corner)", "Square (circle corner)" }));
+						"Square (rounded)", "Square (square inner corner)", "Square (line corner)",
+						"Square (circle corner)", "Square (outer circle corner)", "Square (castel)" }));
 
 		patternProperties.put("Stars", new PatternProperties(true, true, false, true, true, true, //
 				new CharSequence[] { "Nomral", "Spikey", "Star Circle", "Mixed" }));
