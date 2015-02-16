@@ -84,7 +84,7 @@ public class SquareCornered extends Path {
 		close();
 
 		if (!filled) {
-			final Path path = new SquareCornered(center, radius / 2, true, CORNERED_STYLE.CIRCLE);
+			final Path path = new SquareCornered(center, radius / 2, true, CORNERED_STYLE.INNER_ROUND);
 			PathHelper.mirrorPathLeftRight(center.x, center.y, path);
 			addPath(path);
 		}
@@ -178,6 +178,7 @@ public class SquareCornered extends Path {
 
 	private void drawSquareCASTEL(final PointF center, final float radius, final boolean filled) {
 		final float raster = radius / 3;
+		final float inner = 2.5f;
 		moveTo(center.x - 2 * raster, center.y - 3 * raster);
 		lineTo(center.x - 2 * raster, center.y - 2.5f * raster);
 		lineTo(center.x + 2 * raster, center.y - 2.5f * raster);

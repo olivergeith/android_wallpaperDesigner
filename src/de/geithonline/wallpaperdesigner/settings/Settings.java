@@ -215,6 +215,13 @@ public class Settings {
 		return prefs.getBoolean(KEY_PATTERN_BLUR, false);
 	}
 
+	public static boolean isRandomStartwinkel() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean("ramdomStartWinkel", true);
+	}
+
 	public static boolean isUpsideDown() {
 		if (prefs == null) {
 			return false;

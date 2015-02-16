@@ -46,6 +46,14 @@
         android:key="blurPatterns"
         android:title="@string/blurPatterns" />
 
+    
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="ramdomStartWinkel"
+        android:summary="@string/ramdomStartWinkelSummary"
+        android:title="@string/ramdomStartWinkel" />
+    
+    
     <!--
     <Preference
         android:icon="@drawable/about"

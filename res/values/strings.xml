@@ -106,4 +106,10 @@
     <string name="dropShadowOffsetY">Y-Offset of Dropshadow</string>
     <string name="loadColors">Restore Colors from other Design</string>
     <string name="loadColorsSummary">Restore ONLY colors from another Design</string>
+    <string name="ramdomStartWinkel">Random starting-angle</string>
+    <string name="ramdomStartWinkelSummary">Can you spot the difference? :-)</string>
+    
+    
+    
+    
 </resources>

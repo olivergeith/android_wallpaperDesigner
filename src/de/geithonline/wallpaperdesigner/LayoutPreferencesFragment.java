@@ -53,10 +53,12 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 		final SeekBarPreference anzahlPatterns = (SeekBarPreference) findPreference("anzahlPatterns");
 		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
 		final CheckBoxPreference upsideDown = (CheckBoxPreference) findPreference("upsideDown");
+		final CheckBoxPreference randomStartWinkel = (CheckBoxPreference) findPreference("ramdomStartWinkel");
 		overlapping.setEnabled(LayoutManagerV2.hasLayoutOverlap(selectedLayout));
 		anzahlPatterns.setEnabled(LayoutManagerV2.hasLayoutAnzahlPattern(selectedLayout));
 		blurring.setEnabled(LayoutManagerV2.hasLayoutBlurring(selectedLayout));
 		upsideDown.setEnabled(LayoutManagerV2.hasLayoutUpsideDown(selectedLayout));
+		randomStartWinkel.setEnabled(LayoutManagerV2.hasLayoutRandomStartwinkel(selectedLayout));
 
 		// Pattern Variants
 		mainlayoutVariants.setEnabled(LayoutManagerV2.hasLayoutVariants(selectedLayout));

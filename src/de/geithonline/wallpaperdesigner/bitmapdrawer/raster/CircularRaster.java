@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.graphics.Point;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class CircularRaster implements IRaster {
@@ -75,7 +76,7 @@ public class CircularRaster implements IRaster {
 		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height);
 
 		final int radiusStep = Math.round(radius * 2 * overlap);
-		final int anzRinge = maximumRadius / radiusStep + 1;
+		final int anzRinge = maximumRadius / radiusStep + 2;
 
 		final Point center = new Point(width / 2, height);
 		points.add(center);
@@ -85,7 +86,11 @@ public class CircularRaster implements IRaster {
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
 			final float winkelProEcke = (float) (Math.PI / ecken) * 2;
 			Log.i("Half Ring RASTER", "Anzahl Rcken = " + ecken);
-			final float startWinkel = (float) (Math.PI / 2);
+			float startWinkel = (float) (Math.PI / 2);
+			if (Settings.isRandomStartwinkel()) {
+				startWinkel = Randomizer.getRandomFloat(0, (float) Math.PI * 2);
+			}
+			// final float startWinkel = (float) (Math.PI / 2);
 			for (int ecke = 0; ecke < ecken; ecke++) {
 
 				final Point p = new Point();
@@ -112,7 +117,10 @@ public class CircularRaster implements IRaster {
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
 			final float winkelProEcke = (float) (Math.PI / ecken) * 2;
 			Log.i("CIRCULAR RASTER", "Anzahl Ecken = " + ecken);
-			final float startWinkel = Randomizer.getRandomFloat(0, (float) Math.PI * 2);
+			float startWinkel = (float) (Math.PI / 2);
+			if (Settings.isRandomStartwinkel()) {
+				startWinkel = Randomizer.getRandomFloat(0, (float) Math.PI * 2);
+			}
 			for (int ecke = 0; ecke < ecken; ecke++) {
 
 				final Point p = new Point();

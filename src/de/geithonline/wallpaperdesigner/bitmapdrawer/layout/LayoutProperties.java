@@ -7,14 +7,17 @@ public class LayoutProperties {
 	private final boolean upsideDown;
 
 	private final CharSequence[] variants;
+	private final boolean randomStartWinkel;
 
-	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean upsideDown, final CharSequence[] variants) {
+	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap,
+			final boolean upsideDown, final boolean randomStartWinkel, final CharSequence[] variants) {
 		super();
 		this.anzahlPatterns = anzahlPatterns;
 		this.blurring = blurring;
 		this.overlap = overlap;
 		this.upsideDown = upsideDown;
 		this.variants = variants;
+		this.randomStartWinkel = randomStartWinkel;
 	}
 
 	public boolean hasAnzahlPatterns() {
@@ -39,6 +42,10 @@ public class LayoutProperties {
 
 	public CharSequence[] getVariants() {
 		return variants;
+	}
+
+	public boolean hasRandomStartWinkel() {
+		return randomStartWinkel;
 	}
 
 }

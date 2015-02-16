@@ -34,17 +34,17 @@ public class LayoutManagerV2 {
 		drawer.put("Material Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_CENTER));
 
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown)
-		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, //
+		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				null));
-		layoutProperties.put("Geometric Grid", new LayoutProperties(false, false, true, true, //
+		layoutProperties.put("Geometric Grid", new LayoutProperties(false, false, true, true, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
-		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, //
+		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
-		layoutProperties.put("Circular", new LayoutProperties(false, false, true, false, //
+		layoutProperties.put("Circular", new LayoutProperties(false, false, true, false, true, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 
-		layoutProperties.put("Half Circle", new LayoutProperties(false, false, true, false, //
+		layoutProperties.put("Half Circle", new LayoutProperties(false, false, true, false, true,//
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 	}
 
@@ -76,6 +76,14 @@ public class LayoutManagerV2 {
 			return false;
 		}
 		return p.hasBlurring();
+	}
+
+	public static boolean hasLayoutRandomStartwinkel(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasRandomStartWinkel();
 	}
 
 	public static boolean hasLayoutOverlap(final String layout) {
