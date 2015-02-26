@@ -45,6 +45,9 @@ public class PatternPropertyStore {
 						"Knife", "Knife V2", "Knife V3", "Cross", "Double Cross", "Sperm", "Virus", "Virus V2",
 						"Long Heart", "Circle Chain", "Circle Chain (upsidedown)" }));
 
+		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
+				new CharSequence[] { "Long Pyramide", "Pyramide" }));
+
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Curvy", "Straigth", "Round", "Peek", "Lovely", "Asymetric", "Mixed" }));

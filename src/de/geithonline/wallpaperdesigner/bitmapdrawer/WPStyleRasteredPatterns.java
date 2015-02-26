@@ -11,7 +11,6 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory.RasterPositioning;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
-import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class WPStyleRasteredPatterns extends WPStylePattern {
@@ -91,7 +90,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 
 			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
 
-			doDropShadow(refbitmap, dropShadowRadius, paint, x, y, pcolor);
+			setupDropShadow(refbitmap, dropShadowRadius, paint, x, y, pcolor);
 
 			drawPattern(x, y, paint, radius, i);
 		}
@@ -100,34 +99,4 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		refbitmap.recycle();
 		return bitmap;
 	}
-
-	public void doDropShadow(final Bitmap refbitmap, final int dropShadowRadius, final Paint paint, final int x,
-			final int y, final int pcolor) {
-
-		final int dX = Settings.getDropShadowOffsetX();
-		final int dY = Settings.getDropShadowOffsetY();
-		switch (Settings.getDropShadowType()) {
-		default:
-		case "No":
-			break;
-		case "Random":
-			final int sx = getRandomInt(0, bWidth - 1);
-			final int sy = getRandomInt(0, bHeight - 1);
-			final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
-			paint.setShadowLayer(dropShadowRadius, dX, dY, scolor);
-			break;
-		case "Opposite":
-			paint.setShadowLayer(dropShadowRadius, dX, dY,
-					getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
-			break;
-		case "Darker":
-			paint.setShadowLayer(dropShadowRadius, dX, dY,
-					ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
-			break;
-		case "Select":
-			paint.setShadowLayer(dropShadowRadius, dX, dY, Settings.getDropShadowColor());
-			break;
-		}
-	}
-
 }

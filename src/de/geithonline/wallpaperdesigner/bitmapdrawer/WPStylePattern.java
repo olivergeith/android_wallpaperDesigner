@@ -1,5 +1,6 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
+import java.util.List;
 import java.util.Locale;
 
 import android.graphics.Bitmap;
@@ -22,6 +23,8 @@ import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STY
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
+import de.geithonline.wallpaperdesigner.shapes.Asymetric3DPath;
+import de.geithonline.wallpaperdesigner.shapes.Asymetric3DPath.ASYMETRIC_3D_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath;
 import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath.ASYMETRIC_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.BatPath;
@@ -146,6 +149,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Geometrical (long) Shapes":
 			drawGeometricMore(x, y, paint, radius);
+			break;
+		case "3D (long) Shapes":
+			draw3DLongShape(x, y, paint, radius);
 			break;
 		case "Rings":
 			drawRing(x, y, paint, radius);
@@ -590,6 +596,62 @@ public abstract class WPStylePattern extends WPStyle {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
+	}
+
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
+	protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius) {
+		final String variant = Settings.getSelectedPatternVariant();
+		draw3DLongShape(x, y, paint, radius, variant);
+	}
+
+	protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		if (x == bWidth / 2 && y == bHeight / 2) {
+			return;
+		}
+		List<Path> pathes;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Long Pyramide":
+			pathes = Asymetric3DPath.getPathList(new PointF(x, y), radius, radius * 6, ASYMETRIC_3D_STYLE.PYRAMIDE);
+			break;
+		case "V2":
+		case "Pyramide":
+			pathes = Asymetric3DPath.getPathList(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.PYRAMIDE);
+			break;
+		}
+
+		final int color = paint.getColor();
+		for (final Path path : pathes) {
+			PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+
+			final int pcolor = Randomizer.randomizeColor(color, 16);
+			paint.setColor(pcolor);
+
+			bitmapCanvas.drawPath(path, paint);
+		}
+		paint.setColor(color);
+		// Outline
+		// for (final Path path : pathes) {
+		// // Outline
+		// if (Settings.isOutline()) {
+		// setupPaintForOutline(paint, radius);
+		// bitmapCanvas.drawPath(path, paint);
+		// }
+		// }
+
+		// Outline
+		final Path path = new Path();
+		for (final Path p : pathes) {
+			path.addPath(p);
+		}
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+
 	}
 
 	// #########################################################################################
@@ -2471,4 +2533,35 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		paint.setShader(null);
 	}
+
+	public void setupDropShadow(final Bitmap refbitmap, final int dropShadowRadius, final Paint paint, final int x,
+			final int y, final int pcolor) {
+
+		final int dX = Settings.getDropShadowOffsetX();
+		final int dY = Settings.getDropShadowOffsetY();
+		switch (Settings.getDropShadowType()) {
+		default:
+		case "No":
+			paint.setShadowLayer(0, 0, 0, Color.BLACK);
+			break;
+		case "Random":
+			final int sx = getRandomInt(0, bWidth - 1);
+			final int sy = getRandomInt(0, bHeight - 1);
+			final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
+			paint.setShadowLayer(dropShadowRadius, dX, dY, scolor);
+			break;
+		case "Opposite":
+			paint.setShadowLayer(dropShadowRadius, dX, dY,
+					getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+			break;
+		case "Darker":
+			paint.setShadowLayer(dropShadowRadius, dX, dY,
+					ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
+			break;
+		case "Select":
+			paint.setShadowLayer(dropShadowRadius, dX, dY, Settings.getDropShadowColor());
+			break;
+		}
+	}
+
 }
