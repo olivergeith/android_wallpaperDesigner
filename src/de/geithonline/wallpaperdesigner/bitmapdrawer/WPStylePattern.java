@@ -1,6 +1,5 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
-import java.util.List;
 import java.util.Locale;
 
 import android.graphics.Bitmap;
@@ -602,56 +601,51 @@ public abstract class WPStylePattern extends WPStyle {
 	// ----------------
 	// #########################################################################################
 	protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius) {
-		final String variant = Settings.getSelectedPatternVariant();
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 6);
+			variant = "V" + nr;
+		}
 		draw3DLongShape(x, y, paint, radius, variant);
 	}
 
 	protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius, final String variante) {
-		if (x == bWidth / 2 && y == bHeight / 2) {
-			return;
-		}
-		List<Path> pathes;
+		Path path;
 		switch (variante) {
 		default:
 		case "V1":
 		case "Long Pyramide":
-			pathes = Asymetric3DPath.getPathList(new PointF(x, y), radius, radius * 6, ASYMETRIC_3D_STYLE.PYRAMIDE);
+			path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.PYRAMIDE);
 			break;
 		case "V2":
 		case "Pyramide":
-			pathes = Asymetric3DPath.getPathList(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.PYRAMIDE);
+			path = new Asymetric3DPath(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.PYRAMIDE);
+			break;
+		case "V3":
+		case "Long Cube":
+			path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.CUBE);
+			break;
+		case "V4":
+		case "Cube":
+			path = new Asymetric3DPath(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.CUBE);
+			break;
+		case "V5":
+		case "Long Cone":
+			path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.CONE);
+			break;
+		case "V6":
+		case "Cone":
+			path = new Asymetric3DPath(new PointF(x, y), radius, radius * 3, ASYMETRIC_3D_STYLE.CONE);
 			break;
 		}
 
-		final int color = paint.getColor();
-		for (final Path path : pathes) {
-			PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
-
-			final int pcolor = Randomizer.randomizeColor(color, 16);
-			paint.setColor(pcolor);
-
-			bitmapCanvas.drawPath(path, paint);
-		}
-		paint.setColor(color);
+		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
 		// Outline
-		// for (final Path path : pathes) {
-		// // Outline
-		// if (Settings.isOutline()) {
-		// setupPaintForOutline(paint, radius);
-		// bitmapCanvas.drawPath(path, paint);
-		// }
-		// }
-
-		// Outline
-		final Path path = new Path();
-		for (final Path p : pathes) {
-			path.addPath(p);
-		}
 		if (Settings.isOutline()) {
 			setupPaintForOutline(paint, radius);
 			bitmapCanvas.drawPath(path, paint);
 		}
-
 	}
 
 	// #########################################################################################

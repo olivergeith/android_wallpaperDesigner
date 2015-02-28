@@ -46,7 +46,7 @@ public class PatternPropertyStore {
 						"Long Heart", "Circle Chain", "Circle Chain (upsidedown)" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
-				new CharSequence[] { "Long Pyramide", "Pyramide" }));
+				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));
 
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //

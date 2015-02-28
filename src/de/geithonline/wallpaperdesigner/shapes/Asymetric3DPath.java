@@ -1,55 +1,87 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
-public class Asymetric3DPath {
+public class Asymetric3DPath extends Path {
 
 	public enum ASYMETRIC_3D_STYLE {
-		PYRAMIDE;
+		PYRAMIDE, CUBE, CONE;
 	}
 
-	private static final List<Path> pathes = new ArrayList<Path>();
-
-	public static List<Path> getPathList(final PointF center, final float radius, final int height,
-			final ASYMETRIC_3D_STYLE style) {
-		pathes.clear();
+	public Asymetric3DPath(final PointF center, final float radius, final int height, final ASYMETRIC_3D_STYLE style) {
 		switch (style) {
 		default:
 		case PYRAMIDE:
-			return drawPyramide(center, radius, height);
+			drawPyramide(center, radius, height);
+			break;
+		case CUBE:
+			drawWuerfel(center, radius, height);
+			break;
+		case CONE:
+			drawKegel(center, radius, height);
+			break;
 		}
 
 	}
 
-	private static List<Path> drawPyramide(final PointF center, final float radius, final int height) {
+	private void drawPyramide(final PointF center, final float radius, final int height) {
+		final float raster = radius / 100;
+		moveTo(center.x - raster / 2, center.y);
+		lineTo(center.x - radius, center.y - height + radius / 2);
+		lineTo(center.x - raster / 2, center.y - height + radius);
+		close();
 
-		final Path p1 = new Path();
-		p1.moveTo(center.x, center.y);
-		p1.lineTo(center.x - radius, center.y - height + radius / 2);
-		p1.lineTo(center.x, center.y - height + radius);
-		p1.close();
-		pathes.add(p1);
+		moveTo(center.x + raster / 2, center.y);
+		lineTo(center.x + raster / 2, center.y - height + radius);
+		lineTo(center.x + radius, center.y - height + radius / 2);
+		close();
 
-		final Path p2 = new Path();
-		p2.moveTo(center.x, center.y);
-		p2.lineTo(center.x, center.y - height + radius);
-		p2.lineTo(center.x + radius, center.y - height + radius / 2);
-		p2.close();
-		pathes.add(p2);
+		moveTo(center.x, center.y - height + radius - raster);
+		lineTo(center.x - radius, center.y - height + radius / 2 - raster);
+		lineTo(center.x, center.y - height);
+		lineTo(center.x + radius, center.y - height + radius / 2 - raster);
+		close();
+	}
 
-		final Path p3 = new Path();
-		p3.moveTo(center.x, center.y - height + radius);
-		p3.lineTo(center.x - radius, center.y - height + radius / 2);
-		p3.lineTo(center.x, center.y - height);
-		p3.lineTo(center.x + radius, center.y - height + radius / 2);
-		p3.close();
-		pathes.add(p3);
+	private void drawWuerfel(final PointF center, final float radius, final int height) {
+		final float raster = radius / 100;
+		moveTo(center.x - raster / 2, center.y);
+		lineTo(center.x - radius, center.y - radius / 2);
+		lineTo(center.x - radius, center.y - height + radius / 2);
+		lineTo(center.x - raster / 2, center.y - height + radius);
+		close();
 
-		return pathes;
+		moveTo(center.x + raster / 2, center.y);
+		lineTo(center.x + raster / 2, center.y - height + radius);
+		lineTo(center.x + radius, center.y - height + radius / 2);
+		lineTo(center.x + radius, center.y - radius / 2);
+		close();
+
+		moveTo(center.x, center.y - height + radius - raster);
+		lineTo(center.x - radius, center.y - height + radius / 2 - raster);
+		lineTo(center.x, center.y - height);
+		lineTo(center.x + radius, center.y - height + radius / 2 - raster);
+		close();
+	}
+
+	private void drawKegel(final PointF center, final float radius, final int height) {
+		final RectF oval = new RectF();
+		oval.left = center.x - radius;
+		oval.right = center.x + radius;
+		oval.top = center.y - height;
+		oval.bottom = center.y - height + radius;
+		moveTo(center.x, center.y);
+		lineTo(center.x - radius, center.y - height + radius / 2);
+		arcTo(oval, 180, -180);
+		close();
+
+		oval.left = center.x - radius;
+		oval.right = center.x + radius;
+		oval.top = center.y - height;
+		oval.bottom = center.y - height + radius;
+		addOval(oval, Direction.CW);
 	}
 
 }
