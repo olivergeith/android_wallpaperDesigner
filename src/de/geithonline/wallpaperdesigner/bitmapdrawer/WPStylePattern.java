@@ -111,6 +111,7 @@ import de.geithonline.wallpaperdesigner.shapes.VirusPath4;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath5;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath6;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath7;
+import de.geithonline.wallpaperdesigner.shapes.VirusPath8;
 import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
@@ -840,7 +841,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawVirus(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 7);
+			final int nr = getRandomInt(0, 8);
 			variant = "V" + nr;
 		}
 
@@ -871,6 +872,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "V7":
 			path = new VirusPath7(new Point(x, y), radius, getFilledBoolean());
+			break;
+		case "V8":
+			path = new VirusPath8(new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

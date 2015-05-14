@@ -133,7 +133,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Sun", "Cloud", "Mixed" }));
 
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "Mixed" }));
+				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "Mixed" }));
 
 		patternProperties.put("Xmas", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Tree" }));
