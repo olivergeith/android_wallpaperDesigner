@@ -108,6 +108,8 @@
     <string name="loadColorsSummary">Restore ONLY colors from another Design</string>
     <string name="ramdomStartWinkel">Random starting-angle</string>
     <string name="ramdomStartWinkelSummary">Can you spot the difference? :-)</string>
+    <string name="blurrAmount1">Blurr-Strength on first blurr-Stage</string>
+    <string name="blurrAmount2">Blurr-Strength on second blurr-Stage</string>
     
     
     

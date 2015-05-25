@@ -60,8 +60,8 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 			}
 		}
 
-		final int blurLevel2 = anzahlPatterns * 6 / 10;
-		final int blurLevel3 = anzahlPatterns * 8 / 10;
+		final int blurLevel1 = anzahlPatterns * 6 / 10;
+		final int blurLevel2 = anzahlPatterns * 8 / 10;
 
 		task.settingMax(anzahlPatterns);
 		// Zeichnen
@@ -95,13 +95,13 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 			drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
+				if (i == blurLevel1) {
+					System.gc();
+					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount1(), true);
+				}
 				if (i == blurLevel2) {
 					System.gc();
-					bitmap = BitmapBlurrer.doBlur(bitmap, 5, true);
-				}
-				if (i == blurLevel3) {
-					System.gc();
-					bitmap = BitmapBlurrer.doBlur(bitmap, 3, true);
+					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount2(), true);
 				}
 			}
 		}

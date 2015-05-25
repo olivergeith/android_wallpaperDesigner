@@ -46,6 +46,28 @@
         android:key="blurPatterns"
         android:title="@string/blurPatterns" />
 
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:dependency="blurPatterns"
+        android:defaultValue="8"
+        android:dialogMessage="@string/blurrAmount1"
+        android:key="blurrAmount1"
+        android:summary="%1$d (the bigger the number, the more blurring)"
+        android:title="@string/blurrAmount1"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="2"
+        seekbarpreference:stepValue="1" />
+
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:dependency="blurPatterns"
+        android:defaultValue="3"
+        android:dialogMessage="@string/blurrAmount2"
+        android:key="blurrAmount2"
+        android:summary="%1$d (the bigger the number, the more blurring)"
+        android:title="@string/blurrAmount2"
+        seekbarpreference:maxValue="50"
+        seekbarpreference:minValue="1"
+        seekbarpreference:stepValue="1" />
+    
     
     <CheckBoxPreference
         android:defaultValue="true"

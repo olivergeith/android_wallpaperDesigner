@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_BLURR_AMOUNT_1 = "blurrAmount1";
+	public static final String KEY_BLURR_AMOUNT_2 = "blurrAmount2";
 	public static final String KEY_OUTLINE_THICKNESS_LIMIT = "outlineThicknessLimit";
 	public static final String KEY_OUTLINE_THICKNESS_ADJUST = "outlineThicknessAdjust";
 	public static final String KEY_GLOSSY_GLOW_STYLE = "glowStyle";
@@ -213,6 +215,20 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(KEY_PATTERN_BLUR, false);
+	}
+
+	public static int getBlurrAmount1() {
+		if (prefs == null) {
+			return 8;
+		}
+		return prefs.getInt(KEY_BLURR_AMOUNT_1, 8);
+	}
+
+	public static int getBlurrAmount2() {
+		if (prefs == null) {
+			return 3;
+		}
+		return prefs.getInt(KEY_BLURR_AMOUNT_2, 3);
 	}
 
 	public static boolean isRandomStartwinkel() {
@@ -808,6 +824,9 @@ public class Settings {
 			prefs.edit().putString(KEY_IMAGE_FORMAT, "jpg").commit();
 			prefs.edit().putInt(KEY_JPG_COMPRESSION, 95).commit();
 			prefs.edit().putBoolean(KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
+			prefs.edit().putInt(KEY_BLURR_AMOUNT_1, 8).commit();
+			prefs.edit().putInt(KEY_BLURR_AMOUNT_2, 3).commit();
+
 		}
 	}
 
