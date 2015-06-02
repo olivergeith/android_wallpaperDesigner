@@ -46,28 +46,83 @@
         android:key="blurPatterns"
         android:title="@string/blurPatterns" />
 
-    <de.geithonline.android.basics.preferences.SeekBarPreference
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
         android:dependency="blurPatterns"
-        android:defaultValue="8"
-        android:dialogMessage="@string/blurrAmount1"
-        android:key="blurrAmount1"
-        android:summary="%1$d (the bigger the number, the more blurring)"
-        android:title="@string/blurrAmount1"
-        seekbarpreference:maxValue="100"
-        seekbarpreference:minValue="2"
-        seekbarpreference:stepValue="1" />
-
-    <de.geithonline.android.basics.preferences.SeekBarPreference
-        android:dependency="blurPatterns"
-        android:defaultValue="3"
-        android:dialogMessage="@string/blurrAmount2"
-        android:key="blurrAmount2"
-        android:summary="%1$d (the bigger the number, the more blurring)"
-        android:title="@string/blurrAmount2"
-        seekbarpreference:maxValue="50"
-        seekbarpreference:minValue="1"
-        seekbarpreference:stepValue="1" />
+        android:key="blurrScreen"
+        android:title="Blurring Options..." >
+        <PreferenceCategory android:title="Blurring Strength" />
     
+		    <de.geithonline.android.basics.preferences.SeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="8"
+		        android:dialogMessage="@string/blurrAmount1"
+		        android:key="blurrAmount1"
+		        android:summary="%1$d (the bigger the number, the more blurring)"
+		        android:title="@string/blurrAmount1"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="2"
+		        seekbarpreference:stepValue="1" />
+		
+		    <de.geithonline.android.basics.preferences.SeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="3"
+		        android:dialogMessage="@string/blurrAmount2"
+		        android:key="blurrAmount2"
+		        android:summary="%1$d (the bigger the number, the more blurring)"
+		        android:title="@string/blurrAmount2"
+		        seekbarpreference:maxValue="50"
+		        seekbarpreference:minValue="1"
+		        seekbarpreference:stepValue="1" />
+
+		    <de.geithonline.android.basics.preferences.SeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="3"
+		        android:dialogMessage="@string/blurrAmount3"
+		        android:key="blurrAmount3"
+		        android:summary="%1$d (the bigger the number, the more blurring)"
+		        android:title="@string/blurrAmount3"
+		        seekbarpreference:maxValue="50"
+		        seekbarpreference:minValue="1"
+		        seekbarpreference:stepValue="1" />
+        
+        <PreferenceCategory android:title="Blurring Stages" />
+		    		    
+		    <de.geithonline.android.basics.preferences.SeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="60"
+		        android:dialogMessage="@string/blurrStage1"
+		        android:key="blurrStage1"
+		        android:summary="1. blurring after drawing %1$d percent of the patterns"
+		        android:title="@string/blurrStage1"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+
+		    <de.geithonline.android.basics.preferences.SeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="70"
+		        android:dialogMessage="@string/blurrStage2"
+		        android:key="blurrStage2"
+		        android:summary="2. blurring after drawing %1$d percent of the patterns"
+		        android:title="@string/blurrStage2"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+		    
+		    <de.geithonline.android.basics.preferences.SeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="80"
+		        android:dialogMessage="@string/blurrStage3"
+		        android:key="blurrStage3"
+		        android:summary="3. blurring after drawing %1$d percent of the patterns"
+		        android:title="@string/blurrStage3"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+		    		    		    
+    </PreferenceScreen>
     
     <CheckBoxPreference
         android:defaultValue="true"

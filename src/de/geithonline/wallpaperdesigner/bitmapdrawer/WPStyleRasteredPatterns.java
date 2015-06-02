@@ -11,6 +11,7 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory.RasterPositioning;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
+import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class WPStyleRasteredPatterns extends WPStylePattern {
@@ -64,6 +65,11 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
 			MaterialPath.initFlippy();
 		}
+
+		final int blurLevel1 = raster.getAnzahlPatterns() * Settings.getBlurrStage1() / 100;
+		final int blurLevel2 = raster.getAnzahlPatterns() * Settings.getBlurrStage2() / 100;
+		final int blurLevel3 = raster.getAnzahlPatterns() * Settings.getBlurrStage3() / 100;
+
 		// Zeichnen
 		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
 			if (i % 100 == 0) {
@@ -93,6 +99,22 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			setupDropShadow(refbitmap, dropShadowRadius, paint, x, y, pcolor);
 
 			drawPattern(x, y, paint, radius, i);
+
+			if (Settings.isBlurPatterns()) {
+				if (i == blurLevel1) {
+					System.gc();
+					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount1(), true);
+				}
+				if (i == blurLevel2) {
+					System.gc();
+					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount2(), true);
+				}
+				if (i == blurLevel3) {
+					System.gc();
+					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount3(), true);
+				}
+			}
+
 		}
 
 		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern() + "/" + Settings.getSelectedPatternVariant());

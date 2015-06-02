@@ -36,15 +36,15 @@ public class LayoutManagerV2 {
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				null));
-		layoutProperties.put("Geometric Grid", new LayoutProperties(false, false, true, true, false, //
+		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
-		layoutProperties.put("Material Grid", new LayoutProperties(false, false, true, false, false, //
+		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
-		layoutProperties.put("Circular", new LayoutProperties(false, false, true, false, true, //
+		layoutProperties.put("Circular", new LayoutProperties(false, true, true, false, true, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 
-		layoutProperties.put("Half Circle", new LayoutProperties(false, false, true, false, true,//
+		layoutProperties.put("Half Circle", new LayoutProperties(false, true, true, false, true,//
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 	}
 

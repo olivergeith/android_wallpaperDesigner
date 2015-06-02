@@ -10,8 +10,12 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_BLURR_STAGE_1 = "blurrStage1";
+	public static final String KEY_BLURR_STAGE_2 = "blurrStage2";
+	public static final String KEY_BLURR_STAGE_3 = "blurrStage3";
 	public static final String KEY_BLURR_AMOUNT_1 = "blurrAmount1";
 	public static final String KEY_BLURR_AMOUNT_2 = "blurrAmount2";
+	public static final String KEY_BLURR_AMOUNT_3 = "blurrAmount3";
 	public static final String KEY_OUTLINE_THICKNESS_LIMIT = "outlineThicknessLimit";
 	public static final String KEY_OUTLINE_THICKNESS_ADJUST = "outlineThicknessAdjust";
 	public static final String KEY_GLOSSY_GLOW_STYLE = "glowStyle";
@@ -219,16 +223,44 @@ public class Settings {
 
 	public static int getBlurrAmount1() {
 		if (prefs == null) {
-			return 8;
+			return 50;
 		}
-		return prefs.getInt(KEY_BLURR_AMOUNT_1, 8);
+		return prefs.getInt(KEY_BLURR_AMOUNT_1, 50);
 	}
 
 	public static int getBlurrAmount2() {
 		if (prefs == null) {
-			return 3;
+			return 20;
 		}
-		return prefs.getInt(KEY_BLURR_AMOUNT_2, 3);
+		return prefs.getInt(KEY_BLURR_AMOUNT_2, 20);
+	}
+
+	public static int getBlurrAmount3() {
+		if (prefs == null) {
+			return 8;
+		}
+		return prefs.getInt(KEY_BLURR_AMOUNT_3, 8);
+	}
+
+	public static int getBlurrStage1() {
+		if (prefs == null) {
+			return 60;
+		}
+		return prefs.getInt(KEY_BLURR_STAGE_1, 60);
+	}
+
+	public static int getBlurrStage2() {
+		if (prefs == null) {
+			return 70;
+		}
+		return prefs.getInt(KEY_BLURR_STAGE_2, 70);
+	}
+
+	public static int getBlurrStage3() {
+		if (prefs == null) {
+			return 80;
+		}
+		return prefs.getInt(KEY_BLURR_STAGE_3, 80);
 	}
 
 	public static boolean isRandomStartwinkel() {
@@ -824,9 +856,12 @@ public class Settings {
 			prefs.edit().putString(KEY_IMAGE_FORMAT, "jpg").commit();
 			prefs.edit().putInt(KEY_JPG_COMPRESSION, 95).commit();
 			prefs.edit().putBoolean(KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
-			prefs.edit().putInt(KEY_BLURR_AMOUNT_1, 8).commit();
-			prefs.edit().putInt(KEY_BLURR_AMOUNT_2, 3).commit();
-
+			prefs.edit().putInt(KEY_BLURR_AMOUNT_1, 80).commit();
+			prefs.edit().putInt(KEY_BLURR_AMOUNT_2, 20).commit();
+			prefs.edit().putInt(KEY_BLURR_AMOUNT_3, 8).commit();
+			prefs.edit().putInt(KEY_BLURR_STAGE_1, 60).commit();
+			prefs.edit().putInt(KEY_BLURR_STAGE_2, 70).commit();
+			prefs.edit().putInt(KEY_BLURR_STAGE_3, 80).commit();
 		}
 	}
 
