@@ -83,6 +83,10 @@ public class Settings {
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
 	public static final String DEFAULT_SHARE_TEXT = "Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner";
 
+	public static boolean isLimit2Canvas() {
+		return false;
+	}
+
 	public static String getShareText() {
 		if (prefs == null) {
 			return DEFAULT_SHARE_TEXT;
