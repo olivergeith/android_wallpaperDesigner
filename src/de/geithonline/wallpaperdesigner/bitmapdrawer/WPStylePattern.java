@@ -1342,6 +1342,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Skyline":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.SKYLINE);
 			break;
+		case "Pyramide Skyline":
+			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+					MATERIAL_TYPE.PYRAMIDE_SKYLINE);
+			break;
 		case "Edgy Bars":
 			path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
 					MATERIAL_TYPE.EDGY_BARS);
