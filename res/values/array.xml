@@ -18,6 +18,7 @@
         <item >Random Layout</item>
         <item >Geometric Grid</item>
         <item >Circular</item>
+        <item >Spiral</item>
         <item >Half Circle</item>
         <item >Material Grid</item>
         </string-array>

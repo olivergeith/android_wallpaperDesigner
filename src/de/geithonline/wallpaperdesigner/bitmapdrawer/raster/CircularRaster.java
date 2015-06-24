@@ -168,7 +168,14 @@ public class CircularRaster implements IRaster {
 
 				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke) * rp);
 				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke) * rp);
-				points.add(p);
+				// Limitieren auf punkte innerhalb des Canvas
+				if (Settings.isLimit2Canvas()) {
+					if (p.x > 0 && p.x < width && p.y > 0 && p.y < height) {
+						points.add(p);
+					}
+				} else {
+					points.add(p);
+				}
 			}
 		}
 	}

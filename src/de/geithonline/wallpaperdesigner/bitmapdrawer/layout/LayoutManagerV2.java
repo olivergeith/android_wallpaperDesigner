@@ -24,6 +24,9 @@ public class LayoutManagerV2 {
 		drawer.put("Circular (Inner to Outer)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_INNER));
 		drawer.put("Circular (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_OUTER));
 		drawer.put("Circular (Random)", new WPStyleRasteredPatterns(RasterPositioning.CIRCULAR_RANDOM));
+		drawer.put("Spiral (Inner to Outer)", new WPStyleRasteredPatterns(RasterPositioning.SPIRAL_INNER));
+		drawer.put("Spiral (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.SPIRAL_OUTER));
+		drawer.put("Spiral (Random)", new WPStyleRasteredPatterns(RasterPositioning.SPIRAL_RANDOM));
 		drawer.put("Half Circle (Inner to Outer)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_INNER));
 		drawer.put("Half Circle (Outer to Inner)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_OUTER));
 		drawer.put("Half Circle (Random)", new WPStyleRasteredPatterns(RasterPositioning.HALF_CIRCULAR_RANDOM));
@@ -42,6 +45,8 @@ public class LayoutManagerV2 {
 		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 		layoutProperties.put("Circular", new LayoutProperties(false, true, true, false, true, //
+				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
+		layoutProperties.put("Spiral", new LayoutProperties(false, true, true, false, true, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 
 		layoutProperties.put("Half Circle", new LayoutProperties(false, true, true, false, true,//

@@ -13,7 +13,7 @@ public class RasterFactory {
 		GEOMETRIC_RANDOM, GEOMETRIC_BOOK, GEOMETRIC_BOOK_REVERSE, GEOMETRIC_TOWER, GEOMETRIC_CENTER, //
 		MATERIAL_RANDOM, MATERIAL_BOOK, MATERIAL_BOOK_REVERSE, MATERIAL_TOWER, MATERIAL_CENTER, //
 		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER, //
-		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER;
+		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER, SPIRAL_RANDOM, SPIRAL_INNER, SPIRAL_OUTER;
 	}
 
 	public static IRaster getRaster(final RasterPositioning positioning, final int width, final int height,
@@ -34,6 +34,16 @@ public class RasterFactory {
 		case GEOMETRIC_CENTER:
 			return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.CENTER,
 					Settings.isUpsideDown());
+
+		case SPIRAL_RANDOM:
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM,
+					CIRCLE_TYPE.SPIRAL);
+		case SPIRAL_INNER:
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER,
+					CIRCLE_TYPE.SPIRAL);
+		case SPIRAL_OUTER:
+			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER,
+					CIRCLE_TYPE.SPIRAL);
 
 		case CIRCULAR_RANDOM:
 			return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM,
