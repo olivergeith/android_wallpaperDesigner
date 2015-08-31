@@ -16,8 +16,7 @@ public class LayoutManagerV2 {
 	static {
 		drawer.put("Random Layout", new WPStyleRandomPatterns());
 		drawer.put("Geometric Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_BOOK));
-		drawer.put("Geometric Grid (Book Reverse)", new WPStyleRasteredPatterns(
-				RasterPositioning.GEOMETRIC_BOOK_REVERSE));
+		drawer.put("Geometric Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_BOOK_REVERSE));
 		drawer.put("Geometric Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_TOWER));
 		drawer.put("Geometric Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_CENTER));
 		drawer.put("Geometric Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_RANDOM));
@@ -36,10 +35,19 @@ public class LayoutManagerV2 {
 		drawer.put("Material Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_RANDOM));
 		drawer.put("Material Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_CENTER));
 
+		drawer.put("Hex Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.HEX_BOOK));
+		drawer.put("Hex Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.HEX_BOOK_REVERSE));
+		drawer.put("Hex Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.HEX_TOWER));
+		drawer.put("Hex Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.HEX_CENTER));
+		drawer.put("Hex Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.HEX_RANDOM));
+
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				null));
 		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+
+		layoutProperties.put("Hex Grid", new LayoutProperties(false, true, true, true, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //

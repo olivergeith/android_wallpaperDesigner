@@ -21,6 +21,7 @@
         <item >Spiral</item>
         <item >Half Circle</item>
         <item >Material Grid</item>
+        <item >Hex Grid</item>
         </string-array>
     
     <string-array name="hole">
