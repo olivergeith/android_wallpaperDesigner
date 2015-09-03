@@ -41,6 +41,12 @@ public class LayoutManagerV2 {
 		drawer.put("Hex Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.HEX_CENTER));
 		drawer.put("Hex Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.HEX_RANDOM));
 
+		drawer.put("Diagonal Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_BOOK));
+		drawer.put("Diagonal Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_BOOK_REVERSE));
+		drawer.put("Diagonal Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_TOWER));
+		drawer.put("Diagonal Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_CENTER));
+		drawer.put("Diagonal Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_RANDOM));
+
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				null));
@@ -48,6 +54,9 @@ public class LayoutManagerV2 {
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
 		layoutProperties.put("Hex Grid", new LayoutProperties(false, true, true, true, false, //
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+
+		layoutProperties.put("Diagonal Grid", new LayoutProperties(false, true, true, true, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //
