@@ -33,6 +33,9 @@ public class BackgroundDrawer {
 			case "Radial Gradient":
 			case "Radial Gradient (Half Arch)":
 			case "4 Color Sweep Gradient (Half Arch)":
+			case "4 Color Sweep Gradient (Half Arch)(Mirror)":
+			case "4 Color Sweep Gradient (2x)":
+			case "4 Color Sweep Gradient (3x)":
 			case "4 Color Sweep Gradient":
 				drawLinearGradientBackground(canvas);
 				break;
@@ -112,17 +115,96 @@ public class BackgroundDrawer {
 			paint.setShader(new RadialGradient(width / 2, height, radius, getColors(), getDistances(),
 					Shader.TileMode.MIRROR));
 			break;
-		case "4 Color Sweep Gradient":
+		case "4 Color Sweep Gradient": {
 			final int colorsSweep[] = { Settings.getPatternColor1(), Settings.getPatternColor2(),
 					Settings.getPatternColor3(), Settings.getPatternColor4(), Settings.getPatternColor1() };
 			final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
 			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+		}
 			break;
-		case "4 Color Sweep Gradient (Half Arch)":
+
+		case "4 Color Sweep Gradient (2x)": {
+			final int colorsSweep[] = { //
+			Settings.getPatternColor1(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor4(), //
+					Settings.getPatternColor1(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor4(), //
+					Settings.getPatternColor1() };
+			final float distancesSweep[] = { 0.0f, //
+					0.125f, //
+					0.25f, //
+					0.375f, //
+					0.5f, //
+					0.625f, //
+					0.75f, //
+					0.875f, //
+					1f };
+			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+		}
+			break;
+
+		case "4 Color Sweep Gradient (3x)": {
+			final int colorsSweep[] = { //
+			Settings.getPatternColor1(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor4(), //
+					Settings.getPatternColor1(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor4(), //
+					Settings.getPatternColor1(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor4(), //
+					Settings.getPatternColor1() };
+			final float distancesSweep[] = { 0.0f, //
+					0.0833f, //
+					0.1666f, //
+					0.25f, //
+					0.333f, //
+					0.416f, //
+					0.5f, //
+					0.583f, //
+					0.666f, //
+					0.75f, //
+					0.8333f, //
+					0.916f, //
+					1f };
+			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+		}
+			break;
+
+		case "4 Color Sweep Gradient (Half Arch)": {
 			final int colorsSweep2[] = { Settings.getPatternColor1(), Settings.getPatternColor2(),
 					Settings.getPatternColor3(), Settings.getPatternColor4() };
 			final float distancesSweep2[] = { 0.5f, 0.66f, 0.82f, 1.0f };
 			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
+		}
+			break;
+		case "4 Color Sweep Gradient (Half Arch)(Mirror)": {
+			final int colorsSweep2[] = { //
+			Settings.getPatternColor1(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor4(), //
+					Settings.getPatternColor3(), //
+					Settings.getPatternColor2(), //
+					Settings.getPatternColor1() //
+			};
+			final float distancesSweep2[] = { 0.5f, //
+					0.5833f, //
+					0.6666f, //
+					0.75f, //
+					0.8333f, //
+					0.9156f, //
+					1.0f };
+			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
+		}
 			break;
 		}
 		return paint;
