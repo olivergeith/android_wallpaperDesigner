@@ -704,10 +704,7 @@ public class Settings {
 		if (prefs == null) {
 			return false;
 		}
-		return test.equalsIgnoreCase("4-Color Gradient from corners") //
-				|| test.equalsIgnoreCase("4-Colors in corners")//
-				|| test.equalsIgnoreCase("4 Color Sweep Gradient (Half Arch)")//
-				|| test.equalsIgnoreCase("4 Color Sweep Gradient");
+		return test.startsWith("4");
 	}
 
 	public static int getPatternColor1() {
