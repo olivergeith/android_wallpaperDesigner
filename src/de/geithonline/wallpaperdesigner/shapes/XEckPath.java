@@ -1,7 +1,7 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
+import android.graphics.PointF;
 
 public class XEckPath extends Path {
 
@@ -12,15 +12,15 @@ public class XEckPath extends Path {
 	 * @param rotate
 	 *            0-2pi
 	 */
-	public XEckPath(final int ecken, final Point center, final float rOuter, final float rotate, final boolean filled) {
+	public XEckPath(final int ecken, final PointF center, final float rOuter, final float rotate, final boolean filled) {
 		super();
 		final float angle = (float) (Math.PI / ecken) * 2;
 
 		for (int i = 0; i < ecken; i++) {
 			final float r = rOuter;
-			final Point p = new Point();
-			p.x = (int) (center.x + Math.cos(i * angle + rotate) * r);
-			p.y = (int) (center.y + Math.sin(i * angle + rotate) * r);
+			final PointF p = new PointF();
+			p.x = (float) (center.x + Math.cos(i * angle + rotate) * r);
+			p.y = (float) (center.y + Math.sin(i * angle + rotate) * r);
 			if (i == 0) {
 				moveTo(p.x, p.y);
 			} else {
@@ -31,9 +31,9 @@ public class XEckPath extends Path {
 		if (!filled) {
 			for (int i = 0; i < ecken; i++) {
 				final float r = rOuter / 2;
-				final Point p = new Point();
-				p.x = (int) (center.x + Math.cos(-i * angle + rotate) * r);
-				p.y = (int) (center.y + Math.sin(-i * angle + rotate) * r);
+				final PointF p = new PointF();
+				p.x = (float) (center.x + Math.cos(-i * angle + rotate) * r);
+				p.y = (float) (center.y + Math.sin(-i * angle + rotate) * r);
 				if (i == 0) {
 					moveTo(p.x, p.y);
 				} else {
