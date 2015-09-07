@@ -124,7 +124,8 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Letters", "Numbers", "Custom Text" }));
 
 		patternProperties.put("Weather", new PatternProperties(true, true, false, true, true, true, //
-				new CharSequence[] { "Sun", "Cloud", "Mixed" }));
+				new CharSequence[] { "Sun", "Cloud", "Sun with Flames", "Sun with Flames (Drop Style)", "Sun with Flames (Triangle)",
+						"Sun with Flames (Arrows)", "Sun with Flames (Arrows V2)", "Mixed" }));
 
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "Mixed" }));

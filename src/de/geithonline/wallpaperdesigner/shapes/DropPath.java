@@ -1,16 +1,16 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 
 public class DropPath extends Path {
 
-	public DropPath(final Point center, final float radius) {
+	public DropPath(final PointF center, final float radius) {
 		drawDrop(center, radius);
 	}
 
-	private void drawDrop(final Point center, final float radius) {
+	private void drawDrop(final PointF center, final float radius) {
 		final float raster = radius / 2;
 		final RectF oval = new RectF();
 		oval.left = center.x - 1 * raster;
