@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class FlamePath extends Path {
 
 	public enum FLAME_TYPE {
-		FLAME, TRIANGLE, ARROW_TRIANGLE, ARROW_V2
+		FLAME, TRIANGLE, ARROW_TRIANGLE, ARROW_V2, SHARP_TOOTH
 	}
 
 	public FlamePath(final PointF center, final float radius, final FLAME_TYPE type) {
@@ -25,6 +25,9 @@ public class FlamePath extends Path {
 				break;
 			case ARROW_V2:
 				drawArrowV2(center, radius);
+				break;
+			case SHARP_TOOTH:
+				drawSharpTooth(center, radius);
 				break;
 		}
 	}
@@ -77,6 +80,27 @@ public class FlamePath extends Path {
 
 		// arcTo(oval, 90, -180);
 		lineTo(center.x + 6 * raster, center.y - 0 * raster);
+		close();
+	}
+
+	private void drawSharpTooth(final PointF center, final float radius) {
+		final float raster = radius / 8;
+
+		final RectF oval = new RectF();
+
+		moveTo(center.x, center.y - 2 * raster);
+
+		oval.left = center.x - 6 * raster;
+		oval.right = center.x + 6 * raster;
+		oval.top = center.y - 2 * raster;
+		oval.bottom = center.y + 10 * raster;
+		arcTo(oval, -90, 90);
+		lineTo(center.x + 6 * raster, center.y + 6 * raster);
+		oval.left = center.x - 6 * raster;
+		oval.right = center.x + 6 * raster;
+		oval.top = center.y + 2 * raster;
+		oval.bottom = center.y + 14 * raster;
+		arcTo(oval, 0, -90);
 		close();
 	}
 

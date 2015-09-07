@@ -8,7 +8,7 @@ import de.geithonline.wallpaperdesigner.utils.PathHelper;
 public class SunPath extends Path {
 
 	public enum SUN_TYPE {
-		SUN_V1, SUN_FLAMES, SUN_FLAMES_DROP, SUN_TRIANGLE, SUN_ARROW_TRIANGLES, SUN_ARROW_V2
+		SUN_V1, SUN_FLAMES, SUN_FLAMES_DROP, SUN_TRIANGLE, SUN_ARROW_TRIANGLES, SUN_ARROW_V2, SUN_SHARP_TOOTH
 	}
 
 	/**
@@ -38,6 +38,9 @@ public class SunPath extends Path {
 				break;
 			case SUN_ARROW_V2:
 				drawSunFlames(arms, center, radius, filled, FLAME_TYPE.ARROW_V2);
+				break;
+			case SUN_SHARP_TOOTH:
+				drawSunFlames(arms, center, radius, filled, FLAME_TYPE.SHARP_TOOTH);
 				break;
 		}
 

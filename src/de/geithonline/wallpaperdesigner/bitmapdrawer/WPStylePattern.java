@@ -844,6 +844,10 @@ public abstract class WPStylePattern extends WPStyle {
 			case "Sun with Flames (Arrows V2)":
 				path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(), SUN_TYPE.SUN_ARROW_V2);
 				break;
+			case "V8":
+			case "Sun with Flames (Sharp Tooth)":
+				path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(), SUN_TYPE.SUN_SHARP_TOOTH);
+				break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
