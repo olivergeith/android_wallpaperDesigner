@@ -44,8 +44,8 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 
 		// initializing some values depending on BitmapSize
 		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
-		if (maxRadius < 30) {
-			maxRadius = 30;
+		if (maxRadius < 10) {
+			maxRadius = 10;
 		}
 		int minRadius = Math.round(maxRadius * Settings.getPatternMinSizeFactor());
 		if (minRadius < 5) {
@@ -57,8 +57,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final IRaster raster = RasterFactory
-				.getRaster(positioning, width, height, maxRadius, Settings.getOverlapping());
+		final IRaster raster = RasterFactory.getRaster(positioning, width, height, maxRadius, Settings.getOverlapping());
 
 		task.settingMax(raster.getAnzahlPatterns());
 

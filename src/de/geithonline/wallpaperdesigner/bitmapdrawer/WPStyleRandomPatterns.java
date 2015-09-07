@@ -37,8 +37,8 @@ public class WPStyleRandomPatterns extends WPStylePattern {
 
 		// initializing some values depending on BitmapSize
 		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
-		if (maxRadius < 30) {
-			maxRadius = 30;
+		if (maxRadius < 10) {
+			maxRadius = 10;
 		}
 		int minRadius = Math.round(maxRadius * Settings.getPatternMinSizeFactor());
 		if (minRadius < 5) {
