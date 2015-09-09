@@ -13,9 +13,17 @@
 		    android:key="unzipSettingsPremium"
 		    android:icon="@drawable/examplesettings_premium"
 		    android:title="Premium Example Designs"
-		    android:summary="Download even more example Designs! Only for Premium Users!" 
+		    android:summary="Download more example Designs! Only for Premium Users!" 
             />
 
+	    <Preference 
+		    android:key="unzipUserSettings"
+		    android:icon="@drawable/examplesettings_premium"
+		    android:title="More User Example Designs"
+		    android:summary="Download even more example Designs!" 
+            />
+	    
+	    
 	<PreferenceCategory android:title="Manage Designs"/>
 <!-- 
 		    <Preference 
@@ -41,10 +49,22 @@
 	<PreferenceCategory android:title="Manage ALL Designs at once"/>
 	    <Preference 
 		    android:key="backupALLDesigns"
-		    android:title="Backup all Designs"
+		    android:title="Backup all Designs (one Zip)"
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Backup all your designs into a zip-File" 
             />
+	    <Preference 
+		    android:key="backupALLDesignsInManyZips"
+		    android:title="Backup all Designs (many Zips)"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Backup all your designs into many zip-Files" 
+            />
+	    <Preference 
+		    android:key="zipOneDesign"
+		    android:title="Backup one Design (in one Zip)"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Zip one of your designs" 
+        />
 	    <Preference 
 		    android:key="restoreDesigns"
 		    android:title="Restore Designs"

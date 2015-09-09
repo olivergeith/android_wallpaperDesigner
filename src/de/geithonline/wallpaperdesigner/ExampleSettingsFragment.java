@@ -13,11 +13,14 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference shareALLDesigns;
 	private Preference restoreDesigns;
 	private Preference backupALLDesigns;
+	private Preference backupALLDesignsInManyZips;
 	private Preference deleteALLDesigns;
 	private Preference deleteSettings;
 	private Preference unzipSettings;
 	private Preference unzipSettingsPremium;
 	private Preference mailSettings;
+	private Preference zipOneDesign;
+	private Preference unzipUserSettings;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -44,6 +47,18 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 				return false;
 			}
 		});
+
+		unzipUserSettings = findPreference("unzipUserSettings");
+		unzipUserSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
+				intent.putExtra("Premium", false);
+				startActivityForResult(intent, 1);
+				return false;
+			}
+		});
+
 		deleteSettings = findPreference("deleteSettings");
 		deleteSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
@@ -69,6 +84,17 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 				return false;
 			}
 		});
+
+		backupALLDesignsInManyZips = findPreference("backupALLDesignsInManyZips");
+		backupALLDesignsInManyZips.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
+				SettingsIO.saveAllDesignsToManyZips(getActivity());
+				return false;
+			}
+		});
+
 		restoreDesigns = findPreference("restoreDesigns");
 		restoreDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
@@ -95,5 +121,15 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 				return false;
 			}
 		});
+
+		zipOneDesign = findPreference("zipOneDesign");
+		zipOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				SettingsIO.zipDesignTheFancyWay(getActivity(), Settings.prefs);
+				return false;
+			}
+		});
+
 	}
 }

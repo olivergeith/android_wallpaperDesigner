@@ -132,14 +132,13 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 				dialog.cancel();
 			}
 			Alerter.alertInfo(activi,
-					"Example-Designs downloaded successfully!!!\n\nHint: Use 'Restore Desing' to use them!");
+					"Example-Designs downloaded successfully!!!\n\nHint: Swipe from the left on Main-Screen to reveal the drawer with all your designs!");
 			SettingsIO.setDesignListNeedsReload(true);
 		} else {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage
-					+ "\n\nInternet connection available?");
+			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage + "\n\nInternet connection available?");
 			// Toaster.showErrorToast(activi, "Error downloading Example-Settings!!!\n" + errorMessage);
 		}
 	}
