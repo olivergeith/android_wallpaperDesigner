@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -134,9 +135,40 @@ public class ZipHelper {
 
 	/**
 	 * 
-	 * Zips a file at a location and places the resulting zip file at the
-	 * toLocation Example: zipFileAtPath("downloads/myfolder",
-	 * "downloads/myFolder.zip");
+	 * Zips a file at a location and places the resulting zip file at the toLocation Example:
+	 * zipFileAtPath("downloads/myfolder", "downloads/myFolder.zip");
+	 */
+	public static boolean zipFiles(final List<String> files, final String toLocation) {
+		final int BUFFER = 2048;
+		try {
+
+			BufferedInputStream origin = null;
+			final FileOutputStream dest = new FileOutputStream(toLocation);
+			final ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(dest));
+
+			for (final String sourcePath : files) {
+				final byte data[] = new byte[BUFFER];
+				final FileInputStream fi = new FileInputStream(sourcePath);
+				origin = new BufferedInputStream(fi, BUFFER);
+				final ZipEntry entry = new ZipEntry(getLastPathComponent(sourcePath));
+				out.putNextEntry(entry);
+				int count;
+				while ((count = origin.read(data, 0, BUFFER)) != -1) {
+					out.write(data, 0, count);
+				}
+			}
+			out.close();
+		} catch (final Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * Zips a file at a location and places the resulting zip file at the toLocation Example:
+	 * zipFileAtPath("downloads/myfolder", "downloads/myFolder.zip");
 	 */
 	public static boolean zipFileAtPath(final String sourcePath, final String toLocation) {
 		// ArrayList<String> contentList = new ArrayList<String>();
@@ -173,8 +205,7 @@ public class ZipHelper {
 	 * Zips a subfolder
 	 */
 
-	private static void zipSubFolder(final ZipOutputStream out, final File folder, final int basePathLength)
-			throws IOException {
+	private static void zipSubFolder(final ZipOutputStream out, final File folder, final int basePathLength) throws IOException {
 
 		final int BUFFER = 2048;
 
@@ -204,8 +235,7 @@ public class ZipHelper {
 	/*
 	 * gets the last path component
 	 * 
-	 * Example: getLastPathComponent("downloads/example/fileToZip"); Result:
-	 * "fileToZip"
+	 * Example: getLastPathComponent("downloads/example/fileToZip"); Result: "fileToZip"
 	 */
 	private static String getLastPathComponent(final String filePath) {
 		final String[] segments = filePath.split("/");

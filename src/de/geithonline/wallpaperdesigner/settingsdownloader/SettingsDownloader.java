@@ -30,7 +30,14 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	private String errorMessage = "";
 
 	public static void startDownloadFile(final Activity activity, final String url) {
-		final String name = url.substring(url.indexOf(".com") + 5);
+		String name;
+		if (url.contains(".com")) {
+			name = url.substring(url.indexOf(".com") + 5);
+		} else if (url.contains(".net")) {
+			name = url.substring(url.indexOf(".net") + 5);
+		} else {
+			name = url.substring(url.indexOf("/") + 1);
+		}
 		Alerter.alertYesNo(activity, "Download " + name + " ?", "Download Example Designs", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
@@ -132,14 +139,13 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 				dialog.cancel();
 			}
 			Alerter.alertInfo(activi,
-					"Example-Designs downloaded successfully!!!\n\nHint: Use 'Restore Desing' to use them!");
+					"Example-Designs downloaded successfully!!!\n\nHint: Swipe from the left on Main-Screen to reveal the drawer with all your designs!");
 			SettingsIO.setDesignListNeedsReload(true);
 		} else {
 			if (dialog != null) {
 				dialog.cancel();
 			}
-			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage
-					+ "\n\nInternet connection available?");
+			Alerter.alertError(activi, "Error downloading Example-Designs!!!\n\n" + errorMessage + "\n\nInternet connection available?");
 			// Toaster.showErrorToast(activi, "Error downloading Example-Settings!!!\n" + errorMessage);
 		}
 	}
