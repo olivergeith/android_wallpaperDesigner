@@ -21,6 +21,8 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference mailSettings;
 	private Preference zipOneDesign;
 	private Preference unzipUserSettings;
+	private Preference backupALLDesignsForUpload;
+	private Preference backupOneDesignsForUpload;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -126,7 +128,29 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		zipOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.zipDesignTheFancyWay(getActivity(), Settings.prefs);
+				SettingsIO.zipDesignTheFancyWay(getActivity(), Settings.prefs, false);
+				return false;
+			}
+		});
+
+		backupALLDesignsForUpload = findPreference("backupALLDesignsForUpload");
+		backupALLDesignsForUpload.setEnabled(Settings.isDebugging());
+		backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
+				SettingsIO.saveAllDesignsForUpload(getActivity());
+				return false;
+			}
+		});
+
+		backupOneDesignsForUpload = findPreference("backupOneDesignsForUpload");
+		backupOneDesignsForUpload.setEnabled(Settings.isDebugging());
+		backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
+				SettingsIO.zipDesignTheFancyWay(getActivity(), Settings.prefs, true);
 				return false;
 			}
 		});

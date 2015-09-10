@@ -64,27 +64,21 @@ public class SettingsIO {
 
 			@Override
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-				Log.i("Emailing Settings ", "from " + position);
 				if (position >= 0) {
+					Log.i("Emailing Settings ", "from " + position);
 					final SavedDesign design = designList.get(position);
-					final List<String> filePaths = new ArrayList<String>();
-					filePaths.add(design.getPreferenceFile().getAbsolutePath());
-					filePaths.add(design.getBmpFile().getAbsolutePath());
-					final String toAdress = "";
-					final Intent createEMailIntent = EMailHelper.createEMailIntent(toAdress, "", "", "My Design",
-							"Mailing Desing :-) To have them in 'The Wallpaper Designer' save both attached files to \n" + getSettingsDir().getAbsolutePath(),
-							filePaths);
-					EMailHelper.email(activity, createEMailIntent);
+					eMailOneDesign(design, activity);
 				}
 				dialog.dismiss();
 			}
+
 		});
 		dialog.setView(listview);
 		dialog.show();
 
 	}
 
-	public static void zipDesignTheFancyWay(final Activity activity, final SharedPreferences prefs) {
+	public static void zipDesignTheFancyWay(final Activity activity, final SharedPreferences prefs, final boolean upload) {
 
 		final List<SavedDesign> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
@@ -94,7 +88,11 @@ public class SettingsIO {
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
-		dialog.setTitle("Zip one Design");
+		if (upload) {
+			dialog.setTitle("Zip one Design for Upload");
+		} else {
+			dialog.setTitle("Zip one Design");
+		}
 		dialog.setMessage("Select Design to be zipped");
 
 		final ListView listview = createListviewOfAllDesigns(activity, designList);
@@ -105,7 +103,12 @@ public class SettingsIO {
 				Log.i("Zip Design ", "from " + position);
 				if (position >= 0) {
 					final SavedDesign design = designList.get(position);
-					zipOneDesign(design, activity);
+					if (upload) {
+						prepareOneDesignForUpload(design, activity);
+					} else {
+						zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
+
+					}
 				}
 				dialog.dismiss();
 			}
@@ -187,7 +190,7 @@ public class SettingsIO {
 					Alerter.alertYesNo(activity, "Dou you want really want to delete the Design?", "Delete Design", new OnClickListener() {
 						@Override
 						public void onClick(final DialogInterface dialog, final int which) {
-							SettingsIO.deletePreferencesFileAndBitmap(design);
+							deletePreferencesFileAndBitmap(design);
 						}
 					});
 
@@ -244,27 +247,37 @@ public class SettingsIO {
 			return;
 		}
 		final String message = "Backup all Designs to:\n" + StorageHelper.getExtstorageDataDir();
-		Alerter.alertYesNo(activity, message, "Backup all Designs into zips", new OnClickListener() {
+		Alerter.alertYesNo(activity, message, "Backup all Designs into many zips", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				for (final SavedDesign design : designList) {
-					zipOneDesign(design, activity);
+					zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
 				}
 			}
 		});
 	}
 
-	private static void zipOneDesign(final SavedDesign design, final Activity activity) {
-		final File preferenceFile = design.getPreferenceFile();
-		final File bmpFile = design.getBmpFile();
-		final String prefFilename = design.getPreferenceFile().getName();
-		final String zipFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_ZIP);
-		final File outzip = new File(StorageHelper.getExtstorageDataDir(), zipFilename);
-		final List<String> files = new ArrayList<>();
-		files.add(preferenceFile.getAbsolutePath());
-		files.add(bmpFile.getAbsolutePath());
-		ZipHelper.zipFiles(files, outzip.getAbsolutePath());
-		MediaScannerHelper.rescanMedia(activity, outzip);
+	/**
+	 * Backups all Designs to Zipfile
+	 * 
+	 * @param activity
+	 */
+	public static void saveAllDesignsForUpload(final Activity activity) {
+
+		final List<SavedDesign> designList = getSavedPreferencesList();
+		if (designList.isEmpty()) {
+			Toaster.showErrorToast(activity, "There are no Designs!");
+			return;
+		}
+		final String message = "Backup all Designs to:\n" + StorageHelper.getExtstorageUploadDir();
+		Alerter.alertYesNo(activity, message, "Backup all Designs into zips", new OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				for (final SavedDesign design : designList) {
+					prepareOneDesignForUpload(design, activity);
+				}
+			}
+		});
 	}
 
 	public static void sendFileViaEmail(final Activity activity, final String filePathAbsolut, final boolean toOliver) {
@@ -291,28 +304,15 @@ public class SettingsIO {
 			Toaster.showErrorToast(activity, "There are no Designs to delete!");
 			return;
 		}
-		Alerter.alertYesNoUrgent(activity, "Dou you want really want to delete ALL Designs?", "Attention!!! Delete ALL Designs", new OnClickListener() {
+		Alerter.alertYesNoUrgent(activity, "Dou you want really want to delete ALL Designs?", "Attention!!! Delete ALL Designs!!!", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				for (final SavedDesign design : designList) {
-					SettingsIO.deletePreferencesFileAndBitmap(design);
+					deletePreferencesFileAndBitmap(design);
 				}
 				setDesignListNeedsReload(true);
 			}
 		});
-	}
-
-	/**
-	 * Delete a singele preference
-	 * 
-	 * @param pref
-	 */
-	private static void deletePreferencesFileAndBitmap(final SavedDesign pref) {
-		pref.getPreferenceFile().delete();
-		if (pref.getBitmap() != null) {
-			pref.getBmpFile().delete();
-		}
-		setDesignListNeedsReload(true);
 	}
 
 	/**
@@ -407,7 +407,6 @@ public class SettingsIO {
 			out = filename.substring(0, pos);
 		}
 		return out;
-
 	}
 
 	private static File getSettingsDir() {
@@ -504,24 +503,6 @@ public class SettingsIO {
 	}
 
 	/**
-	 * Delete all designs
-	 * 
-	 * @param activity
-	 */
-	private static void deleteALLDesignsWithoutAsking(final Activity activity) {
-
-		final List<SavedDesign> designList = getSavedPreferencesList();
-		if (designList.isEmpty()) {
-			// Toaster.showErrorToast(activity, "There are no Designs to delete!");
-			return;
-		}
-		for (final SavedDesign design : designList) {
-			SettingsIO.deletePreferencesFileAndBitmap(design);
-		}
-		setDesignListNeedsReload(true);
-	}
-
-	/**
 	 * Get a list of all preference filenames
 	 * 
 	 * @param activity
@@ -552,6 +533,70 @@ public class SettingsIO {
 			Log.i("FileList", "Found = " + fileList.size());
 		}
 		return fileList;
+	}
+
+	// *******************************************************************
+	// Basic stuff to do with a design
+	// *******************************************************************
+
+	private static void eMailOneDesign(final SavedDesign design, final Activity activity) {
+		final List<String> filePaths = new ArrayList<String>();
+		filePaths.add(design.getPreferenceFile().getAbsolutePath());
+		filePaths.add(design.getBmpFile().getAbsolutePath());
+		final String toAdress = "";
+		final Intent createEMailIntent = EMailHelper.createEMailIntent(toAdress, "", "", "My Design",
+				"Mailing Desing :-) To have them in 'The Wallpaper Designer' save both attached files to \n" + getSettingsDir().getAbsolutePath(), filePaths);
+		EMailHelper.email(activity, createEMailIntent);
+	}
+
+	private static void zipOneDesign(final SavedDesign design, final Activity activity, final String dir) {
+		final File preferenceFile = design.getPreferenceFile();
+		final File bmpFile = design.getBmpFile();
+		final String prefFilename = design.getPreferenceFile().getName();
+		final String zipFilename = FileIOHelper.replaceExtension(prefFilename, EXTENSION_PREF, EXTENSION_ZIP);
+		final File outzip = new File(dir, zipFilename);
+		final List<String> files = new ArrayList<>();
+		files.add(preferenceFile.getAbsolutePath());
+		files.add(bmpFile.getAbsolutePath());
+		ZipHelper.zipFiles(files, outzip.getAbsolutePath());
+		MediaScannerHelper.rescanMedia(activity, outzip);
+	}
+
+	/**
+	 * Delete a singele preference
+	 * 
+	 * @param design
+	 */
+	private static void deletePreferencesFileAndBitmap(final SavedDesign design) {
+		design.getPreferenceFile().delete();
+		if (design.getBitmap() != null) {
+			design.getBmpFile().delete();
+		}
+		setDesignListNeedsReload(true);
+	}
+
+	/**
+	 * zips a design and resizes the image to 400w and saves both in upload Dir
+	 * 
+	 * @param design
+	 * @param activity
+	 */
+	private static void prepareOneDesignForUpload(final SavedDesign design, final Activity activity) {
+		// saving Zip to upload dir
+		zipOneDesign(design, activity, StorageHelper.getExtstorageUploadDir());
+
+		// rescaling and Saving Bitmap
+		final Bitmap bitmap = design.getBitmap();
+		final int w = bitmap.getWidth();
+		final int h = bitmap.getHeight();
+		final int dw = 400;
+		final int dh = h * dw / w;
+		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
+		final String jpgFilename = design.getBmpFile().getName();
+		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, StorageHelper.getExtstorageUploadDir(), jpgFilename, 80);
+		MediaScannerHelper.rescanMedia(activity, smallJpgFile);
+		small.recycle();
+
 	}
 
 }

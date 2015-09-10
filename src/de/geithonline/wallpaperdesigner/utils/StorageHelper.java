@@ -10,20 +10,23 @@ public class StorageHelper {
 	public final static String DIR_SDCARD = Environment.getExternalStorageDirectory().toString();
 	public final static File PATH_SDCARD = Environment.getExternalStorageDirectory();
 
-	private final static String imagesDir = DIR_SDCARD + File.separator + "Pictures" + File.separator
-			+ "WallpaperDesigner" + File.separator;
+	private final static String imagesDir = DIR_SDCARD + File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File imagesDirFile = new File(imagesDir);
-	private final static String settingsDir = DIR_SDCARD + File.separator + "data" + File.separator
-			+ "WallpaperDesigner" + File.separator;
+	private final static String settingsDir = DIR_SDCARD + File.separator + "data" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File settingsDirFile = new File(settingsDir);
 	private final static File noMedia = new File(settingsDir, ".nomedia");
 	private final static String downloadDir = DIR_SDCARD + File.separator + "Download" + File.separator;
 	private final static File downloadDirFile = new File(downloadDir);
 
+	private final static String extStorageUploadDir = DIR_SDCARD + File.separator + "data" + File.separator + "upload" + File.separator;
+	private final static File extStorageUploadDirFile = new File(extStorageUploadDir);
 	private final static String extStorageDataDir = DIR_SDCARD + File.separator + "data" + File.separator;
 	private final static File extStorageDataDirFile = new File(extStorageDataDir);
 
 	static {
+		if (!extStorageUploadDirFile.exists()) {
+			extStorageUploadDirFile.mkdirs();
+		}
 		if (!imagesDirFile.exists()) {
 			imagesDirFile.mkdirs();
 		}
@@ -60,6 +63,11 @@ public class StorageHelper {
 	// extStorage/data
 	public static String getExtstorageDataDir() {
 		return extStorageDataDir;
+	}
+
+	// extStorage/data
+	public static String getExtstorageUploadDir() {
+		return extStorageUploadDir;
 	}
 
 	public static File getExtstorageDataDirFile() {

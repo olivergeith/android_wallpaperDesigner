@@ -88,6 +88,20 @@
 		    android:icon="@android:drawable/ic_delete"
 		    android:summary="Delete all your designs....ATTENTION!!!" 
             />
-	    	    	    	    		
+	    
+	<PreferenceCategory android:title="More on Designs"/>
+	    <Preference 
+		    android:key="backupALLDesignsForUpload"
+		    android:title="Backup ALL Designs for Upload"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
+            />
+	    <Preference 
+		    android:key="backupOneDesignsForUpload"
+		    android:title="Backup ONE Design for Upload"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Backup one of your designs into zip-File for uploading purposes" 
+            />
+	        	    	    	    	    	    		
 	    	    
 </PreferenceScreen>
