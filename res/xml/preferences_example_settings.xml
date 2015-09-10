@@ -3,36 +3,42 @@
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
     	    
     <PreferenceCategory android:title="Download example Designs"/>
-	    <Preference 
+
+    <PreferenceScreen
+        android:key="howto"
+        android:title="Howto: Example-Designs" >
+        <Preference 
+		    android:key="hintExampleDesigns"
+		    android:title="Howto: Example-Designs"
+		    android:summary="Download your desired designs here. \nThey will be installed on your sdcard. \n \nUsing them is super easy: \n-> Go back to the main screen of this App \n->Swipe from the left to open the drawer with your designs \n->Select a design \n->Done! :-)" 
+            />
+    		    		    		    
+    </PreferenceScreen>
+    
+    
+  
+        <Preference 
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"
-		    android:title="Example Designs"
-		    android:summary="download lots of example Designs! Find them later in the drawer on the left side of the main screen!" 
+		    android:title="Free Example-Designs"
+		    android:summary="Download lots of free Example-Designs! (bundled into packages)" 
             />
 	    <Preference 
 		    android:key="unzipSettingsPremium"
 		    android:icon="@drawable/examplesettings_premium"
-		    android:title="Premium Example Designs"
-		    android:summary="Download more example Designs! Only for Premium Users!" 
+		    android:title="Premium Example-Designs"
+		    android:summary="Download more Example-Designs! Only for Premium Users!" 
             />
 
 	    <Preference 
 		    android:key="unzipUserSettings"
-		    android:icon="@drawable/examplesettings_premium"
-		    android:title="More User Example Designs"
-		    android:summary="Download even more example Designs!" 
+		    android:icon="@drawable/examplesettings"
+		    android:title="More free Example-Designs"
+		    android:summary="Download even more free Example-Designs!" 
             />
 	    
 	    
 	<PreferenceCategory android:title="Manage Designs"/>
-<!-- 
-		    <Preference 
-		    android:key="loadSettings"
-		    android:title="Load Design"
-		    android:icon="@android:drawable/ic_menu_set_as"
-		    android:summary="Restore one of your designs" 
-            />
-             -->
 	    <Preference 
 		    android:key="mailSettings"
 		    android:title="Email Design"
@@ -45,8 +51,6 @@
 		    android:icon="@android:drawable/ic_menu_delete"
 		    android:summary="Delete one of your designs" 
             />
-
-	<PreferenceCategory android:title="Manage ALL Designs at once"/>
 	    <Preference 
 		    android:key="backupALLDesigns"
 		    android:title="Backup all Designs (one Zip)"
@@ -64,14 +68,13 @@
 		    android:title="Backup one Design (in one Zip)"
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Zip one of your designs" 
-        />
+	        />
 	    <Preference 
 		    android:key="restoreDesigns"
 		    android:title="Restore Designs"
 		    android:icon="@android:drawable/ic_menu_upload"
 		    android:summary="Restore designs from a zip-File" 
             />
-	    
 	    <Preference 
 		    android:key="shareALLDesignsViaEmail"
 		    android:title="Share all Designs via eMail"
