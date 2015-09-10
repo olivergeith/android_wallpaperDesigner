@@ -94,8 +94,8 @@
     <string name="rotatingStyle">Rotating Style</string>
     <string name="imageFormat">Image-Format</string>
     <string name="jpgCompression">Compression-Rate of JPGs</string>
-    <string name="title_activity_remote_settings_view">Download Example-Designs</string>
-    <string name="title_activity_user_settings_view">Download more free Example-Designs</string>
+    <string name="title_activity_remote_settings_view">Download Example-Design-Packages</string>
+    <string name="title_activity_user_settings_view">Download Example-Designs</string>
     <string name="shareSubject">Subject when sharing a wallpaper</string>
     <string name="shareText">Text when sharing a wallpaper</string>
     <string name="drawer_open">Open Drawer</string>

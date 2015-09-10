@@ -38,7 +38,7 @@ public class ExampleSettingsUserView extends Activity {
 
 	protected void onCreate(final String url) {
 		if (shared) {
-			setTitle(getTitle() + " (Premium)");
+			setTitle(getTitle() + " (Shared)");
 		}
 		web = (WebView) findViewById(R.id.webView);
 		web.setWebViewClient(new LinkInterceptor());
