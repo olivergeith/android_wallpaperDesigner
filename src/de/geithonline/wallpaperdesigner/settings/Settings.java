@@ -1,5 +1,7 @@
 package de.geithonline.wallpaperdesigner.settings;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -65,6 +67,7 @@ public class Settings {
 	public static final String KEY_PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
 	public static final String KEY_PATTERN_BLUR = "blurPatterns";
 	public static SharedPreferences prefs;
+	private static boolean superuser = false;
 
 	// private static Context context;
 
@@ -120,11 +123,11 @@ public class Settings {
 
 	public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
 		switch (getImageFormat()) {
-		default:
-		case "jpg":
-			return IMAGE_OUTPUT_FORMAT.JPG;
-		case "png":
-			return IMAGE_OUTPUT_FORMAT.PNG;
+			default:
+			case "jpg":
+				return IMAGE_OUTPUT_FORMAT.JPG;
+			case "png":
+				return IMAGE_OUTPUT_FORMAT.PNG;
 		}
 	}
 
@@ -149,11 +152,11 @@ public class Settings {
 
 	public static int getTheme() {
 		switch (getAppTheme()) {
-		default:
-		case "Dark":
-			return R.style.AppThemeDark;
-		case "Light":
-			return R.style.AppThemeLight;
+			default:
+			case "Dark":
+				return R.style.AppThemeDark;
+			case "Light":
+				return R.style.AppThemeLight;
 		}
 	}
 
@@ -161,15 +164,15 @@ public class Settings {
 		// return "Random Layout";
 		final String sort = getSortOrder();
 		switch (sort) {
-		default:
-		case "Last Modified":
-			return SORT_ORDER.LAST_MODIFIED;
-		case "Last Modified (Descending)":
-			return SORT_ORDER.LAST_MODIFIED_DESCENDING;
-		case "Alphabetically":
-			return SORT_ORDER.ALPHA;
-		case "Timestamp in Filename":
-			return SORT_ORDER.FILENAME_TIMESTAMP;
+			default:
+			case "Last Modified":
+				return SORT_ORDER.LAST_MODIFIED;
+			case "Last Modified (Descending)":
+				return SORT_ORDER.LAST_MODIFIED_DESCENDING;
+			case "Alphabetically":
+				return SORT_ORDER.ALPHA;
+			case "Timestamp in Filename":
+				return SORT_ORDER.FILENAME_TIMESTAMP;
 		}
 	}
 
@@ -381,33 +384,33 @@ public class Settings {
 
 	public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
 		switch (getGlossyReflectionStyleString()) {
-		default:
-		case "Diagonal":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
-		case "Diagonal (flipped)":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
-		case "Diagonal 45°":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
-		case "Diagonal 45° (flipped)":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
-		case "Diagonal (curved)":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
-		case "Diagonal (curved) V2":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
-		case "Curved from top":
-			return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
-		case "Topleft":
-			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
-		case "Topleft V2":
-			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
-		case "Big Oval":
-			return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
-		case "Small Oval":
-			return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
-		case "Top Glow":
-			return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
-		case "None":
-			return GLOSSY_REFLECTIONS_STYLE.NONE;
+			default:
+			case "Diagonal":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
+			case "Diagonal (flipped)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
+			case "Diagonal 45°":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
+			case "Diagonal 45° (flipped)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
+			case "Diagonal (curved)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+			case "Diagonal (curved) V2":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
+			case "Curved from top":
+				return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
+			case "Topleft":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+			case "Topleft V2":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
+			case "Big Oval":
+				return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
+			case "Small Oval":
+				return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
+			case "Top Glow":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
+			case "None":
+				return GLOSSY_REFLECTIONS_STYLE.NONE;
 		}
 	}
 
@@ -421,11 +424,11 @@ public class Settings {
 
 	public static GLOSSY_GLOW_STYLE getGlossyGlowStyle() {
 		switch (getGlossyGlowStyleString()) {
-		default:
-		case "Center":
-			return GLOSSY_GLOW_STYLE.CENTER;
-		case "Horizontal":
-			return GLOSSY_GLOW_STYLE.HORIZONTAL;
+			default:
+			case "Center":
+				return GLOSSY_GLOW_STYLE.CENTER;
+			case "Horizontal":
+				return GLOSSY_GLOW_STYLE.HORIZONTAL;
 		}
 	}
 
@@ -640,10 +643,10 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getCustomWidth();
-		default:
-			return getWidthFromSizeString(s);
+			case "customSize":
+				return getCustomWidth();
+			default:
+				return getWidthFromSizeString(s);
 		}
 	}
 
@@ -658,10 +661,10 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getCustomHeight();
-		default:
-			return getHeightFromSizeString(s);
+			case "customSize":
+				return getCustomHeight();
+			default:
+				return getHeightFromSizeString(s);
 		}
 	}
 
@@ -797,6 +800,18 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(KEY_MUIMERP, false);
+	}
+
+	// private static boolean readSuperUser(final Activity activity) {
+	// final File file = new File(activity.getFilesDir(), "superuser.txt");
+	// superuser = file.exists();
+	// return superuser;
+	// }
+
+	public static boolean isSuperUser(final Activity activity) {
+		final File file = new File(activity.getFilesDir(), "superuser.txt");
+		superuser = file.exists();
+		return superuser;
 	}
 
 	// private static final int CURRENT_SETTINGS_VERSION = 2;

@@ -23,6 +23,9 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference unzipUserSettings;
 	private Preference backupALLDesignsForUpload;
 	private Preference backupOneDesignsForUpload;
+	private Preference shareOneDesign;
+	private Preference unzipSharedSettings;
+	private Preference publishOneDesign;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -55,7 +58,17 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
-				intent.putExtra("Premium", false);
+				intent.putExtra("Shared", false);
+				startActivityForResult(intent, 1);
+				return false;
+			}
+		});
+		unzipSharedSettings = findPreference("unzipSharedSettings");
+		unzipSharedSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
+				intent.putExtra("Shared", true);
 				startActivityForResult(intent, 1);
 				return false;
 			}
@@ -128,13 +141,22 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		zipOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.zipDesignTheFancyWay(getActivity(), Settings.prefs, false);
+				SettingsIO.backupDesign(getActivity());
+				return false;
+			}
+		});
+
+		shareOneDesign = findPreference("shareOneDesign");
+		shareOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
+				SettingsIO.shareDesign(getActivity());
 				return false;
 			}
 		});
 
 		backupALLDesignsForUpload = findPreference("backupALLDesignsForUpload");
-		backupALLDesignsForUpload.setEnabled(Settings.isDebugging());
 		backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
@@ -145,15 +167,31 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		});
 
 		backupOneDesignsForUpload = findPreference("backupOneDesignsForUpload");
-		backupOneDesignsForUpload.setEnabled(Settings.isDebugging());
 		backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
-				SettingsIO.zipDesignTheFancyWay(getActivity(), Settings.prefs, true);
+				SettingsIO.backupDesignToUploadDir(getActivity());
 				return false;
 			}
 		});
+
+		publishOneDesign = findPreference("publishOneDesign");
+		publishOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
+				SettingsIO.publishDesign(getActivity());
+				return false;
+			}
+		});
+
+		// bestimmte Menüs gibt es nur als Superuser
+		if (!Settings.isSuperUser(getActivity())) {
+			getPreferenceScreen().removePreference(publishOneDesign);
+			getPreferenceScreen().removePreference(backupOneDesignsForUpload);
+			getPreferenceScreen().removePreference(backupALLDesignsForUpload);
+		}
 
 	}
 }

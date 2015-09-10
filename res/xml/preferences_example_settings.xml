@@ -36,7 +36,13 @@
 		    android:title="More free Example-Designs"
 		    android:summary="Download even more free Example-Designs!" 
             />
-	    
+	    <Preference 
+		    android:key="unzipSharedSettings"
+		    android:icon="@drawable/examplesettings"
+		    android:title="Shared Example-Designs (from other users)"
+		    android:summary="Download even more free Example-Designs shared by other users!" 
+            />
+	    	    
 	    
 	<PreferenceCategory android:title="Manage Designs"/>
 	    <Preference 
@@ -92,16 +98,29 @@
 	<PreferenceCategory android:title="More on Designs"/>
 	    <Preference 
 		    android:key="backupALLDesignsForUpload"
-		    android:title="Backup ALL Designs for Upload"
+		    android:title="Backup ALL Designs to Upload-Dir"
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
             />
 	    <Preference 
 		    android:key="backupOneDesignsForUpload"
-		    android:title="Backup ONE Design for Upload"
+		    android:title="Backup ONE Design to Upload-Dir"
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Backup one of your designs into zip-File for uploading purposes" 
             />
-	        	    	    	    	    	    		
+	    <Preference 
+		    android:key="shareOneDesign"
+		    android:title="Share one Design"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Share one of your designs with others" 
+            />
+	    <Preference 
+		    android:key="publishOneDesign"
+		    android:title="Publish one Design"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Publish one of your designs" 
+            />
+	    
+	    	    	        	    	    	    	    	    		
 	    	    
 </PreferenceScreen>

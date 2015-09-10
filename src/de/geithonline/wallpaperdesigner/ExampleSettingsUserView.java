@@ -15,28 +15,29 @@ import de.geithonline.wallpaperdesigner.utils.Alerter;
 
 public class ExampleSettingsUserView extends Activity {
 
-	private static final String USERDESIGNS_URL = "http://olivergeith.bplaced.net/userdesigns/settingslist.php";
+	private static final String PUBLISHED_DESIGNS_URL = "http://olivergeith.bplaced.net/publisheddesigns/settingslist.php";
+	private static final String SHARED_DESIGNS_URL = "http://olivergeith.bplaced.net/shareddesigns/settingslist.php";
 	private WebView web;
-	private boolean premium;
+	private boolean shared;
 
-	protected String getURL(final boolean premium) {
-		if (premium) {
-			return USERDESIGNS_URL;
+	protected String getURL(final boolean shared) {
+		if (shared) {
+			return SHARED_DESIGNS_URL;
 		}
-		return USERDESIGNS_URL;
+		return PUBLISHED_DESIGNS_URL;
 	}
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		final Intent intent = getIntent();
-		premium = intent.getExtras().getBoolean("Premium");
+		shared = intent.getExtras().getBoolean("Shared");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_example_settings_view);
-		onCreate(getURL(premium));
+		onCreate(getURL(shared));
 	}
 
 	protected void onCreate(final String url) {
-		if (premium) {
+		if (shared) {
 			setTitle(getTitle() + " (Premium)");
 		}
 		web = (WebView) findViewById(R.id.webView);
@@ -78,7 +79,7 @@ public class ExampleSettingsUserView extends Activity {
 			// Zeigen wie die Premium Settings? Und sind wir NICHT Premium User?
 			// Dann Downloaden wir nicht ;-)
 			// Aber geben eine Messagebox aus!
-			if (premium && !Settings.isPremium()) {
+			if (shared && !Settings.isPremium()) {
 				Alerter.alertInfo(ExampleSettingsUserView.this, "Sorry! This is only downloadable for Premium Users!");
 				return true;
 			}

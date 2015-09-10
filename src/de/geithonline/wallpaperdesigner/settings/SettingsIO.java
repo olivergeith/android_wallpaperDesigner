@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsUploader;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.EMailHelper;
@@ -78,7 +79,27 @@ public class SettingsIO {
 
 	}
 
-	public static void zipDesignTheFancyWay(final Activity activity, final SharedPreferences prefs, final boolean upload) {
+	public static void shareDesign(final Activity activity) {
+		zipDesign(activity, DESIGN_SAVING_TYPE.SHARE);
+	}
+
+	public static void publishDesign(final Activity activity) {
+		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH);
+	}
+
+	public static void backupDesignToUploadDir(final Activity activity) {
+		zipDesign(activity, DESIGN_SAVING_TYPE.BACKUP_TO_UPLOAD_DIR);
+	}
+
+	public static void backupDesign(final Activity activity) {
+		zipDesign(activity, DESIGN_SAVING_TYPE.BACKUP);
+	}
+
+	private enum DESIGN_SAVING_TYPE {
+		BACKUP, BACKUP_TO_UPLOAD_DIR, PUBLISH, SHARE
+	}
+
+	private static void zipDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
 
 		final List<SavedDesign> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
@@ -88,12 +109,23 @@ public class SettingsIO {
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
-		if (upload) {
-			dialog.setTitle("Zip one Design for Upload");
-		} else {
-			dialog.setTitle("Zip one Design");
+		switch (savingtype) {
+			default:
+			case BACKUP:
+				dialog.setTitle("Backup one Design");
+				break;
+			case SHARE:
+				dialog.setTitle("Share one Design");
+				break;
+			case PUBLISH:
+				dialog.setTitle("Publish one Design");
+				break;
+			case BACKUP_TO_UPLOAD_DIR:
+				dialog.setTitle("Backup one Design to UploadDir");
+				break;
+
 		}
-		dialog.setMessage("Select Design to be zipped");
+		dialog.setMessage("Select Design");
 
 		final ListView listview = createListviewOfAllDesigns(activity, designList);
 		listview.setOnItemClickListener(new OnItemClickListener() {
@@ -103,10 +135,20 @@ public class SettingsIO {
 				Log.i("Zip Design ", "from " + position);
 				if (position >= 0) {
 					final SavedDesign design = designList.get(position);
-					if (upload) {
-						prepareOneDesignForUpload(design, activity);
-					} else {
-						zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
+					switch (savingtype) {
+						default:
+						case BACKUP:
+							zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
+							break;
+						case SHARE:
+							shareOneDesign(design, activity);
+							break;
+						case PUBLISH:
+							publishOneDesign(design, activity);
+							break;
+						case BACKUP_TO_UPLOAD_DIR:
+							backupOneDesignToUploadDir(design, activity);
+							break;
 
 					}
 				}
@@ -274,7 +316,7 @@ public class SettingsIO {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				for (final SavedDesign design : designList) {
-					prepareOneDesignForUpload(design, activity);
+					backupOneDesignToUploadDir(design, activity);
 				}
 			}
 		});
@@ -549,7 +591,7 @@ public class SettingsIO {
 		EMailHelper.email(activity, createEMailIntent);
 	}
 
-	private static void zipOneDesign(final SavedDesign design, final Activity activity, final String dir) {
+	private static String zipOneDesign(final SavedDesign design, final Activity activity, final String dir) {
 		final File preferenceFile = design.getPreferenceFile();
 		final File bmpFile = design.getBmpFile();
 		final String prefFilename = design.getPreferenceFile().getName();
@@ -560,6 +602,7 @@ public class SettingsIO {
 		files.add(bmpFile.getAbsolutePath());
 		ZipHelper.zipFiles(files, outzip.getAbsolutePath());
 		MediaScannerHelper.rescanMedia(activity, outzip);
+		return outzip.getAbsolutePath();
 	}
 
 	/**
@@ -575,15 +618,27 @@ public class SettingsIO {
 		setDesignListNeedsReload(true);
 	}
 
+	private static void shareOneDesign(final SavedDesign design, final Activity activity) {
+		prepareOneDesignForUpload(design, activity, SettingsUploader.shareURL);
+	}
+
+	private static void publishOneDesign(final SavedDesign design, final Activity activity) {
+		prepareOneDesignForUpload(design, activity, SettingsUploader.publishURL);
+	}
+
+	private static void backupOneDesignToUploadDir(final SavedDesign design, final Activity activity) {
+		prepareOneDesignForUpload(design, activity, null);
+	}
+
 	/**
 	 * zips a design and resizes the image to 400w and saves both in upload Dir
 	 * 
 	 * @param design
 	 * @param activity
 	 */
-	private static void prepareOneDesignForUpload(final SavedDesign design, final Activity activity) {
+	private static void prepareOneDesignForUpload(final SavedDesign design, final Activity activity, final String url) {
 		// saving Zip to upload dir
-		zipOneDesign(design, activity, StorageHelper.getExtstorageUploadDir());
+		final String outzip = zipOneDesign(design, activity, StorageHelper.getExtstorageUploadDir());
 
 		// rescaling and Saving Bitmap
 		final Bitmap bitmap = design.getBitmap();
@@ -596,7 +651,10 @@ public class SettingsIO {
 		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, StorageHelper.getExtstorageUploadDir(), jpgFilename, 80);
 		MediaScannerHelper.rescanMedia(activity, smallJpgFile);
 		small.recycle();
-
+		if (url != null) {
+			SettingsUploader.upload(activity, smallJpgFile.getAbsolutePath(), url);
+			SettingsUploader.upload(activity, outzip, url);
+		}
 	}
 
 }
