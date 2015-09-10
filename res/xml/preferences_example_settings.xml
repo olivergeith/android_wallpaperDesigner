@@ -39,8 +39,8 @@
 	    <Preference 
 		    android:key="unzipSharedSettings"
 		    android:icon="@drawable/examplesettings"
-		    android:title="Community Example-Designs"
-		    android:summary="Download even more free Example-Designs shared by other users!" 
+		    android:title="Community Designs"
+		    android:summary="Download free Designs shared by other users!" 
             />
 	    	    
 	<PreferenceCategory android:title="Share Designs online"/>

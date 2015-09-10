@@ -42,6 +42,7 @@ public class ExampleSettingsUserView extends Activity {
 		}
 		web = (WebView) findViewById(R.id.webView);
 		web.setWebViewClient(new LinkInterceptor());
+		web.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 		web.loadUrl(url);
 		final WebSettings settings = web.getSettings();
 		settings.setUseWideViewPort(true);
