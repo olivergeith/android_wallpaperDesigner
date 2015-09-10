@@ -30,14 +30,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	private String errorMessage = "";
 
 	public static void startDownloadFile(final Activity activity, final String url) {
-		String name;
-		if (url.contains(".com")) {
-			name = url.substring(url.indexOf(".com") + 5);
-		} else if (url.contains(".net")) {
-			name = url.substring(url.indexOf(".net") + 5);
-		} else {
-			name = url.substring(url.indexOf("/") + 1);
-		}
+		final String name = url.substring(url.lastIndexOf("/") + 1);
 		Alerter.alertYesNo(activity, "Download " + name + " ?", "Download Example Designs", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
