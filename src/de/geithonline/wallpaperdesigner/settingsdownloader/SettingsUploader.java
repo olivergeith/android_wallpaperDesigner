@@ -31,7 +31,7 @@ public class SettingsUploader {
 		}
 
 		final AsyncHttpClient client = new AsyncHttpClient();
-		client.setBasicAuth("olivergeith_upload", "upload");
+		// client.setBasicAuth("olivergeith_upload", "upload");
 		client.post(url, params, new AsyncHttpResponseHandler() {
 
 			@Override
