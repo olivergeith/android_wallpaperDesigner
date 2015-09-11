@@ -2,11 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
     	    
-    <PreferenceCategory android:title="Download example Designs"/>
+    <PreferenceCategory android:title="Download Designs"/>
 
     <PreferenceScreen
         android:key="howto"
-        android:title="Howto: Example-Designs" >
+        android:title="Howto: Download Designs" >
         <Preference 
 		    android:key="hintExampleDesigns"
 		    android:title="Howto: Example-Designs"
@@ -36,54 +36,40 @@
 		    android:title="Featured Designs"
 		    android:summary="Download free Designs I (the autor of this APP) like most! Hurry up to get those designs...the featured Designs will frequently change!" 
             />
+
 	    <Preference 
 		    android:key="unzipSharedSettings"
 		    android:icon="@drawable/examplesettings"
 		    android:title="Community Designs"
 		    android:summary="Download free Designs shared by other users!" 
             />
-	    	    
-	<PreferenceCategory android:title="Share Designs online"/>
+	
+	<PreferenceCategory android:title="Share Designs"/>
 	    <Preference 
-		    android:key="mailSettings"
-		    android:title="Email Design"
-		    android:icon="@android:drawable/ic_menu_send"
-		    android:summary="Email one of your designs to a friend" 
-        	/>
-		<Preference 
 		    android:key="shareOneDesign"
 		    android:title="Share Design"
 		    android:icon="@android:drawable/ic_menu_share"
 		    android:summary="Share one of your designs with our users-community!" 
             />
 
+	    	    	    
+	<PreferenceCategory android:title="Email Designs"/>
 	    <Preference 
-		    android:key="publishOneDesign"
-		    android:title="Publish Design"
+		    android:key="mailSettings"
+		    android:title="Email Design"
+		    android:icon="@android:drawable/ic_menu_send"
+		    android:summary="Email one of your designs to a friend" 
+        	/>
+	    <Preference 
+		    android:key="shareALLDesignsViaEmail"
+		    android:title="Share all Designs via eMail"
 		    android:icon="@android:drawable/ic_menu_share"
-		    android:summary="Publish one of your designs" 
-            />
-	
-	<PreferenceCategory android:title="Manage your local Designs"/>
-	    <Preference 
-		    android:key="backupALLDesignsForUpload"
-		    android:title="Backup ALL Designs to Upload-Dir"
-		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
-            />
-	    <Preference 
-		    android:key="backupOneDesignsForUpload"
-		    android:title="Backup ONE Design to Upload-Dir"
-		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Backup one of your designs into zip-File for uploading purposes" 
+		    android:summary="Share all your designs via eMail" 
             />
 	    
-	    <Preference 
-		    android:key="deleteSettings"
-		    android:title="Delete Design"
-		    android:icon="@android:drawable/ic_menu_delete"
-		    android:summary="Delete one of your designs" 
-            />
+	
+	<PreferenceCategory android:title="Backup your local Designs"/>
+	    
 	    <Preference 
 		    android:key="backupALLDesigns"
 		    android:title="Backup all Designs (one Zip)"
@@ -102,25 +88,47 @@
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Zip one of your designs" 
 	        />
+	<PreferenceCategory android:title="Restore Designs from Backup"/>
 	    <Preference 
 		    android:key="restoreDesigns"
 		    android:title="Restore Designs"
 		    android:icon="@android:drawable/ic_menu_upload"
 		    android:summary="Restore designs from a zip-File" 
             />
+
+	    	    	    
+	<PreferenceCategory android:title="Delete your local Designs"/>
 	    <Preference 
-		    android:key="shareALLDesignsViaEmail"
-		    android:title="Share all Designs via eMail"
-		    android:icon="@android:drawable/ic_menu_share"
-		    android:summary="Share all your designs via eMail" 
+		    android:key="deleteSettings"
+		    android:title="Delete Design"
+		    android:icon="@android:drawable/ic_menu_delete"
+		    android:summary="Delete one of your designs" 
             />
-	    	    
 	    <Preference 
 		    android:key="deleteALLDesigns"
 		    android:title="Delete ALL Designs !!!!"
 		    android:icon="@android:drawable/ic_delete"
 		    android:summary="Delete all your designs....ATTENTION!!!" 
             />
-	    	    	    	        	    	    	    	    	    		
+	<PreferenceCategory android:title="More ...."/>
+	    <Preference 
+		    android:key="publishOneDesign"
+		    android:title="Publish Design"
+		    android:icon="@android:drawable/ic_menu_share"
+		    android:summary="Publish one of your designs" 
+            />
+	   <Preference 
+		    android:key="backupALLDesignsForUpload"
+		    android:title="Backup ALL Designs to Upload-Dir"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
+            />
+	    <Preference 
+		    android:key="backupOneDesignsForUpload"
+		    android:title="Backup ONE Design to Upload-Dir"
+		    android:icon="@android:drawable/ic_menu_save"
+		    android:summary="Backup one of your designs into zip-File for uploading purposes" 
+            />
+		    	    	    	    	        	    	    	    	    	    		
 	    	    
 </PreferenceScreen>
