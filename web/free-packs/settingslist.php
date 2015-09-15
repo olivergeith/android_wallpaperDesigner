@@ -20,7 +20,7 @@ array_multisort(
   
 foreach($files as $jpg){    
 	$zipname = str_replace (".jpg" , ".zip" , $jpg);
-	print "<tr><a href=\"".$zipname."\"> <img border=\"0\" src=\"".$jpg."\" width=\"400\"></a></tr>";
+	print "<tr><a href=\"".$zipname."\"> <img border=\"0\" src=\"".$jpg."\" width=\"800\"></a></tr>";
 }
 ?>  
 </table>
