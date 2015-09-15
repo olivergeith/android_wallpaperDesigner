@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import de.geithonline.wallpaperdesigner.WPDUrls;
 import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsUploader;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
@@ -619,11 +620,11 @@ public class SettingsIO {
 	}
 
 	private static void shareOneDesign(final SavedDesign design, final Activity activity) {
-		prepareOneDesignForUpload(design, activity, SettingsUploader.shareURL);
+		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_URL);
 	}
 
 	private static void publishOneDesign(final SavedDesign design, final Activity activity) {
-		prepareOneDesignForUpload(design, activity, SettingsUploader.publishURL);
+		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_FEATURED_DESIGNS);
 	}
 
 	private static void backupOneDesignToUploadDir(final SavedDesign design, final Activity activity) {

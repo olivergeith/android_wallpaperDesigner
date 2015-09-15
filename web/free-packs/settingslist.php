@@ -7,7 +7,17 @@
 <table border="0" cellpadding="6">
 
 <?php
-  $files = glob("*.jpg");
+$files = glob("*.jpg");
+  
+// Sort files by modified time, latest to earliest
+// Use SORT_ASC in place of SORT_DESC for earliest to latest
+array_multisort(
+  array_map( 'filemtime', $files ),
+  SORT_NUMERIC,
+  SORT_DESC,
+  $files
+);  
+  
 foreach($files as $jpg){    
 	$zipname = str_replace (".jpg" , ".zip" , $jpg);
 	print "<tr><a href=\"".$zipname."\"> <img border=\"0\" src=\"".$jpg."\" width=\"400\"></a></tr>";

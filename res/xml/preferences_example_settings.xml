@@ -20,13 +20,13 @@
         <Preference 
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"
-		    android:title="Free Example-Designs"
+		    android:title="Free Example-Design-Packs"
 		    android:summary="Download lots of free Example-Designs! (bundled into packages)" 
             />
 	    <Preference 
 		    android:key="unzipSettingsPremium"
 		    android:icon="@drawable/examplesettings_premium"
-		    android:title="Premium Example-Designs"
+		    android:title="Premium Example-Design-Packs"
 		    android:summary="Download more Example-Design-Packages! Only for Premium Users!" 
             />
 

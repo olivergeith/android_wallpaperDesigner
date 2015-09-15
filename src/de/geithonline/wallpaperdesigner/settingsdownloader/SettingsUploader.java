@@ -16,9 +16,6 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 public class SettingsUploader {
 
-	public static String shareURL = "http://olivergeith.bplaced.net/shareddesigns/upload.php";
-	public static String publishURL = "http://olivergeith.bplaced.net/publisheddesigns/upload.php";
-
 	public static void upload(final Activity activity, final String pathToFile, final String url) {
 		final RequestParams params = new RequestParams();
 

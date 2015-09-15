@@ -36,8 +36,10 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		unzipSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				final Intent intent = new Intent(getActivity(), ExampleSettingsView.class);
-				intent.putExtra("Premium", false);
+				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
+				intent.putExtra("Url", WPDUrls.LIST_URL_FREE_PACKS);
+				intent.putExtra("Title", "Free Example-Design-Packs");
+				intent.putExtra("premiumUsersOnly", false);
 				startActivityForResult(intent, 1);
 				return false;
 			}
@@ -46,8 +48,10 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		unzipSettingsPremium.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				final Intent intent = new Intent(getActivity(), ExampleSettingsView.class);
-				intent.putExtra("Premium", true);
+				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
+				intent.putExtra("Url", WPDUrls.LIST_URL_PREMIUM_PACKS);
+				intent.putExtra("Title", "Premium Example-Design-Packs");
+				intent.putExtra("premiumUsersOnly", true);
 				startActivityForResult(intent, 1);
 				return false;
 			}
@@ -58,7 +62,9 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
-				intent.putExtra("Shared", false);
+				intent.putExtra("Url", WPDUrls.LIST_URL_FEATURED_DESIGNS);
+				intent.putExtra("Title", "Featured Designs");
+				intent.putExtra("premiumUsersOnly", false);
 				startActivityForResult(intent, 1);
 				return false;
 			}
@@ -68,7 +74,9 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
-				intent.putExtra("Shared", true);
+				intent.putExtra("Url", WPDUrls.LIST_URL_COMMUNITY_DESIGNS);
+				intent.putExtra("Title", "Community Designs");
+				intent.putExtra("premiumUsersOnly", false);
 				startActivityForResult(intent, 1);
 				return false;
 			}
