@@ -34,7 +34,7 @@
 		    android:key="unzipUserSettings"
 		    android:icon="@drawable/examplesettings"
 		    android:title="Featured Designs"
-		    android:summary="Download free Designs I (the autor of this APP) like most! Hurry up to get those designs...the featured Designs will frequently change!" 
+		    android:summary="Download free Designs I (the autor of this APP) like most! Hurry up to get those designs...the featured Designs will change frequently!" 
             />
 
 	    <Preference 
