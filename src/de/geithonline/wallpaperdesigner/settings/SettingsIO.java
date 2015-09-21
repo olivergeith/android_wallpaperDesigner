@@ -620,7 +620,7 @@ public class SettingsIO {
 	}
 
 	private static void shareOneDesign(final SavedDesign design, final Activity activity) {
-		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_URL);
+		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_DESIGNS);
 	}
 
 	private static void publishOneDesign(final SavedDesign design, final Activity activity) {

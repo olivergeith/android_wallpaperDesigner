@@ -5,7 +5,7 @@ public class WPDUrls {
 	private static final String PHP_FILE_UPLOAD = "upload.php";
 	private static final String PHP_FILE_LIST = "settingslist.php";
 
-	public static final String UPLOAD_URL_COMMUNITY_URL = WEB_HOST + "shareddesigns/" + PHP_FILE_UPLOAD;
+	public static final String UPLOAD_URL_COMMUNITY_DESIGNS = WEB_HOST + "shareddesigns/" + PHP_FILE_UPLOAD;
 	public static final String UPLOAD_URL_FEATURED_DESIGNS = WEB_HOST + "publisheddesigns/" + PHP_FILE_UPLOAD;
 
 	public static final String LIST_URL_COMMUNITY_DESIGNS = WEB_HOST + "shareddesigns/" + PHP_FILE_LIST;

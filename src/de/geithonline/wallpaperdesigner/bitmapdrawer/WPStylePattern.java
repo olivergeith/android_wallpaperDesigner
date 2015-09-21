@@ -469,30 +469,34 @@ public abstract class WPStylePattern extends WPStyle {
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS);
 				break;
 			case "V18":
+			case "Spiky Cross":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPIKY_CROSS);
+				break;
+			case "V19":
 			case "Double Cross":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DOUBLE_CROSS);
 				break;
-			case "V19":
+			case "V20":
 			case "Sperm":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
 				break;
-			case "V20":
+			case "V21":
 			case "Virus":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
 				break;
-			case "V21":
+			case "V22":
 			case "Virus V2":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
 				break;
-			case "V22":
+			case "V23":
 			case "Long Heart":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.LONG_HEART);
 				break;
-			case "V23":
+			case "V24":
 			case "Circle Chain":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE);
 				break;
-			case "V24":
+			case "V25":
 			case "Circle Chain (upsidedown)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE_UPSIDEDOWN);
 				break;
