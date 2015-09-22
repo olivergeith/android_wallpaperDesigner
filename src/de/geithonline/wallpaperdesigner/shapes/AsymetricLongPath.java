@@ -409,19 +409,15 @@ public class AsymetricLongPath extends Path {
 	private void drawCrossSlim(final PointF center, final float radius, final int height, final boolean filled) {
 		moveTo(center.x, center.y);
 
-		quadTo(center.x, center.y - height / 2, // controllpoint
-				center.x - radius * .01f, center.y - height + radius); // Zielpunkt
-
-		quadTo(center.x, center.y - height, // controllpoint
+		cubicTo(center.x, center.y - height, // CP1
+				center.x, center.y - height, // CP2
 				center.x - radius, center.y - height); // Zielpunkt
 		quadTo(center.x, center.y - height, // controllpoint
 				center.x, center.y - height - radius); // Zielpunkt
 		quadTo(center.x, center.y - height, // controllpoint
 				center.x + radius, center.y - height); // Zielpunkt
-		quadTo(center.x, center.y - height, // controllpoint
-				center.x + radius * 0.1f, center.y - height + radius); // Zielpunkt
-
-		quadTo(center.x, center.y - height / 2, // controllpoint
+		cubicTo(center.x, center.y - height, // CP1
+				center.x, center.y - height, // CP2
 				center.x, center.y); // Zielpunkt
 
 		close();
