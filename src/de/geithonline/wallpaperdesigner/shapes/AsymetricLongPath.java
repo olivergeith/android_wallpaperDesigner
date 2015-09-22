@@ -7,91 +7,98 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE;
 	}
 
-	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
+	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled,
+			final ASYMETRIC_STYLE style) {
 
 		switch (style) {
-			default:
-			case RAUTE:
-				drawRaute(center, radius, height, filled);
-				break;
-			case DRACHEN:
-				drawDrache(center, radius, height, filled);
-				break;
-			case DRACHEN_UPSIDEDOWN:
-				drawDracheUpside(center, radius, height, filled);
-				break;
-			case OVAL:
-				drawOval(center, radius, height, filled);
-				break;
-			case TRIANGLE:
-				drawTriangle(center, radius, height, filled);
-				break;
-			case LENSE:
-				drawLense(center, radius, height, filled);
-				break;
-			case LENSE_V2:
-				drawLenseV2(center, radius, height, filled);
-				break;
-			case LENSE_V3:
-				drawLenseV3(center, radius, height, filled);
-				break;
-			case DROP:
-				drawLongDrop(center, radius, height, filled);
-				break;
-			case LONG_HEART:
-				drawLongHeart(center, radius, height, filled);
-				break;
-			case TAG:
-				drawTag(center, radius, height, filled);
-				break;
-			case KNIFE:
-				drawKnife(center, radius, height, filled);
-				break;
-			case KNIFE_V2:
-				drawKnifeV2(center, radius, height, filled);
-				break;
-			case KNIFE_V3:
-				drawKnifeV3(center, radius, height, filled);
-				break;
-			case GOLF_PIN:
-				drawGolfPin(center, radius, height, filled);
-				break;
-			case CROSS:
-				drawCross(center, radius, height, filled);
-				break;
-			case CROSS_SLIM:
-				drawCrossSlim(center, radius, height, filled);
-				break;
-			case SPIKY_CROSS:
-				drawCrossMartial(center, radius, height, filled);
-				break;
-			case DOUBLE_CROSS:
-				drawCrossDouble(center, radius, height, filled);
-				break;
-			case SPEAR1:
-				drawSpear(center, radius, height, filled);
-				break;
-			case BIRD:
-				drawBird(center, radius, height, filled);
-				break;
-			case SPERM:
-				drawSperm(center, radius, height, filled);
-				break;
-			case VIRUS:
-				drawVirus(8, center, radius, height, filled);
-				break;
-			case VIRUS_V2:
-				drawVirus(16, center, radius, height, filled);
-				break;
-			case CHAIN_CIRCLE:
-				drawCircleChain(center, radius, height, filled);
-				break;
-			case CHAIN_CIRCLE_UPSIDEDOWN:
-				drawCircleChain2(center, radius, height, filled);
-				break;
+		default:
+		case RAUTE:
+			drawRaute(center, radius, height, filled);
+			break;
+		case DRACHEN:
+			drawDrache(center, radius, height, filled);
+			break;
+		case DRACHEN_UPSIDEDOWN:
+			drawDracheUpside(center, radius, height, filled);
+			break;
+		case OVAL:
+			drawOval(center, radius, height, filled);
+			break;
+		case TRIANGLE:
+			drawTriangle(center, radius, height, filled);
+			break;
+		case LENSE:
+			drawLense(center, radius, height, filled);
+			break;
+		case LENSE_V2:
+			drawLenseV2(center, radius, height, filled);
+			break;
+		case LENSE_V3:
+			drawLenseV3(center, radius, height, filled);
+			break;
+		case DROP:
+			drawLongDrop(center, radius, height, filled);
+			break;
+		case LONG_HEART:
+			drawLongHeart(center, radius, height, filled);
+			break;
+		case TAG:
+			drawTag(center, radius, height, filled);
+			break;
+		case KNIFE:
+			drawKnife(center, radius, height, filled);
+			break;
+		case KNIFE_V2:
+			drawKnifeV2(center, radius, height, filled);
+			break;
+		case KNIFE_V3:
+			drawKnifeV3(center, radius, height, filled);
+			break;
+		case GOLF_PIN:
+			drawGolfPin(center, radius, height, filled);
+			break;
+		case PIN:
+			drawPin(center, radius, height, filled);
+			break;
+		case CROSS:
+			drawCross(center, radius, height, filled);
+			break;
+		case CROSS_SLIM:
+			drawCrossSlim(center, radius, height, filled);
+			break;
+		case CROSS_SLIM_DOUBLE:
+			drawCrossSlimV2(center, radius, height, filled);
+			break;
+		case SPIKY_CROSS:
+			drawCrossMartial(center, radius, height, filled);
+			break;
+		case DOUBLE_CROSS:
+			drawCrossDouble(center, radius, height, filled);
+			break;
+		case SPEAR1:
+			drawSpear(center, radius, height, filled);
+			break;
+		case BIRD:
+			drawBird(center, radius, height, filled);
+			break;
+		case SPERM:
+			drawSperm(center, radius, height, filled);
+			break;
+		case VIRUS:
+			drawVirus(8, center, radius, height, filled);
+			break;
+		case VIRUS_V2:
+			drawVirus(16, center, radius, height, filled);
+			break;
+		case CHAIN_CIRCLE:
+			drawCircleChain(center, radius, height, filled);
+			break;
+		case CHAIN_CIRCLE_UPSIDEDOWN:
+			drawCircleChain2(center, radius, height, filled);
+			break;
 		}
 
 	}
@@ -427,6 +434,31 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
+	private void drawCrossSlimV2(final PointF center, final float radius, final int height, final boolean filled) {
+
+		final Path cross1 = new AsymetricLongPath(center, radius / 2, (int) (height - 1.5f * radius), filled,
+				ASYMETRIC_STYLE.CROSS_SLIM);
+
+		addPath(cross1);
+
+		moveTo(center.x, center.y - height + radius);
+
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x - radius, center.y - height); // Zielpunkt
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x, center.y - height - radius); // Zielpunkt
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x + radius, center.y - height); // Zielpunkt
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x, center.y - height + radius); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height, radius * 0.2f, Direction.CCW);
+		}
+	}
+
+	// ##################################################################################
 	private void drawGolfPin(final PointF center, final float radius, final int height, final boolean filled) {
 		moveTo(center.x, center.y);
 
@@ -581,7 +613,8 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawVirus(final int arms, final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawVirus(final int arms, final PointF center, final float radius, final int height,
+			final boolean filled) {
 
 		final PointF circlecenter = new PointF(center.x, center.y - height + radius);
 		final float angle = (float) (2 * Math.PI / (arms));
@@ -644,4 +677,36 @@ public class AsymetricLongPath extends Path {
 			offset = offset + 2 * r2;
 		}
 	}
+
+	// ##################################################################################
+	private void drawPin(final PointF center, final float radius, final int height, final boolean filled) {
+		moveTo(center.x, center.y);
+
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x - radius / 2, center.y - height + radius); // Zielpunkt
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x + radius / 2, center.y - height + radius); // Zielpunkt
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x, center.y); // Zielpunkt
+
+		close();
+
+		moveTo(center.x, center.y - height - radius);
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x + radius, center.y - height); // Zielpunkt
+		final RectF oval = new RectF();
+		oval.left = center.x - radius;
+		oval.right = center.x + radius;
+		oval.top = center.y - height - radius;
+		oval.bottom = center.y - height + radius;
+		arcTo(oval, 0, 180);
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x, center.y - height - radius); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height + radius / 2, radius * 0.3f, Direction.CCW);
+		}
+	}
+
 }
