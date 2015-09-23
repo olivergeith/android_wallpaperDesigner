@@ -37,9 +37,9 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", "Triangle", "Oval", "Diamond", "Dragon", "Dragon (upsidedown)",
-						"Drop", "Lense", "Lense V2", "Lense V3", "Tag", "Knife", "Knife V2", "Knife V3", "Cross", "Cross (Slim)", "Cross (Slim-Double)",
-						"Spiky Cross", "Double Cross", "Sperm", "Virus", "Virus V2", "Long Heart", "Circle Chain", "Circle Chain (upsidedown)", "Spear",
-						"Bird", "Golf Pin", "Pin", "Tulip", "Plane", "Arrow" }));
+						"Drop", "Lense", "Lense V2", "Lense V3", "Tag", "Knife", "Knife V2", "Knife V3", "Cross", "Cross (Slim)", "Cross (Slim V2)",
+						"Cross (Slim V3)", "Cross (Slim-Double)", "Spiky Cross", "Double Cross", "Sperm", "Virus", "Virus V2", "Long Heart", "Circle Chain",
+						"Circle Chain (upsidedown)", "Spear", "Bird", "Golf Pin", "Pin", "Tulip", "Plane", "Arrow" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));

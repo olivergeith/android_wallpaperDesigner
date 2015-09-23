@@ -510,7 +510,7 @@ public abstract class WPStylePattern extends WPStyle {
 				break;
 			case "V28":
 			case "Cross (Slim)":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
 				break;
 			case "V29":
 			case "Cross (Slim-Double)":
@@ -535,6 +535,14 @@ public abstract class WPStylePattern extends WPStyle {
 			case "V34":
 			case "Arrow":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.ARROW);
+				break;
+			case "V35":
+			case "Cross (Slim V2)":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_V2);
+				break;
+			case "V36":
+			case "Cross (Slim V3)":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_V3);
 				break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

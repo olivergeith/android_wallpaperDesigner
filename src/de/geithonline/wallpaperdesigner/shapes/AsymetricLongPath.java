@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP, PLANE, ARROW;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -70,6 +70,12 @@ public class AsymetricLongPath extends Path {
 				break;
 			case CROSS_SLIM:
 				drawCrossSlim(center, radius, height, filled);
+				break;
+			case CROSS_SLIM_V2:
+				drawCrossSlimV2(center, radius, height, filled);
+				break;
+			case CROSS_SLIM_V3:
+				drawCrossSlimV3(center, radius, height, filled);
 				break;
 			case CROSS_SLIM_DOUBLE:
 				drawCrossSlimDouble(center, radius, height, filled);
@@ -432,6 +438,64 @@ public class AsymetricLongPath extends Path {
 		quadTo(center.x, center.y - height, // controllpoint
 				center.x + radius, center.y - height); // Zielpunkt
 		cubicTo(center.x, center.y - height, // CP1
+				center.x, center.y - height, // CP2
+				center.x, center.y); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height, radius * 0.2f, Direction.CCW);
+
+			// Kreise an den Spitzen
+			// addCircle(center.x - radius - radius * 0.2f, center.y - height, radius * 0.2f, Direction.CCW);
+			// addCircle(center.x, center.y - height - radius - radius * 0.2f, radius * 0.2f, Direction.CCW);
+			// addCircle(center.x + radius + radius * 0.2f, center.y - height, radius * 0.2f, Direction.CCW);
+		}
+	}
+
+	// #####################################################-#############################
+	private void drawCrossSlimV2(final PointF center, final float radius, final int height, final boolean filled) {
+		final float offset = 0.1f;
+
+		moveTo(center.x, center.y);
+
+		cubicTo(center.x, center.y - height, // CP1
+				center.x, center.y - height + radius * offset, // CP2
+				center.x - radius, center.y - height + radius * offset); // Zielpunkt
+		lineTo(center.x - radius, center.y - height - radius * offset);
+
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x - radius * offset, center.y - height - radius); // Zielpunkt
+		lineTo(center.x + radius * offset, center.y - height - radius);
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x + radius, center.y - height - radius * offset); // Zielpunkt
+		lineTo(center.x + radius, center.y - height + radius * offset);
+		cubicTo(center.x, center.y - height + radius * offset, // CP1
+				center.x, center.y - height, // CP2
+				center.x, center.y); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height, radius * 0.2f, Direction.CCW);
+		}
+	}
+
+	// #####################################################-#############################
+	private void drawCrossSlimV3(final PointF center, final float radius, final int height, final boolean filled) {
+		final float offset = 0.1f;
+
+		moveTo(center.x, center.y);
+
+		cubicTo(center.x, center.y - height, // CP1
+				center.x, center.y - height + radius * offset, // CP2
+				center.x - radius, center.y - height + radius * offset); // Zielpunkt
+		lineTo(center.x - radius, center.y - height - radius * offset);
+
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x, center.y - height - radius); // Zielpunkt
+		quadTo(center.x, center.y - height, // controllpoint
+				center.x + radius, center.y - height - radius * offset); // Zielpunkt
+		lineTo(center.x + radius, center.y - height + radius * offset);
+		cubicTo(center.x, center.y - height + radius * offset, // CP1
 				center.x, center.y - height, // CP2
 				center.x, center.y); // Zielpunkt
 
