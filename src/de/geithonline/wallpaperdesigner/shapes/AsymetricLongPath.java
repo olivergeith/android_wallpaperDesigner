@@ -7,7 +7,7 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -79,6 +79,9 @@ public class AsymetricLongPath extends Path {
 				break;
 			case SPEAR1:
 				drawSpear(center, radius, height, filled);
+				break;
+			case TULIP:
+				drawTulip(center, radius, height, filled);
 				break;
 			case BIRD:
 				drawBird(center, radius, height, filled);
@@ -536,6 +539,30 @@ public class AsymetricLongPath extends Path {
 			addCircle(center.x, center.y - height - radius * 1 / 3, radius * 0.2f, Direction.CCW);
 			addCircle(center.x, center.y - height + radius * 0.05f, radius * 0.13f, Direction.CCW);
 			addCircle(center.x, center.y - height + radius * 1 / 3, radius * 0.1f, Direction.CCW);
+		}
+	}
+
+	// ##################################################################################
+	private void drawTulip(final PointF center, final float radius, final int height, final boolean filled) {
+		moveTo(center.x, center.y);
+
+		cubicTo(center.x, center.y - height, // CP1
+				center.x - radius / 2, center.y - height + radius, // CP2
+				center.x - radius, center.y - height); // Zielpunkt
+
+		quadTo(center.x - radius / 2, center.y - height + radius / 2, // controllpoint
+				center.x, center.y - height - radius / 2); // Zielpunkt
+
+		quadTo(center.x + radius / 2, center.y - height + radius / 2, // controllpoint
+				center.x + radius, center.y - height); // Zielpunkt
+
+		cubicTo(center.x + radius / 2, center.y - height + radius, // CP1
+				center.x, center.y - height, // CP2
+				center.x, center.y); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height - radius * 3 / 4, radius * 0.2f, Direction.CCW);
 		}
 	}
 
