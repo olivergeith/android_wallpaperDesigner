@@ -526,7 +526,7 @@ public abstract class WPStylePattern extends WPStyle {
 				break;
 			case "V32":
 			case "Tulip":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP);
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_NORMAL);
 				break;
 			case "V33":
 			case "Plane":
@@ -543,6 +543,14 @@ public abstract class WPStylePattern extends WPStyle {
 			case "V36":
 			case "Cross (Slim V3)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_V3);
+				break;
+			case "V37":
+			case "Tulip (Slim)":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_SLIM);
+				break;
+			case "V38":
+			case "Tulip (Fat)":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_FAT);
 				break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

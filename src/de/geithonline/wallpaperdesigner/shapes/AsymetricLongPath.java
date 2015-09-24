@@ -7,7 +7,10 @@ import android.graphics.RectF;
 public class AsymetricLongPath extends Path {
 
 	public enum ASYMETRIC_STYLE {
-		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3;
+		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, //
+		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
+		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
+		TULIP_FAT, TULIP_SLIM;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -89,8 +92,14 @@ public class AsymetricLongPath extends Path {
 			case SPEAR1:
 				drawSpear(center, radius, height, filled);
 				break;
-			case TULIP:
-				drawTulip(center, radius, height, filled);
+			case TULIP_SLIM:
+				drawTulipSlim(center, radius, height, filled);
+				break;
+			case TULIP_NORMAL:
+				drawTulipNormal(center, radius, height, filled);
+				break;
+			case TULIP_FAT:
+				drawTulipFat(center, radius, height, filled);
 				break;
 			case BIRD:
 				drawBird(center, radius, height, filled);
@@ -668,10 +677,31 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawTulip(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawTulipNormal(final PointF center, final float radius, final int height, final boolean filled) {
+		drawTulip(center, radius, height, filled, 0);
+	}
+
+	private void drawTulipSlim(final PointF center, final float radius, final int height, final boolean filled) {
+		drawTulip(center, radius, height, filled, -1);
+	}
+
+	private void drawTulipFat(final PointF center, final float radius, final int height, final boolean filled) {
+		drawTulip(center, radius, height, filled, 1);
+	}
+
+	/**
+	 * @param center
+	 * @param radius
+	 * @param height
+	 * @param filled
+	 * @param slimmy
+	 *            -1 = very slip, 0=nomal, +1=bigger
+	 */
+	private void drawTulip(final PointF center, final float radius, final int height, final boolean filled, final int slimmy) {
 		moveTo(center.x, center.y);
 
-		cubicTo(center.x, center.y - height, // CP1
+		final float offset = slimmy * radius;
+		cubicTo(center.x, center.y - height + offset, // CP1
 				center.x - radius / 2, center.y - height + radius, // CP2
 				center.x - radius, center.y - height); // Zielpunkt
 
@@ -682,7 +712,7 @@ public class AsymetricLongPath extends Path {
 				center.x + radius, center.y - height); // Zielpunkt
 
 		cubicTo(center.x + radius / 2, center.y - height + radius, // CP1
-				center.x, center.y - height, // CP2
+				center.x, center.y - height + offset, // CP2
 				center.x, center.y); // Zielpunkt
 
 		close();
