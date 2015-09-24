@@ -400,155 +400,120 @@ public abstract class WPStylePattern extends WPStyle {
 		Path path;
 		switch (variante) {
 			default:
-			case "V1":
 			case "Rectangle":
 				path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.NORMAL);
 				break;
-			case "V2":
 			case "Rectangle (rounded)":
 				path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
 				break;
-			case "V3":
 			case "Rectangle (Mixed)":
 				path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.MIXED);
 				break;
-			case "V4":
 			case "Triangle":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE);
 				break;
-			case "V5":
 			case "Oval":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.OVAL);
 				break;
-			case "V6":
 			case "Diamond":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.RAUTE);
 				break;
-			case "V7":
 			case "Dragon":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN);
 				break;
-			case "V8":
 			case "Dragon (upsidedown)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN_UPSIDEDOWN);
 				break;
-			case "V9":
 			case "Drop":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DROP);
 				break;
-			case "V10":
 			case "Lense":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE);
 				break;
-			case "V11":
 			case "Lense V2":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V2);
 				break;
-			case "V12":
 			case "Lense V3":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V3);
 				break;
-			case "V13":
 			case "Tag":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TAG);
 				break;
-			case "V14":
 			case "Knife":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE);
 				break;
-			case "V15":
 			case "Knife V2":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V2);
 				break;
-			case "V16":
 			case "Knife V3":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V3);
 				break;
-			case "V17":
 			case "Cross":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS);
 				break;
-			case "V18":
-			case "Spiky Cross":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPIKY_CROSS);
-				break;
-			case "V19":
-			case "Double Cross":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DOUBLE_CROSS);
-				break;
-			case "V20":
-			case "Sperm":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
-				break;
-			case "V21":
-			case "Virus":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
-				break;
-			case "V22":
-			case "Virus V2":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
-				break;
-			case "V23":
-			case "Long Heart":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.LONG_HEART);
-				break;
-			case "V24":
-			case "Circle Chain":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE);
-				break;
-			case "V25":
-			case "Circle Chain (upsidedown)":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE_UPSIDEDOWN);
-				break;
-			case "V26":
-			case "Spear":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPEAR1);
-				break;
-			case "V27":
-			case "Bird":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD);
-				break;
-			case "V28":
 			case "Cross (Slim)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
 				break;
-			case "V29":
 			case "Cross (Slim-Double)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_DOUBLE);
 				break;
-			case "V30":
+			case "Spiky Cross":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPIKY_CROSS);
+				break;
+			case "Double Cross":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DOUBLE_CROSS);
+				break;
+			case "Sperm":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
+				break;
+			case "Virus":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
+				break;
+			case "Virus V2":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
+				break;
+			case "Long Heart":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.LONG_HEART);
+				break;
+			case "Circle Chain":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE);
+				break;
+			case "Circle Chain (upsidedown)":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE_UPSIDEDOWN);
+				break;
+			case "Spear":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPEAR1);
+				break;
+			case "Bird":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD);
+				break;
+			case "Bird V2":
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD_V2);
+				break;
 			case "Golf Pin":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.GOLF_PIN);
 				break;
-			case "V31":
 			case "Pin":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.PIN);
 				break;
-			case "V32":
 			case "Tulip":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_NORMAL);
 				break;
-			case "V33":
 			case "Plane":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.PLANE);
 				break;
-			case "V34":
 			case "Arrow":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.ARROW);
 				break;
-			case "V35":
 			case "Cross (Slim V2)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_V2);
 				break;
-			case "V36":
 			case "Cross (Slim V3)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_V3);
 				break;
-			case "V37":
 			case "Tulip (Slim)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_SLIM);
 				break;
-			case "V38":
 			case "Tulip (Fat)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_FAT);
 				break;
