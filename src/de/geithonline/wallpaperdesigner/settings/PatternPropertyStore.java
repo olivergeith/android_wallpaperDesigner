@@ -35,13 +35,12 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Oval",
 						"Oval (random width)", "Oval (random)", "Half Circle", "Mixed", "Mixed (with Circle)" }));
 
-		patternProperties
-				.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
-						new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", "Triangle", "Oval", "Diamond", "Dragon",
-								"Dragon (upsidedown)", "Drop", "Lense", "Lense V2", "Lense V3", "Tag", "Knife", "Knife V2", "Knife V3", "Cross",
-								"Cross (Slim)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", "Spiky Cross", "Double Cross", "Sperm", "Virus",
-								"Virus V2", "Long Heart", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Bird", "Bird V2", "Golf Pin", "Pin",
-								"Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane", "Arrow" }));
+		patternProperties.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
+				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", "Triangle", "Oval", "Diamond", "Dragon", "Dragon (upsidedown)",
+						"Drop", "Lense", "Lense V2", "Lense V3", "Tag", "Knife", "Knife V2", "Knife V3", "Cross", "Cross (Slim)", "Cross (Slim V2)",
+						"Cross (Slim V3)", "Cross (Slim-Double)", "Spiky Cross", "Double Cross", "Sperm", "Virus", "Virus V2", "Long Heart", "Circle Chain",
+						"Circle Chain (upsidedown)", "Spear", "Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane",
+						"Spaceship", "Arrow" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));

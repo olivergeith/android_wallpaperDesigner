@@ -10,7 +10,7 @@ public class AsymetricLongPath extends Path {
 		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, //
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
-		TULIP_FAT, TULIP_SLIM, BIRD_V2;
+		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -124,6 +124,9 @@ public class AsymetricLongPath extends Path {
 				break;
 			case CHAIN_CIRCLE_UPSIDEDOWN:
 				drawCircleChain2(center, radius, height, filled);
+				break;
+			case SPACESHIP:
+				drawSpaceship(center, radius, height, filled);
 				break;
 		}
 
@@ -721,6 +724,55 @@ public class AsymetricLongPath extends Path {
 		close();
 		if (!filled) {
 			addCircle(center.x, center.y - height - radius * 3 / 4, radius * 0.2f, Direction.CCW);
+		}
+	}
+
+	// #################################################################################
+	private void drawSpaceship(final PointF center, final float radius, final int height, final boolean filled) {
+		moveTo(center.x, center.y);
+
+		final float offset = 0 * radius;
+		final float f = 0.75f;
+		final float d = f * radius;
+
+		cubicTo(center.x, center.y - height + offset, // CP1
+				center.x - radius, center.y - height + radius, // CP2
+				center.x - radius, center.y - height); // Zielpunkt
+
+		quadTo(center.x - radius, center.y - height - radius / 2, // controllpoint
+				center.x - radius / 4, center.y - height - radius); // Zielpunkt
+		quadTo(center.x - d, center.y - height - radius / 2, // controllpoint
+				center.x - d, center.y - height); // Zielpunkt
+
+		final RectF oval = new RectF();
+		oval.left = center.x - d;
+		oval.right = center.x;
+		oval.top = center.y - height - d / 2;
+		oval.bottom = center.y - height + d / 2;
+		arcTo(oval, 180, -180);
+		oval.left = center.x;
+		oval.right = center.x + d;
+		oval.top = center.y - height - d / 2;
+		oval.bottom = center.y - height + d / 2;
+		arcTo(oval, 180, -180);
+
+		// quadTo(center.x - radius / 4, center.y - height + radius / 4, // controllpoint
+		// center.x, center.y - height); // Zielpunkt
+		// quadTo(center.x + radius / 4, center.y - height + radius / 4, // controllpoint
+		// center.x + radius / 2, center.y - height); // Zielpunkt
+
+		quadTo(center.x + d, center.y - height - radius / 2, // controllpoint
+				center.x + radius / 4, center.y - height - radius); // Zielpunkt
+		quadTo(center.x + radius, center.y - height - radius / 2, // controllpoint
+				center.x + radius, center.y - height); // Zielpunkt
+
+		cubicTo(center.x + radius, center.y - height + radius, // CP1
+				center.x, center.y - height + offset, // CP2
+				center.x, center.y); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height + radius / 2, radius * 0.2f, Direction.CCW);
 		}
 	}
 
