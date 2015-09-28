@@ -54,8 +54,7 @@ public class PreferenceIO {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs,
-			final String filename, final boolean onlyColors) {
+	public static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs, final String filename, final boolean onlyColors) {
 		Log.i(LOG_TAG, "Loading Settings from " + filename);
 		final File file = new File(getSettingsDir(), filename);
 		if (file.exists()) {
@@ -82,19 +81,16 @@ public class PreferenceIO {
 				// und auch nur wenn nicht only Colors
 				if (!onlyColors) {
 					if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
-								+ Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
 						prefs.edit().putBoolean(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
 					}
 					if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
-								+ Settings.KEY_DROP_SHADOW_OFFSET_X);
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_DROP_SHADOW_OFFSET_X);
 						prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_X, 0).commit();
 						prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_Y, 0).commit();
 					}
 					if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
-								+ Settings.KEY_GLOSSY_REFLECTION_STYLE);
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_REFLECTION_STYLE);
 						prefs.edit().putString(Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal").commit();
 					}
 					if (!keySet.contains(Settings.KEY_GLOSSY_GLOW_STYLE)) {
@@ -102,15 +98,18 @@ public class PreferenceIO {
 						prefs.edit().putString(Settings.KEY_GLOSSY_GLOW_STYLE, "Center").commit();
 					}
 					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_ADJUST)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
-								+ Settings.KEY_OUTLINE_THICKNESS_ADJUST);
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_OUTLINE_THICKNESS_ADJUST);
 						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_ADJUST, 100).commit();
 					}
 					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: "
-								+ Settings.KEY_OUTLINE_THICKNESS_LIMIT);
+						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_OUTLINE_THICKNESS_LIMIT);
 						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3).commit();
 					}
+				}
+				// Spezialbehandlung für alte Designs, die diese Keys noch nicht enthalten
+				if (!keySet.contains(Settings.KEY_COLOR_RANDOMIZING_TYPE)) {
+					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_COLOR_RANDOMIZING_TYPE + " = full RGB");
+					prefs.edit().putString(Settings.KEY_COLOR_RANDOMIZING_TYPE, "full RGB").commit();
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;

@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_COLOR_RANDOMIZING_TYPE = "colorRandomizingType";
 	public static final String KEY_BLURR_STAGE_1 = "blurrStage1";
 	public static final String KEY_BLURR_STAGE_2 = "blurrStage2";
 	public static final String KEY_BLURR_STAGE_3 = "blurrStage3";
@@ -83,6 +84,10 @@ public class Settings {
 		CENTER, HORIZONTAL;
 	}
 
+	public enum COLOR_RANDOMIZING_TYPE {
+		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE;
+	}
+
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
 	public static final String DEFAULT_SHARE_TEXT = "Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner";
 
@@ -137,6 +142,28 @@ public class Settings {
 		}
 		final String imageFormat = prefs.getString(KEY_IMAGE_FORMAT, "jpg");
 		return imageFormat;
+	}
+
+	public static COLOR_RANDOMIZING_TYPE getColorRandomizingType() {
+		switch (getColorRandomizing()) {
+			default:
+			case "full RGB":
+				return COLOR_RANDOMIZING_TYPE.FULL_RGB;
+			case "only RED":
+				return COLOR_RANDOMIZING_TYPE.ONLY_RED;
+			case "only GREEN":
+				return COLOR_RANDOMIZING_TYPE.ONLY_GREEN;
+			case "only BLUE":
+				return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
+		}
+	}
+
+	public static String getColorRandomizing() {
+		if (prefs == null) {
+			return "full RGB";
+		}
+		final String type = prefs.getString(KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
+		return type;
 	}
 
 	// ###################################################################

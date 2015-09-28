@@ -90,7 +90,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 				pcolor = Randomizer.randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
 			}
 			if (Settings.isRandomizeColors()) {
-				pcolor = Randomizer.randomizeColor(pcolor, Settings.getRandomizeColorRange());
+				pcolor = Randomizer.randomizeColor(pcolor, Settings.getRandomizeColorRange(), Settings.getColorRandomizingType());
 			}
 			paint.setColor(pcolor);
 

@@ -180,6 +180,12 @@
     
    
     
+    <string-array name="colorRandomizingType">
+        <item >full RGB</item>
+        <item >only RED</item>
+        <item >only GREEN</item>
+        <item >only BLUE</item>
+        </string-array>
     
     
 </resources>

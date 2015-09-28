@@ -44,6 +44,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private CheckBoxPreference sameBackgroundAsPatternGradient;
 
 	private List<String> keys = new ArrayList<String>();
+	private ListPreference colorRandomizingType;
 
 	@Override
 	public void onDestroy() {
@@ -71,8 +72,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
-		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity()
-				.getApplicationContext());
+		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 		prefs.registerOnSharedPreferenceChangeListener(this);
 
 		color1 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR1);
@@ -115,6 +115,14 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 		});
+		colorRandomizingType = (ListPreference) findPreference(Settings.KEY_COLOR_RANDOMIZING_TYPE);
+		colorRandomizingType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleColorRandomizingType((String) newValue);
+				return true;
+			}
+		});
 
 		maxOpacity = (SeekBarPreference) findPreference("maxOpacity");
 		maxOpacity.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -129,6 +137,12 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawPreviewImages();
+		handleColorRandomizingType(Settings.getColorRandomizing());
+	}
+
+	protected void handleColorRandomizingType(final String newValue) {
+		colorRandomizingType.setSummary(newValue);
+
 	}
 
 	@Override
@@ -192,19 +206,19 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
-		case 2:
-			color3.setEnabled(false);
-			color4.setEnabled(false);
-			break;
-		case 3:
-			color3.setEnabled(true);
-			color4.setEnabled(false);
-			break;
-		default:
-		case 4:
-			color3.setEnabled(true);
-			color4.setEnabled(true);
-			break;
+			case 2:
+				color3.setEnabled(false);
+				color4.setEnabled(false);
+				break;
+			case 3:
+				color3.setEnabled(true);
+				color4.setEnabled(false);
+				break;
+			default:
+			case 4:
+				color3.setEnabled(true);
+				color4.setEnabled(true);
+				break;
 		}
 	}
 
