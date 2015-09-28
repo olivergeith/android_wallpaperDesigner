@@ -66,9 +66,10 @@
             android:key="randomizeColorRangeInt"
             android:summary="%1$d"
             android:title="@string/randomizeColorRange"
-            seekbarpreference:maxValue="160"
+            seekbarpreference:maxValue="192"
             seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="4" />
+            seekbarpreference:stepValue="2" />
+    	
     	<PreferenceCategory android:title="Brightness Randomizing..." />
         
         <de.geithonline.android.basics.preferences.SeekBarPreference
