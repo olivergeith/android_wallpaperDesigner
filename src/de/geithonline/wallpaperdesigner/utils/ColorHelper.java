@@ -108,13 +108,14 @@ public class ColorHelper {
 	}
 
 	public static int changeColor(final int color, final int offR, final int offG, final int offB) {
+		final int a = Color.alpha(color);
 		int r = Color.red(color);
 		int g = Color.green(color);
 		int b = Color.blue(color);
 		r = validateColor(r + offR);
 		g = validateColor(g + offG);
 		b = validateColor(b + offB);
-		return Color.rgb(r, g, b);
+		return Color.argb(a, r, g, b);
 	}
 
 	private static int validateColor(int col) {
