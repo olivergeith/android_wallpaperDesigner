@@ -87,7 +87,7 @@ public class Settings {
 	}
 
 	public enum COLOR_RANDOMIZING_TYPE {
-		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, SATURATION, HUE_AND_SATURATION;
+		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, SATURATION, HUE_AND_SATURATION, PUSH_RED, PUSH_GREEN, PUSH_BLUE;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -166,6 +166,12 @@ public class Settings {
 				return COLOR_RANDOMIZING_TYPE.SATURATION;
 			case "hue and saturation":
 				return COLOR_RANDOMIZING_TYPE.HUE_AND_SATURATION;
+			case "push RED":
+				return COLOR_RANDOMIZING_TYPE.PUSH_RED;
+			case "push GREEN":
+				return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
+			case "push BLUE":
+				return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
 		}
 	}
 

@@ -26,7 +26,7 @@ public class Randomizer {
 		final int dRed = getRandomInt(-range, range);
 		final int dGreen = getRandomInt(-range, range);
 		final int dBlue = getRandomInt(-range, range);
-		final float dhue = Randomizer.getRandomFloat(-range, range);
+		final float dhue = Randomizer.getRandomFloat(-range, range) / 4f;
 		final float dsat = Randomizer.getRandomFloat(-range, range) / 160f; // 160 is max... wir brauchen einen Wert
 																			// zwischen 0 und 1
 		switch (type) {
@@ -45,6 +45,12 @@ public class Randomizer {
 				return ColorHelper.adjustHSV(color, 0, dsat, 0);
 			case HUE_AND_SATURATION:
 				return ColorHelper.adjustHSV(color, dhue, dsat, 0);
+			case PUSH_RED:
+				return ColorHelper.changeColor(color, Math.abs(dRed), 0, 0);
+			case PUSH_GREEN:
+				return ColorHelper.changeColor(color, 0, Math.abs(dGreen), 0);
+			case PUSH_BLUE:
+				return ColorHelper.changeColor(color, 0, 0, Math.abs(dBlue));
 		}
 	}
 }
