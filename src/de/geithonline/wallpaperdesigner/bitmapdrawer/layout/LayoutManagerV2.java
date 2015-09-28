@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.WPStyleRandomPatterns;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.WPStyleRasteredPatterns;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory.RasterPositioning;
 
@@ -14,7 +13,7 @@ public class LayoutManagerV2 {
 
 	private static final Map<String, LayoutProperties> layoutProperties = new HashMap<String, LayoutProperties>();
 	static {
-		drawer.put("Random Layout", new WPStyleRandomPatterns());
+		drawer.put("Random Layout", new WPStyleRasteredPatterns(RasterPositioning.RANDOM));
 		drawer.put("Geometric Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_BOOK));
 		drawer.put("Geometric Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_BOOK_REVERSE));
 		drawer.put("Geometric Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.GEOMETRIC_TOWER));
@@ -34,20 +33,18 @@ public class LayoutManagerV2 {
 		drawer.put("Material Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_TOWER));
 		drawer.put("Material Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_RANDOM));
 		drawer.put("Material Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.MATERIAL_CENTER));
-
 		drawer.put("Hex Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.HEX_BOOK));
 		drawer.put("Hex Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.HEX_BOOK_REVERSE));
 		drawer.put("Hex Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.HEX_TOWER));
 		drawer.put("Hex Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.HEX_CENTER));
 		drawer.put("Hex Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.HEX_RANDOM));
-
 		drawer.put("Diagonal Grid (Book)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_BOOK));
 		drawer.put("Diagonal Grid (Book Reverse)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_BOOK_REVERSE));
 		drawer.put("Diagonal Grid (Tower)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_TOWER));
 		drawer.put("Diagonal Grid (Center)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_CENTER));
 		drawer.put("Diagonal Grid (Random)", new WPStyleRasteredPatterns(RasterPositioning.DIAGONAL_RANDOM));
 
-		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown)
+		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown, randomstartwinkel)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				null));
 		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //

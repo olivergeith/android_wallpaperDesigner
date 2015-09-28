@@ -17,7 +17,7 @@ public class RasterFactory {
 		MATERIAL_RANDOM, MATERIAL_BOOK, MATERIAL_BOOK_REVERSE, MATERIAL_TOWER, MATERIAL_CENTER, //
 		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER, //
 		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER, SPIRAL_RANDOM, SPIRAL_INNER, SPIRAL_OUTER, //
-		DIAGONAL_BOOK, DIAGONAL_BOOK_REVERSE, DIAGONAL_TOWER, DIAGONAL_CENTER, DIAGONAL_RANDOM;
+		DIAGONAL_BOOK, DIAGONAL_BOOK_REVERSE, DIAGONAL_TOWER, DIAGONAL_CENTER, DIAGONAL_RANDOM, RANDOM;
 	}
 
 	public static IRaster getRaster(final RasterPositioning positioning, final int width, final int height, final int patternRadius, final float overlap) {
@@ -33,6 +33,9 @@ public class RasterFactory {
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER, Settings.isUpsideDown());
 			case GEOMETRIC_CENTER:
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.CENTER, Settings.isUpsideDown());
+
+			case RANDOM:
+				return new RandomRaster(width, height, patternRadius);
 
 			case HEX_RANDOM:
 				return new HexagonalRaster(width, height, patternRadius, overlap, HEX_POSITIONING.RANDOM, Settings.isUpsideDown());
