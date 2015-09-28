@@ -10,6 +10,8 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public abstract class IRaster {
 	public abstract Point drawNextPoint();
 
+	private RasterPositioning positioning;
+
 	protected final List<Point> points = new ArrayList<Point>();
 
 	public final int getAnzahlPatterns() {
@@ -84,6 +86,14 @@ public abstract class IRaster {
 		final Point p = points.remove(location);
 		top = !top;
 		return p;
+	}
+
+	public RasterPositioning getPositioning() {
+		return positioning;
+	}
+
+	public void setPositioning(final RasterPositioning positioning) {
+		this.positioning = positioning;
 	}
 
 }

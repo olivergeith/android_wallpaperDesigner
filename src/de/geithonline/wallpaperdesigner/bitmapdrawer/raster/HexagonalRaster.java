@@ -1,19 +1,13 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 import android.graphics.Point;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class HexagonalRaster extends IRaster {
-	protected enum HEX_POSITIONING {
-		RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER;
-	}
 
-	private final HEX_POSITIONING positioning;
-
-	public HexagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final HEX_POSITIONING random,
+	public HexagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final boolean upsidedown) {
 
-		positioning = random;
+		setPositioning(positioning);
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
 		final int abstandY = (int) Math.sqrt(abstandX * abstandX - (abstandX / 2) * (abstandX / 2));
 
@@ -27,11 +21,7 @@ public class HexagonalRaster extends IRaster {
 					final int x = w * abstandX + (h % 2) * abstandX / 2;
 					final int y = h * abstandY;
 					final Point p = new Point(x, y);
-					if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
-						points.add(p);
-					} else {
-						points.add(p);
-					}
+					addPoint2List(width, height, p);
 				}
 			}
 		} else {
@@ -42,11 +32,7 @@ public class HexagonalRaster extends IRaster {
 					;
 					final int y = h * abstandY;
 					final Point p = new Point(x, y);
-					if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
-						points.add(p);
-					} else {
-						points.add(p);
-					}
+					addPoint2List(width, height, p);
 				}
 			}
 		}
@@ -54,7 +40,7 @@ public class HexagonalRaster extends IRaster {
 
 	@Override
 	public Point drawNextPoint() {
-		switch (positioning) {
+		switch (getPositioning()) {
 			case RANDOM:
 				return drawRandomPoint();
 			default:

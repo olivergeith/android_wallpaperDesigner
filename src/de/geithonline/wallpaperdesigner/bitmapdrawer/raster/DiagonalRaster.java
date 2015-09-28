@@ -3,16 +3,11 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 import android.graphics.Point;
 
 public class DiagonalRaster extends IRaster {
-	protected enum DIAGONAL_POSITIONING {
-		RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER;
-	}
 
-	private final DIAGONAL_POSITIONING positioning;
-
-	public DiagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final DIAGONAL_POSITIONING random,
+	public DiagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning random,
 			final boolean upsidedown) {
 
-		positioning = random;
+		setPositioning(random);
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
 		final int abstandY = abstandX / 2;
 
@@ -44,7 +39,7 @@ public class DiagonalRaster extends IRaster {
 
 	@Override
 	public Point drawNextPoint() {
-		switch (positioning) {
+		switch (getPositioning()) {
 			case RANDOM:
 				return drawRandomPoint();
 			default:

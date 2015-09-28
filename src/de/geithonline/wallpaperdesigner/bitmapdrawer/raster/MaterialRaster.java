@@ -7,11 +7,9 @@ public class MaterialRaster extends IRaster {
 		RANDOM, TOWER, CENTER, BOOK, BOOK_REVERSE;
 	}
 
-	private final MATERIAL_POSITIONING positioning;
+	public MaterialRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
 
-	public MaterialRaster(final int width, final int height, final int patternRadius, final float overlap, final MATERIAL_POSITIONING positioning) {
-
-		this.positioning = positioning;
+		setPositioning(positioning);
 		final int abstand = Math.round(patternRadius * 2 * overlap);
 
 		final int anzW = width / abstand + 2;
@@ -24,7 +22,7 @@ public class MaterialRaster extends IRaster {
 					final int x = w * abstand;
 					final int y = h * abstand;
 					final Point p = new Point(x, y);
-					points.add(p);
+					addPoint2List(width, height, p);
 				}
 			}
 		}
@@ -32,7 +30,7 @@ public class MaterialRaster extends IRaster {
 
 	@Override
 	public Point drawNextPoint() {
-		switch (positioning) {
+		switch (getPositioning()) {
 			case RANDOM:
 				return drawRandomPoint();
 			default:

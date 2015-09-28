@@ -6,20 +6,15 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class CircularRaster extends IRaster {
-	protected enum POSITIONING_CIRCLE {
-		RANDOM, INNER, OUTER;
-	}
 
 	protected enum CIRCLE_TYPE {
 		HALF, FULL_RANDOM_STARWINKEL, SPIRAL;
 	}
 
-	private final POSITIONING_CIRCLE positioning;
-
-	public CircularRaster(final int width, final int height, final int radius, final float overlap, final POSITIONING_CIRCLE positioning,
+	public CircularRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
 			final CIRCLE_TYPE circleType) {
 
-		this.positioning = positioning;
+		setPositioning(positioning);
 
 		switch (circleType) {
 			default:
@@ -61,11 +56,7 @@ public class CircularRaster extends IRaster {
 				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke + startWinkel) * r);
 				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke + startWinkel) * r);
 				// Limitieren auf punkte innerhalb des Canvas
-				if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
-					points.add(p);
-				} else {
-					points.add(p);
-				}
+				addPoint2List(width, height, p);
 			}
 		}
 	}
@@ -95,11 +86,7 @@ public class CircularRaster extends IRaster {
 				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke + startWinkel) * r);
 				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke + startWinkel) * r);
 				// Limitieren auf punkte innerhalb des Canvas
-				if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
-					points.add(p);
-				} else {
-					points.add(p);
-				}
+				addPoint2List(width, height, p);
 			}
 		}
 	}
@@ -126,18 +113,14 @@ public class CircularRaster extends IRaster {
 				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke) * rp);
 				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke) * rp);
 				// Limitieren auf punkte innerhalb des Canvas
-				if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
-					points.add(p);
-				} else {
-					points.add(p);
-				}
+				addPoint2List(width, height, p);
 			}
 		}
 	}
 
 	@Override
 	public Point drawNextPoint() {
-		switch (positioning) {
+		switch (getPositioning()) {
 			case RANDOM:
 				return drawRandomPoint();
 			default:

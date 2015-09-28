@@ -1,24 +1,14 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Point;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class SinewaveRaster extends IRaster {
-	protected enum POSITIONING_SINEWAVE {
-		RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER;
-	}
 
-	private final List<Point> points = new ArrayList<Point>();
-	private final POSITIONING_SINEWAVE positioning;
-
-	public SinewaveRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING_SINEWAVE positioning,
+	public SinewaveRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final int numberOfWaves) {
 
-		this.positioning = positioning;
+		setPositioning(positioning);
 		for (int n = 0; n < numberOfWaves; n++) {
 
 			final double frequency = Randomizer.getRandomFloat(1, 10); // 1 will bin one sinuswawe from left to right
@@ -39,18 +29,14 @@ public class SinewaveRaster extends IRaster {
 				final int x = w * abstand;
 				final int y = (int) (-amplitude * Math.sin(frequency * x * 2 * Math.PI / width)) + zeroLine;
 				final Point p = new Point(x, y);
-				if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
-					points.add(p);
-				} else {
-					points.add(p);
-				}
+				addPoint2List(width, height, p);
 			}
 		}
 	}
 
 	@Override
 	public Point drawNextPoint() {
-		switch (positioning) {
+		switch (getPositioning()) {
 			case RANDOM:
 				return drawRandomPoint();
 			default:
