@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.IRaster;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.AbstractRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
@@ -58,7 +58,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
-		final IRaster raster = RasterFactory.getRaster(layout, layoutVariante, width, height, maxRadius, Settings.getOverlapping());
+		final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, width, height, maxRadius, Settings.getOverlapping());
 
 		task.settingMax(raster.getAnzahlPatterns());
 

@@ -2,7 +2,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 import android.graphics.Point;
 
-public class HexagonalRaster extends IRaster {
+public class HexagonalRaster extends AbstractRaster {
 
 	public HexagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final boolean upsidedown) {
@@ -11,12 +11,12 @@ public class HexagonalRaster extends IRaster {
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
 		final int abstandY = (int) Math.sqrt(abstandX * abstandX - (abstandX / 2) * (abstandX / 2));
 
-		final int anzW = width / abstandX + 2;
-		final int anzH = height / abstandY + 2;
+		final int anzW = width / abstandX + 6;
+		final int anzH = height / abstandY + 6;
 
 		if (!upsidedown) {
-			for (int h = 0; h < anzH; h++) {
-				for (int w = 0; w < anzW; w++) {
+			for (int h = -3; h < anzH; h++) {
+				for (int w = -3; w < anzW; w++) {
 					// random koordinate an der gemalt werden soll
 					final int x = w * abstandX + (h % 2) * abstandX / 2;
 					final int y = h * abstandY;
@@ -25,8 +25,8 @@ public class HexagonalRaster extends IRaster {
 				}
 			}
 		} else {
-			for (int w = 0; w < anzW; w++) {
-				for (int h = 0; h < anzH; h++) {
+			for (int w = -3; w < anzW; w++) {
+				for (int h = -3; h < anzH; h++) {
 					// random koordinate an der gemalt werden soll
 					final int x = w * abstandX + (h % 2) * abstandX / 2;
 					;

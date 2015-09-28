@@ -2,7 +2,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 import android.graphics.Point;
 
-public class MaterialRaster extends IRaster {
+public class MaterialRaster extends AbstractRaster {
 	protected enum MATERIAL_POSITIONING {
 		RANDOM, TOWER, CENTER, BOOK, BOOK_REVERSE;
 	}

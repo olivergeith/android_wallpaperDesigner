@@ -2,7 +2,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 import android.graphics.Point;
 
-public class GeometricRaster extends IRaster {
+public class GeometricRaster extends AbstractRaster {
 
 	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final boolean upsidedown) {

@@ -7,7 +7,7 @@ import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public abstract class IRaster {
+public abstract class AbstractRaster {
 	public abstract Point drawNextPoint();
 
 	private RasterPositioning positioning;
