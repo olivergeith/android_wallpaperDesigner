@@ -5,7 +5,7 @@ import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class CircularRaster extends IRaster {
+public class CircularRaster extends AbstractRaster {
 
 	protected enum CIRCLE_TYPE {
 		HALF, FULL_RANDOM_STARWINKEL, SPIRAL;

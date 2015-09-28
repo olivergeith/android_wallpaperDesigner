@@ -3,7 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class SinewaveRaster extends IRaster {
+public class SinewaveRaster extends AbstractRaster {
 
 	public SinewaveRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final int numberOfWaves) {

@@ -34,7 +34,7 @@ public class RasterFactory {
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 	}
 
-	public static IRaster getRaster(final String layout, final String variante, final int width, final int height, final int patternRadius, final float overlap) {
+	public static AbstractRaster getRaster(final String layout, final String variante, final int width, final int height, final int patternRadius, final float overlap) {
 		String key;
 		if (variante == null) {
 			key = layout;

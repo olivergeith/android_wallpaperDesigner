@@ -4,7 +4,7 @@ import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class RandomRaster extends IRaster {
+public class RandomRaster extends AbstractRaster {
 
 	public RandomRaster(final int width, final int height, final int patternRadius) {
 		setPositioning(RasterPositioning.RANDOM);
