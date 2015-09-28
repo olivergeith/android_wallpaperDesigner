@@ -117,6 +117,9 @@
     <string name="blurrStage3">Third Blurring</string>
     <string name="colorRandomizingType">Type of Color randomizing</string>
     
+    <string name="limit2Canvas">Limit to Canvas</string>
+    <string name="limit2CanvasSummary">Some Layouts -like circular- have drawing-positions outside the canvas. Patterns drawn there will only protrude into the canvas a little bit.</string>
+    
     
     
 </resources>

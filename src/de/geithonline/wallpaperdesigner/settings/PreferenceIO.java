@@ -111,6 +111,11 @@ public class PreferenceIO {
 					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_COLOR_RANDOMIZING_TYPE + " = full RGB");
 					prefs.edit().putString(Settings.KEY_COLOR_RANDOMIZING_TYPE, "full RGB").commit();
 				}
+				if (!keySet.contains(Settings.KEY_LIMIT_2_CANVAS)) {
+					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_LIMIT_2_CANVAS + " = false");
+					prefs.edit().putBoolean(Settings.KEY_LIMIT_2_CANVAS, false).commit();
+				}
+
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {

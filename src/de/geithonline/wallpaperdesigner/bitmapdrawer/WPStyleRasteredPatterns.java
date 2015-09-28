@@ -69,9 +69,9 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		final int blurLevel1 = raster.getAnzahlPatterns() * Settings.getBlurrStage1() / 100;
 		final int blurLevel2 = raster.getAnzahlPatterns() * Settings.getBlurrStage2() / 100;
 		final int blurLevel3 = raster.getAnzahlPatterns() * Settings.getBlurrStage3() / 100;
-
+		final int anzahlPatterns = raster.getAnzahlPatterns();
 		// Zeichnen
-		for (int i = 0; i < raster.getAnzahlPatterns(); i++) {
+		for (int i = 0; i < anzahlPatterns; i++) {
 			if (i % 100 == 0) {
 				System.gc();
 			}

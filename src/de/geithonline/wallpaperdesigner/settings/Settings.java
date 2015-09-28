@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_LIMIT_2_CANVAS = "limit2Canvas";
 	public static final String KEY_COLOR_RANDOMIZING_TYPE = "colorRandomizingType";
 	public static final String KEY_BLURR_STAGE_1 = "blurrStage1";
 	public static final String KEY_BLURR_STAGE_2 = "blurrStage2";
@@ -92,7 +93,10 @@ public class Settings {
 	public static final String DEFAULT_SHARE_TEXT = "Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner";
 
 	public static boolean isLimit2Canvas() {
-		return false;
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(KEY_LIMIT_2_CANVAS, false);
 	}
 
 	public static String getShareText() {

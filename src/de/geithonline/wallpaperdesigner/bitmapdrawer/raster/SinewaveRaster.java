@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Point;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class SinewaveRaster implements IRaster {
+public class SinewaveRaster extends IRaster {
 	protected enum POSITIONING_SINEWAVE {
 		RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER;
 	}
 
 	private final List<Point> points = new ArrayList<Point>();
-	private final int anzahlPatterns;
 	private final POSITIONING_SINEWAVE positioning;
 
 	public SinewaveRaster(final int width, final int height, final int patternRadius, final float overlap, final POSITIONING_SINEWAVE positioning,
@@ -39,10 +39,13 @@ public class SinewaveRaster implements IRaster {
 				final int x = w * abstand;
 				final int y = (int) (-amplitude * Math.sin(frequency * x * 2 * Math.PI / width)) + zeroLine;
 				final Point p = new Point(x, y);
-				points.add(p);
+				if (Settings.isLimit2Canvas() && isInsideCanvas(width, height, p)) {
+					points.add(p);
+				} else {
+					points.add(p);
+				}
 			}
 		}
-		anzahlPatterns = points.size();
 	}
 
 	@Override
@@ -54,73 +57,12 @@ public class SinewaveRaster implements IRaster {
 			case BOOK:
 				return drawNextBookPoint();
 			case BOOK_REVERSE:
-				return drawNextBookPointBackward();
+				return drawNextBookPointReverse();
 			case TOWER:
 				return drawNextTowerPoint();
 			case CENTER:
 				return drawNextCenterPoint();
 		}
-	}
-
-	@Override
-	public int getAnzahlPatterns() {
-		return anzahlPatterns;
-	}
-
-	private Point drawRandomPoint() {
-		final int size = points.size();
-		if (size == 0) {
-			return new Point(0, 0);
-		}
-		final int location = Randomizer.getRandomInt(-1, size - 1);
-		final Point p = points.remove(location);
-		return p;
-	}
-
-	private Point drawNextBookPoint() {
-		final int size = points.size();
-		if (size == 0) {
-			return new Point(0, 0);
-		}
-		final int location = 0;
-		final Point p = points.remove(location);
-		return p;
-	}
-
-	private Point drawNextBookPointBackward() {
-		final int size = points.size();
-		if (size == 0) {
-			return new Point(0, 0);
-		}
-		final int location = size - 1;
-		final Point p = points.remove(location);
-		return p;
-	}
-
-	private boolean top = true;
-
-	private Point drawNextTowerPoint() {
-		final int size = points.size();
-		if (size == 0) {
-			return new Point(0, 0);
-		}
-		int location = 0;
-		if (top) {
-			location = size - 1;
-		}
-		final Point p = points.remove(location);
-		top = !top;
-		return p;
-	}
-
-	private Point drawNextCenterPoint() {
-		final int size = points.size();
-		if (size == 0) {
-			return new Point(0, 0);
-		}
-		final int location = Math.round(size / 2); // aus der mitte nehmen
-		final Point p = points.remove(location);
-		return p;
 	}
 
 }

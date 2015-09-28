@@ -31,6 +31,13 @@
         android:key="upsideDown"
         android:title="@string/upsideDown" />
 
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="limit2Canvas"
+        android:summary="@string/limit2CanvasSummary"
+        android:title="@string/limit2Canvas" />
+    
+    
     <de.geithonline.android.basics.preferences.SeekBarPreference
         android:defaultValue="1000"
         android:dialogMessage="@string/pattern_anzahlPatterns"
