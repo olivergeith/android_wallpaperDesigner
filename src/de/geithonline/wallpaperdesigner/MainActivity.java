@@ -141,6 +141,9 @@ public class MainActivity extends Activity {
 		});
 
 		setWallButton = (TextView) findViewById(R.id.saveButton);
+		if (!Settings.isShowSetWallpaperButton()) {
+			setWallButton.setVisibility(View.INVISIBLE);
+		}
 		setWallButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -173,6 +176,9 @@ public class MainActivity extends Activity {
 			Log.i("MENU", "Coming beack from Settings...generating...");
 			if (Settings.isRenderingOnSettingsExit()) {
 				generate();
+			}
+			if (!Settings.isShowSetWallpaperButton()) {
+				setWallButton.setVisibility(View.INVISIBLE);
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);

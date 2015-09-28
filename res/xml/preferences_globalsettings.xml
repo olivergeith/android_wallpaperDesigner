@@ -20,6 +20,14 @@
             />
 
         <CheckBoxPreference 
+		    android:key="showSetWallpaperButton"
+    		android:defaultValue="true"
+		    android:title="Show Set-Wallpaper-Button"
+		    android:summary="Remove the Button if it gets in your way...." 
+            />
+        
+        
+        <CheckBoxPreference 
 		    android:key="renderOnSettingsExit"
     		android:defaultValue="true"
 		    android:title="New image, on leaving settings"

@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_SHOW_SET_WALLPAPER_BUTTON = "showSetWallpaperButton";
 	public static final String KEY_LIMIT_2_CANVAS = "limit2Canvas";
 	public static final String KEY_COLOR_RANDOMIZING_TYPE = "colorRandomizingType";
 	public static final String KEY_BLURR_STAGE_1 = "blurrStage1";
@@ -807,6 +808,13 @@ public class Settings {
 			return false;
 		}
 		return prefs.getBoolean(KEY_HEX_VALUES, false);
+	}
+
+	public static boolean isShowSetWallpaperButton() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean(KEY_SHOW_SET_WALLPAPER_BUTTON, true);
 	}
 
 	public static boolean isRenderingOnSettingsExit() {
