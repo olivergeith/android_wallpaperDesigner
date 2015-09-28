@@ -1,6 +1,5 @@
 package de.geithonline.wallpaperdesigner.utils;
 
-import android.graphics.Color;
 import de.geithonline.wallpaperdesigner.settings.Settings.COLOR_RANDOMIZING_TYPE;
 
 public class Randomizer {
@@ -23,68 +22,29 @@ public class Randomizer {
 		return false;
 	}
 
-	public static int randomizeColor(final int color, final int range) {
-		int r = Color.red(color);
-		int g = Color.green(color);
-		int b = Color.blue(color);
-		final int offR = getRandomInt(-range, range);
-		final int offG = getRandomInt(-range, range);
-		final int offB = getRandomInt(-range, range);
-		r = validateColor(r + offR);
-		g = validateColor(g + offG);
-		b = validateColor(b + offB);
-		return Color.rgb(r, g, b);
-	}
-
 	public static int randomizeColor(final int color, final int range, final COLOR_RANDOMIZING_TYPE type) {
-		int r = Color.red(color);
-		int g = Color.green(color);
-		int b = Color.blue(color);
-		int offR = 0;
-		int offG = 0;
-		int offB = 0;
+		final int dRed = getRandomInt(-range, range);
+		final int dGreen = getRandomInt(-range, range);
+		final int dBlue = getRandomInt(-range, range);
+		final float dhue = Randomizer.getRandomFloat(-range, range);
+		final float dsat = Randomizer.getRandomFloat(-range, range) / 160f; // 160 is max... wir brauchen einen Wert
+																			// zwischen 0 und 1
 		switch (type) {
 			default:
 			case FULL_RGB:
-				offR = getRandomInt(-range, range);
-				offG = getRandomInt(-range, range);
-				offB = getRandomInt(-range, range);
-				break;
+				return ColorHelper.changeColor(color, dRed, dGreen, dBlue);
 			case ONLY_RED:
-				offR = getRandomInt(-range, range);
-				break;
+				return ColorHelper.changeColor(color, dRed, 0, 0);
 			case ONLY_GREEN:
-				offG = getRandomInt(-range, range);
-				break;
+				return ColorHelper.changeColor(color, 0, dGreen, 0);
 			case ONLY_BLUE:
-				offB = getRandomInt(-range, range);
-				break;
+				return ColorHelper.changeColor(color, 0, 0, dBlue);
+			case HUE:
+				return ColorHelper.adjustHSV(color, dhue, 0, 0);
+			case SATURATION:
+				return ColorHelper.adjustHSV(color, 0, dsat, 0);
+			case HUE_AND_SATURATION:
+				return ColorHelper.adjustHSV(color, dhue, dsat, 0);
 		}
-		r = validateColor(r + offR);
-		g = validateColor(g + offG);
-		b = validateColor(b + offB);
-		return Color.rgb(r, g, b);
 	}
-
-	public static int randomizeColorBrightness(final int color, final int range) {
-		int r = Color.red(color);
-		int g = Color.green(color);
-		int b = Color.blue(color);
-		final int off = getRandomInt(-range, range);
-		r = validateColor(r + off);
-		g = validateColor(g + off);
-		b = validateColor(b + off);
-		return Color.rgb(r, g, b);
-	}
-
-	private static int validateColor(int col) {
-		if (col < 0) {
-			col = 0;
-		}
-		if (col > 255) {
-			col = 255;
-		}
-		return col;
-	}
-
 }

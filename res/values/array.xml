@@ -185,6 +185,9 @@
         <item >only RED</item>
         <item >only GREEN</item>
         <item >only BLUE</item>
+        <item >hue</item>
+        <item >saturation</item>
+        <item >hue and saturation</item>
         </string-array>
     
     

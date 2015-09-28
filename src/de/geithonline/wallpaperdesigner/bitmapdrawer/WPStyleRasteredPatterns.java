@@ -11,6 +11,7 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
+import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class WPStyleRasteredPatterns extends WPStylePattern {
@@ -87,9 +88,10 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
 
 			if (Settings.isRandomizeBrightness()) {
-				pcolor = Randomizer.randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
+				pcolor = ColorHelper.randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
 			}
 			if (Settings.isRandomizeColors()) {
+				// pcolor = Randomizer.randomizeHue(pcolor, Settings.getRandomizeColorRange());
 				pcolor = Randomizer.randomizeColor(pcolor, Settings.getRandomizeColorRange(), Settings.getColorRandomizingType());
 			}
 			paint.setColor(pcolor);
