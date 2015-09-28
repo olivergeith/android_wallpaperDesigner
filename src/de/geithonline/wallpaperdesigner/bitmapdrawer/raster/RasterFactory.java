@@ -1,5 +1,8 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.CIRCLE_TYPE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.POSITIONING_CIRCLE;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.DiagonalRaster.DIAGONAL_POSITIONING;
@@ -10,87 +13,167 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class RasterFactory {
 
-	public enum RasterPositioning {
+	private static final Map<String, LayoutProperties> layoutProperties = new HashMap<String, LayoutProperties>();
+	static {
 
-		GEOMETRIC_RANDOM, GEOMETRIC_BOOK, GEOMETRIC_BOOK_REVERSE, GEOMETRIC_TOWER, GEOMETRIC_CENTER, //
-		HEX_RANDOM, HEX_BOOK, HEX_BOOK_REVERSE, HEX_TOWER, HEX_CENTER, //
-		MATERIAL_RANDOM, MATERIAL_BOOK, MATERIAL_BOOK_REVERSE, MATERIAL_TOWER, MATERIAL_CENTER, //
-		CIRCULAR_RANDOM, CIRCULAR_INNER, CIRCULAR_OUTER, //
-		HALF_CIRCULAR_RANDOM, HALF_CIRCULAR_INNER, HALF_CIRCULAR_OUTER, SPIRAL_RANDOM, SPIRAL_INNER, SPIRAL_OUTER, //
-		DIAGONAL_BOOK, DIAGONAL_BOOK_REVERSE, DIAGONAL_TOWER, DIAGONAL_CENTER, DIAGONAL_RANDOM, RANDOM;
+		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown, randomstartwinkel)
+		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
+				null));
+		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+
+		layoutProperties.put("Hex Grid", new LayoutProperties(false, true, true, true, false, //
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+
+		layoutProperties.put("Diagonal Grid", new LayoutProperties(false, true, true, true, false, //
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+
+		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+		layoutProperties.put("Circular", new LayoutProperties(false, true, true, false, true, //
+				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
+		layoutProperties.put("Spiral", new LayoutProperties(false, true, true, false, true, //
+				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
+
+		layoutProperties.put("Half Circle", new LayoutProperties(false, true, true, false, true,//
+				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Random" }));
 	}
 
-	public static IRaster getRaster(final RasterPositioning positioning, final int width, final int height, final int patternRadius, final float overlap) {
-		switch (positioning) {
+	public static IRaster getRaster(final String layout, final String variante, final int width, final int height, final int patternRadius, final float overlap) {
+		String key;
+		if (variante == null) {
+			key = layout;
+		} else {
+			key = layout + " (" + variante + ")";
+		}
+		switch (key) {
 			default:
-			case GEOMETRIC_RANDOM:
+			case "Geometric Grid (Random)":
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.RANDOM, Settings.isUpsideDown());
-			case GEOMETRIC_BOOK:
+			case "Geometric Grid (Book)":
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK, Settings.isUpsideDown());
-			case GEOMETRIC_BOOK_REVERSE:
+			case "Geometric Grid (Book Reverse)":
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.BOOK_REVERSE, Settings.isUpsideDown());
-			case GEOMETRIC_TOWER:
+			case "Geometric Grid (Tower)":
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.TOWER, Settings.isUpsideDown());
-			case GEOMETRIC_CENTER:
+			case "Geometric Grid (Center)":
 				return new GeometricRaster(width, height, patternRadius, overlap, POSITIONING.CENTER, Settings.isUpsideDown());
 
-			case RANDOM:
+			case "Random Layout":
 				return new RandomRaster(width, height, patternRadius);
 
-			case HEX_RANDOM:
+			case "Hex Grid (Random)":
 				return new HexagonalRaster(width, height, patternRadius, overlap, HEX_POSITIONING.RANDOM, Settings.isUpsideDown());
-			case HEX_BOOK:
+			case "Hex Grid (Book)":
 				return new HexagonalRaster(width, height, patternRadius, overlap, HEX_POSITIONING.BOOK, Settings.isUpsideDown());
-			case HEX_BOOK_REVERSE:
+			case "Hex Grid (Book Reverse)":
 				return new HexagonalRaster(width, height, patternRadius, overlap, HEX_POSITIONING.BOOK_REVERSE, Settings.isUpsideDown());
-			case HEX_TOWER:
+			case "Hex Grid (Tower)":
 				return new HexagonalRaster(width, height, patternRadius, overlap, HEX_POSITIONING.TOWER, Settings.isUpsideDown());
-			case HEX_CENTER:
+			case "Hex Grid (Center)":
 				return new HexagonalRaster(width, height, patternRadius, overlap, HEX_POSITIONING.CENTER, Settings.isUpsideDown());
 
-			case DIAGONAL_RANDOM:
+			case "Diagonal Grid (Random)":
 				return new DiagonalRaster(width, height, patternRadius, overlap, DIAGONAL_POSITIONING.RANDOM, Settings.isUpsideDown());
-			case DIAGONAL_BOOK:
+			case "Diagonal Grid (Book)":
 				return new DiagonalRaster(width, height, patternRadius, overlap, DIAGONAL_POSITIONING.BOOK, Settings.isUpsideDown());
-			case DIAGONAL_BOOK_REVERSE:
+			case "Diagonal Grid (Book Reverse)":
 				return new DiagonalRaster(width, height, patternRadius, overlap, DIAGONAL_POSITIONING.BOOK_REVERSE, Settings.isUpsideDown());
-			case DIAGONAL_TOWER:
+			case "Diagonal Grid (Tower)":
 				return new DiagonalRaster(width, height, patternRadius, overlap, DIAGONAL_POSITIONING.TOWER, Settings.isUpsideDown());
-			case DIAGONAL_CENTER:
+			case "Diagonal Grid (Center)":
 				return new DiagonalRaster(width, height, patternRadius, overlap, DIAGONAL_POSITIONING.CENTER, Settings.isUpsideDown());
 
-			case SPIRAL_RANDOM:
+			case "Spiral (Random)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.SPIRAL);
-			case SPIRAL_INNER:
+			case "Spiral (Outer to Inner)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.SPIRAL);
-			case SPIRAL_OUTER:
+			case "Spiral (Inner to Outer)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.SPIRAL);
 
-			case CIRCULAR_RANDOM:
+			case "Circular (Random)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-			case CIRCULAR_INNER:
+			case "Circular (Inner to Outer)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-			case CIRCULAR_OUTER:
+			case "Circular (Outer to Inner)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 
-			case HALF_CIRCULAR_RANDOM:
+			case "Half Circle (Random)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.RANDOM, CIRCLE_TYPE.HALF);
-			case HALF_CIRCULAR_INNER:
+			case "Half Circle (Inner to Outer)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.INNER, CIRCLE_TYPE.HALF);
-			case HALF_CIRCULAR_OUTER:
+			case "Half Circle (Outer to Inner)":
 				return new CircularRaster(width, height, patternRadius, overlap, POSITIONING_CIRCLE.OUTER, CIRCLE_TYPE.HALF);
 
-			case MATERIAL_BOOK:
+			case "Material Grid (Book)":
 				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.BOOK);
-			case MATERIAL_BOOK_REVERSE:
+			case "Material Grid (Book Reverse)":
 				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.BOOK_REVERSE);
-			case MATERIAL_RANDOM:
+			case "Material Grid (Random)":
 				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.RANDOM);
-			case MATERIAL_TOWER:
+			case "Material Grid (Tower)":
 				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.TOWER);
-			case MATERIAL_CENTER:
+			case "Material Grid (Center)":
 				return new MaterialRaster(width, height, patternRadius, overlap, MATERIAL_POSITIONING.CENTER);
 
 		}
 	}
+
+	public static boolean hasLayoutAnzahlPattern(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasAnzahlPatterns();
+	}
+
+	public static boolean hasLayoutBlurring(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasBlurring();
+	}
+
+	public static boolean hasLayoutRandomStartwinkel(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasRandomStartWinkel();
+	}
+
+	public static boolean hasLayoutOverlap(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasOverlap();
+	}
+
+	public static boolean hasLayoutUpsideDown(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasUpsideDown();
+	}
+
+	public static boolean hasLayoutVariants(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return false;
+		}
+		return p.hasVariants();
+	}
+
+	public static CharSequence[] getLayoutVariants(final String layout) {
+		final LayoutProperties p = layoutProperties.get(layout);
+		if (p == null) {
+			return null;
+		}
+		final CharSequence[] variants = p.getVariants();
+		return variants;
+	}
+
 }

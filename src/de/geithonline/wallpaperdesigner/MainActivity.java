@@ -34,7 +34,7 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.WPStyleRasteredPatterns;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
 import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.SavedDesign;
@@ -81,8 +81,7 @@ public class MainActivity extends Activity {
 		// Drawer einbinden!
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,
-				R.string.drawer_close) {
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
 			/** Called when a drawer has settled in a completely closed state. */
 			@Override
@@ -328,8 +327,8 @@ public class MainActivity extends Activity {
 		// Save tmp image
 		final Bitmap bitmap = drawer.getBitmap();
 		if (bitmap != null) {
-			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap,
-					StorageHelper.getExternalStorage(), "wpd_tmp.jpg", Settings.getJpgCompression());
+			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorage(), "wpd_tmp.jpg",
+					Settings.getJpgCompression());
 
 			final Uri uri = Uri.fromFile(imageFile);
 			// Uri.parse("file://" + imageFile.getAbsolutePath());
@@ -369,12 +368,9 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = LayoutManagerV2.getDrawer(Settings.getSelectedMainLayout(),
-					Settings.getSelectedMainLayoutVariante());
+			drawer = new WPStyleRasteredPatterns(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
 			// drawer.recycleBitmap();
-			Log.i("Geith",
-					"Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante()
-							+ ")");
+			Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
 
 			final Bitmap bitmap = drawer.drawBitmap(this);
 			return bitmap;
@@ -562,8 +558,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-				SensorManager.SENSOR_DELAY_UI);
+		mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
 	}
 
 	@Override

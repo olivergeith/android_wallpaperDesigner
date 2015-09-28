@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.bitmapdrawer.layout;
+package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 public class LayoutProperties {
 	private final boolean anzahlPatterns;

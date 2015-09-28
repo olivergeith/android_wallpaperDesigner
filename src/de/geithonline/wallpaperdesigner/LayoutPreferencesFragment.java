@@ -8,7 +8,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.layout.LayoutManagerV2;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -54,18 +54,18 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
 		final CheckBoxPreference upsideDown = (CheckBoxPreference) findPreference("upsideDown");
 		final CheckBoxPreference randomStartWinkel = (CheckBoxPreference) findPreference("ramdomStartWinkel");
-		overlapping.setEnabled(LayoutManagerV2.hasLayoutOverlap(selectedLayout));
-		anzahlPatterns.setEnabled(LayoutManagerV2.hasLayoutAnzahlPattern(selectedLayout));
-		blurring.setEnabled(LayoutManagerV2.hasLayoutBlurring(selectedLayout));
-		upsideDown.setEnabled(LayoutManagerV2.hasLayoutUpsideDown(selectedLayout));
-		randomStartWinkel.setEnabled(LayoutManagerV2.hasLayoutRandomStartwinkel(selectedLayout));
+		overlapping.setEnabled(RasterFactory.hasLayoutOverlap(selectedLayout));
+		anzahlPatterns.setEnabled(RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
+		blurring.setEnabled(RasterFactory.hasLayoutBlurring(selectedLayout));
+		upsideDown.setEnabled(RasterFactory.hasLayoutUpsideDown(selectedLayout));
+		randomStartWinkel.setEnabled(RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
 
 		// Pattern Variants
-		mainlayoutVariants.setEnabled(LayoutManagerV2.hasLayoutVariants(selectedLayout));
+		mainlayoutVariants.setEnabled(RasterFactory.hasLayoutVariants(selectedLayout));
 
-		if (LayoutManagerV2.hasLayoutVariants(selectedLayout)) {
+		if (RasterFactory.hasLayoutVariants(selectedLayout)) {
 			Log.i("GEITH", "Setting Pattern...");
-			final CharSequence[] variants = LayoutManagerV2.getLayoutVariants(selectedLayout);
+			final CharSequence[] variants = RasterFactory.getLayoutVariants(selectedLayout);
 			mainlayoutVariants.setEntries(variants);
 			mainlayoutVariants.setEntryValues(variants);
 			if (!selectedLayout.equals(mainlayouts.getValue())) {
