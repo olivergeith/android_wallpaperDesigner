@@ -48,7 +48,7 @@ public abstract class AbstractRaster {
 		return p.x >= 0 - abstand //
 				&& p.x < width + abstand //
 				&& p.y >= 0 - abstand //
-				&& p.y < height + abstand;
+				&& p.y < height + 2 * abstand; // unten nehmen wir eine reihe mehr mit...so wars früher auch!
 	}
 
 	protected boolean isInsideCanvasWideTolerance(final int width, final int height, final Point p) {
