@@ -452,7 +452,7 @@ public abstract class WPStylePattern extends WPStyle {
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS);
 				break;
 			case "Cross (Slim)":
-				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
+				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
 				break;
 			case "Cross (Slim-Double)":
 				path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM_DOUBLE);
