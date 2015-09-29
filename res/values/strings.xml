@@ -37,7 +37,7 @@
     <string name="randomizeAlpha">Randomize Alpha</string>
     <string name="randomizeColor">Randomize Color</string>
     <string name="randomizeDropShadowColor">Randomize Dropshadow Color</string>
-    <string name="randomizeColorRange">Color randomizing range</string>
+    <string name="randomizeColorRange">Color-Randomizing amount</string>
     <string name="randomizeColorBrightnessRangeInt">Randomize Brightness Range</string>
     <string name="randomizeAlphaRange">Randomize Alpha Range</string>
     <string name="minOpacity">Minimum Opacity of patterns</string>
@@ -115,7 +115,7 @@
     <string name="blurrStage1">First Blurring</string>
     <string name="blurrStage2">Second Blurring</string>
     <string name="blurrStage3">Third Blurring</string>
-    <string name="colorRandomizingType">Type of Color randomizing</string>
+    <string name="colorRandomizingType">Type of Color-Randomizing</string>
     
     <string name="limit2Canvas">Limit to Canvas</string>
     <string name="limit2CanvasSummary">Some Layouts have drawing-positions outside the canvas. Patterns drawn there will only protrude into the canvas a little bit. You can -stop- these lurking outside-patterns here ;-)</string>

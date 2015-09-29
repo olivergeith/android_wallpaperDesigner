@@ -45,17 +45,19 @@ public abstract class AbstractRaster {
 	}
 
 	protected boolean isInsideCanvasSmallTolerance(final int width, final int height, final Point p) {
-		return p.x >= 0 - abstand //
-				&& p.x < width + abstand //
-				&& p.y >= 0 - abstand //
-				&& p.y < height + 2 * abstand; // unten nehmen wir eine reihe mehr mit...so wars früher auch!
+		return p.x >= 0 - getSmallTolerance() //
+				&& p.x < width + getSmallTolerance() //
+				&& p.y >= 0 - getSmallTolerance() //
+				&& p.y < height + 2 * getSmallTolerance(); // unten nehmen wir eine reihe mehr mit...so wars früher
+															// auch! Und die Designs sollen ja gleich aussehen wie
+															// früher
 	}
 
 	protected boolean isInsideCanvasWideTolerance(final int width, final int height, final Point p) {
-		return p.x >= 0 - abstand * WIDE_CANVAS_LIMIT //
-				&& p.x < width + abstand * WIDE_CANVAS_LIMIT //
-				&& p.y >= 0 - abstand * WIDE_CANVAS_LIMIT //
-				&& p.y < height + abstand * WIDE_CANVAS_LIMIT;
+		return p.x >= 0 - getWideTolerance() //
+				&& p.x < width + getWideTolerance() //
+				&& p.y >= 0 - getWideTolerance() //
+				&& p.y < height + getWideTolerance();
 	}
 
 	protected void addPoint2List(final int width, final int height, final Point p) {
@@ -126,6 +128,14 @@ public abstract class AbstractRaster {
 
 	public void setPositioning(final RasterPositioning positioning) {
 		this.positioning = positioning;
+	}
+
+	public int getSmallTolerance() {
+		return abstand + 1;
+	}
+
+	public int getWideTolerance() {
+		return abstand * WIDE_CANVAS_LIMIT + 1;
 	}
 
 	public int getAbstand() {

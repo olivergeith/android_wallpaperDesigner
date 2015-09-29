@@ -12,8 +12,8 @@ public class HexagonalRaster extends AbstractRaster {
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
 		final int abstandY = (int) Math.sqrt(abstandX * abstandX - (abstandX / 2) * (abstandX / 2));
 
-		final int anzW = width / abstandX + 2 * WIDE_CANVAS_LIMIT;
-		final int anzH = height / abstandY + 2 * WIDE_CANVAS_LIMIT;
+		final int anzW = width / abstandX + 2 * WIDE_CANVAS_LIMIT + 1;
+		final int anzH = height / abstandY + 2 * WIDE_CANVAS_LIMIT + 1;
 
 		if (!upsidedown) {
 			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {

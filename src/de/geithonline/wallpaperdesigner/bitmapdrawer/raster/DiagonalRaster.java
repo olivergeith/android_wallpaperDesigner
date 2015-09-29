@@ -11,8 +11,8 @@ public class DiagonalRaster extends AbstractRaster {
 		final int abstandY = abstandX / 2;
 		setPositioning(random);
 
-		final int anzW = width / abstandX + 2 * WIDE_CANVAS_LIMIT;
-		final int anzH = height / abstandY + 2 * WIDE_CANVAS_LIMIT;
+		final int anzW = width / abstandX + 2 * WIDE_CANVAS_LIMIT + 1;
+		final int anzH = height / abstandY + 2 * WIDE_CANVAS_LIMIT + 1;
 
 		if (!upsidedown) {
 			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {

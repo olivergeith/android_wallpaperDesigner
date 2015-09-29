@@ -10,8 +10,8 @@ public class GeometricRaster extends AbstractRaster {
 		setPositioning(positioning);
 		final int abstand = Math.round(patternRadius * 2 * overlap);
 
-		final int anzW = width / abstand + 2 * WIDE_CANVAS_LIMIT;
-		final int anzH = height / abstand + 2 * WIDE_CANVAS_LIMIT;
+		final int anzW = width / abstand + 2 * WIDE_CANVAS_LIMIT + 1;
+		final int anzH = height / abstand + 2 * WIDE_CANVAS_LIMIT + 1;
 
 		if (!upsidedown) {
 			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {
