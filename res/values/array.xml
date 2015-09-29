@@ -189,8 +189,6 @@
         <item >push GREEN</item>
         <item >push BLUE</item>
         <item >hue</item>
-        <item >saturation</item>
-        <item >hue and saturation</item>
         </string-array>
 
     <string-array name="limit2Canvas">

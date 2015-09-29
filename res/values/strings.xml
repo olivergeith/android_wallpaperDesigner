@@ -37,9 +37,10 @@
     <string name="randomizeAlpha">Randomize Alpha</string>
     <string name="randomizeColor">Randomize Color</string>
     <string name="randomizeDropShadowColor">Randomize Dropshadow Color</string>
-    <string name="randomizeColorRange">Color-Randomizing amount</string>
+    <string name="randomizeColorRange">Randomize Color range</string>
     <string name="randomizeColorBrightnessRangeInt">Randomize Brightness Range</string>
     <string name="randomizeAlphaRange">Randomize Alpha Range</string>
+    <string name="randomizeSaturationRange">Randomize Saturation Range</string>
     <string name="minOpacity">Minimum Opacity of patterns</string>
     <string name="maxOpacity">Maximum Opacity of patterns</string>
     <string name="dropShadow">Dropshadow Style</string>

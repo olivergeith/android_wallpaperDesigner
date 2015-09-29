@@ -69,8 +69,6 @@
             seekbarpreference:maxValue="192"
             seekbarpreference:minValue="0"
             seekbarpreference:stepValue="2" />
-    	
-    	<PreferenceCategory android:title="Brightness Randomizing..." />
         
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="32"
@@ -81,7 +79,20 @@
             seekbarpreference:maxValue="160"
             seekbarpreference:minValue="0"
             seekbarpreference:stepValue="4" />
-    	<PreferenceCategory android:title="Opacity Randomizing..." />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="0"
+            android:dialogMessage="@string/randomizeSaturationRange"
+            android:key="randomizeSaturationRange"
+            android:summary="%1$d"
+            android:title="@string/randomizeSaturationRange"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="1" />
+        
+        
+        
+        <PreferenceCategory android:title="Opacity Randomizing..." />
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="255"
             android:dialogMessage="@string/maxOpacity"

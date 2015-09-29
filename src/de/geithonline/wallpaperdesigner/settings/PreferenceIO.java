@@ -44,6 +44,8 @@ public class PreferenceIO {
 		colorKeys.add(Settings.KEY_COLORS_ANZAHL);
 		colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_RANGE_INT);
 		colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
+		colorKeys.add(Settings.KEY_RANDOMIZE_SATURATION_RANGE);
+		colorKeys.add(Settings.KEY_COLOR_RANDOMIZING_TYPE);
 	}
 
 	/**
@@ -115,6 +117,10 @@ public class PreferenceIO {
 				if (!keySet.contains(Settings.KEY_LIMIT_2_CANVAS)) {
 					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_LIMIT_2_CANVAS + " = small tolerance");
 					prefs.edit().putString(Settings.KEY_LIMIT_2_CANVAS, "small tolerance").commit();
+				}
+				if (!keySet.contains(Settings.KEY_RANDOMIZE_SATURATION_RANGE)) {
+					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_RANDOMIZE_SATURATION_RANGE + " = 0");
+					prefs.edit().putInt(Settings.KEY_RANDOMIZE_SATURATION_RANGE, 0).commit();
 				}
 
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));

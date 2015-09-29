@@ -88,12 +88,21 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			int pcolor = getColorFromBitmap(bitmap, refbitmap, x, y);
 
 			if (Settings.isRandomizeBrightness()) {
-				pcolor = ColorHelper.randomizeColorBrightness(pcolor, Settings.getRandomizeColorBrighnessRange());
+				final int range = Settings.getRandomizeColorBrighnessRange();
+				final int adjust = Randomizer.getRandomInt(-range, range);
+				pcolor = ColorHelper.adjustColorBrightness(pcolor, adjust);
+			}
+			if (Settings.isRandomizeSaturation()) {
+				final int range = Settings.getRandomizeSaturationRange();
+				final float dSaturation = Randomizer.getRandomFloat(-range, range) / 100;
+				pcolor = ColorHelper.adjustHSV(pcolor, 0, dSaturation, 0);
 			}
 			if (Settings.isRandomizeColors()) {
 				// pcolor = Randomizer.randomizeHue(pcolor, Settings.getRandomizeColorRange());
 				pcolor = Randomizer.randomizeColor(pcolor, Settings.getRandomizeColorRange(), Settings.getColorRandomizingType());
 			}
+
+			// pcolor = ColorHelper.setSaturation(pcolor, 0.5f);
 			paint.setColor(pcolor);
 
 			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));

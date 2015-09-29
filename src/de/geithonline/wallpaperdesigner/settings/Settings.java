@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_RANDOMIZE_SATURATION_RANGE = "randomizeSaturationRange";
 	public static final String KEY_SHOW_SET_WALLPAPER_BUTTON = "showSetWallpaperButton";
 	public static final String KEY_LIMIT_2_CANVAS = "limit2Canvas";
 	public static final String KEY_COLOR_RANDOMIZING_TYPE = "colorRandomizingType";
@@ -87,7 +88,7 @@ public class Settings {
 	}
 
 	public enum COLOR_RANDOMIZING_TYPE {
-		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, SATURATION, HUE_AND_SATURATION, PUSH_RED, PUSH_GREEN, PUSH_BLUE;
+		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, PUSH_RED, PUSH_GREEN, PUSH_BLUE;
 	}
 
 	public enum CANVAS_LIMT {
@@ -159,10 +160,6 @@ public class Settings {
 				return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
 			case "hue":
 				return COLOR_RANDOMIZING_TYPE.HUE;
-			case "saturation":
-				return COLOR_RANDOMIZING_TYPE.SATURATION;
-			case "hue and saturation":
-				return COLOR_RANDOMIZING_TYPE.HUE_AND_SATURATION;
 			case "push RED":
 				return COLOR_RANDOMIZING_TYPE.PUSH_RED;
 			case "push GREEN":
@@ -667,6 +664,17 @@ public class Settings {
 			return 12;
 		}
 		return prefs.getInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 12);
+	}
+
+	public static boolean isRandomizeSaturation() {
+		return getRandomizeSaturationRange() != 0;
+	}
+
+	public static int getRandomizeSaturationRange() {
+		if (prefs == null) {
+			return 0;
+		}
+		return prefs.getInt(KEY_RANDOMIZE_SATURATION_RANGE, 0);
 	}
 
 	// ###################################################################

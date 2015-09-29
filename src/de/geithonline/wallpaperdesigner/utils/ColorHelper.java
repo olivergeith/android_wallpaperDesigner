@@ -68,6 +68,25 @@ public class ColorHelper {
 	 *            delta Brightness
 	 * @return
 	 */
+	public static int setSaturation(final int color, final float sat) {
+		final int a = Color.alpha(color);
+
+		final float[] hsv = new float[3];
+		Color.colorToHSV(color, hsv);
+		hsv[1] = validateSaturation(sat);
+		return Color.HSVToColor(a, hsv);
+	}
+
+	/**
+	 * @param color
+	 * @param dHue
+	 *            delta Hue
+	 * @param dSatuarion
+	 *            delta Saturation
+	 * @param dBrightness
+	 *            delta Brightness
+	 * @return
+	 */
 	public static int adjustHSV(final int color, final float dHue, final float dSatuarion, final float dBrightness) {
 		final int a = Color.alpha(color);
 
@@ -78,31 +97,13 @@ public class ColorHelper {
 		float b = hsv[2]; // 0-1 Brightness
 
 		hue = hue + dHue;
-		while (hue > 360) {
-			hue = hue - 360;
-		}
-		while (hue < 0) {
-			hue = hue + 360;
-		}
-		hsv[0] = hue;
+		hsv[0] = validateHue(hue);
 
 		sat = sat + dSatuarion;
-		if (sat > 1) {
-			sat = 1;
-		}
-		while (sat < 0) {
-			sat = 0;
-		}
-		hsv[1] = sat;
+		hsv[1] = validateSaturation(sat);
 
 		b = b + dBrightness;
-		if (b > 1) {
-			b = 1;
-		}
-		while (b < 0) {
-			b = 0;
-		}
-		hsv[2] = b;
+		hsv[2] = validateBrightness(b);
 
 		return Color.HSVToColor(a, hsv);
 	}
@@ -128,14 +129,43 @@ public class ColorHelper {
 		return col;
 	}
 
-	public static int randomizeColorBrightness(final int color, final int range) {
+	private static float validateSaturation(final float sat) {
+		if (sat > 1) {
+			return 1f;
+		}
+		while (sat < 0) {
+			return 0f;
+		}
+		return sat;
+	}
+
+	private static float validateBrightness(final float b) {
+		if (b > 1) {
+			return 1f;
+		}
+		while (b < 0) {
+			return 0f;
+		}
+		return b;
+	}
+
+	private static float validateHue(float hue) {
+		while (hue > 360) {
+			hue = hue - 360;
+		}
+		while (hue < 0) {
+			hue = hue + 360;
+		}
+		return hue;
+	}
+
+	public static int adjustColorBrightness(final int color, final int amout) {
 		int r = Color.red(color);
 		int g = Color.green(color);
 		int b = Color.blue(color);
-		final int off = Randomizer.getRandomInt(-range, range);
-		r = validateColor(r + off);
-		g = validateColor(g + off);
-		b = validateColor(b + off);
+		r = validateColor(r + amout);
+		g = validateColor(g + amout);
+		b = validateColor(b + amout);
 		return Color.rgb(r, g, b);
 	}
 
