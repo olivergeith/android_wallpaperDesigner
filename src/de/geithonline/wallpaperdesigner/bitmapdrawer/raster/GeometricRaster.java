@@ -6,16 +6,16 @@ public class GeometricRaster extends AbstractRaster {
 
 	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final boolean upsidedown) {
-
+		super(patternRadius, overlap);
 		setPositioning(positioning);
 		final int abstand = Math.round(patternRadius * 2 * overlap);
 
-		final int anzW = width / abstand + 10;
-		final int anzH = height / abstand + 10;
+		final int anzW = width / abstand + 2 * WIDE_CANVAS_LIMIT;
+		final int anzH = height / abstand + 2 * WIDE_CANVAS_LIMIT;
 
 		if (!upsidedown) {
-			for (int h = -5; h < anzH; h++) {
-				for (int w = -5; w < anzW; w++) {
+			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {
+				for (int w = -WIDE_CANVAS_LIMIT; w < anzW; w++) {
 					// random koordinate an der gemalt werden soll
 					final int x = w * abstand;
 					final int y = h * abstand;
@@ -24,8 +24,8 @@ public class GeometricRaster extends AbstractRaster {
 				}
 			}
 		} else {
-			for (int w = -5; w < anzW; w++) {
-				for (int h = -5; h < anzH; h++) {
+			for (int w = -WIDE_CANVAS_LIMIT; w < anzW; w++) {
+				for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {
 					// random koordinate an der gemalt werden soll
 					final int x = w * abstand;
 					final int y = h * abstand;

@@ -43,74 +43,74 @@ public class RasterFactory {
 			key = layout + " (" + variante + ")";
 		}
 		switch (key) {
-		default:
-		case "Geometric Grid (Random)":
-			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, Settings.isUpsideDown());
-		case "Geometric Grid (Book)":
-			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK, Settings.isUpsideDown());
-		case "Geometric Grid (Book Reverse)":
-			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE, Settings.isUpsideDown());
-		case "Geometric Grid (Tower)":
-			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, Settings.isUpsideDown());
-		case "Geometric Grid (Center)":
-			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
+			default:
+			case "Geometric Grid (Random)":
+				return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, Settings.isUpsideDown());
+			case "Geometric Grid (Book)":
+				return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK, Settings.isUpsideDown());
+			case "Geometric Grid (Book Reverse)":
+				return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE, Settings.isUpsideDown());
+			case "Geometric Grid (Tower)":
+				return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, Settings.isUpsideDown());
+			case "Geometric Grid (Center)":
+				return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
 
-		case "Random Layout":
-			return new RandomRaster(width, height, patternRadius);
+			case "Random Layout":
+				return new RandomRaster(width, height, patternRadius, overlap);
 
-		case "Hex Grid (Random)":
-			return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, Settings.isUpsideDown());
-		case "Hex Grid (Book)":
-			return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK, Settings.isUpsideDown());
-		case "Hex Grid (Book Reverse)":
-			return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE, Settings.isUpsideDown());
-		case "Hex Grid (Tower)":
-			return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, Settings.isUpsideDown());
-		case "Hex Grid (Center)":
-			return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
+			case "Hex Grid (Random)":
+				return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, Settings.isUpsideDown());
+			case "Hex Grid (Book)":
+				return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK, Settings.isUpsideDown());
+			case "Hex Grid (Book Reverse)":
+				return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE, Settings.isUpsideDown());
+			case "Hex Grid (Tower)":
+				return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, Settings.isUpsideDown());
+			case "Hex Grid (Center)":
+				return new HexagonalRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
 
-		case "Diagonal Grid (Random)":
-			return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, Settings.isUpsideDown());
-		case "Diagonal Grid (Book)":
-			return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK, Settings.isUpsideDown());
-		case "Diagonal Grid (Book Reverse)":
-			return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE, Settings.isUpsideDown());
-		case "Diagonal Grid (Tower)":
-			return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, Settings.isUpsideDown());
-		case "Diagonal Grid (Center)":
-			return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
+			case "Diagonal Grid (Random)":
+				return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, Settings.isUpsideDown());
+			case "Diagonal Grid (Book)":
+				return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK, Settings.isUpsideDown());
+			case "Diagonal Grid (Book Reverse)":
+				return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE, Settings.isUpsideDown());
+			case "Diagonal Grid (Tower)":
+				return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, Settings.isUpsideDown());
+			case "Diagonal Grid (Center)":
+				return new DiagonalRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
 
-		case "Spiral (Random)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.SPIRAL);
-		case "Spiral (Outer to Inner)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.SPIRAL);
-		case "Spiral (Inner to Outer)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.SPIRAL);
+			case "Spiral (Random)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.SPIRAL);
+			case "Spiral (Outer to Inner)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.SPIRAL);
+			case "Spiral (Inner to Outer)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.SPIRAL);
 
-		case "Circular (Random)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-		case "Circular (Inner to Outer)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
-		case "Circular (Outer to Inner)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+			case "Circular (Random)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+			case "Circular (Inner to Outer)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+			case "Circular (Outer to Inner)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 
-		case "Half Circle (Random)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.HALF);
-		case "Half Circle (Inner to Outer)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.HALF);
-		case "Half Circle (Outer to Inner)":
-			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.HALF);
+			case "Half Circle (Random)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.HALF);
+			case "Half Circle (Inner to Outer)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.HALF);
+			case "Half Circle (Outer to Inner)":
+				return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.HALF);
 
-		case "Material Grid (Book)":
-			return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK);
-		case "Material Grid (Book Reverse)":
-			return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE);
-		case "Material Grid (Random)":
-			return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM);
-		case "Material Grid (Tower)":
-			return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER);
-		case "Material Grid (Center)":
-			return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER);
+			case "Material Grid (Book)":
+				return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK);
+			case "Material Grid (Book Reverse)":
+				return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.BOOK_REVERSE);
+			case "Material Grid (Random)":
+				return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM);
+			case "Material Grid (Tower)":
+				return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER);
+			case "Material Grid (Center)":
+				return new MaterialRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER);
 
 		}
 	}

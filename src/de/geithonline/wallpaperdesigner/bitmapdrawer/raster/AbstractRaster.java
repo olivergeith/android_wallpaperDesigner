@@ -8,26 +8,58 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public abstract class AbstractRaster {
+	protected static final int WIDE_CANVAS_LIMIT = 3;
+
 	public abstract Point drawNextPoint();
 
 	private RasterPositioning positioning;
-
+	private int abstand;
 	protected final List<Point> points = new ArrayList<Point>();
+	private final int radius;
+
+	public AbstractRaster(final int radius, final float overlap) {
+		setAbstand(Math.round(radius * 2 * overlap));
+		this.radius = radius;
+	}
 
 	public final int getAnzahlPatterns() {
 		return points.size();
 	}
 
 	protected boolean isInsideCanvas(final int width, final int height, final Point p) {
+		switch (Settings.getCanvasLimitType()) {
+			default:
+			case small:
+				return isInsideCanvasSmallTolerance(width, height, p);
+			case wide:
+				return isInsideCanvasWideTolerance(width, height, p);
+			case strict:
+				return isInsideCanvasStrict(width, height, p);
+			case no_limit:
+				return true;
+		}
+	}
+
+	protected boolean isInsideCanvasStrict(final int width, final int height, final Point p) {
 		return p.x >= 0 && p.x < width && p.y >= 0 && p.y < height;
 	}
 
+	protected boolean isInsideCanvasSmallTolerance(final int width, final int height, final Point p) {
+		return p.x >= 0 - abstand //
+				&& p.x < width + abstand //
+				&& p.y >= 0 - abstand //
+				&& p.y < height + abstand;
+	}
+
+	protected boolean isInsideCanvasWideTolerance(final int width, final int height, final Point p) {
+		return p.x >= 0 - abstand * WIDE_CANVAS_LIMIT //
+				&& p.x < width + abstand * WIDE_CANVAS_LIMIT //
+				&& p.y >= 0 - abstand * WIDE_CANVAS_LIMIT //
+				&& p.y < height + abstand * WIDE_CANVAS_LIMIT;
+	}
+
 	protected void addPoint2List(final int width, final int height, final Point p) {
-		if (Settings.isLimit2Canvas()) {
-			if (isInsideCanvas(width, height, p)) {
-				points.add(p);
-			}
-		} else {
+		if (isInsideCanvas(width, height, p)) {
 			points.add(p);
 		}
 	}
@@ -94,6 +126,18 @@ public abstract class AbstractRaster {
 
 	public void setPositioning(final RasterPositioning positioning) {
 		this.positioning = positioning;
+	}
+
+	public int getAbstand() {
+		return abstand;
+	}
+
+	public void setAbstand(final int abstand) {
+		this.abstand = abstand;
+	}
+
+	public int getRadius() {
+		return radius;
 	}
 
 }

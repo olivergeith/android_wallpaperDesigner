@@ -18,6 +18,7 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 
 	private ListPreference mainlayouts;
 	private ListPreference mainlayoutVariants;
+	private ListPreference limit2Canvas;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 		addPreferencesFromResource(R.xml.preferences_layout);
 		mainlayouts = (ListPreference) findPreference("mainlayouts");
 		mainlayoutVariants = (ListPreference) findPreference("mainlayoutVariants");
+		limit2Canvas = (ListPreference) findPreference("limit2Canvas");
 
 		mainlayouts.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -43,8 +45,23 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 			}
 		});
 
+		limit2Canvas.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleLimit2Canvas((String) newValue);
+				return true;
+			}
+		});
+
+		handleLimit2Canvas(Settings.getCanvasLimit());
 		handleMainLayoutSelect(Settings.getSelectedMainLayout());
 		handleMainLayoutVariantSelect(Settings.getSelectedMainLayoutVariante());
+	}
+
+	protected void handleLimit2Canvas(final String newValue) {
+		limit2Canvas.setSummary(newValue);
+
 	}
 
 	private void handleMainLayoutSelect(final String selectedLayout) {

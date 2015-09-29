@@ -7,6 +7,7 @@ public class SinewaveRaster extends AbstractRaster {
 
 	public SinewaveRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final int numberOfWaves) {
+		super(patternRadius, overlap);
 
 		setPositioning(positioning);
 		for (int n = 0; n < numberOfWaves; n++) {

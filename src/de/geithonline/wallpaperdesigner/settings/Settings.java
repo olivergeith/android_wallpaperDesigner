@@ -90,15 +90,12 @@ public class Settings {
 		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, SATURATION, HUE_AND_SATURATION, PUSH_RED, PUSH_GREEN, PUSH_BLUE;
 	}
 
+	public enum CANVAS_LIMT {
+		strict, small, wide, no_limit;
+	}
+
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
 	public static final String DEFAULT_SHARE_TEXT = "Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner";
-
-	public static boolean isLimit2Canvas() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_LIMIT_2_CANVAS, false);
-	}
 
 	public static String getShareText() {
 		if (prefs == null) {
@@ -180,6 +177,28 @@ public class Settings {
 			return "full RGB";
 		}
 		final String type = prefs.getString(KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
+		return type;
+	}
+
+	public static CANVAS_LIMT getCanvasLimitType() {
+		switch (getCanvasLimit()) {
+			default:
+			case "small tolerance":
+				return CANVAS_LIMT.small;
+			case "wide tolerance":
+				return CANVAS_LIMT.wide;
+			case "strict":
+				return CANVAS_LIMT.strict;
+			case "no limit":
+				return CANVAS_LIMT.no_limit;
+		}
+	}
+
+	public static String getCanvasLimit() {
+		if (prefs == null) {
+			return "small tolerance";
+		}
+		final String type = prefs.getString(KEY_LIMIT_2_CANVAS, "small tolerance");
 		return type;
 	}
 

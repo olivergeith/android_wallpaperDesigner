@@ -13,6 +13,7 @@ public class CircularRaster extends AbstractRaster {
 
 	public CircularRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
 			final CIRCLE_TYPE circleType) {
+		super(radius, overlap);
 
 		setPositioning(positioning);
 
@@ -31,7 +32,7 @@ public class CircularRaster extends AbstractRaster {
 	}
 
 	private void calculateHalfRings(final int width, final int height, final int radius, final float overlap) {
-		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height);
+		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height) + WIDE_CANVAS_LIMIT * getAbstand();
 
 		final int radiusStep = Math.round(radius * 2 * overlap);
 		final int anzRinge = maximumRadius / radiusStep + 2;
@@ -62,7 +63,7 @@ public class CircularRaster extends AbstractRaster {
 	}
 
 	private void calculateCenteredRingsRandomStartWinkel(final int width, final int height, final int radius, final float overlap) {
-		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4);
+		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4) + WIDE_CANVAS_LIMIT * getAbstand();
 
 		final int radiusStep = Math.round(radius * 2 * overlap);
 		final int anzRinge = maximumRadius / radiusStep + 1;
@@ -92,7 +93,7 @@ public class CircularRaster extends AbstractRaster {
 	}
 
 	private void calculateSpiral(final int width, final int height, final int radius, final float overlap) {
-		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4);
+		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4) + WIDE_CANVAS_LIMIT * getAbstand();
 		final int radiusStep = Math.round(radius * 2 * overlap);
 		final int anzRinge = maximumRadius / radiusStep;
 		final Point center = new Point(width / 2, height / 2);

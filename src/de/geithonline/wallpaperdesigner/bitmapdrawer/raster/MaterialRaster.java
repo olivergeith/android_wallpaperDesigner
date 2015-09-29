@@ -8,6 +8,7 @@ public class MaterialRaster extends AbstractRaster {
 	}
 
 	public MaterialRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
+		super(patternRadius, overlap);
 
 		setPositioning(positioning);
 		final int abstand = Math.round(patternRadius * 2 * overlap);
