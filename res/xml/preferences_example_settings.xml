@@ -4,6 +4,7 @@
     	    
     <PreferenceCategory android:title="Download Designs"/>
 
+    <!-- 
     <PreferenceScreen
         android:key="howto"
         android:title="Howto: Download Designs" >
@@ -12,11 +13,23 @@
 		    android:title="Howto: Example-Designs"
 		    android:summary="Download your desired designs here. \nThey will be installed on your sdcard. \n \nUsing them is super easy: \n-> Go back to the main screen of this App \n->Swipe from the left to open the drawer with your designs \n->Select a design \n->Done! :-)" 
             />
+        
     		    		    		    
     </PreferenceScreen>
+     -->
+    <PreferenceCategory android:title="Help on Designs"/>
     
+        <Preference 
+		    android:key="designHowto"
+	        android:title="Howto: Designs"
+	        android:icon="@android:drawable/ic_menu_help"
+	        >
+	        <intent android:action="android.intent.action.VIEW"
+	            android:data="http://olivergeith.bplaced.net/Howto-Desings.html" />
+	    </Preference>
     
-  
+    <PreferenceCategory android:title="Download Designs"/>
+        
         <Preference 
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"

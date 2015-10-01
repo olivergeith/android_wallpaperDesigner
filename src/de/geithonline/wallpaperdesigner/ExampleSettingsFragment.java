@@ -168,7 +168,6 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
 				SettingsIO.saveAllDesignsForUpload(getActivity());
 				return false;
 			}
@@ -178,7 +177,6 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
 				SettingsIO.backupDesignToUploadDir(getActivity());
 				return false;
 			}
@@ -188,7 +186,6 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		publishOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
 				SettingsIO.publishDesign(getActivity());
 				return false;
 			}
