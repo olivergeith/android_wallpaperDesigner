@@ -27,6 +27,8 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference unzipSharedSettings;
 	private Preference publishOneDesign;
 
+	// private Preference designHowto;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -190,6 +192,18 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 				return false;
 			}
 		});
+
+		// designHowto = findPreference("designHowto");
+		// designHowto.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		// @Override
+		// public boolean onPreferenceClick(final Preference preference) {
+		// final Intent intent = new Intent(getActivity(), HelpPageWebView.class);
+		// intent.putExtra("Url", WPDUrls.URL_HOWTO_DESIGNS);
+		// intent.putExtra("Title", "Howto: Designs");
+		// startActivityForResult(intent, 1);
+		// return false;
+		// }
+		// });
 
 		// bestimmte Menüs gibt es nur als Superuser
 		if (!Settings.isSuperUser(getActivity())) {

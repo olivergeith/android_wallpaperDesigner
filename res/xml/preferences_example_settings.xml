@@ -24,8 +24,7 @@
 	        android:title="Howto: Designs"
 	        android:icon="@android:drawable/ic_menu_help"
 	        >
-	        <intent android:action="android.intent.action.VIEW"
-	            android:data="http://olivergeith.bplaced.net/Howto-Desings.html" />
+	        <intent android:action="android.intent.action.VIEW"   android:data="http://olivergeith.bplaced.net/Howto-Desings.html" />
 	    </Preference>
     
     <PreferenceCategory android:title="Download Designs"/>
