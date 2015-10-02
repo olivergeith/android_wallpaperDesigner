@@ -40,12 +40,12 @@ public class PreferenceIO {
 		colorKeys.add(Settings.KEY_COLOR2);
 		colorKeys.add(Settings.KEY_COLOR3);
 		colorKeys.add(Settings.KEY_COLOR4);
-		colorKeys.add(Settings.KEY_COLOR_GRADIENT_DIRECTION);
-		colorKeys.add(Settings.KEY_COLORS_ANZAHL);
-		colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_RANGE_INT);
-		colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
-		colorKeys.add(Settings.KEY_RANDOMIZE_SATURATION_RANGE);
-		colorKeys.add(Settings.KEY_COLOR_RANDOMIZING_TYPE);
+		// colorKeys.add(Settings.KEY_COLOR_GRADIENT_DIRECTION);
+		// colorKeys.add(Settings.KEY_COLORS_ANZAHL);
+		// colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_RANGE_INT);
+		// colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
+		// colorKeys.add(Settings.KEY_RANDOMIZE_SATURATION_RANGE);
+		// colorKeys.add(Settings.KEY_COLOR_RANDOMIZING_TYPE);
 	}
 
 	/**
@@ -82,45 +82,36 @@ public class PreferenceIO {
 				}
 				// Spezialbehandlung für alte Designs, die diese Keys noch nicht enthalten
 				// und auch nur wenn nicht only Colors
-				if (!onlyColors) {
-					if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
-						prefs.edit().putBoolean(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true).commit();
-					}
-					if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_DROP_SHADOW_OFFSET_X);
-						prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_X, 0).commit();
-						prefs.edit().putInt(Settings.KEY_DROP_SHADOW_OFFSET_Y, 0).commit();
-					}
-					if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_REFLECTION_STYLE);
-						prefs.edit().putString(Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal").commit();
-					}
-					if (!keySet.contains(Settings.KEY_GLOSSY_GLOW_STYLE)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_GLOSSY_GLOW_STYLE);
-						prefs.edit().putString(Settings.KEY_GLOSSY_GLOW_STYLE, "Center").commit();
-					}
-					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_ADJUST)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_OUTLINE_THICKNESS_ADJUST);
-						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_ADJUST, 100).commit();
-					}
-					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
-						Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_OUTLINE_THICKNESS_LIMIT);
-						prefs.edit().putInt(Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3).commit();
-					}
+				if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
+					setDefaultBooleanValue(prefs, Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
 				}
-				// Spezialbehandlung für alte Designs, die diese Keys noch nicht enthalten
+				if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
+					setDefaultIntValue(prefs, Settings.KEY_DROP_SHADOW_OFFSET_X, 0);
+					setDefaultIntValue(prefs, Settings.KEY_DROP_SHADOW_OFFSET_Y, 0);
+				}
+				if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
+					setDefaultStringValue(prefs, Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
+				}
+				if (!keySet.contains(Settings.KEY_GLOSSY_GLOW_STYLE)) {
+					setDefaultStringValue(prefs, Settings.KEY_GLOSSY_GLOW_STYLE, "Center");
+				}
+				if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_ADJUST)) {
+					setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_ADJUST, 100);
+				}
+				if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
+					setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3);
+				}
 				if (!keySet.contains(Settings.KEY_COLOR_RANDOMIZING_TYPE)) {
-					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_COLOR_RANDOMIZING_TYPE + " = full RGB");
-					prefs.edit().putString(Settings.KEY_COLOR_RANDOMIZING_TYPE, "full RGB").commit();
+					setDefaultStringValue(prefs, Settings.KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
 				}
 				if (!keySet.contains(Settings.KEY_LIMIT_2_CANVAS)) {
-					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_LIMIT_2_CANVAS + " = small tolerance");
-					prefs.edit().putString(Settings.KEY_LIMIT_2_CANVAS, "small tolerance").commit();
+					setDefaultStringValue(prefs, Settings.KEY_LIMIT_2_CANVAS, "small tolerance");
 				}
 				if (!keySet.contains(Settings.KEY_RANDOMIZE_SATURATION_RANGE)) {
-					Log.i(LOG_TAG, "Key not contained-> setting it to default: " + Settings.KEY_RANDOMIZE_SATURATION_RANGE + " = 0");
-					prefs.edit().putInt(Settings.KEY_RANDOMIZE_SATURATION_RANGE, 0).commit();
+					setDefaultIntValue(prefs, Settings.KEY_RANDOMIZE_SATURATION_RANGE, 0);
+				}
+				if (!keySet.contains(Settings.KEY_PATTERN_BLUR)) {
+					setDefaultBooleanValue(prefs, Settings.KEY_PATTERN_BLUR, false);
 				}
 
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
@@ -132,6 +123,21 @@ public class PreferenceIO {
 			Log.e(LOG_TAG, "Loading Settings - File not exists! " + filename);
 		}
 		return null;
+	}
+
+	private static void setDefaultStringValue(final SharedPreferences prefs, final String key, final String value) {
+		Log.i(LOG_TAG, "Key not contained-> setting it to default: " + key + " = " + value);
+		prefs.edit().putString(key, value).commit();
+	}
+
+	private static void setDefaultIntValue(final SharedPreferences prefs, final String key, final int value) {
+		Log.i(LOG_TAG, "Key not contained-> setting it to default: " + key + " = " + value);
+		prefs.edit().putInt(key, value).commit();
+	}
+
+	private static void setDefaultBooleanValue(final SharedPreferences prefs, final String key, final boolean value) {
+		Log.i(LOG_TAG, "Key not contained-> setting it to default: " + key + " = " + value);
+		prefs.edit().putBoolean(key, value).commit();
 	}
 
 	@SuppressWarnings("rawtypes")
