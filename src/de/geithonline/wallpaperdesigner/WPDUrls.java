@@ -14,6 +14,6 @@ public class WPDUrls {
 	public static final String LIST_URL_FREE_PACKS = WEB_HOST + "free-packs/" + PHP_FILE_LIST;
 	public static final String LIST_URL_PREMIUM_PACKS = WEB_HOST + "premium-packs/" + PHP_FILE_LIST;
 
-	public static final String URL_HOWTO_DESIGNS = WEB_HOST + "Howto-Desings.html";
+	public static final String URL_HOWTO_DESIGNS = WEB_HOST + "howtos/HowtoDesings.html";
 
 }
