@@ -35,7 +35,7 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
-public class SettingsIO {
+public class DesignIO {
 
 	public static final String EXTENSION_ZIP = ".zip";
 	public static final String EXTENSION_PNG = ".png";
@@ -46,11 +46,11 @@ public class SettingsIO {
 	/**
 	 * Cache
 	 */
-	private static List<SavedDesign> mDesignList = new ArrayList<>();
+	private static List<Design> mDesignList = new ArrayList<>();
 
 	public static void eMailDesignTheFancyWay(final Activity activity, final SharedPreferences prefs) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to restore!");
 			return;
@@ -68,7 +68,7 @@ public class SettingsIO {
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				if (position >= 0) {
 					Log.i("Emailing Settings ", "from " + position);
-					final SavedDesign design = designList.get(position);
+					final Design design = designList.get(position);
 					eMailOneDesign(design, activity);
 				}
 				dialog.dismiss();
@@ -102,7 +102,7 @@ public class SettingsIO {
 
 	private static void zipDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to Zip!");
 			return;
@@ -135,7 +135,7 @@ public class SettingsIO {
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Zip Design ", "from " + position);
 				if (position >= 0) {
-					final SavedDesign design = designList.get(position);
+					final Design design = designList.get(position);
 					switch (savingtype) {
 						default:
 						case BACKUP:
@@ -161,7 +161,7 @@ public class SettingsIO {
 
 	}
 
-	private static ListView createListviewOfAllDesigns(final Activity activity, final List<SavedDesign> designList) {
+	private static ListView createListviewOfAllDesigns(final Activity activity, final List<Design> designList) {
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
 		final CustomAdapter adapter = new CustomAdapter(activity, designList);
@@ -172,7 +172,7 @@ public class SettingsIO {
 
 	public static void loadDesignTheFancyWay(final Activity activity, final SharedPreferences prefs, final boolean onlyColors) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to restore!");
 			return;
@@ -195,7 +195,7 @@ public class SettingsIO {
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Loading Settings ", "from " + position);
 				if (position >= 0) {
-					final SavedDesign design = designList.get(position);
+					final Design design = designList.get(position);
 					final String filename = design.getPreferenceFile().getName();
 					if (filename != null) {
 						PreferenceIO.loadPreferencesFromFile(activity, prefs, filename, onlyColors);
@@ -211,7 +211,7 @@ public class SettingsIO {
 
 	public static void deleteDesignTheFancyWay(final Activity activity) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to delete!");
 			return;
@@ -229,7 +229,7 @@ public class SettingsIO {
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
 				Log.i("Deleting Settings ", "from " + position);
 				if (position >= 0) {
-					final SavedDesign design = designList.get(position);
+					final Design design = designList.get(position);
 					Alerter.alertYesNo(activity, "Dou you want really want to delete the Design?", "Delete Design", new OnClickListener() {
 						@Override
 						public void onClick(final DialogInterface dialog, final int which) {
@@ -252,7 +252,7 @@ public class SettingsIO {
 	 */
 	public static void saveAllDesignsToZipAndMail(final Activity activity, final boolean sendmail, final boolean toOliver) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
@@ -284,7 +284,7 @@ public class SettingsIO {
 	 */
 	public static void saveAllDesignsToManyZips(final Activity activity) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
@@ -293,7 +293,7 @@ public class SettingsIO {
 		Alerter.alertYesNo(activity, message, "Backup all Designs into many zips", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
-				for (final SavedDesign design : designList) {
+				for (final Design design : designList) {
 					zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
 				}
 			}
@@ -307,7 +307,7 @@ public class SettingsIO {
 	 */
 	public static void saveAllDesignsForUpload(final Activity activity) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
@@ -316,7 +316,7 @@ public class SettingsIO {
 		Alerter.alertYesNo(activity, message, "Backup all Designs into zips", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
-				for (final SavedDesign design : designList) {
+				for (final Design design : designList) {
 					backupOneDesignToUploadDir(design, activity);
 				}
 			}
@@ -341,7 +341,7 @@ public class SettingsIO {
 	 */
 	public static void deleteALLDesigns(final Activity activity) {
 
-		final List<SavedDesign> designList = getSavedPreferencesList();
+		final List<Design> designList = getSavedPreferencesList();
 
 		if (designList.isEmpty()) {
 			Toaster.showErrorToast(activity, "There are no Designs to delete!");
@@ -350,7 +350,7 @@ public class SettingsIO {
 		Alerter.alertYesNoUrgent(activity, "Dou you want really want to delete ALL Designs?", "Attention!!! Delete ALL Designs!!!", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
-				for (final SavedDesign design : designList) {
+				for (final Design design : designList) {
 					deletePreferencesFileAndBitmap(design);
 				}
 				setDesignListNeedsReload(true);
@@ -392,11 +392,11 @@ public class SettingsIO {
 	}
 
 	/**
-	 * Get a List of all {@link SavedDesign}'s
+	 * Get a List of all {@link Design}'s
 	 * 
 	 * @return
 	 */
-	public static List<SavedDesign> getSavedPreferencesList() {
+	public static List<Design> getSavedPreferencesList() {
 		// müssen wir die Liste neu laden?
 		final List<File> prefs = getPreferenzFileList(Settings.getSortOrderForSavedSettings());
 		if (numberOfPreferenzfilesChanged(prefs) || designListNeedsReload == true) {
@@ -418,7 +418,7 @@ public class SettingsIO {
 					bitmap = BitmapFileIO.loadBitmap(pngFilename);
 					imgFile = pngFile;
 				}
-				final SavedDesign pref = new SavedDesign(bitmap, fi, imgFile);
+				final Design pref = new Design(bitmap, fi, imgFile);
 				mDesignList.add(pref);
 			}
 		}
@@ -464,7 +464,7 @@ public class SettingsIO {
 	}
 
 	public static void setDesignListNeedsReload(final boolean needsReload) {
-		SettingsIO.designListNeedsReload = needsReload;
+		DesignIO.designListNeedsReload = needsReload;
 	}
 
 	public static String getTimeStampForFile() {
@@ -582,7 +582,7 @@ public class SettingsIO {
 	// Basic stuff to do with a design
 	// *******************************************************************
 
-	private static void eMailOneDesign(final SavedDesign design, final Activity activity) {
+	private static void eMailOneDesign(final Design design, final Activity activity) {
 		final List<String> filePaths = new ArrayList<String>();
 		filePaths.add(design.getPreferenceFile().getAbsolutePath());
 		filePaths.add(design.getBmpFile().getAbsolutePath());
@@ -592,7 +592,7 @@ public class SettingsIO {
 		EMailHelper.email(activity, createEMailIntent);
 	}
 
-	private static String zipOneDesign(final SavedDesign design, final Activity activity, final String dir) {
+	private static String zipOneDesign(final Design design, final Activity activity, final String dir) {
 		final File preferenceFile = design.getPreferenceFile();
 		final File bmpFile = design.getBmpFile();
 		final String prefFilename = design.getPreferenceFile().getName();
@@ -611,7 +611,7 @@ public class SettingsIO {
 	 * 
 	 * @param design
 	 */
-	private static void deletePreferencesFileAndBitmap(final SavedDesign design) {
+	private static void deletePreferencesFileAndBitmap(final Design design) {
 		design.getPreferenceFile().delete();
 		if (design.getBitmap() != null) {
 			design.getBmpFile().delete();
@@ -619,15 +619,15 @@ public class SettingsIO {
 		setDesignListNeedsReload(true);
 	}
 
-	private static void shareOneDesign(final SavedDesign design, final Activity activity) {
+	private static void shareOneDesign(final Design design, final Activity activity) {
 		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_DESIGNS);
 	}
 
-	private static void publishOneDesign(final SavedDesign design, final Activity activity) {
+	private static void publishOneDesign(final Design design, final Activity activity) {
 		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_FEATURED_DESIGNS);
 	}
 
-	private static void backupOneDesignToUploadDir(final SavedDesign design, final Activity activity) {
+	private static void backupOneDesignToUploadDir(final Design design, final Activity activity) {
 		prepareOneDesignForUpload(design, activity, null);
 	}
 
@@ -637,7 +637,7 @@ public class SettingsIO {
 	 * @param design
 	 * @param activity
 	 */
-	private static void prepareOneDesignForUpload(final SavedDesign design, final Activity activity, final String url) {
+	private static void prepareOneDesignForUpload(final Design design, final Activity activity, final String url) {
 		// saving Zip to upload dir
 		final String outzip = zipOneDesign(design, activity, StorageHelper.getExtstorageUploadDir());
 

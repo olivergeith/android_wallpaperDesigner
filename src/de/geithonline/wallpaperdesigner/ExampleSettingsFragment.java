@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.SettingsIO;
+import de.geithonline.wallpaperdesigner.settings.DesignIO;
 
 public class ExampleSettingsFragment extends PreferenceFragment {
 
@@ -88,7 +88,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		deleteSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.deleteDesignTheFancyWay(getActivity());
+				DesignIO.deleteDesignTheFancyWay(getActivity());
 				return false;
 			}
 		});
@@ -96,7 +96,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		deleteALLDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.deleteALLDesigns(getActivity());
+				DesignIO.deleteALLDesigns(getActivity());
 				return false;
 			}
 		});
@@ -105,7 +105,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		backupALLDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
+				DesignIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
 				return false;
 			}
 		});
@@ -115,7 +115,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
-				SettingsIO.saveAllDesignsToManyZips(getActivity());
+				DesignIO.saveAllDesignsToManyZips(getActivity());
 				return false;
 			}
 		});
@@ -124,7 +124,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		restoreDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.restoreDesignsFromZip(getActivity(), false);
+				DesignIO.restoreDesignsFromZip(getActivity(), false);
 				return false;
 			}
 		});
@@ -133,7 +133,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		shareALLDesigns.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.saveAllDesignsToZipAndMail(getActivity(), true, false);
+				DesignIO.saveAllDesignsToZipAndMail(getActivity(), true, false);
 				return false;
 			}
 		});
@@ -142,7 +142,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		mailSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.eMailDesignTheFancyWay(getActivity(), Settings.prefs);
+				DesignIO.eMailDesignTheFancyWay(getActivity(), Settings.prefs);
 				return false;
 			}
 		});
@@ -151,7 +151,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		zipOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.backupDesign(getActivity());
+				DesignIO.backupDesign(getActivity());
 				return false;
 			}
 		});
@@ -161,7 +161,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				// SettingsIO.saveAllDesignsToZipAndMail(getActivity(), false, false);
-				SettingsIO.shareDesign(getActivity());
+				DesignIO.shareDesign(getActivity());
 				return false;
 			}
 		});
@@ -170,7 +170,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.saveAllDesignsForUpload(getActivity());
+				DesignIO.saveAllDesignsForUpload(getActivity());
 				return false;
 			}
 		});
@@ -179,7 +179,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.backupDesignToUploadDir(getActivity());
+				DesignIO.backupDesignToUploadDir(getActivity());
 				return false;
 			}
 		});
@@ -188,7 +188,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		publishOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.publishDesign(getActivity());
+				DesignIO.publishDesign(getActivity());
 				return false;
 			}
 		});

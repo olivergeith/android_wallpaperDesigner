@@ -13,7 +13,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.SettingsIO;
+import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
@@ -35,7 +35,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 	@SuppressLint("SimpleDateFormat")
 	@Override
 	public synchronized void save(final Context context, final boolean saveSettings) {
-		final String timeStamp = SettingsIO.getTimeStampForFile();
+		final String timeStamp = DesignIO.getTimeStampForFile();
 		saveBigImage(context, timeStamp);
 		if (saveSettings) {
 			saveSmallImageAndSettings(context);
@@ -46,7 +46,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 	@Override
 	public synchronized void saveSmallImageAndSettings(final Context context) {
-		final String timeStamp = SettingsIO.getTimeStampForFile();
+		final String timeStamp = DesignIO.getTimeStampForFile();
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
@@ -58,7 +58,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		// Generate Filename
 		final String pattern = Settings.getSelectedPattern() + "_" + Settings.getSelectedPatternVariant();
 		final String layout = Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")";
-		final String jpgFilename = pattern + " " + layout + SettingsIO.MARKER + timeStamp + SettingsIO.EXTENSION_JPG;
+		final String jpgFilename = pattern + " " + layout + DesignIO.MARKER + timeStamp + DesignIO.EXTENSION_JPG;
 
 		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small,
 				StorageHelper.getExternalStorageSettings(), jpgFilename, 80);
@@ -66,9 +66,9 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		small.recycle();
 		// Saving corresponding Settings
 		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(),
-				SettingsIO.EXTENSION_JPG, SettingsIO.EXTENSION_PREF);
+				DesignIO.EXTENSION_JPG, DesignIO.EXTENSION_PREF);
 		final File settingsFile = new File(prefFileName);
-		SettingsIO.savePreferences(Settings.prefs, settingsFile);
+		DesignIO.savePreferences(Settings.prefs, settingsFile);
 	}
 
 	public synchronized void saveBigImage(final Context context, final String timeStamp) {
@@ -77,12 +77,12 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		switch (Settings.getImageOutputFormat()) {
 		default:
 		case PNG:
-			filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_PNG;
+			filename = "WallpaperDesigner_" + timeStamp + DesignIO.EXTENSION_PNG;
 			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(),
 					filename);
 			break;
 		case JPG:
-			filename = "WallpaperDesigner_" + timeStamp + SettingsIO.EXTENSION_JPG;
+			filename = "WallpaperDesigner_" + timeStamp + DesignIO.EXTENSION_JPG;
 			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorageImages(),
 					filename, Settings.getJpgCompression());
 			break;

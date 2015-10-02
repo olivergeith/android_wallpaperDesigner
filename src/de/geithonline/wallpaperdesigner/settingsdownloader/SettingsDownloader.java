@@ -18,7 +18,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.AsyncTask;
 import android.util.Log;
-import de.geithonline.wallpaperdesigner.settings.SettingsIO;
+import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
@@ -133,7 +133,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			}
 			Alerter.alertInfo(activi,
 					"Example-Designs downloaded successfully!!!\n\nHint: Swipe from the left on Main-Screen to reveal the drawer with all your designs!");
-			SettingsIO.setDesignListNeedsReload(true);
+			DesignIO.setDesignListNeedsReload(true);
 		} else {
 			if (dialog != null) {
 				dialog.cancel();

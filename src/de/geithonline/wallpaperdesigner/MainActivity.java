@@ -37,9 +37,9 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.WPStyleRasteredPatterns;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
 import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
-import de.geithonline.wallpaperdesigner.settings.SavedDesign;
+import de.geithonline.wallpaperdesigner.settings.Design;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.SettingsIO;
+import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.DebugHelper;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
 			public void onDrawerOpened(final View drawerView) {
 				super.onDrawerOpened(drawerView);
 				// getActionBar().setTitle("Choose Design");
-				if (SettingsIO.isDesignListNeedsReload()) {
+				if (DesignIO.isDesignListNeedsReload()) {
 					updateDrawer();
 				}
 				invalidateOptionsMenu();
@@ -493,7 +493,7 @@ public class MainActivity extends Activity {
 	}
 
 	// ##########################################################
-	public class DesignsLoaderTask extends AsyncTask<Void, Void, List<SavedDesign>> {
+	public class DesignsLoaderTask extends AsyncTask<Void, Void, List<Design>> {
 		private final WeakReference<ListView> weekListViewRef;
 
 		public DesignsLoaderTask(final ListView imageView) {
@@ -504,14 +504,14 @@ public class MainActivity extends Activity {
 
 		// Load List background.
 		@Override
-		protected List<SavedDesign> doInBackground(final Void... params) {
-			final List<SavedDesign> savedPreferencesList = SettingsIO.getSavedPreferencesList();
+		protected List<Design> doInBackground(final Void... params) {
+			final List<Design> savedPreferencesList = DesignIO.getSavedPreferencesList();
 			return savedPreferencesList;
 		}
 
 		// Once complete.....
 		@Override
-		protected void onPostExecute(final List<SavedDesign> savedPreferencesList) {
+		protected void onPostExecute(final List<Design> savedPreferencesList) {
 			if (weekListViewRef != null && savedPreferencesList != null) {
 				final ListView list = weekListViewRef.get();
 				if (list != null) {

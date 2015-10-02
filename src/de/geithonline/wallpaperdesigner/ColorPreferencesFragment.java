@@ -21,7 +21,7 @@ import de.geithonline.android.basics.preferences.SeekBarPreference;
 import de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.BackgroundDrawer;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.SettingsIO;
+import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.utils.DisplayHelper;
 
@@ -111,7 +111,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		loadColors.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
-				SettingsIO.loadDesignTheFancyWay(getActivity(), Settings.prefs, true);
+				DesignIO.loadDesignTheFancyWay(getActivity(), Settings.prefs, true);
 				return true;
 			}
 		});
