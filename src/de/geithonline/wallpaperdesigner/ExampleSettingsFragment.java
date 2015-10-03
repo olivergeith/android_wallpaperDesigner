@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class ExampleSettingsFragment extends PreferenceFragment {
 
@@ -21,8 +21,8 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference mailSettings;
 	private Preference zipOneDesign;
 	private Preference unzipUserSettings;
-	private Preference backupALLDesignsForUpload;
-	private Preference backupOneDesignsForUpload;
+	// private Preference backupALLDesignsForUpload;
+	// private Preference backupOneDesignsForUpload;
 	private Preference shareOneDesign;
 	private Preference unzipSharedSettings;
 	private Preference publishOneDesign;
@@ -166,23 +166,23 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
-		backupALLDesignsForUpload = findPreference("backupALLDesignsForUpload");
-		backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(final Preference preference) {
-				DesignIO.saveAllDesignsForUpload(getActivity());
-				return false;
-			}
-		});
-
-		backupOneDesignsForUpload = findPreference("backupOneDesignsForUpload");
-		backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(final Preference preference) {
-				DesignIO.backupDesignToUploadDir(getActivity());
-				return false;
-			}
-		});
+		// backupALLDesignsForUpload = findPreference("backupALLDesignsForUpload");
+		// backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		// @Override
+		// public boolean onPreferenceClick(final Preference preference) {
+		// DesignIO.saveAllDesignsForUpload(getActivity());
+		// return false;
+		// }
+		// });
+		//
+		// backupOneDesignsForUpload = findPreference("backupOneDesignsForUpload");
+		// backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		// @Override
+		// public boolean onPreferenceClick(final Preference preference) {
+		// DesignIO.backupDesignToUploadDir(getActivity());
+		// return false;
+		// }
+		// });
 
 		publishOneDesign = findPreference("publishOneDesign");
 		publishOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -193,23 +193,11 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
-		// designHowto = findPreference("designHowto");
-		// designHowto.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-		// @Override
-		// public boolean onPreferenceClick(final Preference preference) {
-		// final Intent intent = new Intent(getActivity(), HelpPageWebView.class);
-		// intent.putExtra("Url", WPDUrls.URL_HOWTO_DESIGNS);
-		// intent.putExtra("Title", "Howto: Designs");
-		// startActivityForResult(intent, 1);
-		// return false;
-		// }
-		// });
-
 		// bestimmte Menüs gibt es nur als Superuser
 		if (!Settings.isSuperUser(getActivity())) {
 			getPreferenceScreen().removePreference(publishOneDesign);
-			getPreferenceScreen().removePreference(backupOneDesignsForUpload);
-			getPreferenceScreen().removePreference(backupALLDesignsForUpload);
+			// getPreferenceScreen().removePreference(backupOneDesignsForUpload);
+			// getPreferenceScreen().removePreference(backupALLDesignsForUpload);
 		}
 
 	}
