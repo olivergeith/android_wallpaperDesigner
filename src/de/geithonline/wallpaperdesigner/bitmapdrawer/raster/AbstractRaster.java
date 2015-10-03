@@ -28,15 +28,15 @@ public abstract class AbstractRaster {
 
 	protected boolean isInsideCanvas(final int width, final int height, final Point p) {
 		switch (Settings.getCanvasLimitType()) {
-			default:
-			case small:
-				return isInsideCanvasSmallTolerance(width, height, p);
-			case wide:
-				return isInsideCanvasWideTolerance(width, height, p);
-			case strict:
-				return isInsideCanvasStrict(width, height, p);
-			case no_limit:
-				return true;
+		default:
+		case small:
+			return isInsideCanvasSmallTolerance(width, height, p);
+		case wide:
+			return isInsideCanvasWideTolerance(width, height, p);
+		case strict:
+			return isInsideCanvasStrict(width, height, p);
+		case no_limit:
+			return true;
 		}
 	}
 
@@ -103,6 +103,42 @@ public abstract class AbstractRaster {
 		}
 		final int location = Math.round(size / 2); // aus der mitte nehmen
 		final Point p = points.remove(location);
+		return p;
+	}
+
+	protected Point drawLeftmostPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		int topmostIndex = 0; // der erste
+		int topX = points.get(0).x;
+		for (int i = 0; i < points.size(); i++) {
+			final Point p = points.get(i);
+			if (p.x < topX) {
+				topX = p.x;
+				topmostIndex = i;
+			}
+		}
+		final Point p = points.remove(topmostIndex);
+		return p;
+	}
+
+	protected Point drawTopmostPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		int topmostIndex = 0; // der erste
+		int topY = points.get(0).y;
+		for (int i = 0; i < points.size(); i++) {
+			final Point p = points.get(i);
+			if (p.y < topY) {
+				topY = p.y;
+				topmostIndex = i;
+			}
+		}
+		final Point p = points.remove(topmostIndex);
 		return p;
 	}
 

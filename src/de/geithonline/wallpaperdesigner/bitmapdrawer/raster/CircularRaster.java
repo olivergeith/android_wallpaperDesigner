@@ -17,16 +17,16 @@ public class CircularRaster extends AbstractRaster {
 		setPositioning(positioning);
 
 		switch (circleType) {
-			default:
-			case HALF:
-				calculateHalfRings(width, height, radius, overlap);
-				break;
-			case FULL_RANDOM_STARWINKEL:
-				calculateCenteredRingsRandomStartWinkel(width, height, radius, overlap);
-				break;
-			case SPIRAL:
-				calculateSpiral(width, height, radius, overlap);
-				break;
+		default:
+		case HALF:
+			calculateHalfRings(width, height, radius, overlap);
+			break;
+		case FULL_RANDOM_STARWINKEL:
+			calculateCenteredRingsRandomStartWinkel(width, height, radius, overlap);
+			break;
+		case SPIRAL:
+			calculateSpiral(width, height, radius, overlap);
+			break;
 		}
 	}
 
@@ -114,13 +114,17 @@ public class CircularRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-			case RANDOM:
-				return drawRandomPoint();
-			default:
-			case INNER:
-				return drawNextBookPoint();
-			case OUTER:
-				return drawNextBookPointReverse();
+		default:
+		case INNER:
+			return drawNextBookPoint();
+		case OUTER:
+			return drawNextBookPointReverse();
+		case TOPMOST:
+			return drawTopmostPoint();
+		case LEFTMOST:
+			return drawLeftmostPoint();
+		case RANDOM:
+			return drawRandomPoint();
 		}
 	}
 
