@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.CircularRaster.CIRCLE_TYPE;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
@@ -13,7 +14,7 @@ public class RasterFactory {
 
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown, randomstartwinkel)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
-				null));
+				new CharSequence[] { "Random" }));
 		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 
@@ -36,12 +37,8 @@ public class RasterFactory {
 
 	public static AbstractRaster getRaster(final String layout, final String variante, final int width, final int height, final int patternRadius,
 			final float overlap) {
-		String key;
-		if (variante == null) {
-			key = layout;
-		} else {
-			key = layout + " (" + variante + ")";
-		}
+		final String key = layout + " (" + variante + ")";
+		Log.i("Layout", "Layout = " + key);
 		switch (key) {
 		default:
 		case "Geometric Grid (Random)":
@@ -55,7 +52,7 @@ public class RasterFactory {
 		case "Geometric Grid (Center)":
 			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
 
-		case "Random Layout":
+		case "Random Layout (Random)":
 			return new RandomRaster(width, height, patternRadius, overlap);
 
 		case "Hex Grid (Random)":

@@ -81,7 +81,7 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 		mainlayoutVariants.setEnabled(RasterFactory.hasLayoutVariants(selectedLayout));
 
 		if (RasterFactory.hasLayoutVariants(selectedLayout)) {
-			Log.i("GEITH", "Setting Pattern...");
+			Log.i("Layout", "Setting Layout Variants...");
 			final CharSequence[] variants = RasterFactory.getLayoutVariants(selectedLayout);
 			mainlayoutVariants.setEntries(variants);
 			mainlayoutVariants.setEntryValues(variants);
@@ -94,6 +94,7 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 			mainlayoutVariants.setSummary(mainlayoutVariants.getValue());
 
 		} else {
+			Log.i("Layout", "Setting Layout Variants to not avialable...");
 			mainlayoutVariants.setEntries(null);
 			mainlayoutVariants.setEntryValues(null);
 			mainlayoutVariants.setSummary("not available");
