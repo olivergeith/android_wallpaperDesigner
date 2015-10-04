@@ -2,21 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
     	    
-    <PreferenceCategory android:title="Download Designs"/>
-
-    <!-- 
-    <PreferenceScreen
-        android:key="howto"
-        android:title="Howto: Download Designs" >
-        <Preference 
-		    android:key="hintExampleDesigns"
-		    android:title="Howto: Example-Designs"
-		    android:summary="Download your desired designs here. \nThey will be installed on your sdcard. \n \nUsing them is super easy: \n-> Go back to the main screen of this App \n->Swipe from the left to open the drawer with your designs \n->Select a design \n->Done! :-)" 
-            />
-        
-    		    		    		    
-    </PreferenceScreen>
-     -->
     <PreferenceCategory android:title="Help on Designs"/>
     
         <Preference 
@@ -80,7 +65,7 @@
             />
 	    
 	
-	<PreferenceCategory android:title="Backup your local Designs"/>
+	<PreferenceCategory android:title="Backup and Restore Designs"/>
 	    
 	    <Preference 
 		    android:key="backupALLDesigns"
@@ -100,7 +85,6 @@
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Zip one of your designs" 
 	        />
-	<PreferenceCategory android:title="Restore Designs from Backup"/>
 	    <Preference 
 		    android:key="restoreDesigns"
 		    android:title="Restore Designs"
