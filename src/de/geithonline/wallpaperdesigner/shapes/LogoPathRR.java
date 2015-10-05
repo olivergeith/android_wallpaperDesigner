@@ -2,11 +2,12 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 public class LogoPathRR extends Path {
 
 	public enum LOGO_STYLE_RR {
-		RR_V1, RR_V2, RR_V3
+		RR_V1, RR_V2, RR_V3, RR_V4
 	}
 
 	public LogoPathRR(final PointF center, final float radius, final LOGO_STYLE_RR variante) {
@@ -21,6 +22,9 @@ public class LogoPathRR extends Path {
 				break;
 			case RR_V3:
 				drawResurrectionV3(center, radius);
+				break;
+			case RR_V4:
+				drawResurrectionV4(center, radius);
 				break;
 		}
 
@@ -46,6 +50,27 @@ public class LogoPathRR extends Path {
 		addCircle(center.x, center.y, radius * 0.95f, Direction.CW);
 		addPath(new TortenPath(center, radius * 0.88f, 180, -90));
 		addPath(new TortenPath(center, radius * 0.88f, 0, -90));
+	}
+
+	private void drawResurrectionV4(final PointF center, final float radius) {
+		final float height = 6 * radius;
+		draw2Rs(new PointF(center.x, center.y - height), radius);
+
+		final RectF oval = new RectF();
+		oval.left = center.x - radius;
+		oval.right = center.x + radius;
+		oval.top = center.y - height - radius;
+		oval.bottom = center.y - height + radius;
+
+		moveTo(center.x, center.y);
+		cubicTo(center.x, center.y - height + 1.0f * radius, // CP1
+				center.x + radius, center.y - height + 1.0f * radius, // CP2
+				center.x + radius, center.y - height);
+		arcTo(oval, 0, -180);
+		cubicTo(center.x - radius, center.y - height + 1.0f * radius, // CP2
+				center.x, center.y - height + 1.0f * radius, // CP1
+				center.x, center.y);
+		close();
 	}
 
 	private void draw2Rs(final PointF center, final float radius) {
