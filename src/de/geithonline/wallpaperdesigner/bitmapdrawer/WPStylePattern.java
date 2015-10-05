@@ -26,7 +26,8 @@ import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath.ASYMETRIC_STYLE
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.FlippedPath.FLIPPED_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
-import de.geithonline.wallpaperdesigner.shapes.LogoPath.LOGO_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.LogoPathEX.LOGO_STYLE_EX;
+import de.geithonline.wallpaperdesigner.shapes.LogoPathRR.LOGO_STYLE_RR;
 import de.geithonline.wallpaperdesigner.shapes.MaterialPath.MATERIAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.OvalPath.OVAL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.PacmanPath.PACMAN_STYLE;
@@ -333,11 +334,11 @@ public abstract class WPStylePattern extends WPStyle {
 				break;
 			case "V2":
 			case "Square":
-				path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.NORMAL);
+				path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.NORMAL, Direction.CW);
 				break;
 			case "V3":
 			case "Square (rounded)":
-				path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.ROUNDED);
+				path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.ROUNDED, Direction.CW);
 				break;
 			case "V4":
 			case "Pentagon":
@@ -373,7 +374,7 @@ public abstract class WPStylePattern extends WPStyle {
 				break;
 			case "V12":
 			case "Square (Mixed)":
-				path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.MIXED);
+				path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.MIXED, Direction.CW);
 				break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -402,13 +403,16 @@ public abstract class WPStylePattern extends WPStyle {
 		switch (variante) {
 			default:
 			case "Resurrection Remix":
-				path = new LogoPath(new PointF(x, y), radius, LOGO_STYLE.RR_V1);
+				path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V1);
 				break;
 			case "Resurrection Remix V2":
-				path = new LogoPath(new PointF(x, y), radius, LOGO_STYLE.RR_V2);
+				path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V2);
 				break;
 			case "Resurrection Remix V3":
-				path = new LogoPath(new PointF(x, y), radius, LOGO_STYLE.RR_V3);
+				path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V3);
+				break;
+			case "ElementalX Kernel":
+				path = new LogoPathEX(new PointF(x, y), radius, LOGO_STYLE_EX.V1);
 				break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

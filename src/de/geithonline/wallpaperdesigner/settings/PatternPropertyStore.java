@@ -57,7 +57,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 		patternProperties.put("Logos", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3" }));
+				new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "ElementalX Kernel" }));
 
 		patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));

@@ -21,31 +21,31 @@ public class SquareCornered extends Path {
 	public SquareCornered(final PointF center, final float radius, final boolean filled, final CORNERED_STYLE style) {
 		super();
 		switch (style) {
-		default:
-		case INNER_ROUND:
-			drawSquareINNERROUND(center, radius, filled);
-			break;
-		case INNER_ROUND2:
-			drawSquareROUND2(center, radius, filled);
-			break;
-		case CIRCLE:
-			drawSquareCIRCLE(center, radius, filled);
-			break;
-		case OUTER_CIRCLE:
-			drawSquareOUTERCIRCLE(center, radius, filled);
-			break;
-		case INNER_RECT:
-			drawSquareRECT(center, radius, filled);
-			break;
-		case DIAGONAL_LINE:
-			drawSquareLINE(center, radius, filled);
-			break;
-		case ROUNDED:
-			drawSquareROUNDED(center, radius, filled);
-			break;
-		case CASTEL:
-			drawSquareCASTEL(center, radius, filled);
-			break;
+			default:
+			case INNER_ROUND:
+				drawSquareINNERROUND(center, radius, filled);
+				break;
+			case INNER_ROUND2:
+				drawSquareROUND2(center, radius, filled);
+				break;
+			case CIRCLE:
+				drawSquareCIRCLE(center, radius, filled);
+				break;
+			case OUTER_CIRCLE:
+				drawSquareOUTERCIRCLE(center, radius, filled);
+				break;
+			case INNER_RECT:
+				drawSquareRECT(center, radius, filled);
+				break;
+			case DIAGONAL_LINE:
+				drawSquareLINE(center, radius, filled);
+				break;
+			case ROUNDED:
+				drawSquareROUNDED(center, radius, filled);
+				break;
+			case CASTEL:
+				drawSquareCASTEL(center, radius, filled);
+				break;
 		}
 	}
 
@@ -92,7 +92,7 @@ public class SquareCornered extends Path {
 	}
 
 	private void drawSquareROUNDED(final PointF center, final float radius, final boolean filled) {
-		final Path p = new SquarePath(center, radius, filled, SQUARE_STYLE.ROUNDED);
+		final Path p = new SquarePath(center, radius, filled, SQUARE_STYLE.ROUNDED, Direction.CW);
 		addPath(p);
 	}
 
@@ -178,7 +178,6 @@ public class SquareCornered extends Path {
 
 	private void drawSquareCASTEL(final PointF center, final float radius, final boolean filled) {
 		final float raster = radius / 3;
-		final float inner = 2.5f;
 		moveTo(center.x - 2 * raster, center.y - 3 * raster);
 		lineTo(center.x - 2 * raster, center.y - 2.5f * raster);
 		lineTo(center.x + 2 * raster, center.y - 2.5f * raster);

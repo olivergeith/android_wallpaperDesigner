@@ -3,13 +3,13 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 
-public class LogoPath extends Path {
+public class LogoPathRR extends Path {
 
-	public enum LOGO_STYLE {
+	public enum LOGO_STYLE_RR {
 		RR_V1, RR_V2, RR_V3
 	}
 
-	public LogoPath(final PointF center, final float radius, final LOGO_STYLE variante) {
+	public LogoPathRR(final PointF center, final float radius, final LOGO_STYLE_RR variante) {
 		super();
 		switch (variante) {
 			default:
