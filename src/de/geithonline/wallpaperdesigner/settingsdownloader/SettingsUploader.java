@@ -5,15 +5,15 @@ import java.io.FileNotFoundException;
 
 import org.apache.http.Header;
 
-import android.app.Activity;
-import android.util.Log;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import android.app.Activity;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 
+@SuppressWarnings("deprecation")
 public class SettingsUploader {
 
 	public static void upload(final Activity activity, final String pathToFile, final String url) {
@@ -29,6 +29,7 @@ public class SettingsUploader {
 
 		final AsyncHttpClient client = new AsyncHttpClient();
 		// client.setBasicAuth("olivergeith_upload", "upload");
+
 		client.post(url, params, new AsyncHttpResponseHandler() {
 
 			@Override
