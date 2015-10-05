@@ -10,6 +10,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 public class RasterFactory {
 
 	private static final Map<String, LayoutProperties> layoutProperties = new HashMap<String, LayoutProperties>();
+
 	static {
 
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, upsideDown, randomstartwinkel)
@@ -31,7 +32,7 @@ public class RasterFactory {
 		layoutProperties.put("Spiral", new LayoutProperties(false, true, true, false, true, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Left to Right", "Random" }));
 
-		layoutProperties.put("Half Circle", new LayoutProperties(false, true, true, false, true,//
+		layoutProperties.put("Half Circle", new LayoutProperties(false, true, true, false, true, //
 				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Left to Right", "Random" }));
 	}
 
@@ -52,6 +53,8 @@ public class RasterFactory {
 		case "Geometric Grid (Center)":
 			return new GeometricRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, Settings.isUpsideDown());
 
+		case "Random Layout":
+		case "Random Layout (None)":
 		case "Random Layout (Random)":
 			return new RandomRaster(width, height, patternRadius, overlap);
 
