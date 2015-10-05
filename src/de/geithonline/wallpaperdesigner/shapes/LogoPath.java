@@ -6,16 +6,20 @@ import android.graphics.RectF;
 
 public class LogoPath extends Path {
 
-	public LogoPath(final PointF center, final float radius, final String variante) {
+	public enum LOGO_STYLE {
+		RR_V1, RR_V2
+	}
+
+	public LogoPath(final PointF center, final float radius, final LOGO_STYLE variante) {
 		super();
 		switch (variante) {
-		default:
-		case "RR":
-			drawResurrectionV1(center, radius);
-			break;
-		case "RRV2":
-			drawResurrectionV2(center, radius);
-			break;
+			default:
+			case RR_V1:
+				drawResurrectionV1(center, radius);
+				break;
+			case RR_V2:
+				drawResurrectionV2(center, radius);
+				break;
 		}
 
 	}
