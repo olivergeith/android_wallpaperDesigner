@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class BackgroundDrawer {
@@ -44,6 +45,7 @@ public class BackgroundDrawer {
 				draw4ColorCornerGradientBackground(canvas);
 				break;
 			case "4-Colors in corners":
+				// drawMandelBrot(canvas);
 				draw4ColorBackground(canvas);
 				break;
 			case "Sweep Gradient from corner":
@@ -79,45 +81,39 @@ public class BackgroundDrawer {
 			paint.setShader(new LinearGradient(0, 0, 0, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "Linear Gradient bottom-top":
-			paint.setShader(new LinearGradient(0, 0, 0, height, getColorsReverse(), getDistances(),
-					Shader.TileMode.MIRROR));
+			paint.setShader(new LinearGradient(0, 0, 0, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 
 		case "Linear Gradient left-right":
 			paint.setShader(new LinearGradient(0, 0, width, 0, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "Linear Gradient right-left":
-			paint.setShader(new LinearGradient(0, 0, width, 0, getColorsReverse(), getDistances(),
-					Shader.TileMode.MIRROR));
+			paint.setShader(new LinearGradient(0, 0, width, 0, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 
 		case "Linear Gradient topleft-bottomright":
 			paint.setShader(new LinearGradient(0, 0, width, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "Linear Gradient bottomright-topleft":
-			paint.setShader(new LinearGradient(0, 0, width, height, getColorsReverse(), getDistances(),
-					Shader.TileMode.MIRROR));
+			paint.setShader(new LinearGradient(0, 0, width, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 
 		case "Linear Gradient topright-bottomleft":
 			paint.setShader(new LinearGradient(width, 0, 0, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "Linear Gradient bottomleft-topright":
-			paint.setShader(new LinearGradient(width, 0, 0, height, getColorsReverse(), getDistances(),
-					Shader.TileMode.MIRROR));
+			paint.setShader(new LinearGradient(width, 0, 0, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "Radial Gradient":
-			paint.setShader(new RadialGradient(width / 2, height / 2, radius, getColors(), getDistances(),
-					Shader.TileMode.MIRROR));
+			paint.setShader(new RadialGradient(width / 2, height / 2, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "Radial Gradient (Half Arch)":
 			radius = (int) Math.sqrt(width / 2 * width / 2 + height * height);
-			paint.setShader(new RadialGradient(width / 2, height, radius, getColors(), getDistances(),
-					Shader.TileMode.MIRROR));
+			paint.setShader(new RadialGradient(width / 2, height, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
 			break;
 		case "4 Color Sweep Gradient": {
-			final int colorsSweep[] = { Settings.getPatternColor1(), Settings.getPatternColor2(),
-					Settings.getPatternColor3(), Settings.getPatternColor4(), Settings.getPatternColor1() };
+			final int colorsSweep[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4(),
+					Settings.getPatternColor1() };
 			final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
 			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
 		}
@@ -125,7 +121,7 @@ public class BackgroundDrawer {
 
 		case "4 Color Sweep Gradient (2x)": {
 			final int colorsSweep[] = { //
-			Settings.getPatternColor1(), //
+					Settings.getPatternColor1(), //
 					Settings.getPatternColor2(), //
 					Settings.getPatternColor3(), //
 					Settings.getPatternColor4(), //
@@ -149,7 +145,7 @@ public class BackgroundDrawer {
 
 		case "4 Color Sweep Gradient (3x)": {
 			final int colorsSweep[] = { //
-			Settings.getPatternColor1(), //
+					Settings.getPatternColor1(), //
 					Settings.getPatternColor2(), //
 					Settings.getPatternColor3(), //
 					Settings.getPatternColor4(), //
@@ -180,15 +176,14 @@ public class BackgroundDrawer {
 			break;
 
 		case "4 Color Sweep Gradient (Half Arch)": {
-			final int colorsSweep2[] = { Settings.getPatternColor1(), Settings.getPatternColor2(),
-					Settings.getPatternColor3(), Settings.getPatternColor4() };
+			final int colorsSweep2[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4() };
 			final float distancesSweep2[] = { 0.5f, 0.66f, 0.82f, 1.0f };
 			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
 		}
 			break;
 		case "4 Color Sweep Gradient (Half Arch)(Mirror)": {
 			final int colorsSweep2[] = { //
-			Settings.getPatternColor1(), //
+					Settings.getPatternColor1(), //
 					Settings.getPatternColor2(), //
 					Settings.getPatternColor3(), //
 					Settings.getPatternColor4(), //
@@ -213,8 +208,7 @@ public class BackgroundDrawer {
 	private static int[] getColors() {
 		final int colors2[] = { Settings.getPatternColor1(), Settings.getPatternColor2() };
 		final int colors3[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3() };
-		final int colors4[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(),
-				Settings.getPatternColor4() };
+		final int colors4[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4() };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
 		default:
@@ -230,8 +224,7 @@ public class BackgroundDrawer {
 	private static int[] getColorsReverse() {
 		final int colors2[] = { Settings.getPatternColor2(), Settings.getPatternColor1() };
 		final int colors3[] = { Settings.getPatternColor3(), Settings.getPatternColor2(), Settings.getPatternColor1() };
-		final int colors4[] = { Settings.getPatternColor4(), Settings.getPatternColor3(), Settings.getPatternColor2(),
-				Settings.getPatternColor1() };
+		final int colors4[] = { Settings.getPatternColor4(), Settings.getPatternColor3(), Settings.getPatternColor2(), Settings.getPatternColor1() };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
 		default:
@@ -293,8 +286,7 @@ public class BackgroundDrawer {
 		final int transparent = 0x00FFFFFF;
 		final int colors[] = { whitehalftransparent, transparent, transparent, whitehalftransparent };
 		final float distances[] = { 0.0f, 0.3f, 0.95f, 1.0f };
-		reflectionsPaint.setShader(new RadialGradient(-cWidth / 2, cHeight, cWidth / 7, colors, distances,
-				Shader.TileMode.REPEAT));
+		reflectionsPaint.setShader(new RadialGradient(-cWidth / 2, cHeight, cWidth / 7, colors, distances, Shader.TileMode.REPEAT));
 		// reflectionsPaint.setShader(new LinearGradient(-cWidth / 10, 0, cWidth / 10, 0, colors, distances,
 		// Shader.TileMode.MIRROR));
 		canvas.drawRect(r, reflectionsPaint);
@@ -409,6 +401,46 @@ public class BackgroundDrawer {
 		final int b = Math.round(Color.blue(col1) - diffb * factor);
 
 		return Color.argb(a, r, g, b);
+	}
+
+	public static void drawMandelBrot(final Canvas canvas) {
+		final int width = canvas.getWidth();
+		final int height = canvas.getHeight();
+
+		final int max = 100;
+		for (int row = 0; row < height; row = row + 4) {
+			Log.i("Factal", "row=" + row);
+			for (int col = 0; col < width; col = col + 4) {
+				final double c_re = (col - width / 2.0) * 4.0 / width;
+				final double c_im = (row - height / 2.0) * 4.0 / width;
+				double x = 0, y = 0;
+				int iteration = 0;
+				while (x * x + y * y <= 4 && iteration < max) {
+					final double x_new = x * x - y * y + c_re;
+					y = 2 * x * y + c_im;
+					x = x_new;
+					iteration++;
+				}
+
+				// final Rect r = new Rect(); // x * sqW, y * sqH, x * sqW + sqW, y
+				// // * sqH + sqH);
+				// r.left = Math.round(col);
+				// r.top = Math.round(row);
+				// r.right = Math.round(col+1);
+				// r.bottom = Math.round(row+1);
+				// canvas.drawRect(r, paint);
+
+				final Paint paint = new Paint();
+				if (iteration < max) {
+					paint.setColor(Color.WHITE);
+				} else {
+					paint.setColor(Color.BLACK);
+				}
+				canvas.drawRect(col, row, col + 4, row + 4, paint);// Point(col, row, paint);
+
+			}
+		}
+
 	}
 
 }
