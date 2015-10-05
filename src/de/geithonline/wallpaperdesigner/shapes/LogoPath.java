@@ -2,12 +2,11 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
 
 public class LogoPath extends Path {
 
 	public enum LOGO_STYLE {
-		RR_V1, RR_V2
+		RR_V1, RR_V2, RR_V3
 	}
 
 	public LogoPath(final PointF center, final float radius, final LOGO_STYLE variante) {
@@ -20,24 +19,36 @@ public class LogoPath extends Path {
 			case RR_V2:
 				drawResurrectionV2(center, radius);
 				break;
+			case RR_V3:
+				drawResurrectionV3(center, radius);
+				break;
 		}
 
 	}
 
 	private void drawResurrectionV1(final PointF center, final float radius) {
-		final float raster = radius / 4;
-		final PointF c1 = new PointF(center.x - 3.1f * raster, center.y - 2 * raster);
-		final Path r1 = drawOneR(c1, radius * 0.8f);
-		final PointF c2 = new PointF(center.x - 2.1f * raster, center.y - 1f * raster);
-		final Path r2 = drawOneR(c2, radius * 0.7f);
-		addPath(r1);
-		addPath(r2);
+		draw2Rs(center, radius);
 		addCircle(center.x, center.y, radius, Direction.CCW);
 		addCircle(center.x, center.y, radius * 0.95f, Direction.CW);
 		addCircle(center.x, center.y, radius * 0.88f, Direction.CCW);
 	}
 
 	private void drawResurrectionV2(final PointF center, final float radius) {
+		draw2Rs(center, radius);
+		addCircle(center.x, center.y, radius, Direction.CCW);
+		addCircle(center.x, center.y, radius * 0.95f, Direction.CW);
+		addPath(new TortenPath(center, radius * 0.88f, 90, -180));
+	}
+
+	private void drawResurrectionV3(final PointF center, final float radius) {
+		draw2Rs(center, radius);
+		addCircle(center.x, center.y, radius, Direction.CCW);
+		addCircle(center.x, center.y, radius * 0.95f, Direction.CW);
+		addPath(new TortenPath(center, radius * 0.88f, 180, -90));
+		addPath(new TortenPath(center, radius * 0.88f, 0, -90));
+	}
+
+	private void draw2Rs(final PointF center, final float radius) {
 		final float raster = radius / 4;
 		final PointF c1 = new PointF(center.x - 3.0f * raster, center.y - 2 * raster);
 		final Path r1 = drawOneR(c1, radius * 0.8f);
@@ -45,17 +56,6 @@ public class LogoPath extends Path {
 		final Path r2 = drawOneR(c2, radius * 0.7f);
 		addPath(r1);
 		addPath(r2);
-		addCircle(center.x, center.y, radius, Direction.CCW);
-		addCircle(center.x, center.y, radius * 0.95f, Direction.CW);
-
-		final float arcr = radius * 0.88f;
-		final RectF oval = new RectF();
-		oval.left = center.x - arcr;
-		oval.right = center.x + arcr;
-		oval.top = center.y - arcr;
-		oval.bottom = center.y + arcr;
-
-		addArc(oval, 90, -180);
 	}
 
 	private Path drawOneR(final PointF center, final float radius) {

@@ -407,6 +407,9 @@ public abstract class WPStylePattern extends WPStyle {
 			case "Resurrection Remix V2":
 				path = new LogoPath(new PointF(x, y), radius, LOGO_STYLE.RR_V2);
 				break;
+			case "Resurrection Remix V3":
+				path = new LogoPath(new PointF(x, y), radius, LOGO_STYLE.RR_V3);
+				break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
