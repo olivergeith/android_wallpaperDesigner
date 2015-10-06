@@ -43,15 +43,34 @@
 	        seekbarpreference:stepValue="1" />
     
     </PreferenceScreen>
+
+        <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="LinearGradientSettings"
+        android:title="Gradient Settings..." >
+    	<ListPreference
+	        android:defaultValue="4"
+	        android:dialogTitle="@string/anzColors"
+	        android:entries="@array/anzColors"
+	        android:entryValues="@array/anzColorsValues"
+	        android:key="anzColors"
+	        android:title="@string/anzColors" />
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="1"
+	        android:dialogMessage="@string/colorRepeats"
+	        android:key="colorRepeats"
+	        android:summary="%1$d"
+	        android:title="@string/colorRepeats"
+	        seekbarpreference:maxValue="10"
+	        seekbarpreference:minValue="1"
+	        seekbarpreference:stepValue="1" />
+    		    	    
+   
+    </PreferenceScreen>
     
     
-    <ListPreference
-        android:defaultValue="4"
-        android:dialogTitle="@string/anzColors"
-        android:entries="@array/anzColors"
-        android:entryValues="@array/anzColorsValues"
-        android:key="anzColors"
-        android:title="@string/anzColors" />
+    
     
 
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference

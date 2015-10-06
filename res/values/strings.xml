@@ -83,7 +83,8 @@
     <string name="patternMinSizeAdjust">Min. PatternSize relativ to max. PatternSize</string>
     <string name="textPattern">Content of Text Pattern</string>
     <string name="textDrawStyle">How to draw Text</string>
-    <string name="anzColors">How many Colors in Gradient</string>
+    <string name="anzColors"># of Colors in Gradient</string>
+    <string name="colorRepeats"># of Gradient Repeats</string>
     <string name="blurPatterns">Blur patterns in Background</string>
     <string name="numberOfLeafs">How many leafs-arms should the Pattern have?</string>
     <string name="randomLeafCount">Random Number of leafs-arms</string>
@@ -123,6 +124,6 @@
     
     <string name="tornadoRings">Rings of Tornado</string>
     <string name="tornadoArms">Arms of Tornado</string>
-    
+   
     
 </resources>

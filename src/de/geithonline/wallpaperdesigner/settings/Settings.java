@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_COLOR_REPEATS = "colorRepeats";
 	public static final String KEY_TORNADO_RINGS = "tornadoRings";
 	public static final String KEY_TORNADO_ARMS = "tornadoArms";
 	public static final String KEY_RANDOMIZE_SATURATION_RANGE = "randomizeSaturationRange";
@@ -783,11 +784,18 @@ public class Settings {
 		return test.startsWith("4");
 	}
 
-	// Background Color
-	public static boolean isTornadoGradient(final String test) {
+	public static boolean isLinearGradient(final String test) {
+		return test.startsWith("Linear") || test.startsWith("Radial") || test.startsWith("Sweep Gradient (++)");
+	}
+
+	public static int getColorRepeats() {
 		if (prefs == null) {
-			return false;
+			return 1;
 		}
+		return prefs.getInt(KEY_COLOR_REPEATS, 1);
+	}
+
+	public static boolean isTornadoGradient(final String test) {
 		return test.startsWith("4-Color Tornado");
 	}
 

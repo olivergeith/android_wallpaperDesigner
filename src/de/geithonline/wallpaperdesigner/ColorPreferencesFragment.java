@@ -47,9 +47,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private List<String> keys = new ArrayList<String>();
 	private ListPreference colorRandomizingType;
 
-	private SeekBarPreference tornadoRings;
-	private SeekBarPreference tornadoArms;
+	// private SeekBarPreference tornadoRings;
+	// private SeekBarPreference tornadoArms;
 	private PreferenceScreen tornadoSettings;
+	private PreferenceScreen linearGradientSettings;
 
 	@Override
 	public void onDestroy() {
@@ -76,6 +77,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		keys.add(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
 		keys.add(Settings.KEY_TORNADO_ARMS);
 		keys.add(Settings.KEY_TORNADO_RINGS);
+		keys.add(Settings.KEY_COLOR_REPEATS);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
@@ -142,10 +144,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 
 		});
 
-		tornadoRings = (SeekBarPreference) findPreference("tornadoRings");
-		tornadoArms = (SeekBarPreference) findPreference("tornadoArms");
+		// tornadoRings = (SeekBarPreference) findPreference("tornadoRings");
+		// tornadoArms = (SeekBarPreference) findPreference("tornadoArms");
 		tornadoSettings = (PreferenceScreen) findPreference("TornadoSettings");
-
+		linearGradientSettings = (PreferenceScreen) findPreference("LinearGradientSettings");
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawPreviewImages();
 		handleColorRandomizingType(Settings.getColorRandomizing());
@@ -217,6 +219,11 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			getPreferenceScreen().removePreference(tornadoSettings);
 		} else {
 			getPreferenceScreen().addPreference(tornadoSettings);
+		}
+		if (!Settings.isLinearGradient(selection)) {
+			getPreferenceScreen().removePreference(linearGradientSettings);
+		} else {
+			getPreferenceScreen().addPreference(linearGradientSettings);
 		}
 
 	}
