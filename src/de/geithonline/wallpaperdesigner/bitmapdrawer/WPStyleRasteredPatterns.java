@@ -39,10 +39,13 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
 		BackgroundDrawer.drawBackground(bitmapCanvas, Settings.isSameGradientAsPatterns());
-
 		final Bitmap refbitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		final Canvas refbitmapCanvas = new Canvas(refbitmap);
 		BackgroundDrawer.drawBackground(refbitmapCanvas, true);
+		if (Settings.getGradientDirection().equals("4-Color Tornado")) {
+			bitmap = BitmapBlurrer.doBlur(bitmap, 40, true);
+			// refbitmap = BitmapBlurrer.doBlur(refbitmap, 40, true);
+		}
 
 		// initializing some values depending on BitmapSize
 		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -18,39 +19,41 @@ public class BackgroundDrawer {
 
 		if (sameAsPatternGradient) {
 			switch (Settings.getGradientDirection()) {
-			default:
-			case "Linear Gradient top-bottom":
-			case "Linear Gradient bottom-top":
+				default:
+				case "Linear Gradient top-bottom":
+				case "Linear Gradient bottom-top":
 
-			case "Linear Gradient left-right":
-			case "Linear Gradient right-left":
+				case "Linear Gradient left-right":
+				case "Linear Gradient right-left":
 
-			case "Linear Gradient topleft-bottomright":
-			case "Linear Gradient bottomright-topleft":
+				case "Linear Gradient topleft-bottomright":
+				case "Linear Gradient bottomright-topleft":
 
-			case "Linear Gradient topright-bottomleft":
-			case "Linear Gradient bottomleft-topright":
+				case "Linear Gradient topright-bottomleft":
+				case "Linear Gradient bottomleft-topright":
 
-			case "Radial Gradient":
-			case "Radial Gradient (Half Arch)":
-			case "4 Color Sweep Gradient (Half Arch)":
-			case "4 Color Sweep Gradient (Half Arch)(Mirror)":
-			case "4 Color Sweep Gradient (2x)":
-			case "4 Color Sweep Gradient (3x)":
-			case "4 Color Sweep Gradient":
-				drawLinearGradientBackground(canvas);
-				break;
+				case "Radial Gradient":
+				case "Radial Gradient (Half Arch)":
+				case "4 Color Sweep Gradient (Half Arch)":
+				case "4 Color Sweep Gradient (Half Arch)(Mirror)":
+				case "4 Color Sweep Gradient (2x)":
+				case "4 Color Sweep Gradient (3x)":
+				case "4 Color Sweep Gradient":
+					drawLinearGradientBackground(canvas);
+					break;
 
-			case "4-Color Gradient from corners":
-				draw4ColorCornerGradientBackground(canvas);
-				break;
-			case "4-Colors in corners":
-				// drawMandelBrot(canvas);
-				draw4ColorBackground(canvas);
-				break;
-			case "Sweep Gradient from corner":
-				drawSweepGradientFromCorner(canvas);
-				break;
+				case "4-Color Gradient from corners":
+					draw4ColorCornerGradientBackground(canvas);
+					break;
+				case "4-Colors in corners":
+					draw4ColorBackground(canvas);
+					break;
+				case "4-Color Tornado":
+					draw4ColorTornado2(canvas, 7, 9);
+					break;
+				case "Sweep Gradient from corner":
+					drawSweepGradientFromCorner(canvas);
+					break;
 			}
 		} else {
 			drawSimpleBackground(canvas);
@@ -76,131 +79,132 @@ public class BackgroundDrawer {
 		int radius = (int) Math.sqrt(width * width + height * height) / 2;
 
 		switch (Settings.getGradientDirection()) {
-		default:
-		case "Linear Gradient top-bottom":
-			paint.setShader(new LinearGradient(0, 0, 0, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient bottom-top":
-			paint.setShader(new LinearGradient(0, 0, 0, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
-			break;
+			default:
+			case "Linear Gradient top-bottom":
+				paint.setShader(new LinearGradient(0, 0, 0, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient bottom-top":
+				paint.setShader(new LinearGradient(0, 0, 0, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
+				break;
 
-		case "Linear Gradient left-right":
-			paint.setShader(new LinearGradient(0, 0, width, 0, getColors(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient right-left":
-			paint.setShader(new LinearGradient(0, 0, width, 0, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
-			break;
+			case "Linear Gradient left-right":
+				paint.setShader(new LinearGradient(0, 0, width, 0, getColors(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient right-left":
+				paint.setShader(new LinearGradient(0, 0, width, 0, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
+				break;
 
-		case "Linear Gradient topleft-bottomright":
-			paint.setShader(new LinearGradient(0, 0, width, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient bottomright-topleft":
-			paint.setShader(new LinearGradient(0, 0, width, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
-			break;
+			case "Linear Gradient topleft-bottomright":
+				paint.setShader(new LinearGradient(0, 0, width, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient bottomright-topleft":
+				paint.setShader(new LinearGradient(0, 0, width, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
+				break;
 
-		case "Linear Gradient topright-bottomleft":
-			paint.setShader(new LinearGradient(width, 0, 0, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "Linear Gradient bottomleft-topright":
-			paint.setShader(new LinearGradient(width, 0, 0, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "Radial Gradient":
-			paint.setShader(new RadialGradient(width / 2, height / 2, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "Radial Gradient (Half Arch)":
-			radius = (int) Math.sqrt(width / 2 * width / 2 + height * height);
-			paint.setShader(new RadialGradient(width / 2, height, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
-			break;
-		case "4 Color Sweep Gradient": {
-			final int colorsSweep[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4(),
-					Settings.getPatternColor1() };
-			final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
-			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
-		}
-			break;
+			case "Linear Gradient topright-bottomleft":
+				paint.setShader(new LinearGradient(width, 0, 0, height, getColors(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "Linear Gradient bottomleft-topright":
+				paint.setShader(new LinearGradient(width, 0, 0, height, getColorsReverse(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "Radial Gradient":
+				paint.setShader(new RadialGradient(width / 2, height / 2, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "Radial Gradient (Half Arch)":
+				radius = (int) Math.sqrt(width / 2 * width / 2 + height * height);
+				paint.setShader(new RadialGradient(width / 2, height, radius, getColors(), getDistances(), Shader.TileMode.MIRROR));
+				break;
+			case "4 Color Sweep Gradient": {
+				final int colorsSweep[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4(),
+						Settings.getPatternColor1() };
+				final float distancesSweep[] = { 0.0f, 0.25f, 0.5f, 0.75f, 1f };
+				paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+			}
+				break;
 
-		case "4 Color Sweep Gradient (2x)": {
-			final int colorsSweep[] = { //
-					Settings.getPatternColor1(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor4(), //
-					Settings.getPatternColor1(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor4(), //
-					Settings.getPatternColor1() };
-			final float distancesSweep[] = { 0.0f, //
-					0.125f, //
-					0.25f, //
-					0.375f, //
-					0.5f, //
-					0.625f, //
-					0.75f, //
-					0.875f, //
-					1f };
-			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
-		}
-			break;
+			case "4 Color Sweep Gradient (2x)": {
+				final int colorsSweep[] = { //
+						Settings.getPatternColor1(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor4(), //
+						Settings.getPatternColor1(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor4(), //
+						Settings.getPatternColor1() };
+				final float distancesSweep[] = { 0.0f, //
+						0.125f, //
+						0.25f, //
+						0.375f, //
+						0.5f, //
+						0.625f, //
+						0.75f, //
+						0.875f, //
+						1f };
+				paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+			}
+				break;
 
-		case "4 Color Sweep Gradient (3x)": {
-			final int colorsSweep[] = { //
-					Settings.getPatternColor1(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor4(), //
-					Settings.getPatternColor1(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor4(), //
-					Settings.getPatternColor1(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor4(), //
-					Settings.getPatternColor1() };
-			final float distancesSweep[] = { 0.0f, //
-					0.0833f, //
-					0.1666f, //
-					0.25f, //
-					0.333f, //
-					0.416f, //
-					0.5f, //
-					0.583f, //
-					0.666f, //
-					0.75f, //
-					0.8333f, //
-					0.916f, //
-					1f };
-			paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
-		}
-			break;
+			case "4 Color Sweep Gradient (3x)": {
+				final int colorsSweep[] = { //
+						Settings.getPatternColor1(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor4(), //
+						Settings.getPatternColor1(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor4(), //
+						Settings.getPatternColor1(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor4(), //
+						Settings.getPatternColor1() };
+				final float distancesSweep[] = { 0.0f, //
+						0.0833f, //
+						0.1666f, //
+						0.25f, //
+						0.333f, //
+						0.416f, //
+						0.5f, //
+						0.583f, //
+						0.666f, //
+						0.75f, //
+						0.8333f, //
+						0.916f, //
+						1f };
+				paint.setShader(new SweepGradient(width / 2, height / 2, colorsSweep, distancesSweep));
+			}
+				break;
 
-		case "4 Color Sweep Gradient (Half Arch)": {
-			final int colorsSweep2[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4() };
-			final float distancesSweep2[] = { 0.5f, 0.66f, 0.82f, 1.0f };
-			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
-		}
-			break;
-		case "4 Color Sweep Gradient (Half Arch)(Mirror)": {
-			final int colorsSweep2[] = { //
-					Settings.getPatternColor1(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor4(), //
-					Settings.getPatternColor3(), //
-					Settings.getPatternColor2(), //
-					Settings.getPatternColor1() //
-			};
-			final float distancesSweep2[] = { 0.5f, //
-					0.5833f, //
-					0.6666f, //
-					0.75f, //
-					0.8333f, //
-					0.9156f, //
-					1.0f };
-			paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
-		}
-			break;
+			case "4 Color Sweep Gradient (Half Arch)": {
+				final int colorsSweep2[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(),
+						Settings.getPatternColor4() };
+				final float distancesSweep2[] = { 0.5f, 0.66f, 0.82f, 1.0f };
+				paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
+			}
+				break;
+			case "4 Color Sweep Gradient (Half Arch)(Mirror)": {
+				final int colorsSweep2[] = { //
+						Settings.getPatternColor1(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor4(), //
+						Settings.getPatternColor3(), //
+						Settings.getPatternColor2(), //
+						Settings.getPatternColor1() //
+				};
+				final float distancesSweep2[] = { 0.5f, //
+						0.5833f, //
+						0.6666f, //
+						0.75f, //
+						0.8333f, //
+						0.9156f, //
+						1.0f };
+				paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, distancesSweep2));
+			}
+				break;
 		}
 		return paint;
 	}
@@ -211,13 +215,13 @@ public class BackgroundDrawer {
 		final int colors4[] = { Settings.getPatternColor1(), Settings.getPatternColor2(), Settings.getPatternColor3(), Settings.getPatternColor4() };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
-		default:
-		case 2:
-			return colors2;
-		case 3:
-			return colors3;
-		case 4:
-			return colors4;
+			default:
+			case 2:
+				return colors2;
+			case 3:
+				return colors3;
+			case 4:
+				return colors4;
 		}
 	}
 
@@ -227,13 +231,13 @@ public class BackgroundDrawer {
 		final int colors4[] = { Settings.getPatternColor4(), Settings.getPatternColor3(), Settings.getPatternColor2(), Settings.getPatternColor1() };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
-		default:
-		case 2:
-			return colors2;
-		case 3:
-			return colors3;
-		case 4:
-			return colors4;
+			default:
+			case 2:
+				return colors2;
+			case 3:
+				return colors3;
+			case 4:
+				return colors4;
 		}
 	}
 
@@ -243,13 +247,13 @@ public class BackgroundDrawer {
 		final float distances4[] = { 0.05f, 0.30f, 0.60f, 0.95f };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
-		default:
-		case 2:
-			return distances2;
-		case 3:
-			return distances3;
-		case 4:
-			return distances4;
+			default:
+			case 2:
+				return distances2;
+			case 3:
+				return distances3;
+			case 4:
+				return distances4;
 		}
 	}
 
@@ -259,13 +263,13 @@ public class BackgroundDrawer {
 		final float distances4[] = { 0.0f, 0.08f, 0.16f, 0.24f };
 		final int anzahl = Settings.getAnzahlGradientColors();
 		switch (anzahl) {
-		default:
-		case 2:
-			return distances2;
-		case 3:
-			return distances3;
-		case 4:
-			return distances4;
+			default:
+			case 2:
+				return distances2;
+			case 3:
+				return distances3;
+			case 4:
+				return distances4;
 		}
 	}
 
@@ -279,39 +283,41 @@ public class BackgroundDrawer {
 		// drawSunBeams(canvas, cWidth, cHeight, r);
 	}
 
-	private static void drawWhiteRoundReflection(final Canvas canvas, final int cWidth, final int cHeight, final RectF r) {
-		final Paint reflectionsPaint = new Paint();
-		reflectionsPaint.setAntiAlias(true);
-		final int whitehalftransparent = 0x88FFFFFF;
-		final int transparent = 0x00FFFFFF;
-		final int colors[] = { whitehalftransparent, transparent, transparent, whitehalftransparent };
-		final float distances[] = { 0.0f, 0.3f, 0.95f, 1.0f };
-		reflectionsPaint.setShader(new RadialGradient(-cWidth / 2, cHeight, cWidth / 7, colors, distances, Shader.TileMode.REPEAT));
-		// reflectionsPaint.setShader(new LinearGradient(-cWidth / 10, 0, cWidth / 10, 0, colors, distances,
-		// Shader.TileMode.MIRROR));
-		canvas.drawRect(r, reflectionsPaint);
-	}
-
-	private static void drawSunBeams(final Canvas canvas, final int cWidth, final int cHeight, final RectF r) {
-		final int whitehalftransparent = 0x88FFFFFF;
-		final int transparent = 0x44FFFFFF;
-		final Paint paint = new Paint();
-		paint.setAntiAlias(true);
-		paint.setStrokeWidth(cWidth / 25);
-		final int colors[] = { whitehalftransparent, transparent };
-		final float distances[] = { 0.0f, 1.0f };
-		paint.setShader(new LinearGradient(0, 0, 0, cHeight, colors, distances, Shader.TileMode.MIRROR));
-
-		final int breiteOben = cWidth * 5 / 10;
-		final int breiteUnten = cWidth * 9 / 10;
-		final int rays = 8;
-
-		for (int i = 0; i <= rays; i++) {
-			final int xOben = (cWidth / 2 - breiteOben / 2) + i * breiteOben / rays;
-			final int xUnten = (cWidth / 2 - breiteUnten / 2) + i * breiteUnten / rays;
-			canvas.drawLine(xOben, 0, xUnten, cHeight, paint);
-		}
-	}
+	// private static void drawWhiteRoundReflection(final Canvas canvas, final int cWidth, final int cHeight, final
+	// RectF r) {
+	// final Paint reflectionsPaint = new Paint();
+	// reflectionsPaint.setAntiAlias(true);
+	// final int whitehalftransparent = 0x88FFFFFF;
+	// final int transparent = 0x00FFFFFF;
+	// final int colors[] = { whitehalftransparent, transparent, transparent, whitehalftransparent };
+	// final float distances[] = { 0.0f, 0.3f, 0.95f, 1.0f };
+	// reflectionsPaint.setShader(new RadialGradient(-cWidth / 2, cHeight, cWidth / 7, colors, distances,
+	// Shader.TileMode.REPEAT));
+	// // reflectionsPaint.setShader(new LinearGradient(-cWidth / 10, 0, cWidth / 10, 0, colors, distances,
+	// // Shader.TileMode.MIRROR));
+	// canvas.drawRect(r, reflectionsPaint);
+	// }
+	//
+	// private static void drawSunBeams(final Canvas canvas, final int cWidth, final int cHeight, final RectF r) {
+	// final int whitehalftransparent = 0x88FFFFFF;
+	// final int transparent = 0x44FFFFFF;
+	// final Paint paint = new Paint();
+	// paint.setAntiAlias(true);
+	// paint.setStrokeWidth(cWidth / 25);
+	// final int colors[] = { whitehalftransparent, transparent };
+	// final float distances[] = { 0.0f, 1.0f };
+	// paint.setShader(new LinearGradient(0, 0, 0, cHeight, colors, distances, Shader.TileMode.MIRROR));
+	//
+	// final int breiteOben = cWidth * 5 / 10;
+	// final int breiteUnten = cWidth * 9 / 10;
+	// final int rays = 8;
+	//
+	// for (int i = 0; i <= rays; i++) {
+	// final int xOben = (cWidth / 2 - breiteOben / 2) + i * breiteOben / rays;
+	// final int xUnten = (cWidth / 2 - breiteUnten / 2) + i * breiteUnten / rays;
+	// canvas.drawLine(xOben, 0, xUnten, cHeight, paint);
+	// }
+	// }
 
 	public static void draw4ColorBackground(final Canvas canvas) {
 		final int cWidth = canvas.getWidth();
@@ -350,6 +356,69 @@ public class BackgroundDrawer {
 		final Rect r = new Rect(0, 0, cWidth, cHeight);
 		canvas.drawRect(r, paint);
 
+	}
+
+	private static void draw4ColorTornado2(final Canvas canvas, final int steps, final int anzcolors) {
+		buildTornadoColors();
+		final int cWidth = canvas.getWidth();
+		final int cHeight = canvas.getHeight();
+		final int abstand = cWidth / 30;
+		final int maximumRadius = (int) Math.sqrt(cWidth * cWidth / 4 + cHeight * cHeight / 4) + abstand;
+		final int radiusStep = Math.round(abstand);
+		final int anzRinge = maximumRadius / radiusStep;
+		final Point center = new Point(cWidth / 2, cHeight / 2);
+
+		int index = 0;
+		for (int ring = 0; ring <= anzRinge; ring++) {
+			final float r = ring * radiusStep;
+			final int ecken = tornadoColors.length + 2;// (int) (Math.PI * 2 * r) / radiusStep + Math.max(anzRinge -
+														// ring *
+														// ring, 0);
+			final float winkelProEcke = (float) (Math.PI * 2 / (ecken));
+			for (int ecke = 0; ecke < ecken; ecke++) {
+				final float rp = r + radiusStep * ecke / ecken;
+				final Point p = new Point();
+				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke) * rp);
+				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke) * rp);
+				final Paint paint = new Paint();
+				final int color = tornadoColors[index % tornadoColors.length];
+				index++;
+				paint.setColor(color);
+				canvas.drawCircle(p.x, p.y, abstand * 1.5f, paint);
+			}
+		}
+	}
+
+	private static int getColor(final int number) {
+		switch (number) {
+			default:
+			case 1:
+				return Settings.getPatternColor1();
+			case 2:
+				return Settings.getPatternColor2();
+			case 3:
+				return Settings.getPatternColor3();
+			case 4:
+				return Settings.getPatternColor4();
+			case 5:
+				return Settings.getPatternColor1();
+		}
+	}
+
+	private static int tornadoColors[];
+
+	private static void buildTornadoColors() {
+		final int steps = 10;
+		tornadoColors = new int[steps * 4];
+		int index = 0;
+		for (int color = 1; color < 5; color++) {
+			for (int i = 0; i < steps; i++) {
+
+				final int col = getRadiantColor(getColor(color), getColor(color + 1), i, 0, steps - 1);
+				tornadoColors[index] = col;
+				index++;
+			}
+		}
 	}
 
 	public static void draw4ColorCornerGradientBackground(final Canvas canvas) {
