@@ -49,7 +49,16 @@ public class BackgroundDrawer {
 					draw4ColorBackground(canvas);
 					break;
 				case "4-Color Tornado":
-					draw4ColorTornado2(canvas, 7, 9);
+					draw4ColorTornado(canvas, 2);
+					break;
+				case "4-Color Tornado +":
+					draw4ColorTornado(canvas, 3);
+					break;
+				case "4-Color Tornado ++":
+					draw4ColorTornado(canvas, 4);
+					break;
+				case "4-Color Tornado +++":
+					draw4ColorTornado(canvas, 5);
 					break;
 				case "Sweep Gradient from corner":
 					drawSweepGradientFromCorner(canvas);
@@ -358,7 +367,12 @@ public class BackgroundDrawer {
 
 	}
 
-	private static void draw4ColorTornado2(final Canvas canvas, final int steps, final int anzcolors) {
+	/**
+	 * @param canvas
+	 * @param off
+	 *            staerke des Tornados 1-4 sinnnvoll
+	 */
+	private static void draw4ColorTornado(final Canvas canvas, final int off) {
 		buildTornadoColors();
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
@@ -371,9 +385,9 @@ public class BackgroundDrawer {
 		int index = 0;
 		for (int ring = 0; ring <= anzRinge; ring++) {
 			final float r = ring * radiusStep;
-			final int ecken = tornadoColors.length + 2;// (int) (Math.PI * 2 * r) / radiusStep + Math.max(anzRinge -
-														// ring *
-														// ring, 0);
+			final int ecken = tornadoColors.length + off;// (int) (Math.PI * 2 * r) / radiusStep + Math.max(anzRinge -
+															// ring *
+															// ring, 0);
 			final float winkelProEcke = (float) (Math.PI * 2 / (ecken));
 			for (int ecke = 0; ecke < ecken; ecke++) {
 				final float rp = r + radiusStep * ecke / ecken;
