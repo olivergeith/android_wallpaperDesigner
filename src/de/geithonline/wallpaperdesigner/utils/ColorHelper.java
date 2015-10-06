@@ -41,6 +41,19 @@ public class ColorHelper {
 		return Color.argb(a, r, g, b);
 	}
 
+	/**
+	 * @param col1
+	 *            Farbe 1
+	 * @param col2
+	 *            Farbe 2
+	 * @param level
+	 *            stufe zwischen den farben (0-10)
+	 * @param min
+	 *            minimale stufe (0)
+	 * @param max
+	 *            maximale stufe (10)
+	 * @return
+	 */
 	public static int getRadiantColor(final int col1, final int col2, final int level, final int min, final int max) {
 		final int diff = min - max;
 		final int diffpercent = min - level;

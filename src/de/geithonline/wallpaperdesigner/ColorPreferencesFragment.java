@@ -16,12 +16,13 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
 import de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.BackgroundDrawer;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.utils.DisplayHelper;
 
@@ -46,6 +47,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private List<String> keys = new ArrayList<String>();
 	private ListPreference colorRandomizingType;
 
+	private SeekBarPreference tornadoRings;
+	private SeekBarPreference tornadoArms;
+	private PreferenceScreen tornadoSettings;
+
 	@Override
 	public void onDestroy() {
 		if (patternColorsBitmap != null) {
@@ -69,6 +74,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		keys.add(Settings.KEY_COLOR_GRADIENT_DIRECTION);
 		keys.add(Settings.KEY_COLORS_ANZAHL);
 		keys.add(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
+		keys.add(Settings.KEY_TORNADO_ARMS);
+		keys.add(Settings.KEY_TORNADO_RINGS);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
@@ -134,6 +141,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			}
 
 		});
+
+		tornadoRings = (SeekBarPreference) findPreference("tornadoRings");
+		tornadoArms = (SeekBarPreference) findPreference("tornadoArms");
+		tornadoSettings = (PreferenceScreen) findPreference("TornadoSettings");
 
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawPreviewImages();
@@ -201,24 +212,31 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		color2.update();
 		color3.update();
 		color4.update();
+
+		if (!Settings.isTornadoGradient(selection)) {
+			getPreferenceScreen().removePreference(tornadoSettings);
+		} else {
+			getPreferenceScreen().addPreference(tornadoSettings);
+		}
+
 	}
 
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
-			case 2:
-				color3.setEnabled(false);
-				color4.setEnabled(false);
-				break;
-			case 3:
-				color3.setEnabled(true);
-				color4.setEnabled(false);
-				break;
-			default:
-			case 4:
-				color3.setEnabled(true);
-				color4.setEnabled(true);
-				break;
+		case 2:
+			color3.setEnabled(false);
+			color4.setEnabled(false);
+			break;
+		case 3:
+			color3.setEnabled(true);
+			color4.setEnabled(false);
+			break;
+		default:
+		case 4:
+			color3.setEnabled(true);
+			color4.setEnabled(true);
+			break;
 		}
 	}
 

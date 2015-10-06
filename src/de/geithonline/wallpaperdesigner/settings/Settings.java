@@ -12,6 +12,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_TORNADO_RINGS = "tornadoRings";
+	public static final String KEY_TORNADO_ARMS = "tornadoArms";
 	public static final String KEY_RANDOMIZE_SATURATION_RANGE = "randomizeSaturationRange";
 	public static final String KEY_SHOW_SET_WALLPAPER_BUTTON = "showSetWallpaperButton";
 	public static final String KEY_LIMIT_2_CANVAS = "limit2Canvas";
@@ -779,6 +781,28 @@ public class Settings {
 			return false;
 		}
 		return test.startsWith("4");
+	}
+
+	// Background Color
+	public static boolean isTornadoGradient(final String test) {
+		if (prefs == null) {
+			return false;
+		}
+		return test.startsWith("4-Color Tornado");
+	}
+
+	public static int getTornadoArms() {
+		if (prefs == null) {
+			return 1;
+		}
+		return prefs.getInt(KEY_TORNADO_ARMS, 1);
+	}
+
+	public static int getTornadoRings() {
+		if (prefs == null) {
+			return 2;
+		}
+		return prefs.getInt(KEY_TORNADO_RINGS, 1) + 1;
 	}
 
 	public static int getPatternColor1() {

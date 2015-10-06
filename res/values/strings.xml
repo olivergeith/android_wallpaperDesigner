@@ -121,6 +121,8 @@
     <string name="limit2Canvas">Limit to Canvas</string>
     <string name="limit2CanvasSummary">Some Layouts have drawing-positions outside the canvas. Patterns drawn there will only protrude into the canvas a little bit. You can -stop- these lurking outside-patterns here ;-)</string>
     
+    <string name="tornadoRings">Rings of Tornado</string>
+    <string name="tornadoArms">Arms of Tornado</string>
     
     
 </resources>

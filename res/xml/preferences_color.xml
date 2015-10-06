@@ -16,6 +16,35 @@
         android:entryValues="@array/directions"
         android:key="gradientDirection"
         android:title="@string/gradientDirection" />
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="TornadoSettings"
+        android:title="Tornado Settings..." >
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="1"
+	        android:dialogMessage="@string/tornadoRings"
+	        android:key="tornadoRings"
+	        android:summary="%1$d"
+	        android:title="@string/tornadoRings"
+	        seekbarpreference:maxValue="5"
+	        seekbarpreference:minValue="1"
+	        seekbarpreference:stepValue="1" />
+	    
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="1"
+	        android:dialogMessage="@string/tornadoArms"
+	        android:key="tornadoArms"
+	        android:summary="%1$d"
+	        android:title="@string/tornadoArms"
+	        seekbarpreference:maxValue="3"
+	        seekbarpreference:minValue="1"
+	        seekbarpreference:stepValue="1" />
+    
+    </PreferenceScreen>
+    
+    
     <ListPreference
         android:defaultValue="4"
         android:dialogTitle="@string/anzColors"
@@ -23,6 +52,7 @@
         android:entryValues="@array/anzColorsValues"
         android:key="anzColors"
         android:title="@string/anzColors" />
+    
 
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_RED"
