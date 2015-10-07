@@ -79,25 +79,25 @@ public class BackgroundDrawer {
 		switch (Settings.getGradientDirection()) {
 			default:
 			case "Linear Gradient bottom-top": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(1, true);
 			case "Linear Gradient top-bottom":
 				paint.setShader(new LinearGradient(0, 0, 0, height, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "Linear Gradient right-left": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(1, true);
 			case "Linear Gradient left-right":
 				paint.setShader(new LinearGradient(0, 0, width, 0, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "Linear Gradient bottomright-topleft": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(1, true);
 			case "Linear Gradient topleft-bottomright":
 				paint.setShader(new LinearGradient(0, 0, width, height, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "Linear Gradient bottomleft-topright": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(1, true);
 			case "Linear Gradient topright-bottomleft":
 				paint.setShader(new LinearGradient(width, 0, 0, height, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
@@ -110,17 +110,17 @@ public class BackgroundDrawer {
 				break;
 
 			case "4 Color Sweep Gradient": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(1, false);
 				initSettingsForDeprecatedSweepGradients();
 				initSweepPaint(width, height, paint);
 				break;
 			case "4 Color Sweep Gradient (2x)": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(2, false);
 				initSettingsForDeprecatedSweepGradients();
 				initSweepPaint(width, height, paint);
 				break;
 			case "4 Color Sweep Gradient (3x)": // deprecated
-				initSettingsForDeprecatedGradients();
+				initSettingsForDeprecatedGradients(3, false);
 				initSettingsForDeprecatedSweepGradients();
 				initSweepPaint(width, height, paint);
 				break;
@@ -145,7 +145,8 @@ public class BackgroundDrawer {
 						Settings.getPatternColor2(), //
 						Settings.getPatternColor1() //
 				};
-				final float distancesSweep2[] = { 0.5f, //
+				final float distancesSweep2[] = { //
+						0.5f, //
 						0.5833f, //
 						0.6666f, //
 						0.75f, //
@@ -163,9 +164,9 @@ public class BackgroundDrawer {
 		Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Sweep Gradient (++)").commit();
 	}
 
-	private static void initSettingsForDeprecatedGradients() {
-		Settings.prefs.edit().putBoolean(Settings.KEY_REVERSE_COLORS, true).commit();
-		Settings.prefs.edit().putInt(Settings.KEY_COLOR_REPEATS, 1).commit();
+	private static void initSettingsForDeprecatedGradients(final int repeats, final boolean reverse) {
+		Settings.prefs.edit().putBoolean(Settings.KEY_REVERSE_COLORS, reverse).commit();
+		Settings.prefs.edit().putInt(Settings.KEY_COLOR_REPEATS, repeats).commit();
 	}
 
 	private static void initSweepPaint(final int width, final int height, final Paint paint) {
