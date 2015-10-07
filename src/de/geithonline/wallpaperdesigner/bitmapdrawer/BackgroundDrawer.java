@@ -2,12 +2,14 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.Shader.TileMode;
 import android.graphics.SweepGradient;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
@@ -39,7 +41,7 @@ public class BackgroundDrawer {
 
 	}
 
-	public static void drawGradientBackground(final Canvas canvas) {
+	private static void drawGradientBackground(final Canvas canvas) {
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
 		final RectF r = new RectF(0, 0, cWidth, cHeight);
@@ -195,13 +197,9 @@ public class BackgroundDrawer {
 
 	}
 
-	public static void draw4ColorCornerGradientBackground(final Canvas canvas) {
+	private static void draw4ColorCornerGradientBackground(final Canvas canvas) {
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
-		// final int c1 = Color.RED;
-		// final int c2 = Color.GREEN;
-		// final int c3 = Color.YELLOW;
-		// final int c4 = Color.BLUE;
 		final int c1 = Settings.getPatternColor1();
 		final int c2 = Settings.getPatternColor2();
 		final int c3 = Settings.getPatternColor3();
@@ -226,6 +224,45 @@ public class BackgroundDrawer {
 				canvas.drawRect(r, paint);
 			}
 		}
+
+	}
+
+	private static void draw4ColorCornerGradientBackgroundV2(final Canvas canvas) {
+		final int cWidth = canvas.getWidth();
+		final int cHeight = canvas.getHeight();
+		final int c1 = Settings.getPatternColor1();
+		final int c2 = Settings.getPatternColor2();
+		final int c3 = Settings.getPatternColor3();
+		final int c4 = Settings.getPatternColor4();
+		final Paint paint = new Paint();
+		paint.setAntiAlias(true);
+		paint.setColor(c1);
+		final Rect r = new Rect();
+		r.left = 0;
+		r.top = 0;
+		r.right = cWidth;
+		r.bottom = cHeight;
+		final int radius = (int) (Math.sqrt(cWidth * cWidth + cHeight * cHeight));
+		// if (cWidth < cHeight) {
+		// radius = cHeight;
+		// } else {
+		// radius = cWidth;
+		// }
+
+		final int offset = cWidth / 15;
+		setSpotlightShader(offset, offset, c1, paint, radius);
+		canvas.drawRect(r, paint);
+		setSpotlightShader(cWidth - offset, offset, c2, paint, radius);
+		canvas.drawRect(r, paint);
+		setSpotlightShader(cWidth - offset, cHeight - offset, c3, paint, radius);
+		canvas.drawRect(r, paint);
+		setSpotlightShader(offset, cHeight - offset, c4, paint, radius);
+		canvas.drawRect(r, paint);
+	}
+
+	private static void setSpotlightShader(final int x, final int y, final int color, final Paint paint, final int radius) {
+		final int transparent = Color.argb(0, Color.red(color), Color.green(color), Color.blue(color));
+		paint.setShader(new RadialGradient(x, y, radius, color, transparent, TileMode.CLAMP));
 
 	}
 
