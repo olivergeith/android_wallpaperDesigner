@@ -57,7 +57,8 @@ public class PreferenceIO {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs, final String filename, final boolean onlyColors) {
+	public static Map<String, ?> loadPreferencesFromFile(final Activity activity, final SharedPreferences prefs, final String filename,
+			final boolean onlyColors) {
 		Log.i(LOG_TAG, "Loading Settings from " + filename);
 		final File file = new File(getSettingsDir(), filename);
 		if (file.exists()) {
@@ -112,6 +113,9 @@ public class PreferenceIO {
 				}
 				if (!keySet.contains(Settings.KEY_PATTERN_BLUR)) {
 					setDefaultBooleanValue(prefs, Settings.KEY_PATTERN_BLUR, false);
+				}
+				if (!keySet.contains(Settings.KEY_COLOR_REPEATS)) {
+					setDefaultIntValue(prefs, Settings.KEY_COLOR_REPEATS, 1);
 				}
 
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
