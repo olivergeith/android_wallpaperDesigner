@@ -2,7 +2,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
-public class BackgroundDrawerColorManager {
+public class GradientColorManager {
 
 	public static int[] getColors() {
 		final boolean reverse = Settings.isReverseColors();
@@ -20,6 +20,24 @@ public class BackgroundDrawerColorManager {
 			reverse(colors);
 		}
 		return colors;
+	}
+
+	public static int[] getColorsMirrored() {
+		final int colors[] = getColors();
+		final int newanz = colors.length * 2 - 1;
+		final int[] outcolors = new int[newanz];
+		int index = 0;
+		// erstmal alle Farben eins zu eins kopieren
+		for (int i = 0; i < colors.length; i++) {
+			outcolors[index] = colors[i];
+			index++;
+		}
+		// dann rückwärts anhangen, aber die letzte auslassen
+		for (int i = colors.length - 2; i >= 0; i--) {
+			outcolors[index] = colors[i];
+			index++;
+		}
+		return outcolors;
 	}
 
 	public static int[] getColorsSweep() {
@@ -55,6 +73,17 @@ public class BackgroundDrawerColorManager {
 			left++;
 			right--;
 		}
+	}
+
+	public static float[] getDistancesSweepArc(final int anz, final float min, final float max) {
+		final float distancesSweep2[] = new float[anz];
+		final float diff = max - min;
+		final float step = diff / (anz - 1);
+
+		for (int i = 0; i < anz; i++) {
+			distancesSweep2[i] = min + i * step;
+		}
+		return distancesSweep2;
 	}
 
 	private static int getColor(final int number) {

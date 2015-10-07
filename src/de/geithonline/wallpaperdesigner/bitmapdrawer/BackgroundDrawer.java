@@ -20,26 +20,6 @@ public class BackgroundDrawer {
 		if (sameAsPatternGradient) {
 			switch (Settings.getGradientDirection()) {
 				default:
-				case "Linear Gradient bottom-top": // deprecated
-				case "4 Color Sweep Gradient": // deprecated
-				case "4 Color Sweep Gradient (2x)": // deprecated
-				case "4 Color Sweep Gradient (3x)": // deprecated
-				case "4 Color Sweep Gradient (Half Arch)": // deprecated
-				case "Linear Gradient bottomright-topleft": // deprecated
-				case "Linear Gradient right-left": // deprecated
-				case "Linear Gradient bottomleft-topright": // deprecated
-				case "Sweep Gradient from corner": // deprecaterd
-
-				case "Linear Gradient top-bottom":
-				case "Linear Gradient left-right":
-				case "Linear Gradient topleft-bottomright":
-				case "Linear Gradient topright-bottomleft":
-				case "Radial Gradient":
-				case "Radial Gradient (Half Arch)":
-				case "4 Color Sweep Gradient (Half Arch)(Mirror)":
-				case "Sweep Gradient (++)":
-				case "Sweep Gradient (Half Arch)":
-				case "Sweep Gradient (from corner)":
 					drawGradientBackground(canvas);
 					break;
 
@@ -56,6 +36,14 @@ public class BackgroundDrawer {
 		} else {
 			drawSimpleBackground(canvas);
 		}
+
+	}
+
+	public static void drawGradientBackground(final Canvas canvas) {
+		final int cWidth = canvas.getWidth();
+		final int cHeight = canvas.getHeight();
+		final RectF r = new RectF(0, 0, cWidth, cHeight);
+		canvas.drawRect(r, getBackgroundPaint(cWidth, cHeight));
 
 	}
 
@@ -82,35 +70,35 @@ public class BackgroundDrawer {
 				initSettingsForDeprecatedGradients(1, true);
 				Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Linear Gradient top-bottom").commit();
 			case "Linear Gradient top-bottom":
-				paint.setShader(new LinearGradient(0, 0, 0, height, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
+				paint.setShader(new LinearGradient(0, 0, 0, height, GradientColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "Linear Gradient right-left": // deprecated
 				initSettingsForDeprecatedGradients(1, true);
 				Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Linear Gradient left-right").commit();
 			case "Linear Gradient left-right":
-				paint.setShader(new LinearGradient(0, 0, width, 0, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
+				paint.setShader(new LinearGradient(0, 0, width, 0, GradientColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "Linear Gradient bottomright-topleft": // deprecated
 				initSettingsForDeprecatedGradients(1, true);
 				Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Linear Gradient topleft-bottomright").commit();
 			case "Linear Gradient topleft-bottomright":
-				paint.setShader(new LinearGradient(0, 0, width, height, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
+				paint.setShader(new LinearGradient(0, 0, width, height, GradientColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "Linear Gradient bottomleft-topright": // deprecated
 				initSettingsForDeprecatedGradients(1, true);
 				Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Linear Gradient topright-bottomleft").commit();
 			case "Linear Gradient topright-bottomleft":
-				paint.setShader(new LinearGradient(width, 0, 0, height, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
+				paint.setShader(new LinearGradient(width, 0, 0, height, GradientColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 			case "Radial Gradient":
-				paint.setShader(new RadialGradient(width / 2, height / 2, radius, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
+				paint.setShader(new RadialGradient(width / 2, height / 2, radius, GradientColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 			case "Radial Gradient (Half Arch)":
 				radius = (int) Math.sqrt(width / 2 * width / 2 + height * height);
-				paint.setShader(new RadialGradient(width / 2, height, radius, BackgroundDrawerColorManager.getColors(), null, Shader.TileMode.MIRROR));
+				paint.setShader(new RadialGradient(width / 2, height, radius, GradientColorManager.getColors(), null, Shader.TileMode.MIRROR));
 				break;
 
 			case "4 Color Sweep Gradient": // deprecated
@@ -139,66 +127,45 @@ public class BackgroundDrawer {
 				initSweepPaintHalfArc(width, height, paint);
 				break;
 
-			case "Sweep Gradient from corner":
+			case "Sweep Gradient from corner": // deprecated
 				initSettingsForDeprecatedGradients(1, false);
 				Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Sweep Gradient (from corner)").commit();
 			case "Sweep Gradient (from corner)":
 				initSweepGradientPaintFromCorner(width, height, paint);
 				break;
 
-			case "4 Color Sweep Gradient (Half Arch)(Mirror)": {
-				final int colorsSweep2[] = { //
-						Settings.getPatternColor1(), //
-						Settings.getPatternColor2(), //
-						Settings.getPatternColor3(), //
-						Settings.getPatternColor4(), //
-						Settings.getPatternColor3(), //
-						Settings.getPatternColor2(), //
-						Settings.getPatternColor1() //
-				};
-				paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, getDistancesSweepArc(colorsSweep2.length, 0.5f, 1.0f)));
-			}
+			case "4 Color Sweep Gradient (Half Arch)(Mirror)":// deprecated
+				initSettingsForDeprecatedGradients(1, false);
+				Settings.prefs.edit().putString(Settings.KEY_COLOR_GRADIENT_DIRECTION, "Sweep Gradient (Half Arch - Mirrored)").commit();
+			case "Sweep Gradient (Half Arch - Mirrored)":
+				initSweepPaintHalfArcMirrored(width, height, paint);
 				break;
 		}
 		return paint;
 	}
 
 	private static void initSweepPaintHalfArc(final int width, final int height, final Paint paint) {
-		final int colors[] = BackgroundDrawerColorManager.getColors();
-		paint.setShader(new SweepGradient(width / 2, height, colors, getDistancesSweepArc(colors.length, 0.5f, 1.0f)));
+		final int colors[] = GradientColorManager.getColors();
+		paint.setShader(new SweepGradient(width / 2, height, colors, GradientColorManager.getDistancesSweepArc(colors.length, 0.5f, 1.0f)));
+	}
+
+	private static void initSweepPaintHalfArcMirrored(final int width, final int height, final Paint paint) {
+		final int colorsSweep2[] = GradientColorManager.getColorsMirrored();
+		paint.setShader(new SweepGradient(width / 2, height, colorsSweep2, GradientColorManager.getDistancesSweepArc(colorsSweep2.length, 0.5f, 1.0f)));
 	}
 
 	private static void initSweepPaint(final int width, final int height, final Paint paint) {
-		paint.setShader(new SweepGradient(width / 2, height / 2, BackgroundDrawerColorManager.getColorsSweep(), null));
+		paint.setShader(new SweepGradient(width / 2, height / 2, GradientColorManager.getColorsSweep(), null));
 	}
 
 	private static void initSweepGradientPaintFromCorner(final int width, final int height, final Paint paint) {
-		final int colors[] = BackgroundDrawerColorManager.getColors();
-		paint.setShader(new SweepGradient(0, 0, colors, getDistancesSweepArc(colors.length, 0f, 0.25f)));
-	}
-
-	private static float[] getDistancesSweepArc(final int anz, final float min, final float max) {
-		final float distancesSweep2[] = new float[anz];
-		final float diff = max - min;
-		final float step = diff / (anz - 1);
-
-		for (int i = 0; i < anz; i++) {
-			distancesSweep2[i] = min + i * step;
-		}
-		return distancesSweep2;
+		final int colors[] = GradientColorManager.getColors();
+		paint.setShader(new SweepGradient(0, 0, colors, GradientColorManager.getDistancesSweepArc(colors.length, 0f, 0.25f)));
 	}
 
 	private static void initSettingsForDeprecatedGradients(final int repeats, final boolean reverse) {
 		Settings.prefs.edit().putBoolean(Settings.KEY_REVERSE_COLORS, reverse).commit();
 		Settings.prefs.edit().putInt(Settings.KEY_COLOR_REPEATS, repeats).commit();
-	}
-
-	public static void drawGradientBackground(final Canvas canvas) {
-		final int cWidth = canvas.getWidth();
-		final int cHeight = canvas.getHeight();
-		final RectF r = new RectF(0, 0, cWidth, cHeight);
-		canvas.drawRect(r, getBackgroundPaint(cWidth, cHeight));
-
 	}
 
 	public static void draw4ColorBackground(final Canvas canvas) {

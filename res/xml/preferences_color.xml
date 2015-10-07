@@ -62,7 +62,7 @@
 	        android:key="colorRepeats"
 	        android:summary="%1$d Repeats"
 	        android:title="@string/colorRepeats"
-	        seekbarpreference:maxValue="10"
+	        seekbarpreference:maxValue="6"
 	        seekbarpreference:minValue="1"
 	        seekbarpreference:stepValue="1" />
     	<CheckBoxPreference
