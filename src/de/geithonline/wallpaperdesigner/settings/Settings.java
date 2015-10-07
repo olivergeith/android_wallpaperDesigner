@@ -793,7 +793,7 @@ public class Settings {
 	}
 
 	public static boolean isLinearGradient(final String test) {
-		return test.startsWith("Linear") || test.startsWith("Radial") || test.startsWith("Sweep Gradient (++)");
+		return test.startsWith("Linear") || test.startsWith("Radial") || test.startsWith("Sweep Gradient");
 	}
 
 	public static int getColorRepeats() {
