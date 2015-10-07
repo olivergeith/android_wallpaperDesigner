@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_REVERSE_COLORS = "reverseColors";
 	public static final String KEY_COLOR_REPEATS = "colorRepeats";
 	public static final String KEY_TORNADO_RINGS = "tornadoRings";
 	public static final String KEY_TORNADO_ARMS = "tornadoArms";
@@ -134,11 +135,11 @@ public class Settings {
 
 	public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
 		switch (getImageFormat()) {
-		default:
-		case "jpg":
-			return IMAGE_OUTPUT_FORMAT.JPG;
-		case "png":
-			return IMAGE_OUTPUT_FORMAT.PNG;
+			default:
+			case "jpg":
+				return IMAGE_OUTPUT_FORMAT.JPG;
+			case "png":
+				return IMAGE_OUTPUT_FORMAT.PNG;
 		}
 	}
 
@@ -152,23 +153,23 @@ public class Settings {
 
 	public static COLOR_RANDOMIZING_TYPE getColorRandomizingType() {
 		switch (getColorRandomizing()) {
-		default:
-		case "full RGB":
-			return COLOR_RANDOMIZING_TYPE.FULL_RGB;
-		case "only RED":
-			return COLOR_RANDOMIZING_TYPE.ONLY_RED;
-		case "only GREEN":
-			return COLOR_RANDOMIZING_TYPE.ONLY_GREEN;
-		case "only BLUE":
-			return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
-		case "hue":
-			return COLOR_RANDOMIZING_TYPE.HUE;
-		case "push RED":
-			return COLOR_RANDOMIZING_TYPE.PUSH_RED;
-		case "push GREEN":
-			return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
-		case "push BLUE":
-			return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
+			default:
+			case "full RGB":
+				return COLOR_RANDOMIZING_TYPE.FULL_RGB;
+			case "only RED":
+				return COLOR_RANDOMIZING_TYPE.ONLY_RED;
+			case "only GREEN":
+				return COLOR_RANDOMIZING_TYPE.ONLY_GREEN;
+			case "only BLUE":
+				return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
+			case "hue":
+				return COLOR_RANDOMIZING_TYPE.HUE;
+			case "push RED":
+				return COLOR_RANDOMIZING_TYPE.PUSH_RED;
+			case "push GREEN":
+				return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
+			case "push BLUE":
+				return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
 		}
 	}
 
@@ -182,15 +183,15 @@ public class Settings {
 
 	public static CANVAS_LIMT getCanvasLimitType() {
 		switch (getCanvasLimit()) {
-		default:
-		case "small tolerance":
-			return CANVAS_LIMT.small;
-		case "wide tolerance":
-			return CANVAS_LIMT.wide;
-		case "strict":
-			return CANVAS_LIMT.strict;
-		case "no limit":
-			return CANVAS_LIMT.no_limit;
+			default:
+			case "small tolerance":
+				return CANVAS_LIMT.small;
+			case "wide tolerance":
+				return CANVAS_LIMT.wide;
+			case "strict":
+				return CANVAS_LIMT.strict;
+			case "no limit":
+				return CANVAS_LIMT.no_limit;
 		}
 	}
 
@@ -215,11 +216,11 @@ public class Settings {
 
 	public static int getTheme() {
 		switch (getAppTheme()) {
-		default:
-		case "Dark":
-			return R.style.AppThemeDark;
-		case "Light":
-			return R.style.AppThemeLight;
+			default:
+			case "Dark":
+				return R.style.AppThemeDark;
+			case "Light":
+				return R.style.AppThemeLight;
 		}
 	}
 
@@ -227,15 +228,15 @@ public class Settings {
 		// return "Random Layout";
 		final String sort = getSortOrder();
 		switch (sort) {
-		default:
-		case "Last Modified":
-			return SORT_ORDER.LAST_MODIFIED;
-		case "Last Modified (Descending)":
-			return SORT_ORDER.LAST_MODIFIED_DESCENDING;
-		case "Alphabetically":
-			return SORT_ORDER.ALPHA;
-		case "Timestamp in Filename":
-			return SORT_ORDER.FILENAME_TIMESTAMP;
+			default:
+			case "Last Modified":
+				return SORT_ORDER.LAST_MODIFIED;
+			case "Last Modified (Descending)":
+				return SORT_ORDER.LAST_MODIFIED_DESCENDING;
+			case "Alphabetically":
+				return SORT_ORDER.ALPHA;
+			case "Timestamp in Filename":
+				return SORT_ORDER.FILENAME_TIMESTAMP;
 		}
 	}
 
@@ -447,33 +448,33 @@ public class Settings {
 
 	public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
 		switch (getGlossyReflectionStyleString()) {
-		default:
-		case "Diagonal":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
-		case "Diagonal (flipped)":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
-		case "Diagonal 45°":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
-		case "Diagonal 45° (flipped)":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
-		case "Diagonal (curved)":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
-		case "Diagonal (curved) V2":
-			return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
-		case "Curved from top":
-			return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
-		case "Topleft":
-			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
-		case "Topleft V2":
-			return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
-		case "Big Oval":
-			return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
-		case "Small Oval":
-			return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
-		case "Top Glow":
-			return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
-		case "None":
-			return GLOSSY_REFLECTIONS_STYLE.NONE;
+			default:
+			case "Diagonal":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
+			case "Diagonal (flipped)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
+			case "Diagonal 45°":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
+			case "Diagonal 45° (flipped)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
+			case "Diagonal (curved)":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+			case "Diagonal (curved) V2":
+				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
+			case "Curved from top":
+				return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
+			case "Topleft":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+			case "Topleft V2":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
+			case "Big Oval":
+				return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
+			case "Small Oval":
+				return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
+			case "Top Glow":
+				return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
+			case "None":
+				return GLOSSY_REFLECTIONS_STYLE.NONE;
 		}
 	}
 
@@ -487,11 +488,11 @@ public class Settings {
 
 	public static GLOSSY_GLOW_STYLE getGlossyGlowStyle() {
 		switch (getGlossyGlowStyleString()) {
-		default:
-		case "Center":
-			return GLOSSY_GLOW_STYLE.CENTER;
-		case "Horizontal":
-			return GLOSSY_GLOW_STYLE.HORIZONTAL;
+			default:
+			case "Center":
+				return GLOSSY_GLOW_STYLE.CENTER;
+			case "Horizontal":
+				return GLOSSY_GLOW_STYLE.HORIZONTAL;
 		}
 	}
 
@@ -717,10 +718,10 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getCustomWidth();
-		default:
-			return getWidthFromSizeString(s);
+			case "customSize":
+				return getCustomWidth();
+			default:
+				return getWidthFromSizeString(s);
 		}
 	}
 
@@ -735,10 +736,10 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getCustomHeight();
-		default:
-			return getHeightFromSizeString(s);
+			case "customSize":
+				return getCustomHeight();
+			default:
+				return getHeightFromSizeString(s);
 		}
 	}
 
@@ -774,6 +775,13 @@ public class Settings {
 			return 4;
 		}
 		return Integer.parseInt(prefs.getString(KEY_COLORS_ANZAHL, "4"));
+	}
+
+	public static boolean isReverseColors() {
+		if (prefs == null) {
+			return false;
+		}
+		return prefs.getBoolean(KEY_REVERSE_COLORS, false);
 	}
 
 	// Background Color

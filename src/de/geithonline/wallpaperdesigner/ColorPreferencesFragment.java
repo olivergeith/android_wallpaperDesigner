@@ -78,6 +78,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		keys.add(Settings.KEY_TORNADO_ARMS);
 		keys.add(Settings.KEY_TORNADO_RINGS);
 		keys.add(Settings.KEY_COLOR_REPEATS);
+		keys.add(Settings.KEY_REVERSE_COLORS);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
@@ -203,10 +204,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private void handleSelection(final String selection, final int anzahl) {
 		gradientDirection.setSummary(selection);
 		anzColors.setEnabled(!Settings.is4ColorGradient(selection));
-		anzColors.setSummary("" + anzahl);
+		anzColors.setSummary("" + anzahl + " Colors");
 		if (Settings.is4ColorGradient(selection)) {
 			enableColors(4);
-			anzColors.setSummary("" + 4);
+			anzColors.setSummary("" + 4 + " Colors");
 		} else {
 			enableColors(anzahl);
 		}
@@ -231,19 +232,19 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
-		case 2:
-			color3.setEnabled(false);
-			color4.setEnabled(false);
-			break;
-		case 3:
-			color3.setEnabled(true);
-			color4.setEnabled(false);
-			break;
-		default:
-		case 4:
-			color3.setEnabled(true);
-			color4.setEnabled(true);
-			break;
+			case 2:
+				color3.setEnabled(false);
+				color4.setEnabled(false);
+				break;
+			case 3:
+				color3.setEnabled(true);
+				color4.setEnabled(false);
+				break;
+			default:
+			case 4:
+				color3.setEnabled(true);
+				color4.setEnabled(true);
+				break;
 		}
 	}
 

@@ -117,6 +117,9 @@ public class PreferenceIO {
 				if (!keySet.contains(Settings.KEY_COLOR_REPEATS)) {
 					setDefaultIntValue(prefs, Settings.KEY_COLOR_REPEATS, 1);
 				}
+				if (!keySet.contains(Settings.KEY_REVERSE_COLORS)) {
+					setDefaultBooleanValue(prefs, Settings.KEY_REVERSE_COLORS, false);
+				}
 
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;

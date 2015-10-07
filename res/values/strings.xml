@@ -124,6 +124,7 @@
     
     <string name="tornadoRings">Rings of Tornado</string>
     <string name="tornadoArms">Arms of Tornado</string>
-   
+    <string name="reverseColors">Reverse Color-Order</string>
+    
     
 </resources>

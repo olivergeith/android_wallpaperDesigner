@@ -160,13 +160,9 @@
     
     <string-array name="directions">
         <item >Linear Gradient top-bottom</item>
-        <item >Linear Gradient bottom-top</item>
         <item >Linear Gradient left-right</item>
-        <item >Linear Gradient right-left</item>
         <item >Linear Gradient topleft-bottomright</item>
-        <item >Linear Gradient bottomright-topleft</item>
         <item >Linear Gradient topright-bottomleft</item>
-        <item >Linear Gradient bottomleft-topright</item>
         <item >Radial Gradient</item>
         <item >Radial Gradient (Half Arch)</item>
         <item >Sweep Gradient from corner</item>
