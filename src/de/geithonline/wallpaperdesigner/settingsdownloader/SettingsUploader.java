@@ -40,7 +40,7 @@ public class SettingsUploader {
 
 			@Override
 			public void onFailure(final int arg0, final Header[] arg1, final byte[] arg2, final Throwable arg3) {
-				Log.i("Upload", "Not OK");
+				Log.i("Upload", "Not OK: " + arg3.getMessage());
 				Toaster.showErrorToast(activity, "Error uploading design: " + arg3.getMessage());
 			}
 		});
