@@ -3,11 +3,13 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
+import de.geithonline.wallpaperdesigner.utils.PathHelper;
 
 public class LogoPathRR extends Path {
 
 	public enum LOGO_STYLE_RR {
-		RR_V1, RR_V2, RR_V3, RR_V4
+		RR_V1, RR_V2, RR_V3, RR_V4, RR_V5
 	}
 
 	public LogoPathRR(final PointF center, final float radius, final LOGO_STYLE_RR variante) {
@@ -25,6 +27,9 @@ public class LogoPathRR extends Path {
 				break;
 			case RR_V4:
 				drawResurrectionV4(center, radius);
+				break;
+			case RR_V5:
+				drawResurrectionV5(center, radius);
 				break;
 		}
 
@@ -71,6 +76,15 @@ public class LogoPathRR extends Path {
 				center.x, center.y - height + 1.0f * radius, // CP1
 				center.x, center.y);
 		close();
+	}
+
+	private void drawResurrectionV5(final PointF center, final float radius) {
+		final Path p = new SquarePath(center, radius, true, SQUARE_STYLE.ROUNDED, Direction.CCW);
+		PathHelper.rotatePath(center.x, center.y, p, 45);
+		addPath(p);
+		addCircle(center.x, center.y, radius * 0.95f, Direction.CW);
+		addCircle(center.x, center.y, radius * 0.8f, Direction.CCW);
+		draw2Rs(center, radius * 0.9f);
 	}
 
 	private void draw2Rs(final PointF center, final float radius) {

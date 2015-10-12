@@ -9,9 +9,10 @@ public class PatternPropertyStore {
 
 	static {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
-		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot", "Footprint", "Pentagram", "4Sails",
-						"Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Mixed" }));
+		patternProperties.put("Assorted Shapes",
+				new PatternProperties(true, true, false, true, false, true, //
+						new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot", "Footprint", "Pentagram",
+								"4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Mixed" }));
 
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true, //
 				new CharSequence[] { "Bubble" }));
@@ -31,16 +32,18 @@ public class PatternPropertyStore {
 		patternProperties.put("Gears-Saws", new PatternProperties(true, false, false, true, true, true, //
 				new CharSequence[] { "Gear", "Saw", "Star Gear", "Mixed" }));
 
-		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Oval",
-						"Oval (random width)", "Oval (random)", "Half Circle", "Mixed", "Mixed (with Circle)" }));
+		patternProperties.put("Geometrical Shapes",
+				new PatternProperties(true, true, false, true, false, true, //
+						new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Oval",
+								"Oval (random width)", "Oval (random)", "Half Circle", "Mixed", "Mixed (with Circle)" }));
 
-		patternProperties.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
-				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", "Triangle", "Oval", "Diamond", "Dragon", "Dragon (upsidedown)",
-						"Drop", "Lense", "Lense V2", "Lense V3", "Tag", "Knife", "Knife V2", "Knife V3", "Cross", "Cross (Slim)", "Cross (Slim V2)",
-						"Cross (Slim V3)", "Cross (Slim-Double)", "Spiky Cross", "Double Cross", "Sperm", "Virus", "Virus V2", "Long Heart", "Circle Chain",
-						"Circle Chain (upsidedown)", "Spear", "Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane",
-						"Spaceship", "Arrow" }));
+		patternProperties.put("Geometrical (long) Shapes",
+				new PatternProperties(true, true, false, true, false, false, //
+						new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", "Triangle", "Oval", "Diamond", "Dragon",
+								"Dragon (upsidedown)", "Drop", "Lense", "Lense V2", "Lense V3", "Tag", "Knife", "Knife V2", "Knife V3", "Cross", "Cross (Slim)",
+								"Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", "Spiky Cross", "Double Cross", "Sperm", "Virus", "Virus V2",
+								"Long Heart", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)",
+								"Tulip", "Tulip (Fat)", "Plane", "Spaceship", "Arrow" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));
@@ -49,15 +52,17 @@ public class PatternPropertyStore {
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Curvy", "Straigth", "Round", "Peek", "Lovely", "Asymetric", "Mixed" }));
 
-		patternProperties
-				.put("Invertable Shapes", new PatternProperties(true, true, false, true, false, true, //
+		patternProperties.put("Invertable Shapes",
+				new PatternProperties(true, true, false, true, false, true, //
 						new CharSequence[] { "Heart V1", "Heart V2", "Arrow", "Arrow (round)", "Plus", "Minus", "Star", "Gear", "Crown", "Mixed",
 								"Mixed Plus-Minus" }));
 
 		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
-		patternProperties.put("Logos", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "Resurrection Remix V4", "ElementalX Kernel" }));
+		patternProperties.put("Logos",
+				new PatternProperties(true, true, false, false, false, true, //
+						new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "Resurrection Remix V4",
+								"Resurrection Remix V5", "ElementalX Kernel" }));
 
 		patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));
@@ -65,17 +70,19 @@ public class PatternPropertyStore {
 		patternProperties.put("Maritim", new PatternProperties(true, true, false, false, true, true, //
 				new CharSequence[] { "Sailboat V1", "Sailboat V2", "Lighthouse", "Anchor", "Mixed" }));
 
-		patternProperties.put("Material", new PatternProperties(true, false, false, false, false, false, //
-				new CharSequence[] { "Stripe", "Stripe V2", "Stripe V3", "Half Stripe", "Half Stripe V2", "Half Stripe V3", "Arc 1", "Arc 2", "Arc 3",
-						"Skyline", "Pyramide Skyline", "Edgy Bars", "Rotating Bars", "Rotating Triangles", "Rotating Arches (random arches)",
-						"Rotating Arches (quarter arches)", "Rotating Arches (half arches)", "Rotating Arches (3-quarter arches)" }));
+		patternProperties.put("Material",
+				new PatternProperties(true, false, false, false, false, false, //
+						new CharSequence[] { "Stripe", "Stripe V2", "Stripe V3", "Half Stripe", "Half Stripe V2", "Half Stripe V3", "Arc 1", "Arc 2", "Arc 3",
+								"Skyline", "Pyramide Skyline", "Edgy Bars", "Rotating Bars", "Rotating Triangles", "Rotating Arches (random arches)",
+								"Rotating Arches (quarter arches)", "Rotating Arches (half arches)", "Rotating Arches (3-quarter arches)" }));
 
 		patternProperties.put("PacMan", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Ghost", "Pacman", "Mixed" }));
 
-		patternProperties.put("Pillows", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "3 Edge Pillow", "4 Edge Pillow", "5 Edge Pillow", "6 Edge Pillow", "Plectrum", "Fingernail", "Treky", "YingYang",
-						"Peeek", "Armor", "Messer", "Blazon", "Mixed" }));
+		patternProperties.put("Pillows",
+				new PatternProperties(true, true, false, false, false, true, //
+						new CharSequence[] { "3 Edge Pillow", "4 Edge Pillow", "5 Edge Pillow", "6 Edge Pillow", "Plectrum", "Fingernail", "Treky", "YingYang",
+								"Peeek", "Armor", "Messer", "Blazon", "Mixed" }));
 
 		patternProperties.put("Planes", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Old Planes", "Boing", "Stealthbomber", "Mixed" }));
@@ -90,11 +97,12 @@ public class PatternPropertyStore {
 		patternProperties.put("Puzzle (Square Connector)", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
 
-		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "Random Ratio", "Random Ratio (Rounded)", "Random Ratio (Mixed)",//
-						"Golden Ratio", "Golden Ratio (Rounded)", "Golden Ratio (Mixed)", //
-						"4-3 Ratio", "4-3 Ratio (Rounded)", "4-3 Ratio (Mixed)", //
-						"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)" }));
+		patternProperties.put("Rectangles",
+				new PatternProperties(true, true, false, true, false, true, //
+						new CharSequence[] { "Random Ratio", "Random Ratio (Rounded)", "Random Ratio (Mixed)", //
+								"Golden Ratio", "Golden Ratio (Rounded)", "Golden Ratio (Mixed)", //
+								"4-3 Ratio", "4-3 Ratio (Rounded)", "4-3 Ratio (Mixed)", //
+								"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Mixed" }));
@@ -108,17 +116,21 @@ public class PatternPropertyStore {
 		patternProperties.put("Sonic", new PatternProperties(true, true, false, true, true, true, //
 				new CharSequence[] { "Normal", "Double", "Special", "One Arm" }));
 
-		patternProperties.put("Spooky", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Skull", "Bat V1 (Aarons Cute Design)", "Bat V2", "Bat V3", "Bat V4", "Ghost V1", "Ghost V2", "Owl V1", "Owl V2",
-						"Owl V3", "Owl V4", "Mixed", "Mixed Bats", "Mixed Ghosts", "Mixed Owls" }));
+		patternProperties.put("Spooky",
+				new PatternProperties(true, true, false, false, false, true, //
+						new CharSequence[] { "Skull", "Bat V1 (Aarons Cute Design)", "Bat V2", "Bat V3", "Bat V4", "Ghost V1", "Ghost V2", "Owl V1", "Owl V2",
+								"Owl V3", "Owl V4", "Mixed", "Mixed Bats", "Mixed Ghosts", "Mixed Owls" }));
 
-		patternProperties.put("Space", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Rocket V6", "Ufo V1", "Ufo V2", "Satellite",
-						"Mixed Rockets", "Mixed" }));
+		patternProperties.put("Space",
+				new PatternProperties(true, true, false, true, false, true, //
+						new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Rocket V6", "Ufo V1", "Ufo V2", "Satellite",
+								"Mixed Rockets", "Mixed" }));
 
-		patternProperties.put("Square", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "Square (round inner corner)", "Square (round inner corner V2)", "Square (rounded)", "Square (square inner corner)",
-						"Square (line corner)", "Square (circle corner)", "Square (outer circle corner)", "Square (castel)" }));
+		patternProperties.put("Square",
+				new PatternProperties(true, true, false, true, false, true, //
+						new CharSequence[] { "Square (round inner corner)", "Square (round inner corner V2)", "Square (rounded)",
+								"Square (square inner corner)", "Square (line corner)", "Square (circle corner)", "Square (outer circle corner)",
+								"Square (castel)" }));
 
 		patternProperties.put("Stars", new PatternProperties(true, true, false, true, true, true, //
 				new CharSequence[] { "Nomral", "Spikey", "Star Circle", "Mixed" }));
@@ -127,9 +139,10 @@ public class PatternPropertyStore {
 		patternProperties.put("Text", new PatternProperties(true, false, true, true, false, false, //
 				new CharSequence[] { "Letters", "Numbers", "Custom Text" }));
 
-		patternProperties.put("Weather", new PatternProperties(true, true, false, true, true, true, //
-				new CharSequence[] { "Sun", "Cloud", "Sun with Flames", "Sun with Flames (Drop Style)", "Sun with Flames (Triangle)",
-						"Sun with Flames (Arrows)", "Sun with Flames (Arrows V2)", "Sun with Flames (Sharp Tooth)", "Mixed" }));
+		patternProperties.put("Weather",
+				new PatternProperties(true, true, false, true, true, true, //
+						new CharSequence[] { "Sun", "Cloud", "Sun with Flames", "Sun with Flames (Drop Style)", "Sun with Flames (Triangle)",
+								"Sun with Flames (Arrows)", "Sun with Flames (Arrows V2)", "Sun with Flames (Sharp Tooth)", "Mixed" }));
 
 		patternProperties.put("Virus Attack", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "Mixed" }));
