@@ -495,6 +495,9 @@ public abstract class WPStylePattern extends WPStyle {
 			case "Resurrection Remix V5":
 				path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V5);
 				break;
+			case "Resurrection Remix V6":
+				path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V6);
+				break;
 			case "ElementalX Kernel":
 				path = new LogoPathEX(new PointF(x, y), radius, LOGO_STYLE_EX.V1);
 				break;
