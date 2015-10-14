@@ -6,12 +6,15 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
@@ -21,6 +24,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -36,10 +41,11 @@ import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.WPStyleRasteredPatterns;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
-import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.Design;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
+import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
+import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.DebugHelper;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
@@ -54,6 +60,7 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
 public class MainActivity extends Activity {
 	// Konstanten
 	private static final int REQUEST_CODE_PREFERENCES = 1;
+	private static final int MY_PERMISSIONS_REQUEST_INT = 99;
 	private ProgressDialog dialog;
 	private TouchImageView wallpaperView;
 	private IWPStyle drawer;
@@ -151,8 +158,77 @@ public class MainActivity extends Activity {
 				setWallpaper();
 			}
 		});
-
 		initSensors();
+		requestPermission();
+	}
+
+	/**
+	 * Requests the {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE} permission. If an additional rationale
+	 * should be displayed, the user has to launch the request from a SnackBar that includes additional information.
+	 */
+	private void requestPermission() {
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+			// Permission has not been granted and must be requested.
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+				// Provide an additional rationale to the user if the permission was not granted
+				// and the user would benefit from additional context for the use of the permission.
+				// Display a SnackBar with a button to request the missing permission.
+				Alerter.alertYesNo(MainActivity.this,
+						"We need access to external storage to save, restore and download designs...please grant this permission!", "Permission Request",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(final DialogInterface dialog, final int which) {
+								ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
+										MY_PERMISSIONS_REQUEST_INT);
+							}
+						}, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(final DialogInterface dialog, final int which) {
+								closeOnNotGrantedPermission();
+							}
+
+						});
+
+			} else {
+				ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, MY_PERMISSIONS_REQUEST_INT);
+			}
+		} else {
+			startup();
+		}
+	}
+
+	private void closeOnNotGrantedPermission() {
+		Alerter.alertOneButton(this, "Closing App... we need this permission without it the App is useless ;-)", "Wallpaper Designer", "Close",
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(final DialogInterface dialog, final int which) {
+						finish();
+					}
+				});
+	}
+
+	@Override
+	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
+		switch (requestCode) {
+			case MY_PERMISSIONS_REQUEST_INT: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					startup();
+
+				} else {
+					closeOnNotGrantedPermission();
+				}
+				return;
+			}
+
+				// other 'case' lines to check for other
+				// permissions this app might request
+		}
+	}
+
+	private void startup() {
 		generate();
 		updateDrawer();
 	}

@@ -27,8 +27,7 @@ public class Alerter {
 		alert(typ, activity, msg, null, null);
 	}
 
-	private static void alert(final int typ, final Activity activity, final String msg, final String buttontext,
-			final String url) {
+	private static void alert(final int typ, final Activity activity, final String msg, final String buttontext, final String url) {
 		final AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		bld.setMessage(msg);
 		if (typ == TYPE_ERROR) {
@@ -54,8 +53,7 @@ public class Alerter {
 		bld.create().show();
 	}
 
-	public static void alertYesNo(final Activity activity, final String msg, final String title,
-			final DialogInterface.OnClickListener yesListener) {
+	public static void alertYesNo(final Activity activity, final String msg, final String title, final DialogInterface.OnClickListener yesListener) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(title);
 		builder.setMessage(msg);
@@ -72,8 +70,31 @@ public class Alerter {
 		alert.show();
 	}
 
-	public static void alertYesNoUrgent(final Activity activity, final String msg, final String title,
-			final DialogInterface.OnClickListener yesListener) {
+	public static void alertOneButton(final Activity activity, final String msg, final String title, final String buttonText,
+			final DialogInterface.OnClickListener clickListener) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(title);
+		builder.setMessage(msg);
+		builder.setIcon(android.R.drawable.ic_menu_help);
+		builder.setNegativeButton(buttonText, clickListener);
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	public static void alertYesNo(final Activity activity, final String msg, final String title, final DialogInterface.OnClickListener yesListener,
+			final DialogInterface.OnClickListener noListener) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(title);
+		builder.setMessage(msg);
+		builder.setIcon(android.R.drawable.ic_menu_help);
+		builder.setPositiveButton("YES", yesListener);
+		builder.setNegativeButton("NO", noListener);
+
+		final AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	public static void alertYesNoUrgent(final Activity activity, final String msg, final String title, final DialogInterface.OnClickListener yesListener) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(title);
 		builder.setMessage(msg);
