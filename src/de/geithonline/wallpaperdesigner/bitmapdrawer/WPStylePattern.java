@@ -2284,14 +2284,17 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setStrokeWidth(strokewidth);
 		// paint.setStrokeWidth(Math.round(strokewidth));
 		paint.setShader(null);
-		if (Settings.isOutlineNeverTransparent()) {
-			paint.setAlpha(255);
-		}
 		paint.setShadowLayer(0, 0, 0, 0);
 		if (Settings.isCustomOutlineColor()) {
+			// alpha merken ...die customcoloer ist immer alpha 255
+			final int alpha = paint.getAlpha();
 			paint.setColor(Settings.getCustomOutlineColor());
+			paint.setAlpha(alpha);
 		} else {
 			paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
+		}
+		if (Settings.isOutlineNeverTransparent()) {
+			paint.setAlpha(255);
 		}
 	}
 
