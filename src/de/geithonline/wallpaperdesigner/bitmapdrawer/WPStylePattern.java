@@ -2658,7 +2658,10 @@ public abstract class WPStylePattern extends WPStyle {
 				paint.setShadowLayer(dropShadowRadius, dX, dY, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
 				break;
 			case "Select":
-				paint.setShadowLayer(dropShadowRadius, dX, dY, Settings.getDropShadowColor());
+				final int shd = Settings.getDropShadowColor();
+				final int alpha = Color.alpha(pcolor);
+				final int dc = Color.argb(alpha, Color.red(shd), Color.green(shd), Color.blue(shd));
+				paint.setShadowLayer(dropShadowRadius, dX, dY, dc);
 				break;
 		}
 	}

@@ -107,7 +107,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 
 			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
 
-			setupDropShadow(refbitmap, dropShadowRadius, paint, x, y, pcolor);
+			setupDropShadow(refbitmap, dropShadowRadius, paint, x, y, paint.getColor());
 
 			drawPattern(x, y, paint, radius, i);
 
