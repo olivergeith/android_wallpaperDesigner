@@ -17,21 +17,21 @@
         <Preference 
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"
-		    android:title="Free Example-Design-Packs"
-		    android:summary="Download lots of free Example-Designs! (bundled into packages)" 
+		    android:title="Free Designs"
+		    android:summary="Download lots of free Example-Designs!" 
             />
 	    <Preference 
 		    android:key="unzipSettingsPremium"
 		    android:icon="@drawable/examplesettings_premium"
-		    android:title="Premium Example-Design-Packs"
-		    android:summary="Download more Example-Design-Packages! Only for Premium Users!" 
+		    android:title="Premium Designs"
+		    android:summary="Download Premium-Designs! Only for Premium Users!" 
             />
 
 	    <Preference 
-		    android:key="unzipUserSettings"
+		    android:key="unzipFeaturedSettings"
 		    android:icon="@drawable/examplesettings"
 		    android:title="Featured Designs"
-		    android:summary="Download free Designs I (the autor of this APP) like most! Hurry up to get those designs...the featured Designs will change frequently!" 
+		    android:summary="Download free Designs! Hurry up to get those designs...the featured Designs will change frequently!" 
             />
 
 	    <Preference 
@@ -50,22 +50,19 @@
             />
 
 	    	    	    
-	<PreferenceCategory android:title="Email Designs"/>
-	    <Preference 
-		    android:key="mailSettings"
-		    android:title="Email Design"
-		    android:icon="@android:drawable/ic_menu_send"
-		    android:summary="Email one of your designs to a friend" 
-        	/>
-	    <Preference 
-		    android:key="shareALLDesignsViaEmail"
-		    android:title="Share all Designs via eMail"
-		    android:icon="@android:drawable/ic_menu_share"
-		    android:summary="Share all your designs via eMail" 
-            />
-	    
-	
-	<PreferenceCategory android:title="Backup and Restore Designs"/>
+	    <!-->
+	    	<PreferenceCategory android:title="Email Designs" />
+	    	<Preference android:key="mailSettings"
+	    		android:title="Email Design"
+	    		android:icon="@android:drawable/ic_menu_send"
+	    		android:summary="Email one of your designs to a friend" />
+	    	<Preference android:key="shareALLDesignsViaEmail"
+	    		android:title="Share all Designs via eMail"
+	    		android:icon="@android:drawable/ic_menu_share"
+	    		android:summary="Share all your designs via eMail" />
+	    -->
+
+	    <PreferenceCategory android:title="Backup and Restore Designs"/>
 	    
 	    <Preference 
 		    android:key="backupALLDesigns"
@@ -106,26 +103,28 @@
 		    android:icon="@android:drawable/ic_delete"
 		    android:summary="Delete all your designs....ATTENTION!!!" 
             />
-	<PreferenceCategory android:title="More ...."/>
+	<PreferenceCategory 
+	    android:title="More ...."
+	    android:key="moreSuperKey"
+	    />
 	    <Preference 
 		    android:key="publishOneDesign"
-		    android:title="Publish Design"
+		    android:title="Publish Featured Design"
 		    android:icon="@android:drawable/ic_menu_share"
-		    android:summary="Publish one of your designs" 
+		    android:summary="Publish Design -> Featured" 
             />
-	   <Preference 
+	    <Preference 
+		    android:key="publishPremiumDesign"
+		    android:title="Publish Premium Design"
+		    android:icon="@android:drawable/ic_menu_share"
+		    android:summary="Publish Design -> Premium" 
+            />
+	    	   <Preference 
 		    android:key="backupALLDesignsForUpload"
 		    android:title="Backup ALL Designs to extra Backup-Dir"
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
             />
-	   <!--  Preference 
-	    <Preference 
-		    android:key="backupOneDesignsForUpload"
-		    android:title="Backup ONE Design to Upload-Dir"
-		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Backup one of your designs into zip-File for uploading purposes" 
-            /-->
 		    	    	    	    	        	    	    	    	    	    		
 	    	    
 </PreferenceScreen>

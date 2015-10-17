@@ -85,7 +85,11 @@ public class DesignIO {
 	}
 
 	public static void publishDesign(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH);
+		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_FEATURED);
+	}
+
+	public static void publishPremiumDesign(final Activity activity) {
+		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_PREMIUM);
 	}
 
 	public static void backupDesign(final Activity activity) {
@@ -93,7 +97,7 @@ public class DesignIO {
 	}
 
 	private enum DESIGN_SAVING_TYPE {
-		BACKUP, PUBLISH, SHARE
+		BACKUP, PUBLISH_FEATURED, PUBLISH_PREMIUM, SHARE
 	}
 
 	private static void zipDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
@@ -114,8 +118,11 @@ public class DesignIO {
 		case SHARE:
 			dialog.setTitle("Share one Design");
 			break;
-		case PUBLISH:
-			dialog.setTitle("Publish one Design");
+		case PUBLISH_PREMIUM:
+			dialog.setTitle("Publish Premium Design");
+			break;
+		case PUBLISH_FEATURED:
+			dialog.setTitle("Publish Featured Design");
 			break;
 		}
 		dialog.setMessage("Select Design");
@@ -136,8 +143,11 @@ public class DesignIO {
 					case SHARE:
 						shareOneDesign(design, activity);
 						break;
-					case PUBLISH:
-						publishOneDesign(design, activity);
+					case PUBLISH_FEATURED:
+						publishOneDesign(design, activity, WPDUrls.UPLOAD_URL_FEATURED_DESIGNS);
+						break;
+					case PUBLISH_PREMIUM:
+						publishOneDesign(design, activity, WPDUrls.UPLOAD_URL_PREMIUM_DESIGNS);
 						break;
 					}
 				}
@@ -238,7 +248,7 @@ public class DesignIO {
 	 * 
 	 * @param activity
 	 */
-	public static void saveAllDesignsToZipAndMail(final Activity activity, final boolean sendmail, final boolean toOliver) {
+	public static void saveAllDesignsToOneZip(final Activity activity) {
 
 		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
@@ -247,20 +257,12 @@ public class DesignIO {
 		}
 		final String timeStamp = getTimeStampForFile();
 		final File outzip = new File(StorageHelper.getDataDir(), "WPD_Designs_" + timeStamp + ".zip");
-
-		String message = "Backup all Designs to:\n" + StorageHelper.getDataDir() + "\n" + outzip.getName();
-		if (sendmail) {
-			message = "Email designs to someone?";
-		}
-
+		final String message = "Backup all Designs to:\n" + StorageHelper.getDataDir() + "\n" + outzip.getName();
 		Alerter.alertYesNo(activity, message, "Backup/Email all Designs", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				ZipHelper.zipFileAtPath(getSettingsDir().getAbsolutePath(), outzip.getAbsolutePath());
 				MediaScannerHelper.rescanMedia(activity, outzip);
-				if (sendmail) {
-					sendFileViaEmail(activity, outzip.getAbsolutePath(), toOliver);
-				}
 			}
 		});
 	}
@@ -342,6 +344,7 @@ public class DesignIO {
 					deletePreferencesFileAndBitmap(design);
 				}
 				setDesignListNeedsReload(true);
+				// MediaScannerHelper.rescanFolder(activity, StorageHelper.getDesignsDirFile());
 			}
 		});
 	}
@@ -581,6 +584,7 @@ public class DesignIO {
 	}
 
 	private static String zipOneDesign(final Design design, final Activity activity, final String dir) {
+		Log.i("Zipping Design", design.getPreferenceFile().getName() + " to " + dir);
 		final File preferenceFile = design.getPreferenceFile();
 		final File bmpFile = design.getBmpFile();
 		final String prefFilename = design.getPreferenceFile().getName();
@@ -591,6 +595,7 @@ public class DesignIO {
 		files.add(bmpFile.getAbsolutePath());
 		ZipHelper.zipFiles(files, outzip.getAbsolutePath());
 		MediaScannerHelper.rescanMedia(activity, outzip);
+		Log.i("Zipping Design", " -> done " + outzip.getAbsolutePath());
 		return outzip.getAbsolutePath();
 	}
 
@@ -611,8 +616,8 @@ public class DesignIO {
 		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_DESIGNS);
 	}
 
-	private static void publishOneDesign(final Design design, final Activity activity) {
-		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_FEATURED_DESIGNS);
+	private static void publishOneDesign(final Design design, final Activity activity, final String url) {
+		prepareOneDesignForUpload(design, activity, url);
 	}
 
 	private static void backupOneDesignToUploadDir(final Design design, final Activity activity) {

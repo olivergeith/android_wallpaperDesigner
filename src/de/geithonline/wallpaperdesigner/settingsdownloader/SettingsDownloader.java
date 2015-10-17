@@ -79,7 +79,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			Log.i("ANDRO_ASYNC", "Lenght of file: " + lenghtOfFile);
 
 			final InputStream input = new BufferedInputStream(url.openStream());
-			final String localFile = StorageHelper.getDataDir() + destinationFileName;
+			final String localFile = StorageHelper.getDownloadDir() + destinationFileName;
 			final OutputStream output = new FileOutputStream(localFile);
 
 			final byte data[] = new byte[1024];

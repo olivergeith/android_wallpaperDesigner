@@ -52,10 +52,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ExampleSettingsView"
-            android:label="@string/title_activity_remote_settings_view" >
-        </activity>
-        <activity
             android:name=".HelpPageWebView"
             android:label="Help-Page" >
         </activity>

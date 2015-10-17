@@ -15,6 +15,7 @@ public class StorageHelper {
 
 	private final static String designsDir = DIR_SDCARD + File.separator + "data" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File designsDirFile = new File(designsDir);
+
 	private final static File designsDirNoMedia = new File(designsDir, ".nomedia");
 
 	private final static String downloadDir = DIR_SDCARD + File.separator + "Download" + File.separator;
@@ -68,6 +69,10 @@ public class StorageHelper {
 	// extStorage/data/WallpaperDesigner
 	public static String getDesignsDir() {
 		return designsDir;
+	}
+
+	public static File getDesignsDirFile() {
+		return designsDirFile;
 	}
 
 	// extStorage/data

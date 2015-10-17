@@ -10,13 +10,20 @@ import android.util.Log;
 public class MediaScannerHelper {
 
 	public static void rescanMedia(final Context context, final File imageFile) {
-		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null,
-				new MediaScannerConnection.OnScanCompletedListener() {
-					@Override
-					public void onScanCompleted(final String path, final Uri uri) {
-						Log.i("MediaScannerHelper", "Mediascanner scanned " + path);
-					}
-				});
+		MediaScannerConnection.scanFile(context, new String[] { imageFile.getPath() }, null, new MediaScannerConnection.OnScanCompletedListener() {
+			@Override
+			public void onScanCompleted(final String path, final Uri uri) {
+				Log.i("MediaScannerHelper", "Mediascanner scanned " + path);
+			}
+		});
 	}
+
+	// public static void rescanFolder(final Context context, final File dir) {
+	// // if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+	// context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + dir)));
+	// // } else {
+	// // context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + dir)));
+	// // }
+	// }
 
 }
