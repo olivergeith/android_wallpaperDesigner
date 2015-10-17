@@ -163,8 +163,8 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * Requests the {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE} permission. If an additional rationale
-	 * should be displayed, the user has to launch the request from a SnackBar that includes additional information.
+	 * Requests the {@link android.Manifest.permission#WRITE_EXTERNAL_STORAGE} permission. If an additional rationale should be displayed, the user has to
+	 * launch the request from a SnackBar that includes additional information.
 	 */
 	private void requestPermission() {
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -212,19 +212,19 @@ public class MainActivity extends Activity {
 	@Override
 	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
 		switch (requestCode) {
-			case MY_PERMISSIONS_REQUEST_INT: {
-				// If request is cancelled, the result arrays are empty.
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					startup();
+		case MY_PERMISSIONS_REQUEST_INT: {
+			// If request is cancelled, the result arrays are empty.
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				startup();
 
-				} else {
-					closeOnNotGrantedPermission();
-				}
-				return;
+			} else {
+				closeOnNotGrantedPermission();
 			}
+			return;
+		}
 
-				// other 'case' lines to check for other
-				// permissions this app might request
+			// other 'case' lines to check for other
+			// permissions this app might request
 		}
 	}
 
@@ -304,7 +304,7 @@ public class MainActivity extends Activity {
 		dialog.setCancelable(false);
 		dialog.setMessage("Saving Image...");
 		dialog.show();
-		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
+		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getWallpaperImagesDir());
 	}
 
 	public synchronized void saveWithSettings() {
@@ -315,7 +315,7 @@ public class MainActivity extends Activity {
 		dialog.setCancelable(false);
 		dialog.setMessage("Saving Image and Settings...");
 		dialog.show();
-		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getExternalStorageImages());
+		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getWallpaperImagesDir());
 		updateDrawer();
 	}
 
@@ -409,7 +409,7 @@ public class MainActivity extends Activity {
 		// Save tmp image
 		final Bitmap bitmap = drawer.getBitmap();
 		if (bitmap != null) {
-			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorage(), "wpd_tmp.jpg",
+			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getDataDir(), "wpd_tmp.jpg",
 					Settings.getJpgCompression());
 
 			final Uri uri = Uri.fromFile(imageFile);

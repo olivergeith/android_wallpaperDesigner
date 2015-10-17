@@ -113,12 +113,13 @@
 		    android:icon="@android:drawable/ic_menu_share"
 		    android:summary="Publish one of your designs" 
             />
-	   <!--  Preference 
+	   <Preference 
 		    android:key="backupALLDesignsForUpload"
-		    android:title="Backup ALL Designs to Upload-Dir"
+		    android:title="Backup ALL Designs to extra Backup-Dir"
 		    android:icon="@android:drawable/ic_menu_save"
 		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
             />
+	   <!--  Preference 
 	    <Preference 
 		    android:key="backupOneDesignsForUpload"
 		    android:title="Backup ONE Design to Upload-Dir"

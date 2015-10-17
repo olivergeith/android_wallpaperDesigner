@@ -79,7 +79,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 			Log.i("ANDRO_ASYNC", "Lenght of file: " + lenghtOfFile);
 
 			final InputStream input = new BufferedInputStream(url.openStream());
-			final String localFile = StorageHelper.getExternalStorage() + File.separator + destinationFileName;
+			final String localFile = StorageHelper.getDataDir() + destinationFileName;
 			final OutputStream output = new FileOutputStream(localFile);
 
 			final byte data[] = new byte[1024];
@@ -124,7 +124,7 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 	protected void onPostExecute(final String localFile) {
 		if (localFile != null) {
 			Log.i("ANDRO_ASYNC", "File downloaded: " + localFile);
-			final String outPath = StorageHelper.getExternalStorageSettings();
+			final String outPath = StorageHelper.getDesignsDir();
 			dialog.setMessage("Unzipping " + localFile);
 			unzip(localFile, outPath);
 			dialog.setMessage("Done !");

@@ -209,7 +209,7 @@ public class PreferenceIO {
 
 	private static File getSettingsDir() {
 		// Ordner anlegen fals nicht vorhanden
-		final File dir = new File(StorageHelper.getExternalStorageSettings());
+		final File dir = new File(StorageHelper.getDesignsDir());
 		dir.mkdirs();
 		return dir;
 	}

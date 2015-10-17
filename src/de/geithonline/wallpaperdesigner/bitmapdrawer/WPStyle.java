@@ -61,7 +61,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final String jpgFilename = pattern + " " + layout + DesignIO.MARKER + timeStamp + DesignIO.EXTENSION_JPG;
 
 		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small,
-				StorageHelper.getExternalStorageSettings(), jpgFilename, 80);
+				StorageHelper.getDesignsDir(), jpgFilename, 80);
 		MediaScannerHelper.rescanMedia(context, smallJpgFile);
 		small.recycle();
 		// Saving corresponding Settings
@@ -78,12 +78,12 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		default:
 		case PNG:
 			filename = "WallpaperDesigner_" + timeStamp + DesignIO.EXTENSION_PNG;
-			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getExternalStorageImages(),
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getWallpaperImagesDir(),
 					filename);
 			break;
 		case JPG:
 			filename = "WallpaperDesigner_" + timeStamp + DesignIO.EXTENSION_JPG;
-			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getExternalStorageImages(),
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getWallpaperImagesDir(),
 					filename, Settings.getJpgCompression());
 			break;
 		}

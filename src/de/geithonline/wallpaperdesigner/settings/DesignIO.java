@@ -88,16 +88,12 @@ public class DesignIO {
 		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH);
 	}
 
-	public static void backupDesignToUploadDir(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.BACKUP_TO_UPLOAD_DIR);
-	}
-
 	public static void backupDesign(final Activity activity) {
 		zipDesign(activity, DESIGN_SAVING_TYPE.BACKUP);
 	}
 
 	private enum DESIGN_SAVING_TYPE {
-		BACKUP, BACKUP_TO_UPLOAD_DIR, PUBLISH, SHARE
+		BACKUP, PUBLISH, SHARE
 	}
 
 	private static void zipDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
@@ -111,20 +107,16 @@ public class DesignIO {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
 		switch (savingtype) {
-			default:
-			case BACKUP:
-				dialog.setTitle("Backup one Design");
-				break;
-			case SHARE:
-				dialog.setTitle("Share one Design");
-				break;
-			case PUBLISH:
-				dialog.setTitle("Publish one Design");
-				break;
-			case BACKUP_TO_UPLOAD_DIR:
-				dialog.setTitle("Backup one Design to UploadDir");
-				break;
-
+		default:
+		case BACKUP:
+			dialog.setTitle("Backup one Design");
+			break;
+		case SHARE:
+			dialog.setTitle("Share one Design");
+			break;
+		case PUBLISH:
+			dialog.setTitle("Publish one Design");
+			break;
 		}
 		dialog.setMessage("Select Design");
 
@@ -137,20 +129,16 @@ public class DesignIO {
 				if (position >= 0) {
 					final Design design = designList.get(position);
 					switch (savingtype) {
-						default:
-						case BACKUP:
-							zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
-							break;
-						case SHARE:
-							shareOneDesign(design, activity);
-							break;
-						case PUBLISH:
-							publishOneDesign(design, activity);
-							break;
-						case BACKUP_TO_UPLOAD_DIR:
-							backupOneDesignToUploadDir(design, activity);
-							break;
-
+					default:
+					case BACKUP:
+						zipOneDesign(design, activity, StorageHelper.getDataDir());
+						break;
+					case SHARE:
+						shareOneDesign(design, activity);
+						break;
+					case PUBLISH:
+						publishOneDesign(design, activity);
+						break;
 					}
 				}
 				dialog.dismiss();
@@ -258,9 +246,9 @@ public class DesignIO {
 			return;
 		}
 		final String timeStamp = getTimeStampForFile();
-		final File outzip = new File(StorageHelper.getExtstorageDataDir(), "WPD_Designs_" + timeStamp + ".zip");
+		final File outzip = new File(StorageHelper.getDataDir(), "WPD_Designs_" + timeStamp + ".zip");
 
-		String message = "Backup all Designs to:\n" + StorageHelper.getExtstorageDataDir() + "\n" + outzip.getName();
+		String message = "Backup all Designs to:\n" + StorageHelper.getDataDir() + "\n" + outzip.getName();
 		if (sendmail) {
 			message = "Email designs to someone?";
 		}
@@ -289,12 +277,12 @@ public class DesignIO {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
 		}
-		final String message = "Backup all Designs to:\n" + StorageHelper.getExtstorageDataDir();
+		final String message = "Backup all Designs to:\n" + StorageHelper.getDataDir();
 		Alerter.alertYesNo(activity, message, "Backup all Designs into many zips", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				for (final Design design : designList) {
-					zipOneDesign(design, activity, StorageHelper.getExtstorageDataDir());
+					zipOneDesign(design, activity, StorageHelper.getDataDir());
 				}
 			}
 		});
@@ -312,7 +300,7 @@ public class DesignIO {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
 		}
-		final String message = "Backup all Designs to:\n" + StorageHelper.getExtstorageUploadDir();
+		final String message = "Backup all Designs to:\n" + StorageHelper.getUploadDir();
 		Alerter.alertYesNo(activity, message, "Backup all Designs into zips", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
@@ -454,7 +442,7 @@ public class DesignIO {
 
 	private static File getSettingsDir() {
 		// Ordner anlegen fals nicht vorhanden
-		final File dir = new File(StorageHelper.getExternalStorageSettings());
+		final File dir = new File(StorageHelper.getDesignsDir());
 		dir.mkdirs();
 		return dir;
 	}
@@ -498,14 +486,14 @@ public class DesignIO {
 					final File file = (File) parent.getAdapter().getItem(position);
 					Alerter.alertYesNo(activity, "Dou you want really want to restore all designs from this Zip?\n" + file.getName(),
 							"Restore Designs from Zip", new OnClickListener() {
-								@Override
-								public void onClick(final DialogInterface dialog, final int which) {
-									// deleteALLDesignsWithoutAsking(activity);
-									ZipHelper.unzip(file.getAbsolutePath(), //
-											StorageHelper.getExtstorageDataDirFile().getAbsolutePath());
-									setDesignListNeedsReload(true);
-								}
-							});
+						@Override
+						public void onClick(final DialogInterface dialog, final int which) {
+							// deleteALLDesignsWithoutAsking(activity);
+							ZipHelper.unzip(file.getAbsolutePath(), //
+									StorageHelper.getDataDirFile().getAbsolutePath());
+							setDesignListNeedsReload(true);
+						}
+					});
 
 				}
 				dialog.dismiss();
@@ -536,9 +524,9 @@ public class DesignIO {
 	private static List<File> getAllDesignBackupZips(final boolean fromDownload) {
 		File dir;
 		if (fromDownload) {
-			dir = StorageHelper.getDownloaddirfile();
+			dir = StorageHelper.getDownloadDirFile();
 		} else {
-			dir = StorageHelper.getExtstorageDataDirFile();
+			dir = StorageHelper.getDataDirFile();
 		}
 		Log.i("Data DIR", "Dir = " + dir);
 		final List<File> zipBackups = getZipFileListFromLocalDataDir(dir);
@@ -636,10 +624,13 @@ public class DesignIO {
 	 * 
 	 * @param design
 	 * @param activity
+	 * @param url
+	 *            Wenn url == null nur backup
 	 */
 	private static void prepareOneDesignForUpload(final Design design, final Activity activity, final String url) {
 		// saving Zip to upload dir
-		final String outzip = zipOneDesign(design, activity, StorageHelper.getExtstorageUploadDir());
+		final String outputDir = StorageHelper.getUploadDir();
+		final String outzip = zipOneDesign(design, activity, outputDir);
 
 		// rescaling and Saving Bitmap
 		final Bitmap bitmap = design.getBitmap();
@@ -649,7 +640,7 @@ public class DesignIO {
 		final int dh = h * dw / w;
 		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
 		final String jpgFilename = design.getBmpFile().getName();
-		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, StorageHelper.getExtstorageUploadDir(), jpgFilename, 80);
+		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, outputDir, jpgFilename, 80);
 		MediaScannerHelper.rescanMedia(activity, smallJpgFile);
 		small.recycle();
 		if (url != null) {

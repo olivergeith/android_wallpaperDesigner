@@ -21,8 +21,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference mailSettings;
 	private Preference zipOneDesign;
 	private Preference unzipUserSettings;
-	// private Preference backupALLDesignsForUpload;
-	// private Preference backupOneDesignsForUpload;
+	private Preference backupALLDesignsForUpload;
 	private Preference shareOneDesign;
 	private Preference unzipSharedSettings;
 	private Preference publishOneDesign;
@@ -166,23 +165,14 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
-		// backupALLDesignsForUpload = findPreference("backupALLDesignsForUpload");
-		// backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-		// @Override
-		// public boolean onPreferenceClick(final Preference preference) {
-		// DesignIO.saveAllDesignsForUpload(getActivity());
-		// return false;
-		// }
-		// });
-		//
-		// backupOneDesignsForUpload = findPreference("backupOneDesignsForUpload");
-		// backupOneDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-		// @Override
-		// public boolean onPreferenceClick(final Preference preference) {
-		// DesignIO.backupDesignToUploadDir(getActivity());
-		// return false;
-		// }
-		// });
+		backupALLDesignsForUpload = findPreference("backupALLDesignsForUpload");
+		backupALLDesignsForUpload.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				DesignIO.saveAllDesignsForUpload(getActivity());
+				return false;
+			}
+		});
 
 		publishOneDesign = findPreference("publishOneDesign");
 		publishOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -196,8 +186,7 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 		// bestimmte Menüs gibt es nur als Superuser
 		if (!Settings.isSuperUser(getActivity())) {
 			getPreferenceScreen().removePreference(publishOneDesign);
-			// getPreferenceScreen().removePreference(backupOneDesignsForUpload);
-			// getPreferenceScreen().removePreference(backupALLDesignsForUpload);
+			getPreferenceScreen().removePreference(backupALLDesignsForUpload);
 		}
 
 	}

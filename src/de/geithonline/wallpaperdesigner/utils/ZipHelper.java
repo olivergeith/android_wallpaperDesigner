@@ -68,7 +68,7 @@ public class ZipHelper {
 		InputStream stream;
 
 		context.getFilesDir().mkdirs();
-		final String outPath = StorageHelper.getExternalStorageSettings();
+		final String outPath = StorageHelper.getDesignsDir();
 
 		try {
 			stream = context.getResources().openRawResource(fileResID);
