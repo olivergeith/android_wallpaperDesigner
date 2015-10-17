@@ -1,6 +1,7 @@
 package de.geithonline.wallpaperdesigner;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -23,8 +24,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -412,20 +415,37 @@ public class MainActivity extends Activity {
 			final File imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getDataDir(), "wpd_tmp.jpg",
 					Settings.getJpgCompression());
 
-			final Uri uri = Uri.fromFile(imageFile);
-			// Uri.parse("file://" + imageFile.getAbsolutePath());
-			Log.i("URI", "Uri = " + uri);
-			final Intent shareIntent = new Intent();
-			shareIntent.setAction(Intent.ACTION_SEND);
-			shareIntent.putExtra(Intent.EXTRA_SUBJECT, Settings.getShareSubject());
-			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-			shareIntent.setType("image/jpeg");
-			shareIntent.putExtra(Intent.EXTRA_TEXT, Settings.getShareText());
+			try {
+				final String photoUri = MediaStore.Images.Media.insertImage(getContentResolver(), imageFile.getAbsolutePath(), null, null);
+				final Intent shareIntent = ShareCompat.IntentBuilder.from(this)//
+						.setText(Settings.getShareText())//
+						.setSubject(Settings.getShareSubject())//
+						.setType("image/jpeg")//
+						.setStream(Uri.parse(photoUri))//
+						.getIntent();//
+				// .setPackage("com.google.android.apps.plus");
+				if (mShareActionProvider != null) {
+					mShareActionProvider.setShareIntent(shareIntent);
+				}
 
-			// startActivity(Intent.createChooser(shareIntent, "Share to..."));
-			if (mShareActionProvider != null) {
-				mShareActionProvider.setShareIntent(shareIntent);
+			} catch (final FileNotFoundException e) {
+				Log.e("URI", "Uri = " + imageFile.getAbsolutePath());
+				e.printStackTrace();
 			}
+
+			// final Uri uri = Uri.fromFile(imageFile);
+			// // Uri.parse("file://" + imageFile.getAbsolutePath());
+			// Log.i("URI", "Uri = " + uri);
+			// final Intent shareIntent = new Intent();
+			// shareIntent.setAction(Intent.ACTION_SEND);
+			// shareIntent.putExtra(Intent.EXTRA_SUBJECT, Settings.getShareSubject());
+			// shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+			// shareIntent.setType("image/jpeg");
+			// shareIntent.putExtra(Intent.EXTRA_TEXT, Settings.getShareText());
+
+			// if (mShareActionProvider != null) {
+			// mShareActionProvider.setShareIntent(shareIntent);
+			// }
 		}
 	}
 
