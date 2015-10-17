@@ -92,12 +92,16 @@ public class DesignIO {
 		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_PREMIUM);
 	}
 
+	public static void publishFreeDesign(final Activity activity) {
+		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_FREE);
+	}
+
 	public static void backupDesign(final Activity activity) {
 		zipDesign(activity, DESIGN_SAVING_TYPE.BACKUP);
 	}
 
 	private enum DESIGN_SAVING_TYPE {
-		BACKUP, PUBLISH_FEATURED, PUBLISH_PREMIUM, SHARE
+		BACKUP, PUBLISH_FEATURED, PUBLISH_PREMIUM, SHARE, PUBLISH_FREE
 	}
 
 	private static void zipDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
@@ -124,6 +128,9 @@ public class DesignIO {
 		case PUBLISH_FEATURED:
 			dialog.setTitle("Publish Featured Design");
 			break;
+		case PUBLISH_FREE:
+			dialog.setTitle("Publish Free Design");
+			break;
 		}
 		dialog.setMessage("Select Design");
 
@@ -148,6 +155,9 @@ public class DesignIO {
 						break;
 					case PUBLISH_PREMIUM:
 						publishOneDesign(design, activity, WPDUrls.UPLOAD_URL_PREMIUM_DESIGNS);
+						break;
+					case PUBLISH_FREE:
+						publishOneDesign(design, activity, WPDUrls.UPLOAD_URL_FREE_DESIGNS);
 						break;
 					}
 				}

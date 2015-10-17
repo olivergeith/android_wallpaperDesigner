@@ -23,9 +23,10 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 	private Preference backupALLDesignsForUpload;
 	private Preference shareOneDesign;
 	private Preference unzipSharedSettings;
-	private Preference publishOneDesign;
+	private Preference publishFeaturedDesign;
 	private Preference publishPremiumDesign;
 	private PreferenceCategory moreSuperKey;
+	private Preference publishFreeDesign;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -155,8 +156,8 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
-		publishOneDesign = findPreference("publishOneDesign");
-		publishOneDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		publishFeaturedDesign = findPreference("publishOneDesign");
+		publishFeaturedDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				DesignIO.publishDesign(getActivity());
@@ -173,12 +174,22 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			}
 		});
 
+		publishFreeDesign = findPreference("publishFreeDesign");
+		publishFreeDesign.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				DesignIO.publishPremiumDesign(getActivity());
+				return false;
+			}
+		});
+
 		moreSuperKey = (PreferenceCategory) findPreference("moreSuperKey");
 
 		// bestimmte Menüs gibt es nur als Superuser
 		if (!Settings.isSuperUser(getActivity())) {
 			getPreferenceScreen().removePreference(moreSuperKey);
-			getPreferenceScreen().removePreference(publishOneDesign);
+			getPreferenceScreen().removePreference(publishFreeDesign);
+			getPreferenceScreen().removePreference(publishFeaturedDesign);
 			getPreferenceScreen().removePreference(publishPremiumDesign);
 			getPreferenceScreen().removePreference(backupALLDesignsForUpload);
 		}
