@@ -25,11 +25,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,7 +59,6 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
  * @author Oliver
  * 
  */
-@SuppressWarnings("deprecation")
 public class MainActivity extends Activity {
 	// Konstanten
 	private static final int REQUEST_CODE_PREFERENCES = 1;
@@ -91,8 +90,8 @@ public class MainActivity extends Activity {
 		// Drawer einbinden!
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 			/** Called when a drawer has settled in a completely closed state. */
 			@Override
 			public void onDrawerClosed(final View view) {
@@ -111,6 +110,7 @@ public class MainActivity extends Activity {
 				}
 				invalidateOptionsMenu();
 			}
+
 		};
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
@@ -432,20 +432,6 @@ public class MainActivity extends Activity {
 				Log.e("URI", "Uri = " + imageFile.getAbsolutePath());
 				e.printStackTrace();
 			}
-
-			// final Uri uri = Uri.fromFile(imageFile);
-			// // Uri.parse("file://" + imageFile.getAbsolutePath());
-			// Log.i("URI", "Uri = " + uri);
-			// final Intent shareIntent = new Intent();
-			// shareIntent.setAction(Intent.ACTION_SEND);
-			// shareIntent.putExtra(Intent.EXTRA_SUBJECT, Settings.getShareSubject());
-			// shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-			// shareIntent.setType("image/jpeg");
-			// shareIntent.putExtra(Intent.EXTRA_TEXT, Settings.getShareText());
-
-			// if (mShareActionProvider != null) {
-			// mShareActionProvider.setShareIntent(shareIntent);
-			// }
 		}
 	}
 
