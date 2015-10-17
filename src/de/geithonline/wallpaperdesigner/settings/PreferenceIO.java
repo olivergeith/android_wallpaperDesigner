@@ -83,44 +83,45 @@ public class PreferenceIO {
 				}
 				// Spezialbehandlung für alte Designs, die diese Keys noch nicht enthalten
 				// und auch nur wenn nicht only Colors
-				if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
-					setDefaultBooleanValue(prefs, Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
+				if (!onlyColors) {
+					if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
+						setDefaultBooleanValue(prefs, Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
+					}
+					if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
+						setDefaultIntValue(prefs, Settings.KEY_DROP_SHADOW_OFFSET_X, 0);
+						setDefaultIntValue(prefs, Settings.KEY_DROP_SHADOW_OFFSET_Y, 0);
+					}
+					if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
+						setDefaultStringValue(prefs, Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
+					}
+					if (!keySet.contains(Settings.KEY_GLOSSY_GLOW_STYLE)) {
+						setDefaultStringValue(prefs, Settings.KEY_GLOSSY_GLOW_STYLE, "Center");
+					}
+					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_ADJUST)) {
+						setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_ADJUST, 100);
+					}
+					if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
+						setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3);
+					}
+					if (!keySet.contains(Settings.KEY_COLOR_RANDOMIZING_TYPE)) {
+						setDefaultStringValue(prefs, Settings.KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
+					}
+					if (!keySet.contains(Settings.KEY_LIMIT_2_CANVAS)) {
+						setDefaultStringValue(prefs, Settings.KEY_LIMIT_2_CANVAS, "small tolerance");
+					}
+					if (!keySet.contains(Settings.KEY_RANDOMIZE_SATURATION_RANGE)) {
+						setDefaultIntValue(prefs, Settings.KEY_RANDOMIZE_SATURATION_RANGE, 0);
+					}
+					if (!keySet.contains(Settings.KEY_PATTERN_BLUR)) {
+						setDefaultBooleanValue(prefs, Settings.KEY_PATTERN_BLUR, false);
+					}
+					if (!keySet.contains(Settings.KEY_COLOR_REPEATS)) {
+						setDefaultIntValue(prefs, Settings.KEY_COLOR_REPEATS, 1);
+					}
+					if (!keySet.contains(Settings.KEY_REVERSE_COLORS)) {
+						setDefaultBooleanValue(prefs, Settings.KEY_REVERSE_COLORS, false);
+					}
 				}
-				if (!keySet.contains(Settings.KEY_DROP_SHADOW_OFFSET_X)) {
-					setDefaultIntValue(prefs, Settings.KEY_DROP_SHADOW_OFFSET_X, 0);
-					setDefaultIntValue(prefs, Settings.KEY_DROP_SHADOW_OFFSET_Y, 0);
-				}
-				if (!keySet.contains(Settings.KEY_GLOSSY_REFLECTION_STYLE)) {
-					setDefaultStringValue(prefs, Settings.KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
-				}
-				if (!keySet.contains(Settings.KEY_GLOSSY_GLOW_STYLE)) {
-					setDefaultStringValue(prefs, Settings.KEY_GLOSSY_GLOW_STYLE, "Center");
-				}
-				if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_ADJUST)) {
-					setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_ADJUST, 100);
-				}
-				if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
-					setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3);
-				}
-				if (!keySet.contains(Settings.KEY_COLOR_RANDOMIZING_TYPE)) {
-					setDefaultStringValue(prefs, Settings.KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
-				}
-				if (!keySet.contains(Settings.KEY_LIMIT_2_CANVAS)) {
-					setDefaultStringValue(prefs, Settings.KEY_LIMIT_2_CANVAS, "small tolerance");
-				}
-				if (!keySet.contains(Settings.KEY_RANDOMIZE_SATURATION_RANGE)) {
-					setDefaultIntValue(prefs, Settings.KEY_RANDOMIZE_SATURATION_RANGE, 0);
-				}
-				if (!keySet.contains(Settings.KEY_PATTERN_BLUR)) {
-					setDefaultBooleanValue(prefs, Settings.KEY_PATTERN_BLUR, false);
-				}
-				if (!keySet.contains(Settings.KEY_COLOR_REPEATS)) {
-					setDefaultIntValue(prefs, Settings.KEY_COLOR_REPEATS, 1);
-				}
-				if (!keySet.contains(Settings.KEY_REVERSE_COLORS)) {
-					setDefaultBooleanValue(prefs, Settings.KEY_REVERSE_COLORS, false);
-				}
-
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
 			} catch (final IOException | ClassNotFoundException e) {
