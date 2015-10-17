@@ -37,8 +37,8 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
-				intent.putExtra("Url", WPDUrls.LIST_URL_FREE_PACKS);
-				intent.putExtra("Title", "Free Example-Design-Packs");
+				intent.putExtra("Url", WPDUrls.LIST_URL_FREE_DESIGNS);
+				intent.putExtra("Title", "Free Designs");
 				intent.putExtra("premiumUsersOnly", false);
 				startActivityForResult(intent, 1);
 				return false;
@@ -49,8 +49,8 @@ public class ExampleSettingsFragment extends PreferenceFragment {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
 				final Intent intent = new Intent(getActivity(), ExampleSettingsUserView.class);
-				intent.putExtra("Url", WPDUrls.LIST_URL_PREIUM_DESIGNS);
-				intent.putExtra("Title", "Premium Example-Designs");
+				intent.putExtra("Url", WPDUrls.LIST_URL_PREMIUM_DESIGNS);
+				intent.putExtra("Title", "Premium Designs");
 				intent.putExtra("premiumUsersOnly", true);
 				startActivityForResult(intent, 1);
 				return false;
