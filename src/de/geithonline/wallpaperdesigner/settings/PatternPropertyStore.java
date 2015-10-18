@@ -62,7 +62,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Logos",
 				new PatternProperties(true, true, false, false, false, true, //
 						new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "Resurrection Remix V4",
-								"Resurrection Remix V5", "Resurrection Remix V6", "ElementalX Kernel" }));
+								"Resurrection Remix V5", "Resurrection Remix V6", "ElementalX Kernel", "Peace Sign" }));
 
 		patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));
