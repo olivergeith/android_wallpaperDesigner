@@ -72,6 +72,8 @@ import de.geithonline.wallpaperdesigner.shapes.PentagramPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath;
 import de.geithonline.wallpaperdesigner.shapes.PillowPath.PILLOW_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.PlanePath;
+import de.geithonline.wallpaperdesigner.shapes.PumpkinPath;
+import de.geithonline.wallpaperdesigner.shapes.PumpkinPath.PUMPKIN_TYP;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_CONNECTION;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_TYPE;
@@ -1557,7 +1559,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 11);
+			final int nr = getRandomInt(0, 14);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
 			final int nr = getRandomInt(1, 5);
@@ -1568,6 +1570,8 @@ public abstract class WPStylePattern extends WPStyle {
 		} else if (variante.equalsIgnoreCase("Mixed Owls")) {
 			final int nr = getRandomInt(7, 11);
 			variante = "V" + nr;
+		} else if (variante.equalsIgnoreCase("Mixed Pumpkins")) {
+			variante = "Mixed Pumpkins";
 		}
 		drawSpooky(x, y, paint, radius, variante);
 	}
@@ -1619,6 +1623,21 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V11":
 		case "Owl V4":
 			path = new OwlPath(new Point(x, y), radius, "V4");
+			break;
+		case "V12":
+		case "Pumpkin (round eyes)":
+			path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDZACKIG_AUGERUND);
+			break;
+		case "V13":
+		case "Pumpkin (triangel eyes)":
+			path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDZACKIG_AUGEDREIECKIGV2);
+			break;
+		case "V14":
+		case "Pumpkin (round eyes and mouth)":
+			path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDRUND_AUGERUND);
+			break;
+		case "Mixed Pumpkins":
+			path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.RANDOM);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));

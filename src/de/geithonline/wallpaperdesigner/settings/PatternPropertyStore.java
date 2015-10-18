@@ -119,7 +119,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Spooky",
 				new PatternProperties(true, true, false, false, false, true, //
 						new CharSequence[] { "Skull", "Bat V1 (Aarons Cute Design)", "Bat V2", "Bat V3", "Bat V4", "Ghost V1", "Ghost V2", "Owl V1", "Owl V2",
-								"Owl V3", "Owl V4", "Mixed", "Mixed Bats", "Mixed Ghosts", "Mixed Owls" }));
+								"Owl V3", "Owl V4", "Pumpkin (round eyes)", "Pumpkin (triangel eyes)", "Pumpkin (round eyes and mouth)", "Mixed",
+								"Mixed Pumpkins", "Mixed Bats", "Mixed Ghosts", "Mixed Owls" }));
 
 		patternProperties.put("Space",
 				new PatternProperties(true, true, false, true, false, true, //
