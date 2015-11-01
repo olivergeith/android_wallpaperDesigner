@@ -5,13 +5,17 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.R;
-import de.geithonline.wallpaperdesigner.utils.DebugHelper;
+import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
+import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 
 public class CustomAdapterFiles extends BaseAdapter {
 	Context context;
@@ -45,21 +49,31 @@ public class CustomAdapterFiles extends BaseAdapter {
 	}
 
 	public class Holder {
-		TextView fileNameView;
-		TextView fileSizeView;
+		TextView textview;
+		ImageView imgView;
 	}
 
 	@Override
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		final Holder holder = new Holder();
 		View rowView;
-		rowView = inflater.inflate(R.layout.custom_adapter_filelist, null);
-		holder.fileNameView = (TextView) rowView.findViewById(R.id.filename);
-		holder.fileSizeView = (TextView) rowView.findViewById(R.id.filesize);
+		rowView = inflater.inflate(R.layout.custom_adapter2, null);
+		holder.textview = (TextView) rowView.findViewById(R.id.textView1);
+		holder.imgView = (ImageView) rowView.findViewById(R.id.imageView1);
 		final String text = fileList.get(position).getName();
-		final String size = DebugHelper.humanReadableByteCount(fileList.get(position).length(), true);
-		holder.fileNameView.setText(text);
-		holder.fileSizeView.setText(size);
+		holder.textview.setText(text);
+
+		final File zip = fileList.get(position);
+		final String jpgFilename = FileIOHelper.replaceExtension(zip.getAbsolutePath(), DesignIO.EXTENSION_ZIP, DesignIO.EXTENSION_JPG);
+		Log.i("CustomAdapterFiles", "jpgFilename = " + jpgFilename);
+		final Bitmap bmp = BitmapFileIO.loadBitmap(jpgFilename);
+
+		if (bmp != null) {
+			holder.imgView.setImageBitmap(bmp);
+		} else {
+			Log.i("CustomAdapterFiles", "BMP was null");
+		}
+
 		return rowView;
 	}
 

@@ -12,8 +12,8 @@ import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
-import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
@@ -35,7 +35,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 	@SuppressLint("SimpleDateFormat")
 	@Override
 	public synchronized void save(final Context context, final boolean saveSettings) {
-		final String timeStamp = DesignIO.getTimeStampForFile();
+		final String timeStamp = FileIOHelper.getTimeStampForFile();
 		saveBigImage(context, timeStamp);
 		if (saveSettings) {
 			saveSmallImageAndSettings(context);
@@ -46,7 +46,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 
 	@Override
 	public synchronized void saveSmallImageAndSettings(final Context context) {
-		final String timeStamp = DesignIO.getTimeStampForFile();
+		final String timeStamp = FileIOHelper.getTimeStampForFile();
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
@@ -60,13 +60,11 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		final String layout = Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")";
 		final String jpgFilename = pattern + " " + layout + DesignIO.MARKER + timeStamp + DesignIO.EXTENSION_JPG;
 
-		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small,
-				StorageHelper.getDesignsDir(), jpgFilename, 80);
+		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, StorageHelper.getDesignsDir(), jpgFilename, 80);
 		MediaScannerHelper.rescanMedia(context, smallJpgFile);
 		small.recycle();
 		// Saving corresponding Settings
-		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(),
-				DesignIO.EXTENSION_JPG, DesignIO.EXTENSION_PREF);
+		final String prefFileName = FileIOHelper.replaceExtension(smallJpgFile.getAbsolutePath(), DesignIO.EXTENSION_JPG, DesignIO.EXTENSION_PREF);
 		final File settingsFile = new File(prefFileName);
 		DesignIO.savePreferences(Settings.prefs, settingsFile);
 	}
@@ -78,13 +76,11 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 		default:
 		case PNG:
 			filename = "WallpaperDesigner_" + timeStamp + DesignIO.EXTENSION_PNG;
-			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getWallpaperImagesDir(),
-					filename);
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorage(bitmap, StorageHelper.getWallpaperImagesDir(), filename);
 			break;
 		case JPG:
 			filename = "WallpaperDesigner_" + timeStamp + DesignIO.EXTENSION_JPG;
-			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getWallpaperImagesDir(),
-					filename, Settings.getJpgCompression());
+			imageFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(bitmap, StorageHelper.getWallpaperImagesDir(), filename, Settings.getJpgCompression());
 			break;
 		}
 		MediaScannerHelper.rescanMedia(context, imageFile);
@@ -104,8 +100,7 @@ public abstract class WPStyle extends ColorProvider implements IWPStyle {
 			if (dropShadowRadius < 3) {
 				dropShadowRadius = 3;
 			}
-			final String text = patternName
-					+ " - Created with 'The Wallpaper Designer' ...please get the Premium Version, to remove this text :-)";
+			final String text = patternName + " - Created with 'The Wallpaper Designer' ...please get the Premium Version, to remove this text :-)";
 			final Paint paint = new Paint();
 			paint.setAntiAlias(true);
 			paint.setColor(Color.WHITE);

@@ -60,19 +60,10 @@ public class CustomAdapter extends BaseAdapter {
 		// Wenn Bild vorhanden nur bild anzeigen
 		if (preferenceList.get(position).getBitmap() != null) {
 			holder.imgView.setImageBitmap(preferenceList.get(position).getBitmap());
-			// holder.textview.setVisibility(View.INVISIBLE);
 		} else {
 			// sonst nur text
 			holder.textview.setVisibility(View.VISIBLE);
-			// holder.imgView.setVisibility(View.INVISIBLE);
 		}
-		// rowView.setOnClickListener(new OnClickListener() {
-		// @Override
-		// public void onClick(final View v) {
-		// Toast.makeText(context, "You Clicked Position " + position,
-		// Toast.LENGTH_LONG).show();
-		// }
-		// });
 		return rowView;
 	}
 

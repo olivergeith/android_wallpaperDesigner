@@ -1,7 +1,5 @@
 package de.geithonline.wallpaperdesigner.utils;
 
-import java.io.File;
-
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,7 +12,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.Log;
 
 public class BitmapHelper {
 
@@ -76,10 +73,8 @@ public class BitmapHelper {
 	 *            -180 bis 180
 	 * @return
 	 */
-	public static Bitmap getColorFilteredBitmap(final Bitmap inBitmap, final int brightness, final int contrast,
-			final int saturation, final int hue) {
-		final Bitmap outBitmap = Bitmap
-				.createBitmap(inBitmap.getWidth(), inBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+	public static Bitmap getColorFilteredBitmap(final Bitmap inBitmap, final int brightness, final int contrast, final int saturation, final int hue) {
+		final Bitmap outBitmap = Bitmap.createBitmap(inBitmap.getWidth(), inBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 		final Canvas c = new Canvas(outBitmap);
 		final Paint paint = new Paint();
 		paint.setColorFilter(ColorFilterGenerator.adjustColor(brightness, contrast, saturation, hue));
@@ -109,19 +104,13 @@ public class BitmapHelper {
 		return bitmap;
 	}
 
-	public static void logBackgroundFileInfo(final String path) {
-		Log.i("Geith", "Custom BG = " + path);
-		final File f = new File(path);
-		if (!f.exists()) {
-			Log.i("Geith", "Custom BG = " + path + " does not exist!");
-			return;
-		}
-		if (f.isDirectory()) {
-			Log.i("Geith", "Custom BG = " + path + " is a Directory!");
-			return;
-		}
-		final long size = f.length();
-		Log.i("Geith", "Custom BG = " + path + " -> size is: " + size);
+	public static Bitmap scallToWidth(final Bitmap bitmap, final int width) {
+		final int w = bitmap.getWidth();
+		final int h = bitmap.getHeight();
+		final int dw = width;
+		final int dh = h * dw / w;
+		final Bitmap small = Bitmap.createScaledBitmap(bitmap, dw, dh, true);
+		return small;
 	}
 
 }

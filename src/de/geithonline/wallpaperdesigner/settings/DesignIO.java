@@ -5,17 +5,13 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -27,7 +23,6 @@ import de.geithonline.wallpaperdesigner.WPDUrls;
 import de.geithonline.wallpaperdesigner.settingsdownloader.SettingsUploader;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
-import de.geithonline.wallpaperdesigner.utils.EMailHelper;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
@@ -48,67 +43,31 @@ public class DesignIO {
 	 */
 	private static List<Design> mDesignList = new ArrayList<>();
 
-	public static void eMailDesignTheFancyWay(final Activity activity, final SharedPreferences prefs) {
-
-		final List<Design> designList = getSavedPreferencesList();
-		if (designList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no Designs to restore!");
-			return;
-		}
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final AlertDialog dialog = builder.create();
-		dialog.setTitle("Email Design");
-		dialog.setMessage("Select Design to be emailed");
-
-		final ListView listview = createListviewOfAllDesigns(activity, designList);
-		listview.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
-				if (position >= 0) {
-					Log.i("Emailing Settings ", "from " + position);
-					final Design design = designList.get(position);
-					eMailOneDesign(design, activity);
-				}
-				dialog.dismiss();
-			}
-
-		});
-		dialog.setView(listview);
-		dialog.show();
-
-	}
-
 	public static void shareDesign(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.SHARE);
+		uploadDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_SHARED);
 	}
 
 	public static void publishDesign(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_FEATURED);
+		uploadDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_FEATURED);
 	}
 
 	public static void publishPremiumDesign(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_PREMIUM);
+		uploadDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_PREMIUM);
 	}
 
 	public static void publishFreeDesign(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_FREE);
-	}
-
-	public static void backupDesign(final Activity activity) {
-		zipDesign(activity, DESIGN_SAVING_TYPE.BACKUP);
+		uploadDesign(activity, DESIGN_SAVING_TYPE.PUBLISH_FREE);
 	}
 
 	private enum DESIGN_SAVING_TYPE {
-		BACKUP, PUBLISH_FEATURED, PUBLISH_PREMIUM, SHARE, PUBLISH_FREE
+		PUBLISH_FEATURED, PUBLISH_PREMIUM, PUBLISH_SHARED, PUBLISH_FREE
 	}
 
-	private static void zipDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
+	private static void uploadDesign(final Activity activity, final DESIGN_SAVING_TYPE savingtype) {
 
 		final List<Design> designList = getSavedPreferencesList();
 		if (designList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no Designs to Zip!");
+			Toaster.showErrorToast(activity, "There are no Designs to publish!");
 			return;
 		}
 
@@ -116,10 +75,7 @@ public class DesignIO {
 		final AlertDialog dialog = builder.create();
 		switch (savingtype) {
 		default:
-		case BACKUP:
-			dialog.setTitle("Backup one Design");
-			break;
-		case SHARE:
+		case PUBLISH_SHARED:
 			dialog.setTitle("Share one Design");
 			break;
 		case PUBLISH_PREMIUM:
@@ -144,10 +100,7 @@ public class DesignIO {
 					final Design design = designList.get(position);
 					switch (savingtype) {
 					default:
-					case BACKUP:
-						zipOneDesign(design, activity, StorageHelper.getDataDir());
-						break;
-					case SHARE:
+					case PUBLISH_SHARED:
 						shareOneDesign(design, activity);
 						break;
 					case PUBLISH_FEATURED:
@@ -265,14 +218,15 @@ public class DesignIO {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
 		}
-		final String timeStamp = getTimeStampForFile();
+		final String timeStamp = FileIOHelper.getTimeStampForFile();
 		final File outzip = new File(StorageHelper.getDataDir(), "WPD_Designs_" + timeStamp + ".zip");
 		final String message = "Backup all Designs to:\n" + StorageHelper.getDataDir() + "\n" + outzip.getName();
-		Alerter.alertYesNo(activity, message, "Backup/Email all Designs", new OnClickListener() {
+		Alerter.alertYesNo(activity, message, "Backup all Designs", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				ZipHelper.zipFileAtPath(getSettingsDir().getAbsolutePath(), outzip.getAbsolutePath());
 				MediaScannerHelper.rescanMedia(activity, outzip);
+				Toaster.showInfoToast(activity, "Designs saved to " + outzip.getName() + " successfully!!");
 			}
 		});
 	}
@@ -289,49 +243,16 @@ public class DesignIO {
 			Toaster.showErrorToast(activity, "There are no Designs!");
 			return;
 		}
-		final String message = "Backup all Designs to:\n" + StorageHelper.getDataDir();
+		final String message = "Backup all Designs to:\n" + StorageHelper.getBackupDir();
 		Alerter.alertYesNo(activity, message, "Backup all Designs into many zips", new OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
 				for (final Design design : designList) {
-					zipOneDesign(design, activity, StorageHelper.getDataDir());
+					backupOneDesign(design, activity);
 				}
+				Toaster.showInfoToast(activity, "All Designs backed up to " + StorageHelper.getBackupDir() + " successfully!!");
 			}
 		});
-	}
-
-	/**
-	 * Backups all Designs to Zipfile
-	 * 
-	 * @param activity
-	 */
-	public static void saveAllDesignsForUpload(final Activity activity) {
-
-		final List<Design> designList = getSavedPreferencesList();
-		if (designList.isEmpty()) {
-			Toaster.showErrorToast(activity, "There are no Designs!");
-			return;
-		}
-		final String message = "Backup all Designs to:\n" + StorageHelper.getUploadDir();
-		Alerter.alertYesNo(activity, message, "Backup all Designs into zips", new OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				for (final Design design : designList) {
-					backupOneDesignToUploadDir(design, activity);
-				}
-			}
-		});
-	}
-
-	public static void sendFileViaEmail(final Activity activity, final String filePathAbsolut, final boolean toOliver) {
-		final List<String> filePaths = new ArrayList<String>();
-		filePaths.add(filePathAbsolut);
-		String toAdress = "";
-		if (toOliver) {
-			toAdress = "oliver.geith@gmail.com";
-		}
-		final Intent createEMailIntent = EMailHelper.createEMailIntent(toAdress, "", "", "Designs", "Mailing Desings", filePaths);
-		EMailHelper.email(activity, createEMailIntent);
 	}
 
 	/**
@@ -468,28 +389,17 @@ public class DesignIO {
 		DesignIO.designListNeedsReload = needsReload;
 	}
 
-	public static String getTimeStampForFile() {
-		final Date date = new Date();
-		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
-		final String timeStamp = dt.format(date);
-		return timeStamp;
-	}
-
 	// #########################################################################
 	// restoring designs from zip
 	// #########################################################################
 
-	public static void restoreDesignsFromZip(final Activity activity, final boolean fromDownload) {
+	public static void restoreDesignsFromZip(final Activity activity) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final AlertDialog dialog = builder.create();
-		if (fromDownload) {
-			dialog.setTitle("Restore Designs from shared Zip");
-		} else {
-			dialog.setTitle("Restore Designs from Backup Zip");
-		}
-		dialog.setMessage("Restore alle Designs from one of your backup-zips");
+		dialog.setTitle("Restore Designs from Backup");
+		dialog.setMessage("Restore Designs from Backup");
 
-		final ListView listview = createListviewOfAllBackupZips(activity, fromDownload);
+		final ListView listview = createListviewOfAllBackupZips(activity);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -497,17 +407,9 @@ public class DesignIO {
 				Log.i("Restoring zip Settings ", "from " + position);
 				if (position >= 0) {
 					final File file = (File) parent.getAdapter().getItem(position);
-					Alerter.alertYesNo(activity, "Dou you want really want to restore all designs from this Zip?\n" + file.getName(),
-							"Restore Designs from Zip", new OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int which) {
-							// deleteALLDesignsWithoutAsking(activity);
-							ZipHelper.unzip(file.getAbsolutePath(), //
-									StorageHelper.getDataDirFile().getAbsolutePath());
-							setDesignListNeedsReload(true);
-						}
-					});
-
+					ZipHelper.unzip(file.getAbsolutePath(), StorageHelper.getDesignsDirFile().getAbsolutePath());
+					setDesignListNeedsReload(true);
+					Toaster.showInfoToast(activity, "Design " + file.getName() + " restored successfully!!");
 				}
 				dialog.dismiss();
 			}
@@ -517,10 +419,10 @@ public class DesignIO {
 
 	}
 
-	private static ListView createListviewOfAllBackupZips(final Activity activity, final boolean fromDownload) {
+	private static ListView createListviewOfAllBackupZips(final Activity activity) {
 		final ListView listview = new ListView(activity);
 		/** Declaring an ArrayAdapter to set items to ListView */
-		final CustomAdapterFiles adapter = new CustomAdapterFiles(activity, getAllDesignBackupZips(fromDownload));
+		final CustomAdapterFiles adapter = new CustomAdapterFiles(activity, getAllDesignBackupZips());
 		listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listview.setAdapter(adapter);
 		return listview;
@@ -534,14 +436,9 @@ public class DesignIO {
 	 * @param sortOrder
 	 * @return
 	 */
-	private static List<File> getAllDesignBackupZips(final boolean fromDownload) {
-		File dir;
-		if (fromDownload) {
-			dir = StorageHelper.getDownloadDirFile();
-		} else {
-			dir = StorageHelper.getDataDirFile();
-		}
-		Log.i("Data DIR", "Dir = " + dir);
+	private static List<File> getAllDesignBackupZips() {
+		final File dir = StorageHelper.getBackupDirFile();
+		Log.i("BackupDir", "Dir = " + dir);
 		final List<File> zipBackups = getZipFileListFromLocalDataDir(dir);
 		return zipBackups;
 	}
@@ -568,7 +465,7 @@ public class DesignIO {
 
 			// Sort Files
 			if (files != null) {
-				FileIOHelper.sortFileArray(SORT_ORDER.LAST_MODIFIED_DESCENDING, files);
+				FileIOHelper.sortFileArray(SORT_ORDER.ALPHA, files);
 			}
 			// Putting it into a List
 			for (final File fi : files) {
@@ -579,19 +476,40 @@ public class DesignIO {
 		return fileList;
 	}
 
+	private static void shareOneDesign(final Design design, final Activity activity) {
+		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_DESIGNS, StorageHelper.getUploadDir());
+	}
+
+	private static void publishOneDesign(final Design design, final Activity activity, final String url) {
+		prepareOneDesignForUpload(design, activity, url, StorageHelper.getUploadDir());
+	}
+
+	private static void backupOneDesign(final Design design, final Activity activity) {
+		prepareOneDesignForUpload(design, activity, null, StorageHelper.getBackupDir());
+	}
+
+	/**
+	 * zips a design and resizes the image to 400w and saves both in upload Dir
+	 * 
+	 * @param design
+	 * @param activity
+	 * @param url
+	 *            Wenn url == null nur backup
+	 */
+	private static void prepareOneDesignForUpload(final Design design, final Activity activity, final String url, final String outputDir) {
+		// saving Zip to upload dir
+		final String zip = zipOneDesign(design, activity, outputDir);
+		// rescaling and Saving Bitmap
+		final File jpg = createSmallJpg(design, activity, outputDir);
+		if (url != null) {
+			SettingsUploader.upload(activity, jpg.getAbsolutePath(), url);
+			SettingsUploader.upload(activity, zip, url);
+		}
+	}
+
 	// *******************************************************************
 	// Basic stuff to do with a design
 	// *******************************************************************
-
-	private static void eMailOneDesign(final Design design, final Activity activity) {
-		final List<String> filePaths = new ArrayList<String>();
-		filePaths.add(design.getPreferenceFile().getAbsolutePath());
-		filePaths.add(design.getBmpFile().getAbsolutePath());
-		final String toAdress = "";
-		final Intent createEMailIntent = EMailHelper.createEMailIntent(toAdress, "", "", "My Design",
-				"Mailing Desing :-) To have them in 'The Wallpaper Designer' save both attached files to \n" + getSettingsDir().getAbsolutePath(), filePaths);
-		EMailHelper.email(activity, createEMailIntent);
-	}
 
 	private static String zipOneDesign(final Design design, final Activity activity, final String dir) {
 		Log.i("Zipping Design", design.getPreferenceFile().getName() + " to " + dir);
@@ -622,32 +540,7 @@ public class DesignIO {
 		setDesignListNeedsReload(true);
 	}
 
-	private static void shareOneDesign(final Design design, final Activity activity) {
-		prepareOneDesignForUpload(design, activity, WPDUrls.UPLOAD_URL_COMMUNITY_DESIGNS);
-	}
-
-	private static void publishOneDesign(final Design design, final Activity activity, final String url) {
-		prepareOneDesignForUpload(design, activity, url);
-	}
-
-	private static void backupOneDesignToUploadDir(final Design design, final Activity activity) {
-		prepareOneDesignForUpload(design, activity, null);
-	}
-
-	/**
-	 * zips a design and resizes the image to 400w and saves both in upload Dir
-	 * 
-	 * @param design
-	 * @param activity
-	 * @param url
-	 *            Wenn url == null nur backup
-	 */
-	private static void prepareOneDesignForUpload(final Design design, final Activity activity, final String url) {
-		// saving Zip to upload dir
-		final String outputDir = StorageHelper.getUploadDir();
-		final String outzip = zipOneDesign(design, activity, outputDir);
-
-		// rescaling and Saving Bitmap
+	private static File createSmallJpg(final Design design, final Activity activity, final String outputDir) {
 		final Bitmap bitmap = design.getBitmap();
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
@@ -658,10 +551,7 @@ public class DesignIO {
 		final File smallJpgFile = BitmapFileIO.saveBitmap2ExternalStorageAsJPG(small, outputDir, jpgFilename, 80);
 		MediaScannerHelper.rescanMedia(activity, smallJpgFile);
 		small.recycle();
-		if (url != null) {
-			SettingsUploader.upload(activity, smallJpgFile.getAbsolutePath(), url);
-			SettingsUploader.upload(activity, outzip, url);
-		}
+		return smallJpgFile;
 	}
 
 }

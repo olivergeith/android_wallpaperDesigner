@@ -2,10 +2,13 @@ package de.geithonline.wallpaperdesigner.utils;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.util.Log;
 
@@ -124,6 +127,13 @@ public class FileIOHelper {
 			bmpFilename = filename.substring(0, pos) + newExtension;
 		}
 		return bmpFilename;
+	}
+
+	public static String getTimeStampForFile() {
+		final Date date = new Date();
+		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+		final String timeStamp = dt.format(date);
+		return timeStamp;
 	}
 
 }

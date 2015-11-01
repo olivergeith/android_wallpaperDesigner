@@ -18,31 +18,31 @@
 		    android:key="unzipSettingsPremium"
 		    android:icon="@drawable/examplesettings_premium"
 		    android:title="Premium Designs"
-		    android:summary="Download Premium-Designs! Only for Premium Users!" 
+		    android:summary="Only for Premium Users!" 
             />
     
     	<Preference 
 		    android:key="unzipSettings"
 		    android:icon="@drawable/examplesettings"
 		    android:title="Free Designs"
-		    android:summary="Download lots of free Example-Designs!" 
+		    android:summary="Lots of free Example-Designs!" 
             />
 
 	    <Preference 
 		    android:key="unzipFeaturedSettings"
 		    android:icon="@drawable/examplesettings"
 		    android:title="Featured Designs"
-		    android:summary="Download free Designs! Hurry up to get those designs...the featured Designs will change frequently!" 
+		    android:summary="Even more free Designs! Hurry up to get them...the featured Designs will change frequently!" 
             />
 
 	<PreferenceCategory android:title="Community Designs"/>
 	    <Preference 
 		    android:key="unzipSharedSettings"
 		    android:icon="@drawable/examplesettings"
-		    android:title="Download Community Designs"
+		    android:title="Community Designs"
 		    android:summary="Download free Designs shared by other users!" 
             />
-	
+	    	
 	    <Preference 
 		    android:key="shareOneDesign"
 		    android:title="Share Design -> Community"
@@ -51,43 +51,19 @@
             />
 
 	    	    	    
-	    <!-->
-	    	<PreferenceCategory android:title="Email Designs" />
-	    	<Preference android:key="mailSettings"
-	    		android:title="Email Design"
-	    		android:icon="@android:drawable/ic_menu_send"
-	    		android:summary="Email one of your designs to a friend" />
-	    	<Preference android:key="shareALLDesignsViaEmail"
-	    		android:title="Share all Designs via eMail"
-	    		android:icon="@android:drawable/ic_menu_share"
-	    		android:summary="Share all your designs via eMail" />
-	    -->
-
-	    <PreferenceCategory android:title="Backup and Restore Designs"/>
+    <PreferenceCategory android:title="Backup and Restore Designs"/>
 	    
 	    <Preference 
-		    android:key="backupALLDesigns"
-		    android:title="Backup all Designs (one Zip)"
-		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Backup all your designs into a zip-File" 
-            />
-	    <Preference 
 		    android:key="backupALLDesignsInManyZips"
-		    android:title="Backup all Designs (many Zips)"
+		    android:title="Backup all Designs"
 		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Backup all your designs into many zip-Files" 
+		    android:summary="Backup all your designs" 
             />
-	    <Preference 
-		    android:key="zipOneDesign"
-		    android:title="Backup one Design (in one Zip)"
-		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Zip one of your designs" 
-	        />
 	    <Preference 
 		    android:key="restoreDesigns"
-		    android:title="Restore Designs"
+		    android:title="Restore Design"
 		    android:icon="@android:drawable/ic_menu_upload"
-		    android:summary="Restore designs from a zip-File" 
+		    android:summary="Restore design from backup" 
             />
 
 	    	    	    
@@ -124,11 +100,11 @@
 		    android:icon="@android:drawable/ic_menu_share"
             />
 	    <Preference 
-		    android:key="backupALLDesignsForUpload"
-		    android:title="Backup ALL Designs to Upload-Dir"
+		    android:key="backupALLDesigns"
+		    android:title="Backup all Designs (one Zip)"
 		    android:icon="@android:drawable/ic_menu_save"
-		    android:summary="Backup all your designs into many zip-Files for uploading purposes" 
+		    android:summary="Backup all your designs into a zip-File" 
             />
-		    	    	    	    	        	    	    	    	    	    		
+	    		    	    	    	    	        	    	    	    	    	    		
 	    	    
 </PreferenceScreen>

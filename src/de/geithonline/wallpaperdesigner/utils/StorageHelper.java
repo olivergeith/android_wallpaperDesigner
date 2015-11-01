@@ -23,6 +23,7 @@ public class StorageHelper {
 
 	private final static String backupDir = DIR_SDCARD + File.separator + "data" + File.separator + "WallpaperDesignerBackups" + File.separator;
 	private final static File backupDirFile = new File(backupDir);
+
 	private final static File backupDirNomedia = new File(backupDir, ".nomedia");
 
 	private final static String uploadDir = DIR_SDCARD + File.separator + "data" + File.separator + "upload" + File.separator;
@@ -100,6 +101,10 @@ public class StorageHelper {
 
 	public static String getBackupDir() {
 		return backupDir;
+	}
+
+	public static File getBackupDirFile() {
+		return backupDirFile;
 	}
 
 }
