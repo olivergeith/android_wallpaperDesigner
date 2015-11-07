@@ -48,6 +48,8 @@ import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
+import de.geithonline.wallpaperdesigner.shapes.LeafPath;
+import de.geithonline.wallpaperdesigner.shapes.LeafPath.LEAF_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathEX;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathEX.LOGO_STYLE_EX;
@@ -178,6 +180,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Lines":
 			drawLines(x, y, paint, radius);
+			break;
+		case "Leafs":
+			drawLeafs(x, y, paint, radius);
 			break;
 		case "Logos":
 			drawLogos(x, y, paint, radius);
@@ -475,6 +480,48 @@ public abstract class WPStylePattern extends WPStyle {
 	// #########################################################################################
 	// ----------------
 	// #########################################################################################
+	protected void drawLeafs(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = getRandomInt(0, 3);
+			variant = "V" + nr;
+		}
+		drawLeafs(x, y, paint, radius, variant);
+	}
+
+	protected void drawLeafs(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
+		switch (variante) {
+		default:
+		case "V1":
+		case "Maple":
+			path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.MAPLE);
+			break;
+		case "V2":
+		case "Weed":
+			path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.WEED);
+			break;
+		case "V3":
+		case "Round Leaf":
+			path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.ROUND);
+			break;
+		}
+		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		if (Settings.isGlossy()) {
+			drawGlossyPath(x, y, paint, radius, path);
+			// drawGlossyPathCenterGlow(x, y, paint, radius, path);
+		}
+		// Outline
+		if (Settings.isOutline()) {
+			setupPaintForOutline(paint, radius);
+			bitmapCanvas.drawPath(path, paint);
+		}
+	}
+
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
 	protected void drawLogos(final int x, final int y, final Paint paint, final int radius) {
 		final String variant = Settings.getSelectedPatternVariant();
 		drawLogos(x, y, paint, radius, variant);
@@ -507,6 +554,12 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Peace Sign":
 			path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.V1);
+			break;
+		case "Weed Sign":
+			path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED);
+			break;
+		case "Weed Sign V2":
+			path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED_V2);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
