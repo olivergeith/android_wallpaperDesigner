@@ -58,13 +58,14 @@ public class PatternPropertyStore {
 								"Mixed Plus-Minus" }));
 
 		patternProperties.put("Leafs", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Maple", "Weed", "Round Leaf", "Mixed" }));
+				new CharSequence[] { "Maple", "Finger Maple", "Weed", "Round Leaf", "Mixed" }));
 		patternProperties.put("Lines", new PatternProperties(false, false, false, false, false, false, //
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 		patternProperties.put("Logos",
 				new PatternProperties(true, true, false, false, false, true, //
 						new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "Resurrection Remix V4",
-								"Resurrection Remix V5", "Resurrection Remix V6", "ElementalX Kernel", "Peace Sign", "Weed Sign", "Weed Sign V2" }));
+								"Resurrection Remix V5", "Resurrection Remix V6", "ElementalX Kernel", "Peace Sign", "Weed Sign", "Weed Sign V2", "Nexus V1",
+								"Nexus V2", "Nexus V3", "Oneplus One V1", "Oneplus One V2", "LG V1", "LG V2" }));
 
 		patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
 				new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));

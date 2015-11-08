@@ -53,6 +53,8 @@ import de.geithonline.wallpaperdesigner.shapes.LeafPath.LEAF_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathEX;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathEX.LOGO_STYLE_EX;
+import de.geithonline.wallpaperdesigner.shapes.LogoPathHandys;
+import de.geithonline.wallpaperdesigner.shapes.LogoPathHandys.HANDY_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathPeace;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathPeace.LOGO_STYLE_PEACE;
 import de.geithonline.wallpaperdesigner.shapes.LogoPathRR;
@@ -483,7 +485,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawLeafs(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawLeafs(x, y, paint, radius, variant);
@@ -504,6 +506,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V3":
 		case "Round Leaf":
 			path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.ROUND);
+			break;
+		case "V4":
+		case "Finger Maple":
+			path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.FINGER_MAPLE);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -560,6 +566,27 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Weed Sign V2":
 			path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED_V2);
+			break;
+		case "Nexus V1":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V1);
+			break;
+		case "Nexus V2":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V2);
+			break;
+		case "Nexus V3":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V3);
+			break;
+		case "Oneplus One V1":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.ONEPLUSONE_V1);
+			break;
+		case "Oneplus One V2":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.ONEPLUSONE_V2);
+			break;
+		case "LG V1":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V1);
+			break;
+		case "LG V2":
+			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V2);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
