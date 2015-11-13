@@ -39,7 +39,7 @@ public class RasterFactory {
 		layoutProperties.put("Half Circle",
 				new LayoutProperties(false, true, true, false, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
-								"Tower", "Random" }));
+								"Random" }));
 	}
 
 	public static AbstractRaster getRaster(final String layout, final String variante, final int width, final int height, final int patternRadius,
