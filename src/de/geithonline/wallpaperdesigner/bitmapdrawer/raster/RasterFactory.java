@@ -27,13 +27,19 @@ public class RasterFactory {
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
-		layoutProperties.put("Circular", new LayoutProperties(false, true, true, false, true, //
-				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Left to Right", "Center", "Tower", "Random" }));
-		layoutProperties.put("Spiral", new LayoutProperties(false, true, true, false, true, //
-				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Left to Right", "Center", "Tower", "Random" }));
+		layoutProperties.put("Circular",
+				new LayoutProperties(false, true, true, false, true, //
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+								"Tower", "Random" }));
+		layoutProperties.put("Spiral",
+				new LayoutProperties(false, true, true, false, true, //
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+								"Tower", "Random" }));
 
-		layoutProperties.put("Half Circle", new LayoutProperties(false, true, true, false, true, //
-				new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Left to Right", "Center", "Tower", "Random" }));
+		layoutProperties.put("Half Circle",
+				new LayoutProperties(false, true, true, false, true, //
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+								"Tower", "Random" }));
 	}
 
 	public static AbstractRaster getRaster(final String layout, final String variante, final int width, final int height, final int patternRadius,
@@ -88,8 +94,12 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.INNER, CIRCLE_TYPE.SPIRAL);
 		case "Spiral (Top to Bottom)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOPMOST, CIRCLE_TYPE.SPIRAL);
+		case "Spiral (Bottom to Top)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.BOTTOMMOST, CIRCLE_TYPE.SPIRAL);
 		case "Spiral (Left to Right)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.LEFTMOST, CIRCLE_TYPE.SPIRAL);
+		case "Spiral (Right to Left)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RIGHTMOST, CIRCLE_TYPE.SPIRAL);
 		case "Spiral (Center)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.SPIRAL);
 		case "Spiral (Tower)":
@@ -103,8 +113,12 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case "Circular (Top to Bottom)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOPMOST, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+		case "Circular (Bottom to Top)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.BOTTOMMOST, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case "Circular (Left to Right)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.LEFTMOST, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
+		case "Circular (Right to Left)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RIGHTMOST, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case "Circular (Center)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.FULL_RANDOM_STARWINKEL);
 		case "Circular (Tower)":
@@ -118,8 +132,12 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.OUTER, CIRCLE_TYPE.HALF);
 		case "Half Circle (Top to Bottom)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOPMOST, CIRCLE_TYPE.HALF);
+		case "Half Circle (Bottom to Top)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.BOTTOMMOST, CIRCLE_TYPE.HALF);
 		case "Half Circle (Left to Right)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.LEFTMOST, CIRCLE_TYPE.HALF);
+		case "Half Circle (Right to Left)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RIGHTMOST, CIRCLE_TYPE.HALF);
 		case "Half Circle (Center)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.HALF);
 		case "Half Circle (TOWER)":

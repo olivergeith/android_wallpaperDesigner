@@ -124,6 +124,24 @@ public abstract class AbstractRaster {
 		return p;
 	}
 
+	protected Point drawRightmostPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		int topmostIndex = 0; // der erste
+		int topX = points.get(0).x;
+		for (int i = 0; i < points.size(); i++) {
+			final Point p = points.get(i);
+			if (p.x > topX) {
+				topX = p.x;
+				topmostIndex = i;
+			}
+		}
+		final Point p = points.remove(topmostIndex);
+		return p;
+	}
+
 	protected Point drawTopmostPoint() {
 		final int size = points.size();
 		if (size == 0) {
@@ -134,6 +152,24 @@ public abstract class AbstractRaster {
 		for (int i = 0; i < points.size(); i++) {
 			final Point p = points.get(i);
 			if (p.y < topY) {
+				topY = p.y;
+				topmostIndex = i;
+			}
+		}
+		final Point p = points.remove(topmostIndex);
+		return p;
+	}
+
+	protected Point drawBottommostPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		int topmostIndex = 0; // der erste
+		int topY = points.get(0).y;
+		for (int i = 0; i < points.size(); i++) {
+			final Point p = points.get(i);
+			if (p.y > topY) {
 				topY = p.y;
 				topmostIndex = i;
 			}

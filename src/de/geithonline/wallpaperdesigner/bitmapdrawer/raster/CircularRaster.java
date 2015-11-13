@@ -127,8 +127,12 @@ public class CircularRaster extends AbstractRaster {
 			return drawNextBookPointReverse();
 		case TOPMOST:
 			return drawTopmostPoint();
+		case BOTTOMMOST:
+			return drawBottommostPoint();
 		case LEFTMOST:
 			return drawLeftmostPoint();
+		case RIGHTMOST:
+			return drawRightmostPoint();
 		case RANDOM:
 			return drawRandomPoint();
 		case CENTER:
