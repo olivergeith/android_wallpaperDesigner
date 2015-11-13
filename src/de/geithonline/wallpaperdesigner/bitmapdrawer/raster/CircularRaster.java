@@ -96,6 +96,11 @@ public class CircularRaster extends AbstractRaster {
 		points.add(center);
 		// Log.i("CIRCULAR RASTER", "Anzahl Ringe = " + anzRinge);
 
+		float startWinkel = 0f;
+		if (Settings.isRandomStartwinkel()) {
+			startWinkel = Randomizer.getRandomFloat(0, (float) Math.PI * 2);
+		}
+
 		for (int ring = 0; ring <= anzRinge; ring++) {
 			final float r = ring * radiusStep;
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep + Math.max(anzRinge - ring * ring, 0);
@@ -104,8 +109,8 @@ public class CircularRaster extends AbstractRaster {
 			for (int ecke = 0; ecke < ecken; ecke++) {
 				final float rp = r + radiusStep * ecke / ecken;
 				final Point p = new Point();
-				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke) * rp);
-				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke) * rp);
+				p.x = (int) (center.x + Math.cos(ecke * winkelProEcke + startWinkel) * rp);
+				p.y = (int) (center.y + Math.sin(ecke * winkelProEcke + startWinkel) * rp);
 				// Limitieren auf punkte innerhalb des Canvas
 				addPoint2List(width, height, p);
 			}
