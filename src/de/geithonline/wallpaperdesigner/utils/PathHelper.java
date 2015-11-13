@@ -15,7 +15,7 @@ public class PathHelper {
 	 * @param rotate
 	 *            gradzahl 0-360
 	 */
-	public static void rotatePath(final float x, final float y, final Path path, final int rotate) {
+	public static void rotatePath(final float x, final float y, final Path path, final float rotate) {
 		final Matrix mMatrix = new Matrix();
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);

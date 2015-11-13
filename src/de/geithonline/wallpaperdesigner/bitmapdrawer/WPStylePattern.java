@@ -1614,7 +1614,7 @@ public abstract class WPStylePattern extends WPStyle {
 		if (Settings.isRandomRotate()) {
 			PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y)));
 		} else {
-			int degr = getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y));
+			float degr = getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y));
 			if (getRandomBoolean()) {
 				degr = degr + 90;
 			}
@@ -2409,18 +2409,18 @@ public abstract class WPStylePattern extends WPStyle {
 		return dropShadowRadius;
 	}
 
-	private static int getRotationDegrees(final int randomMin, final int randomMax, final int bWidth, final int bHeight, final Point center) {
+	private static float getRotationDegrees(final int randomMin, final int randomMax, final int bWidth, final int bHeight, final Point center) {
 		switch (Settings.getRotationStyle()) {
 		default:
 		case "Fixed":
 			return Settings.getFixedRotationDegrees();
 		case "Random":
-			return Randomizer.getRandomInt(randomMin - 1, randomMax);
+			return Randomizer.getRandomFloat(randomMin - 1, randomMax);
 		case "Around Point": {
 			final float distTCenterX = bWidth / 2 - center.x;
 			final float distTCenterY = bHeight / 2 - center.y;
 			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-			int winkel = (int) (alpha * 180 / Math.PI);
+			float winkel = (float) (alpha * 180 / Math.PI);
 			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
 			if (center.x <= bWidth / 2) {
 				winkel = winkel + 180;
@@ -2431,7 +2431,7 @@ public abstract class WPStylePattern extends WPStyle {
 			final float distTCenterX = bWidth / 2 - center.x;
 			final float distTCenterY = bHeight - center.y;
 			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-			int winkel = (int) (alpha * 180 / Math.PI);
+			float winkel = (float) (alpha * 180 / Math.PI);
 			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
 			if (center.x <= bWidth / 2) {
 				winkel = winkel + 180;
