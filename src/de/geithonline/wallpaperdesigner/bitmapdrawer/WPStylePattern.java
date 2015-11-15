@@ -674,6 +674,9 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Cross (Sharp)":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SHARP);
 			break;
+		case "Cross (Split)":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SPLIT);
+			break;
 		case "Cross (Slim)":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
 			break;
@@ -690,13 +693,13 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
 			break;
 		case "Virus":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 3, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
 			break;
 		case "Virus V2":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 3, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
 			break;
 		case "Virus V3":
-			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V3);
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V3);
 			break;
 		case "Long Heart":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.LONG_HEART);

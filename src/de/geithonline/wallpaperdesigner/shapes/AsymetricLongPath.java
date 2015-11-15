@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class AsymetricLongPath extends Path {
@@ -11,10 +12,10 @@ public class AsymetricLongPath extends Path {
 		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, //
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
-		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3;
+		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT;
 	}
 
-	public AsymetricLongPath(final PointF center, final float radius, final int height, final boolean filled, final ASYMETRIC_STYLE style) {
+	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
 
 		switch (style) {
 		default:
@@ -74,6 +75,9 @@ public class AsymetricLongPath extends Path {
 			break;
 		case CROSS:
 			drawCross(center, radius, height, filled);
+			break;
+		case CROSS_SPLIT:
+			drawCrossSplit(center, radius, height, filled);
 			break;
 		case CROSS_SHARP:
 			drawSharpCross(center, radius, height, filled);
@@ -143,14 +147,14 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawRaute(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawRaute(final PointF center, final float radius, final float height, final boolean filled) {
 		addPath(drawNormalRaute(center, radius, height, Direction.CW));
 		if (!filled) {
 			addPath(drawNormalRaute(new PointF(center.x, center.y - radius * 2), radius / 2, height / 2, Direction.CCW));
 		}
 	}
 
-	private Path drawNormalRaute(final PointF center, final float radius, final int height, final Direction dir) {
+	private Path drawNormalRaute(final PointF center, final float radius, final float height, final Direction dir) {
 		final Path p = new Path();
 		if (dir.equals(Direction.CW)) {
 			p.moveTo(center.x, center.y);
@@ -169,14 +173,14 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawDrache(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawDrache(final PointF center, final float radius, final float height, final boolean filled) {
 		addPath(drawDrachenRaute(center, radius, height, Direction.CW));
 		if (!filled) {
 			addCircle(center.x, center.y - height * 5 / 6, radius / 2, Direction.CCW);
 		}
 	}
 
-	private Path drawDrachenRaute(final PointF center, final float radius, final int height, final Direction dir) {
+	private Path drawDrachenRaute(final PointF center, final float radius, final float height, final Direction dir) {
 		final Path p = new Path();
 		if (dir.equals(Direction.CW)) {
 			p.moveTo(center.x, center.y);
@@ -195,14 +199,14 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawDracheUpside(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawDracheUpside(final PointF center, final float radius, final float height, final boolean filled) {
 		addPath(drawDrachenRauteUpside(center, radius, height, Direction.CW));
 		if (!filled) {
 			addCircle(center.x, center.y - height * 1 / 6, radius / 2, Direction.CCW);
 		}
 	}
 
-	private Path drawDrachenRauteUpside(final PointF center, final float radius, final int height, final Direction dir) {
+	private Path drawDrachenRauteUpside(final PointF center, final float radius, final float height, final Direction dir) {
 		final Path p = new Path();
 		if (dir.equals(Direction.CW)) {
 			p.moveTo(center.x, center.y);
@@ -221,7 +225,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawOval(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawOval(final PointF center, final float radius, final float height, final boolean filled) {
 		final RectF rect = new RectF();
 
 		rect.left = center.x - radius;
@@ -240,14 +244,14 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawTriangle(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawTriangle(final PointF center, final float radius, final float height, final boolean filled) {
 		addPath(drawTriangle(center, radius, height, Direction.CW));
 		if (!filled) {
 			addPath(drawTriangle(new PointF(center.x, center.y - radius * 2), radius / 2, height / 2, Direction.CCW));
 		}
 	}
 
-	private Path drawTriangle(final PointF center, final float radius, final int height, final Direction dir) {
+	private Path drawTriangle(final PointF center, final float radius, final float height, final Direction dir) {
 		final Path p = new Path();
 		if (dir.equals(Direction.CW)) {
 			p.moveTo(center.x, center.y);
@@ -264,7 +268,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawLense(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawLense(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x - 2 * radius, center.y - height * 1 / 4, // controllpoint
 				center.x, center.y - height); // Zielpunkt
@@ -277,7 +281,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawLenseV2(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawLenseV2(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x - 2 * radius, center.y - height * 1 / 2, // controllpoint
 				center.x, center.y - height); // Zielpunkt
@@ -290,7 +294,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawLenseV3(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawLenseV3(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x - 2 * radius, center.y - height * 5 / 6, // controllpoint
 				center.x, center.y - height); // Zielpunkt
@@ -303,7 +307,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawLongDrop(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawLongDrop(final PointF center, final float radius, final float height, final boolean filled) {
 		final RectF oval = new RectF();
 		oval.left = center.x - radius;
 		oval.right = center.x + radius;
@@ -327,7 +331,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawDropReverse(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawDropReverse(final PointF center, final float radius, final float height, final boolean filled) {
 		final RectF oval = new RectF();
 		oval.left = center.x - radius;
 		oval.right = center.x + radius;
@@ -349,7 +353,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawLongHeart(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawLongHeart(final PointF center, final float radius, final float height, final boolean filled) {
 		final RectF oval = new RectF();
 
 		moveTo(center.x, center.y);
@@ -381,7 +385,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawTag(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawTag(final PointF center, final float radius, final float height, final boolean filled) {
 		final RectF oval = new RectF();
 		oval.left = center.x - radius;
 		oval.right = center.x + radius;
@@ -402,7 +406,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawKnife(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawKnife(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x - radius, center.y - radius, // controllpoint
 				center.x - radius, center.y - height + radius); // Zielpunkt
@@ -417,7 +421,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawKnifeV2(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawKnifeV2(final PointF center, final float radius, final float height, final boolean filled) {
 		final RectF oval = new RectF();
 		oval.left = center.x - radius;
 		oval.right = center.x + radius;
@@ -437,7 +441,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawKnifeV3(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawKnifeV3(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x - radius, center.y - radius, // controllpoint
 				center.x - radius, center.y - height + radius); // Zielpunkt
@@ -457,7 +461,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawCross(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCross(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x, center.y - height + 1.5f * radius, // controllpoint
 				center.x - radius, center.y - height + radius); // Zielpunkt
@@ -474,7 +478,60 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawSharpCross(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCrossSplit(final PointF center, final float radius, final float height, final boolean filled) {
+		moveTo(center.x, center.y);
+		quadTo(center.x - radius * 0.75f, center.y - height / 2, // controllpoint
+				center.x, center.y - height + radius); // Zielpunkt
+		quadTo(center.x + radius * 0.75f, center.y - height / 2, // controllpoint
+				center.x, center.y);
+		close();
+		addPath(new PillowPath(4, new PointF(center.x, center.y - height), radius / 1.5f)); // /1.5 weil der Pillowpath den radius um 1.5 vergrößert
+
+		if (!filled) {
+			final Path p = new PillowPath(4, new PointF(center.x, center.y - height), radius / 2.5f);
+			PathHelper.mirrorPathLeftRight(center.x, center.y - height, p);
+			addPath(p);
+		}
+	}
+
+	// ##################################################################################
+	private void drawCrossFlower(final PointF center, final float radius, final float height, final boolean filled) {
+		moveTo(center.x, center.y);
+		quadTo(center.x - radius * 0.5f, center.y - height / 2, // controllpoint
+				center.x, center.y - height); // Zielpunkt
+		quadTo(center.x + radius * 0.5f, center.y - height / 2, // controllpoint
+				center.x, center.y);
+		close();
+
+		final PointF c = new PointF(center.x, center.y - height);
+		final ASYMETRIC_STYLE type = ASYMETRIC_STYLE.CROSS;
+		final float h = radius;
+		final float r = radius / 4;
+		final Path p1 = new AsymetricLongPath(c, r, h, filled, type);
+		PathHelper.rotatePath(c.x, c.y, p1, 135);
+		addPath(p1);
+		final Path p2 = new AsymetricLongPath(c, r, h, filled, type);
+		PathHelper.rotatePath(c.x, c.y, p2, -135);
+		addPath(p2);
+		final Path p3 = new AsymetricLongPath(c, r, h, filled, type);
+		PathHelper.rotatePath(c.x, c.y, p3, 90);
+		addPath(p3);
+		final Path p4 = new AsymetricLongPath(c, r, h, filled, type);
+		PathHelper.rotatePath(c.x, c.y, p4, -90);
+		addPath(p4);
+		final Path p5 = new AsymetricLongPath(c, r, h, filled, type);
+		PathHelper.rotatePath(c.x, c.y, p5, 45);
+		addPath(p5);
+		final Path p6 = new AsymetricLongPath(c, r, h, filled, type);
+		PathHelper.rotatePath(c.x, c.y, p6, -45);
+		addPath(p6);
+		final Path p7 = new AsymetricLongPath(c, r, h, filled, type);
+		addPath(p7);
+
+	}
+
+	// ##################################################################################
+	private void drawSharpCross(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x, center.y - height + 1.5f * radius, // controllpoint
 				center.x - radius, center.y - height + radius); // Zielpunkt
@@ -491,7 +548,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawCrossSlim(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCrossSlim(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		cubicTo(center.x, center.y - height, // CP1
@@ -517,7 +574,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// #####################################################-#############################
-	private void drawCrossSlimV2(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCrossSlimV2(final PointF center, final float radius, final float height, final boolean filled) {
 		final float offset = 0.1f;
 
 		moveTo(center.x, center.y);
@@ -544,7 +601,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// #####################################################-#############################
-	private void drawCrossSlimV3(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCrossSlimV3(final PointF center, final float radius, final float height, final boolean filled) {
 		final float offset = 0.1f;
 
 		moveTo(center.x, center.y);
@@ -570,7 +627,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawPlane(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawPlane(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		cubicTo(center.x, center.y - height, // CP1
@@ -600,7 +657,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawArrow(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawArrow(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		lineTo(center.x - radius / 10, center.y - height + radius / 2);
@@ -625,7 +682,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawCrossSlimDouble(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCrossSlimDouble(final PointF center, final float radius, final float height, final boolean filled) {
 
 		final Path cross1 = new AsymetricLongPath(center, radius / 2, (int) (height - 1.5f * radius), filled, ASYMETRIC_STYLE.CROSS_SLIM);
 
@@ -649,7 +706,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawGolfPin(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawGolfPin(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		quadTo(center.x, center.y - height, // controllpoint
@@ -666,7 +723,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawCrossMartial(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCrossMartial(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x, center.y - height - radius / 2, // controllpoint
 				center.x - radius / 2, center.y - height + radius / 2); // Zielpunkt
@@ -693,7 +750,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawSpear(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawSpear(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		cubicTo(center.x, center.y - height, // CP1
@@ -732,15 +789,15 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawTulipNormal(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawTulipNormal(final PointF center, final float radius, final float height, final boolean filled) {
 		drawTulip(center, radius, height, filled, 0);
 	}
 
-	private void drawTulipSlim(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawTulipSlim(final PointF center, final float radius, final float height, final boolean filled) {
 		drawTulip(center, radius, height, filled, -1);
 	}
 
-	private void drawTulipFat(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawTulipFat(final PointF center, final float radius, final float height, final boolean filled) {
 		drawTulip(center, radius, height, filled, 1);
 	}
 
@@ -752,7 +809,7 @@ public class AsymetricLongPath extends Path {
 	 * @param slimmy
 	 *            -1 = very slip, 0=nomal, +1=bigger
 	 */
-	private void drawTulip(final PointF center, final float radius, final int height, final boolean filled, final int slimmy) {
+	private void drawTulip(final PointF center, final float radius, final float height, final boolean filled, final int slimmy) {
 		moveTo(center.x, center.y);
 
 		final float offset = slimmy * radius;
@@ -777,7 +834,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// #################################################################################
-	private void drawSpaceship(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawSpaceship(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		final float offset = 0 * radius;
@@ -826,7 +883,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawBird(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawBird(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		lineTo(center.x - radius * 0.1f, center.y - height + radius);
 
@@ -857,7 +914,7 @@ public class AsymetricLongPath extends Path {
 		}
 	}
 
-	private void drawBirdV2(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawBirdV2(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		quadTo(center.x, center.y - height, // controllpoint
@@ -893,7 +950,7 @@ public class AsymetricLongPath extends Path {
 	 * @param widthUnten
 	 *            (zwischen 0 und eins macht sinn)
 	 */
-	private void drawCrossDouble(final PointF center, final float radius, final int height, final boolean filled, final float widthUnten) {
+	private void drawCrossDouble(final PointF center, final float radius, final float height, final boolean filled, final float widthUnten) {
 		moveTo(center.x, center.y);
 		quadTo(center.x, center.y - radius, // controllpoint
 				center.x - radius * widthUnten, center.y - radius); // Zielpunkt
@@ -916,7 +973,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawSperm(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawSperm(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 		quadTo(center.x, center.y - height + 2 * radius, // controllpoint
 				center.x - radius, center.y - height + 1.5f * radius); // Zielpunkt
@@ -933,7 +990,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawVirus(final int arms, final PointF center, final float radius, final int height, final boolean filled, final boolean randomradius) {
+	private void drawVirus(final int arms, final PointF center, final float radius, final float height, final boolean filled, final boolean randomradius) {
 
 		final PointF circlecenter = new PointF(center.x, center.y - height);
 		final float angle = (float) (2 * Math.PI / (arms));
@@ -969,7 +1026,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawCircleChain(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCircleChain(final PointF center, final float radius, final float height, final boolean filled) {
 
 		final PointF p = new PointF(center.x, center.y);
 		float offset = 0;
@@ -986,7 +1043,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawCircleChain2(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawCircleChain2(final PointF center, final float radius, final float height, final boolean filled) {
 
 		final PointF p = new PointF(center.x, center.y);
 		float offset = 0;
@@ -1004,7 +1061,7 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
-	private void drawPin(final PointF center, final float radius, final int height, final boolean filled) {
+	private void drawPin(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
 		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
