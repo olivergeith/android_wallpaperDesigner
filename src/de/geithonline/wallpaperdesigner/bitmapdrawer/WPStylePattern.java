@@ -677,6 +677,9 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Cross (Split)":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SPLIT);
 			break;
+		case "Cross (Split 2)":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SPLIT2);
+			break;
 		case "Cross (Slim)":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.CROSS_SLIM);
 			break;

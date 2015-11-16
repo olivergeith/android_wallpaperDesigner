@@ -42,7 +42,7 @@ public class PatternPropertyStore {
 						new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", //
 								"Triangle", "Oval", "Diamond", "Dragon", "Dragon (upsidedown)", "Drop", "Drop (upsidedown)", "Lense", "Lense V2", "Lense V3", //
 								"Tag", "Knife", "Knife V2", "Knife V3", //
-								"Cross", "Cross (Sharp)", "Cross (Split)", //
+								"Cross", "Cross (Sharp)", "Cross (Split)", "Cross (Split 2)", //
 								"Cross (Slim)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", //
 								"Spiky Cross", "Double Cross", "Sperm", //
 								"Virus", "Virus V2", "Virus V3", //

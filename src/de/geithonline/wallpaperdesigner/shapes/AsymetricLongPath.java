@@ -12,7 +12,7 @@ public class AsymetricLongPath extends Path {
 		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, //
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
-		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT;
+		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -78,6 +78,9 @@ public class AsymetricLongPath extends Path {
 			break;
 		case CROSS_SPLIT:
 			drawCrossSplit(center, radius, height, filled);
+			break;
+		case CROSS_SPLIT2:
+			drawCrossSplit2(center, radius, height, filled);
 			break;
 		case CROSS_SHARP:
 			drawSharpCross(center, radius, height, filled);
@@ -485,13 +488,57 @@ public class AsymetricLongPath extends Path {
 		quadTo(center.x + radius * 0.75f, center.y - height / 2, // controllpoint
 				center.x, center.y);
 		close();
-		addPath(new PillowPath(4, new PointF(center.x, center.y - height), radius / 1.5f)); // /1.5 weil der Pillowpath den radius um 1.5 vergrößert
+		addPath(drawPillow(4, new PointF(center.x, center.y - height), radius));
 
 		if (!filled) {
-			final Path p = new PillowPath(4, new PointF(center.x, center.y - height), radius / 2.5f);
+			final Path p = drawPillow(4, new PointF(center.x, center.y - height), radius * 0.6f);
 			PathHelper.mirrorPathLeftRight(center.x, center.y - height, p);
 			addPath(p);
 		}
+	}
+
+	// ##################################################################################
+	private void drawCrossSplit2(final PointF center, final float radius, final float height, final boolean filled) {
+		moveTo(center.x, center.y);
+		quadTo(center.x, center.y - height + 3 * radius, // controllpoint
+				center.x - radius * 0.7f, center.y - height + 2 * radius);
+
+		quadTo(center.x, center.y - height + 2 * radius, // controllpoint
+				center.x, center.y - height + radius); // Zielpunkt
+		quadTo(center.x, center.y - height + 2 * radius, // controllpoint
+				center.x + radius * 0.7f, center.y - height + 2 * radius); // Zielpunkt
+		quadTo(center.x, center.y - height + 3 * radius, // controllpoint
+				center.x, center.y);
+		close();
+
+		addPath(drawPillow(4, new PointF(center.x, center.y - height), radius));
+
+		if (!filled) {
+			final Path p = drawPillow(4, new PointF(center.x, center.y - height), radius * 0.6f);
+			PathHelper.mirrorPathLeftRight(center.x, center.y - height, p);
+			addPath(p);
+		}
+	}
+
+	private Path drawPillow(final int arms, final PointF center, final float radius) {
+		final Path path = new Path();
+		final float angle = (float) (2 * Math.PI / (arms));
+		final float cpRadius = radius * 0.1f;
+		for (int i = 0; i <= arms; i++) {
+			final PointF cp = new PointF();
+			final PointF p = new PointF();
+			cp.x = (float) (center.x + Math.cos((i - 0.5f) * angle) * cpRadius);
+			cp.y = (float) (center.y + Math.sin((i - 0.5f) * angle) * cpRadius);
+			p.x = (float) (center.x + Math.cos((i) * angle) * radius);
+			p.y = (float) (center.y + Math.sin((i) * angle) * radius);
+			if (i == 0) {
+				path.moveTo(p.x, p.y);
+			} else {
+				path.quadTo(cp.x, cp.y, p.x, p.y);
+			}
+		}
+		path.close();
+		return path;
 	}
 
 	// ##################################################################################
