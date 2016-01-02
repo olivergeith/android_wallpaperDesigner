@@ -33,7 +33,19 @@
 		    android:title="New image, on leaving settings"
 		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
             />
+        <CheckBoxPreference 
+		    android:key="renderOnAppStartup"
+    		android:defaultValue="true"
+		    android:title="New image, on starting App"
+		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
+            />
         
+        <CheckBoxPreference 
+		    android:key="restoreWallpaperSize"
+    		android:defaultValue="true"
+		    android:title="Load size from Designs"
+		    android:summary="If you dont want the wallpaper-size to be overwritten every time you load a design, disable this option!" 
+            />
         
         <ListPreference
 	        android:key="appTheme"

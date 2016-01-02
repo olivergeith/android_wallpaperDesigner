@@ -12,6 +12,11 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_RENDER_ON_APP_STARTUP = "renderOnAppStartup";
+	public static final String KEY_B_HEIGHT = "bHeight";
+	public static final String KEY_B_WIDTH = "bWidth";
+	public static final String KEY_SIZE_SELECTION = "sizeSelection";
+	public static final String KEY_RESTORE_WALLPAPER_SIZE = "restoreWallpaperSize";
 	public static final String KEY_REVERSE_COLORS = "reverseColors";
 	public static final String KEY_COLOR_REPEATS = "colorRepeats";
 	public static final String KEY_TORNADO_RINGS = "tornadoRings";
@@ -707,7 +712,7 @@ public class Settings {
 		if (prefs == null) {
 			return "2560x1600";
 		}
-		return prefs.getString("sizeSelection", "2560x1600");
+		return prefs.getString(KEY_SIZE_SELECTION, "2560x1600");
 	}
 
 	public boolean isCustomSize() {
@@ -726,11 +731,11 @@ public class Settings {
 	}
 
 	public static int getCustomWidth() {
-		return Integer.valueOf(prefs.getString("bWidth", "2560"));
+		return Integer.valueOf(prefs.getString(KEY_B_WIDTH, "2560"));
 	}
 
 	public static int getCustomHeight() {
-		return Integer.valueOf(prefs.getString("bHeight", "1600"));
+		return Integer.valueOf(prefs.getString(KEY_B_HEIGHT, "1600"));
 	}
 
 	public static int getHeight() {
@@ -890,11 +895,25 @@ public class Settings {
 		return prefs.getBoolean(KEY_SHOW_SET_WALLPAPER_BUTTON, true);
 	}
 
+	public static boolean isRestoreSizeFromDesign() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean(KEY_RESTORE_WALLPAPER_SIZE, true);
+	}
+
 	public static boolean isRenderingOnSettingsExit() {
 		if (prefs == null) {
 			return true;
 		}
 		return prefs.getBoolean(KEY_RENDER_ON_SETTINGS_EXIT, true);
+	}
+
+	public static boolean isRenderingOnStartingApp() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean(KEY_RENDER_ON_APP_STARTUP, true);
 	}
 
 	// ###################################################################
@@ -971,9 +990,9 @@ public class Settings {
 			prefs.edit().putBoolean(KEY_PATTERN_BLUR, false).commit();
 			prefs.edit().putInt("colorDropShadow", Color.BLACK).commit();
 			prefs.edit().putInt("patternMinSizeAdjust", 50).commit();
-			prefs.edit().putString("bWidth", "1920").commit();
-			prefs.edit().putString("bHeight", "1200").commit();
-			prefs.edit().putString("sizeSelection", "1920x1200").commit();
+			prefs.edit().putString(KEY_B_WIDTH, "1920").commit();
+			prefs.edit().putString(KEY_B_HEIGHT, "1200").commit();
+			prefs.edit().putString(KEY_SIZE_SELECTION, "1920x1200").commit();
 
 			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_RANGE_INT, 20).commit();
 			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 24).commit();

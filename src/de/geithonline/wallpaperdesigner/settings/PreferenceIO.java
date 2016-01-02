@@ -21,8 +21,9 @@ public class PreferenceIO {
 	private static final String LOG_TAG = "PreferenceIO";
 	public static final String MARKER = " (+++)_";
 	private static List<String> ignoreKeys = new ArrayList<String>();
-
 	private static List<String> colorKeys = new ArrayList<String>();
+
+	private static List<String> sizeKeys = new ArrayList<String>();
 
 	static {
 		ignoreKeys.add(Settings.KEY_MUIMERP);
@@ -46,6 +47,10 @@ public class PreferenceIO {
 		// colorKeys.add(Settings.KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
 		// colorKeys.add(Settings.KEY_RANDOMIZE_SATURATION_RANGE);
 		// colorKeys.add(Settings.KEY_COLOR_RANDOMIZING_TYPE);
+
+		sizeKeys.add(Settings.KEY_B_HEIGHT);
+		sizeKeys.add(Settings.KEY_B_WIDTH);
+		sizeKeys.add(Settings.KEY_SIZE_SELECTION);
 	}
 
 	/**
@@ -158,6 +163,14 @@ public class PreferenceIO {
 			Log.i(LOG_TAG, "Ignoring key: " + key);
 			return;
 		}
+
+		if (Settings.isRestoreSizeFromDesign() == false) {
+			if (sizeKeys.contains(key)) {
+				Log.i(LOG_TAG, "Ignoring size-Key: " + key);
+				return;
+			}
+		}
+
 		// Spezialbehandlung für alten LayoutPicker
 		if (key.equals("layoutPicker") && !keyset.contains(Settings.KEY_MAINLAYOUTS)) {
 			final String val = entry.getValue().toString();
