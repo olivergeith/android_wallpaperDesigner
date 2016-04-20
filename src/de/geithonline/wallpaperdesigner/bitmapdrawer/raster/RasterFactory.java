@@ -32,7 +32,7 @@ public class RasterFactory {
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
 								"Tower", "Random" }));
 		layoutProperties.put("Spiral",
-				new LayoutProperties(false, true, true, false, true, //
+				new LayoutProperties(false, true, true, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
 								"Tower", "Random" }));
 

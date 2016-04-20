@@ -104,7 +104,10 @@ public class CircularRaster extends AbstractRaster {
 		for (int ring = 0; ring <= anzRinge; ring++) {
 			final float r = ring * radiusStep;
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep + Math.max(anzRinge - ring * ring, 0);
-			final float winkelProEcke = (float) (Math.PI * 2 / (ecken));
+			float winkelProEcke = (float) (Math.PI * 2 / (ecken));
+			if (Settings.isUpsideDown()) {
+				winkelProEcke = winkelProEcke * -1f;
+			}
 			// Log.i("CIRCULAR RASTER", "Anzahl Punkte = " + ecken);
 			for (int ecke = 0; ecke < ecken; ecke++) {
 				final float rp = r + radiusStep * ecke / ecken;
