@@ -69,7 +69,28 @@ public class BackgroundDrawerTornado {
 				index++;
 			}
 		}
+
+		final boolean reverse = Settings.isReverseColors();
+		if (reverse) {
+			reverse(tornadoColors);
+		}
 		return tornadoColors;
+	}
+
+	private static void reverse(final int[] data) {
+		int left = 0;
+		int right = data.length - 1;
+
+		while (left < right) {
+			// swap the values at the left and right indices
+			final int temp = data[left];
+			data[left] = data[right];
+			data[right] = temp;
+
+			// move the left and right index pointers in toward the center
+			left++;
+			right--;
+		}
 	}
 
 }

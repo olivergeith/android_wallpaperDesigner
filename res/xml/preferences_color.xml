@@ -41,7 +41,12 @@
 	        seekbarpreference:maxValue="3"
 	        seekbarpreference:minValue="1"
 	        seekbarpreference:stepValue="1" />
-    
+        <CheckBoxPreference
+	        android:defaultValue="false"
+	        android:key="reverseColors"
+	        android:summary="Reverse the color order (color 1-2-3-4 to 4-3-2-1)"
+	        android:title="@string/reverseColors" />
+	    
     </PreferenceScreen>
 
         <PreferenceScreen
