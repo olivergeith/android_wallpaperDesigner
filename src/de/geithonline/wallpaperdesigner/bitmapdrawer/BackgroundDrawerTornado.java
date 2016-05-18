@@ -17,10 +17,10 @@ public class BackgroundDrawerTornado {
 		final int tornadoColors[] = buildTornadoColors(10);
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
-		final int abstand = cWidth / 30;
-		final int maximumRadius = (int) Math.sqrt(cWidth * cWidth / 4 + cHeight * cHeight / 4) + abstand;
+		final float abstand = cWidth / 30;
+		final float maximumRadius = (float) (Math.sqrt(cWidth * cWidth / 4 + cHeight * cHeight / 4) + abstand);
 		final int radiusStep = Math.round(abstand);
-		final int anzRinge = maximumRadius / radiusStep;
+		final int anzRinge = (int) (maximumRadius / radiusStep);
 		final Point center = new Point(cWidth / 2, cHeight / 2);
 
 		int index = 0;
@@ -37,7 +37,7 @@ public class BackgroundDrawerTornado {
 				final int color = tornadoColors[index % tornadoColors.length];
 				index++;
 				paint.setColor(color);
-				canvas.drawCircle(p.x, p.y, abstand * 1.5f, paint);
+				canvas.drawCircle(p.x, p.y, abstand * (1.0f + ring * 0.1f), paint);
 			}
 		}
 	}
