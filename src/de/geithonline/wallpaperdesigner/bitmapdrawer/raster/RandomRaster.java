@@ -7,9 +7,14 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RandomRaster extends AbstractRaster {
 
-	public RandomRaster(final int width, final int height, final int patternRadius, final float overlap) {
+	private final int width;
+	private final int height;
+
+	public RandomRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
 		super(patternRadius, overlap);
-		setPositioning(RasterPositioning.RANDOM);
+		this.width = width;
+		this.height = height;
+		setPositioning(positioning);
 		final int anzahlPatterns = Settings.getAnzahlPatterns();
 		Log.i("Random Raster", "anz = " + anzahlPatterns);
 		for (int w = 0; w < anzahlPatterns; w++) {
@@ -22,6 +27,23 @@ public class RandomRaster extends AbstractRaster {
 
 	@Override
 	public Point drawNextPoint() {
-		return drawNextBookPoint();
+		switch (getPositioning()) {
+		default:
+		case RANDOM:
+			return drawNextBookPoint();
+		case TOPMOST:
+			return drawTopmostPoint();
+		case BOTTOMMOST:
+			return drawBottommostPoint();
+		case LEFTMOST:
+			return drawLeftmostPoint();
+		case RIGHTMOST:
+			return drawRightmostPoint();
+		case INNER:
+			return drawPointNearestToGeometricCenter(width, height);
+		case OUTER:
+			return drawPointFarmostToGeometricCenter(width, height);
+
+		}
 	}
 }

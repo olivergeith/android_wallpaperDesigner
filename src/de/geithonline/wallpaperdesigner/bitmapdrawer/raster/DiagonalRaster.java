@@ -4,9 +4,14 @@ import android.graphics.Point;
 
 public class DiagonalRaster extends AbstractRaster {
 
+	private final int width;
+	private final int height;
+
 	public DiagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning random,
 			final boolean upsidedown) {
 		super(patternRadius, overlap);
+		this.width = width;
+		this.height = height;
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
 		final int abstandY = abstandX / 2;
 		setPositioning(random);
@@ -40,17 +45,22 @@ public class DiagonalRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-			case RANDOM:
-				return drawRandomPoint();
-			default:
-			case BOOK:
-				return drawNextBookPoint();
-			case BOOK_REVERSE:
-				return drawNextBookPointReverse();
-			case TOWER:
-				return drawNextTowerPoint();
-			case CENTER:
-				return drawNextCenterPoint();
+		case RANDOM:
+			return drawRandomPoint();
+		default:
+		case BOOK:
+			return drawNextBookPoint();
+		case BOOK_REVERSE:
+			return drawNextBookPointReverse();
+		case TOWER:
+			return drawNextTowerPoint();
+		case CENTER:
+			return drawNextCenterPoint();
+		case INNER:
+			return drawPointNearestToGeometricCenter(width, height);
+		case OUTER:
+			return drawPointFarmostToGeometricCenter(width, height);
+
 		}
 	}
 
