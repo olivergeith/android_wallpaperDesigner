@@ -405,19 +405,18 @@ public class Settings {
 		return getRotationStyle().equals("Random");
 	}
 
-	@Deprecated
-	public static int getRotationDegrees(final int randomMin, final int randomMax) {
-		if (isRandomRotate()) {
-			return Randomizer.getRandomInt(randomMin - 1, randomMax);
-		}
-		return getFixedRotationDegrees();
-	}
-
 	public static int getFixedRotationDegrees() {
 		if (prefs == null) {
 			return 0;
 		}
 		return prefs.getInt("rotationDegrees", 0);
+	}
+
+	public static int getrandomRangeDegrees() {
+		if (prefs == null) {
+			return 180;
+		}
+		return prefs.getInt("randomRange", 180);
 	}
 
 	// ###################################################################

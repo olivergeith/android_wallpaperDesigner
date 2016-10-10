@@ -32,6 +32,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private CheckBoxPreference randomLeafCount;
 	private ListPreference rotatingStyle;
 	private ListPreference glowStyle;
+	private SeekBarPreference randomRange;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		numberOfLeafs = (SeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
 		randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
 		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
+		randomRange = (SeekBarPreference) findPreference("randomRange");
 		rotatingStyle = (ListPreference) findPreference("rotatingStyle");
 
 		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -149,8 +151,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void handleRotatingStyleSelected(final String newValue) {
 		rotatingStyle.setSummary(newValue);
-		rotationDegrees.setEnabled(newValue.equals("Fixed") || newValue.equals("Around Point")
-				|| newValue.equals("Around Bottom"));
+		rotationDegrees.setEnabled(!newValue.equals("Random"));
+		randomRange.setEnabled(newValue.contains("(Range)"));
 	}
 
 	protected void handleTextDrawStyleSelected(final String newValue) {

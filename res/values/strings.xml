@@ -88,7 +88,7 @@
     <string name="blurPatterns">Blur patterns in Background</string>
     <string name="numberOfLeafs">How many leafs-arms should the Pattern have?</string>
     <string name="randomLeafCount">Random Number of leafs-arms</string>
-    <string name="rotationDegrees">Rotation degrees</string>
+    <string name="rotationDegrees">Rotation Degrees</string>
     <string name="overlapping">Overlap-faktor for patterns</string>
     <string name="sortOrder">Sort-Order for Designs-List</string>
     <string name="dropShadowRadiusAdjustment">Dropshadow Radius Adjustment</string>
@@ -125,6 +125,6 @@
     <string name="tornadoRings">Rings of Tornado</string>
     <string name="tornadoArms">Arms of Tornado</string>
     <string name="reverseColors">Reverse Color-Order</string>
-    
+    <string name="randomRange">Random Rotation Degrees Range</string>
     
 </resources>

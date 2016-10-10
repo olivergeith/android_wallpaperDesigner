@@ -192,7 +192,19 @@
             android:title="@string/rotationDegrees"
             seekbarpreference:maxValue="180"
             seekbarpreference:minValue="-180"
-            seekbarpreference:stepValue="5" />
+            seekbarpreference:stepValue="1" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="180"
+            android:dialogMessage="@string/randomRange"
+            android:key="randomRange"
+            android:summary="between -%1$d° and +%1$d°"
+            android:title="@string/randomRange"
+            seekbarpreference:maxValue="180"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="1" />
+        
+        
     </PreferenceScreen>
 
     <!--
