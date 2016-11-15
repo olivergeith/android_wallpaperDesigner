@@ -26,6 +26,26 @@
         seekbarpreference:minValue="10"
         seekbarpreference:stepValue="2" />
 
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="50"
+        android:dialogMessage="Layout Center X-Axis"
+        android:key="centerPointX"
+        android:summary="%1$d Percent of width)"
+        android:title="Center Position X-Axis"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="1" />
+
+    <de.geithonline.android.basics.preferences.SeekBarPreference
+        android:defaultValue="50"
+        android:dialogMessage="Layout Center Y-Axis"
+        android:key="centerPointY"
+        android:summary="%1$d Percent of height)"
+        android:title="Center Position Y-Axis"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="1" />
+    
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="upsideDown"

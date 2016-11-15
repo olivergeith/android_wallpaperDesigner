@@ -9,7 +9,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class CircularRaster extends AbstractRaster {
 
 	protected enum CIRCLE_TYPE {
-		HALF, FULL_RANDOM_STARWINKEL, SPIRAL;
+		CIRCLE_CENTER_BOTTOM, CIRCLE, SPIRAL, CIRCLE_ADJUSTABLE_CENTER, SPIRAL_ADJUSTABLE_CENTER;
 	}
 
 	public CircularRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
@@ -20,31 +20,35 @@ public class CircularRaster extends AbstractRaster {
 
 		switch (circleType) {
 		default:
-		case HALF:
-			calculateHalfRings(width, height, radius, overlap);
+		case CIRCLE_CENTER_BOTTOM: {
+			final PointF center = new PointF(width / 2, height);
+			calculateRings(width, height, radius, overlap, center);
 			break;
-		case FULL_RANDOM_STARWINKEL:
-			calculateCenteredRingsRandomStartWinkel(width, height, radius, overlap);
+		}
+		case CIRCLE_ADJUSTABLE_CENTER: {
+			final PointF center = new PointF(width * Settings.getCenterPointX(), height * Settings.getCenterPointY());
+			calculateRings(width, height, radius, overlap, center);
 			break;
-		case SPIRAL:
-			calculateSpiral(width, height, radius, overlap);
+		}
+		case CIRCLE: {
+			final PointF center = new PointF(width / 2, height / 2);
+			calculateRings(width, height, radius, overlap, center);
 			break;
+		}
+		case SPIRAL: {
+			final PointF center = new PointF(width / 2, height / 2);
+			calculateSpiral(width, height, radius, overlap, center);
+			break;
+		}
+		case SPIRAL_ADJUSTABLE_CENTER: {
+			final PointF center = new PointF(width * Settings.getCenterPointX(), height * Settings.getCenterPointY());
+			calculateSpiral(width, height, radius, overlap, center);
+			break;
+		}
 		}
 	}
 
-	private void calculateHalfRings(final int width, final int height, final int radius, final float overlap) {
-		final PointF center = new PointF(width / 2, height);
-		calculateRings(width, height, radius, overlap, center);
-
-	}
-
-	private void calculateCenteredRingsRandomStartWinkel(final int width, final int height, final int radius, final float overlap) {
-		final PointF center = new PointF(width / 2, height / 2);
-		calculateRings(width, height, radius, overlap, center);
-
-	}
-
-	private void calculateRings(final int width, final int height, final int radius, final float overlap, final PointF center) {
+	private float calculateMaxRadius(final int width, final int height, final PointF center) {
 		float maximumRadius = 0;
 		float max = GeometrieHelper.calcDistance(center, new PointF(0f, 0f)) + WIDE_CANVAS_LIMIT * getAbstand();
 		if (max > maximumRadius) {
@@ -62,6 +66,11 @@ public class CircularRaster extends AbstractRaster {
 		if (max > maximumRadius) {
 			maximumRadius = max;
 		}
+		return maximumRadius;
+	}
+
+	private void calculateRings(final int width, final int height, final int radius, final float overlap, final PointF center) {
+		final float maximumRadius = calculateMaxRadius(width, height, center);
 
 		final int radiusStep = Math.round(radius * 2 * overlap);
 		final int anzRinge = (int) (maximumRadius / radiusStep + 2);
@@ -88,12 +97,12 @@ public class CircularRaster extends AbstractRaster {
 		}
 	}
 
-	private void calculateSpiral(final int width, final int height, final int radius, final float overlap) {
-		final int maximumRadius = (int) Math.sqrt(width * width / 4 + height * height / 4) + WIDE_CANVAS_LIMIT * getAbstand();
+	private void calculateSpiral(final int width, final int height, final int radius, final float overlap, final PointF center) {
+		final float maximumRadius = calculateMaxRadius(width, height, center);
 		final int radiusStep = Math.round(radius * 2 * overlap);
-		final int anzRinge = maximumRadius / radiusStep;
-		final Point center = new Point(width / 2, height / 2);
-		points.add(center);
+		final int anzRinge = (int) (maximumRadius / radiusStep + 2);
+
+		points.add(new Point((int) center.x, (int) center.y));
 		// Log.i("CIRCULAR RASTER", "Anzahl Ringe = " + anzRinge);
 
 		float startWinkel = 0f;

@@ -67,6 +67,8 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 	private void handleMainLayoutSelect(final String selectedLayout) {
 		mainlayouts.setSummary(selectedLayout);
 		final SeekBarPreference overlapping = (SeekBarPreference) findPreference("overlapping");
+		final SeekBarPreference centerPointX = (SeekBarPreference) findPreference("centerPointX");
+		final SeekBarPreference centerPointY = (SeekBarPreference) findPreference("centerPointY");
 		final SeekBarPreference anzahlPatterns = (SeekBarPreference) findPreference("anzahlPatterns");
 		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
 		final CheckBoxPreference upsideDown = (CheckBoxPreference) findPreference("upsideDown");
@@ -76,6 +78,9 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 		blurring.setEnabled(RasterFactory.hasLayoutBlurring(selectedLayout));
 		upsideDown.setEnabled(RasterFactory.hasLayoutUpsideDown(selectedLayout));
 		randomStartWinkel.setEnabled(RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
+
+		centerPointX.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		centerPointY.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
 
 		// Pattern Variants
 		mainlayoutVariants.setEnabled(RasterFactory.hasLayoutVariants(selectedLayout));

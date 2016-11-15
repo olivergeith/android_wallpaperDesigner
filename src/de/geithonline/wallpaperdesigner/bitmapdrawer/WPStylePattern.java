@@ -2435,6 +2435,18 @@ public abstract class WPStylePattern extends WPStyle {
 			return Randomizer.getRandomFloat(Settings.getFixedRotationDegrees() - Settings.getrandomRangeDegrees(), //
 					Settings.getFixedRotationDegrees() + Settings.getrandomRangeDegrees());
 
+		case "Around Adjustable Center": {
+			final float distTCenterX = bWidth * Settings.getRotationCenterPointX() - center.x;
+			final float distTCenterY = bHeight * Settings.getRotationCenterPointY() - center.y;
+			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
+			float winkel = (float) (alpha * 180 / Math.PI);
+			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
+			if (center.x <= bWidth * Settings.getRotationCenterPointX()) {
+				winkel = winkel + 180;
+			}
+			return winkel + 90 + Settings.getFixedRotationDegrees();
+		}
+		case "Around Center":
 		case "Around Point": {
 			final float distTCenterX = bWidth / 2 - center.x;
 			final float distTCenterY = bHeight / 2 - center.y;

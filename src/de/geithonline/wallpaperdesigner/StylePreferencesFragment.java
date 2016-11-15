@@ -33,6 +33,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference rotatingStyle;
 	private ListPreference glowStyle;
 	private SeekBarPreference randomRange;
+	private SeekBarPreference rotationCenterPointX;
+	private SeekBarPreference rotationCenterPointY;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
 		randomRange = (SeekBarPreference) findPreference("randomRange");
 		rotatingStyle = (ListPreference) findPreference("rotatingStyle");
+		rotationCenterPointX = (SeekBarPreference) findPreference("rotationCenterPointX");
+		rotationCenterPointY = (SeekBarPreference) findPreference("rotationCenterPointY");
 
 		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -153,6 +157,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		rotatingStyle.setSummary(newValue);
 		rotationDegrees.setEnabled(!newValue.equals("Random"));
 		randomRange.setEnabled(newValue.contains("(Range)"));
+		rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
+		rotationCenterPointY.setEnabled(newValue.equals("Around Adjustable Center"));
 	}
 
 	protected void handleTextDrawStyleSelected(final String newValue) {

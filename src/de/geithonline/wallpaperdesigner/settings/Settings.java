@@ -290,6 +290,34 @@ public class Settings {
 		return prefs.getInt("overlapping", 50) / 100f;
 	}
 
+	public static float getCenterPointY() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt("centerPointY", 50) / 100f;
+	}
+
+	public static float getCenterPointX() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt("centerPointX", 50) / 100f;
+	}
+
+	public static float getRotationCenterPointY() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt("rotationCenterPointY", 50) / 100f;
+	}
+
+	public static float getRotationCenterPointX() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt("rotationCenterPointX", 50) / 100f;
+	}
+
 	public static boolean isBlurPatterns() {
 		if (prefs == null) {
 			return false;

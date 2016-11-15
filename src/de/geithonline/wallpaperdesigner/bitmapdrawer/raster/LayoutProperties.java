@@ -8,9 +8,10 @@ public class LayoutProperties {
 
 	private final CharSequence[] variants;
 	private final boolean randomStartWinkel;
+	private boolean adjustableCenter = false;
 
-	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap,
-			final boolean upsideDown, final boolean randomStartWinkel, final CharSequence[] variants) {
+	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean upsideDown,
+			final boolean randomStartWinkel, final CharSequence[] variants) {
 		super();
 		this.anzahlPatterns = anzahlPatterns;
 		this.blurring = blurring;
@@ -20,8 +21,24 @@ public class LayoutProperties {
 		this.randomStartWinkel = randomStartWinkel;
 	}
 
+	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean upsideDown,
+			final boolean randomStartWinkel, final boolean adjustableCenter, final CharSequence[] variants) {
+		super();
+		this.anzahlPatterns = anzahlPatterns;
+		this.blurring = blurring;
+		this.overlap = overlap;
+		this.upsideDown = upsideDown;
+		this.adjustableCenter = adjustableCenter;
+		this.variants = variants;
+		this.randomStartWinkel = randomStartWinkel;
+	}
+
 	public boolean hasAnzahlPatterns() {
 		return anzahlPatterns;
+	}
+
+	public boolean hasAdjustableCenter() {
+		return adjustableCenter;
 	}
 
 	public boolean hasBlurring() {

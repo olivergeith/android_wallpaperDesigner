@@ -17,13 +17,16 @@
     <string-array name="mainlayouts">
         <item >Random Layout</item>
         <item >Geometric Grid</item>
+        <item >Diagonal Grid</item>
+        <item >Hex Grid</item>
+        <item >Half Circle</item>
         <item >Circular</item>
         <item >Spiral</item>
-        <item >Half Circle</item>
+        <item >Circular Adjustable Center</item>
+        <item >Spiral Adjustable Center</item>
         <item >Material Grid</item>
-        <item >Hex Grid</item>
-        <item >Diagonal Grid</item>
         </string-array>
+
     
     <string-array name="hole">
         <item >Filled</item>
@@ -73,7 +76,8 @@
         <item >Fixed</item>
         <item >Random</item>
         <item >Random (Range)</item>
-        <item >Around Point</item>
+        <item >Around Adjustable Center</item>
+        <item >Around Center</item>
         <item >Around Point (Range)</item>
         <item >Around Bottom</item>
         </string-array>
