@@ -153,6 +153,8 @@ public class CircularRaster extends AbstractRaster {
 			return drawNextTowerPoint();
 		case TRISTEP:
 			return drawTriStepPoint();
+		case QUADSTEP:
+			return drawQuadStepPoint();
 		}
 	}
 
