@@ -18,7 +18,7 @@ public class RasterFactory {
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				new CharSequence[] { "Random", "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", }));
 		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //
-				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Inner to Outer", "Outer to Inner", "Random" }));
+				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Inner to Outer", "Outer to Inner", "Random", "TriStep", "QuadStep" }));
 
 		layoutProperties.put("Hex Grid", new LayoutProperties(false, true, true, true, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
