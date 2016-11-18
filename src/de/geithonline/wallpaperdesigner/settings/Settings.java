@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_CORNER_REPEATS = "cornerRepeats";
 	public static final String KEY_CORNER_GRADIENT_LEVELS = "cornerGradientLevels";
 	public static final String KEY_RENDER_ON_APP_STARTUP = "renderOnAppStartup";
 	public static final String KEY_B_HEIGHT = "bHeight";
@@ -725,7 +726,7 @@ public class Settings {
 		if (prefs == null) {
 			return 1;
 		}
-		return prefs.getInt("cornerRepeats", 1);
+		return prefs.getInt(KEY_CORNER_REPEATS, 1);
 	}
 
 	// ###################################################################

@@ -31,21 +31,21 @@ public class RasterFactory {
 		layoutProperties.put("Circular Adjustable Center",
 				new LayoutProperties(false, true, true, false, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
-								"Tower", "Random" }));
+								"Tower", "TriStep", "Random" }));
 		layoutProperties.put("Circular",
 				new LayoutProperties(false, true, true, false, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
-								"Tower", "Random" }));
+								"Tower", "TriStep", "Random" }));
 
 		layoutProperties.put("Spiral Adjustable Center",
 				new LayoutProperties(false, true, true, true, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
-								"Tower", "Random" }));
+								"Tower", "TriStep", "Random" }));
 
 		layoutProperties.put("Spiral",
 				new LayoutProperties(false, true, true, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
-								"Tower", "Random" }));
+								"Tower", "TriStep", "Random" }));
 
 		layoutProperties.put("Half Circle",
 				new LayoutProperties(false, true, true, false, true, //
@@ -135,6 +135,8 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.SPIRAL);
 		case "Spiral (Tower)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, CIRCLE_TYPE.SPIRAL);
+		case "Spiral (TriStep)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TRISTEP, CIRCLE_TYPE.SPIRAL);
 
 		case "Spiral Adjustable Center (Random)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.SPIRAL_ADJUSTABLE_CENTER);
@@ -154,6 +156,8 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.SPIRAL_ADJUSTABLE_CENTER);
 		case "Spiral Adjustable Center (Tower)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, CIRCLE_TYPE.SPIRAL_ADJUSTABLE_CENTER);
+		case "Spiral Adjustable Center ((TriStep)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TRISTEP, CIRCLE_TYPE.SPIRAL_ADJUSTABLE_CENTER);
 
 		case "Circular (Random)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.CIRCLE);
@@ -173,6 +177,8 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.CIRCLE);
 		case "Circular (Tower)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, CIRCLE_TYPE.CIRCLE);
+		case "Circular (TriStep)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TRISTEP, CIRCLE_TYPE.CIRCLE);
 
 		case "Circular Adjustable Center (Random)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.CIRCLE_ADJUSTABLE_CENTER);
@@ -192,6 +198,8 @@ public class RasterFactory {
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.CENTER, CIRCLE_TYPE.CIRCLE_ADJUSTABLE_CENTER);
 		case "Circular Adjustable Center (Tower)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TOWER, CIRCLE_TYPE.CIRCLE_ADJUSTABLE_CENTER);
+		case "Circular Adjustable Center (TriStep)":
+			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.TRISTEP, CIRCLE_TYPE.CIRCLE_ADJUSTABLE_CENTER);
 
 		case "Half Circle (Random)":
 			return new CircularRaster(width, height, patternRadius, overlap, RasterPositioning.RANDOM, CIRCLE_TYPE.CIRCLE_CENTER_BOTTOM);

@@ -126,6 +126,12 @@ public class PreferenceIO {
 					if (!keySet.contains(Settings.KEY_REVERSE_COLORS)) {
 						setDefaultBooleanValue(prefs, Settings.KEY_REVERSE_COLORS, false);
 					}
+					if (!keySet.contains(Settings.KEY_CORNER_GRADIENT_LEVELS)) {
+						setDefaultIntValue(prefs, Settings.KEY_CORNER_GRADIENT_LEVELS, 100);
+					}
+					if (!keySet.contains(Settings.KEY_CORNER_REPEATS)) {
+						setDefaultIntValue(prefs, Settings.KEY_CORNER_REPEATS, 1);
+					}
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
