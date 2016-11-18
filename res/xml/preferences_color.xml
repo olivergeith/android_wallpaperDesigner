@@ -49,7 +49,44 @@
 	    
     </PreferenceScreen>
 
-        <PreferenceScreen
+    
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="vierColorGradientCornerSettings"
+        android:title="Gradient Settings..." >
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="100"
+	        android:dialogMessage="Gradient Levels"
+	        android:key="cornerGradientLevels"
+	        android:summary="%1$d"
+	        android:title="Gradient Levels"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="3"
+	        seekbarpreference:stepValue="1" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="vierColorCornerSettings"
+        android:title="Gradient Settings..." >
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="1"
+	        android:dialogMessage="Repeats"
+	        android:key="cornerRepeats"
+	        android:summary="%1$d"
+	        android:title="Repeats"
+	        seekbarpreference:maxValue="10"
+	        seekbarpreference:minValue="1"
+	        seekbarpreference:stepValue="1" />
+    </PreferenceScreen>
+    
+    
+    
+    <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="LinearGradientSettings"

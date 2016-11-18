@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_CORNER_GRADIENT_LEVELS = "cornerGradientLevels";
 	public static final String KEY_RENDER_ON_APP_STARTUP = "renderOnAppStartup";
 	public static final String KEY_B_HEIGHT = "bHeight";
 	public static final String KEY_B_WIDTH = "bWidth";
@@ -713,6 +714,20 @@ public class Settings {
 		return prefs.getInt(KEY_RANDOMIZE_SATURATION_RANGE, 0);
 	}
 
+	public static int getCornerGradientLevels() {
+		if (prefs == null) {
+			return 100;
+		}
+		return prefs.getInt(KEY_CORNER_GRADIENT_LEVELS, 100);
+	}
+
+	public static int getCornerRepeats() {
+		if (prefs == null) {
+			return 1;
+		}
+		return prefs.getInt("cornerRepeats", 1);
+	}
+
 	// ###################################################################
 	// Wallpater Size
 	public static int getAnzahlFlowerLeafs(final int randomMin, final int randomMax) {
@@ -849,6 +864,14 @@ public class Settings {
 
 	public static boolean isLinearGradient(final String test) {
 		return test.startsWith("Linear") || test.startsWith("Radial") || test.startsWith("Sweep Gradient");
+	}
+
+	public static boolean is4ColorCornerGradient(final String test) {
+		return test.equals("4-Color Gradient from corners");
+	}
+
+	public static boolean is4ColorCorner(final String test) {
+		return test.equals("4-Colors in corners");
 	}
 
 	public static int getColorRepeats() {

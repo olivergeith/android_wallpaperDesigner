@@ -51,6 +51,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	// private SeekBarPreference tornadoArms;
 	private PreferenceScreen tornadoSettings;
 	private PreferenceScreen linearGradientSettings;
+	private PreferenceScreen vierColorGradientCornerSettings;
+	private PreferenceScreen vierColorCornerSettings;
 
 	@Override
 	public void onDestroy() {
@@ -149,6 +151,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		// tornadoArms = (SeekBarPreference) findPreference("tornadoArms");
 		tornadoSettings = (PreferenceScreen) findPreference("TornadoSettings");
 		linearGradientSettings = (PreferenceScreen) findPreference("LinearGradientSettings");
+		vierColorGradientCornerSettings = (PreferenceScreen) findPreference("vierColorGradientCornerSettings");
+		vierColorCornerSettings = (PreferenceScreen) findPreference("vierColorCornerSettings");
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawPreviewImages();
 		handleColorRandomizingType(Settings.getColorRandomizing());
@@ -216,6 +220,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		color3.update();
 		color4.update();
 
+		// enabling special settings for gradients
 		if (!Settings.isTornadoGradient(selection)) {
 			getPreferenceScreen().removePreference(tornadoSettings);
 		} else {
@@ -226,25 +231,35 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		} else {
 			getPreferenceScreen().addPreference(linearGradientSettings);
 		}
+		if (!Settings.is4ColorCornerGradient(selection)) {
+			getPreferenceScreen().removePreference(vierColorGradientCornerSettings);
+		} else {
+			getPreferenceScreen().addPreference(vierColorGradientCornerSettings);
+		}
+		if (!Settings.is4ColorCorner(selection)) {
+			getPreferenceScreen().removePreference(vierColorCornerSettings);
+		} else {
+			getPreferenceScreen().addPreference(vierColorCornerSettings);
+		}
 
 	}
 
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
-			case 2:
-				color3.setEnabled(false);
-				color4.setEnabled(false);
-				break;
-			case 3:
-				color3.setEnabled(true);
-				color4.setEnabled(false);
-				break;
-			default:
-			case 4:
-				color3.setEnabled(true);
-				color4.setEnabled(true);
-				break;
+		case 2:
+			color3.setEnabled(false);
+			color4.setEnabled(false);
+			break;
+		case 3:
+			color3.setEnabled(true);
+			color4.setEnabled(false);
+			break;
+		default:
+		case 4:
+			color3.setEnabled(true);
+			color4.setEnabled(true);
+			break;
 		}
 	}
 
