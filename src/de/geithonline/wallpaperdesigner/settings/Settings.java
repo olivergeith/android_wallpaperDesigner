@@ -813,11 +813,11 @@ public class Settings {
 	}
 
 	public static int getCustomWidth() {
-		return readNumberFromSettings(KEY_B_WIDTH, 2560, 3);
+		return readNumberFromSettings(KEY_B_WIDTH, 2560, 4);
 	}
 
 	public static int getCustomHeight() {
-		return readNumberFromSettings(KEY_B_HEIGHT, 1600, 3);
+		return readNumberFromSettings(KEY_B_HEIGHT, 1600, 4);
 	}
 
 	public static int getHeight() {

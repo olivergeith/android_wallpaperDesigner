@@ -81,6 +81,10 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		keys.add(Settings.KEY_TORNADO_RINGS);
 		keys.add(Settings.KEY_COLOR_REPEATS);
 		keys.add(Settings.KEY_REVERSE_COLORS);
+		keys.add(Settings.KEY_TORNADO_CENTER_POINT_X);
+		keys.add(Settings.KEY_TORNADO_CENTER_POINT_Y);
+		keys.add(Settings.KEY_CORNER_GRADIENT_LEVELS);
+		keys.add(Settings.KEY_CORNER_REPEATS);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_color);
 
