@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -27,9 +28,11 @@ public class BackgroundDrawer {
 			case "4-Colors in corners":
 				BackgroundDrawer4ColorBackground.draw4ColorBackground(canvas, Settings.getCornerRepeats());
 				break;
-			case "4-Color Tornado":
-				BackgroundDrawerTornado.draw4ColorTornado(canvas, Settings.getTornadoRings(), Settings.getTornadoArms());
+			case "4-Color Tornado": {
+				final PointF center = new PointF(canvas.getWidth() * Settings.getTornadoCenterPointX(), canvas.getHeight() * Settings.getTornadoCenterPointY());
+				BackgroundDrawerTornado.draw4ColorTornado(canvas, Settings.getTornadoRings(), Settings.getTornadoArms(), center);
 				break;
+			}
 			}
 		} else {
 			drawSimpleBackground(canvas);

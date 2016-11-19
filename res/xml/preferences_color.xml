@@ -41,6 +41,27 @@
 	        seekbarpreference:maxValue="3"
 	        seekbarpreference:minValue="1"
 	        seekbarpreference:stepValue="1" />
+	    
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="50"
+	        android:dialogMessage="Rotation Center X-Axis"
+	        android:key="tornadoCenterPointX"
+	        android:summary="%1$d Percent of width"
+	        android:title="Center Position X-Axis"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="0"
+	        seekbarpreference:stepValue="1" />
+	
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="50"
+	        android:dialogMessage="Rotation Center Y-Axis"
+	        android:key="tornadoCenterPointY"
+	        android:summary="%1$d Percent of height"
+	        android:title="Rotation Center Position Y-Axis"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="0"
+	        seekbarpreference:stepValue="1" />
+	    
         <CheckBoxPreference
 	        android:defaultValue="false"
 	        android:key="reverseColors"

@@ -132,6 +132,10 @@ public class PreferenceIO {
 					if (!keySet.contains(Settings.KEY_CORNER_REPEATS)) {
 						setDefaultIntValue(prefs, Settings.KEY_CORNER_REPEATS, 1);
 					}
+					if (!keySet.contains(Settings.KEY_TORNADO_CENTER_POINT_X)) { // wenn x fehlt, faht wohl auch Y
+						setDefaultIntValue(prefs, Settings.KEY_TORNADO_CENTER_POINT_X, 50);
+						setDefaultIntValue(prefs, Settings.KEY_TORNADO_CENTER_POINT_Y, 50);
+					}
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;

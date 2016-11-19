@@ -3,30 +3,33 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
+import de.geithonline.wallpaperdesigner.utils.GeometrieHelper;
 
 public class BackgroundDrawerTornado {
 
 	/**
 	 * @param canvas
-	 * @param off
+	 * @param ringOffset
 	 *            staerke des Tornados 1-4 sinnnvoll
+	 * @param center
 	 */
-	public static void draw4ColorTornado(final Canvas canvas, final int off, final int spiralArms) {
+	public static void draw4ColorTornado(final Canvas canvas, final int ringOffset, final int spiralArms, final PointF center) {
 		final int tornadoColors[] = buildTornadoColors(10);
 		final int cWidth = canvas.getWidth();
 		final int cHeight = canvas.getHeight();
 		final float abstand = cWidth / 30;
-		final float maximumRadius = (float) (Math.sqrt(cWidth * cWidth / 4 + cHeight * cHeight / 4) + abstand);
+		final float maximumRadius = GeometrieHelper.calculateMaxDistanceToCorner(cWidth, cHeight, center);
+		// (float) (Math.sqrt(cWidth * cWidth / 4 + cHeight * cHeight / 4) + abstand);
 		final int radiusStep = Math.round(abstand);
 		final int anzRinge = (int) (maximumRadius / radiusStep);
-		final Point center = new Point(cWidth / 2, cHeight / 2);
 
 		int index = 0;
 		for (int ring = 0; ring <= anzRinge; ring++) {
 			final float r = ring * radiusStep;
-			final int ecken = tornadoColors.length * spiralArms + off * spiralArms;
+			final int ecken = tornadoColors.length * spiralArms + ringOffset * spiralArms;
 			final float winkelProEcke = (float) (Math.PI * 2 / (ecken));
 			for (int ecke = 0; ecke < ecken; ecke++) {
 				final float rp = r + radiusStep * ecke / ecken;

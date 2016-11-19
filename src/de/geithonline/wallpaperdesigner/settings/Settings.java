@@ -12,6 +12,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_TORNADO_CENTER_POINT_Y = "tornadoCenterPointY";
+	public static final String KEY_TORNADO_CENTER_POINT_X = "tornadoCenterPointX";
 	public static final String KEY_CORNER_REPEATS = "cornerRepeats";
 	public static final String KEY_CORNER_GRADIENT_LEVELS = "cornerGradientLevels";
 	public static final String KEY_RENDER_ON_APP_STARTUP = "renderOnAppStartup";
@@ -318,6 +320,20 @@ public class Settings {
 			return 0.5f;
 		}
 		return prefs.getInt("rotationCenterPointX", 50) / 100f;
+	}
+
+	public static float getTornadoCenterPointY() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt(KEY_TORNADO_CENTER_POINT_Y, 50) / 100f;
+	}
+
+	public static float getTornadoCenterPointX() {
+		if (prefs == null) {
+			return 0.5f;
+		}
+		return prefs.getInt(KEY_TORNADO_CENTER_POINT_X, 50) / 100f;
 	}
 
 	public static boolean isBlurPatterns() {
@@ -797,11 +813,11 @@ public class Settings {
 	}
 
 	public static int getCustomWidth() {
-		return readNumberFromSettings(KEY_B_WIDTH, 2560, 4);
+		return readNumberFromSettings(KEY_B_WIDTH, 2560, 3);
 	}
 
 	public static int getCustomHeight() {
-		return readNumberFromSettings(KEY_B_HEIGHT, 1600, 4);
+		return readNumberFromSettings(KEY_B_HEIGHT, 1600, 3);
 	}
 
 	public static int getHeight() {
