@@ -17,39 +17,58 @@ public class RasterFactory {
 		// randomstartwinkel)
 		layoutProperties.put("Random Layout", new LayoutProperties(true, true, false, false, false, //
 				new CharSequence[] { "Random", "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", }));
-		layoutProperties.put("Geometric Grid", new LayoutProperties(false, true, true, true, false, //
-				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Inner to Outer", "Outer to Inner", "Random", "TriStep", "QuadStep" }));
+		layoutProperties.put("Geometric Grid", //
+				new LayoutProperties(false, true, true, true, false, //
+						new CharSequence[] { "Random", "Book", "Book Reverse", //
+								"Center", "DuoCenter", "Tower", "TriStep", "QuadStep", //
+								"Inner to Outer", "Outer to Inner" }));
 
-		layoutProperties.put("Hex Grid", new LayoutProperties(false, true, true, true, false, //
-				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
+		layoutProperties.put("Hex Grid",
+				new LayoutProperties(false, true, true, true, false, //
+						new CharSequence[] { "Random", "Book", "Book Reverse", //
+								"Center", "DuoCenter", "Tower", "TriStep", "QuadStep", //
+								"Inner to Outer", "Outer to Inner" }));
 
-		layoutProperties.put("Diagonal Grid", new LayoutProperties(false, true, true, true, false, //
-				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Inner to Outer", "Outer to Inner", "Random" }));
+		layoutProperties.put("Diagonal Grid",
+				new LayoutProperties(false, true, true, true, false, //
+						new CharSequence[] { "Random", "Book", "Book Reverse", //
+								"Center", "DuoCenter", "Tower", "TriStep", "QuadStep", //
+								"Inner to Outer", "Outer to Inner" }));
 
 		layoutProperties.put("Material Grid", new LayoutProperties(false, true, true, false, false, //
 				new CharSequence[] { "Book", "Book Reverse", "Tower", "Center", "Random" }));
 		layoutProperties.put("Circular Adjustable Center",
 				new LayoutProperties(false, true, true, false, true, true, //
-						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
+								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
+								"DuoCenter", "Center", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 		layoutProperties.put("Circular",
 				new LayoutProperties(false, true, true, false, true, //
-						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
+								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
+								"DuoCenter", "Center", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 
 		layoutProperties.put("Spiral Adjustable Center",
 				new LayoutProperties(false, true, true, true, true, true, //
-						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
+								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
+								"DuoCenter", "Center", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 
 		layoutProperties.put("Spiral",
 				new LayoutProperties(false, true, true, true, true, //
-						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
+								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
+								"DuoCenter", "Center", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 
 		layoutProperties.put("Half Circle",
 				new LayoutProperties(false, true, true, false, true, //
-						new CharSequence[] { "Inner to Outer", "Outer to Inner", "Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", "Center",
+						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
+								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
+								"Center", //
 								"Random" }));
 	}
 

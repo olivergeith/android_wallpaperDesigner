@@ -51,16 +51,20 @@ public class GeometricRaster extends AbstractRaster {
 			return drawNextBookPoint();
 		case BOOK_REVERSE:
 			return drawNextBookPointReverse();
-		case TOWER:
-			return drawNextTowerPoint();
-		case CENTER:
-			return drawNextCenterPoint();
-		case TRISTEP:
-			return drawTriStepPoint();
 		case INNER:
 			return drawPointNearestToGeometricCenter(width, height);
 		case OUTER:
 			return drawPointFarmostToGeometricCenter(width, height);
+		case CENTER:
+			return drawNextCenterPoint();
+		case DUO_CENTER:
+			return drawDuoCenterPoint();
+		case TOWER:
+			return drawNextTowerPoint();
+		case TRISTEP:
+			return drawTriStepPoint();
+		case QUADSTEP:
+			return drawQuadStepPoint();
 		}
 	}
 

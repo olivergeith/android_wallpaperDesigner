@@ -149,6 +149,8 @@ public class CircularRaster extends AbstractRaster {
 			return drawRandomPoint();
 		case CENTER:
 			return drawNextCenterPoint();
+		case DUO_CENTER:
+			return drawDuoCenterPoint();
 		case TOWER:
 			return drawNextTowerPoint();
 		case TRISTEP:

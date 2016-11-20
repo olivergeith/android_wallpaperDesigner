@@ -4,9 +4,14 @@ import android.graphics.Point;
 
 public class HexagonalRaster extends AbstractRaster {
 
+	private final int width;
+	private final int height;
+
 	public HexagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
 			final boolean upsidedown) {
 		super(patternRadius, overlap);
+		this.width = width;
+		this.height = height;
 
 		setPositioning(positioning);
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
@@ -42,17 +47,28 @@ public class HexagonalRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-			case RANDOM:
-				return drawRandomPoint();
-			default:
-			case BOOK:
-				return drawNextBookPoint();
-			case BOOK_REVERSE:
-				return drawNextBookPointReverse();
-			case TOWER:
-				return drawNextTowerPoint();
-			case CENTER:
-				return drawNextCenterPoint();
+		case RANDOM:
+			return drawRandomPoint();
+		default:
+		case BOOK:
+			return drawNextBookPoint();
+		case BOOK_REVERSE:
+			return drawNextBookPointReverse();
+		case INNER:
+			return drawPointNearestToGeometricCenter(width, height);
+		case OUTER:
+			return drawPointFarmostToGeometricCenter(width, height);
+		case CENTER:
+			return drawNextCenterPoint();
+		case DUO_CENTER:
+			return drawDuoCenterPoint();
+		case TOWER:
+			return drawNextTowerPoint();
+		case TRISTEP:
+			return drawTriStepPoint();
+		case QUADSTEP:
+			return drawQuadStepPoint();
+
 		}
 	}
 

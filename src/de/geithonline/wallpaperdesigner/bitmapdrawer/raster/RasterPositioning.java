@@ -1,7 +1,7 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 public enum RasterPositioning {
-	RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER, INNER, OUTER, TOPMOST, LEFTMOST, BOTTOMMOST, RIGHTMOST, TRISTEP, QUADSTEP;
+	RANDOM, BOOK, BOOK_REVERSE, TOWER, CENTER, INNER, OUTER, TOPMOST, LEFTMOST, BOTTOMMOST, RIGHTMOST, TRISTEP, QUADSTEP, DUO_CENTER;
 
 	public static RasterPositioning getEnumForName(final String name) {
 		switch (name) {
@@ -16,6 +16,8 @@ public enum RasterPositioning {
 			return TOWER;
 		case "Center":
 			return CENTER;
+		case "DuoCenter":
+			return DUO_CENTER;
 		case "Inner to Outer":
 			return INNER;
 		case "Outer to Inner":

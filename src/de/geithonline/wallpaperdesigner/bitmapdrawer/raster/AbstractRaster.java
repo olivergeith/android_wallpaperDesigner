@@ -239,7 +239,7 @@ public abstract class AbstractRaster {
 		return p;
 	}
 
-	private int triState = 0;
+	private int state = 0;
 
 	protected Point drawTriStepPoint() {
 		final int size = points.size();
@@ -247,19 +247,19 @@ public abstract class AbstractRaster {
 			return new Point(0, 0);
 		}
 		int location = 0;
-		switch (triState) {
+		switch (state) {
 		default:
 		case 0:
 			location = 0;
-			triState = 1;
+			state = 1;
 			break;
 		case 1:
 			location = Math.round(size / 2); // aus der mitte nehmen
-			triState = 2;
+			state = 2;
 			break;
 		case 2:
 			location = size - 1; // den hintersten Punkt
-			triState = 0;
+			state = 0;
 			break;
 		}
 		final Point p = points.remove(location);
@@ -272,23 +272,44 @@ public abstract class AbstractRaster {
 			return new Point(0, 0);
 		}
 		int location = 0;
-		switch (triState) {
+		switch (state) {
 		default:
 		case 0:
 			location = 0;
-			triState = 1;
+			state = 1;
 			break;
 		case 1:
 			location = Math.round(size / 3); // aus der mitte nehmen
-			triState = 2;
+			state = 2;
 			break;
 		case 2:
 			location = Math.round(size * 2 / 3); // aus der mitte nehmen
-			triState = 3;
+			state = 3;
 			break;
 		case 3:
 			location = size - 1; // den hintersten Punkt
-			triState = 0;
+			state = 0;
+			break;
+		}
+		final Point p = points.remove(location);
+		return p;
+	}
+
+	protected Point drawDuoCenterPoint() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		int location = 0;
+		switch (state) {
+		default:
+		case 0:
+			location = Math.round(size / 3); // aus der mitte nehmen
+			state = 1;
+			break;
+		case 1:
+			location = Math.round(size * 2 / 3); // aus der mitte nehmen
+			state = 0;
 			break;
 		}
 		final Point p = points.remove(location);

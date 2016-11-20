@@ -82,8 +82,8 @@
         <item >Fixed</item>
         <item >Random</item>
         <item >Random (Range)</item>
-        <item >Around Adjustable Center</item>
         <item >Around Center</item>
+        <item >Around Adjustable Center</item>
         <item >Around Point (Range)</item>
         <item >Around Bottom</item>
         </string-array>
