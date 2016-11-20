@@ -304,7 +304,7 @@ public abstract class AbstractRaster {
 		switch (state) {
 		default:
 		case 0:
-			location = Math.round(size / 3); // aus der mitte nehmen
+			location = Math.round(size * 1 / 3); // aus der mitte nehmen
 			state = 1;
 			break;
 		case 1:

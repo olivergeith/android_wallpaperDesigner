@@ -41,27 +41,27 @@ public class RasterFactory {
 				new LayoutProperties(false, true, true, false, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
 								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
-								"DuoCenter", "Center", //
+								"Center", "DuoCenter", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 		layoutProperties.put("Circular",
 				new LayoutProperties(false, true, true, false, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
 								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
-								"DuoCenter", "Center", //
+								"Center", "DuoCenter", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 
 		layoutProperties.put("Spiral Adjustable Center",
 				new LayoutProperties(false, true, true, true, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
 								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
-								"DuoCenter", "Center", //
+								"Center", "DuoCenter", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 
 		layoutProperties.put("Spiral",
 				new LayoutProperties(false, true, true, true, true, //
 						new CharSequence[] { "Inner to Outer", "Outer to Inner", //
 								"Top to Bottom", "Bottom to Top", "Left to Right", "Right to Left", //
-								"DuoCenter", "Center", //
+								"Center", "DuoCenter", //
 								"Tower", "TriStep", "QuadStep", "Random" }));
 
 		layoutProperties.put("Half Circle",
