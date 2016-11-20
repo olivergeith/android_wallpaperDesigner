@@ -12,7 +12,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Assorted Shapes",
 				new PatternProperties(true, true, false, true, false, true, //
 						new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot", "Footprint", "Pentagram",
-								"4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Mixed" }));
+								"4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Iron Cross", "Mixed" }));
 
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true, //
 				new CharSequence[] { "Bubble" }));
@@ -46,8 +46,8 @@ public class PatternPropertyStore {
 								"Cross (Slim)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", //
 								"Spiky Cross", "Double Cross", "Sperm", //
 								"Virus", "Virus V2", "Virus V3", //
-								"Long Heart", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)",
-								"Tulip", "Tulip (Fat)", "Plane", "Spaceship", "Arrow" }));
+								"Long Heart", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Iron Cross", //
+								"Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane", "Spaceship", "Spaceship V2", "Arrow" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));
@@ -132,7 +132,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Space",
 				new PatternProperties(true, true, false, true, false, true, //
 						new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Rocket V6", "Ufo V1", "Ufo V2", "Satellite",
-								"Mixed Rockets", "Mixed" }));
+								"Spaceship", "Mixed Rockets", "Mixed" }));
 
 		patternProperties.put("Square",
 				new PatternProperties(true, true, false, true, false, true, //

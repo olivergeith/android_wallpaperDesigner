@@ -12,7 +12,7 @@ public class AsymetricLongPath extends Path {
 		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, //
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
-		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2;
+		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2, IRON_CROSS, SPACESHIP_V2;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -106,6 +106,9 @@ public class AsymetricLongPath extends Path {
 		case SPEAR1:
 			drawSpear(center, radius, height, filled);
 			break;
+		case IRON_CROSS:
+			drawIronCross(center, radius, height, filled);
+			break;
 		case TULIP_SLIM:
 			drawTulipSlim(center, radius, height, filled);
 			break;
@@ -144,6 +147,9 @@ public class AsymetricLongPath extends Path {
 			break;
 		case SPACESHIP:
 			drawSpaceship(center, radius, height, filled);
+			break;
+		case SPACESHIP_V2:
+			drawSpaceshipV2(center, radius, height, filled);
 			break;
 		}
 
@@ -881,6 +887,12 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// #################################################################################
+	private void drawSpaceshipV2(final PointF center, final float radius, final float height, final boolean filled) {
+		final Path p = new SpaceshipPath(new PointF(center.x, center.y - height - radius), radius, filled, height);
+		addPath(p);
+	}
+
+	// #################################################################################
 	private void drawSpaceship(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 
@@ -1108,6 +1120,22 @@ public class AsymetricLongPath extends Path {
 	}
 
 	// ##################################################################################
+	private void drawIronCross(final PointF center, final float radius, final float height, final boolean filled) {
+		moveTo(center.x, center.y);
+
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x - radius / 3, center.y - height + radius); // Zielpunkt
+
+		quadTo(center.x, center.y - height + radius * 1.25f, // controllpoint
+				center.x + radius / 3, center.y - height + radius); // Zielpunkt
+
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x, center.y); // Zielpunkt
+		close();
+		final Path cPath = new IronCrossPath(new PointF(center.x, center.y - height), radius, filled);
+		addPath(cPath);
+	}
+
 	private void drawPin(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 

@@ -48,6 +48,7 @@ import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
+import de.geithonline.wallpaperdesigner.shapes.IronCrossPath;
 import de.geithonline.wallpaperdesigner.shapes.LeafPath;
 import de.geithonline.wallpaperdesigner.shapes.LeafPath.LEAF_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
@@ -106,6 +107,7 @@ import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath.SMILEY_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SonicPath;
 import de.geithonline.wallpaperdesigner.shapes.SonicPath.SONICTYPE;
+import de.geithonline.wallpaperdesigner.shapes.SpaceshipPath;
 import de.geithonline.wallpaperdesigner.shapes.SpiralPath;
 import de.geithonline.wallpaperdesigner.shapes.SquareCornered;
 import de.geithonline.wallpaperdesigner.shapes.SquareCornered.CORNERED_STYLE;
@@ -716,6 +718,9 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Spear":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPEAR1);
 			break;
+		case "Iron Cross":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.IRON_CROSS);
+			break;
 		case "Bird":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD);
 			break;
@@ -751,6 +756,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Spaceship":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPACESHIP);
+			break;
+		case "Spaceship V2":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPACESHIP_V2);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
@@ -936,7 +944,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawSpace(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 9);
+			final int nr = getRandomInt(0, 10);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed Rockets")) {
 			final int nr = getRandomInt(0, 6);
@@ -984,6 +992,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V9":
 		case "Satellite":
 			path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), "Satellite V1");
+			break;
+		case "V10":
+		case "Spaceship":
+			path = new SpaceshipPath(new PointF(x, y), radius, getFilledBoolean());
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(-45, 45, bWidth, bHeight, new Point(x, y)));
@@ -1795,7 +1807,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 16);
+			final int nr = getRandomInt(0, 17);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1880,6 +1892,10 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V16":
 		case "R2D2":
 			path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.R2D2);
+			break;
+		case "V17":
+		case "Iron Cross":
+			path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean());
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
