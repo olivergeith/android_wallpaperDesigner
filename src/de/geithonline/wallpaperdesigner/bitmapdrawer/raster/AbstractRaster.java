@@ -27,42 +27,37 @@ public abstract class AbstractRaster {
 		return points.size();
 	}
 
-	protected boolean isInsideCanvas(final int width, final int height, final Point p) {
+	private boolean isInsideCanvas(final int width, final int height, final Point p) {
 		switch (Settings.getCanvasLimitType()) {
 		default:
 		case small:
-			return isInsideCanvasSmallTolerance(width, height, p);
+			// unten nehmen wir eine reihe mehr mit...so wars früher auch! Und die Designs sollen ja gleich aussehen wie früher
+			return isInsideCanvasTolerance(width, height, p, getSmallTolerance(), getSmallTolerance(), getSmallTolerance(), getSmallTolerance() * 2);
 		case wide:
-			return isInsideCanvasWideTolerance(width, height, p);
+			return isInsideCanvasTolerance(width, height, p, getWideTolerance());
+		case double_wide:
+			return isInsideCanvasTolerance(width, height, p, 2 * getWideTolerance());
 		case strict:
-			return isInsideCanvasStrict(width, height, p);
+			return isInsideCanvasTolerance(width, height, p, 0);
+		case small_inset:
+			return isInsideCanvasTolerance(width, height, p, -getSmallTolerance());
+		case wide_inset:
+			return isInsideCanvasTolerance(width, height, p, -getWideTolerance());
 		case no_limit:
 			return true;
 		}
 	}
 
-	protected boolean isInsideCanvasStrict(final int width, final int height, final Point p) {
-		return p.x >= 0 && p.x < width && p.y >= 0 && p.y < height;
+	private boolean isInsideCanvasTolerance(final int width, final int height, final Point p, final int tolerance) {
+		return isInsideCanvasTolerance(width, height, p, tolerance, tolerance, tolerance, tolerance);
 	}
 
-	protected boolean isInsideCanvasSmallTolerance(final int width, final int height, final Point p) {
-		return p.x >= 0 - getSmallTolerance() //
-				&& p.x < width + getSmallTolerance() //
-				&& p.y >= 0 - getSmallTolerance() //
-				&& p.y < height + 2 * getSmallTolerance(); // unten nehmen wir eine
-															// reihe mehr mit...so wars
-															// frï¿½her
-															// auch! Und die Designs
-															// sollen ja gleich aussehen
-															// wie
-															// frï¿½her
-	}
-
-	protected boolean isInsideCanvasWideTolerance(final int width, final int height, final Point p) {
-		return p.x >= 0 - getWideTolerance() //
-				&& p.x < width + getWideTolerance() //
-				&& p.y >= 0 - getWideTolerance() //
-				&& p.y < height + getWideTolerance();
+	private boolean isInsideCanvasTolerance(final int width, final int height, final Point p, final int toleranceTop, final int toleranceLeft,
+			final int toleranceRight, final int toleranceBottom) {
+		return p.x >= 0 - toleranceLeft //
+				&& p.x < width + toleranceRight //
+				&& p.y >= 0 - toleranceTop //
+				&& p.y < height + toleranceBottom;
 	}
 
 	protected void addPoint2List(final int width, final int height, final Point p) {

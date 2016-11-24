@@ -105,7 +105,7 @@ public class Settings {
 	}
 
 	public enum CANVAS_LIMT {
-		strict, small, wide, no_limit;
+		strict, small, wide, no_limit, double_wide, small_inset, wide_inset;
 	}
 
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -197,8 +197,14 @@ public class Settings {
 			return CANVAS_LIMT.small;
 		case "wide tolerance":
 			return CANVAS_LIMT.wide;
+		case "double wide tolerance":
+			return CANVAS_LIMT.double_wide;
 		case "strict":
 			return CANVAS_LIMT.strict;
+		case "small inset":
+			return CANVAS_LIMT.small_inset;
+		case "wide inset":
+			return CANVAS_LIMT.wide_inset;
 		case "no limit":
 			return CANVAS_LIMT.no_limit;
 		}

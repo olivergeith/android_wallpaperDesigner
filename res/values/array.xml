@@ -201,9 +201,12 @@
         </string-array>
 
     <string-array name="limit2Canvas">
+        <item >wide inset</item>
+        <item >small inset</item>
         <item >strict</item>
         <item >small tolerance</item>
         <item >wide tolerance</item>
+        <item >double wide tolerance</item>
         <item >no limit</item>
         </string-array>
     
