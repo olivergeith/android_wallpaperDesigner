@@ -76,7 +76,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			if (i % 100 == 0) {
 				System.gc();
 			}
-			task.settingProgress(i);
+			task.settingProgress(i, bitmap);
 			paint.setStyle(Style.FILL);
 			final int radius = getRandomInt(minRadius, maxRadius);
 

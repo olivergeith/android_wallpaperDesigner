@@ -31,6 +31,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -215,19 +216,19 @@ public class MainActivity extends Activity {
 	@Override
 	public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
 		switch (requestCode) {
-			case MY_PERMISSIONS_REQUEST_INT: {
-				// If request is cancelled, the result arrays are empty.
-				if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					startup();
+		case MY_PERMISSIONS_REQUEST_INT: {
+			// If request is cancelled, the result arrays are empty.
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				startup();
 
-				} else {
-					closeOnNotGrantedPermission();
-				}
-				return;
+			} else {
+				closeOnNotGrantedPermission();
 			}
+			return;
+		}
 
-				// other 'case' lines to check for other
-				// permissions this app might request
+			// other 'case' lines to check for other
+			// permissions this app might request
 		}
 	}
 
@@ -293,6 +294,11 @@ public class MainActivity extends Activity {
 		dialog.setIndeterminate(false);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setProgress(0);
+
+		if (Settings.isShowRenderingProcess()) {
+			dialog.getWindow().setGravity(Gravity.BOTTOM);
+		}
+
 		dialog.show();
 	}
 
@@ -448,6 +454,8 @@ public class MainActivity extends Activity {
 	// ##########################################################
 	public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
 		private final WeakReference<TouchImageView> imageViewReference;
+		private int max;
+		private Bitmap bitmap;
 
 		public BitmapWorkerTask(final TouchImageView imageView) {
 			// Use a WeakReference to ensure the ImageView can be garbage
@@ -467,19 +475,30 @@ public class MainActivity extends Activity {
 		}
 
 		public void settingMax(final int max) {
+			this.max = max;
 			if (dialog != null) {
 				dialog.setMax(max);
 			}
 		}
 
-		public void settingProgress(final int p) {
+		public void settingProgress(final int p, final Bitmap bitmap) {
+			this.bitmap = bitmap;
 			publishProgress(p);
-
 		}
 
 		// Once complete, see if ImageView is still around and set bitmap.
 		@Override
 		protected void onPostExecute(final Bitmap bitmap) {
+			showBitmap(bitmap);
+			if (dialog != null) {
+				dialog.cancel();
+				if (Settings.isDebugging()) {
+					shakeHint.setText(DebugHelper.getMemoryInfo());
+				}
+			}
+		}
+
+		private void showBitmap(final Bitmap bitmap) {
 			if (imageViewReference != null && bitmap != null) {
 				final TouchImageView imageView = imageViewReference.get();
 				if (imageView != null) {
@@ -505,12 +524,6 @@ public class MainActivity extends Activity {
 
 				}
 			}
-			if (dialog != null) {
-				dialog.cancel();
-				if (Settings.isDebugging()) {
-					shakeHint.setText(DebugHelper.getMemoryInfo());
-				}
-			}
 		}
 
 		@Override
@@ -518,6 +531,9 @@ public class MainActivity extends Activity {
 			// Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
 			if (dialog != null) {
 				dialog.setProgress(values[0]);
+			}
+			if (Settings.isShowRenderingProcess()) {
+				showBitmap(bitmap);
 			}
 		}
 	}

@@ -32,6 +32,7 @@ public class PreferenceIO {
 		ignoreKeys.add(Settings.KEY_JPG_COMPRESSION);
 		ignoreKeys.add(Settings.KEY_HEX_VALUES);
 		ignoreKeys.add(Settings.KEY_SHOW_SET_WALLPAPER_BUTTON);
+		ignoreKeys.add(Settings.KEY_SHOW_RENDERING_PROCESS);
 		ignoreKeys.add(Settings.KEY_SHARE_SUBJECT);
 		ignoreKeys.add(Settings.KEY_SHARE_TEXT);
 		ignoreKeys.add(Settings.KEY_APP_THEME);

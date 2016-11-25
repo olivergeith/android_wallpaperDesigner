@@ -39,6 +39,14 @@
 		    android:title="New image, on starting App"
 		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
             />
+
+        <CheckBoxPreference 
+		    android:key="showRenderingProcess"
+    		android:defaultValue="true"
+		    android:title="Show rendering in progress"
+		    android:summary="See how the image is rendered..." 
+            />
+        
         
         <CheckBoxPreference 
 		    android:key="restoreWallpaperSize"

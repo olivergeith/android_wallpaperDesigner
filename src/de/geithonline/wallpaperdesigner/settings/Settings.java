@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Settings {
+	public static final String KEY_SHOW_RENDERING_PROCESS = "showRenderingProcess";
 	public static final String KEY_TORNADO_CENTER_POINT_Y = "tornadoCenterPointY";
 	public static final String KEY_TORNADO_CENTER_POINT_X = "tornadoCenterPointX";
 	public static final String KEY_CORNER_REPEATS = "cornerRepeats";
@@ -1003,6 +1004,13 @@ public class Settings {
 			return true;
 		}
 		return prefs.getBoolean(KEY_RENDER_ON_SETTINGS_EXIT, true);
+	}
+
+	public static boolean isShowRenderingProcess() {
+		if (prefs == null) {
+			return true;
+		}
+		return prefs.getBoolean(KEY_SHOW_RENDERING_PROCESS, true);
 	}
 
 	public static boolean isRenderingOnStartingApp() {
