@@ -165,7 +165,7 @@ public abstract class WPStylePattern extends WPStyle {
 			drawGeometric(x, y, paint, radius);
 			break;
 		case "Geometrical (long) Shapes":
-			drawGeometricMore(x, y, paint, radius);
+			drawGeometricLong(x, y, paint, radius);
 			break;
 		case "3D (long) Shapes":
 			draw3DLongShape(x, y, paint, radius);
@@ -607,12 +607,12 @@ public abstract class WPStylePattern extends WPStyle {
 	// #########################################################################################
 	// ----------------
 	// #########################################################################################
-	protected void drawGeometricMore(final int x, final int y, final Paint paint, final int radius) {
+	protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius) {
 		final String variant = Settings.getSelectedPatternVariant();
-		drawGeometricMore(x, y, paint, radius, variant);
+		drawGeometricLong(x, y, paint, radius, variant);
 	}
 
-	protected void drawGeometricMore(final int x, final int y, final Paint paint, final int radius, final String variante) {
+	protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		if (x == bWidth / 2 && y == bHeight / 2) {
 			return;
 		}
@@ -709,6 +709,9 @@ public abstract class WPStylePattern extends WPStyle {
 		case "Long Heart":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.LONG_HEART);
 			break;
+		case "Square Chain":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SQUARE_CHAIN);
+			break;
 		case "Circle Chain":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.CHAIN_CIRCLE);
 			break;
@@ -759,6 +762,9 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		case "Spaceship V2":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPACESHIP_V2);
+			break;
+		case "Ritual Axe":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.RITUAL_AXE);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));

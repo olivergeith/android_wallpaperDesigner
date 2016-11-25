@@ -3,6 +3,8 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
+import de.geithonline.wallpaperdesigner.utils.GeometrieHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -12,7 +14,8 @@ public class AsymetricLongPath extends Path {
 		RAUTE, DRACHEN, DRACHEN_UPSIDEDOWN, OVAL, TRIANGLE, LENSE, LENSE_V2, LENSE_V3, DROP, TAG, KNIFE, KNIFE_V2, KNIFE_V3, //
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
-		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2, IRON_CROSS, SPACESHIP_V2;
+		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2, IRON_CROSS, //
+		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -151,6 +154,26 @@ public class AsymetricLongPath extends Path {
 		case SPACESHIP_V2:
 			drawSpaceshipV2(center, radius, height, filled);
 			break;
+		case SQUARE_CHAIN:
+			drawSquaresChain(center, radius, height, filled);
+			break;
+		case RITUAL_AXE:
+			drawRitualAxe(center, radius, height, filled);
+			break;
+
+		}
+
+	}
+
+	// ##################################################################################
+	private void drawSquaresChain(final PointF center, final float radius, final float height, final boolean filled) {
+		final int count = (int) (height / radius);
+		final float sizeFactor = radius / count;
+		for (int i = 0; i < count; i++) {
+			final PointF c = new PointF(center.x, center.y - i * radius * 2);
+			final float r = (i + 1) * sizeFactor;
+			final Path sq = new SquarePath(c, r, filled, SQUARE_STYLE.NORMAL, Direction.CW);
+			addPath(sq);
 		}
 
 	}
@@ -1136,6 +1159,43 @@ public class AsymetricLongPath extends Path {
 		addPath(cPath);
 	}
 
+	// ##################################################################################
+	private void drawRitualAxe(final PointF center, final float radius, final float height, final boolean filled) {
+		final float raster = radius / 3;
+		final float r1 = raster;
+		final float r2 = 2 * raster;
+		final float r3 = 3 * raster;
+		RectF oval = new RectF();
+		PointF c = new PointF();
+
+		moveTo(center.x, center.y);
+
+		// lineTo(center.x - r2, center.y - height - r2);
+		quadTo(center.x, center.y - height - r2, // controllpoint
+				center.x - r2, center.y - height - r2); // Zielpunkt
+
+		c = new PointF(center.x - r2, center.y - height - r3);
+		oval = GeometrieHelper.getCircle(c, r1);
+		arcTo(oval, 90, -270);
+
+		c = new PointF(center.x, center.y - height - r3);
+		oval = GeometrieHelper.getCircle(c, r3);
+		arcTo(oval, 180, 180);
+
+		c = new PointF(center.x + r2, center.y - height - r3);
+		oval = GeometrieHelper.getCircle(c, r1);
+		arcTo(oval, 0, -270);
+
+		quadTo(center.x, center.y - height - r2, // controllpoint
+				center.x, center.y); // Zielpunkt
+
+		close();
+		if (!filled) {
+			addCircle(center.x, center.y - height - radius, radius * 0.3f, Direction.CCW);
+		}
+	}
+
+	// ##################################################################################
 	private void drawPin(final PointF center, final float radius, final float height, final boolean filled) {
 		moveTo(center.x, center.y);
 

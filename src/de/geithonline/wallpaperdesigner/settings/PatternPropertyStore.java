@@ -46,8 +46,9 @@ public class PatternPropertyStore {
 								"Cross (Slim)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", //
 								"Spiky Cross", "Double Cross", "Sperm", //
 								"Virus", "Virus V2", "Virus V3", //
-								"Long Heart", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Iron Cross", //
-								"Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane", "Spaceship", "Spaceship V2", "Arrow" }));
+								"Long Heart", "Square Chain", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Iron Cross", //
+								"Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane", "Spaceship", "Spaceship V2",
+								"Ritual Axe", "Arrow" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));
