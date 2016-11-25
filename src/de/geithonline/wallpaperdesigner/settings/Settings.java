@@ -1018,11 +1018,7 @@ public class Settings {
 		if (prefs == null) {
 			return 1;
 		}
-		int val = prefs.getInt(KEY_RENDERING_PROCESS_FRAMES, 1);
-		if (val == 0) {
-			val = 1;
-		}
-		return val;
+		return Math.max(1, prefs.getInt(KEY_RENDERING_PROCESS_FRAMES, 1));
 	}
 
 	public static boolean isRenderingOnStartingApp() {
