@@ -454,7 +454,6 @@ public class MainActivity extends Activity {
 	// ##########################################################
 	public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
 		private final WeakReference<TouchImageView> imageViewReference;
-		private int max;
 		private Bitmap bitmap;
 
 		public BitmapWorkerTask(final TouchImageView imageView) {
@@ -475,7 +474,6 @@ public class MainActivity extends Activity {
 		}
 
 		public void settingMax(final int max) {
-			this.max = max;
 			if (dialog != null) {
 				dialog.setMax(max);
 			}
@@ -532,7 +530,9 @@ public class MainActivity extends Activity {
 			if (dialog != null) {
 				dialog.setProgress(values[0]);
 			}
-			if (Settings.isShowRenderingProcess()) {
+
+			if (Settings.isShowRenderingProcess() //
+					&& values[0].intValue() % Settings.getRenderingProcessFrames() == 0) {
 				showBitmap(bitmap);
 			}
 		}

@@ -40,13 +40,7 @@
 		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
             />
 
-        <CheckBoxPreference 
-		    android:key="showRenderingProcess"
-    		android:defaultValue="true"
-		    android:title="Show rendering in progress"
-		    android:summary="See how the image is rendered..." 
-            />
-        
+  
         
         <CheckBoxPreference 
 		    android:key="restoreWallpaperSize"
@@ -63,6 +57,26 @@
 	        android:entries="@array/theme"
 	        android:entryValues="@array/theme"
 	        />
+
+    <PreferenceCategory android:title="Rendering Animation"/>
+        <CheckBoxPreference 
+		    android:key="showRenderingProcess"
+    		android:defaultValue="true"
+		    android:title="Show rendering in progress"
+		    android:summary="See how the image is rendered..." 
+            />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:key="renderingProcessFrames"
+	        android:title="Rendering Progress Frames" 
+		    seekbarpreference:minValue="0"
+		    seekbarpreference:stepValue="5"
+		    seekbarpreference:maxValue="100"
+		    android:defaultValue="1"
+		    android:summary="Show rendering every %1$d frames" 
+		    android:dialogMessage="Rendering Progress Frames"
+		    android:dependency="showRenderingProcess"
+		    />
+        
         
     <PreferenceCategory android:title="Wallpaper saving"/>
         <ListPreference
