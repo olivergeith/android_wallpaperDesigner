@@ -135,12 +135,11 @@ import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
-import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public abstract class WPStylePattern extends WPStyle {
-
 	protected int bWidth = 2560;
 	protected int bHeight = 1600;
+	protected Rotator rotator = new Rotator(bWidth, bHeight);
 	protected final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	protected void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
@@ -298,7 +297,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		}
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -344,7 +343,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AnkerPath(new Point(x, y), radius);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -389,7 +388,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -468,7 +467,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.MIXED, Direction.CW);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isGlossy()) {
 			drawGlossyPath(x, y, paint, radius, path);
@@ -514,7 +513,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.FINGER_MAPLE);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isGlossy()) {
 			drawGlossyPath(x, y, paint, radius, path);
@@ -591,7 +590,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V2);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isGlossy()) {
 			drawGlossyPath(x, y, paint, radius, path);
@@ -767,7 +766,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.RITUAL_AXE);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -818,7 +817,7 @@ public abstract class WPStylePattern extends WPStyle {
 			break;
 		}
 
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Outline
 		if (Settings.isOutline()) {
@@ -885,7 +884,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -931,7 +930,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1004,7 +1003,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SpaceshipPath(new PointF(x, y), radius, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-45, 45, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1059,7 +1058,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new VirusPath8(new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1123,7 +1122,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(), SUN_TYPE.SUN_SHARP_TOOTH);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1152,7 +1151,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	protected void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
 		final Path path = new PlanePath(new Point(x, y), radius, variant);
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1207,7 +1206,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1299,7 +1298,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
@@ -1346,7 +1345,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new MandalaV4Path(3, new Point(x, y), radius);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
@@ -1375,7 +1374,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
 		final Path path = new FishPath(new Point(x, y), radius, variante);
 
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-45, 45, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
 		// Mirror only on random rotation
 		if (Settings.isRandomRotate() && getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
@@ -1645,9 +1644,9 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 
 		if (Settings.isRandomRotate()) {
-			PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y)));
+			PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 180, new Point(x, y)));
 		} else {
-			float degr = getRotationDegrees(0, 180, bWidth, bHeight, new Point(x, y));
+			float degr = rotator.getRotationDegrees(0, 180, new Point(x, y));
 			if (getRandomBoolean()) {
 				degr = degr + 90;
 			}
@@ -1753,7 +1752,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.RANDOM);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1794,7 +1793,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL, puzzleConnection, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1904,7 +1903,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -1957,7 +1956,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SonicPath(new PointF(x, y), radius, SONICTYPE.NORMAL, 3, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -2016,7 +2015,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CASTEL);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -2094,7 +2093,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.BLAZON);
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -2184,7 +2183,7 @@ public abstract class WPStylePattern extends WPStyle {
 			path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
 			break;
 		}
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		// Glossy
 		if (Settings.isGlossy()) {
@@ -2241,7 +2240,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = getSmileyPath(x, y, radius);
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		if (Settings.isGlossy()) {
 			drawGlossyPath(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);
@@ -2280,7 +2279,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 	private void drawPacman(final int x, final int y, final Paint paint, final int radius) {
 		final Path path = getPacmanPath(x, y, radius);
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
@@ -2336,7 +2335,7 @@ public abstract class WPStylePattern extends WPStyle {
 	private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
 		// Heart für dropshadow
 		final Path path = getHeartPath(x, y, radius);
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(-30, 30, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
@@ -2381,7 +2380,7 @@ public abstract class WPStylePattern extends WPStyle {
 		// Star
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
 		final Path path = getStarPath(x, y, radius, arms);
-		PathHelper.rotatePath(x, y, path, getRotationDegrees(0, 360 / arms, bWidth, bHeight, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360 / arms, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 
 		if (Settings.isGlossy()) {
@@ -2444,67 +2443,6 @@ public abstract class WPStylePattern extends WPStyle {
 			dropShadowRadius = 5;
 		}
 		return dropShadowRadius;
-	}
-
-	private static float getRotationDegrees(final int randomMin, final int randomMax, final int bWidth, final int bHeight, final Point center) {
-		switch (Settings.getRotationStyle()) {
-		default:
-		case "Fixed":
-			return Settings.getFixedRotationDegrees();
-		case "Random":
-			return Randomizer.getRandomFloat(randomMin - 1, randomMax);
-		case "Random (Range)":
-			return Randomizer.getRandomFloat(Settings.getFixedRotationDegrees() - Settings.getrandomRangeDegrees(), //
-					Settings.getFixedRotationDegrees() + Settings.getrandomRangeDegrees());
-
-		case "Around Adjustable Center": {
-			final float distTCenterX = bWidth * Settings.getRotationCenterPointX() - center.x;
-			final float distTCenterY = bHeight * Settings.getRotationCenterPointY() - center.y;
-			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-			float winkel = (float) (alpha * 180 / Math.PI);
-			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
-			if (center.x <= bWidth * Settings.getRotationCenterPointX()) {
-				winkel = winkel + 180;
-			}
-			return winkel + 90 + Settings.getFixedRotationDegrees();
-		}
-		case "Around Center":
-		case "Around Point": {
-			final float distTCenterX = bWidth / 2 - center.x;
-			final float distTCenterY = bHeight / 2 - center.y;
-			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-			float winkel = (float) (alpha * 180 / Math.PI);
-			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
-			if (center.x <= bWidth / 2) {
-				winkel = winkel + 180;
-			}
-			return winkel + 90 + Settings.getFixedRotationDegrees();
-		}
-		case "Around Point (Range)": {
-			final float distTCenterX = bWidth / 2 - center.x;
-			final float distTCenterY = bHeight / 2 - center.y;
-			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-			float winkel = (float) (alpha * 180 / Math.PI);
-			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
-			if (center.x <= bWidth / 2) {
-				winkel = winkel + 180;
-			}
-			final float rand = Randomizer.getRandomFloat(-Settings.getrandomRangeDegrees(), //
-					+Settings.getrandomRangeDegrees());
-			return winkel + 90 + Settings.getFixedRotationDegrees() + rand;
-		}
-		case "Around Bottom": {
-			final float distTCenterX = bWidth / 2 - center.x;
-			final float distTCenterY = bHeight - center.y;
-			final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-			float winkel = (float) (alpha * 180 / Math.PI);
-			// Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
-			if (center.x <= bWidth / 2) {
-				winkel = winkel + 180;
-			}
-			return winkel + 90 + Settings.getFixedRotationDegrees();
-		}
-		}
 	}
 
 	private boolean getFilledBoolean() {

@@ -35,6 +35,8 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 	public synchronized Bitmap drawBitmap(final int width, final int height) {
 		bWidth = width;
 		bHeight = height;
+		// Rotator Objekt setzen
+		rotator = new Rotator(bWidth, bHeight);
 
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
