@@ -61,7 +61,7 @@
     <PreferenceCategory android:title="Rendering Animation"/>
         <CheckBoxPreference 
 		    android:key="showRenderingProcess"
-    		android:defaultValue="true"
+    		android:defaultValue="false"
 		    android:title="Show rendering in progress"
 		    android:summary="See how the image is rendered..." 
             />

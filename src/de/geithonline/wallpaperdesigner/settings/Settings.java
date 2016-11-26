@@ -88,8 +88,6 @@ public class Settings {
 	public static SharedPreferences prefs;
 	private static boolean superuser = false;
 
-	// private static Context context;
-
 	public enum IMAGE_OUTPUT_FORMAT {
 		PNG, JPG;
 	}
@@ -113,11 +111,32 @@ public class Settings {
 	public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
 	public static final String DEFAULT_SHARE_TEXT = "Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner";
 
-	public static String getShareText() {
+	// Conveniance #####################################################################
+	private static boolean readBooleanPref(final String key, final boolean defaultValue) {
 		if (prefs == null) {
-			return DEFAULT_SHARE_TEXT;
+			return defaultValue;
 		}
-		String p = prefs.getString(KEY_SHARE_TEXT, DEFAULT_SHARE_TEXT);
+		return prefs.getBoolean(key, defaultValue);
+	}
+
+	private static int readIntegerPref(final String key, final int defaultValue) {
+		if (prefs == null) {
+			return defaultValue;
+		}
+		return prefs.getInt(key, defaultValue);
+	}
+
+	private static String readStringPref(final String key, final String defaultValue) {
+		if (prefs == null) {
+			return defaultValue;
+		}
+		return prefs.getString(key, defaultValue);
+	}
+
+	// ##################################################################################
+
+	public static String getShareText() {
+		String p = readStringPref(KEY_SHARE_TEXT, DEFAULT_SHARE_TEXT);
 		if (p.isEmpty()) {
 			p = DEFAULT_SHARE_TEXT;
 			Settings.prefs.edit().putString(KEY_SHARE_TEXT, Settings.DEFAULT_SHARE_TEXT).apply();
@@ -126,10 +145,7 @@ public class Settings {
 	}
 
 	public static String getShareSubject() {
-		if (prefs == null) {
-			return DEFAULT_SHARE_SUBJECT;
-		}
-		String p = prefs.getString(KEY_SHARE_SUBJECT, DEFAULT_SHARE_SUBJECT);
+		String p = readStringPref(KEY_SHARE_SUBJECT, DEFAULT_SHARE_SUBJECT);
 		if (p.isEmpty()) {
 			p = DEFAULT_SHARE_SUBJECT;
 			Settings.prefs.edit().putString(KEY_SHARE_SUBJECT, Settings.DEFAULT_SHARE_SUBJECT).apply();
@@ -138,10 +154,7 @@ public class Settings {
 	}
 
 	public static int getJpgCompression() {
-		if (prefs == null) {
-			return 95;
-		}
-		return prefs.getInt(KEY_JPG_COMPRESSION, 95);
+		return readIntegerPref(KEY_JPG_COMPRESSION, 95);
 	}
 
 	public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
@@ -155,11 +168,7 @@ public class Settings {
 	}
 
 	public static String getImageFormat() {
-		if (prefs == null) {
-			return "jpg";
-		}
-		final String imageFormat = prefs.getString(KEY_IMAGE_FORMAT, "jpg");
-		return imageFormat;
+		return readStringPref(KEY_IMAGE_FORMAT, "jpg");
 	}
 
 	public static COLOR_RANDOMIZING_TYPE getColorRandomizingType() {
@@ -185,11 +194,7 @@ public class Settings {
 	}
 
 	public static String getColorRandomizing() {
-		if (prefs == null) {
-			return "full RGB";
-		}
-		final String type = prefs.getString(KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
-		return type;
+		return readStringPref(KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
 	}
 
 	public static CANVAS_LIMT getCanvasLimitType() {
@@ -213,22 +218,14 @@ public class Settings {
 	}
 
 	public static String getCanvasLimit() {
-		if (prefs == null) {
-			return "small tolerance";
-		}
-		final String type = prefs.getString(KEY_LIMIT_2_CANVAS, "small tolerance");
-		return type;
+		return readStringPref(KEY_LIMIT_2_CANVAS, "small tolerance");
 	}
 
 	// ###################################################################
 	// Other Stuff
 
 	public static String getAppTheme() {
-		if (prefs == null) {
-			return "Dark";
-		}
-		final String s = prefs.getString(KEY_APP_THEME, "Dark");
-		return s;
+		return readStringPref(KEY_APP_THEME, "Dark");
 	}
 
 	public static int getTheme() {
@@ -258,201 +255,116 @@ public class Settings {
 	}
 
 	public static String getSortOrder() {
-		// return "Random Layout";
-		if (prefs == null) {
-			return "Timestamp in Filename";
-		}
-		final String sort = prefs.getString(KEY_SORT_ORDER, "Timestamp in Filename");
-		return sort;
+		return readStringPref(KEY_SORT_ORDER, "Timestamp in Filename");
 	}
 
 	// ###################################################################
 	// Options Layout Selection
 
 	public static String getSelectedMainLayout() {
-		// return "Random Layout";
-		if (prefs == null) {
-			return "Random Layout";
-		}
-		return prefs.getString(KEY_MAINLAYOUTS, "Random Layout");
+		return readStringPref(KEY_MAINLAYOUTS, "Random Layout");
 	}
 
 	public static String getSelectedMainLayoutVariante() {
-		// return "Random Layout";
-		if (prefs == null) {
-			return "Random";
-		}
-		return prefs.getString(KEY_MAINLAYOUT_VARIANTS, "Random");
+		return readStringPref(KEY_MAINLAYOUT_VARIANTS, "Random");
 	}
 
 	public static int getAnzahlPatterns() {
-		if (prefs == null) {
-			return 1000;
-		}
-		// if (isDebugging()) {
-		// return 0;
-		// }
-		return prefs.getInt(KEY_PATTERN_ANZAHL_PATTERNS, 1000);
+		return readIntegerPref(KEY_PATTERN_ANZAHL_PATTERNS, 1000);
 	}
 
 	public static float getOverlapping() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt("overlapping", 50) / 100f;
+		return readIntegerPref("overlapping", 50) / 100f;
 	}
 
 	public static float getCenterPointY() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt("centerPointY", 50) / 100f;
+		return readIntegerPref("centerPointY", 50) / 100f;
 	}
 
 	public static float getCenterPointX() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt("centerPointX", 50) / 100f;
+		return readIntegerPref("centerPointX", 50) / 100f;
 	}
 
 	public static float getRotationCenterPointY() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt("rotationCenterPointY", 50) / 100f;
+		return readIntegerPref("rotationCenterPointY", 50) / 100f;
 	}
 
 	public static float getRotationCenterPointX() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt("rotationCenterPointX", 50) / 100f;
+		return readIntegerPref("rotationCenterPointX", 50) / 100f;
 	}
 
 	public static float getTornadoCenterPointY() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt(KEY_TORNADO_CENTER_POINT_Y, 50) / 100f;
+		return readIntegerPref(KEY_TORNADO_CENTER_POINT_Y, 50) / 100f;
 	}
 
 	public static float getTornadoCenterPointX() {
-		if (prefs == null) {
-			return 0.5f;
-		}
-		return prefs.getInt(KEY_TORNADO_CENTER_POINT_X, 50) / 100f;
+		return readIntegerPref(KEY_TORNADO_CENTER_POINT_X, 50) / 100f;
 	}
 
 	public static boolean isBlurPatterns() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_PATTERN_BLUR, false);
+		return readBooleanPref(KEY_PATTERN_BLUR, false);
 	}
 
 	public static int getBlurrAmount1() {
-		if (prefs == null) {
-			return 50;
-		}
-		return prefs.getInt(KEY_BLURR_AMOUNT_1, 50);
+		return readIntegerPref(KEY_BLURR_AMOUNT_1, 50);
 	}
 
 	public static int getBlurrAmount2() {
-		if (prefs == null) {
-			return 20;
-		}
-		return prefs.getInt(KEY_BLURR_AMOUNT_2, 20);
+		return readIntegerPref(KEY_BLURR_AMOUNT_2, 20);
 	}
 
 	public static int getBlurrAmount3() {
-		if (prefs == null) {
-			return 8;
-		}
-		return prefs.getInt(KEY_BLURR_AMOUNT_3, 8);
+		return readIntegerPref(KEY_BLURR_AMOUNT_3, 8);
 	}
 
 	public static int getBlurrStage1() {
-		if (prefs == null) {
-			return 60;
-		}
-		return prefs.getInt(KEY_BLURR_STAGE_1, 60);
+		return readIntegerPref(KEY_BLURR_STAGE_1, 60);
 	}
 
 	public static int getBlurrStage2() {
-		if (prefs == null) {
-			return 70;
-		}
-		return prefs.getInt(KEY_BLURR_STAGE_2, 70);
+		return readIntegerPref(KEY_BLURR_STAGE_2, 70);
 	}
 
 	public static int getBlurrStage3() {
-		if (prefs == null) {
-			return 80;
-		}
-		return prefs.getInt(KEY_BLURR_STAGE_3, 80);
+		return readIntegerPref(KEY_BLURR_STAGE_3, 80);
 	}
 
 	public static boolean isRandomStartwinkel() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean("ramdomStartWinkel", true);
+		return readBooleanPref("ramdomStartWinkel", true);
 	}
 
 	public static boolean isUpsideDown() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("upsideDown", false);
+		return readBooleanPref("upsideDown", false);
 	}
 
 	// ###################################################################
 	// Options Pattern Style
 
 	public static String getSelectedPattern() {
-		if (prefs == null) {
-			return "Virus Attack";
-		}
-		return prefs.getString(KEY_PATTERN_PATTERN_PICKER, "Virus Attack");
+		return readStringPref(KEY_PATTERN_PATTERN_PICKER, "Virus Attack");
 	}
 
 	public static String getSelectedPatternVariant() {
-		if (prefs == null) {
-			return "none";
-		}
-		return prefs.getString(KEY_PATTERN_PATTERN_VARIANT_PICKER, "V1");
+		return readStringPref(KEY_PATTERN_PATTERN_VARIANT_PICKER, "V1");
 	}
 
 	public static float getPatternSizeFactor() {
-		if (prefs == null) {
-			return 1.0f;
-		}
-		return prefs.getInt("patternSizeAdjust", 100) / 100f;
+		return readIntegerPref("patternSizeAdjust", 100) / 100f;
 	}
 
 	public static float getPatternMinSizeFactor() {
-		if (prefs == null) {
-			return 0.1f;
-		}
-		return prefs.getInt("patternMinSizeAdjust", 10) / 100f;
+		return readIntegerPref("patternMinSizeAdjust", 10) / 100f;
 	}
 
 	public static String getFilledOption() {
-		if (prefs == null) {
-			return "Filled";
-		}
-		return prefs.getString(KEY_PATTERN_FILLED_OPTION, "Filled");
+		return readStringPref(KEY_PATTERN_FILLED_OPTION, "Filled");
 	}
 
 	// ###################################################################
 	// Rotating
 
 	public static String getRotationStyle() {
-		if (prefs == null) {
-			return "Fixed";
-		}
-		return prefs.getString("rotatingStyle", "Fixed");
+		return readStringPref("rotatingStyle", "Fixed");
 	}
 
 	public static boolean isRandomRotate() {
@@ -460,48 +372,30 @@ public class Settings {
 	}
 
 	public static int getFixedRotationDegrees() {
-		if (prefs == null) {
-			return 0;
-		}
-		return prefs.getInt("rotationDegrees", 0);
+		return readIntegerPref("rotationDegrees", 0);
 	}
 
 	public static int getrandomRangeDegrees() {
-		if (prefs == null) {
-			return 180;
-		}
-		return prefs.getInt("randomRange", 180);
+		return readIntegerPref("randomRange", 180);
 	}
 
 	// ###################################################################
 	// Special Settings Glossy
 
 	public static boolean isGlossy() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_PATTERN_GLOSSY, false);
+		return readBooleanPref(KEY_PATTERN_GLOSSY, false);
 	}
 
 	public static int getGlossyCenterGlowBrighness() {
-		if (prefs == null) {
-			return 64;
-		}
-		return prefs.getInt(KEY_GLOSSY_CENTER_GLOW_BRIGHTNESS, 64);
+		return readIntegerPref(KEY_GLOSSY_CENTER_GLOW_BRIGHTNESS, 64);
 	}
 
 	public static int getGlossyCenterGlowOuterDarkness() {
-		if (prefs == null) {
-			return -32;
-		}
-		return prefs.getInt(KEY_GLOSSY_CENTER_GLOW_OUTER_DARKNESS, -32);
+		return readIntegerPref(KEY_GLOSSY_CENTER_GLOW_OUTER_DARKNESS, -32);
 	}
 
 	public static int getGlossyReflectionBrightness() {
-		if (prefs == null) {
-			return 64;
-		}
-		return prefs.getInt(KEY_GLOSSY_REFLECTION_BRIGHTNESS, 64);
+		return readIntegerPref(KEY_GLOSSY_REFLECTION_BRIGHTNESS, 64);
 	}
 
 	public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
@@ -537,11 +431,7 @@ public class Settings {
 	}
 
 	public static String getGlossyReflectionStyleString() {
-		if (prefs == null) {
-			return "Diagonal";
-		}
-		final String style = prefs.getString(KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
-		return style;
+		return readStringPref(KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
 	}
 
 	public static GLOSSY_GLOW_STYLE getGlossyGlowStyle() {
@@ -555,107 +445,63 @@ public class Settings {
 	}
 
 	public static String getGlossyGlowStyleString() {
-		if (prefs == null) {
-			return "Center";
-		}
-		final String style = prefs.getString(KEY_GLOSSY_GLOW_STYLE, "Center");
-		return style;
+		return readStringPref(KEY_GLOSSY_GLOW_STYLE, "Center");
 	}
 
 	// ###################################################################
 	// Special Settings
 	public static boolean isOutline() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_PATTERN_OUTLINE, true);
+		return readBooleanPref(KEY_PATTERN_OUTLINE, true);
 	}
 
 	public static boolean isOutlineNeverTransparent() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT, false);
+		return readBooleanPref(KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT, false);
 	}
 
 	public static boolean isCustomOutlineColor() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("customOutlineColor", false);
+		return readBooleanPref("customOutlineColor", false);
 	}
 
 	public static int getCustomOutlineColor() {
-		if (prefs == null) {
-			return R.integer.COLOR_BLACK;
-		}
-		final int col = prefs.getInt("colorOutline", R.integer.COLOR_BLACK);
-		return col;
+		return readIntegerPref("colorOutline", R.integer.COLOR_BLACK);
 	}
 
 	public static int getOutlineDarkness() {
-		if (prefs == null) {
-			return -48;
-		}
-		return prefs.getInt(KEY_PATTERN_OUTLINE_DARKNESS_ADJUST, -48);
+		return readIntegerPref(KEY_PATTERN_OUTLINE_DARKNESS_ADJUST, -48);
 	}
 
 	public static float getOutlineThicknessAdjustment() {
-		if (prefs == null) {
-			return 1f;
-		}
-		return prefs.getInt(KEY_OUTLINE_THICKNESS_ADJUST, 100) / 100f;
+		return readIntegerPref(KEY_OUTLINE_THICKNESS_ADJUST, 100) / 100f;
 	}
 
 	public static int getOutlineThicknessLimit() {
-		if (prefs == null) {
-			return 3;
-		}
-		return prefs.getInt(KEY_OUTLINE_THICKNESS_LIMIT, 3);
+		return readIntegerPref(KEY_OUTLINE_THICKNESS_LIMIT, 3);
 	}
 
 	public static int getDropShadowDarkness() {
-		if (prefs == null) {
-			return -48;
-		}
-		return prefs.getInt(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -48);
+		return readIntegerPref(KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST, -48);
 	}
 
 	public static int getDropShadowOffsetX() {
-		if (prefs == null) {
-			return 0;
-		}
-		return prefs.getInt(KEY_DROP_SHADOW_OFFSET_X, 0);
+		return readIntegerPref(KEY_DROP_SHADOW_OFFSET_X, 0);
 	}
 
 	public static int getDropShadowOffsetY() {
-		if (prefs == null) {
-			return 0;
-		}
-		return prefs.getInt(KEY_DROP_SHADOW_OFFSET_Y, 0);
+		return readIntegerPref(KEY_DROP_SHADOW_OFFSET_Y, 0);
 	}
 
 	public static String getText() {
-		if (prefs == null) {
-			return "The Wallpaper Designer";
-		}
-		return prefs.getString(KEY_PATTERN_TEXT, "The Wallpaper Designer");
+		return readStringPref(KEY_PATTERN_TEXT, "The Wallpaper Designer");
 	}
 
 	public static String getTextDrawStyle() {
-		if (prefs == null) {
-			return "Round";
-		}
-		return prefs.getString(KEY_PATTERN_TEXT_DRAW_STYLE, "Round");
+		return readStringPref(KEY_PATTERN_TEXT_DRAW_STYLE, "Round");
 	}
 
 	// ###################################################################
 	// Options Pattern Style (DropShadow)
 	public static String getDropShadowType() {
-		if (prefs == null) {
-			return "Darker";
-		}
-		return prefs.getString(KEY_PATTERN_DROPSHADOW_TYPE, "Darker");
+		return readStringPref(KEY_PATTERN_DROPSHADOW_TYPE, "Darker");
 	}
 
 	public static boolean isDropShadow() {
@@ -663,45 +509,20 @@ public class Settings {
 	}
 
 	public static int getDropShadowColor() {
-		if (prefs == null) {
-			return R.integer.COLOR_BLACK;
-		}
-		final int col = prefs.getInt("colorDropShadow", R.integer.COLOR_BLACK);
-		return col;
+		return readIntegerPref("colorDropShadow", R.integer.COLOR_BLACK);
 	}
 
 	public static float getDropShadowRadiusAdjustment() {
-		if (prefs == null) {
-			return 1f;
-		}
-		return prefs.getInt("dropShadowRadiusAdjustment", 100) / 100f;
+		return readIntegerPref("dropShadowRadiusAdjustment", 100) / 100f;
 	}
 
 	// ###################################################################
-	// Options Pattern Style (Alpha)
-	// public static boolean isRandomizeAlpha() {
-	// return getRandomizeAlphaRange() != 0;
-	// }
-	//
-	// public static int getRandomizeAlphaRange() {
-	// if (prefs == null) {
-	// return 128;
-	// }
-	// return prefs.getInt("randomizeAlphaRangeInt", 128);
-	// }
-
 	public static int getMinOpacity() {
-		if (prefs == null) {
-			return 225;
-		}
-		return prefs.getInt("minOpacity", 225);
+		return readIntegerPref("minOpacity", 225);
 	}
 
 	public static int getMaxOpacity() {
-		if (prefs == null) {
-			return 255;
-		}
-		return prefs.getInt("maxOpacity", 255);
+		return readIntegerPref("maxOpacity", 255);
 	}
 
 	// ###################################################################
@@ -711,10 +532,7 @@ public class Settings {
 	}
 
 	public static int getRandomizeColorRange() {
-		if (prefs == null) {
-			return 12;
-		}
-		return prefs.getInt(KEY_RANDOMIZE_COLOR_RANGE_INT, 12);
+		return readIntegerPref(KEY_RANDOMIZE_COLOR_RANGE_INT, 12);
 	}
 
 	public static boolean isRandomizeBrightness() {
@@ -722,10 +540,7 @@ public class Settings {
 	}
 
 	public static int getRandomizeColorBrighnessRange() {
-		if (prefs == null) {
-			return 12;
-		}
-		return prefs.getInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 12);
+		return readIntegerPref(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 12);
 	}
 
 	public static boolean isRandomizeSaturation() {
@@ -733,24 +548,15 @@ public class Settings {
 	}
 
 	public static int getRandomizeSaturationRange() {
-		if (prefs == null) {
-			return 0;
-		}
-		return prefs.getInt(KEY_RANDOMIZE_SATURATION_RANGE, 0);
+		return readIntegerPref(KEY_RANDOMIZE_SATURATION_RANGE, 0);
 	}
 
 	public static int getCornerGradientLevels() {
-		if (prefs == null) {
-			return 100;
-		}
-		return prefs.getInt(KEY_CORNER_GRADIENT_LEVELS, 100);
+		return readIntegerPref(KEY_CORNER_GRADIENT_LEVELS, 100);
 	}
 
 	public static int getCornerRepeats() {
-		if (prefs == null) {
-			return 1;
-		}
-		return prefs.getInt(KEY_CORNER_REPEATS, 1);
+		return readIntegerPref(KEY_CORNER_REPEATS, 1);
 	}
 
 	// ###################################################################
@@ -759,27 +565,18 @@ public class Settings {
 		if (isRandomLeafCount()) {
 			return Randomizer.getRandomInt(randomMin - 1, randomMax);
 		}
-		if (prefs == null) {
-			return 5;
-		}
-		return prefs.getInt(KEY_NUMBER_OF_LEAFS, 5);
+		return readIntegerPref(KEY_NUMBER_OF_LEAFS, 5);
 	}
 
 	private static boolean isRandomLeafCount() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_RANDOM_LEAF_COUNT, false);
+		return readBooleanPref(KEY_RANDOM_LEAF_COUNT, false);
 	}
 
 	// ###################################################################
 	// Wallpater Size
 
 	public static String getSizeSelection() {
-		if (prefs == null) {
-			return "2560x1600";
-		}
-		return prefs.getString(KEY_SIZE_SELECTION, "2560x1600");
+		return readStringPref(KEY_SIZE_SELECTION, "2560x1600");
 	}
 
 	public boolean isCustomSize() {
@@ -807,7 +604,7 @@ public class Settings {
 	 */
 	private static int readNumberFromSettings(final String key, final int defValue, final int maxLength) {
 		// some idiot was typing 100000000 :-)
-		String w = prefs.getString(key, "" + defValue);
+		String w = readStringPref(key, "" + defValue);
 		// some idiot was typing 100000000 :-)
 		if (w.length() > maxLength) {
 			w = "" + defValue;
@@ -852,38 +649,22 @@ public class Settings {
 	// Background Color
 
 	public static boolean isSameGradientAsPatterns() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
+		return readBooleanPref(KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
 	}
 
 	public static String getGradientDirection() {
-		if (prefs == null) {
-			return "4-Color Gradient from corners";
-		}
-		return prefs.getString(KEY_COLOR_GRADIENT_DIRECTION, "4-Color Gradient from corners");
+		return readStringPref(KEY_COLOR_GRADIENT_DIRECTION, "4-Color Gradient from corners");
 	}
 
 	public static int getAnzahlGradientColors() {
-		if (prefs == null) {
-			return 4;
-		}
-		return Integer.parseInt(prefs.getString(KEY_COLORS_ANZAHL, "4"));
+		return Integer.parseInt(readStringPref(KEY_COLORS_ANZAHL, "4"));
 	}
 
 	public static boolean isReverseColors() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_REVERSE_COLORS, false);
+		return readBooleanPref(KEY_REVERSE_COLORS, false);
 	}
 
-	// Background Color
 	public static boolean is4ColorGradient(final String test) {
-		if (prefs == null) {
-			return false;
-		}
 		return test.startsWith("4");
 	}
 
@@ -900,10 +681,7 @@ public class Settings {
 	}
 
 	public static int getColorRepeats() {
-		if (prefs == null) {
-			return 1;
-		}
-		return prefs.getInt(KEY_COLOR_REPEATS, 1);
+		return readIntegerPref(KEY_COLOR_REPEATS, 1);
 	}
 
 	public static boolean isTornadoGradient(final String test) {
@@ -911,144 +689,81 @@ public class Settings {
 	}
 
 	public static int getTornadoArms() {
-		if (prefs == null) {
-			return 1;
-		}
-		return prefs.getInt(KEY_TORNADO_ARMS, 1);
+		return readIntegerPref(KEY_TORNADO_ARMS, 1);
 	}
 
 	public static int getTornadoRings() {
-		if (prefs == null) {
-			return 2;
-		}
-		return prefs.getInt(KEY_TORNADO_RINGS, 1) + 1;
+		return readIntegerPref(KEY_TORNADO_RINGS, 1) + 1;
 	}
 
 	public static int getPatternColor1() {
-		if (prefs == null) {
-			return R.integer.COLOR_BLACK;
-		}
-		final int col = prefs.getInt(KEY_COLOR1, R.integer.COLOR_BLACK);
-		return col;
+		return readIntegerPref(KEY_COLOR1, R.integer.COLOR_BLACK);
 	}
 
 	public static int getPatternColor2() {
-		if (prefs == null) {
-			return R.integer.COLOR_WHITE;
-		}
-		final int col = prefs.getInt(KEY_COLOR2, R.integer.COLOR_WHITE);
-		return col;
+		return readIntegerPref(KEY_COLOR2, R.integer.COLOR_WHITE);
 	}
 
 	public static int getPatternColor3() {
-		if (prefs == null) {
-			return Color.BLUE;
-		}
-		final int col = prefs.getInt(KEY_COLOR3, Color.BLUE);
-		return col;
+		return readIntegerPref(KEY_COLOR3, Color.BLUE);
 	}
 
 	public static int getPatternColor4() {
-		if (prefs == null) {
-			return Color.YELLOW;
-		}
-		final int col = prefs.getInt(KEY_COLOR4, Color.YELLOW);
-		return col;
+		return readIntegerPref(KEY_COLOR4, Color.YELLOW);
 	}
 
 	public static int getBackGrndColor1() {
-		if (prefs == null) {
-			return Color.DKGRAY;
-		}
-		final int col = prefs.getInt(KEY_BGRND_COLOR1, Color.DKGRAY);
-		return col;
+		return readIntegerPref(KEY_BGRND_COLOR1, Color.DKGRAY);
 	}
 
 	public static int getBackGrndColor2() {
-		if (prefs == null) {
-			return Color.BLACK;
-		}
-		final int col = prefs.getInt(KEY_BGRND_COLOR2, Color.BLACK);
-		return col;
+		return readIntegerPref(KEY_BGRND_COLOR2, Color.BLACK);
 	}
 
 	public static boolean isDynamicColoring() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("dynamicColoring", false);
+		return readBooleanPref("dynamicColoring", false);
 	}
 
 	public static boolean isHexValueEnabled() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_HEX_VALUES, false);
+		return readBooleanPref(KEY_HEX_VALUES, false);
 	}
 
 	public static boolean isShowSetWallpaperButton() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_SHOW_SET_WALLPAPER_BUTTON, true);
+		return readBooleanPref(KEY_SHOW_SET_WALLPAPER_BUTTON, true);
 	}
 
 	public static boolean isRestoreSizeFromDesign() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_RESTORE_WALLPAPER_SIZE, true);
+		return readBooleanPref(KEY_RESTORE_WALLPAPER_SIZE, true);
 	}
 
 	public static boolean isRenderingOnSettingsExit() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_RENDER_ON_SETTINGS_EXIT, true);
+		return readBooleanPref(KEY_RENDER_ON_SETTINGS_EXIT, true);
 	}
 
 	public static boolean isShowRenderingProcess() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_SHOW_RENDERING_PROCESS, true);
+		return readBooleanPref(KEY_SHOW_RENDERING_PROCESS, false);
 	}
 
 	public static int getRenderingProcessFrames() {
-		if (prefs == null) {
-			return 1;
-		}
-		return Math.max(1, prefs.getInt(KEY_RENDERING_PROCESS_FRAMES, 1));
+		return Math.max(1, readIntegerPref(KEY_RENDERING_PROCESS_FRAMES, 1));
 	}
 
 	public static boolean isRenderingOnStartingApp() {
-		if (prefs == null) {
-			return true;
-		}
-		return prefs.getBoolean(KEY_RENDER_ON_APP_STARTUP, true);
+		return readBooleanPref(KEY_RENDER_ON_APP_STARTUP, true);
 	}
 
 	// ###################################################################
 	// General stuff
 	public static boolean isDebuggingMessages() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("debug2", false);
+		return readBooleanPref("debug2", false);
 	}
 
 	public static boolean isDebugging() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean("debug", false);
+		return readBooleanPref("debug", false);
 	}
 
 	public static boolean isPremium() {
-		if (prefs == null) {
-			return false;
-		}
-		return prefs.getBoolean(KEY_MUIMERP, false);
+		return readBooleanPref(KEY_MUIMERP, false);
 	}
 
 	// private static boolean readSuperUser(final Activity activity) {
@@ -1071,18 +786,8 @@ public class Settings {
 	 * @param preferences
 	 */
 	public static void initPrefs(final SharedPreferences preferences, final Context ctx, final Activity activity) {
-		// context = ctx;
 		prefs = preferences;
-		// if (prefs.getInt("sampleSettingsVersion", 0) <
-		// CURRENT_SETTINGS_VERSION) {
-		// Log.i("GEITH", "Unzipping Sample Settings...");
-		// ZipHelper.unzipSettings(activity, ctx);
-		// prefs.edit().putInt("sampleSettingsVersion",
-		// CURRENT_SETTINGS_VERSION).commit();
-		// } else {
-		// Log.i("GEITH", "Sample Settings already unzipped...Nothing to do!");
-		// }
-		if (prefs.getBoolean("firstrun", true)) {
+		if (readBooleanPref("firstrun", true)) {
 			Log.i("GEITH", "FirstRun --> initializing the SharedPreferences with some colors...");
 			prefs.edit().putBoolean("firstrun", false).commit();
 			// init colors
@@ -1129,5 +834,4 @@ public class Settings {
 			prefs.edit().putInt(KEY_BLURR_STAGE_3, 80).commit();
 		}
 	}
-
 }
