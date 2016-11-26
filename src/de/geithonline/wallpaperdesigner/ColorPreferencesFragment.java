@@ -20,7 +20,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
 import de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.BackgroundDrawer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer.BackgroundDrawer;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;

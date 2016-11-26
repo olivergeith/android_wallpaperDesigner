@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 
-public interface IWPStyle {
+public interface IBmpRenderer {
 
 	public Bitmap drawBitmap(BitmapWorkerTask bitmapWorkerTask);
 

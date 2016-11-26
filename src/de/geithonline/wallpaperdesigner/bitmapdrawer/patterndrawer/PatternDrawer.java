@@ -1,7 +1,8 @@
-package de.geithonline.wallpaperdesigner.bitmapdrawer;
+package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 
 import java.util.Locale;
 
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
@@ -130,15 +131,28 @@ import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public abstract class WPStylePattern extends WPStyle {
-	protected int bWidth = 2560;
-	protected int bHeight = 1600;
-	protected Rotator rotator = new Rotator(bWidth, bHeight);
-	protected GlossyDrawer glossyDrawer;
-	protected OutlineDrawer outlineDrawer;
-	protected final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+public class PatternDrawer {
 
-	protected void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
+	private final Canvas bitmapCanvas;
+	private final GlossyDrawer glossyDrawer;
+	private final OutlineDrawer outlineDrawer;
+	private final Rotator rotator;
+	private final int bWidth;
+	private final int bHeight;
+
+	private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	public PatternDrawer(final Canvas bitmapCanvas) {
+		this.bitmapCanvas = bitmapCanvas;
+		bWidth = bitmapCanvas.getWidth();
+		bHeight = bitmapCanvas.getHeight();
+		glossyDrawer = new GlossyDrawer(bitmapCanvas);
+		outlineDrawer = new OutlineDrawer(bitmapCanvas);
+		rotator = new Rotator(bWidth, bHeight);
+
+	}
+
+	public void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
 		switch (Settings.getSelectedPattern()) {
 
 		case "Gears-Saws":

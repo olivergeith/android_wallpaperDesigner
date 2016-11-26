@@ -19,9 +19,8 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
-public abstract class WPStyle implements IWPStyle {
+public abstract class BaseBmpRenderer implements IBmpRenderer {
 
-	protected Canvas bitmapCanvas;
 	protected Bitmap bitmap;
 
 	@Override
