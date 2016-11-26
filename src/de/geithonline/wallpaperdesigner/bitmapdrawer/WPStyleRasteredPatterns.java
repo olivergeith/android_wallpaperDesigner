@@ -2,6 +2,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
@@ -35,8 +36,6 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 	public synchronized Bitmap drawBitmap(final int width, final int height) {
 		bWidth = width;
 		bHeight = height;
-		// Rotator Objekt setzen
-		rotator = new Rotator(bWidth, bHeight);
 
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
@@ -45,6 +44,11 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		final Canvas refbitmapCanvas = new Canvas(refbitmap);
 		BackgroundDrawer.drawBackground(refbitmapCanvas, true);
 		bitmap = BackgroundDrawer.blurrIfNessesary(bitmap);
+
+		// Rotator Objekt setzen
+		rotator = new Rotator(bWidth, bHeight);
+		glossyDrawer = new GlossyDrawer(bitmapCanvas);
+		outlineDrawer = new OutlineDrawer(bitmapCanvas);
 
 		// initializing some values depending on BitmapSize
 		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
@@ -134,4 +138,35 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		refbitmap.recycle();
 		return bitmap;
 	}
+
+	private void setupDropShadow(final Bitmap refbitmap, final int dropShadowRadius, final Paint paint, final int x, final int y, final int pcolor) {
+
+		final int dX = Settings.getDropShadowOffsetX();
+		final int dY = Settings.getDropShadowOffsetY();
+		switch (Settings.getDropShadowType()) {
+		default:
+		case "No":
+			paint.setShadowLayer(0, 0, 0, Color.BLACK);
+			break;
+		case "Random":
+			final int sx = getRandomInt(0, bWidth - 1);
+			final int sy = getRandomInt(0, bHeight - 1);
+			final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
+			paint.setShadowLayer(dropShadowRadius, dX, dY, scolor);
+			break;
+		case "Opposite":
+			paint.setShadowLayer(dropShadowRadius, dX, dY, getColorFromBitmap(bitmap, refbitmap, bWidth - 1 - x, bHeight - 1 - y));
+			break;
+		case "Darker":
+			paint.setShadowLayer(dropShadowRadius, dX, dY, ColorHelper.changeBrightness(pcolor, Settings.getDropShadowDarkness()));
+			break;
+		case "Select":
+			final int shd = Settings.getDropShadowColor();
+			final int alpha = Color.alpha(pcolor);
+			final int dc = Color.argb(alpha, Color.red(shd), Color.green(shd), Color.blue(shd));
+			paint.setShadowLayer(dropShadowRadius, dX, dY, dc);
+			break;
+		}
+	}
+
 }
