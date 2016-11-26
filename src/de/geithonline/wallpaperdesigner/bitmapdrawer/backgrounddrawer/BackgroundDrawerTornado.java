@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.bitmapdrawer;
+package de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

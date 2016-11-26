@@ -42,8 +42,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.IWPStyle;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.WPStyleRasteredPatterns;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.IBmpRenderer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.BmpRenderer;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
 import de.geithonline.wallpaperdesigner.settings.Design;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 	private static final int MY_PERMISSIONS_REQUEST_INT = 99;
 	private ProgressDialog dialog;
 	private TouchImageView wallpaperView;
-	private IWPStyle drawer;
+	private IBmpRenderer drawer;
 	private SensorManager mSensorManager;
 	private ShakeEventListener mSensorListener;
 	private TextView shakeHint;
@@ -465,7 +465,7 @@ public class MainActivity extends Activity {
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
-			drawer = new WPStyleRasteredPatterns(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
+			drawer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
 			// drawer.recycleBitmap();
 			Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
 

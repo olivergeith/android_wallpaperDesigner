@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer.BackgroundDrawer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternDrawer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.AbstractRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
@@ -15,13 +17,17 @@ import de.geithonline.wallpaperdesigner.utils.BitmapBlurrer;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class WPStyleRasteredPatterns extends WPStylePattern {
+public class BmpRenderer extends BaseBmpRenderer {
 
 	private BitmapWorkerTask task;
 	private final String layout;
 	private final String layoutVariante;
+	protected Canvas bitmapCanvas;
+	private PatternDrawer patternDrawer;
+	private int bWidth;
+	private int bHeight;
 
-	public WPStyleRasteredPatterns(final String layout, final String layoutVariante) {
+	public BmpRenderer(final String layout, final String layoutVariante) {
 		this.layout = layout;
 		this.layoutVariante = layoutVariante;
 	}
@@ -37,6 +43,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		bWidth = width;
 		bHeight = height;
 
+		// create new Bitmap and Canvas from size
 		bitmap = Bitmap.createBitmap(bWidth, bHeight, Bitmap.Config.ARGB_8888);
 		bitmapCanvas = new Canvas(bitmap);
 		BackgroundDrawer.drawBackground(bitmapCanvas, Settings.isSameGradientAsPatterns());
@@ -45,10 +52,8 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 		BackgroundDrawer.drawBackground(refbitmapCanvas, true);
 		bitmap = BackgroundDrawer.blurrIfNessesary(bitmap);
 
-		// Rotator Objekt setzen
-		rotator = new Rotator(bWidth, bHeight);
-		glossyDrawer = new GlossyDrawer(bitmapCanvas);
-		outlineDrawer = new OutlineDrawer(bitmapCanvas);
+		// Pattern Drawer Object bauen
+		patternDrawer = new PatternDrawer(bitmapCanvas);
 
 		// initializing some values depending on BitmapSize
 		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
@@ -113,7 +118,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 
 			setupDropShadow(refbitmap, getDropShadowRadius(), paint, x, y, paint.getColor());
 
-			drawPattern(x, y, paint, radius, i);
+			patternDrawer.drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
 				if (i == blurLevel1) {
