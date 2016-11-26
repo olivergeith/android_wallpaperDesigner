@@ -42,8 +42,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.IBmpRenderer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.BmpRenderer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.IBmpRenderer;
 import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
 import de.geithonline.wallpaperdesigner.settings.Design;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
@@ -479,8 +479,11 @@ public class MainActivity extends Activity {
 			}
 		}
 
-		public void settingProgress(final int p, final Bitmap bitmap) {
+		public void settingBitmap(final Bitmap bitmap) {
 			this.bitmap = bitmap;
+		}
+
+		public void settingProgress(final int p) {
 			publishProgress(p);
 		}
 
@@ -507,7 +510,7 @@ public class MainActivity extends Activity {
 					if (w <= maxTexturesize && h <= maxTexturesize) {
 						imageView.setImageBitmap(bitmap);
 					} else {
-						Log.i("SCALING Image for view", "Image bigger than GL_MAX_TEXTURE_SIZE -> resizing it");
+						// Log.i("SCALING Image for view", "Image bigger than GL_MAX_TEXTURE_SIZE -> resizing it");
 						if (w > h) {
 							final int nh = bitmap.getHeight() * maxTexturesize / bitmap.getWidth();
 							final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxTexturesize, nh, true);
@@ -519,7 +522,6 @@ public class MainActivity extends Activity {
 						}
 					}
 					imageView.fit2Screen();
-
 				}
 			}
 		}

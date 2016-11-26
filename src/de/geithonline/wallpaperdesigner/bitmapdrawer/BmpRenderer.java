@@ -71,7 +71,8 @@ public class BmpRenderer extends BaseBmpRenderer {
 		final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, width, height, maxRadius, Settings.getOverlapping());
 
 		task.settingMax(raster.getAnzahlPatterns());
-
+		// giving the task the bitmap...so it can animate the progress
+		task.settingBitmap(bitmap);
 		if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
 			MaterialPath.initFlippy();
 		}
@@ -85,7 +86,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 			if (i % 100 == 0) {
 				System.gc();
 			}
-			task.settingProgress(i, bitmap);
+			task.settingProgress(i);
 			paint.setStyle(Style.FILL);
 			final int radius = Randomizer.getRandomInt(minRadius, maxRadius);
 
@@ -111,13 +112,11 @@ public class BmpRenderer extends BaseBmpRenderer {
 				pcolor = Randomizer.randomizeColor(pcolor, Settings.getRandomizeColorRange(), Settings.getColorRandomizingType());
 			}
 
-			// pcolor = ColorHelper.setSaturation(pcolor, 0.5f);
+			// Setting up paint
 			paint.setColor(pcolor);
-
 			paint.setAlpha(Randomizer.getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
-
 			setupDropShadow(refbitmap, getDropShadowRadius(), paint, x, y, paint.getColor());
-
+			// draw the pattern
 			patternDrawer.drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
