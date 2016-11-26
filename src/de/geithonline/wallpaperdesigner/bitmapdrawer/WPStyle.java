@@ -19,7 +19,7 @@ import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.MediaScannerHelper;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
-public abstract class WPStyle extends ColorProvider implements IWPStyle {
+public abstract class WPStyle implements IWPStyle {
 
 	protected Canvas bitmapCanvas;
 	protected Bitmap bitmap;

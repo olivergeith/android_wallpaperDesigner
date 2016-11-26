@@ -2,7 +2,6 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import java.util.Locale;
 
-import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
@@ -129,6 +128,7 @@ import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
+import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public abstract class WPStylePattern extends WPStyle {
 	protected int bWidth = 2560;
@@ -265,7 +265,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(0, 3);
 			variante = "V" + nr;
 		}
 		drawGearSaw(x, y, paint, radius, variante);
@@ -283,7 +283,7 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V2":
 		case "Saw": {
 			final int zahn = 15 + Settings.getAnzahlFlowerLeafs(1, 10);
-			path = new SawPath(zahn, new Point(x, y), radius, getFilledBoolean(), getRandomBoolean());
+			path = new SawPath(zahn, new Point(x, y), radius, getFilledBoolean(), Randomizer.getRandomBoolean());
 			break;
 		}
 		case "V3":
@@ -305,7 +305,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawMaritim(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variante = "V" + nr;
 		}
 		drawMaritim(x, y, paint, radius, variante);
@@ -383,10 +383,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(0, 6);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
-			final int nr = getRandomInt(0, 9);
+			final int nr = Randomizer.getRandomInt(0, 9);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Square (Mixed)")) {
 			variant = "Square (Mixed)";
@@ -460,7 +460,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawLeafs(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawLeafs(x, y, paint, radius, variant);
@@ -739,7 +739,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(0, 6);
 			variant = "V" + nr;
 		}
 		draw3DLongShape(x, y, paint, radius, variant);
@@ -786,10 +786,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 9);
+			final int nr = Randomizer.getRandomInt(0, 9);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
-			final int nr = getRandomInt(4, 6);
+			final int nr = Randomizer.getRandomInt(4, 6);
 			variante = "V" + nr;
 		}
 
@@ -852,7 +852,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawRing(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawRing(x, y, paint, radius, variant);
@@ -891,10 +891,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawSpace(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 10);
+			final int nr = Randomizer.getRandomInt(0, 10);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed Rockets")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(0, 6);
 			variant = "V" + nr;
 		}
 		drawSpace(x, y, paint, radius, variant);
@@ -957,7 +957,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawVirus(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 8);
+			final int nr = Randomizer.getRandomInt(0, 8);
 			variant = "V" + nr;
 		}
 
@@ -1005,7 +1005,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawWeather(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 7);
+			final int nr = Randomizer.getRandomInt(0, 7);
 			variant = "V" + nr;
 		}
 		drawWeather(x, y, paint, radius, variant);
@@ -1060,7 +1060,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawPlane(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(0, 3);
 			variant = "V" + nr;
 		}
 		drawPlane(x, y, paint, radius, variant);
@@ -1080,10 +1080,10 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawFlower(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed V1-V3")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(0, 3);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed V4-V5")) {
-			final int nr = getRandomInt(3, 5);
+			final int nr = Randomizer.getRandomInt(3, 5);
 			variant = "V" + nr;
 		}
 		drawFlower(x, y, paint, radius, variant);
@@ -1128,7 +1128,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawLines(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(0, 6);
 			variant = "V" + nr;
 		}
 		drawLines(x, y, paint, radius, variant);
@@ -1141,23 +1141,23 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Spirals":
-			path = new SpiralPath(getRandomInt(2, 5), new Point(x, y), radius, getRandomBoolean());
+			path = new SpiralPath(Randomizer.getRandomInt(2, 5), new Point(x, y), radius, Randomizer.getRandomBoolean());
 			break;
 		case "V2":
 		case "Streamers":
-			path = new LuftschlangenPath(getRandomInt(5, 7), new Point(x, y), radius, getRandomBoolean());
+			path = new LuftschlangenPath(Randomizer.getRandomInt(5, 7), new Point(x, y), radius, Randomizer.getRandomBoolean());
 			break;
 		case "V3":
 		case "Maze":
-			path = new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(10, 40), radius, true);
+			path = new RandomPath(new Point(x, y), bWidth, bHeight, Randomizer.getRandomInt(10, 40), radius, true);
 			break;
 		case "V4":
 		case "Crickle Crackle":
-			path = new RandomPath(new Point(x, y), bWidth, bHeight, getRandomInt(5, 30), radius, false);
+			path = new RandomPath(new Point(x, y), bWidth, bHeight, Randomizer.getRandomInt(5, 30), radius, false);
 			break;
 		case "V5":
 		case "Blitz":
-			path = new BlitzPath(new Point(x, y), getRandomInt(5, 30), radius, getFilledBoolean());
+			path = new BlitzPath(new Point(x, y), Randomizer.getRandomInt(5, 30), radius, getFilledBoolean());
 			break;
 		}
 
@@ -1172,7 +1172,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawShell(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Shells Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(0, 6);
 			variant = "Shells V" + nr;
 		}
 		drawShell(x, y, paint, radius, variant);
@@ -1203,7 +1203,7 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
+		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
 		}
 		bitmapCanvas.drawPath(path, paint);
@@ -1217,7 +1217,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawMandala(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawMandala(x, y, paint, radius, variant);
@@ -1242,7 +1242,7 @@ public abstract class WPStylePattern extends WPStyle {
 		}
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
+		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
 		}
 		bitmapCanvas.drawPath(path, paint);
@@ -1255,7 +1255,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawFisch(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawFisch(x, y, paint, radius, variant);
@@ -1266,7 +1266,7 @@ public abstract class WPStylePattern extends WPStyle {
 
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
 		// Mirror only on random rotation
-		if (Settings.isRandomRotate() && getRandomBoolean()) {
+		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
 		}
 		bitmapCanvas.drawPath(path, paint);
@@ -1297,7 +1297,7 @@ public abstract class WPStylePattern extends WPStyle {
 			drawCustomText(x, y, paint, radius * 1, text);
 			break;
 		case "Letters":
-			final int letterindex = getRandomInt(0, letters.length() - 1);
+			final int letterindex = Randomizer.getRandomInt(0, letters.length() - 1);
 			final char c = letters.charAt(letterindex);
 			drawCustomText(x, y, paint, radius * 2, "" + c);
 			break;
@@ -1319,7 +1319,7 @@ public abstract class WPStylePattern extends WPStyle {
 			drawTextAngled(x, y, paint, radius, text);
 			break;
 		case "Random":
-			final int i = getRandomInt(0, 3);
+			final int i = Randomizer.getRandomInt(0, 3);
 			switch (i) {
 			default:
 			case 1:
@@ -1354,7 +1354,7 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setTextAlign(Align.CENTER);
 		final Path mArc = new Path();
 		final RectF oval = getRectForRadius(x, y, radius * 2);
-		mArc.addArc(oval, getRandomInt(0, 360), 355);
+		mArc.addArc(oval, Randomizer.getRandomInt(0, 360), 355);
 
 		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
 		outlineDrawer.drawText(paint, radius, text, mArc);
@@ -1365,8 +1365,8 @@ public abstract class WPStylePattern extends WPStyle {
 		paint.setTextAlign(Align.LEFT);
 		final Path mArc = new Path();
 		mArc.moveTo(x, y);
-		final int y2 = getRandomInt(-bHeight, bHeight);
-		final int x2 = getRandomInt(-bWidth, bWidth);
+		final int y2 = Randomizer.getRandomInt(-bHeight, bHeight);
+		final int x2 = Randomizer.getRandomInt(-bWidth, bWidth);
 		mArc.lineTo(x2, y2);
 
 		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
@@ -1514,7 +1514,7 @@ public abstract class WPStylePattern extends WPStyle {
 			PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 180, new Point(x, y)));
 		} else {
 			float degr = rotator.getRotationDegrees(0, 180, new Point(x, y));
-			if (getRandomBoolean()) {
+			if (Randomizer.getRandomBoolean()) {
 				degr = degr + 90;
 			}
 			PathHelper.rotatePath(x, y, path, degr);
@@ -1530,16 +1530,16 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 14);
+			final int nr = Randomizer.getRandomInt(0, 14);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
-			final int nr = getRandomInt(1, 5);
+			final int nr = Randomizer.getRandomInt(1, 5);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Ghosts")) {
-			final int nr = getRandomInt(5, 7);
+			final int nr = Randomizer.getRandomInt(5, 7);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Owls")) {
-			final int nr = getRandomInt(7, 11);
+			final int nr = Randomizer.getRandomInt(7, 11);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Pumpkins")) {
 			variante = "Mixed Pumpkins";
@@ -1657,7 +1657,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 17);
+			final int nr = Randomizer.getRandomInt(0, 17);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1674,14 +1674,14 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V2":
 		case "YingYang":
 			path = new YingYangPath(new Point(x, y), radius);
-			if (Settings.isRandomRotate() && getRandomBoolean()) {
+			if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 				PathHelper.mirrorPathLeftRight(x, y, path);
 			}
 			break;
 		case "V3":
 		case "Crop Circles":
 			path = new DotSpiralPath(3, new Point(x, y), radius, 0);
-			if (Settings.isRandomRotate() && getRandomBoolean()) {
+			if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 				PathHelper.mirrorPathLeftRight(x, y, path);
 			}
 			break;
@@ -1700,7 +1700,7 @@ public abstract class WPStylePattern extends WPStyle {
 		case "V7":
 		case "Footprint":
 			path = new FootprintPath(new Point(x, y), radius, "V1");
-			if (getRandomBoolean()) {
+			if (Randomizer.getRandomBoolean()) {
 				PathHelper.mirrorPathLeftRight(x, y, path);
 			}
 			break;
@@ -1760,7 +1760,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawSonic(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawSonic(x, y, paint, radius, variant);
@@ -1803,7 +1803,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawSquare(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 4);
 			variant = "V" + nr;
 		}
 		drawSquare(x, y, paint, radius, variant);
@@ -1858,7 +1858,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 12);
+			final int nr = Randomizer.getRandomInt(0, 12);
 			variant = "V" + nr;
 		}
 		drawPillow(x, y, paint, radius, variant);
@@ -1929,7 +1929,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 7);
+			final int nr = Randomizer.getRandomInt(0, 7);
 			variant = "V" + nr;
 		}
 		drawChess(x, y, paint, radius, variant);
@@ -1941,35 +1941,35 @@ public abstract class WPStylePattern extends WPStyle {
 		default:
 		case "V1":
 		case "Square":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Square);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Square);
 			break;
 		case "V2":
 		case "Star":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Star);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Star);
 			break;
 		case "V3":
 		case "Circle":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Circle);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Circle);
 			break;
 		case "V4":
 		case "Pillow":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Pillow);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Pillow);
 			break;
 		case "V5":
 		case "Heart":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Heart);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Heart);
 			break;
 		case "V6":
 		case "Arrow":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Arrow);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Arrow);
 			break;
 		case "V7":
 		case "Triangle":
-			path = new SchachbrettPath(new PointF(x, y), radius, getRandomInt(0, 4), BRETT_SHAPE.Triangle);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Triangle);
 			break;
 		}
 		if (Settings.isRandomRotate()) {
-			PathHelper.rotatePath(x, y, path, 90 * getRandomInt(-1, 4));
+			PathHelper.rotatePath(x, y, path, 90 * Randomizer.getRandomInt(-1, 4));
 		}
 		bitmapCanvas.drawPath(path, paint);
 		outlineDrawer.draw(paint, radius, path);
@@ -1981,7 +1981,7 @@ public abstract class WPStylePattern extends WPStyle {
 	protected void drawXmas(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 1);
+			final int nr = Randomizer.getRandomInt(0, 1);
 			variant = "V" + nr;
 		}
 		drawXmas(x, y, paint, radius, variant);
@@ -2021,7 +2021,7 @@ public abstract class WPStylePattern extends WPStyle {
 		final Path path;
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 2);
+			final int nr = Randomizer.getRandomInt(0, 2);
 			variant = "V" + nr;
 		}
 		switch (variant) {
@@ -2054,7 +2054,7 @@ public abstract class WPStylePattern extends WPStyle {
 		Path path;
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 2);
+			final int nr = Randomizer.getRandomInt(0, 2);
 			variante = "V" + nr;
 		}
 		switch (variante) {
@@ -2086,7 +2086,7 @@ public abstract class WPStylePattern extends WPStyle {
 		Path path;
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(0, 6);
 			variante = "V" + nr;
 		}
 		switch (variante) {
@@ -2135,7 +2135,7 @@ public abstract class WPStylePattern extends WPStyle {
 		Path path;
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(0, 3);
 			variante = "V" + nr;
 		}
 		switch (variante) {
@@ -2166,31 +2166,6 @@ public abstract class WPStylePattern extends WPStyle {
 		outlineDrawer.draw(paint, radius, path);
 	}
 
-	// #########################################################################################
-	// Service methods
-	// #########################################################################################
-	protected int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
-
-		int xx = Math.min(x, bWidth - 1);
-		int yy = Math.min(y, bHeight - 1);
-		xx = Math.max(xx, 0);
-		yy = Math.max(yy, 0);
-		if (Settings.isDynamicColoring() && Settings.isSameGradientAsPatterns()) {
-			return bmp.getPixel(xx, yy);
-		} else {
-			return refbmp.getPixel(xx, yy);
-		}
-
-	}
-
-	protected int getDropShadowRadius() {
-		int dropShadowRadius = Math.round(bWidth * 0.01f * Settings.getDropShadowRadiusAdjustment());
-		if (dropShadowRadius < 5) {
-			dropShadowRadius = 5;
-		}
-		return dropShadowRadius;
-	}
-
 	private boolean getFilledBoolean() {
 		boolean filled;
 		switch (Settings.getFilledOption()) {
@@ -2202,7 +2177,7 @@ public abstract class WPStylePattern extends WPStyle {
 			filled = true;
 			break;
 		case "Randomly mixed":
-			filled = getRandomBoolean();
+			filled = Randomizer.getRandomBoolean();
 			break;
 		}
 		return filled;

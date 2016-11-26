@@ -25,6 +25,7 @@ public class Rotator {
 			return Randomizer.getRandomFloat(Settings.getFixedRotationDegrees() - Settings.getrandomRangeDegrees(), //
 					Settings.getFixedRotationDegrees() + Settings.getrandomRangeDegrees());
 
+		case "Around Adjustable Point":
 		case "Around Adjustable Center": {
 			final float distTCenterX = bWidth * Settings.getRotationCenterPointX() - center.x;
 			final float distTCenterY = bHeight * Settings.getRotationCenterPointY() - center.y;

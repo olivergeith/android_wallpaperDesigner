@@ -60,8 +60,6 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			minRadius = 5;
 		}
 
-		final int dropShadowRadius = getDropShadowRadius();
-
 		final Paint paint = new Paint();
 		paint.setAntiAlias(true);
 
@@ -84,7 +82,7 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			}
 			task.settingProgress(i, bitmap);
 			paint.setStyle(Style.FILL);
-			final int radius = getRandomInt(minRadius, maxRadius);
+			final int radius = Randomizer.getRandomInt(minRadius, maxRadius);
 
 			// random koordinate an der gemalt werden soll
 			final Point p = raster.drawNextPoint();
@@ -111,9 +109,9 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			// pcolor = ColorHelper.setSaturation(pcolor, 0.5f);
 			paint.setColor(pcolor);
 
-			paint.setAlpha(getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
+			paint.setAlpha(Randomizer.getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
 
-			setupDropShadow(refbitmap, dropShadowRadius, paint, x, y, paint.getColor());
+			setupDropShadow(refbitmap, getDropShadowRadius(), paint, x, y, paint.getColor());
 
 			drawPattern(x, y, paint, radius, i);
 
@@ -149,8 +147,8 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			paint.setShadowLayer(0, 0, 0, Color.BLACK);
 			break;
 		case "Random":
-			final int sx = getRandomInt(0, bWidth - 1);
-			final int sy = getRandomInt(0, bHeight - 1);
+			final int sx = Randomizer.getRandomInt(0, bWidth - 1);
+			final int sy = Randomizer.getRandomInt(0, bHeight - 1);
 			final int scolor = getColorFromBitmap(bitmap, refbitmap, sx, sy);
 			paint.setShadowLayer(dropShadowRadius, dX, dY, scolor);
 			break;
@@ -167,6 +165,31 @@ public class WPStyleRasteredPatterns extends WPStylePattern {
 			paint.setShadowLayer(dropShadowRadius, dX, dY, dc);
 			break;
 		}
+	}
+
+	private int getDropShadowRadius() {
+		int dropShadowRadius = Math.round(bWidth * 0.01f * Settings.getDropShadowRadiusAdjustment());
+		if (dropShadowRadius < 5) {
+			dropShadowRadius = 5;
+		}
+		return dropShadowRadius;
+	}
+
+	// #########################################################################################
+	// Service methods
+	// #########################################################################################
+	private int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
+
+		int xx = Math.min(x, bWidth - 1);
+		int yy = Math.min(y, bHeight - 1);
+		xx = Math.max(xx, 0);
+		yy = Math.max(yy, 0);
+		if (Settings.isDynamicColoring() && Settings.isSameGradientAsPatterns()) {
+			return bmp.getPixel(xx, yy);
+		} else {
+			return refbmp.getPixel(xx, yy);
+		}
+
 	}
 
 }
