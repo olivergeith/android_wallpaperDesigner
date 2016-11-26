@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.settings;
+package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Assorted Shapes",
 				new PatternProperties(true, true, false, true, false, true, //
 						new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot", "Footprint", "Pentagram",
-								"4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Iron Cross", "Mixed" }));
+								"4Sails", "Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Iron Cross", "Iron Cross (round)",
+								"Mixed" }));
 
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true, //
 				new CharSequence[] { "Bubble" }));
@@ -46,7 +47,7 @@ public class PatternPropertyStore {
 								"Cross (Slim)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", //
 								"Spiky Cross", "Double Cross", "Sperm", //
 								"Virus", "Virus V2", "Virus V3", //
-								"Long Heart", "Square Chain", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Iron Cross", //
+								"Long Heart", "Square Chain", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Iron Cross", "Iron Cross (round)", //
 								"Bird", "Bird V2", "Golf Pin", "Pin", "Tulip (Slim)", "Tulip", "Tulip (Fat)", "Plane", "Spaceship", "Spaceship V2",
 								"Ritual Axe", "Arrow" }));
 

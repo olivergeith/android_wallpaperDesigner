@@ -1,4 +1,4 @@
-package de.geithonline.wallpaperdesigner.settings;
+package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 
 public class PatternProperties {
 	private final boolean outlineOption;

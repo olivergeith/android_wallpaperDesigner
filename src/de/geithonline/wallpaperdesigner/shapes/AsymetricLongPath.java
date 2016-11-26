@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.shapes.IronCrossPath.IRONCROSS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.utils.GeometrieHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
@@ -15,7 +16,7 @@ public class AsymetricLongPath extends Path {
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
 		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2, IRON_CROSS, //
-		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE;
+		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE, IRON_CROSS_ROUND;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -111,6 +112,9 @@ public class AsymetricLongPath extends Path {
 			break;
 		case IRON_CROSS:
 			drawIronCross(center, radius, height, filled);
+			break;
+		case IRON_CROSS_ROUND:
+			drawIronCrossRound(center, radius, height, filled);
 			break;
 		case TULIP_SLIM:
 			drawTulipSlim(center, radius, height, filled);
@@ -1155,7 +1159,24 @@ public class AsymetricLongPath extends Path {
 		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
 				center.x, center.y); // Zielpunkt
 		close();
-		final Path cPath = new IronCrossPath(new PointF(center.x, center.y - height), radius, filled);
+		final Path cPath = new IronCrossPath(new PointF(center.x, center.y - height), radius, filled, IRONCROSS_TYPE.SPITZ);
+		addPath(cPath);
+	}
+
+	// ##################################################################################
+	private void drawIronCrossRound(final PointF center, final float radius, final float height, final boolean filled) {
+		moveTo(center.x, center.y);
+
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x - radius / 3, center.y - height + radius); // Zielpunkt
+
+		quadTo(center.x, center.y - height + radius * 1.25f, // controllpoint
+				center.x + radius / 3, center.y - height + radius); // Zielpunkt
+
+		quadTo(center.x, center.y - height + radius * 1.5f, // controllpoint
+				center.x, center.y); // Zielpunkt
+		close();
+		final Path cPath = new IronCrossPath(new PointF(center.x, center.y - height), radius, filled, IRONCROSS_TYPE.RUND);
 		addPath(cPath);
 	}
 

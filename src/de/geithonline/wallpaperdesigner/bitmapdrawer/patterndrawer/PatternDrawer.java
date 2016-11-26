@@ -44,6 +44,7 @@ import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.IgelPath;
 import de.geithonline.wallpaperdesigner.shapes.InvertablePath;
 import de.geithonline.wallpaperdesigner.shapes.IronCrossPath;
+import de.geithonline.wallpaperdesigner.shapes.IronCrossPath.IRONCROSS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.LeafPath;
 import de.geithonline.wallpaperdesigner.shapes.LeafPath.LEAF_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.LighthousePath;
@@ -698,6 +699,9 @@ public class PatternDrawer {
 			break;
 		case "Iron Cross":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.IRON_CROSS);
+			break;
+		case "Iron Cross (round)":
+			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.IRON_CROSS_ROUND);
 			break;
 		case "Bird":
 			path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD);
@@ -1671,7 +1675,7 @@ public class PatternDrawer {
 	protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 17);
+			final int nr = Randomizer.getRandomInt(0, 18);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, paint, radius, variant);
@@ -1759,7 +1763,11 @@ public class PatternDrawer {
 			break;
 		case "V17":
 		case "Iron Cross":
-			path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean());
+			path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean(), IRONCROSS_TYPE.SPITZ);
+			break;
+		case "V18":
+		case "Iron Cross (round)":
+			path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean(), IRONCROSS_TYPE.RUND);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));

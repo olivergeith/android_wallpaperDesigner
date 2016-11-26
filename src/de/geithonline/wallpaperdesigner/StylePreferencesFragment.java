@@ -12,7 +12,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.SeekBarPreference;
-import de.geithonline.wallpaperdesigner.settings.PatternPropertyStore;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
