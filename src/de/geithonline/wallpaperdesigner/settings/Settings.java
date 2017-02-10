@@ -91,6 +91,8 @@ public class Settings {
     public static final String KEY_PATTERN_DROPSHADOW_TYPE = "pattern_dropShadowType";
     public static final String KEY_PATTERN_DROPSHADOW_COLOR = "colorDropShadow";
     public static final String KEY_PATTERN_BLUR = "blurPatterns";
+    public static final String KEY_RADIUS_TYPE = "radiusType";
+
     public static SharedPreferences prefs;
     private static boolean superuser = false;
 
@@ -121,9 +123,9 @@ public class Settings {
                 return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
             case "Diagonal (flipped)":
                 return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
-            case "Diagonal 45�":
+            case "Diagonal 45°":
                 return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
-            case "Diagonal 45� (flipped)":
+            case "Diagonal 45° (flipped)":
                 return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
             case "Diagonal (curved)":
                 return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
@@ -218,12 +220,13 @@ public class Settings {
             switch (name) {
             default:
             case "random":
+            case "Random":
                 return RADIUS_TYPE.random;
-            case "rising":
+            case "Rising":
                 return RADIUS_TYPE.rising;
-            case "decreasing":
+            case "Decreasing":
                 return RADIUS_TYPE.decreasing;
-            case "dependingOnBlurrStage":
+            case "Depending on BlurrStage":
                 return RADIUS_TYPE.dependingOnBlurrStage;
             }
         }
@@ -500,7 +503,7 @@ public class Settings {
     // ###################################################################
     // RadiusType
     public static String getRadiusTypeString() {
-        return "random"; // TODO prefs lesen
+        return readStringPref(KEY_RADIUS_TYPE, "Random");
     }
 
     public static RADIUS_TYPE getRadiusType() {

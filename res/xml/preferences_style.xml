@@ -364,6 +364,15 @@
         android:key="specialPatternSizeSettings"
         android:summary="Size of pattern and range of randomization of size"
         android:title="Sizes of Patterns..." >
+        
+        <ListPreference
+            android:defaultValue="random"
+            android:dialogTitle="Radius Calculating-Style"
+            android:entries="@array/radiusTypes"
+            android:entryValues="@array/radiusTypes"
+            android:key="radiusType"
+            android:title="Radius Calculating-Style" />
+        
         <de.geithonline.android.basics.preferences.SeekBarPreference
             android:defaultValue="100"
             android:dialogMessage="@string/patternSizeAdjust"
