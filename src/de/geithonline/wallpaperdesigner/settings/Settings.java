@@ -96,24 +96,137 @@ public class Settings {
 
     public enum IMAGE_OUTPUT_FORMAT {
         PNG, JPG;
+
+        public static IMAGE_OUTPUT_FORMAT enumForName(final String name) {
+            switch (name) {
+            default:
+            case "jpg":
+                return IMAGE_OUTPUT_FORMAT.JPG;
+            case "png":
+                return IMAGE_OUTPUT_FORMAT.PNG;
+            }
+        }
+
     }
 
     public enum GLOSSY_REFLECTIONS_STYLE {
         SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_45GRAD, CURVED_FROM_TOP,
         DIAGONAL_FLIPPED,
         DIAGONAL_45GRAD_FLIPPED, TOP_GLOW, BOTTOM_GLOW, DIAGONAL_CURVED_V2, TOP_LEFT_V2;
+
+        public static GLOSSY_REFLECTIONS_STYLE enumForName(final String name) {
+            switch (name) {
+            default:
+            case "Diagonal":
+                return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
+            case "Diagonal (flipped)":
+                return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
+            case "Diagonal 45�":
+                return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
+            case "Diagonal 45� (flipped)":
+                return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
+            case "Diagonal (curved)":
+                return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
+            case "Diagonal (curved) V2":
+                return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
+            case "Curved from top":
+                return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
+            case "Topleft":
+                return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
+            case "Topleft V2":
+                return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
+            case "Big Oval":
+                return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
+            case "Small Oval":
+                return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
+            case "Top Glow":
+                return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
+            case "None":
+                return GLOSSY_REFLECTIONS_STYLE.NONE;
+            }
+        }
     }
 
     public enum GLOSSY_GLOW_STYLE {
         CENTER, HORIZONTAL;
+
+        public static GLOSSY_GLOW_STYLE enumForName(final String name) {
+            switch (name) {
+            default:
+            case "Center":
+                return GLOSSY_GLOW_STYLE.CENTER;
+            case "Horizontal":
+                return GLOSSY_GLOW_STYLE.HORIZONTAL;
+            }
+        }
     }
 
     public enum COLOR_RANDOMIZING_TYPE {
         FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, PUSH_RED, PUSH_GREEN, PUSH_BLUE;
+
+        public static COLOR_RANDOMIZING_TYPE enumForName(final String name) {
+            switch (name) {
+            default:
+            case "full RGB":
+                return COLOR_RANDOMIZING_TYPE.FULL_RGB;
+            case "only RED":
+                return COLOR_RANDOMIZING_TYPE.ONLY_RED;
+            case "only GREEN":
+                return COLOR_RANDOMIZING_TYPE.ONLY_GREEN;
+            case "only BLUE":
+                return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
+            case "hue":
+                return COLOR_RANDOMIZING_TYPE.HUE;
+            case "push RED":
+                return COLOR_RANDOMIZING_TYPE.PUSH_RED;
+            case "push GREEN":
+                return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
+            case "push BLUE":
+                return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
+            }
+        }
     }
 
     public enum CANVAS_LIMT {
         strict, small, wide, no_limit, double_wide, small_inset, wide_inset;
+
+        public static CANVAS_LIMT enumForName(final String name) {
+            switch (name) {
+            default:
+            case "small tolerance":
+                return CANVAS_LIMT.small;
+            case "wide tolerance":
+                return CANVAS_LIMT.wide;
+            case "double wide tolerance":
+                return CANVAS_LIMT.double_wide;
+            case "strict":
+                return CANVAS_LIMT.strict;
+            case "small inset":
+                return CANVAS_LIMT.small_inset;
+            case "wide inset":
+                return CANVAS_LIMT.wide_inset;
+            case "no limit":
+                return CANVAS_LIMT.no_limit;
+            }
+        }
+    }
+
+    public enum RADIUS_TYPE {
+        random, rising, dependingOnBlurrStage, decreasing;
+
+        public static RADIUS_TYPE enumForName(final String name) {
+            switch (name) {
+            default:
+            case "random":
+                return RADIUS_TYPE.random;
+            case "rising":
+                return RADIUS_TYPE.rising;
+            case "decreasing":
+                return RADIUS_TYPE.decreasing;
+            case "dependingOnBlurrStage":
+                return RADIUS_TYPE.dependingOnBlurrStage;
+            }
+        }
     }
 
     public static final String DEFAULT_SHARE_SUBJECT = "Shared from the Wallpaper Designer";
@@ -168,66 +281,26 @@ public class Settings {
     }
 
     public static IMAGE_OUTPUT_FORMAT getImageOutputFormat() {
-        switch (getImageFormat()) {
-        default:
-        case "jpg":
-            return IMAGE_OUTPUT_FORMAT.JPG;
-        case "png":
-            return IMAGE_OUTPUT_FORMAT.PNG;
-        }
+        return IMAGE_OUTPUT_FORMAT.enumForName(getImageFormatString());
     }
 
-    public static String getImageFormat() {
+    public static String getImageFormatString() {
         return readStringPref(KEY_IMAGE_FORMAT, "jpg");
     }
 
     public static COLOR_RANDOMIZING_TYPE getColorRandomizingType() {
-        switch (getColorRandomizing()) {
-        default:
-        case "full RGB":
-            return COLOR_RANDOMIZING_TYPE.FULL_RGB;
-        case "only RED":
-            return COLOR_RANDOMIZING_TYPE.ONLY_RED;
-        case "only GREEN":
-            return COLOR_RANDOMIZING_TYPE.ONLY_GREEN;
-        case "only BLUE":
-            return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
-        case "hue":
-            return COLOR_RANDOMIZING_TYPE.HUE;
-        case "push RED":
-            return COLOR_RANDOMIZING_TYPE.PUSH_RED;
-        case "push GREEN":
-            return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
-        case "push BLUE":
-            return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
-        }
+        return COLOR_RANDOMIZING_TYPE.enumForName(getColorRandomizingString());
     }
 
-    public static String getColorRandomizing() {
+    public static String getColorRandomizingString() {
         return readStringPref(KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
     }
 
     public static CANVAS_LIMT getCanvasLimitType() {
-        switch (getCanvasLimit()) {
-        default:
-        case "small tolerance":
-            return CANVAS_LIMT.small;
-        case "wide tolerance":
-            return CANVAS_LIMT.wide;
-        case "double wide tolerance":
-            return CANVAS_LIMT.double_wide;
-        case "strict":
-            return CANVAS_LIMT.strict;
-        case "small inset":
-            return CANVAS_LIMT.small_inset;
-        case "wide inset":
-            return CANVAS_LIMT.wide_inset;
-        case "no limit":
-            return CANVAS_LIMT.no_limit;
-        }
+        return CANVAS_LIMT.enumForName(getCanvasLimitString());
     }
 
-    public static String getCanvasLimit() {
+    public static String getCanvasLimitString() {
         return readStringPref(KEY_LIMIT_2_CANVAS, "small tolerance");
     }
 
@@ -409,35 +482,7 @@ public class Settings {
     }
 
     public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
-        switch (getGlossyReflectionStyleString()) {
-        default:
-        case "Diagonal":
-            return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
-        case "Diagonal (flipped)":
-            return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
-        case "Diagonal 45�":
-            return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
-        case "Diagonal 45� (flipped)":
-            return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
-        case "Diagonal (curved)":
-            return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
-        case "Diagonal (curved) V2":
-            return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
-        case "Curved from top":
-            return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
-        case "Topleft":
-            return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
-        case "Topleft V2":
-            return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
-        case "Big Oval":
-            return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
-        case "Small Oval":
-            return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
-        case "Top Glow":
-            return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
-        case "None":
-            return GLOSSY_REFLECTIONS_STYLE.NONE;
-        }
+        return GLOSSY_REFLECTIONS_STYLE.enumForName(getGlossyReflectionStyleString());
     }
 
     public static String getGlossyReflectionStyleString() {
@@ -445,17 +490,21 @@ public class Settings {
     }
 
     public static GLOSSY_GLOW_STYLE getGlossyGlowStyle() {
-        switch (getGlossyGlowStyleString()) {
-        default:
-        case "Center":
-            return GLOSSY_GLOW_STYLE.CENTER;
-        case "Horizontal":
-            return GLOSSY_GLOW_STYLE.HORIZONTAL;
-        }
+        return GLOSSY_GLOW_STYLE.enumForName(getGlossyGlowStyleString());
     }
 
     public static String getGlossyGlowStyleString() {
         return readStringPref(KEY_GLOSSY_GLOW_STYLE, "Center");
+    }
+
+    // ###################################################################
+    // RadiusType
+    public static String getRadiusTypeString() {
+        return "random"; // TODO prefs lesen
+    }
+
+    public static RADIUS_TYPE getRadiusType() {
+        return RADIUS_TYPE.enumForName(getRadiusTypeString());
     }
 
     // ###################################################################

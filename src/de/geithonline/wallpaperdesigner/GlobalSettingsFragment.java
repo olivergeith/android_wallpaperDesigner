@@ -77,7 +77,7 @@ public class GlobalSettingsFragment extends PreferenceFragment {
 			}
 
 		});
-		handleImageFormat(Settings.getImageFormat());
+		handleImageFormat(Settings.getImageFormatString());
 		handleSortOrder(Settings.getSortOrder());
 		handleAppTheme(Settings.getAppTheme());
 
