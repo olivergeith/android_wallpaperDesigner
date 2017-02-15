@@ -483,7 +483,8 @@ public class MainActivity extends Activity {
 			this.bitmap = bitmap;
 		}
 
-		public void settingProgress(final int p) {
+		public void settingProgress(final int p, final Bitmap bitmap) {
+			this.bitmap = bitmap;
 			publishProgress(p);
 		}
 

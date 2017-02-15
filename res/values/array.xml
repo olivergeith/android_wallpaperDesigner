@@ -212,9 +212,10 @@
     
     <string-array name="radiusTypes">
         <item >Random</item>
-        <item >Rising</item>
+        <item >Increasing</item>
         <item >Decreasing</item>
-        <item >Depending on BlurrStage</item>
+        <item >Depending on BlurrStage (increasing)</item>
+        <item >Depending on BlurrStage (decreasing)</item>
         </string-array>
     
     
