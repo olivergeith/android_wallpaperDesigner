@@ -54,7 +54,7 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 			}
 		});
 
-		handleLimit2Canvas(Settings.getCanvasLimit());
+		handleLimit2Canvas(Settings.getCanvasLimitString());
 		handleMainLayoutSelect(Settings.getSelectedMainLayout());
 		handleMainLayoutVariantSelect(Settings.getSelectedMainLayoutVariante());
 	}

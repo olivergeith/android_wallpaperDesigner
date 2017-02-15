@@ -159,7 +159,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		vierColorCornerSettings = (PreferenceScreen) findPreference("vierColorCornerSettings");
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawPreviewImages();
-		handleColorRandomizingType(Settings.getColorRandomizing());
+		handleColorRandomizingType(Settings.getColorRandomizingString());
 	}
 
 	protected void handleColorRandomizingType(final String newValue) {
