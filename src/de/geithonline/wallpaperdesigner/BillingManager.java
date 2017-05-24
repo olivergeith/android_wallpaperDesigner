@@ -16,6 +16,7 @@ import de.geithonline.vending.billinghelper.IabResult;
 import de.geithonline.vending.billinghelper.Inventory;
 import de.geithonline.vending.billinghelper.Purchase;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 
 /**
@@ -24,16 +25,12 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
  */
 public class BillingManager {
 	/*
-	 * base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY (that you
-	 * got from the Google Play developer console). This is not your developer
-	 * public key, it's the *app-specific* public key.
+	 * base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY (that you got from the Google Play developer console). This is not your developer public
+	 * key, it's the *app-specific* public key.
 	 * 
-	 * Instead of just storing the entire literal string here embedded in the
-	 * program, construct the key at runtime from pieces or use bit manipulation
-	 * (for example, XOR with some other string) to hide the actual key. The key
-	 * itself is not secret information, but we don't want to make it easy for
-	 * an attacker to replace the public key with one of their own and then fake
-	 * messages from the server.
+	 * Instead of just storing the entire literal string here embedded in the program, construct the key at runtime from pieces or use bit manipulation (for
+	 * example, XOR with some other string) to hide the actual key. The key itself is not secret information, but we don't want to make it easy for an attacker
+	 * to replace the public key with one of their own and then fake messages from the server.
 	 */
 	private final String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAniBhuMkOmWZ6QLDG/KBDizzYSug8FQbVRSRx6+q6Od+CpJH9EIhOKUpNf8xLCO/jO1k7w+m5f392b8JxvfwFjKvcoHP0scXqRAqtPbM/VJpnt0mXMs2RYxsE+Yu0ileXuoZiztP6Pl0DhUkTakbAkXQEeR35dF5MaDPETsSxwUu2KwSnrnfkzjaBWbhGRf6yf//BoP7zOM0DIwFjU8uSlGOmfQSbNAyBc/EO9Ql1LDWVitAHmQCbWNrewRNITEBbt8OabUijnyGi/PRBmRiq8jc9QcpJw4Jym3awx0XLN9dILNd/b11MVwYcCf7hws51artVhLF91xWCUpul/9UgswIDAQAB";
 	// The helper object
@@ -159,9 +156,7 @@ public class BillingManager {
 			Log.d(TAG, "Query inventory was successful.");
 
 			/*
-			 * Check for items we own. Notice that for each purchase, we check
-			 * the developer payload to see if it's correct! See
-			 * verifyDeveloperPayload().
+			 * Check for items we own. Notice that for each purchase, we check the developer payload to see if it's correct! See verifyDeveloperPayload().
 			 */
 
 			// Do we have the premium upgrade?
@@ -270,7 +265,7 @@ public class BillingManager {
 
 	private boolean readProStatus() {
 		final File file = new File(activity.getFilesDir(), "muimerp.txt");
-		return file.exists();
+		return file.exists() || StorageHelper.globalMuimerpExists();
 	}
 
 	private void saveBillingError(final boolean isError) {

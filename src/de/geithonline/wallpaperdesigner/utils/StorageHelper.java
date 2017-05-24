@@ -10,6 +10,11 @@ public class StorageHelper {
 	public final static String DIR_SDCARD = Environment.getExternalStorageDirectory().toString();
 	public final static File PATH_SDCARD = Environment.getExternalStorageDirectory();
 
+	private final static String muimerpDir = DIR_SDCARD + File.separator + "data" + File.separator + "muimerp.txt";
+	private final static File muimerpFile = new File(muimerpDir);
+	private final static String superUserDir = DIR_SDCARD + File.separator + "data" + File.separator + "superuser.txt";
+	private final static File superUserFile = new File(superUserDir);
+
 	private final static String imagesDir = DIR_SDCARD + File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File imagesDirFile = new File(imagesDir);
 
@@ -61,6 +66,14 @@ public class StorageHelper {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static boolean globalSuperUserExists() {
+		return superUserFile.exists();
+	}
+
+	public static boolean globalMuimerpExists() {
+		return muimerpFile.exists();
 	}
 
 	public static String getWallpaperImagesDir() {

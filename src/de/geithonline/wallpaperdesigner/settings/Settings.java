@@ -10,6 +10,7 @@ import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
+import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class Settings {
 	public static final String KEY_ROTATING_STYLE = "rotatingStyle";
@@ -836,7 +837,7 @@ public class Settings {
 	public static boolean isSuperUser(final Activity activity) {
 		final File file = new File(activity.getFilesDir(), "superuser.txt");
 		superuser = file.exists();
-		return superuser;
+		return superuser || StorageHelper.globalSuperUserExists();
 	}
 
 	// private static final int CURRENT_SETTINGS_VERSION = 2;
