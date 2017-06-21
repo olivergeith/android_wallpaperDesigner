@@ -30,7 +30,7 @@ public class OutlineDrawer {
 		}
 	}
 
-	private static void setupPaintForOutline(final Paint paint, final int radius) {
+	public static void setupPaintForOutline(final Paint paint, final int radius) {
 		paint.setStyle(Style.STROKE);
 		float strokewidth = radius / 45f * Settings.getOutlineThicknessAdjustment();
 		// Log.i("outline", "Thickness = " + strokewidth);
