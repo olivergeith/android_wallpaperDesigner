@@ -14,7 +14,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_GLOW_STYLE;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
@@ -115,11 +114,11 @@ import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.StarTrailPath.TRAIL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.StarwarsPath;
 import de.geithonline.wallpaperdesigner.shapes.StarwarsPath.STARWARS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.SunPath.SUN_TYPE;
-import de.geithonline.wallpaperdesigner.shapes.TrailOfStarsPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -139,2224 +138,2265 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class PatternDrawer {
 
-  private final Canvas bitmapCanvas;
-  private final GlossyDrawer glossyDrawer;
-  private final OutlineDrawer outlineDrawer;
-  private final SceneDrawer sceneDrawer;
-  private final Rotator rotator;
-  private final int bWidth;
-  private final int bHeight;
-
-  private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  public PatternDrawer(final Canvas bitmapCanvas) {
-    this.bitmapCanvas = bitmapCanvas;
-    bWidth = bitmapCanvas.getWidth();
-    bHeight = bitmapCanvas.getHeight();
-    glossyDrawer = new GlossyDrawer(bitmapCanvas);
-    outlineDrawer = new OutlineDrawer(bitmapCanvas);
-    rotator = new Rotator(bWidth, bHeight);
-    sceneDrawer = new SceneDrawer(bitmapCanvas, glossyDrawer, outlineDrawer, rotator);
-
-  }
-
-  public void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
-    switch (Settings.getSelectedPattern()) {
-
-    case "Gears-Saws":
-      drawGearSaw(x, y, paint, radius);
-      break;
-    case "Spooky":
-      drawSpooky(x, y, paint, radius);
-      break;
-    case "Assorted Shapes":
-      drawAssorted(x, y, paint, radius);
-      break;
-    case "Chess":
-      drawChess(x, y, paint, radius);
-      break;
-    case "Flipped":
-      drawFlipped(x, y, paint, radius);
-      break;
-    case "Geometrical Shapes":
-      drawGeometric(x, y, paint, radius);
-      break;
-    case "Geometrical (long) Shapes":
-      drawGeometricLong(x, y, paint, radius);
-      break;
-    case "3D (long) Shapes":
-      draw3DLongShape(x, y, paint, radius);
-      break;
-    case "Rings":
-      drawRing(x, y, paint, radius);
-      break;
-    case "Bubbles":
-      drawBubble(x, y, paint, radius);
-      break;
-    case "Hearts":
-      drawHeart(x, y, paint, radius);
-      break;
-    case "Invertable Shapes":
-      drawInvertable(x, y, paint, radius);
-      break;
-    case "Lines":
-      drawLines(x, y, paint, radius);
-      break;
-    case "Lines (Directed)":
-      drawLinesDirected(x, y, paint, radius);
-      break;
-    case "Leafs":
-      drawLeafs(x, y, paint, radius);
-      break;
-    case "Logos":
-      drawLogos(x, y, paint, radius);
-      break;
-    case "PacMan":
-      drawPacman(x, y, paint, radius);
-      break;
-    case "Pillows":
-      drawPillow(x, y, paint, radius);
-      break;
-    case "Puzzle":
-      drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.NORMAL);
-      break;
-    case "Puzzle (Circle Connector)":
-      drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.CIRCLE);
-      break;
-    case "Puzzle (Square)":
-      drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.RECT_NORMAL);
-      break;
-    case "Puzzle (Square Connector)":
-      drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.SQUARE);
-      break;
-    case "Smiley":
-      drawSmiley(x, y, paint, radius);
-      break;
-    case "Stars":
-      drawStar(x, y, paint, radius);
-      break;
-    case "Square":
-      drawSquare(x, y, paint, radius);
-      break;
-    case "Text":
-      drawText(x, y, paint, radius * 2, index);
-      break;
-    case "Fish":
-      drawFisch(x, y, paint, radius);
-      break;
-    case "Flowers":
-      drawFlower(x, y, paint, radius);
-      break;
-    case "Mandala":
-      drawMandala(x, y, paint, radius);
-      break;
-    case "Maritim":
-      drawMaritim(x, y, paint, radius);
-      break;
-    case "Material":
-      drawMaterial(x, y, paint, radius);
-      break;
-    case "Rectangles":
-      drawRect(x, y, paint, radius);
-      break;
-    case "Scenes":
-      drawScene(x, y, paint, radius, index);
-      break;
-    case "Shells":
-      drawShell(x, y, paint, radius);
-      break;
-    case "Sonic":
-      drawSonic(x, y, paint, radius);
-      break;
-    case "Space":
-      drawSpace(x, y, paint, radius);
-      break;
-    default:
-    case "Virus Attack":
-      drawVirus(x, y, paint, radius);
-      break;
-    case "Weather":
-      drawWeather(x, y, paint, radius);
-      break;
-    case "Planes":
-      drawPlane(x, y, paint, radius);
-      break;
-    case "Xmas":
-      drawXmas(x, y, paint, radius);
-      break;
-    }
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius) {
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 3);
-      variante = "V" + nr;
-    }
-    drawGearSaw(x, y, paint, radius, variante);
-  }
-
-  protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Gear":
-      final int zaehne = 10 + Settings.getAnzahlFlowerLeafs(1, 10);
-      path = new GearPath(zaehne, new Point(x, y), radius, getFilledBoolean());
-      break;
-    case "V2":
-    case "Saw": {
-      final int zahn = 15 + Settings.getAnzahlFlowerLeafs(1, 10);
-      path = new SawPath(zahn, new Point(x, y), radius, getFilledBoolean(), Randomizer.getRandomBoolean());
-      break;
-    }
-    case "V3":
-    case "Star Gear": {
-      final int zahn = 15 + Settings.getAnzahlFlowerLeafs(1, 10);
-      path = new StarPath(zahn, new PointF(x, y), radius, radius * 0.8f, getFilledBoolean());
-      break;
-    }
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawMaritim(final int x, final int y, final Paint paint, final int radius) {
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variante = "V" + nr;
-    }
-    drawMaritim(x, y, paint, radius, variante);
-  }
-
-  protected void drawMaritim(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Sailboat V1":
-      path = new SailboatPath(new Point(x, y), radius);
-      break;
-    case "V2":
-    case "Sailboat V2":
-      path = new SailboatPath2(new Point(x, y), radius);
-      break;
-    case "V3":
-    case "Lighthouse":
-      path = new LighthousePath(new Point(x, y), radius);
-      break;
-    case "V4":
-    case "Anchor":
-      path = new AnkerPath(new Point(x, y), radius);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    // Glossy
-
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawFlipped(final int x, final int y, final Paint paint, final int radius) {
-    final String variant = Settings.getSelectedPatternVariant();
-    drawFlipped(x, y, paint, radius, variant);
-  }
-
-  protected void drawFlipped(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "Triangle":
-      path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.TRIANGLE);
-      break;
-    case "Triangle V2":
-      path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.TRIANGLE_V2);
-      break;
-    case "Square":
-      path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.SQUARE);
-      break;
-    case "Rectangle":
-      path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.RECTANGLE);
-      break;
-    case "Quarter Arc":
-      path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.QUARTER_ARC);
-      break;
-    case "Quarter Arc V2":
-      path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.QUARTER_ARC_V2);
-      break;
-
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 6);
-      variant = "V" + nr;
-    } else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
-      final int nr = Randomizer.getRandomInt(0, 9);
-      variant = "V" + nr;
-    } else if (variant.equalsIgnoreCase("Square (Mixed)")) {
-      variant = "Square (Mixed)";
-    }
-    drawGeometric(x, y, paint, radius, variant);
-  }
-
-  protected void drawGeometric(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Triangle":
-      path = new XEckPath(3, new PointF(x, y), radius, 0, getFilledBoolean());
-      break;
-    case "V2":
-    case "Square":
-      path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.NORMAL, Direction.CW);
-      break;
-    case "V3":
-    case "Square (rounded)":
-      path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.ROUNDED, Direction.CW);
-      break;
-    case "V4":
-    case "Pentagon":
-      path = new XEckPath(5, new PointF(x, y), radius, 0, getFilledBoolean());
-      break;
-    case "V5":
-    case "Hexagon":
-      path = new XEckPath(6, new PointF(x, y), radius, 0, getFilledBoolean());
-      break;
-    case "V6":
-    case "Octagon":
-      path = new XEckPath(8, new PointF(x, y), radius, 0, getFilledBoolean());
-      break;
-    case "V7":
-    case "Circle":
-      path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.CIRCLE);
-      break;
-    case "V8":
-    case "Oval":
-      path = new OvalPath(new PointF(x, y), radius / 2, radius, Direction.CW, OVAL_TYPE.NORMAL);
-      break;
-    case "V9":
-    case "Oval (random width)":
-      path = new OvalPath(new PointF(x, y), radius * 0.8f, radius, Direction.CW, OVAL_TYPE.RANDOM_WIDTH);
-      break;
-    case "V10":
-    case "Oval (random)":
-      path = new OvalPath(new PointF(x, y), radius * 0.8f, radius, Direction.CW, OVAL_TYPE.RANDOM);
-      break;
-    case "V11":
-    case "Half Circle":
-      path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.HALF_CIRCLE);
-      break;
-    case "V12":
-    case "Square (Mixed)":
-      path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.MIXED, Direction.CW);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawLeafs(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawLeafs(x, y, paint, radius, variant);
-  }
-
-  protected void drawLeafs(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Maple":
-      path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.MAPLE);
-      break;
-    case "V2":
-    case "Weed":
-      path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.WEED);
-      break;
-    case "V3":
-    case "Round Leaf":
-      path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.ROUND);
-      break;
-    case "V4":
-    case "Finger Maple":
-      path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.FINGER_MAPLE);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawLogos(final int x, final int y, final Paint paint, final int radius) {
-    final String variant = Settings.getSelectedPatternVariant();
-    drawLogos(x, y, paint, radius, variant);
-  }
-
-  protected void drawLogos(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "Resurrection Remix":
-      path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V1);
-      break;
-    case "Resurrection Remix V2":
-      path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V2);
-      break;
-    case "Resurrection Remix V3":
-      path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V3);
-      break;
-    case "Resurrection Remix V4":
-      path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V4);
-      break;
-    case "Resurrection Remix V5":
-      path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V5);
-      break;
-    case "Resurrection Remix V6":
-      path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V6);
-      break;
-    case "ElementalX Kernel":
-      path = new LogoPathEX(new PointF(x, y), radius, LOGO_STYLE_EX.V1);
-      break;
-    case "Peace Sign":
-      path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.V1);
-      break;
-    case "Weed Sign":
-      path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED);
-      break;
-    case "Weed Sign V2":
-      path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED_V2);
-      break;
-    case "Nexus V1":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V1);
-      break;
-    case "Nexus V2":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V2);
-      break;
-    case "Nexus V3":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V3);
-      break;
-    case "Oneplus One V1":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.ONEPLUSONE_V1);
-      break;
-    case "Oneplus One V2":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.ONEPLUSONE_V2);
-      break;
-    case "LG V1":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V1);
-      break;
-    case "LG V2":
-      path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V2);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius) {
-    final String variant = Settings.getSelectedPatternVariant();
-    drawGeometricLong(x, y, paint, radius, variant);
-  }
-
-  protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius,
-      final String variante) {
-    if (x == bWidth / 2 && y == bHeight / 2) {
-      return;
-    }
-    Path path;
-    switch (variante) {
-    default:
-    case "Rectangle":
-      path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.NORMAL);
-      break;
-    case "Rectangle (rounded)":
-      path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.ROUNDED);
-      break;
-    case "Rectangle (Mixed)":
-      path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(), RECT_ROUNDED.MIXED);
-      break;
-    case "Triangle":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE);
-      break;
-    case "Oval":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.OVAL);
-      break;
-    case "Diamond":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.RAUTE);
-      break;
-    case "Dragon":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DRACHEN);
-      break;
-    case "Dragon (upsidedown)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
-          ASYMETRIC_STYLE.DRACHEN_UPSIDEDOWN);
-      break;
-    case "Drop":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.DROP);
-      break;
-    case "Drop (upsidedown)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
-          ASYMETRIC_STYLE.DROP_REVERSE);
-      break;
-    case "Lense":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE);
-      break;
-    case "Lense V2":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V2);
-      break;
-    case "Lense V3":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V3);
-      break;
-    case "Tag":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.TAG);
-      break;
-    case "Knife":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE);
-      break;
-    case "Knife V2":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V2);
-      break;
-    case "Knife V3":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.KNIFE_V3);
-      break;
-    case "Cross":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.CROSS);
-      break;
-    case "Cross (Sharp)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SHARP);
-      break;
-    case "Cross (Split)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SPLIT);
-      break;
-    case "Cross (Split 2)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SPLIT2);
-      break;
-    case "Cross (Slim)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SLIM);
-      break;
-    case "Cross (Slim-Double)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SLIM_DOUBLE);
-      break;
-    case "Spiky Cross":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
-          ASYMETRIC_STYLE.SPIKY_CROSS);
-      break;
-    case "Double Cross":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
-          ASYMETRIC_STYLE.DOUBLE_CROSS);
-      break;
-    case "Sperm":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(), ASYMETRIC_STYLE.SPERM);
-      break;
-    case "Virus":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 3, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS);
-      break;
-    case "Virus V2":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 3, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V2);
-      break;
-    case "Virus V3":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.VIRUS_V3);
-      break;
-    case "Long Heart":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.LONG_HEART);
-      break;
-    case "Square Chain":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.SQUARE_CHAIN);
-      break;
-    case "Circle Chain":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.CHAIN_CIRCLE);
-      break;
-    case "Circle Chain (upsidedown)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.CHAIN_CIRCLE_UPSIDEDOWN);
-      break;
-    case "Spear":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPEAR1);
-      break;
-    case "Iron Cross":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.IRON_CROSS);
-      break;
-    case "Iron Cross (round)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.IRON_CROSS_ROUND);
-      break;
-    case "Bird":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD);
-      break;
-    case "Bird V2":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(), ASYMETRIC_STYLE.BIRD_V2);
-      break;
-    case "Golf Pin":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.GOLF_PIN);
-      break;
-    case "Pin":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.PIN);
-      break;
-    case "Tulip":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.TULIP_NORMAL);
-      break;
-    case "Plane":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.PLANE);
-      break;
-    case "Arrow":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.ARROW);
-      break;
-    case "Cross (Slim V2)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SLIM_V2);
-      break;
-    case "Cross (Slim V3)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.CROSS_SLIM_V3);
-      break;
-    case "Tulip (Slim)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.TULIP_SLIM);
-      break;
-    case "Tulip (Fat)":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.TULIP_FAT);
-      break;
-    case "Spaceship":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(), ASYMETRIC_STYLE.SPACESHIP);
-      break;
-    case "Spaceship V2":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.SPACESHIP_V2);
-      break;
-    case "Ritual Axe":
-      path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
-          ASYMETRIC_STYLE.RITUAL_AXE);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 6);
-      variant = "V" + nr;
-    }
-    draw3DLongShape(x, y, paint, radius, variant);
-  }
-
-  protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Long Pyramide":
-      path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.PYRAMIDE);
-      break;
-    case "V2":
-    case "Pyramide":
-      path = new Asymetric3DPath(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.PYRAMIDE);
-      break;
-    case "V3":
-    case "Long Cube":
-      path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.CUBE);
-      break;
-    case "V4":
-    case "Cube":
-      path = new Asymetric3DPath(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.CUBE);
-      break;
-    case "V5":
-    case "Long Cone":
-      path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.CONE);
-      break;
-    case "V6":
-    case "Cone":
-      path = new Asymetric3DPath(new PointF(x, y), radius, radius * 3, ASYMETRIC_3D_STYLE.CONE);
-      break;
-    }
-
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 9);
-      variante = "V" + nr;
-    } else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
-      final int nr = Randomizer.getRandomInt(4, 6);
-      variante = "V" + nr;
-    }
-
-    drawInvertable(x, y, paint, radius, variante);
-  }
-
-  protected void drawInvertable(final int x, final int y, final Paint paint, final int radius, final String variante) {
-
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Heart V1":
-      path = new HeartPath(new PointF(x, y), radius, getFilledBoolean(), HEART_SHAPE.Curvy);
-      break;
-    case "V2":
-    case "Heart V2":
-      path = new HeartPath(new PointF(x, y), radius, getFilledBoolean(), HEART_SHAPE.Straigth);
-      break;
-    case "V3":
-    case "Arrow":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow");
-      break;
-    case "V4":
-    case "Arrow (round)":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow (round)");
-      break;
-    case "V5":
-    case "Plus":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Plus");
-      break;
-    case "V6":
-    case "Minus":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Minus");
-      break;
-    case "V7":
-    case "Star":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Star");
-      break;
-    case "V8":
-    case "Gear":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Gear");
-      break;
-    case "V9":
-    case "Crown":
-      path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    // Glossy
-
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawRing(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawRing(x, y, paint, radius, variant);
-  }
-
-  protected void drawRing(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Rings V1 (Flange)":
-      path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V1");
-      break;
-    case "V2":
-    case "Rings V2 (Asymetric)":
-      path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V2");
-      break;
-    case "V3":
-    case "Rings V3 (Concentric)":
-      path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
-      break;
-    case "V4":
-    case "Rings V4 (Dizzy)":
-      path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawSpace(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 10);
-      variant = "V" + nr;
-    } else if (variant.equalsIgnoreCase("Mixed Rockets")) {
-      final int nr = Randomizer.getRandomInt(0, 6);
-      variant = "V" + nr;
-    }
-    drawSpace(x, y, paint, radius, variant);
-  }
-
-  protected void drawSpace(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Rocket V1":
-      path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V1");
-      break;
-    case "V2":
-    case "Rocket V2":
-      path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V2");
-      break;
-    case "V3":
-    case "Rocket V3":
-      path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V3");
-      break;
-    case "V4":
-    case "Rocket V4":
-      path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V4");
-      break;
-    case "V5":
-    case "Rocket V5":
-      path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V5");
-      break;
-    case "V6":
-    case "Rocket V6":
-      path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V6");
-      break;
-    case "V7":
-    case "Ufo V1":
-      path = new UfoPath(new Point(x, y), radius, UFO_TYPE.UfoV1, getFilledBoolean());
-      break;
-    case "V8":
-    case "Ufo V2":
-      path = new UfoPath(new Point(x, y), radius, UFO_TYPE.UfoV2, getFilledBoolean());
-      break;
-    case "V9":
-    case "Satellite":
-      path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), "Satellite V1");
-      break;
-    case "V10":
-    case "Spaceship":
-      path = new SpaceshipPath(new PointF(x, y), radius, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawVirus(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 8);
-      variant = "V" + nr;
-    }
-
-    drawVirus(x, y, paint, radius, variant);
-  }
-
-  protected void drawVirus(final int x, final int y, final Paint paint, final int radius, final String variant) {
-    Path path;
-    switch (variant) {
-    default:
-    case "V1":
-      path = new VirusPath(new Point(x, y), radius, getFilledBoolean());
-      break;
-    case "V2":
-      path = new VirusPath2(new Point(x, y), radius, 13, getFilledBoolean());
-      break;
-    case "V3":
-      path = new VirusPath3(new Point(x, y), radius, 17, getFilledBoolean());
-      break;
-    case "V4":
-      path = new VirusPath4(new Point(x, y), radius);
-      break;
-    case "V5":
-      path = new VirusPath5(new Point(x, y), radius);
-      break;
-    case "V6":
-      path = new VirusPath6(new Point(x, y), radius, getFilledBoolean());
-      break;
-    case "V7":
-      path = new VirusPath7(new Point(x, y), radius, getFilledBoolean());
-      break;
-    case "V8":
-      path = new VirusPath8(new Point(x, y), radius, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawWeather(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 7);
-      variant = "V" + nr;
-    }
-    drawWeather(x, y, paint, radius, variant);
-  }
-
-  protected void drawWeather(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Sun":
-      path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(3, 10), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_V1);
-      break;
-    case "V2":
-    case "Cloud":
-      path = new CloudPath(new Point(x, y), radius, getFilledBoolean());
-      break;
-    case "V3":
-    case "Sun with Flames":
-      path = new SunPath(15 + Settings.getAnzahlFlowerLeafs(1, 10), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_FLAMES);
-      break;
-    case "V4":
-    case "Sun with Flames (Drop Style)":
-      path = new SunPath(8 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_FLAMES_DROP);
-      break;
-    case "V5":
-    case "Sun with Flames (Triangle)":
-      path = new SunPath(12 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_TRIANGLE);
-      break;
-    case "V6":
-    case "Sun with Flames (Arrows)":
-      path = new SunPath(12 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_ARROW_TRIANGLES);
-      break;
-    case "V7":
-    case "Sun with Flames (Arrows V2)":
-      path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_ARROW_V2);
-      break;
-    case "V8":
-    case "Sun with Flames (Sharp Tooth)":
-      path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius, getFilledBoolean(),
-          SUN_TYPE.SUN_SHARP_TOOTH);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawPlane(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 3);
-      variant = "V" + nr;
-    }
-    drawPlane(x, y, paint, radius, variant);
-  }
-
-  protected void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
-    final Path path = new PlanePath(new Point(x, y), radius, variant);
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawFlower(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed V1-V3")) {
-      final int nr = Randomizer.getRandomInt(0, 3);
-      variant = "V" + nr;
-    } else if (variant.equalsIgnoreCase("Mixed V4-V5")) {
-      final int nr = Randomizer.getRandomInt(3, 5);
-      variant = "V" + nr;
-    }
-    drawFlower(x, y, paint, radius, variant);
-  }
-
-  protected void drawFlower(final int x, final int y, final Paint paint, final int radius, final String variant) {
-
-    Path path;
-    switch (variant) {
-    default:
-    case "V1":
-      path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f,
-          "Circle Filling");
-      break;
-    case "V2":
-      path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f,
-          "Circle Filling");
-      break;
-    case "V3":
-      path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0,
-          "V3");
-      break;
-    case "V4":
-      path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 1.0f,
-          "Inner Flower");
-      break;
-    case "V5":
-      path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean(), 0.8f,
-          "Inner Flower");
-      break;
-    case "V6":
-      path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
-      break;
-    case "V7":
-      path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawLines(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 5);
-      variant = "V" + nr;
-    }
-    drawLines(x, y, paint, radius, variant);
-
-  }
-
-  protected void drawLines(final int x, final int y, final Paint paint, final int radius, final String variant) {
-    Path path;
-    switch (variant) {
-    default:
-    case "V1":
-    case "Spirals":
-      path = new SpiralPath(Randomizer.getRandomInt(2, 5), new Point(x, y), radius, Randomizer.getRandomBoolean());
-      break;
-    case "V2":
-    case "Streamers":
-      path = new LuftschlangenPath(Randomizer.getRandomInt(5, 7), new Point(x, y), radius, Randomizer
-          .getRandomBoolean());
-      break;
-    case "V3":
-    case "Maze":
-      path = new RandomPath(new Point(x, y), bWidth, bHeight, Randomizer.getRandomInt(10, 40), radius, true);
-      break;
-    case "V4":
-    case "Crickle Crackle":
-      path = new RandomPath(new Point(x, y), bWidth, bHeight, Randomizer.getRandomInt(5, 30), radius, false);
-      break;
-    case "V5":
-    case "Blitz":
-      path = new BlitzPath(new Point(x, y), Randomizer.getRandomInt(5, 30), radius, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    paint.setStyle(Style.STROKE);
-    paint.setStrokeWidth(radius / 15);
-    outlineDrawer.draw(paint, radius, path);
-    // bitmapCanvas.drawPath(path, paint);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawLinesDirected(x, y, paint, radius, variant);
-
-  }
-
-  protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius,
-      final String variant) {
-    Path path;
-    switch (variant) {
-    default:
-    case "V1":
-    case "Straight Line":
-      path = new LinePath(new PointF(x, y), radius, LINE_STYLE.straight, getFilledBoolean());
-      break;
-    case "V2":
-    case "Sinus":
-      path = new LinePath(new PointF(x, y), radius, LINE_STYLE.sinus, getFilledBoolean());
-      break;
-    case "V3":
-    case "Zig-Zag":
-      path = new LinePath(new PointF(x, y), radius, LINE_STYLE.zigzag, getFilledBoolean());
-      break;
-    case "V4":
-    case "Bow":
-      path = new LinePath(new PointF(x, y), radius, LINE_STYLE.bow, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    OutlineDrawer.setupPaintForOutline(paint, radius);
-    bitmapCanvas.drawPath(path, paint);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawScene(final int x, final int y, final Paint paint, final int radius, final int index) {
-    final String variant = Settings.getSelectedPatternVariant();
-    drawScene(x, y, paint, radius, variant, index);
-  }
-
-  public void drawScene(final int x, final int y, final Paint paint, final int radius, final String variant,
-      final int index) {
-    switch (variant) {
-    default:
-    case "Rain":
-      if (index % 40 == 0) {
-        // bubble
-        // drawGeometric(x, y, paint, radius / 3, "Hexagon");
-        drawBubble(x, y, paint, radius / 3);
-      } else {
-        // Rain
-        drawLinesDirected(x, y, paint, radius, "Straight Line");
-      }
-      break;
-    case "Trail Of Stars":
-      sceneDrawer.drawTrailOfStars(x, y, paint, radius, getFilledBoolean());
-      break;
-    case "Trail Of Boxes":
-      sceneDrawer.drawTrailOfBoxes(x, y, paint, radius, getFilledBoolean());
-      break;
-    case "Experiemental":
-      final TrailOfStarsPath path = new TrailOfStarsPath(new PointF(x, y),
-          radius, getFilledBoolean());
-      PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-      // PathHelper.rotatePath(x, y, path.trailPath,
-      // rotator.getRotationDegrees(0, 360, new Point(x, y)));
-      bitmapCanvas.drawPath(path, paint);
-      glossyDrawer.draw(x, y, paint, radius, path);
-
-      glossyDrawer.draw(x, y, paint, radius, path.trailPath, //
-          GLOSSY_REFLECTIONS_STYLE.NONE, GLOSSY_GLOW_STYLE.VERTICAL, true);
-      outlineDrawer.draw(paint, radius, path);
-
-      break;
-    }
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawShell(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Shells Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 6);
-      variant = "Shells V" + nr;
-    }
-    drawShell(x, y, paint, radius, variant);
-  }
-
-  public void drawShell(final int x, final int y, final Paint paint, final int radius, final String variant) {
-    Path path;
-    switch (variant) {
-    default:
-    case "Shells V1":
-      path = new ShellV1Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-      break;
-    case "Shells V2":
-      path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f,
-          ShellV2Path.VARIANTE_OUTER, getFilledBoolean());
-      break;
-    case "Shells V3":
-      path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-      break;
-    case "Shells V4":
-      path = new ShellV4Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-      break;
-    case "Shells V5":
-      path = new ShellV5Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-      break;
-    case "Shells V6":
-      path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    // Mirror only on random rotation
-    if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
-      PathHelper.mirrorPathLeftRight(x, y, path);
-    }
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawMandala(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawMandala(x, y, paint, radius, variant);
-  }
-
-  protected void drawMandala(final int x, final int y, final Paint paint, final int radius, final String variant) {
-    Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
-    switch (variant) {
-    default:
-    case "V1":
-      path = new MandalaV1Path(2 + 2 * Settings.getAnzahlFlowerLeafs(2, 8), new Point(x, y), radius);
-      break;
-    case "V2":
-      path = new MandalaV2Path(3, 16, new Point(x, y), radius);
-      break;
-    case "V3":
-      path = new MandalaV3Path(3, 2 + 2 * Settings.getAnzahlFlowerLeafs(4, 10), new Point(x, y), radius);
-      break;
-    case "V4":
-      path = new MandalaV4Path(3, new Point(x, y), radius);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    // Mirror only on random rotation
-    if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
-      PathHelper.mirrorPathLeftRight(x, y, path);
-    }
-    bitmapCanvas.drawPath(path, paint);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawFisch(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawFisch(x, y, paint, radius, variant);
-  }
-
-  protected void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    final Path path = new FishPath(new Point(x, y), radius, variante);
-
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
-    // Mirror only on random rotation
-    if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
-      PathHelper.mirrorPathLeftRight(x, y, path);
-    }
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawText(final int x, final int y, final Paint paint, final int radius, final int index) {
-    // Some Paint Inits
-    if (getFilledBoolean()) {
-      paint.setTypeface(Typeface.DEFAULT_BOLD);
-    } else {
-      paint.setTypeface(Typeface.DEFAULT);
-    }
-
-    final String variant = Settings.getSelectedPatternVariant();
-    switch (variant) {
-    default:
-    case "Numbers":
-      final String number = String.format(Locale.GERMANY, "%04d", index);
-      drawCustomText(x, y, paint, radius * 1, number);
-      break;
-    case "Custom Text":
-      final String text = Settings.getText();
-      drawCustomText(x, y, paint, radius * 1, text);
-      break;
-    case "Letters":
-      final int letterindex = Randomizer.getRandomInt(0, letters.length() - 1);
-      final char c = letters.charAt(letterindex);
-      drawCustomText(x, y, paint, radius * 2, "" + c);
-      break;
-    }
-
-  }
-
-  protected void drawCustomText(final int x, final int y, final Paint paint, final int radius, final String text) {
-
-    switch (Settings.getTextDrawStyle()) {
-    default:
-    case "Round":
-      drawTextCircle(x, y, paint, radius, text);
-      break;
-    case "Normal":
-      drawTextStraight(x, y, paint, radius, text);
-      break;
-    case "Angled":
-      drawTextAngled(x, y, paint, radius, text);
-      break;
-    case "Random":
-      final int i = Randomizer.getRandomInt(0, 3);
-      switch (i) {
-      default:
-      case 1:
-        drawTextCircle(x, y, paint, radius, text);
-        break;
-      case 2:
-        drawTextStraight(x, y, paint, radius, text);
-        break;
-      case 3:
-        drawTextAngled(x, y, paint, radius, text);
-        break;
-      }
-      break;
-    }
-  }
-
-  protected void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
-    paint.setTextSize(radius);
-    paint.setTextAlign(Align.LEFT);
-    final Path mArc = new Path();
-    final int x2 = bWidth;
-    mArc.moveTo(x - radius / 2, y + radius / 2);
-    mArc.lineTo(x2, y + radius / 2);
-
-    bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
-    outlineDrawer.drawText(paint, radius, text, mArc);
-
-  }
-
-  protected void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
-    paint.setTextSize(radius);
-    paint.setTextAlign(Align.CENTER);
-    final Path mArc = new Path();
-    final RectF oval = getRectForRadius(x, y, radius * 2);
-    mArc.addArc(oval, Randomizer.getRandomInt(0, 360), 355);
-
-    bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
-    outlineDrawer.drawText(paint, radius, text, mArc);
-  }
-
-  protected void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
-    paint.setTextSize(radius);
-    paint.setTextAlign(Align.LEFT);
-    final Path mArc = new Path();
-    mArc.moveTo(x, y);
-    final int y2 = Randomizer.getRandomInt(-bHeight, bHeight);
-    final int x2 = Randomizer.getRandomInt(-bWidth, bWidth);
-    mArc.lineTo(x2, y2);
-
-    bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
-    outlineDrawer.drawText(paint, radius, text, mArc);
-  }
-
-  protected RectF getRectForRadius(final int x, final int y, final int radius) {
-    return new RectF(x - radius, y - radius, x + radius, y + radius);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  private void drawMaterial(final int x, final int y, final Paint paint, final int radius) {
-    final String variante = Settings.getSelectedPatternVariant();
-    drawMaterial(x, y, paint, radius, variante);
-  }
-
-  private void drawMaterial(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "Stripe":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.STIPE);
-      break;
-    case "Stripe V2":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.STIPE_V2);
-      break;
-    case "Stripe V3":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.STIPE_V3);
-      break;
-    case "Arc 1":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC1);
-      break;
-    case "Arc 2":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC2);
-      break;
-    case "Arc 3":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.ARC3);
-      break;
-    case "Skyline":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.SKYLINE);
-      break;
-    case "Pyramide Skyline":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.PYRAMIDE_SKYLINE);
-      break;
-    case "Edgy Bars":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.EDGY_BARS);
-      break;
-    case "Rotating Bars":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.ROTATING_BARS);
-      break;
-    case "Rotating Triangles":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.ROTATING_TRIANGLES);
-      break;
-    case "Half Stripe":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight, MATERIAL_TYPE.HALF_STIPE);
-      break;
-    case "Half Stripe V2":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.HALF_STIPE_V2);
-      break;
-    case "Half Stripe V3":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.HALF_STIPE_V3);
-      break;
-    case "Rotating Arches (random arches)":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.ROTATING_ARCHES_RANDOM_SIZE);
-      break;
-    case "Rotating Arches (quarter arches)":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.ROTATING_QUARTER_ARCHES);
-      break;
-    case "Rotating Arches (half arches)":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.ROTATING_HALF_ARCHES);
-      break;
-    case "Rotating Arches (3-quarter arches)":
-      path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
-          MATERIAL_TYPE.ROTATING_THREE_QUARTER_ARCHES);
-      break;
-    }
-    bitmapCanvas.drawPath(path, paint);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
-    final String variante = Settings.getSelectedPatternVariant();
-    drawRect(x, y, paint, radius, variante);
-  }
-
-  protected void drawRect(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Random Ratio":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.RANDOM);
-      break;
-    case "V2":
-    case "Random Ratio (Rounded)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.RANDOM);
-      break;
-    case "V3":
-    case "Random Ratio (Mixed)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.RANDOM);
-      break;
-    case "V4":
-    case "4-3 Ratio":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
-          RECT_ASPECT.ASPECT_3_4);
-      break;
-    case "V5":
-    case "4-3 Ratio (Rounded)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
-          RECT_ASPECT.ASPECT_3_4);
-      break;
-    case "V6":
-    case "4-3 Ratio (Mixed)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_3_4);
-      break;
-    case "V7":
-    case "1-2 Ratio":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
-          RECT_ASPECT.ASPECT_1_2);
-      break;
-    case "V8":
-    case "1-2 Ratio (Rounded)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
-          RECT_ASPECT.ASPECT_1_2);
-      break;
-    case "V9":
-    case "1-2 Ratio (Mixed)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
-      break;
-    case "V10":
-    case "Golden Ratio":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
-          RECT_ASPECT.ASPECT_GOLDEN_CUT);
-      break;
-    case "V11":
-    case "Golden Ratio (Rounded)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
-          RECT_ASPECT.ASPECT_GOLDEN_CUT);
-      break;
-    case "V12":
-    case "Golden Ratio (Mixed)":
-      path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
-          RECT_ASPECT.ASPECT_GOLDEN_CUT);
-      break;
-    }
-
-    if (Settings.isRandomRotate()) {
-      PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 180, new Point(x, y)));
-    } else {
-      float degr = rotator.getRotationDegrees(0, 180, new Point(x, y));
-      if (Randomizer.getRandomBoolean()) {
-        degr = degr + 90;
-      }
-      PathHelper.rotatePath(x, y, path, degr);
-    }
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 14);
-      variante = "V" + nr;
-    } else if (variante.equalsIgnoreCase("Mixed Bats")) {
-      final int nr = Randomizer.getRandomInt(1, 5);
-      variante = "V" + nr;
-    } else if (variante.equalsIgnoreCase("Mixed Ghosts")) {
-      final int nr = Randomizer.getRandomInt(5, 7);
-      variante = "V" + nr;
-    } else if (variante.equalsIgnoreCase("Mixed Owls")) {
-      final int nr = Randomizer.getRandomInt(7, 11);
-      variante = "V" + nr;
-    } else if (variante.equalsIgnoreCase("Mixed Pumpkins")) {
-      variante = "Mixed Pumpkins";
-    }
-    drawSpooky(x, y, paint, radius, variante);
-  }
-
-  protected void drawSpooky(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Skull":
-      path = new SkullPath(new Point(x, y), radius);
-      break;
-    case "V2":
-    case "Bat V1 (Aarons Cute Design)":
-      path = new BatPath(new Point(x, y), radius, "V1");
-      break;
-    case "V3":
-    case "Bat V2":
-      path = new BatPath(new Point(x, y), radius, "V2");
-      break;
-    case "V4":
-    case "Bat V3":
-      path = new BatPath(new Point(x, y), radius, "V3");
-      break;
-    case "V5":
-    case "Bat V4":
-      path = new BatPath(new Point(x, y), radius, "V4");
-      break;
-    case "V6":
-    case "Ghost V1":
-      path = new GhostPath(new Point(x, y), radius, "V1");
-      break;
-    case "V7":
-    case "Ghost V2":
-      path = new GhostPath(new Point(x, y), radius, "V2");
-      break;
-    case "V8":
-    case "Owl V1":
-      path = new OwlPath(new Point(x, y), radius, "V1");
-      break;
-    case "V9":
-    case "Owl V2":
-      path = new OwlPath(new Point(x, y), radius, "V2");
-      break;
-    case "V10":
-    case "Owl V3":
-      path = new OwlPath(new Point(x, y), radius, "V3");
-      break;
-    case "V11":
-    case "Owl V4":
-      path = new OwlPath(new Point(x, y), radius, "V4");
-      break;
-    case "V12":
-    case "Pumpkin (round eyes)":
-      path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDZACKIG_AUGERUND);
-      break;
-    case "V13":
-    case "Pumpkin (triangel eyes)":
-      path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDZACKIG_AUGEDREIECKIGV2);
-      break;
-    case "V14":
-    case "Pumpkin (round eyes and mouth)":
-      path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDRUND_AUGERUND);
-      break;
-    case "Mixed Pumpkins":
-      path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.RANDOM);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius,
-      final PUZZLE_CONNECTION puzzleConnection) {
-    final String variant = Settings.getSelectedPatternVariant();
-    drawPuzzle(x, y, paint, radius, variant, puzzleConnection);
-  }
-
-  protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius, final String variante,
-      final PUZZLE_CONNECTION puzzleConnection) {
-    Path path;
-    switch (variante) {
-    default:
-    case "Mixed":
-      path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM, puzzleConnection, getFilledBoolean());
-      break;
-    case "Manneken":
-      path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN, puzzleConnection, getFilledBoolean());
-      break;
-    case "Top-Right":
-      path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS, puzzleConnection, getFilledBoolean());
-      break;
-    case "Cross":
-      path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ, puzzleConnection, getFilledBoolean());
-      break;
-    case "All":
-      path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL, puzzleConnection, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 18);
-      variant = "V" + nr;
-    }
-    drawAssorted(x, y, paint, radius, variant);
-  }
-
-  protected void drawAssorted(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Lemon":
-      path = new ZitronePath(new Point(x, y), radius);
-      break;
-    case "V2":
-    case "YingYang":
-      path = new YingYangPath(new Point(x, y), radius);
-      if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
-        PathHelper.mirrorPathLeftRight(x, y, path);
-      }
-      break;
-    case "V3":
-    case "Crop Circles":
-      path = new DotSpiralPath(3, new Point(x, y), radius, 0);
-      if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
-        PathHelper.mirrorPathLeftRight(x, y, path);
-      }
-      break;
-    case "V4":
-    case "Roses":
-      path = new RosePath(new Point(x, y), radius);
-      break;
-    case "V5":
-    case "Pillows":
-      path = new PillowPath(4, new PointF(x, y), radius);
-      break;
-    case "V6":
-    case "Android":
-      path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.ANDROID);
-      break;
-    case "V7":
-    case "Footprint":
-      path = new FootprintPath(new Point(x, y), radius, "V1");
-      if (Randomizer.getRandomBoolean()) {
-        PathHelper.mirrorPathLeftRight(x, y, path);
-      }
-      break;
-    case "V8":
-    case "Pentagram":
-      path = new PentagramPath(new PointF(x, y), radius);
-      break;
-    case "V9":
-    case "4Sails":
-      path = new FourSailsPath(new Point(x, y), radius, "V1");
-      break;
-    case "V10":
-    case "Dice":
-      path = new DicePath(new PointF(x, y), radius * 0.8f);
-      break;
-    case "V11":
-    case "Drop":
-      path = new DropPath(new PointF(x, y), radius);
-      break;
-    case "V12":
-    case "Ikae Robot":
-      path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.IKEA);
-      break;
-    case "V13":
-    case "Hedgehog":
-      path = new IgelPath(new Point(x, y + radius / 2), radius * 1.3f);
-      if (getFilledBoolean()) {
-        PathHelper.mirrorPathLeftRight(x, y, path);
-      }
-      break;
-    case "V14":
-    case "Dandelion":
-      path = new DandelionPath(new Point(x, y), radius);
-      break;
-    case "V15":
-    case "Deathstar":
-      path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.DEATHSTAR);
-      break;
-    case "V16":
-    case "R2D2":
-      path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.R2D2);
-      break;
-    case "V17":
-    case "Iron Cross":
-      path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean(), IRONCROSS_TYPE.SPITZ);
-      break;
-    case "V18":
-    case "Iron Cross (round)":
-      path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean(), IRONCROSS_TYPE.RUND);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawSonic(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawSonic(x, y, paint, radius, variant);
-  }
-
-  protected void drawSonic(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    int leafs = Settings.getAnzahlFlowerLeafs(1, 10);
-    if (leafs % 2 == 0) {
-      // wir haben ne gerade zahl... und m�ssen ungerade werden... eins drauf
-      // addieren
-      leafs++;
-    }
-    final int rounds = 2 + leafs;
-
-    switch (variante) {
-    default:
-    case "V1":
-    case "Normal":
-      path = new SonicPath(new PointF(x, y), radius, SONICTYPE.NORMAL, rounds, getFilledBoolean());
-      break;
-    case "V2":
-    case "Double":
-      path = new SonicPath(new PointF(x, y), radius, SONICTYPE.DOUBLE, rounds, getFilledBoolean());
-      break;
-    case "V3":
-    case "Special":
-      path = new SonicPath(new PointF(x, y), radius, SONICTYPE.SPECIAL, rounds, getFilledBoolean());
-      break;
-    case "V4":
-    case "One Arm":
-      path = new SonicPath(new PointF(x, y), radius, SONICTYPE.NORMAL, 3, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  protected void drawSquare(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 4);
-      variant = "V" + nr;
-    }
-    drawSquare(x, y, paint, radius, variant);
-  }
-
-  protected void drawSquare(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Square (round inner corner)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_ROUND);
-      break;
-    case "V2":
-    case "Square (square inner corner)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_RECT);
-      break;
-    case "V3":
-    case "Square (line corner)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.DIAGONAL_LINE);
-      break;
-    case "V4":
-    case "Square (round inner corner V2)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_ROUND2);
-      break;
-    case "V5":
-    case "Square (circle corner)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CIRCLE);
-      break;
-    case "V6":
-    case "Square (outer circle corner)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.OUTER_CIRCLE);
-      break;
-    case "V7":
-    case "Square (rounded)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUNDED);
-      break;
-    case "V8":
-    case "Square (castel)":
-      path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CASTEL);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 12);
-      variant = "V" + nr;
-    }
-    drawPillow(x, y, paint, radius, variant);
-  }
-
-  protected void drawPillow(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "3 Edge Pillow":
-      path = new PillowPath(3, new PointF(x, y), radius);
-      break;
-    case "V2":
-    case "4 Edge Pillow":
-      path = new PillowPath(4, new PointF(x, y), radius);
-      break;
-    case "V3":
-    case "5 Edge Pillow":
-      path = new PillowPath(5, new PointF(x, y), radius);
-      break;
-    case "V4":
-    case "6 Edge Pillow":
-      path = new PillowPath(6, new PointF(x, y), radius);
-      break;
-    case "V5":
-    case "Plectrum":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PLEKTRUM);
-      break;
-    case "V6":
-    case "Fingernail":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.FINGERNAIL);
-      break;
-    case "V7":
-    case "Treky":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.TREKY);
-      break;
-    case "V8":
-    case "YingYang":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.YINGYANG);
-      break;
-    case "V9":
-    case "Peeek":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PEEEK);
-      break;
-    case "V10":
-    case "Armor":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.ARMOR);
-      break;
-    case "V11":
-    case "Messer":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.MESSER);
-      break;
-    case "V12":
-    case "Blazon":
-      path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.BLAZON);
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 7);
-      variant = "V" + nr;
-    }
-    drawChess(x, y, paint, radius, variant);
-  }
-
-  protected void drawChess(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Square":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Square);
-      break;
-    case "V2":
-    case "Star":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Star);
-      break;
-    case "V3":
-    case "Circle":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Circle);
-      break;
-    case "V4":
-    case "Pillow":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Pillow);
-      break;
-    case "V5":
-    case "Heart":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Heart);
-      break;
-    case "V6":
-    case "Arrow":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Arrow);
-      break;
-    case "V7":
-    case "Triangle":
-      path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Triangle);
-      break;
-    }
-    if (Settings.isRandomRotate()) {
-      PathHelper.rotatePath(x, y, path, 90 * Randomizer.getRandomInt(-1, 4));
-    }
-    bitmapCanvas.drawPath(path, paint);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // ----------------
-  // #########################################################################################
-  protected void drawXmas(final int x, final int y, final Paint paint, final int radius) {
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 1);
-      variant = "V" + nr;
-    }
-    drawXmas(x, y, paint, radius, variant);
-  }
-
-  protected void drawXmas(final int x, final int y, final Paint paint, final int radius, final String variante) {
-    Path path;
-    switch (variante) {
-    default:
-    case "V1":
-    case "Tree":
-      path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
-      break;
-    }
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // Bubble
-  // #########################################################################################
-
-  private void drawBubble(final int x, final int y, final Paint paint, final int radius) {
+    private final Canvas bitmapCanvas;
+    private final GlossyDrawer glossyDrawer;
+    private final OutlineDrawer outlineDrawer;
+    private final SceneDrawer sceneDrawer;
+    private final Rotator rotator;
+    private final int bWidth;
+    private final int bHeight;
+
+    private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public PatternDrawer(final Canvas bitmapCanvas) {
+        this.bitmapCanvas = bitmapCanvas;
+        bWidth = bitmapCanvas.getWidth();
+        bHeight = bitmapCanvas.getHeight();
+        glossyDrawer = new GlossyDrawer(bitmapCanvas);
+        outlineDrawer = new OutlineDrawer(bitmapCanvas);
+        rotator = new Rotator(bWidth, bHeight);
+        sceneDrawer = new SceneDrawer(bitmapCanvas, glossyDrawer, outlineDrawer, rotator);
+
+    }
+
+    public void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
+        switch (Settings.getSelectedPattern()) {
+
+            case "Gears-Saws":
+                drawGearSaw(x, y, paint, radius);
+                break;
+            case "Spooky":
+                drawSpooky(x, y, paint, radius);
+                break;
+            case "Assorted Shapes":
+                drawAssorted(x, y, paint, radius);
+                break;
+            case "Chess":
+                drawChess(x, y, paint, radius);
+                break;
+            case "Flipped":
+                drawFlipped(x, y, paint, radius);
+                break;
+            case "Geometrical Shapes":
+                drawGeometric(x, y, paint, radius);
+                break;
+            case "Geometrical (long) Shapes":
+                drawGeometricLong(x, y, paint, radius);
+                break;
+            case "3D (long) Shapes":
+                draw3DLongShape(x, y, paint, radius);
+                break;
+            case "Rings":
+                drawRing(x, y, paint, radius);
+                break;
+            case "Bubbles":
+                drawBubble(x, y, paint, radius);
+                break;
+            case "Hearts":
+                drawHeart(x, y, paint, radius);
+                break;
+            case "Invertable Shapes":
+                drawInvertable(x, y, paint, radius);
+                break;
+            case "Lines":
+                drawLines(x, y, paint, radius);
+                break;
+            case "Lines (Directed)":
+                drawLinesDirected(x, y, paint, radius);
+                break;
+            case "Leafs":
+                drawLeafs(x, y, paint, radius);
+                break;
+            case "Logos":
+                drawLogos(x, y, paint, radius);
+                break;
+            case "PacMan":
+                drawPacman(x, y, paint, radius);
+                break;
+            case "Pillows":
+                drawPillow(x, y, paint, radius);
+                break;
+            case "Puzzle":
+                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.NORMAL);
+                break;
+            case "Puzzle (Circle Connector)":
+                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.CIRCLE);
+                break;
+            case "Puzzle (Square)":
+                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.RECT_NORMAL);
+                break;
+            case "Puzzle (Square Connector)":
+                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.SQUARE);
+                break;
+            case "Smiley":
+                drawSmiley(x, y, paint, radius);
+                break;
+            case "Stars":
+                drawStar(x, y, paint, radius);
+                break;
+            case "Square":
+                drawSquare(x, y, paint, radius);
+                break;
+            case "Text":
+                drawText(x, y, paint, radius * 2, index);
+                break;
+            case "Fish":
+                drawFisch(x, y, paint, radius);
+                break;
+            case "Flowers":
+                drawFlower(x, y, paint, radius);
+                break;
+            case "Mandala":
+                drawMandala(x, y, paint, radius);
+                break;
+            case "Maritim":
+                drawMaritim(x, y, paint, radius);
+                break;
+            case "Material":
+                drawMaterial(x, y, paint, radius);
+                break;
+            case "Rectangles":
+                drawRect(x, y, paint, radius);
+                break;
+            case "Scenes":
+                drawScene(x, y, paint, radius, index);
+                break;
+            case "Shells":
+                drawShell(x, y, paint, radius);
+                break;
+            case "Sonic":
+                drawSonic(x, y, paint, radius);
+                break;
+            case "Space":
+                drawSpace(x, y, paint, radius);
+                break;
+            default:
+            case "Virus Attack":
+                drawVirus(x, y, paint, radius);
+                break;
+            case "Weather":
+                drawWeather(x, y, paint, radius);
+                break;
+            case "Planes":
+                drawPlane(x, y, paint, radius);
+                break;
+            case "Xmas":
+                drawXmas(x, y, paint, radius);
+                break;
+        }
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius) {
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 3);
+            variante = "V" + nr;
+        }
+        drawGearSaw(x, y, paint, radius, variante);
+    }
+
+    protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Gear":
+                final int zaehne = 10 + Settings.getAnzahlFlowerLeafs(1, 10);
+                path = new GearPath(zaehne, new Point(x, y), radius, getFilledBoolean());
+                break;
+            case "V2":
+            case "Saw": {
+                final int zahn = 15 + Settings.getAnzahlFlowerLeafs(1, 10);
+                path = new SawPath(zahn, new Point(x, y), radius, getFilledBoolean(), Randomizer.getRandomBoolean());
+                break;
+            }
+            case "V3":
+            case "Star Gear": {
+                final int zahn = 15 + Settings.getAnzahlFlowerLeafs(1, 10);
+                path = new StarPath(zahn, new PointF(x, y), radius, radius * 0.8f, getFilledBoolean());
+                break;
+            }
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawMaritim(final int x, final int y, final Paint paint, final int radius) {
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variante = "V" + nr;
+        }
+        drawMaritim(x, y, paint, radius, variante);
+    }
+
+    protected void drawMaritim(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Sailboat V1":
+                path = new SailboatPath(new Point(x, y), radius);
+                break;
+            case "V2":
+            case "Sailboat V2":
+                path = new SailboatPath2(new Point(x, y), radius);
+                break;
+            case "V3":
+            case "Lighthouse":
+                path = new LighthousePath(new Point(x, y), radius);
+                break;
+            case "V4":
+            case "Anchor":
+                path = new AnkerPath(new Point(x, y), radius);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        // Glossy
+
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawFlipped(final int x, final int y, final Paint paint, final int radius) {
+        final String variant = Settings.getSelectedPatternVariant();
+        drawFlipped(x, y, paint, radius, variant);
+    }
+
+    protected void drawFlipped(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "Triangle":
+                path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.TRIANGLE);
+                break;
+            case "Triangle V2":
+                path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.TRIANGLE_V2);
+                break;
+            case "Square":
+                path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.SQUARE);
+                break;
+            case "Rectangle":
+                path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.RECTANGLE);
+                break;
+            case "Quarter Arc":
+                path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.QUARTER_ARC);
+                break;
+            case "Quarter Arc V2":
+                path = new FlippedPath(new PointF(x, y), radius, getFilledBoolean(), FLIPPED_STYLE.QUARTER_ARC_V2);
+                break;
+
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 6);
+            variant = "V" + nr;
+        } else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
+            final int nr = Randomizer.getRandomInt(0, 9);
+            variant = "V" + nr;
+        } else if (variant.equalsIgnoreCase("Square (Mixed)")) {
+            variant = "Square (Mixed)";
+        }
+        drawGeometric(x, y, paint, radius, variant);
+    }
+
+    protected void drawGeometric(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Triangle":
+                path = new XEckPath(3, new PointF(x, y), radius, 0, getFilledBoolean());
+                break;
+            case "V2":
+            case "Square":
+                path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.NORMAL, Direction.CW);
+                break;
+            case "V3":
+            case "Square (rounded)":
+                path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.ROUNDED, Direction.CW);
+                break;
+            case "V4":
+            case "Pentagon":
+                path = new XEckPath(5, new PointF(x, y), radius, 0, getFilledBoolean());
+                break;
+            case "V5":
+            case "Hexagon":
+                path = new XEckPath(6, new PointF(x, y), radius, 0, getFilledBoolean());
+                break;
+            case "V6":
+            case "Octagon":
+                path = new XEckPath(8, new PointF(x, y), radius, 0, getFilledBoolean());
+                break;
+            case "V7":
+            case "Circle":
+                path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(), CIRCLE_STYLE.CIRCLE);
+                break;
+            case "V8":
+            case "Oval":
+                path = new OvalPath(new PointF(x, y), radius / 2, radius, Direction.CW, OVAL_TYPE.NORMAL);
+                break;
+            case "V9":
+            case "Oval (random width)":
+                path = new OvalPath(new PointF(x, y), radius * 0.8f, radius, Direction.CW, OVAL_TYPE.RANDOM_WIDTH);
+                break;
+            case "V10":
+            case "Oval (random)":
+                path = new OvalPath(new PointF(x, y), radius * 0.8f, radius, Direction.CW, OVAL_TYPE.RANDOM);
+                break;
+            case "V11":
+            case "Half Circle":
+                path = new CirclePath(new PointF(x, y), radius, radius / 2, getFilledBoolean(),
+                        CIRCLE_STYLE.HALF_CIRCLE);
+                break;
+            case "V12":
+            case "Square (Mixed)":
+                path = new SquarePath(new PointF(x, y), radius, getFilledBoolean(), SQUARE_STYLE.MIXED, Direction.CW);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawLeafs(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawLeafs(x, y, paint, radius, variant);
+    }
+
+    protected void drawLeafs(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Maple":
+                path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.MAPLE);
+                break;
+            case "V2":
+            case "Weed":
+                path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.WEED);
+                break;
+            case "V3":
+            case "Round Leaf":
+                path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.ROUND);
+                break;
+            case "V4":
+            case "Finger Maple":
+                path = new LeafPath(new PointF(x, y), radius, LEAF_STYLE.FINGER_MAPLE);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawLogos(final int x, final int y, final Paint paint, final int radius) {
+        final String variant = Settings.getSelectedPatternVariant();
+        drawLogos(x, y, paint, radius, variant);
+    }
+
+    protected void drawLogos(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "Resurrection Remix":
+                path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V1);
+                break;
+            case "Resurrection Remix V2":
+                path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V2);
+                break;
+            case "Resurrection Remix V3":
+                path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V3);
+                break;
+            case "Resurrection Remix V4":
+                path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V4);
+                break;
+            case "Resurrection Remix V5":
+                path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V5);
+                break;
+            case "Resurrection Remix V6":
+                path = new LogoPathRR(new PointF(x, y), radius, LOGO_STYLE_RR.RR_V6);
+                break;
+            case "ElementalX Kernel":
+                path = new LogoPathEX(new PointF(x, y), radius, LOGO_STYLE_EX.V1);
+                break;
+            case "Peace Sign":
+                path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.V1);
+                break;
+            case "Weed Sign":
+                path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED);
+                break;
+            case "Weed Sign V2":
+                path = new LogoPathPeace(new PointF(x, y), radius, LOGO_STYLE_PEACE.WEED_V2);
+                break;
+            case "Nexus V1":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V1);
+                break;
+            case "Nexus V2":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V2);
+                break;
+            case "Nexus V3":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.NEXUS_V3);
+                break;
+            case "Oneplus One V1":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.ONEPLUSONE_V1);
+                break;
+            case "Oneplus One V2":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.ONEPLUSONE_V2);
+                break;
+            case "LG V1":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V1);
+                break;
+            case "LG V2":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.LG_V2);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius) {
+        final String variant = Settings.getSelectedPatternVariant();
+        drawGeometricLong(x, y, paint, radius, variant);
+    }
+
+    protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius,
+            final String variante) {
+        if (x == bWidth / 2 && y == bHeight / 2) {
+            return;
+        }
+        Path path;
+        switch (variante) {
+            default:
+            case "Rectangle":
+                path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(),
+                        RECT_ROUNDED.NORMAL);
+                break;
+            case "Rectangle (rounded)":
+                path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(),
+                        RECT_ROUNDED.ROUNDED);
+                break;
+            case "Rectangle (Mixed)":
+                path = new RectangleAsymetricPath(new Point(x, y), radius, radius * 6, getFilledBoolean(),
+                        RECT_ROUNDED.MIXED);
+                break;
+            case "Triangle":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.TRIANGLE);
+                break;
+            case "Oval":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.OVAL);
+                break;
+            case "Diamond":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.RAUTE);
+                break;
+            case "Dragon":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.DRACHEN);
+                break;
+            case "Dragon (upsidedown)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.DRACHEN_UPSIDEDOWN);
+                break;
+            case "Drop":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.DROP);
+                break;
+            case "Drop (upsidedown)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.DROP_REVERSE);
+                break;
+            case "Lense":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.LENSE);
+                break;
+            case "Lense V2":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.LENSE_V2);
+                break;
+            case "Lense V3":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.LENSE_V3);
+                break;
+            case "Tag":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.TAG);
+                break;
+            case "Knife":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.KNIFE);
+                break;
+            case "Knife V2":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.KNIFE_V2);
+                break;
+            case "Knife V3":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.KNIFE_V3);
+                break;
+            case "Cross":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS);
+                break;
+            case "Cross (Sharp)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SHARP);
+                break;
+            case "Cross (Split)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SPLIT);
+                break;
+            case "Cross (Split 2)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SPLIT2);
+                break;
+            case "Cross (Slim)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SLIM);
+                break;
+            case "Cross (Slim-Double)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SLIM_DOUBLE);
+                break;
+            case "Spiky Cross":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.SPIKY_CROSS);
+                break;
+            case "Double Cross":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.DOUBLE_CROSS);
+                break;
+            case "Sperm":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 6, getFilledBoolean(),
+                        ASYMETRIC_STYLE.SPERM);
+                break;
+            case "Virus":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 3, getFilledBoolean(),
+                        ASYMETRIC_STYLE.VIRUS);
+                break;
+            case "Virus V2":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 3, getFilledBoolean(),
+                        ASYMETRIC_STYLE.VIRUS_V2);
+                break;
+            case "Virus V3":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+                        ASYMETRIC_STYLE.VIRUS_V3);
+                break;
+            case "Long Heart":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.LONG_HEART);
+                break;
+            case "Square Chain":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.SQUARE_CHAIN);
+                break;
+            case "Circle Chain":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CHAIN_CIRCLE);
+                break;
+            case "Circle Chain (upsidedown)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CHAIN_CIRCLE_UPSIDEDOWN);
+                break;
+            case "Spear":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.SPEAR1);
+                break;
+            case "Iron Cross":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.IRON_CROSS);
+                break;
+            case "Iron Cross (round)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.IRON_CROSS_ROUND);
+                break;
+            case "Bird":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+                        ASYMETRIC_STYLE.BIRD);
+                break;
+            case "Bird V2":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 4, getFilledBoolean(),
+                        ASYMETRIC_STYLE.BIRD_V2);
+                break;
+            case "Golf Pin":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.GOLF_PIN);
+                break;
+            case "Pin":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.PIN);
+                break;
+            case "Tulip":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.TULIP_NORMAL);
+                break;
+            case "Plane":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.PLANE);
+                break;
+            case "Arrow":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.ARROW);
+                break;
+            case "Cross (Slim V2)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SLIM_V2);
+                break;
+            case "Cross (Slim V3)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.CROSS_SLIM_V3);
+                break;
+            case "Tulip (Slim)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.TULIP_SLIM);
+                break;
+            case "Tulip (Fat)":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.TULIP_FAT);
+                break;
+            case "Spaceship":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.SPACESHIP);
+                break;
+            case "Spaceship V2":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.SPACESHIP_V2);
+                break;
+            case "Ritual Axe":
+                path = new AsymetricLongPath(new PointF(x, y), radius, radius * 5, getFilledBoolean(),
+                        ASYMETRIC_STYLE.RITUAL_AXE);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 6);
+            variant = "V" + nr;
+        }
+        draw3DLongShape(x, y, paint, radius, variant);
+    }
+
+    protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius,
+            final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Long Pyramide":
+                path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.PYRAMIDE);
+                break;
+            case "V2":
+            case "Pyramide":
+                path = new Asymetric3DPath(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.PYRAMIDE);
+                break;
+            case "V3":
+            case "Long Cube":
+                path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.CUBE);
+                break;
+            case "V4":
+            case "Cube":
+                path = new Asymetric3DPath(new PointF(x, y), radius, radius * 2, ASYMETRIC_3D_STYLE.CUBE);
+                break;
+            case "V5":
+            case "Long Cone":
+                path = new Asymetric3DPath(new PointF(x, y), radius, radius * 4, ASYMETRIC_3D_STYLE.CONE);
+                break;
+            case "V6":
+            case "Cone":
+                path = new Asymetric3DPath(new PointF(x, y), radius, radius * 3, ASYMETRIC_3D_STYLE.CONE);
+                break;
+        }
+
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 9);
+            variante = "V" + nr;
+        } else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
+            final int nr = Randomizer.getRandomInt(4, 6);
+            variante = "V" + nr;
+        }
+
+        drawInvertable(x, y, paint, radius, variante);
+    }
+
+    protected void drawInvertable(final int x, final int y, final Paint paint, final int radius,
+            final String variante) {
+
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Heart V1":
+                path = new HeartPath(new PointF(x, y), radius, getFilledBoolean(), HEART_SHAPE.Curvy);
+                break;
+            case "V2":
+            case "Heart V2":
+                path = new HeartPath(new PointF(x, y), radius, getFilledBoolean(), HEART_SHAPE.Straigth);
+                break;
+            case "V3":
+            case "Arrow":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow");
+                break;
+            case "V4":
+            case "Arrow (round)":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Arrow (round)");
+                break;
+            case "V5":
+            case "Plus":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Plus");
+                break;
+            case "V6":
+            case "Minus":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Minus");
+                break;
+            case "V7":
+            case "Star":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Star");
+                break;
+            case "V8":
+            case "Gear":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Gear");
+                break;
+            case "V9":
+            case "Crown":
+                path = new InvertablePath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "Crown");
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        // Glossy
+
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawRing(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawRing(x, y, paint, radius, variant);
+    }
+
+    protected void drawRing(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Rings V1 (Flange)":
+                path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V1");
+                break;
+            case "V2":
+            case "Rings V2 (Asymetric)":
+                path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V2");
+                break;
+            case "V3":
+            case "Rings V3 (Concentric)":
+                path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V3");
+                break;
+            case "V4":
+            case "Rings V4 (Dizzy)":
+                path = new RingPath(new Point(x, y), radius, radius / 2, getFilledBoolean(), "V4");
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawSpace(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 10);
+            variant = "V" + nr;
+        } else if (variant.equalsIgnoreCase("Mixed Rockets")) {
+            final int nr = Randomizer.getRandomInt(0, 6);
+            variant = "V" + nr;
+        }
+        drawSpace(x, y, paint, radius, variant);
+    }
+
+    protected void drawSpace(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Rocket V1":
+                path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V1");
+                break;
+            case "V2":
+            case "Rocket V2":
+                path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V2");
+                break;
+            case "V3":
+            case "Rocket V3":
+                path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V3");
+                break;
+            case "V4":
+            case "Rocket V4":
+                path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V4");
+                break;
+            case "V5":
+            case "Rocket V5":
+                path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V5");
+                break;
+            case "V6":
+            case "Rocket V6":
+                path = new RocketPath(new Point(x, y), radius, getFilledBoolean(), "Rocket V6");
+                break;
+            case "V7":
+            case "Ufo V1":
+                path = new UfoPath(new Point(x, y), radius, UFO_TYPE.UfoV1, getFilledBoolean());
+                break;
+            case "V8":
+            case "Ufo V2":
+                path = new UfoPath(new Point(x, y), radius, UFO_TYPE.UfoV2, getFilledBoolean());
+                break;
+            case "V9":
+            case "Satellite":
+                path = new SatelitePath(new Point(x, y), radius, getFilledBoolean(), "Satellite V1");
+                break;
+            case "V10":
+            case "Spaceship":
+                path = new SpaceshipPath(new PointF(x, y), radius, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawVirus(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 8);
+            variant = "V" + nr;
+        }
+
+        drawVirus(x, y, paint, radius, variant);
+    }
+
+    protected void drawVirus(final int x, final int y, final Paint paint, final int radius, final String variant) {
+        Path path;
+        switch (variant) {
+            default:
+            case "V1":
+                path = new VirusPath(new Point(x, y), radius, getFilledBoolean());
+                break;
+            case "V2":
+                path = new VirusPath2(new Point(x, y), radius, 13, getFilledBoolean());
+                break;
+            case "V3":
+                path = new VirusPath3(new Point(x, y), radius, 17, getFilledBoolean());
+                break;
+            case "V4":
+                path = new VirusPath4(new Point(x, y), radius);
+                break;
+            case "V5":
+                path = new VirusPath5(new Point(x, y), radius);
+                break;
+            case "V6":
+                path = new VirusPath6(new Point(x, y), radius, getFilledBoolean());
+                break;
+            case "V7":
+                path = new VirusPath7(new Point(x, y), radius, getFilledBoolean());
+                break;
+            case "V8":
+                path = new VirusPath8(new Point(x, y), radius, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawWeather(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 7);
+            variant = "V" + nr;
+        }
+        drawWeather(x, y, paint, radius, variant);
+    }
+
+    protected void drawWeather(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Sun":
+                path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(3, 10), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_V1);
+                break;
+            case "V2":
+            case "Cloud":
+                path = new CloudPath(new Point(x, y), radius, getFilledBoolean());
+                break;
+            case "V3":
+            case "Sun with Flames":
+                path = new SunPath(15 + Settings.getAnzahlFlowerLeafs(1, 10), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_FLAMES);
+                break;
+            case "V4":
+            case "Sun with Flames (Drop Style)":
+                path = new SunPath(8 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_FLAMES_DROP);
+                break;
+            case "V5":
+            case "Sun with Flames (Triangle)":
+                path = new SunPath(12 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_TRIANGLE);
+                break;
+            case "V6":
+            case "Sun with Flames (Arrows)":
+                path = new SunPath(12 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_ARROW_TRIANGLES);
+                break;
+            case "V7":
+            case "Sun with Flames (Arrows V2)":
+                path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_ARROW_V2);
+                break;
+            case "V8":
+            case "Sun with Flames (Sharp Tooth)":
+                path = new SunPath(5 + Settings.getAnzahlFlowerLeafs(1, 5), new PointF(x, y), radius,
+                        getFilledBoolean(), SUN_TYPE.SUN_SHARP_TOOTH);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawPlane(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 3);
+            variant = "V" + nr;
+        }
+        drawPlane(x, y, paint, radius, variant);
+    }
+
+    protected void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
+        final Path path = new PlanePath(new Point(x, y), radius, variant);
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawFlower(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed V1-V3")) {
+            final int nr = Randomizer.getRandomInt(0, 3);
+            variant = "V" + nr;
+        } else if (variant.equalsIgnoreCase("Mixed V4-V5")) {
+            final int nr = Randomizer.getRandomInt(3, 5);
+            variant = "V" + nr;
+        }
+        drawFlower(x, y, paint, radius, variant);
+    }
+
+    protected void drawFlower(final int x, final int y, final Paint paint, final int radius, final String variant) {
+
+        Path path;
+        switch (variant) {
+            default:
+            case "V1":
+                path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+                        getFilledBoolean(), 1.0f, "Circle Filling");
+                break;
+            case "V2":
+                path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+                        getFilledBoolean(), 0.8f, "Circle Filling");
+                break;
+            case "V3":
+                path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+                        getFilledBoolean(), 0, "V3");
+                break;
+            case "V4":
+                path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+                        getFilledBoolean(), 1.0f, "Inner Flower");
+                break;
+            case "V5":
+                path = new NiceFlowerPath(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+                        getFilledBoolean(), 0.8f, "Inner Flower");
+                break;
+            case "V6":
+                path = new FlowerPath(new Point(x, y), radius, Settings.getAnzahlFlowerLeafs(5, 10), 5);
+                break;
+            case "V7":
+                path = new FlowerV2Path(Settings.getAnzahlFlowerLeafs(5, 10), new Point(x, y), radius,
+                        getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawLines(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 5);
+            variant = "V" + nr;
+        }
+        drawLines(x, y, paint, radius, variant);
+
+    }
+
+    protected void drawLines(final int x, final int y, final Paint paint, final int radius, final String variant) {
+        Path path;
+        switch (variant) {
+            default:
+            case "V1":
+            case "Spirals":
+                path = new SpiralPath(Randomizer.getRandomInt(2, 5), new Point(x, y), radius,
+                        Randomizer.getRandomBoolean());
+                break;
+            case "V2":
+            case "Streamers":
+                path = new LuftschlangenPath(Randomizer.getRandomInt(5, 7), new Point(x, y), radius,
+                        Randomizer.getRandomBoolean());
+                break;
+            case "V3":
+            case "Maze":
+                path = new RandomPath(new Point(x, y), bWidth, bHeight, Randomizer.getRandomInt(10, 40), radius, true);
+                break;
+            case "V4":
+            case "Crickle Crackle":
+                path = new RandomPath(new Point(x, y), bWidth, bHeight, Randomizer.getRandomInt(5, 30), radius, false);
+                break;
+            case "V5":
+            case "Blitz":
+                path = new BlitzPath(new Point(x, y), Randomizer.getRandomInt(5, 30), radius, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        paint.setStyle(Style.STROKE);
+        paint.setStrokeWidth(radius / 15);
+        outlineDrawer.draw(paint, radius, path);
+        // bitmapCanvas.drawPath(path, paint);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawLinesDirected(x, y, paint, radius, variant);
+
+    }
+
+    protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius,
+            final String variant) {
+        Path path;
+        switch (variant) {
+            default:
+            case "V1":
+            case "Straight Line":
+                path = new LinePath(new PointF(x, y), radius, LINE_STYLE.straight, getFilledBoolean());
+                break;
+            case "V2":
+            case "Sinus":
+                path = new LinePath(new PointF(x, y), radius, LINE_STYLE.sinus, getFilledBoolean());
+                break;
+            case "V3":
+            case "Zig-Zag":
+                path = new LinePath(new PointF(x, y), radius, LINE_STYLE.zigzag, getFilledBoolean());
+                break;
+            case "V4":
+            case "Bow":
+                path = new LinePath(new PointF(x, y), radius, LINE_STYLE.bow, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        OutlineDrawer.setupPaintForOutline(paint, radius);
+        bitmapCanvas.drawPath(path, paint);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawScene(final int x, final int y, final Paint paint, final int radius, final int index) {
+        final String variant = Settings.getSelectedPatternVariant();
+        drawScene(x, y, paint, radius, variant, index);
+    }
+
+    public void drawScene(final int x, final int y, final Paint paint, final int radius, final String variant,
+            final int index) {
+        switch (variant) {
+            default:
+            case "Rain":
+                if (index % 40 == 0) {
+                    // bubble
+                    // drawGeometric(x, y, paint, radius / 3, "Hexagon");
+                    drawBubble(x, y, paint, radius / 3);
+                } else {
+                    // Rain
+                    drawLinesDirected(x, y, paint, radius, "Straight Line");
+                }
+                break;
+            case "Trail Of Stars":
+                sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.Stars);
+                break;
+            case "Trail Of Stars (getting Bigger)":
+                sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
+                break;
+            case "Experiemental":
+                sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.Lines);
+                break;
+        }
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawShell(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Shells Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 6);
+            variant = "Shells V" + nr;
+        }
+        drawShell(x, y, paint, radius, variant);
+    }
+
+    public void drawShell(final int x, final int y, final Paint paint, final int radius, final String variant) {
+        Path path;
+        switch (variant) {
+            default:
+            case "Shells V1":
+                path = new ShellV1Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+                break;
+            case "Shells V2":
+                path = new ShellV2Path(15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius * 1.5f,
+                        ShellV2Path.VARIANTE_OUTER, getFilledBoolean());
+                break;
+            case "Shells V3":
+                path = new ShellV3Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+                break;
+            case "Shells V4":
+                path = new ShellV4Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+                break;
+            case "Shells V5":
+                path = new ShellV5Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+                break;
+            case "Shells V6":
+                path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        // Mirror only on random rotation
+        if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
+            PathHelper.mirrorPathLeftRight(x, y, path);
+        }
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawMandala(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawMandala(x, y, paint, radius, variant);
+    }
+
+    protected void drawMandala(final int x, final int y, final Paint paint, final int radius, final String variant) {
+        Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
+        switch (variant) {
+            default:
+            case "V1":
+                path = new MandalaV1Path(2 + 2 * Settings.getAnzahlFlowerLeafs(2, 8), new Point(x, y), radius);
+                break;
+            case "V2":
+                path = new MandalaV2Path(3, 16, new Point(x, y), radius);
+                break;
+            case "V3":
+                path = new MandalaV3Path(3, 2 + 2 * Settings.getAnzahlFlowerLeafs(4, 10), new Point(x, y), radius);
+                break;
+            case "V4":
+                path = new MandalaV4Path(3, new Point(x, y), radius);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        // Mirror only on random rotation
+        if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
+            PathHelper.mirrorPathLeftRight(x, y, path);
+        }
+        bitmapCanvas.drawPath(path, paint);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawFisch(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawFisch(x, y, paint, radius, variant);
+    }
+
+    protected void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        final Path path = new FishPath(new Point(x, y), radius, variante);
+
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
+        // Mirror only on random rotation
+        if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
+            PathHelper.mirrorPathLeftRight(x, y, path);
+        }
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawText(final int x, final int y, final Paint paint, final int radius, final int index) {
+        // Some Paint Inits
+        if (getFilledBoolean()) {
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
+        } else {
+            paint.setTypeface(Typeface.DEFAULT);
+        }
+
+        final String variant = Settings.getSelectedPatternVariant();
+        switch (variant) {
+            default:
+            case "Numbers":
+                final String number = String.format(Locale.GERMANY, "%04d", index);
+                drawCustomText(x, y, paint, radius * 1, number);
+                break;
+            case "Custom Text":
+                final String text = Settings.getText();
+                drawCustomText(x, y, paint, radius * 1, text);
+                break;
+            case "Letters":
+                final int letterindex = Randomizer.getRandomInt(0, letters.length() - 1);
+                final char c = letters.charAt(letterindex);
+                drawCustomText(x, y, paint, radius * 2, "" + c);
+                break;
+        }
+
+    }
+
+    protected void drawCustomText(final int x, final int y, final Paint paint, final int radius, final String text) {
+
+        switch (Settings.getTextDrawStyle()) {
+            default:
+            case "Round":
+                drawTextCircle(x, y, paint, radius, text);
+                break;
+            case "Normal":
+                drawTextStraight(x, y, paint, radius, text);
+                break;
+            case "Angled":
+                drawTextAngled(x, y, paint, radius, text);
+                break;
+            case "Random":
+                final int i = Randomizer.getRandomInt(0, 3);
+                switch (i) {
+                    default:
+                    case 1:
+                        drawTextCircle(x, y, paint, radius, text);
+                        break;
+                    case 2:
+                        drawTextStraight(x, y, paint, radius, text);
+                        break;
+                    case 3:
+                        drawTextAngled(x, y, paint, radius, text);
+                        break;
+                }
+                break;
+        }
+    }
+
+    protected void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
+        paint.setTextSize(radius);
+        paint.setTextAlign(Align.LEFT);
+        final Path mArc = new Path();
+        final int x2 = bWidth;
+        mArc.moveTo(x - radius / 2, y + radius / 2);
+        mArc.lineTo(x2, y + radius / 2);
+
+        bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+        outlineDrawer.drawText(paint, radius, text, mArc);
+
+    }
+
+    protected void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
+        paint.setTextSize(radius);
+        paint.setTextAlign(Align.CENTER);
+        final Path mArc = new Path();
+        final RectF oval = getRectForRadius(x, y, radius * 2);
+        mArc.addArc(oval, Randomizer.getRandomInt(0, 360), 355);
+
+        bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+        outlineDrawer.drawText(paint, radius, text, mArc);
+    }
+
+    protected void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
+        paint.setTextSize(radius);
+        paint.setTextAlign(Align.LEFT);
+        final Path mArc = new Path();
+        mArc.moveTo(x, y);
+        final int y2 = Randomizer.getRandomInt(-bHeight, bHeight);
+        final int x2 = Randomizer.getRandomInt(-bWidth, bWidth);
+        mArc.lineTo(x2, y2);
+
+        bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
+        outlineDrawer.drawText(paint, radius, text, mArc);
+    }
+
+    protected RectF getRectForRadius(final int x, final int y, final int radius) {
+        return new RectF(x - radius, y - radius, x + radius, y + radius);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    private void drawMaterial(final int x, final int y, final Paint paint, final int radius) {
+        final String variante = Settings.getSelectedPatternVariant();
+        drawMaterial(x, y, paint, radius, variante);
+    }
+
+    private void drawMaterial(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "Stripe":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.STIPE);
+                break;
+            case "Stripe V2":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.STIPE_V2);
+                break;
+            case "Stripe V3":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.STIPE_V3);
+                break;
+            case "Arc 1":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ARC1);
+                break;
+            case "Arc 2":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ARC2);
+                break;
+            case "Arc 3":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ARC3);
+                break;
+            case "Skyline":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.SKYLINE);
+                break;
+            case "Pyramide Skyline":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.PYRAMIDE_SKYLINE);
+                break;
+            case "Edgy Bars":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.EDGY_BARS);
+                break;
+            case "Rotating Bars":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ROTATING_BARS);
+                break;
+            case "Rotating Triangles":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ROTATING_TRIANGLES);
+                break;
+            case "Half Stripe":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.HALF_STIPE);
+                break;
+            case "Half Stripe V2":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.HALF_STIPE_V2);
+                break;
+            case "Half Stripe V3":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.HALF_STIPE_V3);
+                break;
+            case "Rotating Arches (random arches)":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ROTATING_ARCHES_RANDOM_SIZE);
+                break;
+            case "Rotating Arches (quarter arches)":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ROTATING_QUARTER_ARCHES);
+                break;
+            case "Rotating Arches (half arches)":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ROTATING_HALF_ARCHES);
+                break;
+            case "Rotating Arches (3-quarter arches)":
+                path = new MaterialPath(new Point(x, y), radius, getFilledBoolean(), bWidth, bHeight,
+                        MATERIAL_TYPE.ROTATING_THREE_QUARTER_ARCHES);
+                break;
+        }
+        bitmapCanvas.drawPath(path, paint);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
+        final String variante = Settings.getSelectedPatternVariant();
+        drawRect(x, y, paint, radius, variante);
+    }
+
+    protected void drawRect(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Random Ratio":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+                        RECT_ASPECT.RANDOM);
+                break;
+            case "V2":
+            case "Random Ratio (Rounded)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+                        RECT_ASPECT.RANDOM);
+                break;
+            case "V3":
+            case "Random Ratio (Mixed)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+                        RECT_ASPECT.RANDOM);
+                break;
+            case "V4":
+            case "4-3 Ratio":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+                        RECT_ASPECT.ASPECT_3_4);
+                break;
+            case "V5":
+            case "4-3 Ratio (Rounded)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+                        RECT_ASPECT.ASPECT_3_4);
+                break;
+            case "V6":
+            case "4-3 Ratio (Mixed)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+                        RECT_ASPECT.ASPECT_3_4);
+                break;
+            case "V7":
+            case "1-2 Ratio":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+                        RECT_ASPECT.ASPECT_1_2);
+                break;
+            case "V8":
+            case "1-2 Ratio (Rounded)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+                        RECT_ASPECT.ASPECT_1_2);
+                break;
+            case "V9":
+            case "1-2 Ratio (Mixed)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+                        RECT_ASPECT.ASPECT_1_2);
+                break;
+            case "V10":
+            case "Golden Ratio":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.NORMAL,
+                        RECT_ASPECT.ASPECT_GOLDEN_CUT);
+                break;
+            case "V11":
+            case "Golden Ratio (Rounded)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.ROUNDED,
+                        RECT_ASPECT.ASPECT_GOLDEN_CUT);
+                break;
+            case "V12":
+            case "Golden Ratio (Mixed)":
+                path = new RectanglePath(new Point(x, y), radius, getFilledBoolean(), RECT_ROUNDED.MIXED,
+                        RECT_ASPECT.ASPECT_GOLDEN_CUT);
+                break;
+        }
+
+        if (Settings.isRandomRotate()) {
+            PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 180, new Point(x, y)));
+        } else {
+            float degr = rotator.getRotationDegrees(0, 180, new Point(x, y));
+            if (Randomizer.getRandomBoolean()) {
+                degr = degr + 90;
+            }
+            PathHelper.rotatePath(x, y, path, degr);
+        }
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 14);
+            variante = "V" + nr;
+        } else if (variante.equalsIgnoreCase("Mixed Bats")) {
+            final int nr = Randomizer.getRandomInt(1, 5);
+            variante = "V" + nr;
+        } else if (variante.equalsIgnoreCase("Mixed Ghosts")) {
+            final int nr = Randomizer.getRandomInt(5, 7);
+            variante = "V" + nr;
+        } else if (variante.equalsIgnoreCase("Mixed Owls")) {
+            final int nr = Randomizer.getRandomInt(7, 11);
+            variante = "V" + nr;
+        } else if (variante.equalsIgnoreCase("Mixed Pumpkins")) {
+            variante = "Mixed Pumpkins";
+        }
+        drawSpooky(x, y, paint, radius, variante);
+    }
+
+    protected void drawSpooky(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Skull":
+                path = new SkullPath(new Point(x, y), radius);
+                break;
+            case "V2":
+            case "Bat V1 (Aarons Cute Design)":
+                path = new BatPath(new Point(x, y), radius, "V1");
+                break;
+            case "V3":
+            case "Bat V2":
+                path = new BatPath(new Point(x, y), radius, "V2");
+                break;
+            case "V4":
+            case "Bat V3":
+                path = new BatPath(new Point(x, y), radius, "V3");
+                break;
+            case "V5":
+            case "Bat V4":
+                path = new BatPath(new Point(x, y), radius, "V4");
+                break;
+            case "V6":
+            case "Ghost V1":
+                path = new GhostPath(new Point(x, y), radius, "V1");
+                break;
+            case "V7":
+            case "Ghost V2":
+                path = new GhostPath(new Point(x, y), radius, "V2");
+                break;
+            case "V8":
+            case "Owl V1":
+                path = new OwlPath(new Point(x, y), radius, "V1");
+                break;
+            case "V9":
+            case "Owl V2":
+                path = new OwlPath(new Point(x, y), radius, "V2");
+                break;
+            case "V10":
+            case "Owl V3":
+                path = new OwlPath(new Point(x, y), radius, "V3");
+                break;
+            case "V11":
+            case "Owl V4":
+                path = new OwlPath(new Point(x, y), radius, "V4");
+                break;
+            case "V12":
+            case "Pumpkin (round eyes)":
+                path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDZACKIG_AUGERUND);
+                break;
+            case "V13":
+            case "Pumpkin (triangel eyes)":
+                path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDZACKIG_AUGEDREIECKIGV2);
+                break;
+            case "V14":
+            case "Pumpkin (round eyes and mouth)":
+                path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.MUNDRUND_AUGERUND);
+                break;
+            case "Mixed Pumpkins":
+                path = new PumpkinPath(new PointF(x, y), radius, PUMPKIN_TYP.RANDOM);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius,
+            final PUZZLE_CONNECTION puzzleConnection) {
+        final String variant = Settings.getSelectedPatternVariant();
+        drawPuzzle(x, y, paint, radius, variant, puzzleConnection);
+    }
+
+    protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius, final String variante,
+            final PUZZLE_CONNECTION puzzleConnection) {
+        Path path;
+        switch (variante) {
+            default:
+            case "Mixed":
+                path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.RANDOM, puzzleConnection,
+                        getFilledBoolean());
+                break;
+            case "Manneken":
+                path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.MANNEKEN, puzzleConnection,
+                        getFilledBoolean());
+                break;
+            case "Top-Right":
+                path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.OBEN_RECHTS, puzzleConnection,
+                        getFilledBoolean());
+                break;
+            case "Cross":
+                path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.KREUZ, puzzleConnection, getFilledBoolean());
+                break;
+            case "All":
+                path = new PuzzlePath(new Point(x, y), radius, PUZZLE_TYPE.ALL, puzzleConnection, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 18);
+            variant = "V" + nr;
+        }
+        drawAssorted(x, y, paint, radius, variant);
+    }
+
+    protected void drawAssorted(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Lemon":
+                path = new ZitronePath(new Point(x, y), radius);
+                break;
+            case "V2":
+            case "YingYang":
+                path = new YingYangPath(new Point(x, y), radius);
+                if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
+                    PathHelper.mirrorPathLeftRight(x, y, path);
+                }
+                break;
+            case "V3":
+            case "Crop Circles":
+                path = new DotSpiralPath(3, new Point(x, y), radius, 0);
+                if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
+                    PathHelper.mirrorPathLeftRight(x, y, path);
+                }
+                break;
+            case "V4":
+            case "Roses":
+                path = new RosePath(new Point(x, y), radius);
+                break;
+            case "V5":
+            case "Pillows":
+                path = new PillowPath(4, new PointF(x, y), radius);
+                break;
+            case "V6":
+            case "Android":
+                path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.ANDROID);
+                break;
+            case "V7":
+            case "Footprint":
+                path = new FootprintPath(new Point(x, y), radius, "V1");
+                if (Randomizer.getRandomBoolean()) {
+                    PathHelper.mirrorPathLeftRight(x, y, path);
+                }
+                break;
+            case "V8":
+            case "Pentagram":
+                path = new PentagramPath(new PointF(x, y), radius);
+                break;
+            case "V9":
+            case "4Sails":
+                path = new FourSailsPath(new Point(x, y), radius, "V1");
+                break;
+            case "V10":
+            case "Dice":
+                path = new DicePath(new PointF(x, y), radius * 0.8f);
+                break;
+            case "V11":
+            case "Drop":
+                path = new DropPath(new PointF(x, y), radius);
+                break;
+            case "V12":
+            case "Ikae Robot":
+                path = new AndroidPath(new Point(x, y), radius, ROBOT_STYLE.IKEA);
+                break;
+            case "V13":
+            case "Hedgehog":
+                path = new IgelPath(new Point(x, y + radius / 2), radius * 1.3f);
+                if (getFilledBoolean()) {
+                    PathHelper.mirrorPathLeftRight(x, y, path);
+                }
+                break;
+            case "V14":
+            case "Dandelion":
+                path = new DandelionPath(new Point(x, y), radius);
+                break;
+            case "V15":
+            case "Deathstar":
+                path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.DEATHSTAR);
+                break;
+            case "V16":
+            case "R2D2":
+                path = new StarwarsPath(new Point(x, y), radius, STARWARS_TYPE.R2D2);
+                break;
+            case "V17":
+            case "Iron Cross":
+                path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean(), IRONCROSS_TYPE.SPITZ);
+                break;
+            case "V18":
+            case "Iron Cross (round)":
+                path = new IronCrossPath(new PointF(x, y), radius, getFilledBoolean(), IRONCROSS_TYPE.RUND);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawSonic(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawSonic(x, y, paint, radius, variant);
+    }
+
+    protected void drawSonic(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        int leafs = Settings.getAnzahlFlowerLeafs(1, 10);
+        if (leafs % 2 == 0) {
+            // wir haben ne gerade zahl... und m�ssen ungerade werden... eins drauf
+            // addieren
+            leafs++;
+        }
+        final int rounds = 2 + leafs;
+
+        switch (variante) {
+            default:
+            case "V1":
+            case "Normal":
+                path = new SonicPath(new PointF(x, y), radius, SONICTYPE.NORMAL, rounds, getFilledBoolean());
+                break;
+            case "V2":
+            case "Double":
+                path = new SonicPath(new PointF(x, y), radius, SONICTYPE.DOUBLE, rounds, getFilledBoolean());
+                break;
+            case "V3":
+            case "Special":
+                path = new SonicPath(new PointF(x, y), radius, SONICTYPE.SPECIAL, rounds, getFilledBoolean());
+                break;
+            case "V4":
+            case "One Arm":
+                path = new SonicPath(new PointF(x, y), radius, SONICTYPE.NORMAL, 3, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    protected void drawSquare(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 4);
+            variant = "V" + nr;
+        }
+        drawSquare(x, y, paint, radius, variant);
+    }
+
+    protected void drawSquare(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Square (round inner corner)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_ROUND);
+                break;
+            case "V2":
+            case "Square (square inner corner)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_RECT);
+                break;
+            case "V3":
+            case "Square (line corner)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.DIAGONAL_LINE);
+                break;
+            case "V4":
+            case "Square (round inner corner V2)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.INNER_ROUND2);
+                break;
+            case "V5":
+            case "Square (circle corner)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CIRCLE);
+                break;
+            case "V6":
+            case "Square (outer circle corner)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.OUTER_CIRCLE);
+                break;
+            case "V7":
+            case "Square (rounded)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.ROUNDED);
+                break;
+            case "V8":
+            case "Square (castel)":
+                path = new SquareCornered(new PointF(x, y), radius, getFilledBoolean(), CORNERED_STYLE.CASTEL);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 12);
+            variant = "V" + nr;
+        }
+        drawPillow(x, y, paint, radius, variant);
+    }
+
+    protected void drawPillow(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "3 Edge Pillow":
+                path = new PillowPath(3, new PointF(x, y), radius);
+                break;
+            case "V2":
+            case "4 Edge Pillow":
+                path = new PillowPath(4, new PointF(x, y), radius);
+                break;
+            case "V3":
+            case "5 Edge Pillow":
+                path = new PillowPath(5, new PointF(x, y), radius);
+                break;
+            case "V4":
+            case "6 Edge Pillow":
+                path = new PillowPath(6, new PointF(x, y), radius);
+                break;
+            case "V5":
+            case "Plectrum":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PLEKTRUM);
+                break;
+            case "V6":
+            case "Fingernail":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.FINGERNAIL);
+                break;
+            case "V7":
+            case "Treky":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.TREKY);
+                break;
+            case "V8":
+            case "YingYang":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.YINGYANG);
+                break;
+            case "V9":
+            case "Peeek":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.PEEEK);
+                break;
+            case "V10":
+            case "Armor":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.ARMOR);
+                break;
+            case "V11":
+            case "Messer":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.MESSER);
+                break;
+            case "V12":
+            case "Blazon":
+                path = new PillowPath(new PointF(x, y), radius, PILLOW_TYPE.BLAZON);
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 7);
+            variant = "V" + nr;
+        }
+        drawChess(x, y, paint, radius, variant);
+    }
+
+    protected void drawChess(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Square":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Square);
+                break;
+            case "V2":
+            case "Star":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Star);
+                break;
+            case "V3":
+            case "Circle":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Circle);
+                break;
+            case "V4":
+            case "Pillow":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Pillow);
+                break;
+            case "V5":
+            case "Heart":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Heart);
+                break;
+            case "V6":
+            case "Arrow":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Arrow);
+                break;
+            case "V7":
+            case "Triangle":
+                path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4),
+                        BRETT_SHAPE.Triangle);
+                break;
+        }
+        if (Settings.isRandomRotate()) {
+            PathHelper.rotatePath(x, y, path, 90 * Randomizer.getRandomInt(-1, 4));
+        }
+        bitmapCanvas.drawPath(path, paint);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    protected void drawXmas(final int x, final int y, final Paint paint, final int radius) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 1);
+            variant = "V" + nr;
+        }
+        drawXmas(x, y, paint, radius, variant);
+    }
+
+    protected void drawXmas(final int x, final int y, final Paint paint, final int radius, final String variante) {
+        Path path;
+        switch (variante) {
+            default:
+            case "V1":
+            case "Tree":
+                path = new XmasTreePath(new Point(x, y), radius, getFilledBoolean());
+                break;
+        }
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
     // Bubble
-    final Path path = new CirclePath(new PointF(x, y), radius, radius / 2, true, CIRCLE_STYLE.CIRCLE);
-    bitmapCanvas.drawCircle(x, y, radius, paint);
-    glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);
-    outlineDrawer.draw(paint, radius, path);
-  }
+    // #########################################################################################
 
-  // #########################################################################################
-  // Smiley
-  // #########################################################################################
-  private Path getSmileyPath(final int x, final int y, final int radius) {
-    final Path path;
-    String variant = Settings.getSelectedPatternVariant();
-    if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 2);
-      variant = "V" + nr;
+    private void drawBubble(final int x, final int y, final Paint paint, final int radius) {
+        // Bubble
+        final Path path = new CirclePath(new PointF(x, y), radius, radius / 2, true, CIRCLE_STYLE.CIRCLE);
+        bitmapCanvas.drawCircle(x, y, radius, paint);
+        glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);
+        outlineDrawer.draw(paint, radius, path);
     }
-    switch (variant) {
-    default:
-    case "V1":
-    case "Happy":
-      path = new SmileyPath(new Point(x, y), radius, SMILEY_TYPE.HAPPY);
-      break;
-    case "V2":
-    case "Sad":
-      path = new SmileyPath(new Point(x, y), radius, SMILEY_TYPE.SAD);
-      break;
+
+    // #########################################################################################
+    // Smiley
+    // #########################################################################################
+    private Path getSmileyPath(final int x, final int y, final int radius) {
+        final Path path;
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 2);
+            variant = "V" + nr;
+        }
+        switch (variant) {
+            default:
+            case "V1":
+            case "Happy":
+                path = new SmileyPath(new Point(x, y), radius, SMILEY_TYPE.HAPPY);
+                break;
+            case "V2":
+            case "Sad":
+                path = new SmileyPath(new Point(x, y), radius, SMILEY_TYPE.SAD);
+                break;
+        }
+        return path;
     }
-    return path;
-  }
 
-  private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
-    final Path path = getSmileyPath(x, y, radius);
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // Packman
-  // #########################################################################################
-
-  private Path getPacmanPath(final int x, final int y, final int radius) {
-    Path path;
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 2);
-      variante = "V" + nr;
+    private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
+        final Path path = getSmileyPath(x, y, radius);
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);
+        outlineDrawer.draw(paint, radius, path);
     }
-    switch (variante) {
-    default:
-    case "Ghost":
-    case "V1":
-      path = new PacmanPath(new Point(x, y), radius, PACMAN_STYLE.GHOST);
-      break;
-    case "Pacman":
-    case "V2":
-      path = new PacmanPath(new Point(x, y), radius, PACMAN_STYLE.PACMAN);
-      break;
-    }
-    return path;
-  }
 
-  private void drawPacman(final int x, final int y, final Paint paint, final int radius) {
-    final Path path = getPacmanPath(x, y, radius);
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL);
-    outlineDrawer.draw(paint, radius, path);
-  }
+    // #########################################################################################
+    // Packman
+    // #########################################################################################
 
-  // #########################################################################################
-  // Heart
-  // #########################################################################################
-  private Path getHeartPath(final int x, final int y, final int radius) {
-    Path path;
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 6);
-      variante = "V" + nr;
+    private Path getPacmanPath(final int x, final int y, final int radius) {
+        Path path;
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 2);
+            variante = "V" + nr;
+        }
+        switch (variante) {
+            default:
+            case "Ghost":
+            case "V1":
+                path = new PacmanPath(new Point(x, y), radius, PACMAN_STYLE.GHOST);
+                break;
+            case "Pacman":
+            case "V2":
+                path = new PacmanPath(new Point(x, y), radius, PACMAN_STYLE.PACMAN);
+                break;
+        }
+        return path;
     }
-    switch (variante) {
-    default:
-    case "Curvy":
-    case "V1":
-      path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Curvy);
-      break;
-    case "Straigth":
-    case "V2":
-      path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Straigth);
-      break;
-    case "Round":
-    case "V3":
-      path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Round);
-      break;
-    case "Peek":
-    case "V4":
-      path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Peek);
-      break;
-    case "Lovely":
-    case "V5":
-      path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Lovely);
-      break;
-    case "Asymetric":
-    case "V6":
-      path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Asymetric);
-      break;
-    }
-    return path;
-  }
 
-  private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
-    // Heart f�r dropshadow
-    final Path path = getHeartPath(x, y, radius);
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  // #########################################################################################
-  // Star
-  // #########################################################################################
-  private Path getStarPath(final int x, final int y, final int radius, final int arms) {
-    Path path;
-    String variante = Settings.getSelectedPatternVariant();
-    if (variante.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 3);
-      variante = "V" + nr;
+    private void drawPacman(final int x, final int y, final Paint paint, final int radius) {
+        final Path path = getPacmanPath(x, y, radius);
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL);
+        outlineDrawer.draw(paint, radius, path);
     }
-    switch (variante) {
-    default:
-    case "V1":
-    case "Normal":
-      path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.NORMAL, getFilledBoolean());
-      break;
-    case "V2":
-    case "Spikey":
-      path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.SPIKEY, getFilledBoolean());
-      break;
-    case "V3":
-    case "Star Circle":
-      path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.STAR_CIRCLE, getFilledBoolean());
-      break;
-    }
-    return path;
-  }
 
-  private void drawStar(final int x, final int y, final Paint paint, final int radius) {
+    // #########################################################################################
+    // Heart
+    // #########################################################################################
+    private Path getHeartPath(final int x, final int y, final int radius) {
+        Path path;
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 6);
+            variante = "V" + nr;
+        }
+        switch (variante) {
+            default:
+            case "Curvy":
+            case "V1":
+                path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Curvy);
+                break;
+            case "Straigth":
+            case "V2":
+                path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Straigth);
+                break;
+            case "Round":
+            case "V3":
+                path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Round);
+                break;
+            case "Peek":
+            case "V4":
+                path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Peek);
+                break;
+            case "Lovely":
+            case "V5":
+                path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Lovely);
+                break;
+            case "Asymetric":
+            case "V6":
+                path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Asymetric);
+                break;
+        }
+        return path;
+    }
+
+    private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
+        // Heart f�r dropshadow
+        final Path path = getHeartPath(x, y, radius);
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    // #########################################################################################
     // Star
-    final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-    final Path path = getStarPath(x, y, radius, arms);
-    PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360 / arms, new Point(x, y)));
-    bitmapCanvas.drawPath(path, paint);
-    glossyDrawer.draw(x, y, paint, radius, path);
-    outlineDrawer.draw(paint, radius, path);
-  }
-
-  private boolean getFilledBoolean() {
-    boolean filled;
-    switch (Settings.getFilledOption()) {
-    default:
-    case "Not filled":
-      filled = false;
-      break;
-    case "Filled":
-      filled = true;
-      break;
-    case "Randomly mixed":
-      filled = Randomizer.getRandomBoolean();
-      break;
+    // #########################################################################################
+    private Path getStarPath(final int x, final int y, final int radius, final int arms) {
+        Path path;
+        String variante = Settings.getSelectedPatternVariant();
+        if (variante.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(0, 3);
+            variante = "V" + nr;
+        }
+        switch (variante) {
+            default:
+            case "V1":
+            case "Normal":
+                path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.NORMAL, getFilledBoolean());
+                break;
+            case "V2":
+            case "Spikey":
+                path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.SPIKEY, getFilledBoolean());
+                break;
+            case "V3":
+            case "Star Circle":
+                path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.STAR_CIRCLE, getFilledBoolean());
+                break;
+        }
+        return path;
     }
-    return filled;
-  }
+
+    private void drawStar(final int x, final int y, final Paint paint, final int radius) {
+        // Star
+        final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
+        final Path path = getStarPath(x, y, radius, arms);
+        PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360 / arms, new Point(x, y)));
+        bitmapCanvas.drawPath(path, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
+        outlineDrawer.draw(paint, radius, path);
+    }
+
+    private boolean getFilledBoolean() {
+        boolean filled;
+        switch (Settings.getFilledOption()) {
+            default:
+            case "Not filled":
+                filled = false;
+                break;
+            case "Filled":
+                filled = true;
+                break;
+            case "Randomly mixed":
+                filled = Randomizer.getRandomBoolean();
+                break;
+        }
+        return filled;
+    }
 
 }
