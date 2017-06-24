@@ -116,6 +116,7 @@ public class PatternPropertyStore {
 		patternProperties.put("Scenes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { //
 						"Rain", //
+						// "Star Rain", //
 						"Trail of Stars", //
 						"Trail of Hearts", //
 						"Sine Trail of Stars", //

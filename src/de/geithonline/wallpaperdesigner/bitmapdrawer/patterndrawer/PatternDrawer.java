@@ -1249,7 +1249,7 @@ public class PatternDrawer {
 		switch (variant) {
 		default:
 		case "Rain":
-			if (index % 40 == 0) {
+			if (Randomizer.getRandomInt(0, 40) == 1) {
 				// bubble
 				// drawGeometric(x, y, paint, radius / 3, "Hexagon");
 				drawBubble(x, y, paint, radius / 3);
@@ -2201,15 +2201,19 @@ public class PatternDrawer {
 	}
 
 	// #########################################################################################
-	// Heart
+	// ----------------
 	// #########################################################################################
-	private Path getHeartPath(final int x, final int y, final int radius) {
-		Path path;
-		String variante = Settings.getSelectedPatternVariant();
-		if (variante.equalsIgnoreCase("Mixed")) {
+	protected void drawHeart(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = Randomizer.getRandomInt(0, 6);
-			variante = "V" + nr;
+			variant = "V" + nr;
 		}
+		drawHeart(x, y, paint, radius, variant);
+	}
+
+	protected void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
 		switch (variante) {
 		default:
 		case "Curvy":
@@ -2237,28 +2241,27 @@ public class PatternDrawer {
 			path = new HeartPath(new PointF(x, y), radius, false, HEART_SHAPE.Asymetric);
 			break;
 		}
-		return path;
-	}
-
-	private void drawHeart(final int x, final int y, final Paint paint, final int radius) {
-		// Heart f�r dropshadow
-		final Path path = getHeartPath(x, y, radius);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
-		glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.TOP_LEFT);
+		glossyDrawer.draw(x, y, paint, radius, path);
 		outlineDrawer.draw(paint, radius, path);
 	}
 
 	// #########################################################################################
-	// Star
+	// ----------------
 	// #########################################################################################
-	private Path getStarPath(final int x, final int y, final int radius, final int arms) {
-		Path path;
-		String variante = Settings.getSelectedPatternVariant();
-		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 3);
-			variante = "V" + nr;
+	protected void drawStar(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = Randomizer.getRandomInt(0, 4);
+			variant = "V" + nr;
 		}
+		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
+		drawStar(x, y, paint, radius, variant, arms);
+	}
+
+	protected void drawStar(final int x, final int y, final Paint paint, final int radius, final String variante, final int arms) {
+		Path path;
 		switch (variante) {
 		default:
 		case "V1":
@@ -2274,18 +2277,14 @@ public class PatternDrawer {
 			path = new StarPath(arms, new PointF(x, y), radius, STAR_TYPE.STAR_CIRCLE, getFilledBoolean());
 			break;
 		}
-		return path;
-	}
-
-	private void drawStar(final int x, final int y, final Paint paint, final int radius) {
-		// Star
-		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-		final Path path = getStarPath(x, y, radius, arms);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360 / arms, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		glossyDrawer.draw(x, y, paint, radius, path);
 		outlineDrawer.draw(paint, radius, path);
 	}
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
 
 	private boolean getFilledBoolean() {
 		boolean filled;
