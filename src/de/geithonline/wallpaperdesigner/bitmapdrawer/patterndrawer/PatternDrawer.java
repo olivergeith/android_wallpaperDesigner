@@ -2136,16 +2136,20 @@ public class PatternDrawer {
 	}
 
 	// #########################################################################################
-	// Smiley
+	// ----------------
 	// #########################################################################################
-	private Path getSmileyPath(final int x, final int y, final int radius) {
-		final Path path;
+	protected void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = Randomizer.getRandomInt(0, 2);
 			variant = "V" + nr;
 		}
-		switch (variant) {
+		drawSmiley(x, y, paint, radius, variant);
+	}
+
+	protected void drawSmiley(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		final Path path;
+		switch (variante) {
 		default:
 		case "V1":
 		case "Happy":
@@ -2156,28 +2160,26 @@ public class PatternDrawer {
 			path = new SmileyPath(new Point(x, y), radius, SMILEY_TYPE.SAD);
 			break;
 		}
-		return path;
-	}
-
-	private void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = getSmileyPath(x, y, radius);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
-		glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);
+		glossyDrawer.draw(x, y, paint, radius, path);
 		outlineDrawer.draw(paint, radius, path);
 	}
 
 	// #########################################################################################
-	// Packman
+	// ----------------
 	// #########################################################################################
-
-	private Path getPacmanPath(final int x, final int y, final int radius) {
-		Path path;
-		String variante = Settings.getSelectedPatternVariant();
-		if (variante.equalsIgnoreCase("Mixed")) {
+	protected void drawPacman(final int x, final int y, final Paint paint, final int radius) {
+		String variant = Settings.getSelectedPatternVariant();
+		if (variant.equalsIgnoreCase("Mixed")) {
 			final int nr = Randomizer.getRandomInt(0, 2);
-			variante = "V" + nr;
+			variant = "V" + nr;
 		}
+		drawPacman(x, y, paint, radius, variant);
+	}
+
+	protected void drawPacman(final int x, final int y, final Paint paint, final int radius, final String variante) {
+		Path path;
 		switch (variante) {
 		default:
 		case "Ghost":
@@ -2189,14 +2191,9 @@ public class PatternDrawer {
 			path = new PacmanPath(new Point(x, y), radius, PACMAN_STYLE.PACMAN);
 			break;
 		}
-		return path;
-	}
-
-	private void drawPacman(final int x, final int y, final Paint paint, final int radius) {
-		final Path path = getPacmanPath(x, y, radius);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-30, 30, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
-		glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL);
+		glossyDrawer.draw(x, y, paint, radius, path);
 		outlineDrawer.draw(paint, radius, path);
 	}
 
