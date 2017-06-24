@@ -6,7 +6,7 @@ import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class StarTrailPath extends Path {
+public class TrailStarPath extends Path {
 
 	public enum TRAIL_TYPE {
 		Stars, Lines, StarsGettingBigger, Sinus;
@@ -14,7 +14,7 @@ public class StarTrailPath extends Path {
 
 	public Path trailPath = new Path();
 
-	public StarTrailPath(final PointF center, final float radius, final boolean filled, final TRAIL_TYPE type) {
+	public TrailStarPath(final PointF center, final float radius, final boolean filled, final TRAIL_TYPE type) {
 		super();
 
 		addPath(new StarPath(5, center, radius, STAR_TYPE.NORMAL, true));

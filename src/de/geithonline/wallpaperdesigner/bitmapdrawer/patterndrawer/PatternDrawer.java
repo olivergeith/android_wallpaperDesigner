@@ -114,11 +114,12 @@ import de.geithonline.wallpaperdesigner.shapes.SquarePath;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
-import de.geithonline.wallpaperdesigner.shapes.StarTrailPath.TRAIL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.StarwarsPath;
 import de.geithonline.wallpaperdesigner.shapes.StarwarsPath.STARWARS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.SunPath.SUN_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath.HEART_TRAIL_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailStarPath.TRAIL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -1258,12 +1259,21 @@ public class PatternDrawer {
 			}
 			break;
 		case "Trail Of Stars":
+		case "Trail of Stars":
 			sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.Stars);
 			break;
+		case "Trail of Hearts":
+			sceneDrawer.drawHeartWithTrail(x, y, paint, radius, getFilledBoolean(), HEART_TRAIL_TYPE.Hearts);
+			break;
 		case "Sine Trail Of Stars":
+		case "Sine Trail of Stars":
 			sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.Sinus);
 			break;
+		case "Sine Trail of Hearts":
+			sceneDrawer.drawHeartWithTrail(x, y, paint, radius, getFilledBoolean(), HEART_TRAIL_TYPE.Sinus);
+			break;
 		case "Trail Of Stars (getting Bigger)":
+		case "Trail of Stars (getting Bigger)":
 			sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
 			break;
 		case "Experiemental":

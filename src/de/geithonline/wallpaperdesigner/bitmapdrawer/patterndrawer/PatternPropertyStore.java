@@ -114,7 +114,14 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Mixed" }));
 
 		patternProperties.put("Scenes", new PatternProperties(true, true, false, true, false, true, //
-				new CharSequence[] { "Rain", "Trail Of Stars", "Sine Trail Of Stars", "Trail Of Stars (getting Bigger)", "Experiemental" }));
+				new CharSequence[] { //
+						"Rain", //
+						"Trail of Stars", //
+						"Trail of Hearts", //
+						"Sine Trail of Stars", //
+						"Sine Trail of Hearts", //
+						"Trail of Stars (getting Bigger)", //
+						"Experiemental" }));
 
 		patternProperties.put("Shells", new PatternProperties(true, true, false, false, true, true, //
 				new CharSequence[] { "Shells V1", "Shells V2", "Shells V3", "Shells V4", "Shells V5", "Shells V6", "Shells Mixed" }));
