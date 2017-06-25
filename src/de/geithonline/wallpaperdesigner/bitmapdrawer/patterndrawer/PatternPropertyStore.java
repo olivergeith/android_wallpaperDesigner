@@ -66,7 +66,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 
 		patternProperties.put("Lines (Directed)", new PatternProperties(false, true, false, true, false, false, //
-				new CharSequence[] { "Straight Line", "Sinus", "Zig-Zag", "Bow", "Mixed" }));
+				new CharSequence[] { "Straight Line", "Sinus", "Zig-Zag", "Bow", "Blitz", "Mixed" }));
 
 		patternProperties.put("Logos", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "Resurrection Remix V4", "Resurrection Remix V5",

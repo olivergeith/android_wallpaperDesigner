@@ -1194,8 +1194,8 @@ public class PatternDrawer {
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(radius / 15);
-		outlineDrawer.draw(paint, radius, path);
-		// bitmapCanvas.drawPath(path, paint);
+		// outlineDrawer.draw(paint, radius, path);
+		bitmapCanvas.drawPath(path, paint);
 	}
 
 	// #########################################################################################
@@ -1204,7 +1204,7 @@ public class PatternDrawer {
 	protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(0, 5);
 			variant = "V" + nr;
 		}
 		drawLinesDirected(x, y, paint, radius, variant);
@@ -1230,6 +1230,10 @@ public class PatternDrawer {
 		case "V4":
 		case "Bow":
 			path = new LinePath(new PointF(x, y), radius, LINE_STYLE.bow, getFilledBoolean());
+			break;
+		case "V5":
+		case "Blitz":
+			path = new LinePath(new PointF(x, y), radius, LINE_STYLE.blitz, getFilledBoolean());
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
