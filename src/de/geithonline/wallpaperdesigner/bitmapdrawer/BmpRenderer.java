@@ -133,15 +133,15 @@ public class BmpRenderer extends BaseBmpRenderer {
 			patternDrawer.drawPattern(x, y, paint, radius, i);
 
 			if (Settings.isBlurPatterns()) {
-				if (i == blurLevel1) {
+				if (i == blurLevel1 && Settings.getBlurrAmount1() > 0) {
 					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount1(), true);
 				}
-				if (i == blurLevel2) {
+				if (i == blurLevel2 && Settings.getBlurrAmount2() > 0) {
 					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount2(), true);
 				}
-				if (i == blurLevel3) {
+				if (i == blurLevel3 && Settings.getBlurrAmount3() > 0) {
 					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount3(), true);
 				}

@@ -90,7 +90,7 @@
 		        android:summary="%1$d (the bigger the number, the more blurring)"
 		        android:title="@string/blurrAmount1"
 		        seekbarpreference:maxValue="100"
-		        seekbarpreference:minValue="2"
+		        seekbarpreference:minValue="0"
 		        seekbarpreference:stepValue="1" />
 		
 		    <de.geithonline.android.basics.preferences.SeekBarPreference
@@ -101,7 +101,7 @@
 		        android:summary="%1$d (the bigger the number, the more blurring)"
 		        android:title="@string/blurrAmount2"
 		        seekbarpreference:maxValue="50"
-		        seekbarpreference:minValue="1"
+		        seekbarpreference:minValue="0"
 		        seekbarpreference:stepValue="1" />
 
 		    <de.geithonline.android.basics.preferences.SeekBarPreference
@@ -112,7 +112,7 @@
 		        android:summary="%1$d (the bigger the number, the more blurring)"
 		        android:title="@string/blurrAmount3"
 		        seekbarpreference:maxValue="50"
-		        seekbarpreference:minValue="1"
+		        seekbarpreference:minValue="0"
 		        seekbarpreference:stepValue="1" />
         
         <PreferenceCategory android:title="Blurring Stages" />

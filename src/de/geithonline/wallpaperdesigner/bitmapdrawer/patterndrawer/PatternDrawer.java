@@ -83,6 +83,8 @@ import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_CONNECTION;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.QuallePath.QUALLE_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.QuallePath2;
+import de.geithonline.wallpaperdesigner.shapes.QuallePath2.QUALLE2_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
@@ -138,6 +140,7 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -1293,25 +1296,53 @@ public class PatternDrawer {
 			sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
 			break;
 		case "Jelley Fish":
-			final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
-			final Path path = new QuallePath(new PointF(x, y), radius, QUALLE_TYPE.qualle);
-			final Path tail = new QuallePath(new PointF(x, y), radius, QUALLE_TYPE.tail);
-			PathHelper.rotatePath(x, y, path, rotationDegrees);
-			PathHelper.rotatePath(x, y, tail, rotationDegrees);
-
-			bitmapCanvas.drawPath(path, paint);
-
-			OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
-			bitmapCanvas.drawPath(tail, paint);
-
-			glossyDrawer.draw(x, y, paint, radius, path);
-			outlineDrawer.draw(paint, radius, path);
-
+			drawQualle1(x, y, paint, radius);
+			break;
+		case "Jelley Fish 2":
+			drawQualle2(x, y, paint, radius);
 			break;
 		case "Experiemental":
 
 			break;
 		}
+	}
+
+	private void drawQualle1(final int x, final int y, final Paint paint, final int radius) {
+		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
+		final Path path = new QuallePath(new PointF(x, y), radius, QUALLE_TYPE.qualle);
+		final Path tail = new QuallePath(new PointF(x, y), radius, QUALLE_TYPE.tail);
+		PathHelper.rotatePath(x, y, path, rotationDegrees);
+		PathHelper.rotatePath(x, y, tail, rotationDegrees);
+
+		bitmapCanvas.drawPath(path, paint);
+
+		OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
+		bitmapCanvas.drawPath(tail, paint);
+
+		glossyDrawer.draw(x, y, paint, radius, path);
+		outlineDrawer.draw(paint, radius, path);
+	}
+
+	private void drawQualle2(final int x, final int y, final Paint paint, final int radius) {
+		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
+		final Path path = new QuallePath2(new PointF(x, y), radius, QUALLE2_TYPE.qualle);
+		final Path innerQualle = new QuallePath2(new PointF(x, y), radius, QUALLE2_TYPE.inner_qualle);
+		final Path tail = new QuallePath2(new PointF(x, y), radius, QUALLE2_TYPE.tail);
+		PathHelper.rotatePath(x, y, path, rotationDegrees);
+		PathHelper.rotatePath(x, y, innerQualle, rotationDegrees);
+		PathHelper.rotatePath(x, y, tail, rotationDegrees);
+
+		bitmapCanvas.drawPath(path, paint);
+		final int oldColor = paint.getColor();
+		paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), 24));
+		bitmapCanvas.drawPath(innerQualle, paint);
+		paint.setColor(oldColor);
+
+		OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
+		bitmapCanvas.drawPath(tail, paint);
+
+		glossyDrawer.draw(x, y, paint, radius, path);
+		outlineDrawer.draw(paint, radius, path);
 	}
 
 	// #########################################################################################

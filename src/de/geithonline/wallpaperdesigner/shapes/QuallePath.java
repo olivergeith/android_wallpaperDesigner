@@ -31,25 +31,37 @@ public class QuallePath extends Path {
 		final Path qualle = new CirclePath(c, radius / 2, 0, true, CIRCLE_STYLE.HALF_CIRCLE);
 		PathHelper.rotatePath(c.x, c.y, qualle, -90);
 		addPath(qualle);
+
+		// Augen
+		// final float raster = radius / 8;
+		// c.x = center.x - 7 * raster;
+		// c.y = center.y - 1 * raster;
+		// addPath(new OvalPath(c, raster / 2, raster, Direction.CCW));
+		// c.x = center.x - 7 * raster;
+		// c.y = center.y + 1 * raster;
+		// addPath(new OvalPath(c, raster / 2, raster, Direction.CCW));
+		// c.x = center.x - 7 * raster;
+		// c.y = center.y;
+		// addPath(new OvalPath(c, raster / 2, raster, Direction.CCW));
+		// c.x = center.x - 5 * raster;
+		// c.y = center.y;
+		// addPath(new OvalPath(c, raster / 2, raster, Direction.CCW));
 	}
 
 	public void drawTail(final PointF center, final float radius) {
-		final float x = center.x;
-		final float y = center.y;
-		final int anzTails = 4 + Randomizer.getRandomInt(0, 3);
-		for (int i = 0; i < anzTails; i++) {
-			final float length = radius * Randomizer.getRandomFloat(0.4f, 2f);
-			final int repeats = 1 + Randomizer.getRandomInt(0, 3);
-			final float amplitude = radius * Randomizer.getRandomFloat(0.1f, 0.3f);
-			final PointF c = new PointF();
-			c.x = x - radius / 2 + length;
-			c.y = y + Randomizer.getRandomFloat(-radius * 0.25f, radius * 0.25f);
-			final Path sinus = new SinusPath(c, length, repeats, amplitude);
-			if (Randomizer.getRandomBoolean()) {
-				PathHelper.mirrorPathUpDown(c.x, c.y, sinus);
-			}
-			addPath(sinus);
-		}
+		final PointF c = new PointF();
+		// start of tail is radius/2 to the left
+		c.x = center.x - radius / 2;
+		c.y = center.y;
+		addPath(new SinusTailPath(c, radius, 4 + Randomizer.getRandomInt(0, 3), radius * 0.2f));
+
+		// c.x = center.x - radius / 2;
+		// c.y = center.y - radius / 2;
+		// addPath(new SinusTailPath(c, radius / 3, 3, 0));
+		// c.x = center.x - radius / 2;
+		// c.y = center.y + radius / 2;
+		// addPath(new SinusTailPath(c, radius / 3, 3, 0));
+
 	}
 
 }

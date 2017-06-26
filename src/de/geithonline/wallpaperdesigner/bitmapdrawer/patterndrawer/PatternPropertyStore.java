@@ -123,6 +123,7 @@ public class PatternPropertyStore {
 						"Sine Trail of Hearts", //
 						"Trail of Stars (getting Bigger)", //
 						"Jelley Fish", //
+						"Jelley Fish 2", //
 						"Experiemental" }));
 
 		patternProperties.put("Shells", new PatternProperties(true, true, false, false, true, true, //
