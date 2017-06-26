@@ -57,4 +57,31 @@ public class OutlineDrawer {
 		}
 	}
 
+	public static void setupPaintForOutlineKeepDropshadow(final Paint paint, final int radius) {
+		paint.setStyle(Style.STROKE);
+		float strokewidth = radius / 45f * Settings.getOutlineThicknessAdjustment();
+		// Log.i("outline", "Thickness = " + strokewidth);
+		if (strokewidth > Settings.getOutlineThicknessLimit()) {
+			strokewidth = Settings.getOutlineThicknessLimit();
+		}
+		if (strokewidth < 1.0f) {
+			strokewidth = 0;
+		}
+		paint.setStrokeWidth(strokewidth);
+		// paint.setStrokeWidth(Math.round(strokewidth));
+		paint.setShader(null);
+		// paint.setShadowLayer(0, 0, 0, 0);
+		if (Settings.isCustomOutlineColor()) {
+			// alpha merken ...die customcoloer ist immer alpha 255
+			final int alpha = paint.getAlpha();
+			paint.setColor(Settings.getCustomOutlineColor());
+			paint.setAlpha(alpha);
+		} else {
+			paint.setColor(ColorHelper.changeBrightness(paint.getColor(), Settings.getOutlineDarkness()));
+		}
+		if (Settings.isOutlineNeverTransparent()) {
+			paint.setAlpha(255);
+		}
+	}
+
 }

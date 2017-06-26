@@ -9,7 +9,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class LinePath extends Path {
 
 	public enum LINE_STYLE {
-		straight, sinus, zigzag, bow, blitz;
+		straight, zigzag, bow, blitz;
 	}
 
 	public LinePath(final PointF center, final float radius, final LINE_STYLE style, final boolean filled) {
@@ -18,9 +18,6 @@ public class LinePath extends Path {
 		default:
 		case straight:
 			drawStraight(center, radius);
-			break;
-		case sinus:
-			drawSinus(center, radius);
 			break;
 		case blitz:
 			drawBlitz(center, radius);
@@ -75,24 +72,6 @@ public class LinePath extends Path {
 		moveTo(l, mitteY);
 		// und nun der Sinus
 		final int points = 2 * sinRepeats;
-		for (int i = 1; i <= points; i++) {
-			final float x = l + i * (r - l) / points;
-			final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
-			final float y = mitteY + (float) (sinradius * Math.sin(angle));
-			lineTo(x, y);
-		}
-	}
-
-	private void drawSinus(final PointF center, final float radius) {
-		// nach links
-		final float l = center.x - radius;
-		final float r = center.x + radius;
-		final float mitteY = center.y;
-		final float sinradius = radius * 0.1f;
-		final int sinRepeats = 7;
-		moveTo(l, mitteY);
-		// und nun der Sinus
-		final int points = 30;
 		for (int i = 1; i <= points; i++) {
 			final float x = l + i * (r - l) / points;
 			final float angle = (float) ((float) i / points * Math.PI * sinRepeats);

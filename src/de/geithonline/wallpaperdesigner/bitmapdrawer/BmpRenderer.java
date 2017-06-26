@@ -154,7 +154,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 		return bitmap;
 	}
 
-	private void setupDropShadow(final Bitmap refbitmap, final int dropShadowRadius, final Paint paint, final int x, final int y, final int pcolor) {
+	public void setupDropShadow(final Bitmap refbitmap, final int dropShadowRadius, final Paint paint, final int x, final int y, final int pcolor) {
 
 		final int dX = Settings.getDropShadowOffsetX();
 		final int dY = Settings.getDropShadowOffsetY();

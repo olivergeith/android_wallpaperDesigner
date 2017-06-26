@@ -81,6 +81,8 @@ import de.geithonline.wallpaperdesigner.shapes.PumpkinPath.PUMPKIN_TYP;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_CONNECTION;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.QuallePath;
+import de.geithonline.wallpaperdesigner.shapes.QuallePath.QUALLE_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
@@ -101,6 +103,8 @@ import de.geithonline.wallpaperdesigner.shapes.ShellV3Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV4Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV5Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV6Path;
+import de.geithonline.wallpaperdesigner.shapes.SinusPath;
+import de.geithonline.wallpaperdesigner.shapes.SinusTailPath;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath.SMILEY_TYPE;
@@ -1221,7 +1225,7 @@ public class PatternDrawer {
 			break;
 		case "V2":
 		case "Sinus":
-			path = new LinePath(new PointF(x, y), radius, LINE_STYLE.sinus, getFilledBoolean());
+			path = new SinusPath(new PointF(x, y), radius, 2 + Settings.getAnzahlFlowerLeafs(5, 15), radius * 0.1f);
 			break;
 		case "V3":
 		case "Zig-Zag":
@@ -1234,6 +1238,14 @@ public class PatternDrawer {
 		case "V5":
 		case "Blitz":
 			path = new LinePath(new PointF(x, y), radius, LINE_STYLE.blitz, getFilledBoolean());
+			break;
+		case "V6":
+		case "Sinus (one)":
+			path = new SinusPath(new PointF(x, y), radius, 2, radius * 0.2f);
+			break;
+		case "V7":
+		case "Sinus Tail":
+			path = new SinusTailPath(new PointF(x, y), radius, 2 + Settings.getAnzahlFlowerLeafs(5, 15), 0);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
@@ -1280,8 +1292,24 @@ public class PatternDrawer {
 		case "Trail of Stars (getting Bigger)":
 			sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
 			break;
+		case "Jelley Fish":
+			final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
+			final Path path = new QuallePath(new PointF(x, y), radius, QUALLE_TYPE.qualle);
+			final Path tail = new QuallePath(new PointF(x, y), radius, QUALLE_TYPE.tail);
+			PathHelper.rotatePath(x, y, path, rotationDegrees);
+			PathHelper.rotatePath(x, y, tail, rotationDegrees);
+
+			bitmapCanvas.drawPath(path, paint);
+
+			OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
+			bitmapCanvas.drawPath(tail, paint);
+
+			glossyDrawer.draw(x, y, paint, radius, path);
+			outlineDrawer.draw(paint, radius, path);
+
+			break;
 		case "Experiemental":
-			sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.Lines);
+
 			break;
 		}
 	}
