@@ -44,16 +44,16 @@ public class QuallePath2 extends Path {
     public void drawTail(final PointF center, final float radius) {
         final PointF c = new PointF();
         // start of tail is radius/2 to the left
-        c.x = center.x - radius * 0.1f;
+        c.x = center.x - radius * 0.125f;
         c.y = center.y;
-        addPath(new SinusTailPath(c, radius, radius * 1f, radius * 2f, 4 + Randomizer.getRandomInt(0, 3), radius * 0.2f,
-                SINUS_TAIL_STYLE.line));
+        addPath(new SinusTailPath(c, radius, radius * 1.0f, radius * 2f, 4 + Randomizer.getRandomInt(0, 3),
+                radius * 0.2f, SINUS_TAIL_STYLE.line));
     }
 
     public void drawBubbleTail(final PointF center, final float radius) {
         final PointF c = new PointF();
         // start of tail is radius/2 to the left
-        c.x = center.x - radius * 0.1f;
+        c.x = center.x - radius * 0.125f;
         c.y = center.y;
         addPath(new SinusTailPath(c, radius, radius * 1.3f, radius * 2f, 2, 0, SINUS_TAIL_STYLE.bubbles));
     }
