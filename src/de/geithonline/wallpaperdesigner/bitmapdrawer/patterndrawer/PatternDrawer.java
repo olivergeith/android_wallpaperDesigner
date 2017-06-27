@@ -1373,6 +1373,9 @@ public class PatternDrawer {
             case "Jelley Fish 2":
                 drawQualle(x, y, paint, radius, "V2", true);
                 break;
+            case "Jelley Fish 3":
+                drawQualle(x, y, paint, radius, "V3", true);
+                break;
             case "Experiemental":
 
                 break;
@@ -1398,6 +1401,12 @@ public class PatternDrawer {
                 innerQualle = new QuallePath2(new PointF(x, y), radius, QualleType.inner_qualle);
                 bubbleTail = new QuallePath2(new PointF(x, y), radius, QualleType.bubbletail);
                 break;
+            case "V3":
+                path = new QuallePath(new PointF(x, y), radius, QualleType.qualle);
+                tail = new QuallePath(new PointF(x, y), radius, QualleType.tail);
+                innerQualle = new QuallePath(new PointF(x, y), radius, QualleType.inner_qualle);
+                bubbleTail = new QuallePath(new PointF(x, y), radius, QualleType.bubbletail);
+                break;
         }
         PathHelper.rotatePath(x, y, path, rotationDegrees);
         PathHelper.rotatePath(x, y, innerQualle, rotationDegrees);
@@ -1408,28 +1417,37 @@ public class PatternDrawer {
         bitmapCanvas.drawPath(path, paint);
         outlineDrawer.draw(paint, radius, path);
         glossyDrawer.draw(x, y, paint, radius, path);
+        final int oldColor = paint.getColor();
+        final int oldAlpha = paint.getAlpha();
 
         // inner oval
         if (innerQualle != null) {
-            final int oldColor = paint.getColor();
             paint.setStyle(Style.FILL);
-            paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), 56));
+            // paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(50, 120)));
+            paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), 60));
+            // paint.setAlpha(oldAlpha);
             bitmapCanvas.drawPath(innerQualle, paint);
             paint.setColor(oldColor);
         }
         // bubble tail
         if (withBubbles) {
-            final int oldColor = paint.getColor();
-            paint.setStyle(Style.FILL);
-            paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), +12));
-            bitmapCanvas.drawPath(bubbleTail, paint);
-            paint.setColor(oldColor);
+            final int anzahlTails = Randomizer.getRandomInt(1, 4);
+            for (int i = 0; i < anzahlTails; i++) {
+                bubbleTail = new QuallePath(new PointF(x, y), radius, QualleType.bubbletail);
+                PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
+                paint.setStyle(Style.FILL);
+                paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));
+                // paint.setAlpha(oldAlpha);
+                bitmapCanvas.drawPath(bubbleTail, paint);
+                paint.setColor(oldColor);
+            }
         }
         // tail
         OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
+        // making tail even brighter
+        paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(2, 10)));
+        paint.setAlpha(oldAlpha);
         bitmapCanvas.drawPath(tail, paint);
-
-        // outlineDrawer.draw(paint, radius, path);
     }
 
     // #########################################################################################

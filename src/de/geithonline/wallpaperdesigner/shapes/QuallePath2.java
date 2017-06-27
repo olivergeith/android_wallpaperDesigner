@@ -55,7 +55,7 @@ public class QuallePath2 extends Path {
         // start of tail is radius/2 to the left
         c.x = center.x - radius * 0.125f;
         c.y = center.y;
-        addPath(new SinusTailPath(c, radius, radius * 1.3f, radius * 2f, 2, 0, SINUS_TAIL_STYLE.bubbles));
+        addPath(new SinusTailPath(c, radius, radius * 1.3f, radius * 2f, 1, 0, SINUS_TAIL_STYLE.bubbles));
     }
 
 }
