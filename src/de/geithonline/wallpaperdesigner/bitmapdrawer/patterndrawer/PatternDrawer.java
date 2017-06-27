@@ -1368,13 +1368,13 @@ public class PatternDrawer {
                 sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
                 break;
             case "Jelley Fish":
-                drawQualle(x, y, paint, radius, "V1", true);
+                drawQualle(x, y, paint, radius, "V1", getFilledBoolean());
                 break;
             case "Jelley Fish 2":
-                drawQualle(x, y, paint, radius, "V2", true);
+                drawQualle(x, y, paint, radius, "V2", getFilledBoolean());
                 break;
             case "Jelley Fish 3":
-                drawQualle(x, y, paint, radius, "V3", true);
+                drawQualle(x, y, paint, radius, "V3", getFilledBoolean());
                 break;
             case "Experiemental":
 
