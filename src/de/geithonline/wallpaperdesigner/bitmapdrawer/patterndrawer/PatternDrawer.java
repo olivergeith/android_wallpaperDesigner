@@ -81,9 +81,6 @@ import de.geithonline.wallpaperdesigner.shapes.PumpkinPath.PUMPKIN_TYP;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_CONNECTION;
 import de.geithonline.wallpaperdesigner.shapes.PuzzlePath.PUZZLE_TYPE;
-import de.geithonline.wallpaperdesigner.shapes.QuallePath;
-import de.geithonline.wallpaperdesigner.shapes.QuallePath2;
-import de.geithonline.wallpaperdesigner.shapes.QualleType;
 import de.geithonline.wallpaperdesigner.shapes.RandomPath;
 import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
@@ -105,8 +102,6 @@ import de.geithonline.wallpaperdesigner.shapes.ShellV4Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV5Path;
 import de.geithonline.wallpaperdesigner.shapes.ShellV6Path;
 import de.geithonline.wallpaperdesigner.shapes.SinusPath;
-import de.geithonline.wallpaperdesigner.shapes.SinusTailPath;
-import de.geithonline.wallpaperdesigner.shapes.SinusTailPath.SINUS_TAIL_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.SkullPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath;
 import de.geithonline.wallpaperdesigner.shapes.SmileyPath.SMILEY_TYPE;
@@ -140,6 +135,10 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
+import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
+import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -1318,8 +1317,8 @@ public class PatternDrawer {
                 break;
             case "V7":
             case "Sinus Tail":
-                path = new SinusTailPath(new PointF(x, y), radius, radius * 0.7f, radius * 2,
-                        2 + Settings.getAnzahlFlowerLeafs(5, 15), 0, SINUS_TAIL_STYLE.line);
+                path = new MultiSinusLinesPath(new PointF(x, y), radius, radius * 0.7f, radius * 2,
+                        2 + Settings.getAnzahlFlowerLeafs(5, 15), 0);
                 break;
         }
         PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
@@ -1390,22 +1389,22 @@ public class PatternDrawer {
         switch (variante) {
             default:
             case "V1":
-                path = new QuallePath(new PointF(x, y), radius, QualleType.qualle);
-                tail = new QuallePath(new PointF(x, y), radius, QualleType.tail);
+                path = new QuallePath(new PointF(x, y), radius, EQualleType.qualle);
+                tail = new QuallePath(new PointF(x, y), radius, EQualleType.tail);
                 // innerQualle = new QuallePath(new PointF(x, y), radius, QualleType.inner_qualle);
-                bubbleTail = new QuallePath(new PointF(x, y), radius, QualleType.bubbletail);
+                bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
             case "V2":
-                path = new QuallePath2(new PointF(x, y), radius, QualleType.qualle);
-                tail = new QuallePath2(new PointF(x, y), radius, QualleType.tail);
-                innerQualle = new QuallePath2(new PointF(x, y), radius, QualleType.inner_qualle);
-                bubbleTail = new QuallePath2(new PointF(x, y), radius, QualleType.bubbletail);
+                path = new QuallePath2(new PointF(x, y), radius, EQualleType.qualle);
+                tail = new QuallePath2(new PointF(x, y), radius, EQualleType.tail);
+                innerQualle = new QuallePath2(new PointF(x, y), radius, EQualleType.inner_qualle);
+                bubbleTail = new QuallePath2(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
             case "V3":
-                path = new QuallePath(new PointF(x, y), radius, QualleType.qualle);
-                tail = new QuallePath(new PointF(x, y), radius, QualleType.tail);
-                innerQualle = new QuallePath(new PointF(x, y), radius, QualleType.inner_qualle);
-                bubbleTail = new QuallePath(new PointF(x, y), radius, QualleType.bubbletail);
+                path = new QuallePath(new PointF(x, y), radius, EQualleType.qualle);
+                tail = new QuallePath(new PointF(x, y), radius, EQualleType.tail);
+                innerQualle = new QuallePath(new PointF(x, y), radius, EQualleType.inner_qualle);
+                bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
         }
         PathHelper.rotatePath(x, y, path, rotationDegrees);
@@ -1433,7 +1432,7 @@ public class PatternDrawer {
         if (withBubbles) {
             final int anzahlTails = Randomizer.getRandomInt(1, 4);
             for (int i = 0; i < anzahlTails; i++) {
-                bubbleTail = new QuallePath(new PointF(x, y), radius, QualleType.bubbletail);
+                bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
                 PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
                 paint.setStyle(Style.FILL);
                 paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));

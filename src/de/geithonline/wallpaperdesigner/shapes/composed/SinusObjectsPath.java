@@ -1,43 +1,61 @@
 
-package de.geithonline.wallpaperdesigner.shapes;
+package de.geithonline.wallpaperdesigner.shapes.composed;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.HeartPath;
+import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
+import de.geithonline.wallpaperdesigner.shapes.StarPath;
+import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
+import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class SinusBubblePath extends Path {
+public class SinusObjectsPath extends ComposedPath {
 
-    enum SINUS_BUBBLE_PATH_TYPE {
-        random, decreasing;
-    }
+    private final ESinusObjectsType objectType;
 
     /**
+     * Erzeugt einen waagerecht liegenden sinusförmigen Trail von Objekten.
+     *
+     * <code><br>
+     *   ...  |  ... <br>
+     *  .   . + .   .  3 Halbwellen<br>
+     *       ...<br>
+     *        |<br>
+     *      center<br>
+     * </code><br>
+     *
      * @param center
      * @param radius
-     * @param sinRepeats
+     * @param halbWellen
      *            1 == one bow/Halbwelle, 2 == a complete sinus
      * @param amplitude
-     * @param maxBubbleRadius
+     * @param maxObjectRadius
      * @param prozentToDraw
      *            (0-100 allowed)
+     * @param sizeType
+     * @param objectType
      */
-    public SinusBubblePath(final PointF center, final float radius, final int sinRepeats, final float amplitude,
-            final float maxBubbleRadius, final int prozentToDraw, final SINUS_BUBBLE_PATH_TYPE type) {
+    public SinusObjectsPath(final PointF center, final float radius, final int halbWellen, final float amplitude,
+            final float maxObjectRadius, final int prozentToDraw, final ESinusObjectsSizingType sizeType,
+            final ESinusObjectsType objectType) {
         super();
-        switch (type) {
+        this.objectType = objectType;
+        switch (sizeType) {
             case decreasing:
-                drawBubbleSinusGettingSmaller(center, radius, sinRepeats, amplitude, maxBubbleRadius, prozentToDraw);
+                drawSinusGettingSmaller(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
                 break;
             default:
             case random:
-                drawBubbleSinus(center, radius, sinRepeats, amplitude, maxBubbleRadius, prozentToDraw);
+                drawSinus(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
                 break;
 
         }
     }
 
-    private void drawBubbleSinus(final PointF center, final float radius, final int sinRepeats, final float amplitude,
+    private void drawSinus(final PointF center, final float radius, final int sinRepeats, final float amplitude,
             final float maxBubbleRadius, final int prozentToDraw) {
         // nach links
         final float l = center.x - radius;
@@ -53,12 +71,12 @@ public class SinusBubblePath extends Path {
                 final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
                 final float y = mitteY + (float) (amplitude * Math.sin(angle));
                 final PointF c = new PointF(x, y);
-                addPath(new CirclePath(c, bubbleRadius, 0, true, CIRCLE_STYLE.CIRCLE));
+                addPath(getObject(bubbleRadius, c));
             }
         }
     }
 
-    private void drawBubbleSinusGettingSmaller(final PointF center, final float radius, final int sinRepeats,
+    private void drawSinusGettingSmaller(final PointF center, final float radius, final int sinRepeats,
             final float amplitude, final float maxBubbleRadius, final int prozentToDraw) {
         // nach links
         final float l = center.x - radius;
@@ -75,9 +93,24 @@ public class SinusBubblePath extends Path {
                 final float angle = (float) ((float) i / anzahlBubbles * Math.PI * sinRepeats);
                 final float y = mitteY + (float) (amplitude * Math.sin(angle));
                 final PointF c = new PointF(x, y);
-                addPath(new CirclePath(c, bubbleRadius, 0, true, CIRCLE_STYLE.CIRCLE));
+                addPath(getObject(bubbleRadius, c));
             }
         }
+    }
+
+    private Path getObject(final float radius, final PointF center) {
+        switch (objectType) {
+            default:
+            case bubble:
+                return new CirclePath(center, radius, 0, true, CIRCLE_STYLE.CIRCLE);
+            case star:
+                return new StarPath(5, center, radius, STAR_TYPE.NORMAL, true);
+            case heart:
+                final Path p = new HeartPath(center, radius, false, HEART_SHAPE.Lovely);
+                PathHelper.rotatePath(center.x, center.y, p, Randomizer.getRandomFloat(-90 - 19, -90 + 19));
+                return p;
+        }
+
     }
 
 }

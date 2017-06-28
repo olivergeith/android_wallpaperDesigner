@@ -1,14 +1,13 @@
 
-package de.geithonline.wallpaperdesigner.shapes;
+package de.geithonline.wallpaperdesigner.shapes.composed;
 
-import android.graphics.Path;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.shapes.SinusTailPath.SINUS_TAIL_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.OvalPath;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class QuallePath2 extends Path {
+public class QuallePath2 extends ComposedPath {
 
-    public QuallePath2(final PointF center, final float radius, final QualleType type) {
+    public QuallePath2(final PointF center, final float radius, final EQualleType type) {
         switch (type) {
             default:
             case qualle:
@@ -46,8 +45,8 @@ public class QuallePath2 extends Path {
         // start of tail is radius/2 to the left
         c.x = center.x - radius * 0.125f;
         c.y = center.y;
-        addPath(new SinusTailPath(c, radius, radius * 1.0f, radius * 2f, 4 + Randomizer.getRandomInt(0, 3),
-                radius * 0.2f, SINUS_TAIL_STYLE.line));
+        addPath(new MultiSinusLinesPath(c, radius, radius * 1.0f, radius * 2f, 4 + Randomizer.getRandomInt(0, 3),
+                radius * 0.2f));
     }
 
     public void drawBubbleTail(final PointF center, final float radius) {
@@ -55,7 +54,7 @@ public class QuallePath2 extends Path {
         // start of tail is radius/2 to the left
         c.x = center.x - radius * 0.125f;
         c.y = center.y;
-        addPath(new SinusTailPath(c, radius, radius * 1.3f, radius * 2f, 1, 0, SINUS_TAIL_STYLE.bubbles));
+        addPath(new MultiSinusObjectsPath(c, radius, radius * 1.3f, radius * 2f, 1, 0, ESinusObjectsType.bubble));
     }
 
 }
