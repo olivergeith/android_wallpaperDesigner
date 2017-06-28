@@ -1434,7 +1434,7 @@ public class PatternDrawer {
             for (int i = 0; i < anzahlTails; i++) {
                 bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
                 PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
-                pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));
+                pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 30));
                 // paint.setStyle(Style.FILL);
                 // paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));
                 // paint.setAlpha(oldAlpha);
