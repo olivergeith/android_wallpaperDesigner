@@ -13,6 +13,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.PaintManager;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
@@ -135,10 +136,10 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
-import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
-import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -154,9 +155,13 @@ public class PatternDrawer {
     private final int bHeight;
 
     private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final PaintManager pm;
+    private final Paint paint;
 
-    public PatternDrawer(final Canvas bitmapCanvas) {
+    public PatternDrawer(final Canvas bitmapCanvas, final PaintManager pm) {
         this.bitmapCanvas = bitmapCanvas;
+        this.pm = pm;
+        paint = pm.paint;
         bWidth = bitmapCanvas.getWidth();
         bHeight = bitmapCanvas.getHeight();
         glossyDrawer = new GlossyDrawer(bitmapCanvas);
@@ -166,129 +171,129 @@ public class PatternDrawer {
 
     }
 
-    public void drawPattern(final int x, final int y, final Paint paint, final int radius, final int index) {
+    public void drawPattern(final int x, final int y, final int radius, final int index) {
         switch (Settings.getSelectedPattern()) {
 
             case "Gears-Saws":
-                drawGearSaw(x, y, paint, radius);
+                drawGearSaw(x, y, radius);
                 break;
             case "Spooky":
-                drawSpooky(x, y, paint, radius);
+                drawSpooky(x, y, radius);
                 break;
             case "Assorted Shapes":
-                drawAssorted(x, y, paint, radius);
+                drawAssorted(x, y, radius);
                 break;
             case "Chess":
-                drawChess(x, y, paint, radius);
+                drawChess(x, y, radius);
                 break;
             case "Flipped":
-                drawFlipped(x, y, paint, radius);
+                drawFlipped(x, y, radius);
                 break;
             case "Geometrical Shapes":
-                drawGeometric(x, y, paint, radius);
+                drawGeometric(x, y, radius);
                 break;
             case "Geometrical (long) Shapes":
-                drawGeometricLong(x, y, paint, radius);
+                drawGeometricLong(x, y, radius);
                 break;
             case "3D (long) Shapes":
-                draw3DLongShape(x, y, paint, radius);
+                draw3DLongShape(x, y, radius);
                 break;
             case "Rings":
-                drawRing(x, y, paint, radius);
+                drawRing(x, y, radius);
                 break;
             case "Bubbles":
-                drawBubble(x, y, paint, radius);
+                drawBubble(x, y, radius);
                 break;
             case "Hearts":
-                drawHeart(x, y, paint, radius);
+                drawHeart(x, y, radius);
                 break;
             case "Invertable Shapes":
-                drawInvertable(x, y, paint, radius);
+                drawInvertable(x, y, radius);
                 break;
             case "Lines":
-                drawLines(x, y, paint, radius);
+                drawLines(x, y, radius);
                 break;
             case "Lines (Directed)":
-                drawLinesDirected(x, y, paint, radius);
+                drawLinesDirected(x, y, radius);
                 break;
             case "Leafs":
-                drawLeafs(x, y, paint, radius);
+                drawLeafs(x, y, radius);
                 break;
             case "Logos":
-                drawLogos(x, y, paint, radius);
+                drawLogos(x, y, radius);
                 break;
             case "PacMan":
-                drawPacman(x, y, paint, radius);
+                drawPacman(x, y, radius);
                 break;
             case "Pillows":
-                drawPillow(x, y, paint, radius);
+                drawPillow(x, y, radius);
                 break;
             case "Puzzle":
-                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.NORMAL);
+                drawPuzzle(x, y, radius, PUZZLE_CONNECTION.NORMAL);
                 break;
             case "Puzzle (Circle Connector)":
-                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.CIRCLE);
+                drawPuzzle(x, y, radius, PUZZLE_CONNECTION.CIRCLE);
                 break;
             case "Puzzle (Square)":
-                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.RECT_NORMAL);
+                drawPuzzle(x, y, radius, PUZZLE_CONNECTION.RECT_NORMAL);
                 break;
             case "Puzzle (Square Connector)":
-                drawPuzzle(x, y, paint, radius, PUZZLE_CONNECTION.SQUARE);
+                drawPuzzle(x, y, radius, PUZZLE_CONNECTION.SQUARE);
                 break;
             case "Smiley":
-                drawSmiley(x, y, paint, radius);
+                drawSmiley(x, y, radius);
                 break;
             case "Stars":
-                drawStar(x, y, paint, radius);
+                drawStar(x, y, radius);
                 break;
             case "Square":
-                drawSquare(x, y, paint, radius);
+                drawSquare(x, y, radius);
                 break;
             case "Text":
-                drawText(x, y, paint, radius * 2, index);
+                drawText(x, y, radius * 2, index);
                 break;
             case "Fish":
-                drawFisch(x, y, paint, radius);
+                drawFisch(x, y, radius);
                 break;
             case "Flowers":
-                drawFlower(x, y, paint, radius);
+                drawFlower(x, y, radius);
                 break;
             case "Mandala":
-                drawMandala(x, y, paint, radius);
+                drawMandala(x, y, radius);
                 break;
             case "Maritim":
-                drawMaritim(x, y, paint, radius);
+                drawMaritim(x, y, radius);
                 break;
             case "Material":
-                drawMaterial(x, y, paint, radius);
+                drawMaterial(x, y, radius);
                 break;
             case "Rectangles":
-                drawRect(x, y, paint, radius);
+                drawRect(x, y, radius);
                 break;
             case "Scenes":
-                drawScene(x, y, paint, radius, index);
+                drawScene(x, y, radius, index);
                 break;
             case "Shells":
-                drawShell(x, y, paint, radius);
+                drawShell(x, y, radius);
                 break;
             case "Sonic":
-                drawSonic(x, y, paint, radius);
+                drawSonic(x, y, radius);
                 break;
             case "Space":
-                drawSpace(x, y, paint, radius);
+                drawSpace(x, y, radius);
                 break;
             default:
             case "Virus Attack":
-                drawVirus(x, y, paint, radius);
+                drawVirus(x, y, radius);
                 break;
             case "Weather":
-                drawWeather(x, y, paint, radius);
+                drawWeather(x, y, radius);
                 break;
             case "Planes":
-                drawPlane(x, y, paint, radius);
+                drawPlane(x, y, radius);
                 break;
             case "Xmas":
-                drawXmas(x, y, paint, radius);
+                drawXmas(x, y, radius);
                 break;
         }
     }
@@ -296,16 +301,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawGearSaw(final int x, final int y, final int radius) {
         String variante = Settings.getSelectedPatternVariant();
         if (variante.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 3);
             variante = "V" + nr;
         }
-        drawGearSaw(x, y, paint, radius, variante);
+        drawGearSaw(x, y, radius, variante);
     }
 
-    protected void drawGearSaw(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawGearSaw(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -336,16 +341,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawMaritim(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawMaritim(final int x, final int y, final int radius) {
         String variante = Settings.getSelectedPatternVariant();
         if (variante.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variante = "V" + nr;
         }
-        drawMaritim(x, y, paint, radius, variante);
+        drawMaritim(x, y, radius, variante);
     }
 
-    protected void drawMaritim(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawMaritim(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -377,12 +382,12 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawFlipped(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawFlipped(final int x, final int y, final int radius) {
         final String variant = Settings.getSelectedPatternVariant();
-        drawFlipped(x, y, paint, radius, variant);
+        drawFlipped(x, y, radius, variant);
     }
 
-    protected void drawFlipped(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawFlipped(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -414,7 +419,7 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawGeometric(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawGeometric(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 6);
@@ -425,10 +430,10 @@ public class PatternDrawer {
         } else if (variant.equalsIgnoreCase("Square (Mixed)")) {
             variant = "Square (Mixed)";
         }
-        drawGeometric(x, y, paint, radius, variant);
+        drawGeometric(x, y, radius, variant);
     }
 
-    protected void drawGeometric(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawGeometric(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -492,16 +497,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawLeafs(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawLeafs(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
-        drawLeafs(x, y, paint, radius, variant);
+        drawLeafs(x, y, radius, variant);
     }
 
-    protected void drawLeafs(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawLeafs(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -532,12 +537,12 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawLogos(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawLogos(final int x, final int y, final int radius) {
         final String variant = Settings.getSelectedPatternVariant();
-        drawLogos(x, y, paint, radius, variant);
+        drawLogos(x, y, radius, variant);
     }
 
-    protected void drawLogos(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawLogos(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -603,13 +608,12 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawGeometricLong(final int x, final int y, final int radius) {
         final String variant = Settings.getSelectedPatternVariant();
-        drawGeometricLong(x, y, paint, radius, variant);
+        drawGeometricLong(x, y, radius, variant);
     }
 
-    protected void drawGeometricLong(final int x, final int y, final Paint paint, final int radius,
-            final String variante) {
+    protected void drawGeometricLong(final int x, final int y, final int radius, final String variante) {
         if (x == bWidth / 2 && y == bHeight / 2) {
             return;
         }
@@ -825,17 +829,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius) {
+    protected void draw3DLongShape(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 6);
             variant = "V" + nr;
         }
-        draw3DLongShape(x, y, paint, radius, variant);
+        draw3DLongShape(x, y, radius, variant);
     }
 
-    protected void draw3DLongShape(final int x, final int y, final Paint paint, final int radius,
-            final String variante) {
+    protected void draw3DLongShape(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -873,7 +876,7 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawInvertable(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawInvertable(final int x, final int y, final int radius) {
         String variante = Settings.getSelectedPatternVariant();
         if (variante.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 9);
@@ -883,11 +886,10 @@ public class PatternDrawer {
             variante = "V" + nr;
         }
 
-        drawInvertable(x, y, paint, radius, variante);
+        drawInvertable(x, y, radius, variante);
     }
 
-    protected void drawInvertable(final int x, final int y, final Paint paint, final int radius,
-            final String variante) {
+    protected void drawInvertable(final int x, final int y, final int radius, final String variante) {
 
         Path path;
         switch (variante) {
@@ -940,16 +942,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawRing(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawRing(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
-        drawRing(x, y, paint, radius, variant);
+        drawRing(x, y, radius, variant);
     }
 
-    protected void drawRing(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawRing(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -979,7 +981,7 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawSpace(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawSpace(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 10);
@@ -988,10 +990,10 @@ public class PatternDrawer {
             final int nr = Randomizer.getRandomInt(0, 6);
             variant = "V" + nr;
         }
-        drawSpace(x, y, paint, radius, variant);
+        drawSpace(x, y, radius, variant);
     }
 
-    protected void drawSpace(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawSpace(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -1045,17 +1047,17 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawVirus(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawVirus(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 8);
             variant = "V" + nr;
         }
 
-        drawVirus(x, y, paint, radius, variant);
+        drawVirus(x, y, radius, variant);
     }
 
-    protected void drawVirus(final int x, final int y, final Paint paint, final int radius, final String variant) {
+    protected void drawVirus(final int x, final int y, final int radius, final String variant) {
         Path path;
         switch (variant) {
             default:
@@ -1093,16 +1095,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawWeather(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawWeather(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 7);
             variant = "V" + nr;
         }
-        drawWeather(x, y, paint, radius, variant);
+        drawWeather(x, y, radius, variant);
     }
 
-    protected void drawWeather(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawWeather(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -1155,16 +1157,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawPlane(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawPlane(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 3);
             variant = "V" + nr;
         }
-        drawPlane(x, y, paint, radius, variant);
+        drawPlane(x, y, radius, variant);
     }
 
-    protected void drawPlane(final int x, final int y, final Paint paint, final int radius, final String variant) {
+    protected void drawPlane(final int x, final int y, final int radius, final String variant) {
         final Path path = new PlanePath(new Point(x, y), radius, variant);
         PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
         bitmapCanvas.drawPath(path, paint);
@@ -1175,7 +1177,7 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawFlower(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawFlower(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed V1-V3")) {
             final int nr = Randomizer.getRandomInt(0, 3);
@@ -1184,10 +1186,10 @@ public class PatternDrawer {
             final int nr = Randomizer.getRandomInt(3, 5);
             variant = "V" + nr;
         }
-        drawFlower(x, y, paint, radius, variant);
+        drawFlower(x, y, radius, variant);
     }
 
-    protected void drawFlower(final int x, final int y, final Paint paint, final int radius, final String variant) {
+    protected void drawFlower(final int x, final int y, final int radius, final String variant) {
 
         Path path;
         switch (variant) {
@@ -1229,17 +1231,17 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawLines(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawLines(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 5);
             variant = "V" + nr;
         }
-        drawLines(x, y, paint, radius, variant);
+        drawLines(x, y, radius, variant);
 
     }
 
-    protected void drawLines(final int x, final int y, final Paint paint, final int radius, final String variant) {
+    protected void drawLines(final int x, final int y, final int radius, final String variant) {
         Path path;
         switch (variant) {
             default:
@@ -1276,18 +1278,17 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawLinesDirected(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 5);
             variant = "V" + nr;
         }
-        drawLinesDirected(x, y, paint, radius, variant);
+        drawLinesDirected(x, y, radius, variant);
 
     }
 
-    protected void drawLinesDirected(final int x, final int y, final Paint paint, final int radius,
-            final String variant) {
+    protected void drawLinesDirected(final int x, final int y, final int radius, final String variant) {
         Path path;
         switch (variant) {
             default:
@@ -1329,23 +1330,22 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawScene(final int x, final int y, final Paint paint, final int radius, final int index) {
+    protected void drawScene(final int x, final int y, final int radius, final int index) {
         final String variant = Settings.getSelectedPatternVariant();
-        drawScene(x, y, paint, radius, variant, index);
+        drawScene(x, y, radius, variant, index);
     }
 
-    public void drawScene(final int x, final int y, final Paint paint, final int radius, final String variant,
-            final int index) {
+    public void drawScene(final int x, final int y, final int radius, final String variant, final int index) {
         switch (variant) {
             default:
             case "Rain":
                 if (Randomizer.getRandomInt(0, 40) == 1) {
                     // bubble
                     // drawGeometric(x, y, paint, radius / 3, "Hexagon");
-                    drawBubble(x, y, paint, radius / 3);
+                    drawBubble(x, y, radius / 3);
                 } else {
                     // Rain
-                    drawLinesDirected(x, y, paint, radius, "Straight Line");
+                    drawLinesDirected(x, y, radius, "Straight Line");
                 }
                 break;
             case "Trail Of Stars":
@@ -1367,13 +1367,13 @@ public class PatternDrawer {
                 sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
                 break;
             case "Jelley Fish":
-                drawQualle(x, y, paint, radius, "V1", getFilledBoolean());
+                drawQualle(x, y, radius, "V1", getFilledBoolean());
                 break;
             case "Jelley Fish 2":
-                drawQualle(x, y, paint, radius, "V2", getFilledBoolean());
+                drawQualle(x, y, radius, "V2", getFilledBoolean());
                 break;
             case "Jelley Fish 3":
-                drawQualle(x, y, paint, radius, "V3", getFilledBoolean());
+                drawQualle(x, y, radius, "V3", getFilledBoolean());
                 break;
             case "Experiemental":
 
@@ -1381,7 +1381,7 @@ public class PatternDrawer {
         }
     }
 
-    private void drawQualle(final int x, final int y, final Paint paint, final int radius, final String variante,
+    private void drawQualle(final int x, final int y, final int radius, final String variante,
             final boolean withBubbles) {
         final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
         Path path = null, tail = null, innerQualle = null, bubbleTail = null;
@@ -1421,9 +1421,9 @@ public class PatternDrawer {
 
         // inner oval
         if (innerQualle != null) {
-            paint.setStyle(Style.FILL);
+            pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), 60));
+            // paint.setStyle(Style.FILL);
             // paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(50, 120)));
-            paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), 60));
             // paint.setAlpha(oldAlpha);
             bitmapCanvas.drawPath(innerQualle, paint);
             paint.setColor(oldColor);
@@ -1434,8 +1434,9 @@ public class PatternDrawer {
             for (int i = 0; i < anzahlTails; i++) {
                 bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
                 PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
-                paint.setStyle(Style.FILL);
-                paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));
+                pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));
+                // paint.setStyle(Style.FILL);
+                // paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 24));
                 // paint.setAlpha(oldAlpha);
                 bitmapCanvas.drawPath(bubbleTail, paint);
                 paint.setColor(oldColor);
@@ -1452,16 +1453,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawShell(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawShell(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Shells Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 6);
             variant = "Shells V" + nr;
         }
-        drawShell(x, y, paint, radius, variant);
+        drawShell(x, y, radius, variant);
     }
 
-    public void drawShell(final int x, final int y, final Paint paint, final int radius, final String variant) {
+    public void drawShell(final int x, final int y, final int radius, final String variant) {
         Path path;
         switch (variant) {
             default:
@@ -1498,16 +1499,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawMandala(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawMandala(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
-        drawMandala(x, y, paint, radius, variant);
+        drawMandala(x, y, radius, variant);
     }
 
-    protected void drawMandala(final int x, final int y, final Paint paint, final int radius, final String variant) {
+    protected void drawMandala(final int x, final int y, final int radius, final String variant) {
         Path path = new ShellV6Path(3, 15 + Settings.getAnzahlFlowerLeafs(0, 10), new Point(x, y), radius);
         switch (variant) {
             default:
@@ -1536,16 +1537,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawFisch(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawFisch(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
-        drawFisch(x, y, paint, radius, variant);
+        drawFisch(x, y, radius, variant);
     }
 
-    protected void drawFisch(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawFisch(final int x, final int y, final int radius, final String variante) {
         final Path path = new FishPath(new Point(x, y), radius, variante);
 
         PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
@@ -1561,7 +1562,7 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawText(final int x, final int y, final Paint paint, final int radius, final int index) {
+    protected void drawText(final int x, final int y, final int radius, final int index) {
         // Some Paint Inits
         if (getFilledBoolean()) {
             paint.setTypeface(Typeface.DEFAULT_BOLD);
@@ -1574,53 +1575,53 @@ public class PatternDrawer {
             default:
             case "Numbers":
                 final String number = String.format(Locale.GERMANY, "%04d", index);
-                drawCustomText(x, y, paint, radius * 1, number);
+                drawCustomText(x, y, radius * 1, number);
                 break;
             case "Custom Text":
                 final String text = Settings.getText();
-                drawCustomText(x, y, paint, radius * 1, text);
+                drawCustomText(x, y, radius * 1, text);
                 break;
             case "Letters":
                 final int letterindex = Randomizer.getRandomInt(0, letters.length() - 1);
                 final char c = letters.charAt(letterindex);
-                drawCustomText(x, y, paint, radius * 2, "" + c);
+                drawCustomText(x, y, radius * 2, "" + c);
                 break;
         }
 
     }
 
-    protected void drawCustomText(final int x, final int y, final Paint paint, final int radius, final String text) {
+    protected void drawCustomText(final int x, final int y, final int radius, final String text) {
 
         switch (Settings.getTextDrawStyle()) {
             default:
             case "Round":
-                drawTextCircle(x, y, paint, radius, text);
+                drawTextCircle(x, y, radius, text);
                 break;
             case "Normal":
-                drawTextStraight(x, y, paint, radius, text);
+                drawTextStraight(x, y, radius, text);
                 break;
             case "Angled":
-                drawTextAngled(x, y, paint, radius, text);
+                drawTextAngled(x, y, radius, text);
                 break;
             case "Random":
                 final int i = Randomizer.getRandomInt(0, 3);
                 switch (i) {
                     default:
                     case 1:
-                        drawTextCircle(x, y, paint, radius, text);
+                        drawTextCircle(x, y, radius, text);
                         break;
                     case 2:
-                        drawTextStraight(x, y, paint, radius, text);
+                        drawTextStraight(x, y, radius, text);
                         break;
                     case 3:
-                        drawTextAngled(x, y, paint, radius, text);
+                        drawTextAngled(x, y, radius, text);
                         break;
                 }
                 break;
         }
     }
 
-    protected void drawTextStraight(final int x, final int y, final Paint paint, final int radius, final String text) {
+    protected void drawTextStraight(final int x, final int y, final int radius, final String text) {
         paint.setTextSize(radius);
         paint.setTextAlign(Align.LEFT);
         final Path mArc = new Path();
@@ -1633,7 +1634,7 @@ public class PatternDrawer {
 
     }
 
-    protected void drawTextCircle(final int x, final int y, final Paint paint, final int radius, final String text) {
+    protected void drawTextCircle(final int x, final int y, final int radius, final String text) {
         paint.setTextSize(radius);
         paint.setTextAlign(Align.CENTER);
         final Path mArc = new Path();
@@ -1644,7 +1645,7 @@ public class PatternDrawer {
         outlineDrawer.drawText(paint, radius, text, mArc);
     }
 
-    protected void drawTextAngled(final int x, final int y, final Paint paint, final int radius, final String text) {
+    protected void drawTextAngled(final int x, final int y, final int radius, final String text) {
         paint.setTextSize(radius);
         paint.setTextAlign(Align.LEFT);
         final Path mArc = new Path();
@@ -1664,12 +1665,12 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    private void drawMaterial(final int x, final int y, final Paint paint, final int radius) {
+    private void drawMaterial(final int x, final int y, final int radius) {
         final String variante = Settings.getSelectedPatternVariant();
-        drawMaterial(x, y, paint, radius, variante);
+        drawMaterial(x, y, radius, variante);
     }
 
-    private void drawMaterial(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    private void drawMaterial(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -1753,12 +1754,12 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawRect(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawRect(final int x, final int y, final int radius) {
         final String variante = Settings.getSelectedPatternVariant();
-        drawRect(x, y, paint, radius, variante);
+        drawRect(x, y, radius, variante);
     }
 
-    protected void drawRect(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawRect(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -1841,7 +1842,7 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawSpooky(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawSpooky(final int x, final int y, final int radius) {
         String variante = Settings.getSelectedPatternVariant();
         if (variante.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 14);
@@ -1858,10 +1859,10 @@ public class PatternDrawer {
         } else if (variante.equalsIgnoreCase("Mixed Pumpkins")) {
             variante = "Mixed Pumpkins";
         }
-        drawSpooky(x, y, paint, radius, variante);
+        drawSpooky(x, y, radius, variante);
     }
 
-    protected void drawSpooky(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawSpooky(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -1934,13 +1935,12 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius,
-            final PUZZLE_CONNECTION puzzleConnection) {
+    protected void drawPuzzle(final int x, final int y, final int radius, final PUZZLE_CONNECTION puzzleConnection) {
         final String variant = Settings.getSelectedPatternVariant();
-        drawPuzzle(x, y, paint, radius, variant, puzzleConnection);
+        drawPuzzle(x, y, radius, variant, puzzleConnection);
     }
 
-    protected void drawPuzzle(final int x, final int y, final Paint paint, final int radius, final String variante,
+    protected void drawPuzzle(final int x, final int y, final int radius, final String variante,
             final PUZZLE_CONNECTION puzzleConnection) {
         Path path;
         switch (variante) {
@@ -1973,16 +1973,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawAssorted(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawAssorted(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 18);
             variant = "V" + nr;
         }
-        drawAssorted(x, y, paint, radius, variant);
+        drawAssorted(x, y, radius, variant);
     }
 
-    protected void drawAssorted(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawAssorted(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2080,16 +2080,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawSonic(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawSonic(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
-        drawSonic(x, y, paint, radius, variant);
+        drawSonic(x, y, radius, variant);
     }
 
-    protected void drawSonic(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawSonic(final int x, final int y, final int radius, final String variante) {
         Path path;
         int leafs = Settings.getAnzahlFlowerLeafs(1, 10);
         if (leafs % 2 == 0) {
@@ -2124,16 +2124,16 @@ public class PatternDrawer {
         outlineDrawer.draw(paint, radius, path);
     }
 
-    protected void drawSquare(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawSquare(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
-        drawSquare(x, y, paint, radius, variant);
+        drawSquare(x, y, radius, variant);
     }
 
-    protected void drawSquare(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawSquare(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2179,16 +2179,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawPillow(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawPillow(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 12);
             variant = "V" + nr;
         }
-        drawPillow(x, y, paint, radius, variant);
+        drawPillow(x, y, radius, variant);
     }
 
-    protected void drawPillow(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawPillow(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2250,16 +2250,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawChess(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawChess(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 7);
             variant = "V" + nr;
         }
-        drawChess(x, y, paint, radius, variant);
+        drawChess(x, y, radius, variant);
     }
 
-    protected void drawChess(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawChess(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2303,16 +2303,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawXmas(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawXmas(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 1);
             variant = "V" + nr;
         }
-        drawXmas(x, y, paint, radius, variant);
+        drawXmas(x, y, radius, variant);
     }
 
-    protected void drawXmas(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawXmas(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2331,7 +2331,7 @@ public class PatternDrawer {
     // Bubble
     // #########################################################################################
 
-    private void drawBubble(final int x, final int y, final Paint paint, final int radius) {
+    private void drawBubble(final int x, final int y, final int radius) {
         // Bubble
         final Path path = new CirclePath(new PointF(x, y), radius, radius / 2, true, CIRCLE_STYLE.CIRCLE);
         bitmapCanvas.drawCircle(x, y, radius, paint);
@@ -2342,16 +2342,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawSmiley(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawSmiley(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 2);
             variant = "V" + nr;
         }
-        drawSmiley(x, y, paint, radius, variant);
+        drawSmiley(x, y, radius, variant);
     }
 
-    protected void drawSmiley(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawSmiley(final int x, final int y, final int radius, final String variante) {
         final Path path;
         switch (variante) {
             default:
@@ -2373,16 +2373,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawPacman(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawPacman(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 2);
             variant = "V" + nr;
         }
-        drawPacman(x, y, paint, radius, variant);
+        drawPacman(x, y, radius, variant);
     }
 
-    protected void drawPacman(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawPacman(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2404,16 +2404,16 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawHeart(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawHeart(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 6);
             variant = "V" + nr;
         }
-        drawHeart(x, y, paint, radius, variant);
+        drawHeart(x, y, radius, variant);
     }
 
-    protected void drawHeart(final int x, final int y, final Paint paint, final int radius, final String variante) {
+    protected void drawHeart(final int x, final int y, final int radius, final String variante) {
         Path path;
         switch (variante) {
             default:
@@ -2451,18 +2451,17 @@ public class PatternDrawer {
     // #########################################################################################
     // ----------------
     // #########################################################################################
-    protected void drawStar(final int x, final int y, final Paint paint, final int radius) {
+    protected void drawStar(final int x, final int y, final int radius) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
             final int nr = Randomizer.getRandomInt(0, 4);
             variant = "V" + nr;
         }
         final int arms = Settings.getAnzahlFlowerLeafs(5, 10);
-        drawStar(x, y, paint, radius, variant, arms);
+        drawStar(x, y, radius, variant, arms);
     }
 
-    protected void drawStar(final int x, final int y, final Paint paint, final int radius, final String variante,
-            final int arms) {
+    protected void drawStar(final int x, final int y, final int radius, final String variante, final int arms) {
         Path path;
         switch (variante) {
             default:
