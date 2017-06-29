@@ -5,8 +5,8 @@
     android:versionName="5.1" >
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="23" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="25" />
 
     <!-- For downloading Settings from Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
