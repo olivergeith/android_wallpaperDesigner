@@ -44,9 +44,9 @@ public class SplatterPath extends Path {
 
   private void drawCloud(final PointF center, final float radius) {
     for (int i = 0; i < 15; i++) {
-      final float x = center.x + Randomizer.getRandomFloat(-radius / 2, radius / 2);
-      final float y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
-      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.4f);
+      final float x = center.x + Randomizer.getRandomFloat(-radius * 0.7f, radius * 0.7f);
+      final float y = center.y + Randomizer.getRandomFloat(-radius * 0.7f, radius * 0.7f);
+      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.5f);
       final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true,
           CIRCLE_STYLE.CIRCLE);
       op(c, Op.UNION);
@@ -55,9 +55,9 @@ public class SplatterPath extends Path {
 
   private void drawSquares(final PointF center, final float radius) {
     for (int i = 0; i < 8; i++) {
-      final float x = center.x + Randomizer.getRandomFloat(-radius / 2, radius / 2);
-      final float y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
-      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.4f);
+      final float x = center.x + Randomizer.getRandomFloat(-radius * 0.7f, radius * 0.7f);
+      final float y = center.y + Randomizer.getRandomFloat(-radius * 0.7f, radius * 0.7f);
+      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.5f);
       // final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true,
       // CIRCLE_STYLE.CIRCLE);
       final Path c = new SquarePath(new PointF(x, y), circleRadius, true, SQUARE_STYLE.NORMAL, Direction.CW);
@@ -69,7 +69,7 @@ public class SplatterPath extends Path {
     for (int i = 0; i < 15; i++) {
       final float x = center.x + Randomizer.getRandomFloat(-radius / 2, radius / 2);
       final float y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
-      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.4f);
+      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.5f);
       final Path c;
       if (Randomizer.getRandomInt(0, 10) > 3) {
         c = new VirusPath(new PointF(x, y), circleRadius, true);
