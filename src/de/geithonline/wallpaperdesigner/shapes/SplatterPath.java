@@ -4,13 +4,14 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.Rotator;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class SplatterPath extends Path {
 
   public enum SPLATTER_TYPE {
-    Cloud, Drop, Bacteria;
+    Cloud, Drop, Bacteria, Square;
   }
 
   /**
@@ -34,6 +35,9 @@ public class SplatterPath extends Path {
     case Bacteria:
       drawBacteria(center, radius);
       break;
+    case Square:
+      drawSquares(center, radius);
+      break;
     }
 
   }
@@ -43,7 +47,20 @@ public class SplatterPath extends Path {
       final float x = center.x + Randomizer.getRandomFloat(-radius / 2, radius / 2);
       final float y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
       final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.4f);
-      final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true, CIRCLE_STYLE.CIRCLE);
+      final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true,
+          CIRCLE_STYLE.CIRCLE);
+      op(c, Op.UNION);
+    }
+  }
+
+  private void drawSquares(final PointF center, final float radius) {
+    for (int i = 0; i < 8; i++) {
+      final float x = center.x + Randomizer.getRandomFloat(-radius / 2, radius / 2);
+      final float y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
+      final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.4f);
+      // final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true,
+      // CIRCLE_STYLE.CIRCLE);
+      final Path c = new SquarePath(new PointF(x, y), circleRadius, true, SQUARE_STYLE.NORMAL, Direction.CW);
       op(c, Op.UNION);
     }
   }

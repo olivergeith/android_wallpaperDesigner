@@ -1057,7 +1057,7 @@ public class PatternDrawer {
   protected void drawSplatter(final int x, final int y, final int radius) {
     String variant = Settings.getSelectedPatternVariant();
     if (variant.equalsIgnoreCase("Mixed")) {
-      final int nr = Randomizer.getRandomInt(0, 10);
+      final int nr = Randomizer.getRandomInt(0, 4);
       variant = "V" + nr;
     }
     drawSplatter(x, y, radius, variant);
@@ -1078,6 +1078,10 @@ public class PatternDrawer {
     case "V3":
     case "Bacteria":
       path = new SplatterPath(new PointF(x, y), radius, getFilledBoolean(), SPLATTER_TYPE.Bacteria);
+      break;
+    case "V4":
+    case "Square":
+      path = new SplatterPath(new PointF(x, y), radius, getFilledBoolean(), SPLATTER_TYPE.Square);
       break;
     }
     PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
