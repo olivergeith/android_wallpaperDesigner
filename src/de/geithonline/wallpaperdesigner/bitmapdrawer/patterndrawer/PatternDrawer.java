@@ -138,10 +138,12 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
+import de.geithonline.wallpaperdesigner.shapes.composed.RocketCloudPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -1417,7 +1419,12 @@ public class PatternDrawer {
       drawQualle(x, y, radius, "V3", getFilledBoolean());
       break;
     case "Experiemental":
-
+      final ComposedPath path = new RocketCloudPath(new PointF(x, y), radius, bHeight);
+      for (final Path p : path.getPathElements()) {
+        bitmapCanvas.drawPath(p, paint);
+        // glossyDrawer.draw(x, y, paint, radius, p);
+        // outlineDrawer.draw(paint, radius, p);
+      }
       break;
     }
   }
