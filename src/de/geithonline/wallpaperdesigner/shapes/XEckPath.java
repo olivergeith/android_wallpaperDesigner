@@ -1,9 +1,14 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Path;
 import android.graphics.PointF;
 
 public class XEckPath extends Path {
+
+	public List<PointF> points = new ArrayList<>();
 
 	/**
 	 * @param ecken
@@ -21,6 +26,7 @@ public class XEckPath extends Path {
 			final PointF p = new PointF();
 			p.x = (float) (center.x + Math.cos(i * angle + rotate) * r);
 			p.y = (float) (center.y + Math.sin(i * angle + rotate) * r);
+			points.add(p);
 			if (i == 0) {
 				moveTo(p.x, p.y);
 			} else {

@@ -10,6 +10,11 @@ public class CirclePath extends Path {
 		CIRCLE, HALF_CIRCLE;
 	}
 
+	public CirclePath(final PointF center, final float radius) {
+		drawRingV2(center, radius, 0, true);
+
+	}
+
 	public CirclePath(final PointF center, final float rOuter, final float rInner, final boolean filled, final CIRCLE_STYLE style) {
 		super();
 		switch (style) {
