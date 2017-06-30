@@ -11,12 +11,22 @@ public class OvalPath extends Path {
 		NORMAL, RANDOM_WIDTH, RANDOM;
 	}
 
+	private RectF oval;
+
+	public RectF getOval() {
+		return oval;
+	}
+
 	public OvalPath(final PointF center, final float radiusW, final float radiusH, final Direction dir) {
 		drawOval(center, radiusW, radiusH, dir);
 	}
 
-	public OvalPath(final PointF center, final float radiusW, final float radiusH, final Direction dir,
-			final OVAL_TYPE type) {
+	public OvalPath(final RectF oval, final Direction dir) {
+		this.oval = oval;
+		addOval(oval, dir);
+	}
+
+	public OvalPath(final PointF center, final float radiusW, final float radiusH, final Direction dir, final OVAL_TYPE type) {
 		switch (type) {
 		default:
 		case NORMAL:
@@ -32,7 +42,7 @@ public class OvalPath extends Path {
 	}
 
 	private void drawOval(final PointF center, final float radiusW, final float radiusH, final Direction dir) {
-		final RectF oval = new RectF();
+		oval = new RectF();
 		oval.left = center.x - radiusW;
 		oval.right = center.x + radiusW;
 		oval.top = center.y - radiusH;
@@ -41,7 +51,7 @@ public class OvalPath extends Path {
 	}
 
 	private void drawOvalRandomWidth(final PointF center, final float radiusW, final float radiusH, final Direction dir) {
-		final RectF oval = new RectF();
+		oval = new RectF();
 		final float rw = Randomizer.getRandomFloat(radiusW / 10, radiusW);
 		oval.left = center.x - rw;
 		oval.right = center.x + rw;
@@ -51,7 +61,7 @@ public class OvalPath extends Path {
 	}
 
 	private void drawOvalRandom(final PointF center, final float radiusW, final float radiusH, final Direction dir) {
-		final RectF oval = new RectF();
+		oval = new RectF();
 		float rw = radiusW;
 		float rh = radiusH;
 		// entweder die breite oder die Höhe randomizen
