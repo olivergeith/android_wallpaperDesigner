@@ -4,13 +4,14 @@ package de.geithonline.wallpaperdesigner.shapes;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 
 public class LogoPathHandys extends Path {
 
     public enum HANDY_STYLE {
-        NEXUS_V1, NEXUS_V2, ONEPLUSONE_V1, ONEPLUSONE_V2, NEXUS_V3, LG_V1, LG_V2, Moto
+        NEXUS_V1, NEXUS_V2, ONEPLUSONE_V1, ONEPLUSONE_V2, NEXUS_V3, LG_V1, LG_V2, Moto, MotoInvert
     }
 
     public LogoPathHandys(final PointF center, final float radius, final HANDY_STYLE variante) {
@@ -41,7 +42,17 @@ public class LogoPathHandys extends Path {
             case Moto:
                 drawMoto(center, radius);
                 break;
+            case MotoInvert:
+                drawMotoInvert(center, radius);
+                break;
         }
+
+    }
+
+    private void drawMotoInvert(final PointF center, final float radius) {
+        drawMoto(center, radius * 0.65f);
+        final Path path = new CirclePath(center, radius, 0, true, CIRCLE_STYLE.CIRCLE);
+        op(path, Op.REVERSE_DIFFERENCE);
 
     }
 
@@ -57,14 +68,14 @@ public class LogoPathHandys extends Path {
         path = new SimpleTrianglePath(pos, 4 * raster, 8 * raster);
         op(path, Op.UNION);
 
-        pos.x = center.x - 2.5f * raster;
+        pos.x = center.x - 2.6f * raster;
         pos.y = center.y + 8.5f * raster;
-        path = new OvalPath(pos, 3.3f * raster, 6 * raster, Direction.CW);
+        path = new OvalPath(pos, 3.2f * raster, 6 * raster, Direction.CW);
         op(path, Op.DIFFERENCE);
 
-        pos.x = center.x + 2.5f * raster;
+        pos.x = center.x + 2.6f * raster;
         pos.y = center.y + 8.5f * raster;
-        path = new OvalPath(pos, 3.3f * raster, 6 * raster, Direction.CW);
+        path = new OvalPath(pos, 3.2f * raster, 6 * raster, Direction.CW);
         op(path, Op.DIFFERENCE);
     }
 

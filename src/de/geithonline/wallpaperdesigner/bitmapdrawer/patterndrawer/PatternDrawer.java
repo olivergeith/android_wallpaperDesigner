@@ -611,6 +611,9 @@ public class PatternDrawer {
             case "Moto":
                 path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.Moto);
                 break;
+            case "Moto (inverted)":
+                path = new LogoPathHandys(new PointF(x, y), radius, HANDY_STYLE.MotoInvert);
+                break;
         }
         PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
         bitmapCanvas.drawPath(path, paint);

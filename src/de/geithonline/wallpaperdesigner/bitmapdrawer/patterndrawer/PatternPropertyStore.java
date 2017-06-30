@@ -78,7 +78,7 @@ public class PatternPropertyStore {
                 new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3",
                         "Resurrection Remix V4", "Resurrection Remix V5", "Resurrection Remix V6", "ElementalX Kernel",
                         "Peace Sign", "Weed Sign", "Weed Sign V2", "Nexus V1", "Nexus V2", "Nexus V3", "Oneplus One V1",
-                        "Oneplus One V2", "LG V1", "LG V2", "Quake", "Moto" }));
+                        "Oneplus One V2", "LG V1", "LG V2", "Quake", "Moto", "Moto (inverted)" }));
 
         patternProperties.put("Mandala", new PatternProperties(true, true, false, false, true, false, //
                 new CharSequence[] { "V1", "V2", "V3", "V4", "Mixed" }));
