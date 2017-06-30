@@ -151,7 +151,7 @@ public class Settings {
 	}
 
 	public enum GLOSSY_GLOW_STYLE {
-		CENTER, HORIZONTAL, VERTICAL, VERTICAL_WHITE;
+		CENTER, HORIZONTAL, VERTICAL, VERTICAL_WHITE, VERTICAL_RAINBOW;
 
 		public static GLOSSY_GLOW_STYLE enumForName(final String name) {
 			switch (name) {
@@ -162,6 +162,8 @@ public class Settings {
 				return GLOSSY_GLOW_STYLE.HORIZONTAL;
 			case "Vertical":
 				return GLOSSY_GLOW_STYLE.VERTICAL;
+			case "Vertical Rainbow":
+				return GLOSSY_GLOW_STYLE.VERTICAL_RAINBOW;
 			case "Vertical (White)":
 				return GLOSSY_GLOW_STYLE.VERTICAL_WHITE;
 			}

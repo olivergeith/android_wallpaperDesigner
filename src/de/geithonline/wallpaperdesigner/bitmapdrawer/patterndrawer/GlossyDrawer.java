@@ -55,6 +55,9 @@ public class GlossyDrawer {
 		case VERTICAL:
 			setupPaintShaderVerticalGlow(x, y, paint, radius);
 			break;
+		case VERTICAL_RAINBOW:
+			setupPaintShaderVerticalRainbowGlow(x, y, paint, radius);
+			break;
 		case VERTICAL_WHITE:
 			setupPaintShaderVerticalWhiteGlow2(x, y, paint, radius);
 			break;
@@ -145,6 +148,24 @@ public class GlossyDrawer {
 		paint.setShadowLayer(0, 0, 0, 0);
 		final int colors[] = { colorDarker, colorBrighter, colorDarker };
 		final float dists[] = { 0f, 0.5f, 1f };
+		paint.setShader(new LinearGradient(//
+				x, //
+				y - radius, //
+				x, //
+				y + radius, //
+				colors, dists, Shader.TileMode.CLAMP));
+	}
+
+	private static void setupPaintShaderVerticalRainbowGlow(final int x, final int y, final Paint paint, final int radius) {
+		paint.setShadowLayer(0, 0, 0, 0);
+		final int color1 = Color.argb(64, 255, 0, 0);
+		final int color2 = ColorHelper.adjustHSV(color1, 60, 0, 0);
+		final int color3 = ColorHelper.adjustHSV(color1, 120, 0, 0);
+		final int color4 = ColorHelper.adjustHSV(color1, 180, 0, 0);
+		final int color5 = ColorHelper.adjustHSV(color1, 240, 0, 0);
+		final int color6 = ColorHelper.adjustHSV(color1, 300, 0, 0);
+		final int colors[] = { color1, color2, color3, color4, color5, color6 };
+		final float dists[] = { 0f, 0.2f, 0.4f, 0.6f, 0.8f, 1f };
 		paint.setShader(new LinearGradient(//
 				x, //
 				y - radius, //
