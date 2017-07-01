@@ -46,7 +46,7 @@ public class TrailHeartPath extends Path {
 			pos.x = center.x + Randomizer.getRandomFloat(-trailRadius / 2, +trailRadius / 2);
 			pos.y = 5 + distance * trailRadius * i;
 			final float randRadius = Randomizer.getRandomFloat(trailRadius / 2, trailRadius * 2);
-			if (Randomizer.getRandomInt(0, 5) != 1) {
+			if (Randomizer.getRandomInt(1, 5) != 1) {
 				final Path p = new HeartPath(pos, randRadius, false, HEART_SHAPE.Lovely);
 				PathHelper.rotatePath(pos.x, pos.y, p, Randomizer.getRandomFloat(-19, +19));
 				trailPath.addPath(p);
@@ -68,7 +68,7 @@ public class TrailHeartPath extends Path {
 			pos.x = center.x + (float) (trailRadius * 2 * Math.sin(angle));// Randomizer.getRandomFloat(-trailRadius / 2, +trailRadius / 2);
 			pos.y = 5 + distance * trailRadius * i;
 			final float randRadius = Randomizer.getRandomFloat(trailRadius / 2, trailRadius * 2);
-			if (Randomizer.getRandomInt(0, 5) != 1) {
+			if (Randomizer.getRandomInt(1, 5) != 1) {
 				final Path p = new HeartPath(pos, randRadius, false, HEART_SHAPE.Lovely);
 				PathHelper.rotatePath(pos.x, pos.y, p, Randomizer.getRandomFloat(-19, +19));
 				trailPath.addPath(p);

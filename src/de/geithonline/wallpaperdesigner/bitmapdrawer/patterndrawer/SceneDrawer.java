@@ -66,7 +66,7 @@ public class SceneDrawer {
 		PathHelper.rotatePath(x, y, qualle, 90);
 
 		for (int i = 0; i < 5; i++) {
-			final int repeats = 1 + Randomizer.getRandomInt(0, 4);
+			final int repeats = Randomizer.getRandomInt(1, 4);
 			final float amplitude = radius * 0.4f;
 			final PointF c = new PointF(x + radius / 4, y);
 			qualle.addPath(new SinusPath(c, radius * 0.75f, repeats, amplitude));

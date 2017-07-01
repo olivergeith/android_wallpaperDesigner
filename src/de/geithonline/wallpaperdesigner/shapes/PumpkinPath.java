@@ -33,7 +33,7 @@ public class PumpkinPath extends Path {
 			drawPumpkin(center, radius, AUGE_DREIECKIG_V2, MUND_ZACKIG);
 			break;
 		case RANDOM:
-			drawPumpkin(center, radius, Randomizer.getRandomInt(0, 3), Randomizer.getRandomInt(0, 2));
+			drawPumpkin(center, radius, Randomizer.getRandomInt(1, 3), Randomizer.getRandomInt(1, 2));
 			break;
 		}
 

@@ -40,10 +40,9 @@ public class FlippedPath extends Path {
 		final float raster = radius / 1;
 
 		if (!filled) {
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CCW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CCW);
 		}
-		final int i = Randomizer.getRandomInt(0, 4);
+		final int i = Randomizer.getRandomInt(1, 4);
 		Log.i("int", "=" + i);
 		switch (i) {
 		default:
@@ -78,10 +77,9 @@ public class FlippedPath extends Path {
 		final float raster = radius / 1;
 
 		if (!filled) {
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CCW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CCW);
 		}
-		switch (Randomizer.getRandomInt(0, 4)) {
+		switch (Randomizer.getRandomInt(1, 4)) {
 		default:
 		case 1:
 			moveTo(center.x - 0 * raster, center.y - 0 * raster);
@@ -114,8 +112,7 @@ public class FlippedPath extends Path {
 		final float raster = radius / 1;
 
 		if (!filled) {
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CCW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CCW);
 		}
 
 		final Path p = new Path();
@@ -125,7 +122,7 @@ public class FlippedPath extends Path {
 				center.x - 1 * raster, center.y + 1 * raster);
 		p.close();
 
-		final int drehwinkel = Randomizer.getRandomInt(-1, 3) * 90;
+		final int drehwinkel = Randomizer.getRandomInt(0, 3) * 90;
 		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
@@ -134,8 +131,7 @@ public class FlippedPath extends Path {
 		final float raster = radius / 1;
 
 		if (!filled) {
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CCW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CCW);
 		}
 
 		final Path p = new Path();
@@ -145,7 +141,7 @@ public class FlippedPath extends Path {
 				center.x - 1 * raster, center.y + 1 * raster);
 		p.close();
 
-		final int drehwinkel = Randomizer.getRandomInt(-1, 3) * 90;
+		final int drehwinkel = Randomizer.getRandomInt(0, 3) * 90;
 		PathHelper.rotatePath(center.x, center.y, p, drehwinkel);
 		addPath(p);
 	}
@@ -154,26 +150,21 @@ public class FlippedPath extends Path {
 		final float raster = radius / 1;
 
 		if (!filled) {
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CCW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CCW);
 		}
-		switch (Randomizer.getRandomInt(0, 4)) {
+		switch (Randomizer.getRandomInt(1, 4)) {
 		default:
 		case 1:
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 0 * raster, center.y + 0 * raster,
-					Direction.CW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 0 * raster, center.y + 0 * raster, Direction.CW);
 			break;
 		case 2:
-			addRect(center.x - 0 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y - 0 * raster,
-					Direction.CW);
+			addRect(center.x - 0 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y - 0 * raster, Direction.CW);
 			break;
 		case 3:
-			addRect(center.x - 0 * raster, center.y - 0 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CW);
+			addRect(center.x - 0 * raster, center.y - 0 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CW);
 			break;
 		case 4:
-			addRect(center.x - 1 * raster, center.y - 0 * raster, center.x + 0 * raster, center.y + 1 * raster,
-					Direction.CW);
+			addRect(center.x - 1 * raster, center.y - 0 * raster, center.x + 0 * raster, center.y + 1 * raster, Direction.CW);
 			break;
 		}
 	}
@@ -182,26 +173,21 @@ public class FlippedPath extends Path {
 		final float raster = radius / 1;
 
 		if (!filled) {
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CCW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CCW);
 		}
-		switch (Randomizer.getRandomInt(0, 4)) {
+		switch (Randomizer.getRandomInt(1, 4)) {
 		default:
 		case 1:
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 0 * raster,
-					Direction.CW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 0 * raster, Direction.CW);
 			break;
 		case 2:
-			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 0 * raster, center.y + 1 * raster,
-					Direction.CW);
+			addRect(center.x - 1 * raster, center.y - 1 * raster, center.x + 0 * raster, center.y + 1 * raster, Direction.CW);
 			break;
 		case 3:
-			addRect(center.x - 1 * raster, center.y - 0 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CW);
+			addRect(center.x - 1 * raster, center.y - 0 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CW);
 			break;
 		case 4:
-			addRect(center.x - 0 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster,
-					Direction.CW);
+			addRect(center.x - 0 * raster, center.y - 1 * raster, center.x + 1 * raster, center.y + 1 * raster, Direction.CW);
 			break;
 		}
 	}

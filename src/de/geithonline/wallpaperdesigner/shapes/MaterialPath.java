@@ -14,59 +14,58 @@ public class MaterialPath extends Path {
 		ROTATING_ARCHES_RANDOM_SIZE, ROTATING_QUARTER_ARCHES, ROTATING_HALF_ARCHES, ROTATING_THREE_QUARTER_ARCHES, STIPE_V2, STIPE_V3, HALF_STIPE_V2, HALF_STIPE_V3, PYRAMIDE_SKYLINE;
 	}
 
-	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth,
-			final int bHeight, final MATERIAL_TYPE type) {
+	public MaterialPath(final Point center, final float radius, final boolean filled, final int bWidth, final int bHeight, final MATERIAL_TYPE type) {
 		super();
 		switch (type) {
-			default:
-			case STIPE:
-				drawStripe(center, radius, bWidth, bHeight);
-				break;
-			case STIPE_V2:
-				drawStripeV2(center, radius, bWidth, bHeight, 30);
-				break;
-			case STIPE_V3:
-				drawStripeV3(center, radius, bWidth, bHeight, 45);
-				break;
-			case HALF_STIPE:
-				drawHalfStripe(center, radius, bWidth, bHeight);
-				break;
-			case HALF_STIPE_V2:
-				drawHalfStripe2(center, radius, bWidth, bHeight, 45);
-				break;
-			case HALF_STIPE_V3:
-				drawHalfStripe2(center, radius, bWidth, bHeight, 30);
-				break;
-			case ARC1:
-				drawArcV1(center, radius, bWidth, bHeight);
-				break;
-			case ARC2:
-				drawArcV2(center, radius, bWidth, bHeight);
-				break;
-			case ARC3:
-				drawArcV3(center, radius, bWidth, bHeight);
-				break;
-			case SKYLINE:
-				drawSkyline(center, radius, bWidth, bHeight);
-				break;
-			case PYRAMIDE_SKYLINE:
-				drawPyramideSkyline(center, radius, bWidth, bHeight);
-				break;
-			case EDGY_BARS:
-				drawEdgyBars(center, radius, bWidth, bHeight);
-				break;
-			case ROTATING_BARS:
-				drawRotatingBars(center, radius, bWidth, bHeight);
-				break;
-			case ROTATING_TRIANGLES:
-				drawRotatingTriangles(center, radius, bWidth, bHeight);
-				break;
-			case ROTATING_ARCHES_RANDOM_SIZE:
-			case ROTATING_QUARTER_ARCHES:
-			case ROTATING_HALF_ARCHES:
-			case ROTATING_THREE_QUARTER_ARCHES:
-				drawRotatingArches(center, radius, bWidth, bHeight, type);
-				break;
+		default:
+		case STIPE:
+			drawStripe(center, radius, bWidth, bHeight);
+			break;
+		case STIPE_V2:
+			drawStripeV2(center, radius, bWidth, bHeight, 30);
+			break;
+		case STIPE_V3:
+			drawStripeV3(center, radius, bWidth, bHeight, 45);
+			break;
+		case HALF_STIPE:
+			drawHalfStripe(center, radius, bWidth, bHeight);
+			break;
+		case HALF_STIPE_V2:
+			drawHalfStripe2(center, radius, bWidth, bHeight, 45);
+			break;
+		case HALF_STIPE_V3:
+			drawHalfStripe2(center, radius, bWidth, bHeight, 30);
+			break;
+		case ARC1:
+			drawArcV1(center, radius, bWidth, bHeight);
+			break;
+		case ARC2:
+			drawArcV2(center, radius, bWidth, bHeight);
+			break;
+		case ARC3:
+			drawArcV3(center, radius, bWidth, bHeight);
+			break;
+		case SKYLINE:
+			drawSkyline(center, radius, bWidth, bHeight);
+			break;
+		case PYRAMIDE_SKYLINE:
+			drawPyramideSkyline(center, radius, bWidth, bHeight);
+			break;
+		case EDGY_BARS:
+			drawEdgyBars(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_BARS:
+			drawRotatingBars(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_TRIANGLES:
+			drawRotatingTriangles(center, radius, bWidth, bHeight);
+			break;
+		case ROTATING_ARCHES_RANDOM_SIZE:
+		case ROTATING_QUARTER_ARCHES:
+		case ROTATING_HALF_ARCHES:
+		case ROTATING_THREE_QUARTER_ARCHES:
+			drawRotatingArches(center, radius, bWidth, bHeight, type);
+			break;
 		}
 	}
 
@@ -152,8 +151,7 @@ public class MaterialPath extends Path {
 		flip = !flip;
 	}
 
-	private void drawStripeV2(final Point center, final float radius, final int bWidth, final int bHeight,
-			final int rotation) {
+	private void drawStripeV2(final Point center, final float radius, final int bWidth, final int bHeight, final int rotation) {
 		int drehwinkel = rotation;
 		final float rectLength = bWidth * 1.5f;
 		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + rectLength);
@@ -171,8 +169,7 @@ public class MaterialPath extends Path {
 
 	private static int fli = 0;
 
-	private void drawStripeV3(final Point center, final float radius, final int bWidth, final int bHeight,
-			final int rotation) {
+	private void drawStripeV3(final Point center, final float radius, final int bWidth, final int bHeight, final int rotation) {
 		int drehwinkel = rotation;
 		final float rectLength = bWidth * 1.3f;
 		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + rectLength);
@@ -218,25 +215,24 @@ public class MaterialPath extends Path {
 		addPath(p);
 	}
 
-	private void drawHalfStripe2(final Point center, final float radius, final int bWidth, final int bHeight,
-			final int rotation) {
+	private void drawHalfStripe2(final Point center, final float radius, final int bWidth, final int bHeight, final int rotation) {
 		int drehwinkel = 0;
 		final float rectLength = bHeight * 2f;
 		final RectF rect = new RectF(center.x - radius, center.y - rectLength, center.x + radius, center.y + 1 * radius);
 		switch (flippy) {
-			default:
-			case 0:
-				drehwinkel = 0 + rotation;
-				break;
-			case 1:
-				drehwinkel = 90 + rotation;
-				break;
-			case 2:
-				drehwinkel = 180 + rotation;
-				break;
-			case 3:
-				drehwinkel = 270 + rotation;
-				break;
+		default:
+		case 0:
+			drehwinkel = 0 + rotation;
+			break;
+		case 1:
+			drehwinkel = 90 + rotation;
+			break;
+		case 2:
+			drehwinkel = 180 + rotation;
+			break;
+		case 3:
+			drehwinkel = 270 + rotation;
+			break;
 		}
 
 		flippy++;
@@ -314,8 +310,7 @@ public class MaterialPath extends Path {
 		addPath(p);
 	}
 
-	private void drawRotatingArches(final Point center, final float radius, final int bWidth, final int bHeight,
-			final MATERIAL_TYPE arctype) {
+	private void drawRotatingArches(final Point center, final float radius, final int bWidth, final int bHeight, final MATERIAL_TYPE arctype) {
 		if (center.x == bWidth / 2 && center.y == bHeight / 2) {
 			return;
 		}
@@ -323,22 +318,22 @@ public class MaterialPath extends Path {
 		int rotateWinkel = 0;
 		final float archWinkel;
 		switch (arctype) {
-			default:
-			case ROTATING_ARCHES_RANDOM_SIZE:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.1f, (float) Math.PI * 0.9f);
-				break;
-			case ROTATING_QUARTER_ARCHES:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.15f, (float) Math.PI * 0.33f);
-				// archWinkel = (float) Math.PI * 0.25f;
-				break;
-			case ROTATING_HALF_ARCHES:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.4f, (float) Math.PI * 0.6f);
-				// archWinkel = (float) Math.PI * 0.5f;
-				break;
-			case ROTATING_THREE_QUARTER_ARCHES:
-				archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.65f, (float) Math.PI * 0.85f);
-				// archWinkel = (float) Math.PI * 0.75f;
-				break;
+		default:
+		case ROTATING_ARCHES_RANDOM_SIZE:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.1f, (float) Math.PI * 0.9f);
+			break;
+		case ROTATING_QUARTER_ARCHES:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.15f, (float) Math.PI * 0.33f);
+			// archWinkel = (float) Math.PI * 0.25f;
+			break;
+		case ROTATING_HALF_ARCHES:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.4f, (float) Math.PI * 0.6f);
+			// archWinkel = (float) Math.PI * 0.5f;
+			break;
+		case ROTATING_THREE_QUARTER_ARCHES:
+			archWinkel = Randomizer.getRandomFloat((float) Math.PI * 0.65f, (float) Math.PI * 0.85f);
+			// archWinkel = (float) Math.PI * 0.75f;
+			break;
 		}
 
 		final float archWinkelDeg = (float) (archWinkel * 180 / Math.PI);
@@ -459,7 +454,7 @@ public class MaterialPath extends Path {
 	private static int flippy = initFlippy();
 
 	public static int initFlippy() {
-		final int i = Randomizer.getRandomInt(-1, 3);
+		final int i = Randomizer.getRandomInt(0, 3);
 		Log.i("Flippy", "init with:" + i);
 		return i;
 	}
@@ -472,23 +467,23 @@ public class MaterialPath extends Path {
 		final Point centerOL = new Point(0, 0);
 		int circleRadius = 0;
 		switch (flippy) {
-			default:
-			case 0:
-				circleCenter = centerUL;
-				circleRadius = center.x;
-				break;
-			case 1:
-				circleCenter = centerUR;
-				circleRadius = bWidth - center.x;
-				break;
-			case 2:
-				circleCenter = centerOR;
-				circleRadius = center.x;
-				break;
-			case 3:
-				circleCenter = centerOL;
-				circleRadius = bWidth - center.x;
-				break;
+		default:
+		case 0:
+			circleCenter = centerUL;
+			circleRadius = center.x;
+			break;
+		case 1:
+			circleCenter = centerUR;
+			circleRadius = bWidth - center.x;
+			break;
+		case 2:
+			circleCenter = centerOR;
+			circleRadius = center.x;
+			break;
+		case 3:
+			circleCenter = centerOL;
+			circleRadius = bWidth - center.x;
+			break;
 		}
 
 		addCircle(circleCenter.x, circleCenter.y, circleRadius + radius, Direction.CW);

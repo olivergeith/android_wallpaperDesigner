@@ -633,7 +633,7 @@ public class Settings {
 	// Wallpater Size
 	public static int getAnzahlFlowerLeafs(final int randomMin, final int randomMax) {
 		if (isRandomLeafCount()) {
-			return Randomizer.getRandomInt(randomMin - 1, randomMax);
+			return Randomizer.getRandomInt(randomMin, randomMax);
 		}
 		return readIntegerPref(KEY_NUMBER_OF_LEAFS, 5);
 	}

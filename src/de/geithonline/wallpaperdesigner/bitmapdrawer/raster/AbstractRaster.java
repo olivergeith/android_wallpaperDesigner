@@ -71,7 +71,7 @@ public abstract class AbstractRaster {
 		if (size == 0) {
 			return new Point(0, 0);
 		}
-		final int location = Randomizer.getRandomInt(-1, size - 1);
+		final int location = Randomizer.getRandomInt(0, size - 1);
 		final Point p = points.remove(location);
 		return p;
 	}

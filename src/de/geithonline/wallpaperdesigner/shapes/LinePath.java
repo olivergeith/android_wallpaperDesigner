@@ -116,7 +116,7 @@ public class LinePath extends Path {
 			}
 			p.lineTo(x, y);
 			// rekursion
-			if (i == Randomizer.getRandomInt(0, anzahl)) {
+			if (i == Randomizer.getRandomInt(1, anzahl)) {
 				getBlitzArm(anzahl - i, new PointF(x, y), radius - (i * radius / anzahl), Randomizer.getRandomFloat(-30, 00));
 			}
 

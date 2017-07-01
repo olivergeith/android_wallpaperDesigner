@@ -313,7 +313,7 @@ public class PatternDrawer {
 	protected void drawGearSaw(final int x, final int y, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(1, 3);
 			variante = "V" + nr;
 		}
 		drawGearSaw(x, y, radius, variante);
@@ -353,7 +353,7 @@ public class PatternDrawer {
 	protected void drawMaritim(final int x, final int y, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variante = "V" + nr;
 		}
 		drawMaritim(x, y, radius, variante);
@@ -431,10 +431,10 @@ public class PatternDrawer {
 	protected void drawGeometric(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(1, 6);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed (with Circle)")) {
-			final int nr = Randomizer.getRandomInt(0, 9);
+			final int nr = Randomizer.getRandomInt(1, 9);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Square (Mixed)")) {
 			variant = "Square (Mixed)";
@@ -508,7 +508,7 @@ public class PatternDrawer {
 	protected void drawLeafs(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		drawLeafs(x, y, radius, variant);
@@ -799,7 +799,7 @@ public class PatternDrawer {
 	protected void draw3DLongShape(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(1, 6);
 			variant = "V" + nr;
 		}
 		draw3DLongShape(x, y, radius, variant);
@@ -846,10 +846,10 @@ public class PatternDrawer {
 	protected void drawInvertable(final int x, final int y, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 9);
+			final int nr = Randomizer.getRandomInt(1, 9);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Plus-Minus")) {
-			final int nr = Randomizer.getRandomInt(4, 6);
+			final int nr = Randomizer.getRandomInt(5, 6);
 			variante = "V" + nr;
 		}
 
@@ -912,7 +912,7 @@ public class PatternDrawer {
 	protected void drawRing(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		drawRing(x, y, radius, variant);
@@ -951,7 +951,7 @@ public class PatternDrawer {
 	protected void drawSpace(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 10);
+			final int nr = Randomizer.getRandomInt(1, 10);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed Rockets")) {
 			final int nr = Randomizer.getRandomInt(0, 6);
@@ -1017,7 +1017,7 @@ public class PatternDrawer {
 	protected void drawSplatter(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 5);
+			final int nr = Randomizer.getRandomInt(1, 5);
 			variant = "V" + nr;
 		}
 		drawSplatter(x, y, radius, variant);
@@ -1060,7 +1060,7 @@ public class PatternDrawer {
 	protected void drawVirus(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 8);
+			final int nr = Randomizer.getRandomInt(1, 8);
 			variant = "V" + nr;
 		}
 
@@ -1108,7 +1108,7 @@ public class PatternDrawer {
 	protected void drawWeather(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 7);
+			final int nr = Randomizer.getRandomInt(1, 7);
 			variant = "V" + nr;
 		}
 		drawWeather(x, y, radius, variant);
@@ -1164,7 +1164,7 @@ public class PatternDrawer {
 	protected void drawPlane(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(1, 3);
 			variant = "V" + nr;
 		}
 		drawPlane(x, y, radius, variant);
@@ -1184,10 +1184,10 @@ public class PatternDrawer {
 	protected void drawFlower(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed V1-V3")) {
-			final int nr = Randomizer.getRandomInt(0, 3);
+			final int nr = Randomizer.getRandomInt(1, 3);
 			variant = "V" + nr;
 		} else if (variant.equalsIgnoreCase("Mixed V4-V5")) {
-			final int nr = Randomizer.getRandomInt(3, 5);
+			final int nr = Randomizer.getRandomInt(4, 5);
 			variant = "V" + nr;
 		}
 		drawFlower(x, y, radius, variant);
@@ -1232,7 +1232,7 @@ public class PatternDrawer {
 	protected void drawLines(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 5);
+			final int nr = Randomizer.getRandomInt(1, 5);
 			variant = "V" + nr;
 		}
 		drawLines(x, y, radius, variant);
@@ -1245,11 +1245,11 @@ public class PatternDrawer {
 		default:
 		case "V1":
 		case "Spirals":
-			path = new SpiralPath(Randomizer.getRandomInt(2, 5), new Point(x, y), radius, Randomizer.getRandomBoolean());
+			path = new SpiralPath(Randomizer.getRandomInt(3, 5), new Point(x, y), radius, Randomizer.getRandomBoolean());
 			break;
 		case "V2":
 		case "Streamers":
-			path = new LuftschlangenPath(Randomizer.getRandomInt(5, 7), new Point(x, y), radius, Randomizer.getRandomBoolean());
+			path = new LuftschlangenPath(Randomizer.getRandomInt(6, 7), new Point(x, y), radius, Randomizer.getRandomBoolean());
 			break;
 		case "V3":
 		case "Maze":
@@ -1277,7 +1277,7 @@ public class PatternDrawer {
 	protected void drawLinesDirected(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 5);
+			final int nr = Randomizer.getRandomInt(1, 5);
 			variant = "V" + nr;
 		}
 		drawLinesDirected(x, y, radius, variant);
@@ -1334,7 +1334,7 @@ public class PatternDrawer {
 		switch (variant) {
 		default:
 		case "Rain":
-			if (Randomizer.getRandomInt(0, 40) == 1) {
+			if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
 				// bubble
 				// drawGeometric(x, y, paint, radius / 3, "Hexagon");
 				drawBubble(x, y, radius / 3);
@@ -1431,7 +1431,7 @@ public class PatternDrawer {
 		}
 		// bubble tail
 		if (withBubbles) {
-			final int anzahlTails = Randomizer.getRandomInt(1, 4);
+			final int anzahlTails = Randomizer.getRandomInt(2, 4);
 			for (int i = 0; i < anzahlTails; i++) {
 				bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
 				PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
@@ -1458,7 +1458,7 @@ public class PatternDrawer {
 	protected void drawShell(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Shells Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(1, 6);
 			variant = "Shells V" + nr;
 		}
 		drawShell(x, y, radius, variant);
@@ -1503,7 +1503,7 @@ public class PatternDrawer {
 	protected void drawMandala(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		drawMandala(x, y, radius, variant);
@@ -1541,7 +1541,7 @@ public class PatternDrawer {
 	protected void drawFisch(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		drawFisch(x, y, radius, variant);
@@ -1605,7 +1605,7 @@ public class PatternDrawer {
 			drawTextAngled(x, y, radius, text);
 			break;
 		case "Random":
-			final int i = Randomizer.getRandomInt(0, 3);
+			final int i = Randomizer.getRandomInt(1, 3);
 			switch (i) {
 			default:
 			case 1:
@@ -1640,7 +1640,7 @@ public class PatternDrawer {
 		paint.setTextAlign(Align.CENTER);
 		final Path mArc = new Path();
 		final RectF oval = getRectForRadius(x, y, radius * 2);
-		mArc.addArc(oval, Randomizer.getRandomInt(0, 360), 355);
+		mArc.addArc(oval, Randomizer.getRandomInt(1, 360), 355);
 
 		bitmapCanvas.drawTextOnPath(text, mArc, 0, 0, paint);
 		outlineDrawer.drawText(paint, radius, text, mArc);
@@ -1816,16 +1816,16 @@ public class PatternDrawer {
 	protected void drawSpooky(final int x, final int y, final int radius) {
 		String variante = Settings.getSelectedPatternVariant();
 		if (variante.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 14);
+			final int nr = Randomizer.getRandomInt(1, 14);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Bats")) {
-			final int nr = Randomizer.getRandomInt(1, 5);
+			final int nr = Randomizer.getRandomInt(2, 5);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Ghosts")) {
-			final int nr = Randomizer.getRandomInt(5, 7);
+			final int nr = Randomizer.getRandomInt(6, 7);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Owls")) {
-			final int nr = Randomizer.getRandomInt(7, 11);
+			final int nr = Randomizer.getRandomInt(8, 11);
 			variante = "V" + nr;
 		} else if (variante.equalsIgnoreCase("Mixed Pumpkins")) {
 			variante = "Mixed Pumpkins";
@@ -1943,7 +1943,7 @@ public class PatternDrawer {
 	protected void drawAssorted(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 18);
+			final int nr = Randomizer.getRandomInt(1, 18);
 			variant = "V" + nr;
 		}
 		drawAssorted(x, y, radius, variant);
@@ -2050,7 +2050,7 @@ public class PatternDrawer {
 	protected void drawSonic(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		drawSonic(x, y, radius, variant);
@@ -2094,7 +2094,7 @@ public class PatternDrawer {
 	protected void drawSquare(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		drawSquare(x, y, radius, variant);
@@ -2149,7 +2149,7 @@ public class PatternDrawer {
 	protected void drawPillow(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 13);
+			final int nr = Randomizer.getRandomInt(1, 13);
 			variant = "V" + nr;
 		}
 		drawPillow(x, y, radius, variant);
@@ -2224,7 +2224,7 @@ public class PatternDrawer {
 	protected void drawChess(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 7);
+			final int nr = Randomizer.getRandomInt(1, 7);
 			variant = "V" + nr;
 		}
 		drawChess(x, y, radius, variant);
@@ -2236,35 +2236,35 @@ public class PatternDrawer {
 		default:
 		case "V1":
 		case "Square":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Square);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Square);
 			break;
 		case "V2":
 		case "Star":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Star);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Star);
 			break;
 		case "V3":
 		case "Circle":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Circle);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Circle);
 			break;
 		case "V4":
 		case "Pillow":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Pillow);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Pillow);
 			break;
 		case "V5":
 		case "Heart":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Heart);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Heart);
 			break;
 		case "V6":
 		case "Arrow":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Arrow);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Arrow);
 			break;
 		case "V7":
 		case "Triangle":
-			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(0, 4), BRETT_SHAPE.Triangle);
+			path = new SchachbrettPath(new PointF(x, y), radius, Randomizer.getRandomInt(1, 4), BRETT_SHAPE.Triangle);
 			break;
 		}
 		if (Settings.isRandomRotate()) {
-			PathHelper.rotatePath(x, y, path, 90 * Randomizer.getRandomInt(-1, 4));
+			PathHelper.rotatePath(x, y, path, 90 * Randomizer.getRandomInt(0, 4));
 		}
 		bitmapCanvas.drawPath(path, paint);
 		outlineDrawer.draw(paint, radius, path);
@@ -2276,7 +2276,7 @@ public class PatternDrawer {
 	protected void drawXmas(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 1);
+			final int nr = Randomizer.getRandomInt(1, 1);
 			variant = "V" + nr;
 		}
 		drawXmas(x, y, radius, variant);
@@ -2315,7 +2315,7 @@ public class PatternDrawer {
 	protected void drawSmiley(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 2);
+			final int nr = Randomizer.getRandomInt(1, 2);
 			variant = "V" + nr;
 		}
 		drawSmiley(x, y, radius, variant);
@@ -2346,7 +2346,7 @@ public class PatternDrawer {
 	protected void drawPacman(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 2);
+			final int nr = Randomizer.getRandomInt(1, 2);
 			variant = "V" + nr;
 		}
 		drawPacman(x, y, radius, variant);
@@ -2377,7 +2377,7 @@ public class PatternDrawer {
 	protected void drawHeart(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 6);
+			final int nr = Randomizer.getRandomInt(1, 6);
 			variant = "V" + nr;
 		}
 		drawHeart(x, y, radius, variant);
@@ -2424,7 +2424,7 @@ public class PatternDrawer {
 	protected void drawStar(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(0, 4);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		final int arms = Settings.getAnzahlFlowerLeafs(5, 10);

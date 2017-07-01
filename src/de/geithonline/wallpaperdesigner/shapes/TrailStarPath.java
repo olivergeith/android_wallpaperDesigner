@@ -52,7 +52,7 @@ public class TrailStarPath extends Path {
 			pos.x = center.x + Randomizer.getRandomFloat(-trailRadius / 2, +trailRadius / 2);
 			pos.y = 5 + distance * trailRadius * i;
 			final float randRadius = Randomizer.getRandomFloat(trailRadius / 2, trailRadius * 2);
-			if (Randomizer.getRandomInt(0, 5) != 1) {
+			if (Randomizer.getRandomInt(1, 5) != 1) {
 				trailPath.addPath(new StarPath(5, pos, randRadius, STAR_TYPE.NORMAL, true));
 			}
 		}
@@ -72,7 +72,7 @@ public class TrailStarPath extends Path {
 			pos.x = center.x + (float) (trailRadius * 2 * Math.sin(angle));// Randomizer.getRandomFloat(-trailRadius / 2, +trailRadius / 2);
 			pos.y = 5 + distance * trailRadius * i;
 			final float randRadius = Randomizer.getRandomFloat(trailRadius / 2, trailRadius * 2);
-			if (Randomizer.getRandomInt(0, 5) != 1) {
+			if (Randomizer.getRandomInt(1, 5) != 1) {
 				trailPath.addPath(new StarPath(5, pos, randRadius, STAR_TYPE.NORMAL, true));
 			}
 		}
@@ -93,7 +93,7 @@ public class TrailStarPath extends Path {
 					+ (float) i / (float) numberOfTrailStars * 0.7f * trailRadius//
 					+ Randomizer.getRandomFloat(0, 0.7f * trailRadius);
 
-			if (Randomizer.getRandomInt(0, 6) != 1) {
+			if (Randomizer.getRandomInt(1, 6) != 1) {
 				trailPath.addPath(new StarPath(5, pos, starRadius, STAR_TYPE.NORMAL, true));
 			}
 		}
