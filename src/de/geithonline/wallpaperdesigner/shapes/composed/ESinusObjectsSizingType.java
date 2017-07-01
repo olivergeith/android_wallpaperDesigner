@@ -2,5 +2,5 @@
 package de.geithonline.wallpaperdesigner.shapes.composed;
 
 public enum ESinusObjectsSizingType {
-    random, decreasing;
+	random, decreasing, connected;
 }

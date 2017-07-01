@@ -145,6 +145,7 @@ import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
 import de.geithonline.wallpaperdesigner.shapes.composed.RocketCloudPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
@@ -1017,7 +1018,7 @@ public class PatternDrawer {
 	protected void drawSplatter(final int x, final int y, final int radius) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 5);
+			final int nr = Randomizer.getRandomInt(1, 6);
 			variant = "V" + nr;
 		}
 		drawSplatter(x, y, radius, variant);
@@ -1046,6 +1047,10 @@ public class PatternDrawer {
 		case "V5":
 		case "Triangle":
 			path = new SplatterPath(new PointF(x, y), radius, getFilledBoolean(), SPLATTER_TYPE.Triangle);
+			break;
+		case "V6":
+		case "Cloud with Holes":
+			path = new SplatterPath(new PointF(x, y), radius, getFilledBoolean(), SPLATTER_TYPE.CloudWithHoles);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(-45, 45, new Point(x, y)));
@@ -1401,10 +1406,10 @@ public class PatternDrawer {
 			bubbleTail = new QuallePath2(new PointF(x, y), radius, EQualleType.bubbletail);
 			break;
 		case "V3":
-			path = new QuallePath(new PointF(x, y), radius, EQualleType.qualle);
-			tail = new QuallePath(new PointF(x, y), radius, EQualleType.tail);
-			innerQualle = new QuallePath(new PointF(x, y), radius, EQualleType.inner_qualle);
-			bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
+			path = new QuallePath3(new PointF(x, y), radius, EQualleType.qualle);
+			tail = new QuallePath3(new PointF(x, y), radius, EQualleType.tail);
+			innerQualle = new QuallePath3(new PointF(x, y), radius, EQualleType.inner_qualle);
+			bubbleTail = new QuallePath3(new PointF(x, y), radius, EQualleType.bubbletail);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotationDegrees);
@@ -1422,10 +1427,6 @@ public class PatternDrawer {
 		// inner oval
 		if (innerQualle != null) {
 			pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), 60));
-			// paint.setStyle(Style.FILL);
-			// paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(),
-			// Randomizer.getRandomInt(50, 120)));
-			// paint.setAlpha(oldAlpha);
 			bitmapCanvas.drawPath(innerQualle, paint);
 			paint.setColor(oldColor);
 		}
@@ -1433,13 +1434,9 @@ public class PatternDrawer {
 		if (withBubbles) {
 			final int anzahlTails = Randomizer.getRandomInt(2, 4);
 			for (int i = 0; i < anzahlTails; i++) {
-				bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
+				bubbleTail = new QuallePath3(new PointF(x, y), radius, EQualleType.bubbletail);
 				PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
 				pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), (i + 1) * 30));
-				// paint.setStyle(Style.FILL);
-				// paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), (i
-				// + 1) * 24));
-				// paint.setAlpha(oldAlpha);
 				bitmapCanvas.drawPath(bubbleTail, paint);
 				paint.setColor(oldColor);
 			}

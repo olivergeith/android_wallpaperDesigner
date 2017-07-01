@@ -12,7 +12,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class SplatterPath extends Path {
 
 	public enum SPLATTER_TYPE {
-		Cloud, Drop, Bacteria, Square, Triangle;
+		Cloud, Drop, Bacteria, Square, Triangle, CloudWithHoles;
 	}
 
 	/**
@@ -28,7 +28,10 @@ public class SplatterPath extends Path {
 		switch (type) {
 		default:
 		case Cloud:
-			drawCloud(center, radius);
+			drawCloud(center, radius, false);
+			break;
+		case CloudWithHoles:
+			drawCloud(center, radius, true);
 			break;
 		case Drop:
 			drawDrop(center, radius);
@@ -46,13 +49,21 @@ public class SplatterPath extends Path {
 
 	}
 
-	private void drawCloud(final PointF center, final float radius) {
+	private void drawCloud(final PointF center, final float radius, final boolean withHoles) {
 		for (int i = 0; i < 15; i++) {
 			final float x = center.x + Randomizer.getRandomFloat(-radius * 0.7f, radius * 0.7f);
 			final float y = center.y + Randomizer.getRandomFloat(-radius * 0.7f, radius * 0.7f);
 			final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.5f);
 			final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true, CIRCLE_STYLE.CIRCLE);
-			op(c, Op.UNION);
+			if (withHoles) {
+				if (Randomizer.getRandomBooleanInPercentOfCases(80)) {
+					op(c, Op.UNION);
+				} else {
+					op(c, Op.DIFFERENCE);
+				}
+			} else {
+				op(c, Op.UNION);
+			}
 		}
 	}
 

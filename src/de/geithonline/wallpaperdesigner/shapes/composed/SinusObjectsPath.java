@@ -50,6 +50,9 @@ public class SinusObjectsPath extends ComposedPath {
 		case random:
 			drawSinus(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
 			break;
+		case connected:
+			drawSinusConnected(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
+			break;
 
 		}
 	}
@@ -66,6 +69,43 @@ public class SinusObjectsPath extends ComposedPath {
 			// nicht immer einen bubble zeichnen...
 			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
 				final float bubbleRadius = Randomizer.getRandomFloat(0, maxBubbleRadius);
+				final float x = l + i * (r - l) / points;
+				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
+				final float y = mitteY + (float) (amplitude * Math.sin(angle));
+				final PointF c = new PointF(x, y);
+				addPath(getObject(bubbleRadius, c));
+			} else if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
+				// manchmal einen fetten Bubble zeichnen
+				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius, maxBubbleRadius * 3);
+				final float x = l + i * (r - l) / points;
+				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
+				final float y = mitteY + (float) (amplitude * Math.sin(angle));
+				final PointF c = new PointF(x, y);
+				addPath(getObject(bubbleRadius, c));
+			}
+		}
+	}
+
+	private void drawSinusConnected(final PointF center, final float radius, final int sinRepeats, final float amplitude, final float maxBubbleRadius,
+			final int prozentToDraw) {
+		// nach links
+		final float l = center.x - radius;
+		final float r = center.x + radius;
+		final float mitteY = center.y;
+		// und nun der Sinus
+		final int points = (int) (2 * radius / (maxBubbleRadius * 0.8f));
+		for (int i = 1; i < points; i++) {
+			// nicht immer einen bubble zeichnen...
+			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius / 2, maxBubbleRadius);
+				final float x = l + i * (r - l) / points;
+				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
+				final float y = mitteY + (float) (amplitude * Math.sin(angle));
+				final PointF c = new PointF(x, y);
+				addPath(getObject(bubbleRadius, c));
+			} else if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
+				// manchmal einen fetten Bubble zeichnen
+				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius, maxBubbleRadius * 3);
 				final float x = l + i * (r - l) / points;
 				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
 				final float y = mitteY + (float) (amplitude * Math.sin(angle));

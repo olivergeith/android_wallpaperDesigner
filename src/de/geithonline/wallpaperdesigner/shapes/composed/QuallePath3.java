@@ -9,9 +9,9 @@ import de.geithonline.wallpaperdesigner.shapes.OvalPath;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class QuallePath extends ComposedPath {
+public class QuallePath3 extends ComposedPath {
 
-	public QuallePath(final PointF center, final float radius, final EQualleType type) {
+	public QuallePath3(final PointF center, final float radius, final EQualleType type) {
 		switch (type) {
 		default:
 		case qualle:
@@ -33,7 +33,7 @@ public class QuallePath extends ComposedPath {
 		final Path qualle = new CirclePath(center, radius * 0.5f, 0, true, CIRCLE_STYLE.HALF_CIRCLE);
 		PathHelper.rotatePath(center.x, center.y, qualle, -90);
 		addPath(qualle);
-		// op(new OvalPath(center, radius * 0.1f, radius * 0.5f, Direction.CCW), Op.UNION);
+		op(new OvalPath(center, radius * 0.1f, radius * 0.5f, Direction.CCW), Op.UNION);
 	}
 
 	private void drawInnerQualle(final PointF center, final float radius) {

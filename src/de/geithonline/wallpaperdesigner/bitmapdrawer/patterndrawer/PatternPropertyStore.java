@@ -141,7 +141,7 @@ public class PatternPropertyStore {
 						"Mixed Rockets", "Mixed" }));
 
 		patternProperties.put("Splatter", new PatternProperties(true, true, false, true, true, true, //
-				new CharSequence[] { "Cloud", "Drop", "Bacteria", "Square", "Triangle", "Mixed" }));
+				new CharSequence[] { "Cloud", "Cloud with Holes", "Drop", "Bacteria", "Square", "Triangle", "Mixed" }));
 
 		patternProperties.put("Spooky", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Skull", "Bat V1 (Aarons Cute Design)", "Bat V2", "Bat V3", "Bat V4", "Ghost V1", "Ghost V2", "Owl V1", "Owl V2", "Owl V3",
