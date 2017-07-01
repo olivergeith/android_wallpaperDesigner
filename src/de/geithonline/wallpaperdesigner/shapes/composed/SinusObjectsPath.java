@@ -76,7 +76,7 @@ public class SinusObjectsPath extends ComposedPath {
 				addPath(getObject(bubbleRadius, c));
 			} else if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
 				// manchmal einen fetten Bubble zeichnen
-				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius, maxBubbleRadius * 3);
+				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius * 1.5f, maxBubbleRadius * 2);
 				final float x = l + i * (r - l) / points;
 				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
 				final float y = mitteY + (float) (amplitude * Math.sin(angle));
@@ -93,7 +93,7 @@ public class SinusObjectsPath extends ComposedPath {
 		final float r = center.x + radius;
 		final float mitteY = center.y;
 		// und nun der Sinus
-		final int points = (int) (2 * radius / (maxBubbleRadius * 0.8f));
+		final int points = (int) (2 * radius / (maxBubbleRadius * 0.6f));
 		for (int i = 1; i < points; i++) {
 			// nicht immer einen bubble zeichnen...
 			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {

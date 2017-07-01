@@ -17,6 +17,10 @@ public class OvalPath extends Path {
 		return oval;
 	}
 
+	public OvalPath(final PointF center, final float radiusW, final float radiusH) {
+		drawOval(center, radiusW, radiusH, Direction.CW);
+	}
+
 	public OvalPath(final PointF center, final float radiusW, final float radiusH, final Direction dir) {
 		drawOval(center, radiusW, radiusH, dir);
 	}
