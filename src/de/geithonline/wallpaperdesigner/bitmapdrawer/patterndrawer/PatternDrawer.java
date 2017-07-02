@@ -142,7 +142,7 @@ import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
-import de.geithonline.wallpaperdesigner.shapes.composed.FlyPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.FlyCartoonPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
@@ -1375,13 +1375,22 @@ public class PatternDrawer {
 		case "Jelley Fish 3":
 			drawQualle(x, y, radius, "V3", getFilledBoolean());
 			break;
+		// case "Experiemental":
+		// final CartoonFly fly = new CartoonFly();
+		// final int color = paint.getColor();
+		// fly.render(bitmapCanvas, new PointF(x, y), radius, radius, color);
+		// break;
 		case "Experiemental":
-			final ComposedPath path = new FlyPath(new PointF(x, y), radius);
-			for (final Path p : path.getPathElements()) {
-				bitmapCanvas.drawPath(p, paint);
-				// glossyDrawer.draw(x, y, paint, radius, p);
-				// outlineDrawer.draw(paint, radius, p);
-			}
+			final ComposedPath path = new FlyCartoonPath(new PointF(x, y), radius);
+			bitmapCanvas.drawPath(path, paint);
+			// glossyDrawer.draw(x, y, paint, radius, p);
+			outlineDrawer.draw(paint, radius, path);
+
+			// for (final Path p : path.getPathElements()) {
+			// bitmapCanvas.drawPath(p, paint);
+			// // glossyDrawer.draw(x, y, paint, radius, p);
+			// // outlineDrawer.draw(paint, radius, p);
+			// }
 			break;
 		}
 	}
