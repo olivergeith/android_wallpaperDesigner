@@ -64,6 +64,15 @@ public class PatternPropertyStore {
                 new CharSequence[] { "Heart V1", "Heart V2", "Arrow", "Arrow (round)", "Plus", "Minus", "Star", "Gear",
                         "Crown", "Mixed", "Mixed Plus-Minus" }));
 
+        patternProperties.put("Jellyfish", new PatternProperties(true, true, false, true, false, true, //
+                new CharSequence[] { //
+                        "V1 (Half Circle)", //
+                        "V2 (UFO)", //
+                        "V3 (Oval)", //
+                        "V4 (Topview)", //
+                        "V5 (Topview 2)", //
+                        "V6 (Topview 3)", //
+                        "Mixed" }));
         patternProperties.put("Leafs", new PatternProperties(true, true, false, false, false, true, //
                 new CharSequence[] { "Maple", "Finger Maple", "Weed", "Round Leaf", "Mixed" }));
 
@@ -133,10 +142,6 @@ public class PatternPropertyStore {
                         "Sine Trail of Stars", //
                         "Sine Trail of Hearts", //
                         "Trail of Stars (getting Bigger)", //
-                        "Jelley Fish", //
-                        "Jelley Fish 2", //
-                        "Jelley Fish 3", //
-                        "Jelley Fish 4", //
                         "Experiemental" }));
 
         patternProperties.put("Shells", new PatternProperties(true, true, false, false, true, true, //

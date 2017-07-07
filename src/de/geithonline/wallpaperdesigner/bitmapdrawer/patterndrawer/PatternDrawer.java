@@ -146,6 +146,8 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath4;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath5;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath6;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -215,6 +217,9 @@ public class PatternDrawer {
                 break;
             case "Invertable Shapes":
                 drawInvertable(x, y, radius);
+                break;
+            case "Jellyfish":
+                drawQualle(x, y, radius, index);
                 break;
             case "Lines":
                 drawLines(x, y, radius);
@@ -1432,70 +1437,75 @@ public class PatternDrawer {
             case "Trail of Stars (getting Bigger)":
                 sceneDrawer.drawStarWithTrail(x, y, paint, radius, getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
                 break;
-            case "Jelley Fish":
-                drawQualle(x, y, radius, "V1", getFilledBoolean());
-                break;
-            case "Jelley Fish 2":
-                drawQualle(x, y, radius, "V2", getFilledBoolean());
-                break;
-            case "Jelley Fish 3":
-                drawQualle(x, y, radius, "V3", getFilledBoolean());
-                break;
-            case "Jelley Fish 4":
-                drawQualle(x, y, radius, "V4", getFilledBoolean());
-                break;
-            // case "Experiemental":
-            // final CartoonFly fly = new CartoonFly();
-            // final int color = paint.getColor();
-            // fly.render(bitmapCanvas, new PointF(x, y), radius, radius, color);
-            // break;
             case "Experiemental":
-                // final ComposedPath path = new FlyCartoonPath(new PointF(x, y), radius);
-                // bitmapCanvas.drawPath(path, paint);
-                // glossyDrawer.draw(x, y, paint, radius, p);
-                // outlineDrawer.draw(paint, radius, path);
-
-                // for (final Path p : path.getPathElements()) {
-                // bitmapCanvas.drawPath(p, paint);
-                // // glossyDrawer.draw(x, y, paint, radius, p);
-                // // outlineDrawer.draw(paint, radius, p);
-                // }
                 break;
         }
     }
 
-    private void drawQualle(final int x, final int y, final int radius, final String variante,
-            final boolean withBubbles) {
+    // #########################################################################################
+    // ----------------
+    // #########################################################################################
+    private void drawQualle(final int x, final int y, final int radius, final int index) {
+        String variant = Settings.getSelectedPatternVariant();
+        if (variant.equalsIgnoreCase("Mixed")) {
+            final int nr = Randomizer.getRandomInt(1, 6);
+            variant = "V" + nr;
+        }
+        drawQualle(x, y, radius, variant);
+    }
+
+    private void drawQualle(final int x, final int y, final int radius, final String variante) {
         final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
         Path path = null, tail = null, innerQualle = null, bubbleTail = null;
 
         switch (variante) {
             default:
             case "V1":
+            case "V1 (Half Circle)":
+            case "Jellyfish":
                 path = new QuallePath(new PointF(x, y), radius, EQualleType.qualle);
                 tail = new QuallePath(new PointF(x, y), radius, EQualleType.tail);
-                // innerQualle = new QuallePath(new PointF(x, y), radius,
-                // QualleType.inner_qualle);
                 bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
             case "V2":
+            case "V2 (UFO)":
+            case "Jellyfish 2":
                 path = new QuallePath2(new PointF(x, y), radius, EQualleType.qualle);
                 tail = new QuallePath2(new PointF(x, y), radius, EQualleType.tail);
                 innerQualle = new QuallePath2(new PointF(x, y), radius, EQualleType.inner_qualle);
                 bubbleTail = new QuallePath2(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
             case "V3":
+            case "V3 (Oval)":
+            case "Jellyfish 3":
                 path = new QuallePath3(new PointF(x, y), radius, EQualleType.qualle);
                 tail = new QuallePath3(new PointF(x, y), radius, EQualleType.tail);
                 innerQualle = new QuallePath3(new PointF(x, y), radius, EQualleType.inner_qualle);
                 bubbleTail = new QuallePath3(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
             case "V4":
+            case "V4 (Topview)":
+            case "Jellyfish 4":
                 path = new QuallePath4(new PointF(x, y), radius, EQualleType.qualle);
                 tail = new QuallePath4(new PointF(x, y), radius, EQualleType.tail);
-                // innerQualle = new QuallePath(new PointF(x, y), radius,
-                // QualleType.inner_qualle);
+                innerQualle = new QuallePath4(new PointF(x, y), radius, EQualleType.inner_qualle);
                 bubbleTail = new QuallePath4(new PointF(x, y), radius, EQualleType.bubbletail);
+                break;
+            case "V5":
+            case "V5 (Topview 2)":
+            case "Jellyfish 5":
+                path = new QuallePath5(new PointF(x, y), radius, EQualleType.qualle);
+                tail = new QuallePath5(new PointF(x, y), radius, EQualleType.tail);
+                innerQualle = new QuallePath5(new PointF(x, y), radius, EQualleType.inner_qualle);
+                bubbleTail = new QuallePath5(new PointF(x, y), radius, EQualleType.bubbletail);
+                break;
+            case "V6":
+            case "V6 (Topview 3)":
+            case "Jellyfish 6":
+                path = new QuallePath6(new PointF(x, y), radius, EQualleType.qualle);
+                tail = new QuallePath6(new PointF(x, y), radius, EQualleType.tail);
+                innerQualle = new QuallePath6(new PointF(x, y), radius, EQualleType.inner_qualle);
+                bubbleTail = new QuallePath6(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
         }
         PathHelper.rotatePath(x, y, path, rotationDegrees);
@@ -1506,29 +1516,26 @@ public class PatternDrawer {
         // qualle
         bitmapCanvas.drawPath(path, paint);
         outlineDrawer.draw(paint, radius, path);
-        glossyDrawer.draw(x, y, paint, radius, path);
-        final int oldColor = paint.getColor();
-        final int oldAlpha = paint.getAlpha();
+        // glossyDrawer.draw(x, y, paint, radius, path);
+        pm.backupColor();
 
         // inner oval
-        if (innerQualle != null) {
+        if (innerQualle != null && getFilledBoolean() == true) {
             pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), 60));
             bitmapCanvas.drawPath(innerQualle, paint);
-            paint.setColor(oldColor);
+            pm.restoreColor();
         }
         // bubble tail
-        if (withBubbles) {
-            pm.initPaintForPattern(
-                    ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(20, 60)));
-            bitmapCanvas.drawPath(bubbleTail, paint);
-            paint.setColor(oldColor);
-        }
+        pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(20, 60)));
+        bitmapCanvas.drawPath(bubbleTail, paint);
+        pm.restoreColor();
         // tail
         OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
         // making tail even brighter
-        paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(2, 10)));
-        paint.setAlpha(oldAlpha);
+        paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(2, 50)));
+        pm.restoreColor();
         bitmapCanvas.drawPath(tail, paint);
+        glossyDrawer.draw(x, y, paint, radius, path);
     }
 
     // #########################################################################################
