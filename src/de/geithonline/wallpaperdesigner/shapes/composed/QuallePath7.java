@@ -4,14 +4,13 @@ package de.geithonline.wallpaperdesigner.shapes.composed;
 import android.graphics.Path;
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
-import de.geithonline.wallpaperdesigner.shapes.LinePath;
-import de.geithonline.wallpaperdesigner.shapes.LinePath.LINE_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.SinusPath;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class QuallePath6 extends ComposedPath {
+public class QuallePath7 extends ComposedPath {
 
-    public QuallePath6(final PointF center, final float radius, final EQualleType type) {
+    public QuallePath7(final PointF center, final float radius, final EQualleType type) {
         switch (type) {
             default:
             case qualle:
@@ -81,7 +80,7 @@ public class QuallePath6 extends ComposedPath {
         final boolean flip = Randomizer.getRandomBoolean();
         final int anz = 15;
         for (int i = 0; i < 15; i++) {
-            final int repeats = 2; // Randomizer.getRandomInt(1, 4);
+            final int repeats = 3; // Randomizer.getRandomInt(1, 4);
             final float amplitude = radius * 0.4f; // Randomizer.getRandomFloat(0.1f, 0.4f);
             final float length = radius * Randomizer.getRandomFloat(2.0f, 3.5f);
             final PointF c = new PointF();
@@ -98,14 +97,20 @@ public class QuallePath6 extends ComposedPath {
         }
     }
 
-    private void drawTail(final PointF center, final float radius) {
+    public void drawTail(final PointF center, final float radius) {
+        final boolean flip = Randomizer.getRandomBoolean();
         final int anz = 30;
         for (int i = 0; i < anz; i++) {
-            final float length = radius * Randomizer.getRandomFloat(3f, 8f);
+            final int repeats = 2;
+            final float amplitude = radius * 0.3f;
+            final float length = radius * Randomizer.getRandomFloat(1f, 1.7f);
             final PointF c = new PointF();
-            c.x = center.x + radius + length;
+            c.x = center.x + radius * 0.4f + length;
             c.y = center.y;
-            final Path s = new LinePath(c, length, LINE_STYLE.straight, true);
+            final Path s = new SinusPath(c, length, repeats, amplitude);
+            if (flip) {
+                PathHelper.mirrorPathUpDown(c.x, c.y, s);
+            }
             PathHelper.rotatePath(center, s, i * 360 / anz);
             addPath(s);
         }

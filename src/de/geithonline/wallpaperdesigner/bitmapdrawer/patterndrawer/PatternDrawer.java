@@ -148,6 +148,7 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath4;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath5;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath6;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath7;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -1507,6 +1508,14 @@ public class PatternDrawer {
                 innerQualle = new QuallePath6(new PointF(x, y), radius, EQualleType.inner_qualle);
                 bubbleTail = new QuallePath6(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
+            case "V7":
+            case "V7 (Topview 4)":
+            case "Jellyfish 7":
+                path = new QuallePath7(new PointF(x, y), radius, EQualleType.qualle);
+                tail = new QuallePath7(new PointF(x, y), radius, EQualleType.tail);
+                innerQualle = new QuallePath7(new PointF(x, y), radius, EQualleType.inner_qualle);
+                bubbleTail = new QuallePath7(new PointF(x, y), radius, EQualleType.bubbletail);
+                break;
         }
         PathHelper.rotatePath(x, y, path, rotationDegrees);
         PathHelper.rotatePath(x, y, innerQualle, rotationDegrees);
@@ -1526,15 +1535,20 @@ public class PatternDrawer {
             pm.restoreColor();
         }
         // bubble tail
-        pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(20, 60)));
-        bitmapCanvas.drawPath(bubbleTail, paint);
-        pm.restoreColor();
+        if (bubbleTail != null) {
+            pm.initPaintForPattern(
+                    ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(20, 60)));
+            bitmapCanvas.drawPath(bubbleTail, paint);
+            pm.restoreColor();
+        }
         // tail
-        OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
-        // making tail even brighter
-        paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(2, 50)));
-        pm.restoreColor();
-        bitmapCanvas.drawPath(tail, paint);
+        if (tail != null) {
+            OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
+            // making tail even brighter
+            paint.setColor(ColorHelper.adjustColorBrightness(paint.getColor(), Randomizer.getRandomInt(2, 50)));
+            pm.restoreColor();
+            bitmapCanvas.drawPath(tail, paint);
+        }
         glossyDrawer.draw(x, y, paint, radius, path);
     }
 

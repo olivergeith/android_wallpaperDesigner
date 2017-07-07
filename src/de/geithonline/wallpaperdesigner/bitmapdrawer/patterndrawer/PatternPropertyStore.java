@@ -72,6 +72,7 @@ public class PatternPropertyStore {
                         "V4 (Topview)", //
                         "V5 (Topview 2)", //
                         "V6 (Topview 3)", //
+                        "V7 (Topview 4)", //
                         "Mixed" }));
         patternProperties.put("Leafs", new PatternProperties(true, true, false, false, false, true, //
                 new CharSequence[] { "Maple", "Finger Maple", "Weed", "Round Leaf", "Mixed" }));

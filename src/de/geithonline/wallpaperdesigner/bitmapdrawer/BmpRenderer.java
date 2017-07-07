@@ -114,14 +114,17 @@ public class BmpRenderer extends BaseBmpRenderer {
                 if (i == blurLevel1 && Settings.getBlurrAmount1() > 0) {
                     System.gc();
                     bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount1(), true);
+                    System.gc();
                 }
                 if (i == blurLevel2 && Settings.getBlurrAmount2() > 0) {
                     System.gc();
                     bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount2(), true);
+                    System.gc();
                 }
                 if (i == blurLevel3 && Settings.getBlurrAmount3() > 0) {
                     System.gc();
                     bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount3(), true);
+                    System.gc();
                 }
             }
 
