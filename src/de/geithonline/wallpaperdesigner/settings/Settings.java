@@ -171,7 +171,7 @@ public class Settings {
 	}
 
 	public enum COLOR_RANDOMIZING_TYPE {
-		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, PUSH_RED, PUSH_GREEN, PUSH_BLUE;
+		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, PUSH_RED, PUSH_GREEN, PUSH_BLUE, PULL_RED, PULL_GREEN, PULL_BLUE, PUSH_YELLOW;
 
 		public static COLOR_RANDOMIZING_TYPE enumForName(final String name) {
 			switch (name) {
@@ -192,6 +192,14 @@ public class Settings {
 				return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
 			case "push BLUE":
 				return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
+			case "push YELLOW":
+				return COLOR_RANDOMIZING_TYPE.PUSH_YELLOW;
+			case "pull RED":
+				return COLOR_RANDOMIZING_TYPE.PULL_RED;
+			case "pull GREEN":
+				return COLOR_RANDOMIZING_TYPE.PULL_GREEN;
+			case "pull BLUE":
+				return COLOR_RANDOMIZING_TYPE.PULL_BLUE;
 			}
 		}
 	}

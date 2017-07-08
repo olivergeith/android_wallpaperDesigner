@@ -7,13 +7,8 @@ public class RandomizerColor {
 		final int dRed = Randomizer.getRandomInt(-range, range);
 		final int dGreen = Randomizer.getRandomInt(-range, range);
 		final int dBlue = Randomizer.getRandomInt(-range, range);
-		final float dhue = Randomizer.getRandomFloat(-range, range); // ergibt ein
-																		// max
-																		// Hue-delta
-																		// 192 (0-360
-																		// ist der
-																		// Wertebereich
-																		// f�r hue)
+		final float dhue = Randomizer.getRandomFloat(-range, range);
+
 		switch (type) {
 		default:
 		case FULL_RGB:
@@ -26,14 +21,23 @@ public class RandomizerColor {
 			return ColorHelper.changeColor(color, 0, 0, dBlue);
 		case HUE:
 			return ColorHelper.adjustHSV(color, dhue, 0, 0);
+
 		case PUSH_RED:
-			return ColorHelper.changeColor(color, Math.abs(dRed), 0, 0); // push geht
-																			// nur ins
-																			// positive
+			return ColorHelper.changeColor(color, Math.abs(dRed), 0, 0);
 		case PUSH_GREEN:
 			return ColorHelper.changeColor(color, 0, Math.abs(dGreen), 0);
 		case PUSH_BLUE:
 			return ColorHelper.changeColor(color, 0, 0, Math.abs(dBlue));
+		case PUSH_YELLOW:
+			return ColorHelper.changeColor(color, Math.abs(dRed), Math.abs(dGreen), 0);
+
+		case PULL_RED:
+			return ColorHelper.changeColor(color, -Math.abs(dRed), 0, 0);
+		case PULL_GREEN:
+			return ColorHelper.changeColor(color, 0, -Math.abs(dGreen), 0);
+		case PULL_BLUE:
+			return ColorHelper.changeColor(color, 0, 0, -Math.abs(dBlue));
+
 		}
 	}
 
