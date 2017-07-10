@@ -79,16 +79,16 @@ public class QuallePath10 extends ComposedPath {
 
 	private void drawBubbleTail(final PointF center, final float radius) {
 		final boolean flip = Randomizer.getRandomBoolean();
-		final int anz = 15;
+		final int anz = 25;
 		for (int i = 0; i < anz; i++) {
-			final int repeats = 4; // Randomizer.getRandomInt(1, 4);
-			final float amplitude = radius * Randomizer.getRandomFloat(0.1f, 0.4f);
-			final float length = radius * Randomizer.getRandomFloat(3.0f, 4.5f);
+			final int repeats = 3; // Randomizer.getRandomInt(1, 4);
+			final float amplitude = radius * 0.3f;
+			final float length = radius * 2.0f;
 			final PointF c = new PointF();
 			c.x = center.x + radius + length;
 			c.y = center.y;
 			final float maxBubbleRadius = radius * 0.1f;
-			final Path s = new SinusObjectsPath(c, length, repeats, amplitude, maxBubbleRadius, 100, ESinusObjectsSizingType.decreasing,
+			final Path s = new SinusObjectsPath(c, length, repeats, amplitude, maxBubbleRadius, 100, ESinusObjectsSizingType.decreasing_withbigEnd,
 					ESinusObjectsType.bubble);
 			if (flip) {
 				PathHelper.mirrorPathUpDown(c.x, c.y, s);
