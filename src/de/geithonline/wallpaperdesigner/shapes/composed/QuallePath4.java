@@ -10,7 +10,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class QuallePath4 extends ComposedPath {
 
-    public QuallePath4(final PointF center, final float radius, final EQualleType type) {
+    public QuallePath4(final PointF center, final float radius, final int arms, final EQualleType type) {
         switch (type) {
             default:
             case qualle:
@@ -23,7 +23,7 @@ public class QuallePath4 extends ComposedPath {
                 drawTail(center, radius);
                 break;
             case bubbletail:
-                drawBubbleTail(center, radius);
+                drawBubbleTail(center, radius, arms);
                 break;
         }
     }
@@ -78,8 +78,8 @@ public class QuallePath4 extends ComposedPath {
         addPath(p1);
     }
 
-    public void drawBubbleTail(final PointF center, final float radius) {
-        for (int i = 0; i < 15; i++) {
+    public void drawBubbleTail(final PointF center, final float radius, final int arms) {
+        for (int i = 0; i < 11 + arms; i++) {
             final int repeats = Randomizer.getRandomInt(1, 3);
             final float amplitude = radius * Randomizer.getRandomFloat(0.1f, 0.3f);
             final float length = radius * Randomizer.getRandomFloat(1.5f, 2.5f);
