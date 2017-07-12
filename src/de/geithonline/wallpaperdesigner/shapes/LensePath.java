@@ -7,14 +7,14 @@ import android.graphics.PointF;
 public class LensePath extends Path {
 
 	public LensePath(final PointF center, final float radius) {
-		drawOval(center, radius, Direction.CW);
+		drawLense(center, radius, Direction.CW);
 	}
 
 	public LensePath(final PointF center, final float radius, final Direction dir) {
-		drawOval(center, radius, dir);
+		drawLense(center, radius, dir);
 	}
 
-	private void drawOval(final PointF center, final float radius, final Direction dir) {
+	private void drawLense(final PointF center, final float radius, final Direction dir) {
 		moveTo(center.x - radius, center.y);
 		switch (dir) {
 		case CCW:

@@ -15,6 +15,11 @@ public class CirclePath extends Path {
 
 	}
 
+	public CirclePath(final PointF center, final float radius, final Direction dir) {
+		drawCircle(center, radius, dir);
+
+	}
+
 	public CirclePath(final PointF center, final float rOuter, final float rInner, final boolean filled, final CIRCLE_STYLE style) {
 		super();
 		switch (style) {
@@ -54,4 +59,9 @@ public class CirclePath extends Path {
 			addCircle(center.x, center.y, rInner, Direction.CW);
 		}
 	}
+
+	public void drawCircle(final PointF center, final float rOuter, final Direction dir) {
+		addCircle(center.x, center.y, rOuter, dir);
+	}
+
 }
