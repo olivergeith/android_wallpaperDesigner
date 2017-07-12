@@ -108,7 +108,7 @@ public class QuallePath11 extends ComposedPath {
             final float length = radius * 0.5f + i * 2 * radius / anz; // length wird
             // immer größer
             final PointF c = new PointF();
-            c.x = center.x + radius * 0.6f + length;
+            c.x = center.x + radius * 1.2f + length;
             c.y = center.y;
             final Path s = new SinusPath(c, length, repeats, amplitude, SinusType.decreasingAmplitude);
             if (flip) {

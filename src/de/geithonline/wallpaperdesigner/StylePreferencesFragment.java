@@ -158,7 +158,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
         handleReflectionStyleSelect(Settings.getGlossyReflectionStyleString());
         handlePatternSelect(Settings.getSelectedPattern());
         handleFilledOptionSelected(Settings.getFilledOption());
-        handleDropShadowTypeSelection(Settings.getDropShadowType());
+        handleDropShadowTypeSelection(Settings.getDropShadowTypeString());
         handleRadiusTypeSelection(Settings.getRadiusTypeString());
         handlePatternTextChanged(Settings.getText());
         handleTextDrawStyleSelected(Settings.getTextDrawStyle());

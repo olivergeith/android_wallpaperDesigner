@@ -47,6 +47,9 @@ public class SinusObjectsPath extends ComposedPath {
             case decreasing:
                 drawSinusGettingSmaller(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
                 break;
+            case increasing:
+                drawSinusGettingBigger(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
+                break;
             case decreasing_withbigEnd:
                 drawSinusGettingSmaller2(center, radius, halbWellen, amplitude, maxObjectRadius, prozentToDraw);
                 break;
@@ -131,6 +134,28 @@ public class SinusObjectsPath extends ComposedPath {
             // nicht immer einen bubble zeichnen...
             if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
                 final float bubbleRadius = (anzahlBubbles - (float) i) * (maxBubbleRadius / anzahlBubbles); // Randomizer.getRandomFloat(0,
+                // maxBubbleRadius);
+                final float x = l + i * (r - l) / anzahlBubbles;
+                final float angle = (float) ((float) i / anzahlBubbles * Math.PI * sinRepeats);
+                final float y = mitteY + (float) (amplitude * Math.sin(angle));
+                final PointF c = new PointF(x, y);
+                addPath(getObject(bubbleRadius, c));
+            }
+        }
+    }
+
+    private void drawSinusGettingBigger(final PointF center, final float radius, final int sinRepeats,
+            final float amplitude, final float maxBubbleRadius, final int prozentToDraw) {
+        // nach links
+        final float l = center.x - radius;
+        final float r = center.x + radius;
+        final float mitteY = center.y;
+        // und nun der Sinus
+        final int anzahlBubbles = (int) (2 * radius / (maxBubbleRadius * 1.6f));
+        for (int i = 1; i < anzahlBubbles; i++) {
+            // nicht immer einen bubble zeichnen...
+            if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+                final float bubbleRadius = i * (maxBubbleRadius / anzahlBubbles); // Randomizer.getRandomFloat(0,
                 // maxBubbleRadius);
                 final float x = l + i * (r - l) / anzahlBubbles;
                 final float angle = (float) ((float) i / anzahlBubbles * Math.PI * sinRepeats);

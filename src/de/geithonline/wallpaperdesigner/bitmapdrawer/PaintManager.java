@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.RandomizerColor;
@@ -58,25 +59,34 @@ public class PaintManager {
     }
 
     public void setupDropShadowForPattern(final int color, final int oppositeColor, final int randomColor) {
+        setupDropShadowForPattern(color, oppositeColor, randomColor, Settings.getDropShadowType());
+    }
+
+    public void setupDropShadowForPatternDark(final int color) {
+        setupDropShadowForPattern(color, color, color, DROP_SHADOW_TYPE.DARKER);
+    }
+
+    public void setupDropShadowForPattern(final int color, final int oppositeColor, final int randomColor,
+            final DROP_SHADOW_TYPE dropShadowType) {
         final int dropShadowRadius = getDropShadowRadius();
         final int dX = Settings.getDropShadowOffsetX();
         final int dY = Settings.getDropShadowOffsetY();
-        switch (Settings.getDropShadowType()) {
+        switch (dropShadowType) {
             default:
-            case "No":
+            case NO:
                 paint.setShadowLayer(0, 0, 0, Color.BLACK);
                 break;
-            case "Random":
+            case RANDOM:
                 paint.setShadowLayer(dropShadowRadius, dX, dY, randomColor);
                 break;
-            case "Opposite":
+            case OPPOSITE:
                 paint.setShadowLayer(dropShadowRadius, dX, dY, oppositeColor);
                 break;
-            case "Darker":
+            case DARKER:
                 paint.setShadowLayer(dropShadowRadius, dX, dY,
                         ColorHelper.changeBrightness(color, Settings.getDropShadowDarkness()));
                 break;
-            case "Select":
+            case SELECT:
                 final int shd = Settings.getDropShadowColor();
                 final int alpha = Color.alpha(color);
                 final int dc = Color.argb(alpha, Color.red(shd), Color.green(shd), Color.blue(shd));
