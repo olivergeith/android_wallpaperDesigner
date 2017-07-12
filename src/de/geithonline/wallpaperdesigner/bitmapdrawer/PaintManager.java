@@ -18,6 +18,14 @@ public class PaintManager {
     private int oldColor;
     private int oldAlpha;
 
+    public int getOldColor() {
+        return oldColor;
+    }
+
+    public int getOldAlpha() {
+        return oldAlpha;
+    }
+
     public PaintManager(final int bWidth, final int bHeight) {
         this.bWidth = bWidth;
         this.bHeight = bHeight;
