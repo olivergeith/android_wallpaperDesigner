@@ -83,7 +83,8 @@ public class QuallePath11 extends ComposedPath {
         for (int i = 0; i < anz; i++) {
             final int repeats = 3; // Randomizer.getRandomInt(1, 4);
             final float amplitude = radius * 0.3f;
-            final float length = radius + i * radius / anz; // length wird immer größer
+            final float length = radius * 0.3f + i * 2 * radius / anz; // length wird
+            // immer größer
             final PointF c = new PointF();
             c.x = center.x + radius + length;
             c.y = center.y;
@@ -102,9 +103,10 @@ public class QuallePath11 extends ComposedPath {
         final boolean flip = Randomizer.getRandomBoolean();
         final int anz = 20 + arms;
         for (int i = 0; i < anz; i++) {
-            final int repeats = 10;
+            final int repeats = 15;
             final float amplitude = radius * 0.3f;
-            final float length = radius * Randomizer.getRandomFloat(2f, 4.0f);
+            final float length = radius * 0.5f + i * 2 * radius / anz; // length wird
+            // immer größer
             final PointF c = new PointF();
             c.x = center.x + radius * 0.6f + length;
             c.y = center.y;
