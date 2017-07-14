@@ -9,9 +9,9 @@ import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusType;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class QuallePath11 extends ComposedPath {
+public class QuallePath12 extends ComposedPath {
 
-	public QuallePath11(final PointF center, final float radius, final int arms, final EQualleType type) {
+	public QuallePath12(final PointF center, final float radius, final int arms, final EQualleType type) {
 		switch (type) {
 		default:
 		case qualle:
@@ -79,7 +79,7 @@ public class QuallePath11 extends ComposedPath {
 
 	private void drawBubbleTail(final PointF center, final float radius, final int arms) {
 		final boolean flip = Randomizer.getRandomBoolean();
-		final int anz = 20 + arms;
+		final int anz = 12 + arms;
 		for (int i = 0; i < anz; i++) {
 			final int repeats = 3; // Randomizer.getRandomInt(1, 4);
 			final float amplitude = radius * 0.3f;
@@ -93,7 +93,23 @@ public class QuallePath11 extends ComposedPath {
 			if (flip) {
 				PathHelper.mirrorPathUpDown(c.x, c.y, s);
 			}
-			PathHelper.rotatePath(center, s, i * 360 / anz);
+			PathHelper.rotatePath(center, s, i * 180 / anz);
+			addPath(s);
+		}
+		for (int i = 1; i <= anz; i++) {
+			final int repeats = 3; // Randomizer.getRandomInt(1, 4);
+			final float amplitude = radius * 0.3f;
+			final float length = radius * 0.5f + i * 2 * radius / anz; // length wird // immer größer
+			final PointF c = new PointF();
+			c.x = center.x + radius + length;
+			c.y = center.y;
+			final float maxBubbleRadius = radius * 0.1f;
+			final Path s = new SinusObjectsPath(c, length, repeats, amplitude, maxBubbleRadius, 100, ESinusObjectsSizingType.decreasing_withbigEnd,
+					ESinusObjectsType.bubble);
+			if (flip) {
+				PathHelper.mirrorPathUpDown(c.x, c.y, s);
+			}
+			PathHelper.rotatePath(center, s, -i * 180 / anz);
 			addPath(s);
 		}
 	}
@@ -104,7 +120,8 @@ public class QuallePath11 extends ComposedPath {
 		for (int i = 0; i < anz; i++) {
 			final int repeats = 15;
 			final float amplitude = radius * 0.3f;
-			final float length = radius * 2.5f;
+			final float length = radius * 0.5f + i * 2 * radius / anz; // length wird
+			// immer größer
 			final PointF c = new PointF();
 			c.x = center.x + radius * 1.2f + length;
 			c.y = center.y;

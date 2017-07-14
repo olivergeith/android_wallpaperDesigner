@@ -146,6 +146,7 @@ import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath10;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath11;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath12;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath4;
@@ -1393,10 +1394,7 @@ public class PatternDrawer {
 	private void drawQualle(final int x, final int y, final int radius, final int index) {
 		String variant = Settings.getSelectedPatternVariant();
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 9);
-			variant = "V" + nr;
-		} else if (variant.equalsIgnoreCase("Mixed Topview")) {
-			final int nr = Randomizer.getRandomInt(4, 8);
+			final int nr = Randomizer.getRandomInt(1, 12);
 			variant = "V" + nr;
 		}
 		drawQualle(x, y, radius, variant);
@@ -1495,6 +1493,14 @@ public class PatternDrawer {
 			tail = new QuallePath11(new PointF(x, y), radius, leafs, EQualleType.tail);
 			innerQualle = new QuallePath11(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
 			bubbleTail = new QuallePath11(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
+			break;
+		case "V12":
+		case "V12 (Heart)":
+		case "Jellyfish 12":
+			path = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.qualle);
+			// tail = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.tail);
+			innerQualle = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
+			bubbleTail = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotationDegrees);
