@@ -73,6 +73,7 @@ public class PatternPropertyStore {
 						"V10 (Curly)", //
 						"V11 (Spiral)", //
 						"V12 (Heart)", //
+						"V13 (Big)", //
 						"Mixed" }));
 		patternProperties.put("Leafs", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Maple", "Finger Maple", "Weed", "Round Leaf", "Mixed" }));

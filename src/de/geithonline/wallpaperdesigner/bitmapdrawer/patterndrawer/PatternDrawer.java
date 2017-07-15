@@ -147,6 +147,7 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath10;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath11;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath12;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath13;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath4;
@@ -1501,6 +1502,14 @@ public class PatternDrawer {
 			// tail = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.tail);
 			innerQualle = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
 			bubbleTail = new QuallePath12(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
+			break;
+		case "V13":
+		case "V13 (Big)":
+		case "Jellyfish 13":
+			path = new QuallePath13(new PointF(x, y), radius, leafs, EQualleType.qualle);
+			tail = new QuallePath13(new PointF(x, y), radius, leafs, EQualleType.tail);
+			innerQualle = new QuallePath13(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
+			bubbleTail = new QuallePath13(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotationDegrees);
