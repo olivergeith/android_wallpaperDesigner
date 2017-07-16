@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="assortedScreen"
+        android:summary="Filling, Text, Number of leafs/arms ..."
+        android:title="Assorted Options..." >
+        <PreferenceCategory android:title="Assorted Options" />
+
+        <ListPreference
+            android:defaultValue="Not filled"
+            android:dialogTitle="@string/filledOption"
+            android:entries="@array/hole"
+            android:entryValues="@array/hole"
+            android:key="filledOption"
+            android:title="@string/filledOption" />
+
+        <PreferenceCategory android:title="Custom Text Options" />
+
+        <EditTextPreference
+            android:defaultValue="The Wallpaper Designer"
+            android:dialogTitle="@string/textPattern"
+            android:key="textPattern"
+            android:title="@string/textPattern" />
+
+        <ListPreference
+            android:defaultValue="Round"
+            android:dialogTitle="@string/textDrawStyle"
+            android:entries="@array/textDrawStyle"
+            android:entryValues="@array/textDrawStyle"
+            android:key="textDrawStyle"
+            android:title="@string/textDrawStyle" />
+
+        <PreferenceCategory android:title="Leafs-Arms Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="randomLeafCount"
+            android:title="@string/randomLeafCount" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="5"
+            android:dependency="randomLeafCount"
+            android:dialogMessage="@string/numberOfLeafs"
+            android:key="numberOfLeafs"
+            android:summary="%1$d"
+            android:title="@string/numberOfLeafs"
+            seekbarpreference:maxValue="10"
+            seekbarpreference:minValue="4"
+            seekbarpreference:stepValue="1" />
+    </PreferenceScreen>
+
+
+</PreferenceScreen>

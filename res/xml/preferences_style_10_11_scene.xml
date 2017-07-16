@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_add"
+        android:key="sceneOptions"
+        android:title="Scene Options..." >
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="5"
+            android:dialogMessage="Percentage of circles"
+            android:key="scenePercentageOfCircles"
+            android:summary="%1$d percent"
+            android:title="Percentage of circles"
+            seekbarpreference:maxValue="50"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+       
+    </PreferenceScreen>
+</PreferenceScreen>

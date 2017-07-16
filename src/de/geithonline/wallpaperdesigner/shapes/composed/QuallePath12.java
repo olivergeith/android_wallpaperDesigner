@@ -29,12 +29,12 @@ public class QuallePath12 extends ComposedPath {
 		}
 	}
 
-	private void drawQualle(final PointF center, final float radius) {
+	protected void drawQualle(final PointF center, final float radius) {
 		final Path qualle = new CirclePath(center, radius);
 		addPath(qualle);
 	}
 
-	private void drawInnerQualle(final PointF center, final float radius) {
+	protected void drawInnerQualle(final PointF center, final float radius) {
 		final PointF c1 = new PointF();
 		final PointF c2 = new PointF();
 		final float raster = radius / 4;
@@ -77,7 +77,7 @@ public class QuallePath12 extends ComposedPath {
 		addPath(p1);
 	}
 
-	private void drawBubbleTail(final PointF center, final float radius, final int arms) {
+	protected void drawBubbleTail(final PointF center, final float radius, final int arms) {
 		final boolean flip = Randomizer.getRandomBoolean();
 		final int anz = 12 + arms;
 		for (int i = 0; i < anz; i++) {

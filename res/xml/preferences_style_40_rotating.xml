@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="ratatingScreen"
+        android:title="Rotating..." >
+        <PreferenceCategory android:title="Rotating" />
+
+        <ListPreference
+            android:defaultValue="Fixed"
+            android:dialogTitle="@string/rotatingStyle"
+            android:entries="@array/rotatingStyle"
+            android:entryValues="@array/rotatingStyle"
+            android:key="rotatingStyle"
+            android:title="@string/rotatingStyle" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="0"
+            android:dialogMessage="@string/rotationDegrees"
+            android:key="rotationDegrees"
+            android:summary="%1$d°"
+            android:title="@string/rotationDegrees"
+            seekbarpreference:maxValue="180"
+            seekbarpreference:minValue="-180"
+            seekbarpreference:stepValue="1" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="180"
+            android:dialogMessage="@string/randomRange"
+            android:key="randomRange"
+            android:summary="between -%1$d° and +%1$d°"
+            android:title="@string/randomRange"
+            seekbarpreference:maxValue="180"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="1" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="50"
+	        android:dialogMessage="Rotation Center X-Axis"
+	        android:key="rotationCenterPointX"
+	        android:summary="%1$d Percent of width"
+	        android:title="Center Position X-Axis"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="0"
+	        seekbarpreference:stepValue="1" />
+	
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:defaultValue="50"
+	        android:dialogMessage="Rotation Center Y-Axis"
+	        android:key="rotationCenterPointY"
+	        android:summary="%1$d Percent of height"
+	        android:title="Rotation Center Position Y-Axis"
+	        seekbarpreference:maxValue="100"
+	        seekbarpreference:minValue="0"
+	        seekbarpreference:stepValue="1" />
+        
+        
+    </PreferenceScreen>
+
+</PreferenceScreen>

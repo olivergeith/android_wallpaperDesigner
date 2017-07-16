@@ -14,6 +14,8 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class Settings {
+	private static final String KEY_SCENE_PERCENTAGE_OF_CIRCLES = "scenePercentageOfCircles";
+	public static final String KEY_CLOSED_SINE_TRAIL = "closedSineTrail";
 	public static final String KEY_COLORFUL_DRAWING = "colorfulDrawing";
 	public static final String KEY_TAIL_OPTION = "tailOption2";
 	public static final String KEY_ROTATING_STYLE = "rotatingStyle";
@@ -525,6 +527,14 @@ public class Settings {
 
 	public static boolean isColorfulDrawing() {
 		return readBooleanPref(KEY_COLORFUL_DRAWING, false);
+	}
+
+	public static boolean isClosedSineTrail() {
+		return readBooleanPref(KEY_CLOSED_SINE_TRAIL, false);
+	}
+
+	public static int getScenePercentageOfCircles() {
+		return readIntegerPref(KEY_SCENE_PERCENTAGE_OF_CIRCLES, 5);
 	}
 
 	// ###################################################################

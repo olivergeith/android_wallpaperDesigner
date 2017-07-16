@@ -1359,9 +1359,7 @@ public class PatternDrawer {
 		switch (variant) {
 		default:
 		case "Rain":
-			if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
-				// bubble
-				// drawGeometric(x, y, paint, radius / 3, "Hexagon");
+			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
 				drawBubble(x, y, radius / 3);
 			} else {
 				// Rain
@@ -1558,7 +1556,9 @@ public class PatternDrawer {
 		}
 		// tail
 		if (tail != null && Settings.getTailBoolean()) {
-			OutlineDrawer.setupPaintForStroke(paint, radius);
+			if (!Settings.isClosedSineTrail()) {
+				OutlineDrawer.setupPaintForStroke(paint, radius);
+			}
 			if (Settings.isColorfulDrawing()) {
 				for (final Path p : tail.getPathElements()) {
 					pm.randomizeColorAccordingToSettings(pm.getInitialColor());

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceCategory android:title="Pattern" />
+
+    <ListPreference
+        android:defaultValue="Stars"
+        android:dialogTitle="@string/patternPicker"
+        android:entries="@array/pattern"
+        android:entryValues="@array/pattern"
+        android:key="pattern_patternPicker"
+        android:title="@string/patternPicker" />
+    <ListPreference
+        android:dialogTitle="@string/patternVariantPicker"
+        android:key="pattern_patternVariantPicker"
+        android:title="@string/patternVariantPicker" />
+
+</PreferenceScreen>

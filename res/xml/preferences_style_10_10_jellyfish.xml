@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_add"
+        android:key="jellyfishOptions"
+        android:title="Jellyfish Options..." >
+
+        <ListPreference
+            android:defaultValue="With Tail"
+            android:dialogTitle="Tail Option"
+            android:entries="@array/tail"
+            android:entryValues="@array/tail"
+            android:key="tailOption2"
+            android:summary="........"
+            android:title="Tail Option" />
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="closedSineTrail"
+	        android:summary="Sinelines in Trail are closed."
+            android:title="Closed Sine-Trail" />
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="colorfulDrawing"
+	        android:summary="Some parts of the pattern are even more colorful"
+            android:title="colorful drawing" />
+       
+    </PreferenceScreen>
+</PreferenceScreen>

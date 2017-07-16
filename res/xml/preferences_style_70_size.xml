@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:key="specialPatternSizeSettings"
+        android:summary="Size of pattern and range of randomization of size"
+        android:title="Sizes of Patterns..." >
+        
+        <ListPreference
+            android:defaultValue="random"
+            android:dialogTitle="Radius Calculating-Style"
+            android:entries="@array/radiusTypes"
+            android:entryValues="@array/radiusTypes"
+            android:key="radiusType"
+            android:title="Radius Calculating-Style" />
+        
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dialogMessage="@string/patternSizeAdjust"
+            android:key="patternSizeAdjust"
+            android:summary="%1$d percent"
+            android:title="@string/patternSizeAdjust"
+            seekbarpreference:maxValue="700"
+            seekbarpreference:minValue="20"
+            seekbarpreference:stepValue="5" />
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="10"
+            android:dialogMessage="@string/patternMinSizeAdjust"
+            android:key="patternMinSizeAdjust"
+            android:summary="Minimum Pattern size is %1$d percent of maximum Pattern Size"
+            android:title="@string/patternMinSizeAdjust"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="5"
+            seekbarpreference:stepValue="5" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

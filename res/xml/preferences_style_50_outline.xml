@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="outlineScreen"
+        android:title="Outline..." >
+        <PreferenceCategory android:title="Outline Options" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="outline"
+            android:title="@string/outline"
+            android:summary="@string/outlineSummary" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="outline"
+            android:key="outlineNeverTransparent"
+            android:summary="@string/outlineNeverTransparentSummary"
+            android:title="@string/outlineNeverTransparent" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="100"
+            android:dependency="outline"
+            android:dialogMessage="@string/outlineThicknessAdjust"
+            android:key="outlineThicknessAdjust"
+            android:summary="%1$d percent"
+            android:title="@string/outlineThicknessAdjust"
+            seekbarpreference:maxValue="800"
+            seekbarpreference:minValue="10"
+            seekbarpreference:stepValue="5" />
+
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="3"
+            android:dependency="outline"
+            android:dialogMessage="@string/outlineThicknessLimit"
+            android:key="outlineThicknessLimit"
+            android:summary="%1$d pixel (outline will never be thicken than this)"
+            android:title="@string/outlineThicknessLimit"
+            seekbarpreference:maxValue="25"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+        
+        <de.geithonline.android.basics.preferences.SeekBarPreference
+            android:defaultValue="-48"
+            android:dependency="outline"
+            android:dialogMessage="@string/outlineDarknessAdjust"
+            android:key="outlineDarknessAdjust"
+            android:summary="%1$d (negativ=darker, positiv=brighter)"
+            android:title="@string/outlineDarknessAdjust"
+            seekbarpreference:maxValue="192"
+            seekbarpreference:minValue="-192"
+            seekbarpreference:stepValue="8" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="outline"
+            android:key="customOutlineColor"
+            android:title="@string/customOutlineColor" />
+
+        <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_BLACK"
+            android:dependency="customOutlineColor"
+            android:key="colorOutline"
+            android:title="@string/colorOutline" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

@@ -38,12 +38,27 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private SeekBarPreference rotationCenterPointY;
 	private ListPreference radiusType;
 
+	private PreferenceScreen jellyfishOptions;
+	private PreferenceScreen sceneOptions;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.preferences_style);
+		addPreferencesFromResource(R.xml.preferences_style_10_pattern);
+		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish);
+		addPreferencesFromResource(R.xml.preferences_style_10_11_scene);
+		addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
+		addPreferencesFromResource(R.xml.preferences_style_30_glossy);
+		addPreferencesFromResource(R.xml.preferences_style_40_rotating);
+		addPreferencesFromResource(R.xml.preferences_style_50_outline);
+		addPreferencesFromResource(R.xml.preferences_style_60_assorted);
+		addPreferencesFromResource(R.xml.preferences_style_70_size);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+
+		jellyfishOptions = (PreferenceScreen) findPreference("jellyfishOptions");
+		sceneOptions = (PreferenceScreen) findPreference("sceneOptions");
+
 		reflectionStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_REFLECTION_STYLE);
 		glowStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_GLOW_STYLE);
 		patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
@@ -270,6 +285,19 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				|| PatternPropertyStore.hasPatternFilledOption(newPattern)//
 				|| PatternPropertyStore.hasNumberOfLeafsOption(newPattern)//
 		);
+
+		// Special Pattern Settings enabel or disable
+		if (newPattern.equalsIgnoreCase("Jellyfish")) {
+			getPreferenceScreen().addPreference(jellyfishOptions);
+		} else {
+			getPreferenceScreen().removePreference(jellyfishOptions);
+		}
+		if (newPattern.equalsIgnoreCase("Scenes")) {
+			getPreferenceScreen().addPreference(sceneOptions);
+		} else {
+			getPreferenceScreen().removePreference(sceneOptions);
+		}
+
 	}
 
 	protected void handlePatternVariantSelect(final String newVariant) {
