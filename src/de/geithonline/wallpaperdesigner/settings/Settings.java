@@ -14,7 +14,8 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class Settings {
-	public static final String KEY_TAIL_OPTION = "tailOption";
+	public static final String KEY_COLORFUL_DRAWING = "colorfulDrawing";
+	public static final String KEY_TAIL_OPTION = "tailOption2";
 	public static final String KEY_ROTATING_STYLE = "rotatingStyle";
 	public static final String KEY_COLOR_OUTLINE = "colorOutline";
 	public static final String KEY_DROP_SHADOW_RADIUS_ADJUSTMENT = "dropShadowRadiusAdjustment";
@@ -523,7 +524,7 @@ public class Settings {
 	}
 
 	public static boolean isColorfulDrawing() {
-		return readBooleanPref("colorfulDrawing", false);
+		return readBooleanPref(KEY_COLORFUL_DRAWING, false);
 	}
 
 	// ###################################################################

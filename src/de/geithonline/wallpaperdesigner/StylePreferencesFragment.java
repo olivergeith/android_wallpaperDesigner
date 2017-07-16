@@ -59,7 +59,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
 		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
 		randomRange = (SeekBarPreference) findPreference("randomRange");
-		rotatingStyle = (ListPreference) findPreference("rotatingStyle");
+		rotatingStyle = (ListPreference) findPreference(Settings.KEY_ROTATING_STYLE);
 		rotationCenterPointX = (SeekBarPreference) findPreference("rotationCenterPointX");
 		rotationCenterPointY = (SeekBarPreference) findPreference("rotationCenterPointY");
 
@@ -117,8 +117,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 		});
-		tailOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
+		tailOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
 				handleTailOptionSelected((String) newValue);
@@ -230,19 +230,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void handlePatternSelect(final String newPattern) {
 		patternSelection.setSummary(newPattern);
-		// final CheckBoxPreference glossy = (CheckBoxPreference)
-		// findPreference(Settings.KEY_PATTERN_GLOSSY);
-		// final CheckBoxPreference outline = (CheckBoxPreference)
-		// findPreference(Settings.KEY_PATTERN_OUTLINE);
-		// final CheckBoxPreference outlineneverTransparent =
-		// (CheckBoxPreference)
-		// findPreference(Settings.KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT);
-		// glossy.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
-		// outline.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		// outlineneverTransparent.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		// rotationDegrees.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
-		// rotationDegrees.setEnabled(Settings.getRotationStyle().equals("Fixed"));
-		// rotatingStyle.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
 		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
 		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
 		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));

@@ -420,9 +420,11 @@
             android:dialogTitle="Tail Option"
             android:entries="@array/tail"
             android:entryValues="@array/tail"
-            android:key="tailOption"
+            android:key="tailOption2"
+            android:summary="........"
             android:title="Tail Option" />
-
+        
+        
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="colorfulDrawing"
