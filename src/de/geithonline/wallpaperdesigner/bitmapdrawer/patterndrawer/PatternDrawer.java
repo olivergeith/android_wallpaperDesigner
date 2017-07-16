@@ -149,6 +149,7 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath10;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath11;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath12;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath13;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath14;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath4;
@@ -1513,57 +1514,65 @@ public class PatternDrawer {
 			innerQualle = new QuallePath13(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
 			bubbleTail = new QuallePath13(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
 			break;
+		case "V14":
+		case "V14 (Schweif)":
+		case "Jellyfish 14":
+			path = new QuallePath14(new PointF(x, y), radius, leafs, EQualleType.qualle);
+			tail = new QuallePath14(new PointF(x, y), radius, leafs, EQualleType.tail);
+			innerQualle = new QuallePath14(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
+			bubbleTail = new QuallePath14(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
+			break;
 		}
 		PathHelper.rotatePath(x, y, path, rotationDegrees);
 		PathHelper.rotatePath(x, y, innerQualle, rotationDegrees);
-		PathHelper.rotatePath(x, y, tail, rotationDegrees);
-		PathHelper.rotatePath(x, y, bubbleTail, rotationDegrees);
+		PathHelper.rotateComposedPath(x, y, tail, rotationDegrees);
+		PathHelper.rotateComposedPath(x, y, bubbleTail, rotationDegrees);
 
 		// qualle
 		bitmapCanvas.drawPath(path, paint);
 		outlineDrawer.draw(paint, radius, path);
-		// glossyDrawer.draw(x, y, paint, radius, path);
-		pm.backupColor();
+		glossyDrawer.draw(x, y, paint, radius, path);
 
 		// inner oval
+		pm.initFillPaint();
 		if (innerQualle != null && Settings.getFilledBoolean() == true) {
-			pm.initPaintForPattern(ColorHelper.adjustColorBrightness(paint.getColor(), 60));
+			pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), 90));
 			bitmapCanvas.drawPath(innerQualle, paint);
 		}
 		// bubble tail
-		pm.restoreColor();
 		if (bubbleTail != null) {
 			if (Settings.isColorfulDrawing()) {
 				for (final Path p : bubbleTail.getPathElements()) {
-					pm.initPaintForPattern(pm.getOldColor());
-					pm.setupDropShadowForPatternDark(pm.getOldColor());
+					pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+					pm.setupDropShadowForPatternDark(pm.getCurrentColor());
+					pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
 					bitmapCanvas.drawPath(p, paint);
 				}
 			} else {
-				pm.initPaintForPattern(ColorHelper.adjustColorBrightness(pm.getOldColor(), Randomizer.getRandomInt(20, 60)));
-				pm.setupDropShadowForPatternDark(pm.getOldColor());
+				pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+				pm.setupDropShadowForPatternDark(pm.getCurrentColor());
+				pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
 				bitmapCanvas.drawPath(bubbleTail, paint);
 			}
 		}
 		// tail
-		pm.restoreColor();
 		if (tail != null && Settings.getTailBoolean()) {
+			OutlineDrawer.setupPaintForStroke(paint, radius);
 			if (Settings.isColorfulDrawing()) {
 				for (final Path p : tail.getPathElements()) {
-					pm.initPaintForPattern(pm.getOldColor());
-					OutlineDrawer.setupPaintForStroke(paint, radius);
+					pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+					pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
 					bitmapCanvas.drawPath(p, paint);
 				}
 			} else {
-				OutlineDrawer.setupPaintForOutlineKeepDropshadow(paint, radius);
 				// making tail even brighter
-				paint.setColor(ColorHelper.adjustColorBrightness(pm.getOldColor(), Randomizer.getRandomInt(2, 50)));
+				pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+				pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
 				bitmapCanvas.drawPath(tail, paint);
 			}
 		}
 		// bitmapCanvas.drawLine(x, y, prevPoint.x, prevPoint.y, paint);
-		pm.restoreColor();
-		glossyDrawer.draw(x, y, paint, radius, path);
 	}
 
 	// #########################################################################################
@@ -1594,24 +1603,25 @@ public class PatternDrawer {
 		PathHelper.rotatePath(x, y, path.schnabel, rotationDegrees);
 		// body
 		bitmapCanvas.drawPath(path.body, paint);
-		pm.backupColor();
 		glossyDrawer.draw(x, y, paint, radius, path.body);
 		outlineDrawer.draw(paint, radius, path.body);
 
 		// Bauch
-		pm.initFillPaint(ColorHelper.adjustColorBrightness(pm.getOldColor(), 32));
+		pm.initFillPaint();
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), 32));
 		// pm.initPaintForPattern(ColorHelper.adjustColorBrightness(pm.getOldColor(), 0));
 		bitmapCanvas.drawPath(path.bauch, paint);
 
 		// Augen
-		pm.initFillPaint(ColorHelper.adjustColorBrightness(pm.getOldColor(), 60));
+		pm.initFillPaint();
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), 60));
 		bitmapCanvas.drawPath(path.augen, paint);
 		outlineDrawer.draw(paint, radius, path.augen);
 		// Schnabel
-		pm.initFillPaint(ColorHelper.adjustColorBrightness(pm.getOldColor(), -32));
+		pm.initFillPaint();
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), -32));
 		bitmapCanvas.drawPath(path.schnabel, paint);
 
-		pm.restoreColor();
 	}
 
 	// #########################################################################################

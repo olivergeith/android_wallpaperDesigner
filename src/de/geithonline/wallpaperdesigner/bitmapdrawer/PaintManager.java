@@ -15,15 +15,25 @@ public class PaintManager {
 	private final int bWidth;
 	private final int bHeight;
 	public final Paint paint;
-	private int oldColor;
-	private int oldAlpha;
+	private int initialRandomizedColor;
+	private int initialColor;
 
-	public int getOldColor() {
-		return oldColor;
+	public int getInitialColor() {
+		return initialColor;
 	}
 
-	public int getOldAlpha() {
-		return oldAlpha;
+	public int getInitialAlpha() {
+		return initialAlpha;
+	}
+
+	private int initialAlpha;
+
+	public int getInitialRandomizedColor() {
+		return initialRandomizedColor;
+	}
+
+	public int getCurrentColor() {
+		return paint.getColor();
 	}
 
 	public PaintManager(final int bWidth, final int bHeight) {
@@ -34,19 +44,16 @@ public class PaintManager {
 		paint.setStyle(Style.FILL);
 	}
 
-	public void backupColor() {
-		oldColor = paint.getColor();
-		oldAlpha = paint.getAlpha();
-	}
-
-	public void restoreColor() {
-		paint.setColor(oldColor);
-		paint.setAlpha(oldAlpha);
-	}
-
-	public void initPaintForPattern(int pcolor) {
+	void initPaintForPattern(final int pcolor) {
 		paint.setAntiAlias(true);
 		paint.setStyle(Style.FILL);
+		initialColor = pcolor;
+		initialAlpha = Randomizer.getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity());
+		randomizeColorAccordingToSettings(pcolor);
+		initialRandomizedColor = paint.getColor();
+	}
+
+	public void randomizeColorAccordingToSettings(int pcolor) {
 		if (Settings.isRandomizeBrightness()) {
 			final int range = Settings.getRandomizeColorBrighnessRange();
 			final int adjust = Randomizer.getRandomInt(-range, range);
@@ -62,26 +69,30 @@ public class PaintManager {
 		}
 
 		paint.setColor(pcolor);
-		paint.setAlpha(Randomizer.getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
+		paint.setAlpha(initialAlpha);
 	}
 
-	public void initColor(final int pcolor, final int alpha) {
+	public void setColorAndAlpha(final int pcolor, final int alpha) {
 		paint.setColor(pcolor);
 		if (alpha < 0) {
-			paint.setAlpha(oldAlpha);
+			paint.setAlpha(getInitialAlpha());
 		} else {
 			paint.setAlpha(alpha);
 		}
 	}
 
-	public void initColor(final int pcolor) {
-		initColor(pcolor, -1);
+	public void setColor(final int pcolor) {
+		setColorAndAlpha(pcolor, -1);
 	}
 
-	public void initFillPaint(final int pcolor) {
+	public void initFillPaint() {
+		paint.setAntiAlias(true);
 		paint.setStyle(Style.FILL);
-		paint.setColor(pcolor);
-		paint.setAlpha(Randomizer.getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
+	}
+
+	public void initStrokePaint() {
+		paint.setAntiAlias(true);
+		paint.setStyle(Style.STROKE);
 	}
 
 	public void setupDropShadowForPattern(final int color, final int oppositeColor, final int randomColor) {

@@ -317,15 +317,6 @@
             android:key="filledOption"
             android:title="@string/filledOption" />
 
-        <ListPreference
-            android:defaultValue="With Tail"
-            android:dialogTitle="Tail Option"
-            android:entries="@array/tail"
-            android:entryValues="@array/tail"
-            android:key="tailOption"
-            android:title="Tail Option" />
-        
-        
         <PreferenceCategory android:title="Custom Text Options" />
 
         <EditTextPreference

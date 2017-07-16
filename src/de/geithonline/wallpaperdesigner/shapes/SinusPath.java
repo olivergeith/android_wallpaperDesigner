@@ -21,11 +21,31 @@ public class SinusPath extends Path {
 		super();
 		switch (type) {
 		case decreasingAmplitude:
-			drawSinusDecreasingAmplitude(center, radius, sinRepeats, amplitude);
+			drawSinusDecreasingAmplitude(center, radius, sinRepeats, amplitude, false);
 			break;
 		default:
 		case normal:
-			drawSinus(center, radius, sinRepeats, amplitude);
+			drawSinus(center, radius, sinRepeats, amplitude, false);
+			break;
+		}
+	}
+
+	/**
+	 * @param center
+	 * @param radius
+	 * @param sinRepeats
+	 *            1 == one bow/Halbwelle, 2 == a complete sinus
+	 * @param amplitude
+	 */
+	public SinusPath(final PointF center, final float radius, final int sinRepeats, final float amplitude, final SinusType type, final boolean filled) {
+		super();
+		switch (type) {
+		case decreasingAmplitude:
+			drawSinusDecreasingAmplitude(center, radius, sinRepeats, amplitude, filled);
+			break;
+		default:
+		case normal:
+			drawSinus(center, radius, sinRepeats, amplitude, filled);
 			break;
 		}
 	}
@@ -39,7 +59,19 @@ public class SinusPath extends Path {
 	 */
 	public SinusPath(final PointF center, final float radius, final int sinRepeats, final float amplitude) {
 		super();
-		drawSinus(center, radius, sinRepeats, amplitude);
+		drawSinus(center, radius, sinRepeats, amplitude, false);
+	}
+
+	/**
+	 * @param center
+	 * @param radius
+	 * @param sinRepeats
+	 *            1 == one bow/Halbwelle, 2 == a complete sinus
+	 * @param amplitude
+	 */
+	public SinusPath(final PointF center, final float radius, final int sinRepeats, final float amplitude, final boolean filled) {
+		super();
+		drawSinus(center, radius, sinRepeats, amplitude, filled);
 	}
 
 	/**
@@ -49,7 +81,7 @@ public class SinusPath extends Path {
 	 *            1 == one bow, 2 == a complete sinus
 	 * @param amplitude
 	 */
-	private void drawSinus(final PointF center, final float radius, final int sinRepeats, final float amplitude) {
+	private void drawSinus(final PointF center, final float radius, final int sinRepeats, final float amplitude, final boolean filled) {
 		// nach links
 		final float l = center.x - radius;
 		final float r = center.x + radius;
@@ -63,6 +95,9 @@ public class SinusPath extends Path {
 			final float y = mitteY + (float) (amplitude * Math.sin(angle));
 			lineTo(x, y);
 		}
+		if (filled) {
+			close();
+		}
 	}
 
 	/**
@@ -72,7 +107,7 @@ public class SinusPath extends Path {
 	 *            1 == one bow, 2 == a complete sinus
 	 * @param amplitude
 	 */
-	private void drawSinusDecreasingAmplitude(final PointF center, final float radius, final int sinRepeats, final float amplitude) {
+	private void drawSinusDecreasingAmplitude(final PointF center, final float radius, final int sinRepeats, final float amplitude, final boolean filled) {
 		// nach links
 		final float l = center.x - radius;
 		final float r = center.x + radius;
@@ -87,6 +122,10 @@ public class SinusPath extends Path {
 			final float y = mitteY + (float) (a * Math.sin(angle));
 			lineTo(x, y);
 		}
+		if (filled) {
+			close();
+		}
+
 	}
 
 }

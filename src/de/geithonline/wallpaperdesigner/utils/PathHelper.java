@@ -30,29 +30,22 @@ public class PathHelper {
 	}
 
 	public static void rotatePath(final PointF center, final Path path, final float rotate) {
+		rotatePath(center.x, center.y, path, rotate);
+	}
+
+	public static void rotateComposedPath(final float x, final float y, final ComposedPath path, final float rotate) {
 		if (path == null) {
 			return;
 		}
-		final Matrix mMatrix = new Matrix();
-		final RectF bounds = new RectF();
-		path.computeBounds(bounds, true);
-		mMatrix.postRotate(rotate, center.x, center.y);
-		path.transform(mMatrix);
+		rotatePath(x, y, path, rotate);
+		// und nun die einzelelemente drehen
+		for (final Path p : path.getPathElements()) {
+			rotatePath(x, y, p, rotate);
+		}
 	}
 
 	public static void rotateComposedPath(final PointF center, final ComposedPath path, final float rotate) {
-		if (path == null) {
-			return;
-		}
-		rotatePath(center, path, rotate);
-		// und nun die einzelelemente drehen
-		for (final Path p : path.getPathElements()) {
-			final Matrix mMatrix = new Matrix();
-			final RectF bounds = new RectF();
-			path.computeBounds(bounds, true);
-			mMatrix.postRotate(rotate, center.x, center.y);
-			path.transform(mMatrix);
-		}
+		rotateComposedPath(center.x, center.y, path, rotate);
 	}
 
 	/**

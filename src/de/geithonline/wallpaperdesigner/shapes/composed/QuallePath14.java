@@ -9,9 +9,9 @@ import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusType;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class QuallePath13 extends ComposedPath {
+public class QuallePath14 extends ComposedPath {
 
-	public QuallePath13(final PointF center, final float radius, final int arms, final EQualleType type) {
+	public QuallePath14(final PointF center, final float radius, final int arms, final EQualleType type) {
 		switch (type) {
 		default:
 		case qualle:
@@ -58,17 +58,15 @@ public class QuallePath13 extends ComposedPath {
 
 	private void drawBubbleTail(final PointF center, final float radius, final int arms) {
 		final boolean flip = Randomizer.getRandomBoolean();
-		final int anz = 2 + arms;
+		final int anz = 6 + arms;
 		for (int i = 0; i < anz; i++) {
-			final int repeats = 3; // Randomizer.getRandomInt(1, 4);
-			final float amplitude = radius * 0.5f;
-			final float length = radius * 4.5f;
+			final int repeats = 10; // Randomizer.getRandomInt(1, 4);
+			final float amplitude = radius * 0.35f;
+			final float length = radius * Randomizer.getRandomFloat(2.0f, 5.5f);
 			final PointF c = new PointF();
-			c.x = center.x + radius * 0.9f + length;
+			c.x = center.x + radius * 1.5f + length;
 			c.y = center.y;
-			final float maxBubbleRadius = radius * 0.3f;
-			final Path s = new SinusObjectsPath(c, length, repeats, amplitude, maxBubbleRadius, 100, ESinusObjectsSizingType.decreasing,
-					ESinusObjectsType.bubble);
+			final Path s = new SinusPath(c, length, repeats, amplitude, SinusType.decreasingAmplitude, true);
 			if (flip) {
 				PathHelper.mirrorPathUpDown(c.x, c.y, s);
 			}
