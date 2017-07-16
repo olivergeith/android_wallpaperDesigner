@@ -317,6 +317,15 @@
             android:key="filledOption"
             android:title="@string/filledOption" />
 
+        <ListPreference
+            android:defaultValue="With Tail"
+            android:dialogTitle="Tail Option"
+            android:entries="@array/tail"
+            android:entryValues="@array/tail"
+            android:key="tailOption"
+            android:title="Tail Option" />
+        
+        
         <PreferenceCategory android:title="Custom Text Options" />
 
         <EditTextPreference
@@ -397,50 +406,29 @@
     ###########################################################################
     ################################################################################
     ############################################################################
+    -->
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:icon="@android:drawable/ic_menu_preferences"
-        android:key="ColorRandomizingSettings"
-        android:title="Color Randomizing..." >
-        <PreferenceCategory android:title="Color Randomizing..." />
+        android:icon="@android:drawable/ic_menu_add"
+        android:key="specialScreen"
+        android:summary="Options, that may have or not have an effect on the selected pattern..."
+        android:title="Special Options..." >
+        <PreferenceCategory android:title="Special Options (used in Jellyfish)" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="32"
-            android:dialogMessage="@string/randomizeColorRange"
-            android:key="randomizeColorRangeInt"
-            android:summary="%1$d"
-            android:title="@string/randomizeColorRange"
-            seekbarpreference:maxValue="160"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="4" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="32"
-            android:dialogMessage="@string/randomizeColorBrightnessRangeInt"
-            android:key="randomizeColorBrightnessRangeInt"
-            android:summary="%1$d"
-            android:title="@string/randomizeColorBrightnessRangeInt"
-            seekbarpreference:maxValue="160"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="4" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="255"
-            android:dialogMessage="@string/maxOpacity"
-            android:key="maxOpacity"
-            android:summary="%1$d"
-            android:title="@string/maxOpacity"
-            seekbarpreference:maxValue="255"
-            seekbarpreference:minValue="15"
-            seekbarpreference:stepValue="5" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="128"
-            android:dialogMessage="@string/minOpacity"
-            android:key="minOpacity"
-            android:summary="%1$d"
-            android:title="@string/minOpacity"
-            seekbarpreference:maxValue="255"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="5" />
+        <ListPreference
+            android:defaultValue="With Tail"
+            android:dialogTitle="Tail Option"
+            android:entries="@array/tail"
+            android:entryValues="@array/tail"
+            android:key="tailOption"
+            android:title="Tail Option" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="colorfulDrawing"
+	        android:summary="Some parts of the pattern are even more colorful"
+            android:title="colorful drawing" />
+        
+        
     </PreferenceScreen>
-    -->
-
 </PreferenceScreen>

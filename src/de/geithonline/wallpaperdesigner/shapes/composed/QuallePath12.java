@@ -120,7 +120,7 @@ public class QuallePath12 extends ComposedPath {
 		for (int i = 0; i < anz; i++) {
 			final int repeats = 15;
 			final float amplitude = radius * 0.3f;
-			final float length = radius * 0.5f + i * 2 * radius / anz; // length wird
+			final float length = radius * 2.5f; // length wird
 			// immer größer
 			final PointF c = new PointF();
 			c.x = center.x + radius * 1.2f + length;

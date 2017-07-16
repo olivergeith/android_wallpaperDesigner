@@ -65,6 +65,19 @@ public class PaintManager {
 		paint.setAlpha(Randomizer.getRandomInt(Settings.getMinOpacity(), Settings.getMaxOpacity()));
 	}
 
+	public void initColor(final int pcolor, final int alpha) {
+		paint.setColor(pcolor);
+		if (alpha < 0) {
+			paint.setAlpha(oldAlpha);
+		} else {
+			paint.setAlpha(alpha);
+		}
+	}
+
+	public void initColor(final int pcolor) {
+		initColor(pcolor, -1);
+	}
+
 	public void initFillPaint(final int pcolor) {
 		paint.setStyle(Style.FILL);
 		paint.setColor(pcolor);
