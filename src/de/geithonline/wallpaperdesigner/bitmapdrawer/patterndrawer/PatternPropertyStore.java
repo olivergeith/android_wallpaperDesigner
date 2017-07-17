@@ -76,6 +76,11 @@ public class PatternPropertyStore {
 						"V13 (Big)", //
 						"V14 (Schweif)", //
 						"Mixed" }));
+		patternProperties.put("Jellyfish New", new PatternProperties(true, true, false, false, false, true, //
+				new CharSequence[] { //
+						"V1", //
+						"V2", //
+						"Mixed" }));
 		patternProperties.put("Leafs", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Maple", "Finger Maple", "Weed", "Round Leaf", "Mixed" }));
 

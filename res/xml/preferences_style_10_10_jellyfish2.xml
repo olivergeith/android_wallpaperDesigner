@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_add"
+        android:key="jellyfishOptions"
+        android:title="Jellyfish Options..." >
+
+        <PreferenceCategory android:title="Trail Lines Options" />
+        
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:dialogMessage="Number of Line Tails"
+	        android:title="Number of Line Tails"
+	        android:key="TailOptionsLine.anzTails"
+	        android:summary="%1$d Tails"
+	        android:defaultValue="25"
+	        seekbarpreference:maxValue="30"
+	        seekbarpreference:minValue="5"
+	        seekbarpreference:stepValue="1" />
+
+	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	        android:dialogMessage="Sine Halfwaves"
+	        android:title="Number of Line Tails"
+	        android:key="TailOptionsLine.minSinusRepeats"
+	        android:summary="%1$d Tails"
+	        android:defaultValue="25"
+	        seekbarpreference:maxValue="30"
+	        seekbarpreference:minValue="5"
+	        seekbarpreference:stepValue="1" />
+	    
+	    
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="TailOptionsLine.randomFlip"
+            android:title="Ramdomly flipped" />
+        
+       
+    </PreferenceScreen>
+</PreferenceScreen>

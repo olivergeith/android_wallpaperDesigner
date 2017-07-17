@@ -8,6 +8,16 @@ public class SinusPath extends Path {
 
 	public enum SinusType {
 		normal, decreasingAmplitude;
+		public static SinusType enumForName(final String name) {
+			switch (name) {
+			default:
+			case "Decreasing Amplitude":
+				return SinusType.decreasingAmplitude;
+			case "Normal":
+				return SinusType.normal;
+			}
+		}
+
 	}
 
 	/**
