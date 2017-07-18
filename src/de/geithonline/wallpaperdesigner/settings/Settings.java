@@ -510,14 +510,32 @@ public class Settings {
 		final TailOptionsLine options = new TailOptionsLine();
 		options.anzTails = readIntegerPref("TailOptionsLine.anzTails", 25);
 		options.randomFlip = readBooleanPref("TailOptionsLine.randomFlip", false);
-		// TODO lesen aller preferences....
+
+		options.minAmplitude = readIntegerPref("TailOptionsLine.minAmplitude", 1) / 10f;
+		options.maxAmplitude = readIntegerPref("TailOptionsLine.maxAmplitude", 3) / 10f;
+
+		options.minSinusRepeats = readIntegerPref("TailOptionsLine.minSinusRepeats", 1);
+		options.maxSinusRepeats = readIntegerPref("TailOptionsLine.maxSinusRepeats", 3);
+
+		options.minLength = readIntegerPref("TailOptionsLine.minLength", 25) / 10f;
+		options.maxLength = readIntegerPref("TailOptionsLine.maxLength", 50) / 10f;
+
 		return options;
 	}
 
 	public static TailOptionsBubbles getTailOptionsBubbles() {
 		final TailOptionsBubbles options = new TailOptionsBubbles();
 		options.anzTails = readIntegerPref("TailOptionsBubbles.anzTails", 6);
-		// TODO lesen aller preferences....
+		options.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
+
+		options.minAmplitude = readIntegerPref("TailOptionsBubbles.minAmplitude", 1) / 10f;
+		options.maxAmplitude = readIntegerPref("TailOptionsBubbles.maxAmplitude", 3) / 10f;
+
+		options.minSinusRepeats = readIntegerPref("TailOptionsBubbles.minSinusRepeats", 1);
+		options.maxSinusRepeats = readIntegerPref("TailOptionsBubbles.maxSinusRepeats", 3);
+
+		options.minLength = readIntegerPref("TailOptionsBubbles.minLength", 25) / 10f;
+		options.maxLength = readIntegerPref("TailOptionsBubbles.maxLength", 50) / 10f;
 		return options;
 	}
 
@@ -998,7 +1016,7 @@ public class Settings {
 			prefs.edit().putString(KEY_COLOR_RANDOMIZING_TYPE, "hue").commit();
 			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_RANGE_INT, 16).commit();
 			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 24).commit();
-			prefs.edit().putInt(KEY_MIN_OPACITY, 225).commit();
+			prefs.edit().putInt(KEY_MIN_OPACITY, 128).commit();
 			prefs.edit().putInt(KEY_MAX_OPACITY, 255).commit();
 			prefs.edit().putInt(KEY_DROP_SHADOW_RADIUS_ADJUSTMENT, 200).commit();
 

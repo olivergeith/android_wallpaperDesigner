@@ -39,6 +39,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference radiusType;
 
 	private PreferenceScreen jellyfishOptions;
+	private PreferenceScreen jellyfishOptions2;
 	private PreferenceScreen sceneOptions;
 
 	@Override
@@ -46,6 +47,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_style_10_pattern);
 		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish);
+		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish2);
 		addPreferencesFromResource(R.xml.preferences_style_10_11_scene);
 		addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
 		addPreferencesFromResource(R.xml.preferences_style_30_glossy);
@@ -57,6 +59,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 
 		jellyfishOptions = (PreferenceScreen) findPreference("jellyfishOptions");
+		jellyfishOptions2 = (PreferenceScreen) findPreference("jellyfishOptions2");
 		sceneOptions = (PreferenceScreen) findPreference("sceneOptions");
 
 		reflectionStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_REFLECTION_STYLE);
@@ -291,6 +294,11 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			getPreferenceScreen().addPreference(jellyfishOptions);
 		} else {
 			getPreferenceScreen().removePreference(jellyfishOptions);
+		}
+		if (newPattern.equalsIgnoreCase("Jellyfish New")) {
+			getPreferenceScreen().addPreference(jellyfishOptions2);
+		} else {
+			getPreferenceScreen().removePreference(jellyfishOptions2);
 		}
 		if (newPattern.equalsIgnoreCase("Scenes")) {
 			getPreferenceScreen().addPreference(sceneOptions);

@@ -221,6 +221,8 @@
 	        android:defaultValue="128-225"
 	        seekbarpreference:absoluteMaxValue="255"
 	        seekbarpreference:absoluteMinValue="0"
+	        seekbarpreference:defaultMaxValue="255"
+	        seekbarpreference:defaultMinValue="128"
 	        seekbarpreference:step="1" 
 	        />
         
