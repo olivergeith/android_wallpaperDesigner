@@ -907,10 +907,6 @@ public class Settings {
 		return readIntegerPref(KEY_BGRND_COLOR2, Color.BLACK);
 	}
 
-	public static boolean isDynamicColoring() {
-		return readBooleanPref("dynamicColoring", false);
-	}
-
 	public static boolean isHexValueEnabled() {
 		return readBooleanPref(KEY_HEX_VALUES, false);
 	}
@@ -985,8 +981,6 @@ public class Settings {
 			prefs.edit().putString(KEY_COLOR_GRADIENT_DIRECTION, "Sweep Gradient (++)").commit();
 			prefs.edit().putBoolean(Settings.KEY_REVERSE_COLORS, false).commit();
 			prefs.edit().putInt(Settings.KEY_COLOR_REPEATS, 3).commit();
-
-			prefs.edit().putBoolean("dynamicColoring", false).commit();
 
 			prefs.edit().putString(KEY_SORT_ORDER, "Timestamp in Filename").commit();
 			prefs.edit().putString(KEY_PATTERN_PATTERN_PICKER, "Fish").commit();

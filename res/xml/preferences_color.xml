@@ -211,26 +211,6 @@
         
         <PreferenceCategory android:title="Opacity Randomizing..." />
   
-<!--         
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="255"
-            android:dialogMessage="@string/maxOpacity"
-            android:key="maxOpacity"
-            android:summary="%1$d"
-            android:title="@string/maxOpacity"
-            seekbarpreference:maxValue="255"
-            seekbarpreference:minValue="15"
-            seekbarpreference:stepValue="5" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="128"
-            android:dialogMessage="@string/minOpacity"
-            android:key="minOpacity"
-            android:summary="%1$d"
-            android:title="@string/minOpacity"
-            seekbarpreference:maxValue="255"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="5" />
-  -->
         <de.geithonline.android.basics.preferences.RangeSeekBarPreference
 	        android:dialogMessage="Opacity Range"
 	        android:title="Opacity Range"
@@ -244,13 +224,6 @@
 	        seekbarpreference:step="1" 
 	        />
         
-        
-        
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="dynamicColoring"
-            android:summary="Hard to explain, what this does...check it out and try to see the difference...if checked, the colors are mixed a little bit more! "
-            android:title="@string/dynamicColoring" />
     </PreferenceScreen>
     
     <!-- 
