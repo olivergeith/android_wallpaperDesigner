@@ -522,8 +522,8 @@ public class Settings {
         options.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsBubbles.tailRotationType", "Even"));
 
         options.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsBubbles.sinusAmplitudeType", "Normal"));
-        options.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectsSizingType", "Decreasing"));
-
+        options.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectSizingType", "Decreasing"));
+        // Log.i("SizingType", "=" + options.sinusObjectsSizingType);
         options.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
 
         options.minAmplitude = readIntegerPref("TailOptionsBubbles.minAmplitude", 1) / 10f;
@@ -536,6 +536,8 @@ public class Settings {
         options.maxLength = readIntegerPref("TailOptionsBubbles.maxLength", 50) / 10f;
 
         options.bubbleRadius = readIntegerPref("TailOptionsBubbles.bubbleRadius", 10) / 100f;
+
+        options.percentOfBubblesToDraw = readIntegerPref("TailOptionsBubbles.percentOfBubblesToDraw", 100);
         return options;
     }
 

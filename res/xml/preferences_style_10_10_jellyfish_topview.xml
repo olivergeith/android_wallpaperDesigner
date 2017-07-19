@@ -13,7 +13,7 @@
             android:key="jellyfishBubbleOptions"
             android:title="Bubble Tail Options..." >
 
-            <PreferenceCategory android:title="Number of Tails and Positioning" />
+            <PreferenceCategory android:title="Number of Bubble-Tails and Positioning" />
 
             <de.geithonline.android.basics.preferences.SeekBarPreference
                 android:defaultValue="6"
@@ -34,7 +34,7 @@
                 android:summary=""
                 android:title="Rotation Type" />
 
-            <PreferenceCategory android:title="Bubble Size" />
+            <PreferenceCategory android:title="The Bubble itself" />
             
             <de.geithonline.android.basics.preferences.CoolListPreference
                 android:defaultValue="Decreasing"
@@ -55,6 +55,17 @@
                 seekbarpreference:minValue="5"
                 seekbarpreference:stepValue="5" />
 
+            
+            <de.geithonline.android.basics.preferences.SeekBarPreference
+                android:defaultValue="100"
+                android:dialogMessage="Percentage of Bubbles to draw"
+                android:key="TailOptionsBubbles.percentOfBubblesToDraw"
+                android:summary="%1$d"
+                android:title="Percentage of Bubbles to draw"
+                seekbarpreference:maxValue="100"
+                seekbarpreference:minValue="50"
+                seekbarpreference:stepValue="1" />
+            
             
             
             <PreferenceCategory android:title="The Tail itself" />
