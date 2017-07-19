@@ -44,7 +44,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
     private CheckBoxPreference sameBackgroundAsPatternGradient;
 
     private List<String> keys = new ArrayList<String>();
-    private ListPreference colorRandomizingType;
 
     // private SeekBarPreference tornadoRings;
     // private SeekBarPreference tornadoArms;
@@ -130,14 +129,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
                 return true;
             }
         });
-        colorRandomizingType = (ListPreference) findPreference(Settings.KEY_COLOR_RANDOMIZING_TYPE);
-        colorRandomizingType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                handleColorRandomizingType((String) newValue);
-                return true;
-            }
-        });
 
         // tornadoRings = (SeekBarPreference) findPreference("tornadoRings");
         // tornadoArms = (SeekBarPreference) findPreference("tornadoArms");
@@ -147,12 +138,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
         vierColorCornerSettings = (PreferenceScreen) findPreference("vierColorCornerSettings");
         handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
         drawPreviewImages();
-        handleColorRandomizingType(Settings.getColorRandomizingString());
-    }
-
-    protected void handleColorRandomizingType(final String newValue) {
-        colorRandomizingType.setSummary(newValue);
-
     }
 
     @Override
@@ -198,7 +183,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
     }
 
     private void handleSelection(final String selection, final int anzahl) {
-        gradientDirection.setSummary(selection);
         anzColors.setEnabled(!Settings.is4ColorGradient(selection));
         anzColors.setSummary("" + anzahl + " Colors");
         if (Settings.is4ColorGradient(selection)) {

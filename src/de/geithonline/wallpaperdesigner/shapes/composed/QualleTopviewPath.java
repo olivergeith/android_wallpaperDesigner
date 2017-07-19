@@ -88,8 +88,8 @@ public class QualleTopviewPath extends ComposedPath {
             final float maxBubbleRadius = radius * tailOptions.bubbleRadius;
             final Path s = new SinusObjectsPath(c, length, repeats, amplitude, maxBubbleRadius, //
                     tailOptions.percentOfBubblesToDraw, //
-                    tailOptions.sizingType, //
-                    tailOptions.objectType);
+                    tailOptions.sinusObjectsSizingType, //
+                    tailOptions.sinusObjectType);
             if (getFlipBoolean(flip, tailOptions)) {
                 PathHelper.mirrorPathUpDown(c.x, c.y, s);
             }

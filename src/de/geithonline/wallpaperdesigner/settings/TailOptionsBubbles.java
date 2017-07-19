@@ -7,6 +7,6 @@ import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsType;
 public class TailOptionsBubbles extends TailOptions {
     public int percentOfBubblesToDraw = 100;
     public float bubbleRadius = 0.2f; // a multiple of radius
-    public ESinusObjectsSizingType sizingType = ESinusObjectsSizingType.decreasing;
-    public ESinusObjectsType objectType = ESinusObjectsType.bubble;
+    public ESinusObjectsSizingType sinusObjectsSizingType = ESinusObjectsSizingType.decreasing;
+    public ESinusObjectsType sinusObjectType = ESinusObjectsType.bubble;
 }

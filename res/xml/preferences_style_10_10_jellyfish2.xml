@@ -24,7 +24,8 @@
                 seekbarpreference:minValue="1"
                 seekbarpreference:stepValue="1" />
 
-            <ListPreference
+            <de.geithonline.android.basics.preferences.CoolListPreference
+                android:summary=""
                 android:defaultValue="Even"
                 android:dialogTitle="Rotation Type"
                 android:entries="@array/tailrotationtype"
@@ -90,12 +91,15 @@
                 seekbarpreference:maxValue="30"
                 seekbarpreference:minValue="0"
                 seekbarpreference:stepValue="1" />
-            <ListPreference
+
+           
+            <de.geithonline.android.basics.preferences.CoolListPreference
                 android:defaultValue="Even"
                 android:dialogTitle="Rotation Type"
                 android:entries="@array/tailrotationtype"
                 android:entryValues="@array/tailrotationtype"
                 android:key="TailOptionsLine.tailRotationType"
+	            android:summary=""
                 android:title="Rotation Type" />
             
             <de.geithonline.android.basics.preferences.RangeSeekBarPreference
