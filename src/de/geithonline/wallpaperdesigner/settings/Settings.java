@@ -9,7 +9,9 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
+import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.TailRotationType;
+import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsSizingType;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
@@ -498,6 +500,8 @@ public class Settings {
         final TailOptionsLine options = new TailOptionsLine();
         options.anzTails = readIntegerPref("TailOptionsLine.anzTails", 25);
         options.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsLine.tailRotationType", "Even"));
+        options.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsLine.sinusAmplitudeType", "Normal"));
+
         options.randomFlip = readBooleanPref("TailOptionsLine.randomFlip", false);
 
         options.minAmplitude = readIntegerPref("TailOptionsLine.minAmplitude", 1) / 10f;
@@ -517,6 +521,9 @@ public class Settings {
         options.anzTails = readIntegerPref("TailOptionsBubbles.anzTails", 6);
         options.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsBubbles.tailRotationType", "Even"));
 
+        options.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsBubbles.sinusAmplitudeType", "Normal"));
+        options.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectsSizingType", "Decreasing"));
+
         options.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
 
         options.minAmplitude = readIntegerPref("TailOptionsBubbles.minAmplitude", 1) / 10f;
@@ -527,6 +534,8 @@ public class Settings {
 
         options.minLength = readIntegerPref("TailOptionsBubbles.minLength", 25) / 10f;
         options.maxLength = readIntegerPref("TailOptionsBubbles.maxLength", 50) / 10f;
+
+        options.bubbleRadius = readIntegerPref("TailOptionsBubbles.bubbleRadius", 10) / 100f;
         return options;
     }
 

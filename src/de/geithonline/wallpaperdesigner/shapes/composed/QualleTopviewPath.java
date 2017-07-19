@@ -89,7 +89,7 @@ public class QualleTopviewPath extends ComposedPath {
             final Path s = new SinusObjectsPath(c, length, repeats, amplitude, maxBubbleRadius, //
                     tailOptions.percentOfBubblesToDraw, //
                     tailOptions.sinusObjectsSizingType, //
-                    tailOptions.sinusObjectType);
+                    tailOptions.sinusObjectType, tailOptions.sinusAmplitudeType);
             if (getFlipBoolean(flip, tailOptions)) {
                 PathHelper.mirrorPathUpDown(c.x, c.y, s);
             }

@@ -12,7 +12,8 @@
             android:icon="@android:drawable/ic_menu_add"
             android:key="jellyfishBubbleOptions"
             android:title="Bubble Tail Options..." >
-            <PreferenceCategory android:title="Bubble Tail Options" />
+
+            <PreferenceCategory android:title="Number of Tails and Positioning" />
 
             <de.geithonline.android.basics.preferences.SeekBarPreference
                 android:defaultValue="6"
@@ -25,14 +26,39 @@
                 seekbarpreference:stepValue="1" />
 
             <de.geithonline.android.basics.preferences.CoolListPreference
-                android:summary=""
                 android:defaultValue="Even"
                 android:dialogTitle="Rotation Type"
                 android:entries="@array/tailrotationtype"
                 android:entryValues="@array/tailrotationtype"
                 android:key="TailOptionsBubbles.tailRotationType"
+                android:summary=""
                 android:title="Rotation Type" />
 
+            <PreferenceCategory android:title="Bubble Size" />
+            
+            <de.geithonline.android.basics.preferences.CoolListPreference
+                android:defaultValue="Decreasing"
+                android:dialogTitle="Bubble Sizing Type"
+                android:entries="@array/sinusObjectSizingType"
+                android:entryValues="@array/sinusObjectSizingType"
+                android:key="TailOptionsBubbles.sinusObjectSizingType"
+                android:summary=""
+                android:title="Bubble Sizing Type" />
+            
+            <de.geithonline.android.basics.preferences.SeekBarPreference
+                android:defaultValue="10"
+                android:dialogMessage="Maximum Bubble radius"
+                android:key="TailOptionsBubbles.bubbleRadius"
+                android:summary="%1$d"
+                android:title="Maximum Bubble radius"
+                seekbarpreference:maxValue="50"
+                seekbarpreference:minValue="5"
+                seekbarpreference:stepValue="5" />
+
+            
+            
+            <PreferenceCategory android:title="The Tail itself" />
+            
             <de.geithonline.android.basics.preferences.RangeSeekBarPreference
                 android:dialogMessage="Sine Halfwaves"
                 android:key="TailOptionsBubbles.sinusRepeats"
@@ -45,6 +71,16 @@
                 seekbarpreference:keyMaxValue="TailOptionsBubbles.maxSinusRepeats"
                 seekbarpreference:keyMinValue="TailOptionsBubbles.minSinusRepeats"
                 seekbarpreference:step="1" />
+
+            <de.geithonline.android.basics.preferences.CoolListPreference
+                android:defaultValue="Normal"
+                android:dialogTitle="Amplitude Type"
+                android:entries="@array/sinusAmplitudeType"
+                android:entryValues="@array/sinusAmplitudeType"
+                android:key="TailOptionsBubbles.sinusAmplitudeType"
+                android:summary=""
+                android:title="Amplitude Type" />
+
             <de.geithonline.android.basics.preferences.RangeSeekBarPreference
                 android:dialogMessage="Sine Amplitude"
                 android:key="TailOptionsBubbles.amplitude"
@@ -57,6 +93,7 @@
                 seekbarpreference:keyMaxValue="TailOptionsBubbles.maxAmplitude"
                 seekbarpreference:keyMinValue="TailOptionsBubbles.minAmplitude"
                 seekbarpreference:step="1" />
+
             <de.geithonline.android.basics.preferences.RangeSeekBarPreference
                 android:dialogMessage="Length"
                 android:key="TailOptionsBubbles.length"
@@ -80,6 +117,7 @@
             android:icon="@android:drawable/ic_menu_add"
             android:key="jellyfishLineOptions"
             android:title="Line Tail Options..." >
+
             <PreferenceCategory android:title="Line Tail Options" />
 
             <de.geithonline.android.basics.preferences.SeekBarPreference
@@ -92,15 +130,16 @@
                 seekbarpreference:minValue="0"
                 seekbarpreference:stepValue="1" />
 
-           
             <de.geithonline.android.basics.preferences.CoolListPreference
                 android:defaultValue="Even"
                 android:dialogTitle="Rotation Type"
                 android:entries="@array/tailrotationtype"
                 android:entryValues="@array/tailrotationtype"
                 android:key="TailOptionsLine.tailRotationType"
-	            android:summary=""
+                android:summary=""
                 android:title="Rotation Type" />
+
+            <PreferenceCategory android:title="The Tail itself" />
             
             <de.geithonline.android.basics.preferences.RangeSeekBarPreference
                 android:dialogMessage="Sine Halfwaves"
@@ -114,6 +153,16 @@
                 seekbarpreference:keyMaxValue="TailOptionsLine.maxSinusRepeats"
                 seekbarpreference:keyMinValue="TailOptionsLine.minSinusRepeats"
                 seekbarpreference:step="1" />
+
+            <de.geithonline.android.basics.preferences.CoolListPreference
+                android:defaultValue="Normal"
+                android:dialogTitle="Amplitude Type"
+                android:entries="@array/sinusAmplitudeType"
+                android:entryValues="@array/sinusAmplitudeType"
+                android:key="TailOptionsLine.sinusAmplitudeType"
+                android:summary=""
+                android:title="Amplitude Type" />
+
             <de.geithonline.android.basics.preferences.RangeSeekBarPreference
                 android:dialogMessage="Sine Amplitude"
                 android:key="TailOptionsLine.amplitude"

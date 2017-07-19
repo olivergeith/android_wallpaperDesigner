@@ -3,22 +3,9 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
 
 public class SinusPath extends Path {
-
-    public enum SinusAmplitudeType {
-        normal, decreasingAmplitude;
-        public static SinusAmplitudeType enumForName(final String name) {
-            switch (name) {
-                default:
-                case "Decreasing Amplitude":
-                    return SinusAmplitudeType.decreasingAmplitude;
-                case "Normal":
-                    return SinusAmplitudeType.normal;
-            }
-        }
-
-    }
 
     /**
      * @param center
@@ -51,7 +38,8 @@ public class SinusPath extends Path {
      *            1 == one bow/Halbwelle, 2 == a complete sinus
      * @param amplitude
      */
-    public SinusPath(final PointF center, final float radius, final int sinRepeats, final float amplitude, final SinusAmplitudeType type, final boolean filled) {
+    public SinusPath(final PointF center, final float radius, final int sinRepeats, final float amplitude, final SinusAmplitudeType type,
+            final boolean filled) {
         super();
         switch (type) {
             case decreasingAmplitude:

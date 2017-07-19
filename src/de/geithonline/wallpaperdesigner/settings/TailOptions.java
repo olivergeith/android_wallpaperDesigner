@@ -1,8 +1,6 @@
 
 package de.geithonline.wallpaperdesigner.settings;
 
-import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusAmplitudeType;
-
 public class TailOptions {
 
     public enum TailRotationType {
@@ -16,6 +14,20 @@ public class TailOptions {
                     return TailRotationType.Random;
             }
         }
+    }
+
+    public enum SinusAmplitudeType {
+        normal, decreasingAmplitude;
+        public static SinusAmplitudeType enumForName(final String name) {
+            switch (name) {
+                default:
+                case "Decreasing Amplitude":
+                    return SinusAmplitudeType.decreasingAmplitude;
+                case "Normal":
+                    return SinusAmplitudeType.normal;
+            }
+        }
+
     }
 
     public int minSinusRepeats = 1; // Anzahl Halbwellen

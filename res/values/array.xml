@@ -50,6 +50,19 @@
         <item >Even</item>
         <item >Random</item>
     </string-array>
+
+    <string-array name="sinusAmplitudeType">
+        <item >Normal</item>
+        <item >Decreasing Amplitude</item>
+    </string-array>
+    
+    <string-array name="sinusObjectSizingType">
+        <item >Random</item>
+        <item >Decreasing</item>
+        <item >Connected</item>
+        <item >Decreasing with big End</item>
+        <item >Increasing</item>
+    </string-array>
     
     
     

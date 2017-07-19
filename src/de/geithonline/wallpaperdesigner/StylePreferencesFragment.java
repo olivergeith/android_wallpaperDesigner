@@ -47,7 +47,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_style_10_pattern);
 		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish);
-		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish2);
+		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish_topview);
 		addPreferencesFromResource(R.xml.preferences_style_10_11_scene);
 		addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
 		addPreferencesFromResource(R.xml.preferences_style_30_glossy);

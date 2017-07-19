@@ -3,11 +3,11 @@ package de.geithonline.wallpaperdesigner.shapes.composed;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath;
 import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
-import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.shapes.StarPath;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
