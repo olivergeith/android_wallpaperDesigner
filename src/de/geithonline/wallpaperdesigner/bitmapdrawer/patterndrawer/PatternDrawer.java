@@ -1647,7 +1647,10 @@ public class PatternDrawer {
         }
         // tail
         if (path.tail != null) {
-            OutlineDrawer.setupPaintForStroke(paint, radius);
+            if (tailOptionsLine.outline) {
+                OutlineDrawer.setupPaintForStroke(paint, radius);
+            }
+            // OutlineDrawer.setupPaintForStroke(paint, radius);
             if (Settings.isColorfulDrawing()) {
                 for (final Path p : path.tail.getPathElements()) {
                     pm.randomizeColorAccordingToSettings(pm.getInitialColor());

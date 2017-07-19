@@ -503,6 +503,7 @@ public class Settings {
         options.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsLine.sinusAmplitudeType", "Normal"));
 
         options.randomFlip = readBooleanPref("TailOptionsLine.randomFlip", false);
+        options.outline = readBooleanPref("TailOptionsLine.outline", true);
 
         options.minAmplitude = readIntegerPref("TailOptionsLine.minAmplitude", 1) / 10f;
         options.maxAmplitude = readIntegerPref("TailOptionsLine.maxAmplitude", 3) / 10f;
@@ -525,6 +526,7 @@ public class Settings {
         options.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectSizingType", "Decreasing"));
         // Log.i("SizingType", "=" + options.sinusObjectsSizingType);
         options.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
+        options.outline = false;
 
         options.minAmplitude = readIntegerPref("TailOptionsBubbles.minAmplitude", 1) / 10f;
         options.maxAmplitude = readIntegerPref("TailOptionsBubbles.maxAmplitude", 3) / 10f;

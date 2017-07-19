@@ -123,7 +123,7 @@ public class QualleTopviewPath extends ComposedPath {
             final PointF c = new PointF();
             c.x = center.x + radius + length;
             c.y = center.y;
-            final Path s = new SinusPath(c, length, repeats, amplitude, tailOptions.sinusAmplitudeType, tailOptions.closedSinus);
+            final Path s = new SinusPath(c, length, repeats, amplitude, tailOptions.sinusAmplitudeType, !tailOptions.outline);
             if (getFlipBoolean(flip, tailOptions)) {
                 PathHelper.mirrorPathUpDown(c.x, c.y, s);
             }

@@ -38,6 +38,7 @@ public class TailOptions {
     public float maxLength = 1.0f; // a multiple of radius
     public float minLength = 3.0f; // a multiple of radius
     public boolean randomFlip = false;
+    public boolean outline = true;
     public TailRotationType tailRotationType = TailRotationType.Even;
     public SinusAmplitudeType sinusAmplitudeType = SinusAmplitudeType.decreasingAmplitude;
 
