@@ -1,10 +1,21 @@
 
 package de.geithonline.wallpaperdesigner.settings;
 
+import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusAmplitudeType;
+
 public class TailOptions {
 
-    public enum RotationType {
+    public enum TailRotationType {
         Random, Even;
+        public static TailRotationType enumForName(final String name) {
+            switch (name) {
+                default:
+                case "Even":
+                    return TailRotationType.Even;
+                case "Random":
+                    return TailRotationType.Random;
+            }
+        }
     }
 
     public int minSinusRepeats = 1; // Anzahl Halbwellen
@@ -15,6 +26,7 @@ public class TailOptions {
     public float maxLength = 1.0f; // a multiple of radius
     public float minLength = 3.0f; // a multiple of radius
     public boolean randomFlip = false;
-    public RotationType rotationType = RotationType.Even;
+    public TailRotationType tailRotationType = TailRotationType.Even;
+    public SinusAmplitudeType sinusAmplitudeType = SinusAmplitudeType.decreasingAmplitude;
 
 }

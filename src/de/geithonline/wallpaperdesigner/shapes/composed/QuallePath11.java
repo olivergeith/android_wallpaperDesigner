@@ -5,7 +5,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.SinusPath;
-import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusType;
+import de.geithonline.wallpaperdesigner.shapes.SinusPath.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -108,7 +108,7 @@ public class QuallePath11 extends ComposedPath {
 			final PointF c = new PointF();
 			c.x = center.x + radius * 1.2f + length;
 			c.y = center.y;
-			final Path s = new SinusPath(c, length, repeats, amplitude, SinusType.decreasingAmplitude);
+			final Path s = new SinusPath(c, length, repeats, amplitude, SinusAmplitudeType.decreasingAmplitude);
 			if (flip) {
 				PathHelper.mirrorPathUpDown(c.x, c.y, s);
 			}
