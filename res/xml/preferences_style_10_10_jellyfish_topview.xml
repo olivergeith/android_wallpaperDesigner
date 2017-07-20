@@ -9,7 +9,7 @@
         android:title="Jellyfish Topview Options..." >
         <PreferenceScreen
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@android:drawable/ic_menu_edit"
             android:key="jellyfishBubbleOptions"
             android:title="Bubble Tail Options..." >
 
@@ -22,7 +22,7 @@
                 android:summary="%1$d Tails"
                 android:title="Number of Bubble Tails"
                 seekbarpreference:maxValue="30"
-                seekbarpreference:minValue="1"
+                seekbarpreference:minValue="0"
                 seekbarpreference:stepValue="1" />
 
             <de.geithonline.android.basics.preferences.CoolListPreference
@@ -120,12 +120,19 @@
 
             <CheckBoxPreference
                 android:defaultValue="false"
+                android:key="TailOptionsBubbles.colorful"
+                android:title="Colorful" 
+                android:summary="Each tail has its own random color"
+                />
+            
+            <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="TailOptionsBubbles.randomFlip"
                 android:title="Ramdomly flipped" />
             </PreferenceScreen>
         <PreferenceScreen
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@android:drawable/ic_menu_edit"
             android:key="jellyfishLineOptions"
             android:title="Line Tail Options..." >
 
@@ -199,6 +206,24 @@
                 seekbarpreference:keyMinValue="TailOptionsLine.minLength"
                 seekbarpreference:step="5" />
 
+            <de.geithonline.android.basics.preferences.SeekBarPreference
+                android:defaultValue="10"
+                android:dialogMessage="Inset"
+                android:key="TailOptionsLine.inset"
+                android:summary="%1$d"
+                android:title="Inset"
+                seekbarpreference:maxValue="20"
+                seekbarpreference:minValue="3"
+                seekbarpreference:stepValue="1" />
+            
+            
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="TailOptionsLine.colorful"
+                android:title="Colorful" 
+                android:summary="Each tail has its own random color"
+                />
+            
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="TailOptionsLine.randomFlip"

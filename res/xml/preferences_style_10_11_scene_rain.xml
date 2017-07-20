@@ -5,7 +5,7 @@
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_add"
-        android:key="sceneOptions"
+        android:key="sceneRainOptions"
         android:title="Scene Options..." >
 
         <de.geithonline.android.basics.preferences.SeekBarPreference

@@ -496,51 +496,55 @@ public class Settings {
         return readStringPref(KEY_TAIL_OPTION, "With Tail");
     }
 
+    private final static TailOptionsLine lineOptions = new TailOptionsLine();
+
     public static TailOptionsLine getTailOptionsLine() {
-        final TailOptionsLine options = new TailOptionsLine();
-        options.anzTails = readIntegerPref("TailOptionsLine.anzTails", 25);
-        options.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsLine.tailRotationType", "Even"));
-        options.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsLine.sinusAmplitudeType", "Normal"));
+        lineOptions.anzTails = readIntegerPref("TailOptionsLine.anzTails", 25);
+        lineOptions.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsLine.tailRotationType", "Even"));
+        lineOptions.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsLine.sinusAmplitudeType", "Normal"));
 
-        options.randomFlip = readBooleanPref("TailOptionsLine.randomFlip", false);
-        options.outline = readBooleanPref("TailOptionsLine.outline", true);
+        lineOptions.randomFlip = readBooleanPref("TailOptionsLine.randomFlip", false);
+        lineOptions.outline = readBooleanPref("TailOptionsLine.outline", true);
+        lineOptions.colorful = readBooleanPref("TailOptionsLine.colorful", true);
 
-        options.minAmplitude = readIntegerPref("TailOptionsLine.minAmplitude", 1) / 10f;
-        options.maxAmplitude = readIntegerPref("TailOptionsLine.maxAmplitude", 3) / 10f;
+        lineOptions.minAmplitude = readIntegerPref("TailOptionsLine.minAmplitude", 1) / 10f;
+        lineOptions.maxAmplitude = readIntegerPref("TailOptionsLine.maxAmplitude", 3) / 10f;
 
-        options.minSinusRepeats = readIntegerPref("TailOptionsLine.minSinusRepeats", 1);
-        options.maxSinusRepeats = readIntegerPref("TailOptionsLine.maxSinusRepeats", 3);
+        lineOptions.minSinusRepeats = readIntegerPref("TailOptionsLine.minSinusRepeats", 1);
+        lineOptions.maxSinusRepeats = readIntegerPref("TailOptionsLine.maxSinusRepeats", 3);
 
-        options.minLength = readIntegerPref("TailOptionsLine.minLength", 25) / 10f;
-        options.maxLength = readIntegerPref("TailOptionsLine.maxLength", 50) / 10f;
-
-        return options;
+        lineOptions.minLength = readIntegerPref("TailOptionsLine.minLength", 25) / 10f;
+        lineOptions.maxLength = readIntegerPref("TailOptionsLine.maxLength", 50) / 10f;
+        lineOptions.inset = readIntegerPref("TailOptionsLine.inset", 10) / 10f;
+        return lineOptions;
     }
 
+    private final static TailOptionsBubbles bubbleOptions = new TailOptionsBubbles();
+
     public static TailOptionsBubbles getTailOptionsBubbles() {
-        final TailOptionsBubbles options = new TailOptionsBubbles();
-        options.anzTails = readIntegerPref("TailOptionsBubbles.anzTails", 6);
-        options.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsBubbles.tailRotationType", "Even"));
+        bubbleOptions.anzTails = readIntegerPref("TailOptionsBubbles.anzTails", 6);
+        bubbleOptions.tailRotationType = TailRotationType.enumForName(readStringPref("TailOptionsBubbles.tailRotationType", "Even"));
 
-        options.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsBubbles.sinusAmplitudeType", "Normal"));
-        options.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectSizingType", "Decreasing"));
+        bubbleOptions.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsBubbles.sinusAmplitudeType", "Normal"));
+        bubbleOptions.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectSizingType", "Decreasing"));
         // Log.i("SizingType", "=" + options.sinusObjectsSizingType);
-        options.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
-        options.outline = false;
+        bubbleOptions.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
+        bubbleOptions.outline = false;
+        bubbleOptions.colorful = readBooleanPref("TailOptionsBubbles.colorful", true);
 
-        options.minAmplitude = readIntegerPref("TailOptionsBubbles.minAmplitude", 1) / 10f;
-        options.maxAmplitude = readIntegerPref("TailOptionsBubbles.maxAmplitude", 3) / 10f;
+        bubbleOptions.minAmplitude = readIntegerPref("TailOptionsBubbles.minAmplitude", 1) / 10f;
+        bubbleOptions.maxAmplitude = readIntegerPref("TailOptionsBubbles.maxAmplitude", 3) / 10f;
 
-        options.minSinusRepeats = readIntegerPref("TailOptionsBubbles.minSinusRepeats", 1);
-        options.maxSinusRepeats = readIntegerPref("TailOptionsBubbles.maxSinusRepeats", 3);
+        bubbleOptions.minSinusRepeats = readIntegerPref("TailOptionsBubbles.minSinusRepeats", 1);
+        bubbleOptions.maxSinusRepeats = readIntegerPref("TailOptionsBubbles.maxSinusRepeats", 3);
 
-        options.minLength = readIntegerPref("TailOptionsBubbles.minLength", 25) / 10f;
-        options.maxLength = readIntegerPref("TailOptionsBubbles.maxLength", 50) / 10f;
+        bubbleOptions.minLength = readIntegerPref("TailOptionsBubbles.minLength", 25) / 10f;
+        bubbleOptions.maxLength = readIntegerPref("TailOptionsBubbles.maxLength", 50) / 10f;
 
-        options.bubbleRadius = readIntegerPref("TailOptionsBubbles.bubbleRadius", 10) / 100f;
+        bubbleOptions.bubbleRadius = readIntegerPref("TailOptionsBubbles.bubbleRadius", 10) / 100f;
 
-        options.percentOfBubblesToDraw = readIntegerPref("TailOptionsBubbles.percentOfBubblesToDraw", 100);
-        return options;
+        bubbleOptions.percentOfBubblesToDraw = readIntegerPref("TailOptionsBubbles.percentOfBubblesToDraw", 100);
+        return bubbleOptions;
     }
 
     public static boolean getFilledBoolean() {

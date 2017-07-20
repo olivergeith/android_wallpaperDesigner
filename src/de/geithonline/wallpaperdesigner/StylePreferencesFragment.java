@@ -41,7 +41,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
     private PreferenceScreen jellyfishOptions;
     private PreferenceScreen jellyfishTopviewOptions;
-    private PreferenceScreen sceneOptions;
+    private PreferenceScreen sceneRainOptions;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
         addPreferencesFromResource(R.xml.preferences_style_10_pattern);
         addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish);
         addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish_topview);
-        addPreferencesFromResource(R.xml.preferences_style_10_11_scene);
+        addPreferencesFromResource(R.xml.preferences_style_10_11_scene_rain);
         addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
         addPreferencesFromResource(R.xml.preferences_style_30_glossy);
         addPreferencesFromResource(R.xml.preferences_style_40_rotating);
@@ -61,7 +61,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
         jellyfishOptions = (PreferenceScreen) findPreference("jellyfishOptions");
         jellyfishTopviewOptions = (PreferenceScreen) findPreference("jellyfishOptions2");
-        sceneOptions = (PreferenceScreen) findPreference("sceneOptions");
+        sceneRainOptions = (PreferenceScreen) findPreference("sceneRainOptions");
 
         reflectionStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_REFLECTION_STYLE);
         glowStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_GLOW_STYLE);
@@ -306,10 +306,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
         } else {
             getPreferenceScreen().removePreference(jellyfishTopviewOptions);
         }
-        if (pattern.equalsIgnoreCase("Scenes")) {
-            getPreferenceScreen().addPreference(sceneOptions);
+        if (pattern.equalsIgnoreCase("Scenes") && variant.equals("Rain#")) {
+            getPreferenceScreen().addPreference(sceneRainOptions);
         } else {
-            getPreferenceScreen().removePreference(sceneOptions);
+            getPreferenceScreen().removePreference(sceneRainOptions);
         }
 
     }

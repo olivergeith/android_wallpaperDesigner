@@ -34,11 +34,12 @@ public class TailOptions {
     public int maxSinusRepeats = 3; // Anzahl Halbwellen
     public float maxAmplitude = 0.3f; // a multiple of radius
     public float minAmplitude = 0.1f; // a multiple of radius
-    public int anzTails = 50; // Anzahl Tails
+    public int anzTails = 25; // Anzahl Tails
     public float maxLength = 1.0f; // a multiple of radius
     public float minLength = 3.0f; // a multiple of radius
     public boolean randomFlip = false;
     public boolean outline = true;
+    public boolean colorful = true;
     public TailRotationType tailRotationType = TailRotationType.Even;
     public SinusAmplitudeType sinusAmplitudeType = SinusAmplitudeType.decreasingAmplitude;
 

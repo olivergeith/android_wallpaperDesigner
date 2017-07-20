@@ -14,13 +14,13 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class QualleTopviewPath extends ComposedPath {
 
     public Path qualle;
-    public Path inner;
-    public ComposedPath tail;
-    public ComposedPath bubbletail;
+    public Path inner = new Path();
+    public ComposedPath tail = new ComposedPath();
+    public ComposedPath bubbletail = new ComposedPath();
 
     public QualleTopviewPath(final PointF center, final float radius, final TailOptionsLine tailOptions, final TailOptionsBubbles bubbleOptions) {
         drawQualle(center, radius);
-        drawInnerQualle(center, radius);
+        drawInnerQualleV2(center, radius);
         drawTail(center, radius, tailOptions);
         drawBubbleTail(center, radius, bubbleOptions);
     }
@@ -31,7 +31,6 @@ public class QualleTopviewPath extends ComposedPath {
     }
 
     protected void drawInnerQualle(final PointF center, final float radius) {
-        inner = new Path();
         final PointF c1 = new PointF();
         final PointF c2 = new PointF();
         final float raster = radius / 4;
@@ -72,11 +71,55 @@ public class QualleTopviewPath extends ComposedPath {
         p2 = new CirclePath(c2, r2);
         p1.op(p2, Op.DIFFERENCE);
         inner.addPath(p1);
+        // if (false) {
+        // drawInnerLines(center, radius);
+        // }
+        addPath(inner);
+    }
+
+    private void drawInnerLines(final PointF center, final float radius) {
+        final boolean flip = Randomizer.getRandomBoolean();
+        final int anz = 20;
+        for (int i = 0; i < anz; i++) {
+            final int repeats = 1;
+            final float amplitude = radius * 0.05f;
+            final float length = radius * 0.25f;
+            final PointF c = new PointF();
+            c.x = center.x + radius * 0.5f + length;
+            c.y = center.y;
+            final Path s = new SinusPath(c, length, repeats, amplitude);
+            if (flip) {
+                PathHelper.mirrorPathUpDown(c.x, c.y, s);
+            }
+            PathHelper.rotatePath(center, s, i * 360 / anz);
+            inner.addPath(s);
+        }
+    }
+
+    private void drawInnerQualleV2(final PointF center, final float radius) {
+        final int anz = Randomizer.getRandomInt(4, 5);
+        for (int i = 0; i < anz; i++) {
+            final PointF c1 = new PointF();
+            final PointF c2 = new PointF();
+            final float raster = radius / 3;
+            final float r1 = raster * 0.6f;
+            final float r2 = raster * 0.45f;
+            Path p1;
+            Path p2;
+            c1.x = center.x + raster;
+            c1.y = center.y;
+            c2.x = center.x + raster * 0.8f;
+            c2.y = center.y;
+            p1 = new CirclePath(c1, r1);
+            p2 = new CirclePath(c2, r2);
+            p1.op(p2, Op.DIFFERENCE);
+            PathHelper.rotatePath(center, p1, i * 360 / anz);
+            inner.addPath(p1);
+        }
         addPath(inner);
     }
 
     protected void drawBubbleTail(final PointF center, final float radius, final TailOptionsBubbles tailOptions) {
-        bubbletail = new ComposedPath();
         final Boolean flip = Randomizer.getRandomBoolean();
         for (int i = 0; i < tailOptions.anzTails; i++) {
             final int repeats = Randomizer.getRandomInt(tailOptions.minSinusRepeats, tailOptions.maxSinusRepeats);
@@ -109,7 +152,6 @@ public class QualleTopviewPath extends ComposedPath {
     }
 
     protected void drawTail(final PointF center, final float radius, final TailOptionsLine tailOptions) {
-        tail = new ComposedPath();
         drawSinusTail(center, radius, tailOptions);
         addPath(tail);
     }
@@ -121,7 +163,7 @@ public class QualleTopviewPath extends ComposedPath {
             final float amplitude = radius * Randomizer.getRandomFloat(tailOptions.minAmplitude, tailOptions.maxAmplitude);
             final float length = radius * Randomizer.getRandomFloat(tailOptions.minLength, tailOptions.maxLength);
             final PointF c = new PointF();
-            c.x = center.x + radius + length;
+            c.x = center.x + radius * tailOptions.inset + length;
             c.y = center.y;
             final Path s = new SinusPath(c, length, repeats, amplitude, tailOptions.sinusAmplitudeType, !tailOptions.outline);
             if (getFlipBoolean(flip, tailOptions)) {

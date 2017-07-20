@@ -154,13 +154,13 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath13;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath14;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath2;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath3;
-import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath4;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath5;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath6;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath7;
-import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath8;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath9;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset01;
+import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset02;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
@@ -1439,14 +1439,6 @@ public class PatternDrawer {
                 innerQualle = new QuallePath3(new PointF(x, y), radius, EQualleType.inner_qualle);
                 bubbleTail = new QuallePath3(new PointF(x, y), radius, EQualleType.bubbletail);
                 break;
-            case "V4":
-            case "V4 (Topview 1)":
-            case "Jellyfish 4":
-                path = new QuallePath4(new PointF(x, y), radius, leafs, EQualleType.qualle);
-                tail = new QuallePath4(new PointF(x, y), radius, leafs, EQualleType.tail);
-                innerQualle = new QuallePath4(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
-                bubbleTail = new QuallePath4(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
-                break;
             case "V5":
             case "V5 (Topview 2)":
             case "Jellyfish 5":
@@ -1470,14 +1462,6 @@ public class PatternDrawer {
                 tail = new QuallePath7(new PointF(x, y), radius, leafs, EQualleType.tail);
                 innerQualle = new QuallePath7(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
                 bubbleTail = new QuallePath7(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
-                break;
-            case "V8":
-            case "V8 (Topview 5)":
-            case "Jellyfish 8":
-                path = new QuallePath8(new PointF(x, y), radius, leafs, EQualleType.qualle);
-                tail = new QuallePath8(new PointF(x, y), radius, leafs, EQualleType.tail);
-                innerQualle = new QuallePath8(new PointF(x, y), radius, leafs, EQualleType.inner_qualle);
-                bubbleTail = new QuallePath8(new PointF(x, y), radius, leafs, EQualleType.bubbletail);
                 break;
             case "V9":
             case "V9 (Ghost)":
@@ -1588,7 +1572,7 @@ public class PatternDrawer {
     private void drawQualle2(final int x, final int y, final int radius, final int index) {
         String variant = Settings.getSelectedPatternVariant();
         if (variant.equalsIgnoreCase("Mixed")) {
-            final int nr = Randomizer.getRandomInt(1, 13);
+            final int nr = Randomizer.getRandomInt(1, 3);
             variant = "V" + nr;
         }
         drawQualle2(x, y, radius, variant);
@@ -1598,9 +1582,8 @@ public class PatternDrawer {
         final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
         QualleTopviewPath path = null;
 
-        final TailOptionsLine tailOptionsLine = Settings.getTailOptionsLine();
-        final TailOptionsBubbles tailOptionsBubbles = Settings.getTailOptionsBubbles();
-
+        TailOptionsLine tailOptionsLine = Settings.getTailOptionsLine();
+        TailOptionsBubbles tailOptionsBubbles = Settings.getTailOptionsBubbles();
         switch (variante) {
             default:
             case "V1":
@@ -1608,7 +1591,15 @@ public class PatternDrawer {
                 path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
                 break;
             case "V2":
-            case "Sideview":
+            case "Topview Preset 1":
+                tailOptionsLine = QualleTopviewPreset01.lineOptions;
+                tailOptionsBubbles = QualleTopviewPreset01.bubbleOptions;
+                path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
+                break;
+            case "V3":
+            case "Topview Preset 2":
+                tailOptionsLine = QualleTopviewPreset02.lineOptions;
+                tailOptionsBubbles = QualleTopviewPreset02.bubbleOptions;
                 path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
                 break;
         }
@@ -1631,7 +1622,7 @@ public class PatternDrawer {
         }
         // bubble tail
         if (path.bubbletail != null) {
-            if (Settings.isColorfulDrawing()) {
+            if (tailOptionsBubbles.colorful) {
                 for (final Path p : path.bubbletail.getPathElements()) {
                     pm.randomizeColorAccordingToSettings(pm.getInitialColor());
                     pm.setupDropShadowForPatternDark(pm.getCurrentColor());
@@ -1651,7 +1642,7 @@ public class PatternDrawer {
                 OutlineDrawer.setupPaintForStroke(paint, radius);
             }
             // OutlineDrawer.setupPaintForStroke(paint, radius);
-            if (Settings.isColorfulDrawing()) {
+            if (tailOptionsLine.colorful) {
                 for (final Path p : path.tail.getPathElements()) {
                     pm.randomizeColorAccordingToSettings(pm.getInitialColor());
                     pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
@@ -1664,7 +1655,6 @@ public class PatternDrawer {
                 bitmapCanvas.drawPath(path.tail, paint);
             }
         }
-        // bitmapCanvas.drawLine(x, y, prevPoint.x, prevPoint.y, paint);
     }
 
     // #########################################################################################
