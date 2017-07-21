@@ -12,6 +12,7 @@ import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.TailRotationType;
 import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsSizingType;
+import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsType;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
@@ -527,6 +528,7 @@ public class Settings {
 
         bubbleOptions.sinusAmplitudeType = SinusAmplitudeType.enumForName(readStringPref("TailOptionsBubbles.sinusAmplitudeType", "Normal"));
         bubbleOptions.sinusObjectsSizingType = ESinusObjectsSizingType.enumForName(readStringPref("TailOptionsBubbles.sinusObjectSizingType", "Decreasing"));
+        bubbleOptions.sinusObjectType = ESinusObjectsType.enumForNameUsedInQualle(readStringPref("TailOptionsBubbles.sinusObjectType", "Bubble"));
         // Log.i("SizingType", "=" + options.sinusObjectsSizingType);
         bubbleOptions.randomFlip = readBooleanPref("TailOptionsBubbles.randomFlip", false);
         bubbleOptions.outline = false;

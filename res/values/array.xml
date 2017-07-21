@@ -47,14 +47,17 @@
     </string-array>
     
     <string-array name="tailrotationtype">
-        <item >Even</item>
         <item >Random</item>
+        <item >Even</item>
+        <item >Spiral</item>
+        <item >Heart</item>
     </string-array>
 
     <string-array name="sinusAmplitudeType">
         <item >Normal</item>
         <item >Decreasing Amplitude</item>
-    </string-array>
+		<item >Increasing Amplitude</item>
+        </string-array>
     
     <string-array name="sinusObjectSizingType">
         <item >Random</item>
@@ -64,6 +67,11 @@
         <item >Increasing</item>
     </string-array>
     
+    <string-array name="sinusObjectType">
+        <item >Star</item>
+        <item >Bubble</item>
+        <item >Heart</item>
+    </string-array>
     
     
     <string-array name="theme">
@@ -161,7 +169,7 @@
         <item >Hearts</item>
         <item >Invertable Shapes</item>
         <item >Jellyfish</item>
-        <item >Jellyfish New</item>
+        <item >Jellyfish Topview</item>
         <item >Leafs</item>
         <item >Lines</item>
         <item >Lines (Directed)</item>

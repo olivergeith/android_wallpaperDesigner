@@ -35,6 +35,15 @@
                 android:title="Rotation Type" />
 
             <PreferenceCategory android:title="The Bubble itself" />
+
+            <de.geithonline.android.basics.preferences.CoolListPreference
+                android:defaultValue="Bubble"
+                android:dialogTitle="Bubble Type"
+                android:entries="@array/sinusObjectType"
+                android:entryValues="@array/sinusObjectType"
+                android:key="TailOptionsBubbles.sinusObjectType"
+                android:summary=""
+                android:title="Bubble Type" />
             
             <de.geithonline.android.basics.preferences.CoolListPreference
                 android:defaultValue="Decreasing"
@@ -54,7 +63,6 @@
                 seekbarpreference:maxValue="50"
                 seekbarpreference:minValue="5"
                 seekbarpreference:stepValue="5" />
-
             
             <de.geithonline.android.basics.preferences.SeekBarPreference
                 android:defaultValue="100"

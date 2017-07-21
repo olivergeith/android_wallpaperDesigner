@@ -301,7 +301,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
         } else {
             getPreferenceScreen().removePreference(jellyfishOptions);
         }
-        if (pattern.equalsIgnoreCase("Jellyfish New") && variant.equals("Topview")) {
+        if (pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable")) {
             getPreferenceScreen().addPreference(jellyfishTopviewOptions);
         } else {
             getPreferenceScreen().removePreference(jellyfishTopviewOptions);

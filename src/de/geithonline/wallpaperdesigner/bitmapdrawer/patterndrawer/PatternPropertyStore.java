@@ -64,21 +64,14 @@ public class PatternPropertyStore {
                         "V1 (Half Circle)", //
                         "V2 (UFO)", //
                         "V3 (Oval)", //
-                        "V9 (Ghost)", //
-                        "V5 (Topview 2)", //
-                        "V6 (Topview 3)", //
-                        "V7 (Topview 4)", //
-                        "V10 (Curly)", //
-                        "V11 (Spiral)", //
-                        "V12 (Heart)", //
-                        "V13 (Big)", //
-                        "V14 (Schweif)", //
                         "Mixed" }));
-        patternProperties.put("Jellyfish New", new PatternProperties(true, true, false, false, false, true, //
+        patternProperties.put("Jellyfish Topview", new PatternProperties(true, true, false, false, false, true, //
                 new CharSequence[] { //
-                        "Topview", //
-                        "Topview Preset 1", //
-                        "Topview Preset 2" //
+                        "Fully customizable", //
+                        "Preset 1", //
+                        "Preset 2", //
+                        "Heart Preset", //
+                        "Spiral Preset" //
                 }));
         patternProperties.put("Leafs", new PatternProperties(true, true, false, false, false, true, //
                 new CharSequence[] { "Maple", "Finger Maple", "Weed", "Round Leaf", "Mixed" }));

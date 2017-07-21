@@ -87,6 +87,9 @@ public class SinusObjectsPath extends ComposedPath {
 
             float a = amplitude;
             switch (amplitudeType) {
+                case increasingAmplitude:
+                    a = (i) * amplitude / points;
+                    break;
                 case decreasingAmplitude:
                     a = (points - i) * amplitude / points;
                     break;
@@ -261,10 +264,21 @@ public class SinusObjectsPath extends ComposedPath {
                 return new CirclePath(center, radius, 0, true, CIRCLE_STYLE.CIRCLE);
             case star:
                 return new StarPath(5, center, radius, STAR_TYPE.NORMAL, true);
-            case heart:
+            case heart: {
                 final Path p = new HeartPath(center, radius, false, HEART_SHAPE.Lovely);
                 PathHelper.rotatePath(center.x, center.y, p, Randomizer.getRandomFloat(-90 - 19, -90 + 19));
                 return p;
+            }
+            case heart90: {
+                final Path p = new HeartPath(center, radius, false, HEART_SHAPE.Lovely);
+                PathHelper.rotatePath(center.x, center.y, p, 90);
+                return p;
+            }
+            case heart270: {
+                final Path p = new HeartPath(center, radius, false, HEART_SHAPE.Lovely);
+                PathHelper.rotatePath(center.x, center.y, p, 270);
+                return p;
+            }
         }
 
     }

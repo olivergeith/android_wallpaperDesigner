@@ -20,6 +20,9 @@ public class SinusPath extends Path {
             drawLine(center, radius);
         } else {
             switch (type) {
+                case increasingAmplitude:
+                    drawSinusIncreasingAmplitude(center, radius, sinRepeats, amplitude, false);
+                    break;
                 case decreasingAmplitude:
                     drawSinusDecreasingAmplitude(center, radius, sinRepeats, amplitude, false);
                     break;
@@ -42,6 +45,9 @@ public class SinusPath extends Path {
             final boolean filled) {
         super();
         switch (type) {
+            case increasingAmplitude:
+                drawSinusIncreasingAmplitude(center, radius, sinRepeats, amplitude, filled);
+                break;
             case decreasingAmplitude:
                 drawSinusDecreasingAmplitude(center, radius, sinRepeats, amplitude, filled);
                 break;
@@ -119,6 +125,34 @@ public class SinusPath extends Path {
         final int points = 100;
         for (int i = 1; i <= points; i++) {
             final float a = (points - i) * amplitude / points;
+            final float x = l + i * (r - l) / points;
+            final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
+            final float y = mitteY + (float) (a * Math.sin(angle));
+            lineTo(x, y);
+        }
+        if (filled) {
+            close();
+        }
+
+    }
+
+    /**
+     * @param center
+     * @param radius
+     * @param sinRepeats
+     *            1 == one bow, 2 == a complete sinus
+     * @param amplitude
+     */
+    private void drawSinusIncreasingAmplitude(final PointF center, final float radius, final int sinRepeats, final float amplitude, final boolean filled) {
+        // nach links
+        final float l = center.x - radius;
+        final float r = center.x + radius;
+        final float mitteY = center.y;
+        moveTo(l, mitteY);
+        // und nun der Sinus
+        final int points = 100;
+        for (int i = 1; i <= points; i++) {
+            final float a = (i) * amplitude / points;
             final float x = l + i * (r - l) / points;
             final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
             final float y = mitteY + (float) (a * Math.sin(angle));

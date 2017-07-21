@@ -124,7 +124,29 @@ public class QualleTopviewPath extends ComposedPath {
         for (int i = 0; i < tailOptions.anzTails; i++) {
             final int repeats = Randomizer.getRandomInt(tailOptions.minSinusRepeats, tailOptions.maxSinusRepeats);
             final float amplitude = radius * Randomizer.getRandomFloat(tailOptions.minAmplitude, tailOptions.maxAmplitude);
-            final float length = radius * Randomizer.getRandomFloat(tailOptions.minLength, tailOptions.maxLength);
+
+            float length = radius * Randomizer.getRandomFloat(tailOptions.minLength, tailOptions.maxLength);
+            switch (tailOptions.tailRotationType) {
+                default:
+                case Spiral:
+                    length = radius * tailOptions.minLength + i * (radius * tailOptions.maxLength - radius * tailOptions.minLength) / tailOptions.anzTails;
+                    break;
+                case Heart:
+                    if (i < tailOptions.anzTails / 2) {
+                        final int index = i;
+                        length = radius * tailOptions.minLength
+                                + index * (radius * tailOptions.maxLength - radius * tailOptions.minLength) / (tailOptions.anzTails / 2);
+                    } else {
+                        final int index = i - tailOptions.anzTails / 2;
+                        length = radius * tailOptions.minLength
+                                + index * (radius * tailOptions.maxLength - radius * tailOptions.minLength) / (tailOptions.anzTails / 2);
+                    }
+                    break;
+                case Even:
+                case Random:
+                    break;
+            }
+
             final PointF c = new PointF();
             c.x = center.x + radius + length;
             c.y = center.y;
@@ -138,13 +160,22 @@ public class QualleTopviewPath extends ComposedPath {
             }
             switch (tailOptions.tailRotationType) {
                 default:
+                case Spiral:
                 case Even:
                     PathHelper.rotatePath(center, s, i * 360 / tailOptions.anzTails);
                     break;
                 case Random:
                     PathHelper.rotatePath(center, s, Randomizer.getRandomFloat(0, 360));
                     break;
-
+                case Heart:
+                    if (i < tailOptions.anzTails / 2) {
+                        final int index = i;
+                        PathHelper.rotatePath(center, s, -index * 180 / (tailOptions.anzTails / 2));
+                    } else {
+                        final int index = i - tailOptions.anzTails / 2;
+                        PathHelper.rotatePath(center, s, index * 180 / (tailOptions.anzTails / 2));
+                    }
+                    break;
             }
             bubbletail.addPath(s);
         }
@@ -171,6 +202,7 @@ public class QualleTopviewPath extends ComposedPath {
             }
             switch (tailOptions.tailRotationType) {
                 default:
+                case Spiral:
                 case Even:
                     PathHelper.rotatePath(center, s, i * 360 / tailOptions.anzTails);
                     break;

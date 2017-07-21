@@ -4,25 +4,31 @@ package de.geithonline.wallpaperdesigner.settings;
 public class TailOptions {
 
     public enum TailRotationType {
-        Random, Even;
+        Random, Even, Spiral, Heart;
         public static TailRotationType enumForName(final String name) {
             switch (name) {
                 default:
                 case "Even":
                     return TailRotationType.Even;
+                case "Spiral":
+                    return TailRotationType.Spiral;
                 case "Random":
                     return TailRotationType.Random;
+                case "Heart":
+                    return TailRotationType.Heart;
             }
         }
     }
 
     public enum SinusAmplitudeType {
-        normal, decreasingAmplitude;
+        normal, decreasingAmplitude, increasingAmplitude;
         public static SinusAmplitudeType enumForName(final String name) {
             switch (name) {
                 default:
                 case "Decreasing Amplitude":
                     return SinusAmplitudeType.decreasingAmplitude;
+                case "Increasing Amplitude":
+                    return SinusAmplitudeType.increasingAmplitude;
                 case "Normal":
                     return SinusAmplitudeType.normal;
             }
