@@ -496,6 +496,15 @@ public class Settings {
 	}
 
 	private final static TailOptionsLine lineOptions = new TailOptionsLine();
+	private final static EyeOptions eyeOptions = new EyeOptions();
+
+	public static EyeOptions getEyeOptions() {
+		eyeOptions.minBrightness = readIntegerPref("EyeOptions.minBrightness", 60);
+		eyeOptions.maxBrightness = readIntegerPref("EyeOptions.maxBrightness", 90);
+		eyeOptions.minAnzEyes = readIntegerPref("EyeOptions.minAnzEyes", 4);
+		eyeOptions.maxAnzEyes = readIntegerPref("EyeOptions.maxAnzEyes", 5);
+		return eyeOptions;
+	}
 
 	public static TailOptionsLine getTailOptionsLine() {
 		lineOptions.anzTails = readIntegerPref("TailOptionsLine.anzTails", 25);

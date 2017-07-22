@@ -269,6 +269,42 @@
                 android:title="Outline" />
             
         </PreferenceScreen>
+        <PreferenceScreen
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:key="jellyfishEyeOptions"
+            android:title="Eye Options..." >
+        
+            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+                android:dialogMessage="Brightness Randomization"
+                android:key="EyeOptions.brightness"
+                android:summary="%1$s Brightness range"
+                android:title="Brightness Randomization"
+                seekbarpreference:absoluteMaxValue="150"
+                seekbarpreference:absoluteMinValue="-150"
+                seekbarpreference:defaultMaxValue="90"
+                seekbarpreference:defaultMinValue="40"
+                seekbarpreference:keyMaxValue="EyeOptions.maxBrightness"
+                seekbarpreference:keyMinValue="EyeOptions.minBrightness"
+                seekbarpreference:step="5" />
+
+            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+                android:dialogMessage="Number of Eyes"
+                android:key="EyeOptions.anzEyes"
+                android:summary="%1$s Eyes"
+                android:title="Number of Eyes"
+                seekbarpreference:absoluteMaxValue="5"
+                seekbarpreference:absoluteMinValue="0"
+                seekbarpreference:defaultMaxValue="5"
+                seekbarpreference:defaultMinValue="4"
+                seekbarpreference:keyMaxValue="EyeOptions.maxAnzEyes"
+                seekbarpreference:keyMinValue="EyeOptions.minAnzEyes"
+                seekbarpreference:step="1" />
+            
+            
+        
+        </PreferenceScreen>
+            
     </PreferenceScreen>
 
 </PreferenceScreen>

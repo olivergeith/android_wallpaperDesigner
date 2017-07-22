@@ -14,6 +14,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.PaintManager;
+import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
@@ -1503,36 +1504,41 @@ public class PatternDrawer {
 
 		TailOptionsLine tailOptionsLine = Settings.getTailOptionsLine();
 		TailOptionsBubbles tailOptionsBubbles = Settings.getTailOptionsBubbles();
+		EyeOptions eyeOptions = Settings.getEyeOptions();
 		switch (variante) {
 		default:
 		case "V1":
 		case "Topview":
 		case "Fully customizable":
-			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
+			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles, eyeOptions);
 			break;
 		case "V2":
 		case "Preset 1":
 			tailOptionsLine = QualleTopviewPreset01.lineOptions;
 			tailOptionsBubbles = QualleTopviewPreset01.bubbleOptions;
-			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
+			eyeOptions = QualleTopviewPreset01.eyeOptions;
+			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles, eyeOptions);
 			break;
 		case "V3":
 		case "Preset 2":
 			tailOptionsLine = QualleTopviewPreset02.lineOptions;
 			tailOptionsBubbles = QualleTopviewPreset02.bubbleOptions;
-			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
+			eyeOptions = QualleTopviewPreset02.eyeOptions;
+			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles, eyeOptions);
 			break;
 		case "V4":
 		case "Spiral Preset":
 			tailOptionsLine = QualleTopviewPreset03Spiral.lineOptions;
 			tailOptionsBubbles = QualleTopviewPreset03Spiral.bubbleOptions;
-			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
+			eyeOptions = QualleTopviewPreset03Spiral.eyeOptions;
+			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles, eyeOptions);
 			break;
 		case "V5":
 		case "Heart Preset":
 			tailOptionsLine = QualleTopviewPreset04Heart.lineOptions;
 			tailOptionsBubbles = QualleTopviewPreset04Heart.bubbleOptions;
-			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles);
+			eyeOptions = QualleTopviewPreset04Heart.eyeOptions;
+			path = new QualleTopviewPath(new PointF(x, y), radius, tailOptionsLine, tailOptionsBubbles, eyeOptions);
 			break;
 		}
 		PathHelper.rotatePath(x, y, path.qualle, rotationDegrees);
@@ -1548,25 +1554,18 @@ public class PatternDrawer {
 		// inner oval
 		pm.initFillPaint();
 		if (path.inner != null) {
-			pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-			pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), 90));
+			reRandomizeColor(eyeOptions.minBrightness, eyeOptions.maxBrightness, false);
 			bitmapCanvas.drawPath(path.inner, paint);
 		}
 		// bubble tail
 		if (path.bubbletail != null && path.bubbletail.getPathElements().size() > 0) {
 			if (tailOptionsBubbles.colorful) {
 				for (final Path p : path.bubbletail.getPathElements()) {
-					pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-					pm.setupDropShadowForPatternDark(pm.getCurrentColor());
-					pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), //
-							Randomizer.getRandomInt(tailOptionsBubbles.minBrightness, tailOptionsBubbles.maxBrightness)));
+					reRandomizeColor(tailOptionsBubbles.minBrightness, tailOptionsBubbles.maxBrightness, true);
 					bitmapCanvas.drawPath(p, paint);
 				}
 			} else {
-				pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-				pm.setupDropShadowForPatternDark(pm.getCurrentColor());
-				pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), //
-						Randomizer.getRandomInt(tailOptionsBubbles.minBrightness, tailOptionsBubbles.maxBrightness)));
+				reRandomizeColor(tailOptionsBubbles.minBrightness, tailOptionsBubbles.maxBrightness, true);
 				bitmapCanvas.drawPath(path.bubbletail, paint);
 			}
 		}
@@ -1578,19 +1577,24 @@ public class PatternDrawer {
 			// OutlineDrawer.setupPaintForStroke(paint, radius);
 			if (tailOptionsLine.colorful) {
 				for (final Path p : path.tail.getPathElements()) {
-					pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-					pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), //
-							Randomizer.getRandomInt(tailOptionsLine.minBrightness, tailOptionsLine.maxBrightness)));
+					reRandomizeColor(tailOptionsLine.minBrightness, tailOptionsLine.maxBrightness, false);
 					bitmapCanvas.drawPath(p, paint);
 				}
 			} else {
 				// making tail even brighter
-				pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-				pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), //
-						Randomizer.getRandomInt(tailOptionsLine.minBrightness, tailOptionsLine.maxBrightness)));
+				reRandomizeColor(tailOptionsLine.minBrightness, tailOptionsLine.maxBrightness, false);
 				bitmapCanvas.drawPath(path.tail, paint);
 			}
 		}
+	}
+
+	private void reRandomizeColor(final int minBrightness, final int maxBrightness, final boolean withDdropShadow) {
+		pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+		if (withDdropShadow) {
+			pm.setupDropShadowForPatternDark(pm.getCurrentColor());
+		}
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), //
+				Randomizer.getRandomInt(minBrightness, maxBrightness)));
 	}
 
 	// #########################################################################################

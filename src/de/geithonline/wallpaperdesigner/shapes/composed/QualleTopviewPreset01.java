@@ -1,6 +1,7 @@
 
 package de.geithonline.wallpaperdesigner.shapes.composed;
 
+import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.TailRotationType;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
@@ -10,6 +11,17 @@ public class QualleTopviewPreset01 {
 
 	public static final TailOptionsLine lineOptions = getTailOptionsLine();
 	public static final TailOptionsBubbles bubbleOptions = getTailOptionsBubbles();
+
+	public static final EyeOptions eyeOptions = getEyeOptions();
+
+	public static EyeOptions getEyeOptions() {
+		final EyeOptions options = new EyeOptions();
+		options.minBrightness = 60;
+		options.maxBrightness = 90;
+		options.minAnzEyes = 4;
+		options.maxAnzEyes = 5;
+		return options;
+	}
 
 	private static TailOptionsLine getTailOptionsLine() {
 		final TailOptionsLine options = new TailOptionsLine();
