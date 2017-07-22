@@ -8,57 +8,62 @@ import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
 
 public class QualleTopviewPreset03Spiral {
 
-    public static final TailOptionsLine lineOptions = getTailOptionsLine();
-    public static final TailOptionsBubbles bubbleOptions = getTailOptionsBubbles();
+	public static final TailOptionsLine lineOptions = getTailOptionsLine();
+	public static final TailOptionsBubbles bubbleOptions = getTailOptionsBubbles();
 
-    private static TailOptionsLine getTailOptionsLine() {
-        final TailOptionsLine lineOptions = new TailOptionsLine();
-        lineOptions.anzTails = 0;
-        lineOptions.tailRotationType = TailRotationType.Even;
-        lineOptions.sinusAmplitudeType = SinusAmplitudeType.decreasingAmplitude;
+	private static TailOptionsLine getTailOptionsLine() {
+		final TailOptionsLine options = new TailOptionsLine();
+		options.anzTails = 0;
+		options.tailRotationType = TailRotationType.Even;
+		options.sinusAmplitudeType = SinusAmplitudeType.decreasingAmplitude;
 
-        lineOptions.randomFlip = false;
-        lineOptions.outline = true;
-        lineOptions.colorful = false;
+		options.randomFlip = false;
+		options.outline = true;
+		options.colorful = false;
 
-        lineOptions.minAmplitude = 0.2f;
-        lineOptions.maxAmplitude = 0.2f;
+		options.minAmplitude = 0.2f;
+		options.maxAmplitude = 0.2f;
 
-        lineOptions.minSinusRepeats = 15;
-        lineOptions.maxSinusRepeats = 15;
+		options.minSinusRepeats = 15;
+		options.maxSinusRepeats = 15;
 
-        lineOptions.minLength = 2.5f;
-        lineOptions.maxLength = 2.5f;
-        lineOptions.inset = 1.1f;
-        return lineOptions;
-    }
+		options.minLength = 2.5f;
+		options.maxLength = 2.5f;
+		options.inset = 1.1f;
+		options.minBrightness = 40;
+		options.maxBrightness = 90;
 
-    public static TailOptionsBubbles getTailOptionsBubbles() {
-        final TailOptionsBubbles bubbleOptions = new TailOptionsBubbles();
+		return options;
+	}
 
-        bubbleOptions.anzTails = 25;
-        bubbleOptions.tailRotationType = TailRotationType.Spiral;
+	public static TailOptionsBubbles getTailOptionsBubbles() {
+		final TailOptionsBubbles options = new TailOptionsBubbles();
 
-        bubbleOptions.sinusAmplitudeType = SinusAmplitudeType.normal;
-        bubbleOptions.sinusObjectsSizingType = ESinusObjectsSizingType.decreasing_withbigEnd;
-        // Log.i("SizingType", "=" + options.sinusObjectsSizingType);
-        bubbleOptions.randomFlip = false;
-        bubbleOptions.outline = false;
-        bubbleOptions.colorful = false;
+		options.anzTails = 25;
+		options.tailRotationType = TailRotationType.Spiral;
 
-        bubbleOptions.minAmplitude = 0.3f;
-        bubbleOptions.maxAmplitude = 0.3f;
+		options.sinusAmplitudeType = SinusAmplitudeType.normal;
+		options.sinusObjectsSizingType = ESinusObjectsSizingType.decreasing_withbigEnd;
+		// Log.i("SizingType", "=" + options.sinusObjectsSizingType);
+		options.randomFlip = false;
+		options.outline = false;
+		options.colorful = false;
 
-        bubbleOptions.minSinusRepeats = 3;
-        bubbleOptions.maxSinusRepeats = 3;
+		options.minAmplitude = 0.3f;
+		options.maxAmplitude = 0.3f;
 
-        bubbleOptions.minLength = 0.75f;
-        bubbleOptions.maxLength = 2.5f;
+		options.minSinusRepeats = 3;
+		options.maxSinusRepeats = 3;
 
-        bubbleOptions.bubbleRadius = 0.1f;
+		options.minLength = 0.75f;
+		options.maxLength = 2.5f;
 
-        bubbleOptions.percentOfBubblesToDraw = 100;
-        return bubbleOptions;
-    }
+		options.bubbleRadius = 0.1f;
+		options.minBrightness = 40;
+		options.maxBrightness = 90;
+
+		options.percentOfBubblesToDraw = 100;
+		return options;
+	}
 
 }

@@ -132,6 +132,19 @@
                 android:title="Colorful" 
                 android:summary="Each tail has its own random color"
                 />
+
+            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+                android:dialogMessage="Brightness Randomization"
+                android:key="TailOptionsBubbles.brightness"
+                android:summary="%1$s Brightness range"
+                android:title="Brightness Randomization"
+                seekbarpreference:absoluteMaxValue="150"
+                seekbarpreference:absoluteMinValue="-150"
+                seekbarpreference:defaultMaxValue="90"
+                seekbarpreference:defaultMinValue="40"
+                seekbarpreference:keyMaxValue="TailOptionsBubbles.maxBrightness"
+                seekbarpreference:keyMinValue="TailOptionsBubbles.minBrightness"
+                seekbarpreference:step="5" />
             
             <CheckBoxPreference
                 android:defaultValue="false"
@@ -231,6 +244,19 @@
                 android:title="Colorful" 
                 android:summary="Each tail has its own random color"
                 />
+            
+            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+                android:dialogMessage="Brightness Randomization"
+                android:key="TailOptionsLine.brightness"
+                android:summary="%1$s Brightness range"
+                android:title="Brightness Randomization"
+                seekbarpreference:absoluteMaxValue="150"
+                seekbarpreference:absoluteMinValue="-150"
+                seekbarpreference:defaultMaxValue="90"
+                seekbarpreference:defaultMinValue="40"
+                seekbarpreference:keyMaxValue="TailOptionsLine.maxBrightness"
+                seekbarpreference:keyMinValue="TailOptionsLine.minBrightness"
+                seekbarpreference:step="5" />
             
             <CheckBoxPreference
                 android:defaultValue="false"
