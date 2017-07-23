@@ -79,7 +79,7 @@ public class PreferenceIO {
 				fi.close();
 				// Looping over Map
 				final Set<String> keySet = settings.keySet();
-
+				// erstmal alles schreiben...
 				for (final Map.Entry<String, ?> entry : settings.entrySet()) {
 					if (onlyColors) {
 						if (colorKeys.contains(entry.getKey())) {
@@ -89,11 +89,12 @@ public class PreferenceIO {
 						writeEntry(entry, prefs, keySet);
 					}
 				}
-				// Spezialbehandlung f�r alte Designs, die diese Keys noch nicht enthalten
-				// und auch nur wenn nicht only Colors
+				// ... dann reparieren
 				if (!onlyColors) {
 					repairSomeDefaultValues(prefs, keySet);
 					repairColorRandomizing(prefs, keySet);
+					repairLayoutPicker(prefs, keySet);
+					repairRandomRotate(prefs, keySet);
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
@@ -189,14 +190,64 @@ public class PreferenceIO {
 				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
 				break;
 			}
-			editor.remove(Settings.OLD_KEY_COLOR_RANDOMIZING_TYPE);
-			editor.remove(Settings.OLD_KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
-			editor.remove(Settings.OLD_KEY_RANDOMIZE_COLOR_RANGE_INT);
-			editor.remove(Settings.OLD_KEY_RANDOMIZE_SATURATION_RANGE);
-
 			editor.commit();
 
+			deleteKeyFromPref(prefs, Settings.OLD_KEY_COLOR_RANDOMIZING_TYPE);
+			deleteKeyFromPref(prefs, Settings.OLD_KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT);
+			deleteKeyFromPref(prefs, Settings.OLD_KEY_RANDOMIZE_COLOR_RANGE_INT);
+			deleteKeyFromPref(prefs, Settings.OLD_KEY_RANDOMIZE_SATURATION_RANGE);
 		}
+	}
+
+	private static void deleteKeyFromPref(final SharedPreferences prefs, final String key) {
+		Log.i("Deleting key from pref", key);
+		prefs.edit().remove(key).commit();
+	}
+
+	private static void repairRandomRotate(final SharedPreferences prefs, final Set<String> keySet) {
+		// Spezialbehandlung für alten randomRotate
+		if (keySet.contains("randomRotate") && !keySet.contains("rotatingStyle")) {
+			final boolean val = prefs.getBoolean("randomRotate", true);
+			Log.i(LOG_TAG, " old randomRotate found --> " + val + ")");
+			if (val == true) {
+				prefs.edit().putString("rotatingStyle", "Random").commit();
+				Log.i(LOG_TAG, "randomRotate found - Putting ---> Random");
+			} else {
+				prefs.edit().putString("rotatingStyle", "Fixed").commit();
+				Log.i(LOG_TAG, "randomRotate found - Putting ---> fixed");
+			}
+		}
+		deleteKeyFromPref(prefs, "randomRotate");
+	}
+
+	private static void repairLayoutPicker(final SharedPreferences prefs, final Set<String> keySet) {
+		// Spezialbehandlung für alten LayoutPicker
+		if (keySet.contains("layoutPicker") && !keySet.contains(Settings.KEY_MAINLAYOUTS)) {
+			final String val = prefs.getString("layoutPicker", "Random Layout");
+			Log.i(LOG_TAG, " old layoutPicker found --> " + val + ")");
+			final int pos = val.indexOf(" (");
+			if (pos > 0) {
+				final String mainLayout = val.substring(0, pos);
+				if (mainLayout.startsWith("Geo")) {
+					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Geometric Grid").commit();
+					Log.i(LOG_TAG, "layoutPicker found - Putting --> Geometric Grid");
+				} else if (mainLayout.startsWith("Circular")) {
+					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Circular").commit();
+					Log.i(LOG_TAG, "layoutPicker found - Putting --> Circular");
+				} else if (mainLayout.startsWith("Half")) {
+					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Half Circle").commit();
+					Log.i(LOG_TAG, "layoutPicker found - Putting --> Half Circle");
+				}
+				final int posEnd = val.indexOf(")");
+				final String mainLayoutVariante = val.substring(pos + 2, posEnd);
+				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, mainLayoutVariante).commit();
+				Log.i(LOG_TAG, "layoutPicker found - Putting Variante --> " + mainLayoutVariante);
+			} else {
+				prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Random Layout").commit();
+				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, "Random").commit();
+			}
+		}
+		deleteKeyFromPref(prefs, "layoutPicker");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -272,55 +323,15 @@ public class PreferenceIO {
 		final String key = entry.getKey();
 		// ein paar Keys nicht lesen!
 		if (ignoreKeys.contains(key)) {
-			Log.i(LOG_TAG, "Ignoring key: " + key);
+			Log.i(LOG_TAG, " - Ignoring key: " + key);
 			return;
 		}
 
 		if (Settings.isRestoreSizeFromDesign() == false) {
 			if (sizeKeys.contains(key)) {
-				Log.i(LOG_TAG, "Ignoring size-Key: " + key);
+				Log.i(LOG_TAG, " - Ignoring size-Key: " + key);
 				return;
 			}
-		}
-
-		// Spezialbehandlung für alten LayoutPicker
-		if (key.equals("layoutPicker") && !keyset.contains(Settings.KEY_MAINLAYOUTS)) {
-			final String val = entry.getValue().toString();
-			Log.i(LOG_TAG, "layoutPicker found --> " + entry.getValue().toString() + ")");
-			final int pos = val.indexOf(" (");
-			if (pos > 0) {
-				final String mainLayout = val.substring(0, pos);
-				if (mainLayout.startsWith("Geo")) {
-					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Geometric Grid").commit();
-					Log.i(LOG_TAG, "layoutPicker found - Putting --> Geometric Grid");
-				} else if (mainLayout.startsWith("Circular")) {
-					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Circular").commit();
-					Log.i(LOG_TAG, "layoutPicker found - Putting --> Circular");
-				} else if (mainLayout.startsWith("Half")) {
-					prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Half Circle").commit();
-					Log.i(LOG_TAG, "layoutPicker found - Putting --> Half Circle");
-				}
-				final int posEnd = val.indexOf(")");
-				final String mainLayoutVariante = val.substring(pos + 2, posEnd);
-				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, mainLayoutVariante).commit();
-				Log.i(LOG_TAG, "layoutPicker found - Putting Variante --> " + mainLayoutVariante);
-			} else {
-				prefs.edit().putString(Settings.KEY_MAINLAYOUTS, "Random Layout").commit();
-				prefs.edit().putString(Settings.KEY_MAINLAYOUT_VARIANTS, "Random").commit();
-			}
-			return;
-		}
-		// Spezialbehandlung für alten randomRotate
-		if (key.equals("randomRotate") && !keyset.contains("rotatingStyle")) {
-			final boolean rota = (Boolean) entry.getValue();
-			if (rota == true) {
-				prefs.edit().putString("rotatingStyle", "Random").commit();
-				Log.i(LOG_TAG, "randomRotate found - Putting ---> Random");
-			} else {
-				prefs.edit().putString("rotatingStyle", "Fixed").commit();
-				Log.i(LOG_TAG, "randomRotate found - Putting ---> fixed");
-			}
-			return;
 		}
 
 		final Class cl = entry.getValue().getClass();
