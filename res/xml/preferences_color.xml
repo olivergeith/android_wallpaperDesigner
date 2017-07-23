@@ -174,43 +174,58 @@
         <de.geithonline.android.basics.preferences.CoolListPreference
             android:summary=""
         	android:defaultValue="full RGB"
-	        android:dialogTitle="@string/colorRandomizingType"
+	        android:dialogTitle="Type of Color-Randomizing"
 	        android:entries="@array/colorRandomizingType"
 	        android:entryValues="@array/colorRandomizingType"
-	        android:key="colorRandomizingType"
-	        android:title="@string/colorRandomizingType" />
+	        android:key="Color.colorRandomizingType"
+	        android:title="Type of Color-Randomizing" />
         
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="32"
-            android:dialogMessage="@string/randomizeColorRange"
-            android:key="randomizeColorRangeInt"
-            android:summary="%1$d"
-            android:title="@string/randomizeColorRange"
-            seekbarpreference:maxValue="192"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="2" />
-        
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="32"
-            android:dialogMessage="@string/randomizeColorBrightnessRangeInt"
-            android:key="randomizeColorBrightnessRangeInt"
-            android:summary="%1$d"
-            android:title="@string/randomizeColorBrightnessRangeInt"
-            seekbarpreference:maxValue="160"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+	        android:dialogMessage="Color Randomization Range"
+	        android:title="Color Randomization Range"
+	        android:key="Color.colorRange"
+	        seekbarpreference:keyMinValue="Color.minColorRange"
+	        seekbarpreference:keyMaxValue="Color.maxColorRange"
+	        android:summary="%1$s"
+	        android:defaultValue="-32 - 32"
+	        seekbarpreference:absoluteMaxValue="192"
+	        seekbarpreference:absoluteMinValue="-192"
+	        seekbarpreference:defaultMaxValue="32"
+	        seekbarpreference:defaultMinValue="-32"
+	        seekbarpreference:step="4" 
+	        />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
-            android:defaultValue="0"
-            android:dialogMessage="@string/randomizeSaturationRange"
-            android:key="randomizeSaturationRange"
-            android:summary="%1$d"
-            android:title="@string/randomizeSaturationRange"
-            seekbarpreference:maxValue="100"
-            seekbarpreference:minValue="0"
-            seekbarpreference:stepValue="1" />
+        <PreferenceCategory android:title="Brightness, Saturation ..." />
         
-        
+        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+	        android:dialogMessage="Brightness Randomization Range"
+	        android:title="Brightness Randomization Range"
+	        android:key="Color.brightnessRange"
+	        seekbarpreference:keyMinValue="Color.minBrightnessRange"
+	        seekbarpreference:keyMaxValue="Color.maxBrightnessRange"
+	        android:summary="%1$s"
+	        android:defaultValue="-30 - 30"
+	        seekbarpreference:absoluteMaxValue="192"
+	        seekbarpreference:absoluteMinValue="-192"
+	        seekbarpreference:defaultMaxValue="32"
+	        seekbarpreference:defaultMinValue="-32"
+	        seekbarpreference:step="4" 
+	        />
+
+        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+	        android:dialogMessage="Saturation Randomization Range"
+	        android:title="Saturation Randomization Range"
+	        android:key="Color.saturationRange"
+	        seekbarpreference:keyMinValue="Color.minSaturationRange"
+	        seekbarpreference:keyMaxValue="Color.maxSaturationRange"
+	        android:summary="%1$s"
+	        android:defaultValue="0"
+	        seekbarpreference:absoluteMaxValue="100"
+	        seekbarpreference:absoluteMinValue="-100"
+	        seekbarpreference:defaultMaxValue="0"
+	        seekbarpreference:defaultMinValue="0"
+	        seekbarpreference:step="5" 
+	        />
         
         <PreferenceCategory android:title="Opacity Randomizing..." />
   

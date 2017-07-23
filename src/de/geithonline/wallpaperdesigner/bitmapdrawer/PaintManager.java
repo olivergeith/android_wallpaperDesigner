@@ -4,6 +4,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import de.geithonline.wallpaperdesigner.settings.ColorRandOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -54,20 +55,18 @@ public class PaintManager {
 	}
 
 	public void randomizeColorAccordingToSettings(int pcolor) {
-		if (Settings.isRandomizeBrightness()) {
-			final int range = Settings.getRandomizeColorBrighnessRange();
-			final int adjust = Randomizer.getRandomInt(-range, range);
+		final ColorRandOptions colorOptions = Settings.getColorRandomizingOptions();
+		if (colorOptions.isRandomizeColor()) {
+			pcolor = RandomizerColor.randomizeColor(pcolor, colorOptions);
+		}
+		if (colorOptions.isRandomizeBrightness()) {
+			final int adjust = Randomizer.getRandomInt(colorOptions.minBrightnessRange, colorOptions.maxBrightnessRange);
 			pcolor = ColorHelper.adjustColorBrightness(pcolor, adjust);
 		}
-		if (Settings.isRandomizeSaturation()) {
-			final int range = Settings.getRandomizeSaturationRange();
-			final float dSaturation = Randomizer.getRandomFloat(-range, range) / 100;
+		if (colorOptions.isRandomizeSaturation()) {
+			final float dSaturation = Randomizer.getRandomFloat(colorOptions.minSaturationRange, colorOptions.maxSaturationRange) / 100;
 			pcolor = ColorHelper.adjustHSV(pcolor, 0, dSaturation, 0);
 		}
-		if (Settings.isRandomizeColors()) {
-			pcolor = RandomizerColor.randomizeColor(pcolor, Settings.getRandomizeColorRange(), Settings.getColorRandomizingType());
-		}
-
 		paint.setColor(pcolor);
 		paint.setAlpha(initialAlpha);
 	}

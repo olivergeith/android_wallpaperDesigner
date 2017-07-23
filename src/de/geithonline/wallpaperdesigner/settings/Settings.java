@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
+import de.geithonline.wallpaperdesigner.settings.ColorRandOptions.COLOR_RANDOMIZING_TYPE;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
 import de.geithonline.wallpaperdesigner.settings.TailOptions.TailRotationType;
 import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsSizingType;
@@ -43,10 +44,12 @@ public class Settings {
 	public static final String KEY_COLOR_REPEATS = "colorRepeats";
 	public static final String KEY_TORNADO_RINGS = "tornadoRings";
 	public static final String KEY_TORNADO_ARMS = "tornadoArms";
-	public static final String KEY_RANDOMIZE_SATURATION_RANGE = "randomizeSaturationRange";
+	@Deprecated
+	public static final String OLD_KEY_RANDOMIZE_SATURATION_RANGE = "randomizeSaturationRange";
 	public static final String KEY_SHOW_SET_WALLPAPER_BUTTON = "showSetWallpaperButton";
 	public static final String KEY_LIMIT_2_CANVAS = "limit2Canvas";
-	public static final String KEY_COLOR_RANDOMIZING_TYPE = "colorRandomizingType";
+	@Deprecated
+	public static final String OLD_KEY_COLOR_RANDOMIZING_TYPE = "colorRandomizingType";
 	public static final String KEY_BLURR_STAGE_1 = "blurrStage1";
 	public static final String KEY_BLURR_STAGE_2 = "blurrStage2";
 	public static final String KEY_BLURR_STAGE_3 = "blurrStage3";
@@ -62,8 +65,10 @@ public class Settings {
 	public static final String KEY_BGRND_COLOR2 = "bgrnd_color2";
 	public static final String KEY_BGRND_COLOR1 = "bgrnd_color1";
 	public static final String KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT = "sameBackgroundAsPatternGradient";
-	public static final String KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT = "randomizeColorBrightnessRangeInt";
-	public static final String KEY_RANDOMIZE_COLOR_RANGE_INT = "randomizeColorRangeInt";
+	@Deprecated
+	public static final String OLD_KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT = "randomizeColorBrightnessRangeInt";
+	@Deprecated
+	public static final String OLD_KEY_RANDOMIZE_COLOR_RANGE_INT = "randomizeColorRangeInt";
 	public static final String KEY_RENDER_ON_SETTINGS_EXIT = "renderOnSettingsExit";
 	public static final String KEY_COLORS_ANZAHL = "anzColors";
 	public static final String KEY_COLOR_GRADIENT_DIRECTION = "gradientDirection";
@@ -199,40 +204,6 @@ public class Settings {
 		}
 	}
 
-	public enum COLOR_RANDOMIZING_TYPE {
-		FULL_RGB, ONLY_RED, ONLY_GREEN, ONLY_BLUE, HUE, PUSH_RED, PUSH_GREEN, PUSH_BLUE, PULL_RED, PULL_GREEN, PULL_BLUE, PUSH_YELLOW;
-
-		public static COLOR_RANDOMIZING_TYPE enumForName(final String name) {
-			switch (name) {
-			default:
-			case "full RGB":
-				return COLOR_RANDOMIZING_TYPE.FULL_RGB;
-			case "only RED":
-				return COLOR_RANDOMIZING_TYPE.ONLY_RED;
-			case "only GREEN":
-				return COLOR_RANDOMIZING_TYPE.ONLY_GREEN;
-			case "only BLUE":
-				return COLOR_RANDOMIZING_TYPE.ONLY_BLUE;
-			case "hue":
-				return COLOR_RANDOMIZING_TYPE.HUE;
-			case "push RED":
-				return COLOR_RANDOMIZING_TYPE.PUSH_RED;
-			case "push GREEN":
-				return COLOR_RANDOMIZING_TYPE.PUSH_GREEN;
-			case "push BLUE":
-				return COLOR_RANDOMIZING_TYPE.PUSH_BLUE;
-			case "push YELLOW":
-				return COLOR_RANDOMIZING_TYPE.PUSH_YELLOW;
-			case "pull RED":
-				return COLOR_RANDOMIZING_TYPE.PULL_RED;
-			case "pull GREEN":
-				return COLOR_RANDOMIZING_TYPE.PULL_GREEN;
-			case "pull BLUE":
-				return COLOR_RANDOMIZING_TYPE.PULL_BLUE;
-			}
-		}
-	}
-
 	public enum CANVAS_LIMT {
 		strict, small, wide, no_limit, double_wide, small_inset, wide_inset;
 
@@ -337,11 +308,12 @@ public class Settings {
 	}
 
 	public static COLOR_RANDOMIZING_TYPE getColorRandomizingType() {
-		return COLOR_RANDOMIZING_TYPE.enumForName(getColorRandomizingString());
+		return COLOR_RANDOMIZING_TYPE.enumForName(getOldColorRandomizingString());
 	}
 
-	public static String getColorRandomizingString() {
-		return readStringPref(KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
+	@Deprecated
+	public static String getOldColorRandomizingString() {
+		return readStringPref(OLD_KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
 	}
 
 	public static CANVAS_LIMT getCanvasLimitType() {
@@ -756,28 +728,33 @@ public class Settings {
 
 	// ###################################################################
 	// Options Pattern Style (Color)
-	public static boolean isRandomizeColors() {
-		return getRandomizeColorRange() != 0;
+
+	@Deprecated
+	public static int getOldRandomizeColorRange() {
+		return readIntegerPref(OLD_KEY_RANDOMIZE_COLOR_RANGE_INT, 12);
 	}
 
-	public static int getRandomizeColorRange() {
-		return readIntegerPref(KEY_RANDOMIZE_COLOR_RANGE_INT, 12);
+	private static final ColorRandOptions colorRandomizingOptions = new ColorRandOptions();
+
+	public static ColorRandOptions getColorRandomizingOptions() {
+		colorRandomizingOptions.randomizingType = COLOR_RANDOMIZING_TYPE.enumForName(readStringPref(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "full RGB"));
+		colorRandomizingOptions.minColorRange = readIntegerPref(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -32);
+		colorRandomizingOptions.maxColorRange = readIntegerPref(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 32);
+		colorRandomizingOptions.minBrightnessRange = readIntegerPref(ColorRandOptions.KEY_COLOR_MIN_BRIGHTNESS_RANGE, -32);
+		colorRandomizingOptions.maxBrightnessRange = readIntegerPref(ColorRandOptions.KEY_COLOR_MAX_BRIGHTNESS_RANGE, 32);
+		colorRandomizingOptions.minSaturationRange = readIntegerPref(ColorRandOptions.KEY_COLOR_MIN_SATURATION_RANGE, 0);
+		colorRandomizingOptions.maxSaturationRange = readIntegerPref(ColorRandOptions.KEY_COLOR_MAX_SATURATION_RANGE, 0);
+		return colorRandomizingOptions;
 	}
 
-	public static boolean isRandomizeBrightness() {
-		return getRandomizeColorBrighnessRange() != 0;
+	@Deprecated
+	public static int getOldRandomizeColorBrighnessRange() {
+		return readIntegerPref(OLD_KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 12);
 	}
 
-	public static int getRandomizeColorBrighnessRange() {
-		return readIntegerPref(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 12);
-	}
-
-	public static boolean isRandomizeSaturation() {
-		return getRandomizeSaturationRange() != 0;
-	}
-
-	public static int getRandomizeSaturationRange() {
-		return readIntegerPref(KEY_RANDOMIZE_SATURATION_RANGE, 0);
+	@Deprecated
+	public static int getOldRandomizeSaturationRange() {
+		return readIntegerPref(OLD_KEY_RANDOMIZE_SATURATION_RANGE, 0);
 	}
 
 	public static int getCornerGradientLevels() {
@@ -1037,9 +1014,9 @@ public class Settings {
 			prefs.edit().putString(KEY_B_HEIGHT, "1200").commit();
 			prefs.edit().putString(KEY_SIZE_SELECTION, "1920x1200").commit();
 
-			prefs.edit().putString(KEY_COLOR_RANDOMIZING_TYPE, "hue").commit();
-			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_RANGE_INT, 16).commit();
-			prefs.edit().putInt(KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 24).commit();
+			prefs.edit().putString(OLD_KEY_COLOR_RANDOMIZING_TYPE, "hue").commit();
+			prefs.edit().putInt(OLD_KEY_RANDOMIZE_COLOR_RANGE_INT, 16).commit();
+			prefs.edit().putInt(OLD_KEY_RANDOMIZE_COLOR_BRIGHTNESS_RANGE_INT, 24).commit();
 			prefs.edit().putInt(KEY_MIN_OPACITY, 128).commit();
 			prefs.edit().putInt(KEY_MAX_OPACITY, 255).commit();
 			prefs.edit().putInt(KEY_DROP_SHADOW_RADIUS_ADJUSTMENT, 200).commit();
