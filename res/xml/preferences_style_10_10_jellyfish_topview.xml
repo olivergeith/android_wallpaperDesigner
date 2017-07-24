@@ -15,7 +15,7 @@
 
             <PreferenceCategory android:title="Number of Bubble-Tails and Positioning" />
 
-            <de.geithonline.android.basics.preferences.SeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="6"
                 android:dialogMessage="Number of Bubble Tails"
                 android:key="TailOptionsBubbles.anzTails"
