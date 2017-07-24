@@ -78,7 +78,7 @@
             
             <PreferenceCategory android:title="The Tail itself" />
             
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Sine Halfwaves"
                 android:key="TailOptionsBubbles.sinusRepeats"
                 android:summary="%1$s Halfwaves"
@@ -100,7 +100,7 @@
                 android:summary=""
                 android:title="Amplitude Type" />
 
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Sine Amplitude"
                 android:key="TailOptionsBubbles.amplitude"
                 android:summary="%1$s"
@@ -113,7 +113,7 @@
                 seekbarpreference:keyMinValue="TailOptionsBubbles.minAmplitude"
                 seekbarpreference:step="1" />
 
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Length"
                 android:key="TailOptionsBubbles.length"
                 android:summary="%1$s"
@@ -133,7 +133,7 @@
                 android:summary="Each tail has its own random color"
                 />
 
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Brightness Randomization"
                 android:key="TailOptionsBubbles.brightness"
                 android:summary="%1$s Brightness range"
@@ -180,7 +180,7 @@
 
             <PreferenceCategory android:title="The Tail itself" />
             
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Sine Halfwaves"
                 android:key="TailOptionsLine.sinusRepeats"
                 android:summary="%1$s Halfwaves"
@@ -202,7 +202,7 @@
                 android:summary=""
                 android:title="Amplitude Type" />
 
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Sine Amplitude"
                 android:key="TailOptionsLine.amplitude"
                 android:summary="%1$s"
@@ -214,7 +214,7 @@
                 seekbarpreference:keyMaxValue="TailOptionsLine.maxAmplitude"
                 seekbarpreference:keyMinValue="TailOptionsLine.minAmplitude"
                 seekbarpreference:step="1" />
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Length"
                 android:key="TailOptionsLine.length"
                 android:summary="%1$s"
@@ -245,7 +245,7 @@
                 android:summary="Each tail has its own random color"
                 />
             
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Brightness Randomization"
                 android:key="TailOptionsLine.brightness"
                 android:summary="%1$s Brightness range"
@@ -275,7 +275,7 @@
             android:key="jellyfishEyeOptions"
             android:title="Eye Options..." >
         
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Brightness Randomization"
                 android:key="EyeOptions.brightness"
                 android:summary="%1$s Brightness range"
@@ -288,7 +288,7 @@
                 seekbarpreference:keyMinValue="EyeOptions.minBrightness"
                 seekbarpreference:step="5" />
 
-            <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Number of Eyes"
                 android:key="EyeOptions.anzEyes"
                 android:summary="%1$s Eyes"

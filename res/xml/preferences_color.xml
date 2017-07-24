@@ -180,7 +180,7 @@
 	        android:key="Color.colorRandomizingType"
 	        android:title="Type of Color-Randomizing" />
         
-        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
 	        android:dialogMessage="Color Randomization Range"
 	        android:title="Color Randomization Range"
 	        android:key="Color.colorRange"
@@ -197,7 +197,7 @@
 
         <PreferenceCategory android:title="Brightness, Saturation ..." />
         
-        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
 	        android:dialogMessage="Brightness Randomization Range"
 	        android:title="Brightness Randomization Range"
 	        android:key="Color.brightnessRange"
@@ -212,7 +212,7 @@
 	        seekbarpreference:step="4" 
 	        />
 
-        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
 	        android:dialogMessage="Saturation Randomization Range"
 	        android:title="Saturation Randomization Range"
 	        android:key="Color.saturationRange"
@@ -229,7 +229,7 @@
         
         <PreferenceCategory android:title="Opacity Randomizing..." />
   
-        <de.geithonline.android.basics.preferences.RangeSeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
 	        android:dialogMessage="Opacity Range"
 	        android:title="Opacity Range"
 	        android:key="opacity"
