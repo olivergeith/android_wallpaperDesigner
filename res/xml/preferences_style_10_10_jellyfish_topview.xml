@@ -54,7 +54,7 @@
                 android:summary=""
                 android:title="Bubble Sizing Type" />
             
-            <de.geithonline.android.basics.preferences.SeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="10"
                 android:dialogMessage="Maximum Bubble radius"
                 android:key="TailOptionsBubbles.bubbleRadius"
@@ -64,7 +64,7 @@
                 seekbarpreference:minValue="5"
                 seekbarpreference:stepValue="5" />
             
-            <de.geithonline.android.basics.preferences.SeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="100"
                 android:dialogMessage="Percentage of Bubbles to draw"
                 android:key="TailOptionsBubbles.percentOfBubblesToDraw"
@@ -159,7 +159,7 @@
 
             <PreferenceCategory android:title="Line Tail Options" />
 
-            <de.geithonline.android.basics.preferences.SeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="25"
                 android:dialogMessage="Number of Line Tails"
                 android:key="TailOptionsLine.anzTails"
@@ -227,7 +227,7 @@
                 seekbarpreference:keyMinValue="TailOptionsLine.minLength"
                 seekbarpreference:step="5" />
 
-            <de.geithonline.android.basics.preferences.SeekBarPreference
+            <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="10"
                 android:dialogMessage="Inset"
                 android:key="TailOptionsLine.inset"

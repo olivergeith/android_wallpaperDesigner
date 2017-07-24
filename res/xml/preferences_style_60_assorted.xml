@@ -42,7 +42,7 @@
             android:key="randomLeafCount"
             android:title="@string/randomLeafCount" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="5"
             android:dependency="randomLeafCount"
             android:dialogMessage="@string/numberOfLeafs"

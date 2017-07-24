@@ -23,7 +23,7 @@
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="TornadoSettings"
         android:title="Tornado Settings..." >
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="1"
 	        android:dialogMessage="@string/tornadoRings"
 	        android:key="tornadoRings"
@@ -33,7 +33,7 @@
 	        seekbarpreference:minValue="1"
 	        seekbarpreference:stepValue="1" />
 	    
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="1"
 	        android:dialogMessage="@string/tornadoArms"
 	        android:key="tornadoArms"
@@ -43,7 +43,7 @@
 	        seekbarpreference:minValue="1"
 	        seekbarpreference:stepValue="1" />
 	    
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="50"
 	        android:dialogMessage="Rotation Center X-Axis"
 	        android:key="tornadoCenterPointX"
@@ -53,7 +53,7 @@
 	        seekbarpreference:minValue="0"
 	        seekbarpreference:stepValue="1" />
 	
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="50"
 	        android:dialogMessage="Rotation Center Y-Axis"
 	        android:key="tornadoCenterPointY"
@@ -78,7 +78,7 @@
         android:key="vierColorGradientCornerSettings"
         android:title="Gradient Settings..." >
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="100"
 	        android:dialogMessage="Gradient Levels"
 	        android:key="cornerGradientLevels"
@@ -95,7 +95,7 @@
         android:key="vierColorCornerSettings"
         android:title="Gradient Settings..." >
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="1"
 	        android:dialogMessage="Repeats"
 	        android:key="cornerRepeats"
@@ -121,7 +121,7 @@
 	        android:entryValues="@array/anzColorsValues"
 	        android:key="anzColors"
 	        android:title="@string/anzColors" />
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="1"
 	        android:dialogMessage="@string/colorRepeats"
 	        android:key="colorRepeats"

@@ -12,7 +12,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import de.geithonline.android.basics.preferences.SeekBarPreference;
+import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
@@ -29,14 +29,14 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private ListPreference tailOption;
 	private EditTextPreference textPattern;
 	private ListPreference textDrawStyle;
-	private SeekBarPreference numberOfLeafs;
-	private SeekBarPreference rotationDegrees;
+	private InlineSeekBarPreference numberOfLeafs;
+	private InlineSeekBarPreference rotationDegrees;
 	private CheckBoxPreference randomLeafCount;
 	private ListPreference rotatingStyle;
 	private ListPreference glowStyle;
-	private SeekBarPreference randomRange;
-	private SeekBarPreference rotationCenterPointX;
-	private SeekBarPreference rotationCenterPointY;
+	private InlineSeekBarPreference randomRange;
+	private InlineSeekBarPreference rotationCenterPointX;
+	private InlineSeekBarPreference rotationCenterPointY;
 	private ListPreference radiusType;
 
 	private PreferenceScreen jellyfishOptions;
@@ -74,13 +74,13 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		textPattern = (EditTextPreference) findPreference(Settings.KEY_PATTERN_TEXT);
 		radiusType = (ListPreference) findPreference(Settings.KEY_RADIUS_TYPE);
 
-		numberOfLeafs = (SeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
+		numberOfLeafs = (InlineSeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
 		randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
-		rotationDegrees = (SeekBarPreference) findPreference("rotationDegrees");
-		randomRange = (SeekBarPreference) findPreference("randomRange");
+		rotationDegrees = (InlineSeekBarPreference) findPreference("rotationDegrees");
+		randomRange = (InlineSeekBarPreference) findPreference("randomRange");
 		rotatingStyle = (ListPreference) findPreference(Settings.KEY_ROTATING_STYLE);
-		rotationCenterPointX = (SeekBarPreference) findPreference("rotationCenterPointX");
-		rotationCenterPointY = (SeekBarPreference) findPreference("rotationCenterPointY");
+		rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
+		rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
 
 		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -238,11 +238,11 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		dropShadowColor.setEnabled(newValue.equals("Select"));
 		final Preference dropShadowDarkness = findPreference(Settings.KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST);
 		dropShadowDarkness.setEnabled(newValue.equals("Darker"));
-		final SeekBarPreference dropShadowRadiusAdjustment = (SeekBarPreference) findPreference("dropShadowRadiusAdjustment");
+		final InlineSeekBarPreference dropShadowRadiusAdjustment = (InlineSeekBarPreference) findPreference("dropShadowRadiusAdjustment");
 		dropShadowRadiusAdjustment.setEnabled(!newValue.equals("No"));
-		final SeekBarPreference dropShadowOffsetX = (SeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_X);
+		final InlineSeekBarPreference dropShadowOffsetX = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_X);
 		dropShadowOffsetX.setEnabled(!newValue.equals("No"));
-		final SeekBarPreference dropShadowOffsetY = (SeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_Y);
+		final InlineSeekBarPreference dropShadowOffsetY = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_Y);
 		dropShadowOffsetY.setEnabled(!newValue.equals("No"));
 
 	}

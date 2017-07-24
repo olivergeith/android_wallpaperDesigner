@@ -7,7 +7,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.util.Log;
-import de.geithonline.android.basics.preferences.SeekBarPreference;
+import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
@@ -66,10 +66,10 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 
 	private void handleMainLayoutSelect(final String selectedLayout) {
 		mainlayouts.setSummary(selectedLayout);
-		final SeekBarPreference overlapping = (SeekBarPreference) findPreference("overlapping");
-		final SeekBarPreference centerPointX = (SeekBarPreference) findPreference("centerPointX");
-		final SeekBarPreference centerPointY = (SeekBarPreference) findPreference("centerPointY");
-		final SeekBarPreference anzahlPatterns = (SeekBarPreference) findPreference("anzahlPatterns");
+		final InlineSeekBarPreference overlapping = (InlineSeekBarPreference) findPreference("overlapping");
+		final InlineSeekBarPreference centerPointX = (InlineSeekBarPreference) findPreference("centerPointX");
+		final InlineSeekBarPreference centerPointY = (InlineSeekBarPreference) findPreference("centerPointY");
+		final InlineSeekBarPreference anzahlPatterns = (InlineSeekBarPreference) findPreference("anzahlPatterns");
 		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
 		final CheckBoxPreference upsideDown = (CheckBoxPreference) findPreference("upsideDown");
 		final CheckBoxPreference randomStartWinkel = (CheckBoxPreference) findPreference("ramdomStartWinkel");

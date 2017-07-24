@@ -13,45 +13,45 @@
 
         <ListPreference
             android:defaultValue="Darker"
-            android:dialogTitle="@string/dropShadow"
+            android:dialogTitle="Dropshadow Style"
             android:entries="@array/dropShadowType"
             android:entryValues="@array/dropShadowTypeValues"
             android:key="pattern_dropShadowType"
-            android:title="@string/dropShadow" />
+            android:title="Dropshadow Style" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="-48"
-            android:dialogMessage="@string/dropShadowDarknessAdjust"
+            android:dialogMessage="Brightness Offset"
             android:key="dropShadowDarknessAdjust"
             android:summary="%1$d (negativ=darker, positiv=brighter)"
-            android:title="@string/dropShadowDarknessAdjust"
+            android:title="Brightness Offset"
             seekbarpreference:maxValue="192"
             seekbarpreference:minValue="-192"
             seekbarpreference:stepValue="8" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="100"
-            android:dialogMessage="@string/dropShadowRadiusAdjustment"
+            android:dialogMessage="Radius Adjustment"
             android:key="dropShadowRadiusAdjustment"
             android:summary="%1$d percent"
-            android:title="@string/dropShadowRadiusAdjustment"
+            android:title="Radius Adjustment"
             seekbarpreference:maxValue="1000"
             seekbarpreference:minValue="10"
             seekbarpreference:stepValue="10" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="0"
-            android:dialogMessage="@string/dropShadowOffsetX"
+            android:dialogMessage="Offset-X"
             android:key="dropShadowOffsetX"
             android:summary="%1$d pixel"
-            android:title="@string/dropShadowOffsetX"
+            android:title="Offset-X"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="-50"
             seekbarpreference:stepValue="1" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="0"
-            android:dialogMessage="@string/dropShadowOffsetY"
+            android:dialogMessage="Offset-Y"
             android:key="dropShadowOffsetY"
             android:summary="%1$d pixel"
-            android:title="@string/dropShadowOffsetY"
+            android:title="Offset-Y"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="-50"
             seekbarpreference:stepValue="1" />

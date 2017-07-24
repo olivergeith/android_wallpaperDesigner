@@ -17,7 +17,7 @@
             android:key="rotatingStyle"
             android:title="@string/rotatingStyle" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="0"
             android:dialogMessage="@string/rotationDegrees"
             android:key="rotationDegrees"
@@ -27,7 +27,7 @@
             seekbarpreference:minValue="-180"
             seekbarpreference:stepValue="1" />
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="180"
             android:dialogMessage="@string/randomRange"
             android:key="randomRange"
@@ -36,22 +36,22 @@
             seekbarpreference:maxValue="180"
             seekbarpreference:minValue="0"
             seekbarpreference:stepValue="1" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="50"
-	        android:dialogMessage="Rotation Center X-Axis"
+	        android:dialogMessage="Center X-Axis"
 	        android:key="rotationCenterPointX"
 	        android:summary="%1$d Percent of width"
-	        android:title="Center Position X-Axis"
+	        android:title="Center X-Axis"
 	        seekbarpreference:maxValue="100"
 	        seekbarpreference:minValue="0"
 	        seekbarpreference:stepValue="1" />
 	
-	    <de.geithonline.android.basics.preferences.SeekBarPreference
+	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="50"
-	        android:dialogMessage="Rotation Center Y-Axis"
+	        android:dialogMessage="Center Y-Axis"
 	        android:key="rotationCenterPointY"
 	        android:summary="%1$d Percent of height"
-	        android:title="Rotation Center Position Y-Axis"
+	        android:title="Center Y-Axis"
 	        seekbarpreference:maxValue="100"
 	        seekbarpreference:minValue="0"
 	        seekbarpreference:stepValue="1" />

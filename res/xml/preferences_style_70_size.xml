@@ -17,7 +17,7 @@
             android:key="radiusType"
             android:title="Radius Calculating-Style" />
         
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="100"
             android:dialogMessage="@string/patternSizeAdjust"
             android:key="patternSizeAdjust"
@@ -26,7 +26,7 @@
             seekbarpreference:maxValue="700"
             seekbarpreference:minValue="20"
             seekbarpreference:stepValue="5" />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="10"
             android:dialogMessage="@string/patternMinSizeAdjust"
             android:key="patternMinSizeAdjust"

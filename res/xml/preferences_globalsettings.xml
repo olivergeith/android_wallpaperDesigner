@@ -65,7 +65,7 @@
 		    android:title="Show rendering in progress"
 		    android:summary="See how the image is rendered..." 
             />
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:key="renderingProcessFrames"
 	        android:title="Rendering Progress Frames" 
 		    seekbarpreference:minValue="0"
@@ -87,7 +87,7 @@
 	        android:entries="@array/imageFormat"
 	        android:entryValues="@array/imageFormat"
 	        />
-     	<de.geithonline.android.basics.preferences.SeekBarPreference
+     	<de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:key="jpgCompression"
 	        android:title="@string/jpgCompression" 
 		    seekbarpreference:minValue="50"

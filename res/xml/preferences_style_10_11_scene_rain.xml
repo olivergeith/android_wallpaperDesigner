@@ -8,7 +8,7 @@
         android:key="sceneRainOptions"
         android:title="Scene Options..." >
 
-        <de.geithonline.android.basics.preferences.SeekBarPreference
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="5"
             android:dialogMessage="Percentage of circles"
             android:key="scenePercentageOfCircles"
