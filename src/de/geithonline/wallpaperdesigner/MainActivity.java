@@ -83,7 +83,6 @@ public class MainActivity extends Activity {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Settings.initPrefs(prefs, getApplicationContext(), this);
         setTheme(Settings.getTheme());
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // prefs.registerOnSharedPreferenceChangeListener(this);

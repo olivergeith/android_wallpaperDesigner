@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<color name="COLOR_BLACK_TRANSPARENT_160">#A0000000</color>
+
+    <color name="COLOR_BLACK_TRANSPARENT_160">#A0000000</color>
     <color name="COLOR_BLACK_TRANSPARENT_170">#AA000000</color>
-	<color name="COLOR_BLACK_TRANSPARENT_192">#C0000000</color>
-	<color name="COLOR_BLACK_TRANSPARENT_128">#80000000</color>
-	<color name="COLOR_BLACK_NOTTRANSPARENT">#FF000000</color>
-	
-	
-	<!-- color name="window_bg">#1A262B</color-->
-	<color name="window_bg">#00344c</color>
-	<color name="primary">#005885</color>
-	<color name="primary_128">#80005885</color>
-	<color name="primary_dark">#004466</color>
+    <color name="COLOR_BLACK_TRANSPARENT_192">#C0000000</color>
+    <color name="COLOR_BLACK_TRANSPARENT_128">#80000000</color>
+    <color name="COLOR_BLACK_NOTTRANSPARENT">#FF000000</color>
+
+    <!-- color name="window_bg">#1A262B</color -->
+    <color name="window_bg">#00344c</color>
+    <color name="primary">#005885</color>
+    <color name="primary_128">#80005885</color>
+    <color name="primary_dark">#004466</color>
     <color name="dark">#002C42</color>
     <color name="super_dark">#1A262B</color>
     <color name="accent">#00AAFF</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#AADCEDC8</color>
-
     <color name="brown_window_bg">#3b302d</color>
-	<color name="brown_primary">#6a5750</color>
-	<color name="brown_primary_dark">#463936</color>
+    <color name="brown_primary">#6a5750</color>
+    <color name="brown_primary_dark">#463936</color>
     <color name="brown_accent">#d35511</color>
-    
     <color name="lime_window_bg">#3d3c0f</color>
-	<color name="lime_primary">#9E9D24</color>
-	<color name="lime_primary_dark">#636217</color>
+    <color name="lime_primary">#9E9D24</color>
+    <color name="lime_primary_dark">#636217</color>
     <color name="lime_accent">#dcda14</color>
+
+    <color name="pink_window_bg">#38081e</color>
+    <color name="pink_primary">#AD1457</color>
+    <color name="pink_primary_dark">#6f113b</color>
+    <color name="pink_accent">#e7096c</color>
+
+    <color name="amber_brown_primary">#c67900</color>
+    <color name="amber_brown_primary_dark">#503830</color>
+    <color name="amber_brown_primary_light">#795548</color>
+    <color name="amber_brown_accent">#FFC107</color>
     
-    
-	<color name="white">#FFFFFFFF</color>
-	<color name="white_128">#80FFFFFF</color>
-	<color name="orange_128">#80ff7801</color>
-	<color name="red_128">#80ff0101</color>
-	<color name="green_128">#806eff01</color>
-	
-	
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_128">#80FFFFFF</color>
+    <color name="orange_128">#80ff7801</color>
+    <color name="red_128">#80ff0101</color>
+    <color name="green_128">#806eff01</color>
+
 </resources>

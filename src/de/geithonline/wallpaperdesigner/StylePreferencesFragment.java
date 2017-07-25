@@ -15,320 +15,199 @@ import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
 
 /**
  * This fragment shows the preferences for the first header.
  */
 public class StylePreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
-	private ListPreference reflectionStyle;
-	private ListPreference patternSelection;
-	private ListPreference patternVariantSelection;
-	private ListPreference dropShadowType;
-	private ListPreference filledOption;
-	private ListPreference tailOption;
-	private EditTextPreference textPattern;
-	private ListPreference textDrawStyle;
-	private InlineSeekBarPreference numberOfLeafs;
-	private InlineSeekBarPreference rotationDegrees;
-	private CheckBoxPreference randomLeafCount;
-	private ListPreference rotatingStyle;
-	private ListPreference glowStyle;
-	private InlineSeekBarPreference randomRange;
-	private InlineSeekBarPreference rotationCenterPointX;
-	private InlineSeekBarPreference rotationCenterPointY;
-	private ListPreference radiusType;
+    private ListPreference patternSelection;
+    private ListPreference patternVariantSelection;
+    private PreferenceScreen jellyfishOptions;
+    private PreferenceScreen jellyfishTopviewOptions;
+    private PreferenceScreen sceneRainOptions;
 
-	private PreferenceScreen jellyfishOptions;
-	private PreferenceScreen jellyfishTopviewOptions;
-	private PreferenceScreen sceneRainOptions;
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences_style_10_pattern);
+        addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish);
+        addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish_topview);
+        addPreferencesFromResource(R.xml.preferences_style_10_11_scene_rain);
+        addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
+        addPreferencesFromResource(R.xml.preferences_style_30_glossy);
+        addPreferencesFromResource(R.xml.preferences_style_40_rotating);
+        addPreferencesFromResource(R.xml.preferences_style_50_outline);
+        addPreferencesFromResource(R.xml.preferences_style_60_assorted);
+        addPreferencesFromResource(R.xml.preferences_style_70_size);
 
-	@Override
-	public void onCreate(final Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.preferences_style_10_pattern);
-		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish);
-		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish_topview);
-		addPreferencesFromResource(R.xml.preferences_style_10_11_scene_rain);
-		addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
-		addPreferencesFromResource(R.xml.preferences_style_30_glossy);
-		addPreferencesFromResource(R.xml.preferences_style_40_rotating);
-		addPreferencesFromResource(R.xml.preferences_style_50_outline);
-		addPreferencesFromResource(R.xml.preferences_style_60_assorted);
-		addPreferencesFromResource(R.xml.preferences_style_70_size);
+        Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+        patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
+        patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
-		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                handlePatternSelect((String) newValue);
+                return true;
+            }
+        });
+        patternVariantSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER);
+        patternVariantSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
-		jellyfishOptions = (PreferenceScreen) findPreference("jellyfishOptions");
-		jellyfishTopviewOptions = (PreferenceScreen) findPreference("jellyfishOptions2");
-		sceneRainOptions = (PreferenceScreen) findPreference("sceneRainOptions");
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                handlePatternVariantSelect((String) newValue);
+                return false;
+            }
+        });
 
-		reflectionStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_REFLECTION_STYLE);
-		glowStyle = (ListPreference) findPreference(Settings.KEY_GLOSSY_GLOW_STYLE);
-		patternSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_PICKER);
-		patternVariantSelection = (ListPreference) findPreference(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER);
-		filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
-		tailOption = (ListPreference) findPreference(Settings.KEY_TAIL_OPTION);
-		textDrawStyle = (ListPreference) findPreference(Settings.KEY_PATTERN_TEXT_DRAW_STYLE);
-		dropShadowType = (ListPreference) findPreference(Settings.KEY_PATTERN_DROPSHADOW_TYPE);
-		textPattern = (EditTextPreference) findPreference(Settings.KEY_PATTERN_TEXT);
-		radiusType = (ListPreference) findPreference(Settings.KEY_RADIUS_TYPE);
+        jellyfishOptions = (PreferenceScreen) findPreference("jellyfishOptions");
+        jellyfishTopviewOptions = (PreferenceScreen) findPreference("jellyfishOptions2");
+        sceneRainOptions = (PreferenceScreen) findPreference("sceneRainOptions");
 
-		numberOfLeafs = (InlineSeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
-		randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
-		rotationDegrees = (InlineSeekBarPreference) findPreference("rotationDegrees");
-		randomRange = (InlineSeekBarPreference) findPreference("randomRange");
-		rotatingStyle = (ListPreference) findPreference(Settings.KEY_ROTATING_STYLE);
-		rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
-		rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
+        handlePatternSelect(Settings.getSelectedPattern());
+        handlePatternVariantSelect(Settings.getSelectedPatternVariant());
+        handleDropShadowTypeSelection(Settings.getDropShadowType());
+        handleRotatingStyleSelected(Settings.getRotationStyle());
+        enableProFeatures();
+    }
 
-		textPattern.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+    private void handleRotatingStyleSelected(final String newValue) {
+        final InlineSeekBarPreference rotationDegrees = (InlineSeekBarPreference) findPreference("rotationDegrees");
+        final InlineSeekBarPreference randomRange = (InlineSeekBarPreference) findPreference("randomRange");
+        final InlineSeekBarPreference rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
+        final InlineSeekBarPreference rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handlePatternTextChanged((String) newValue);
-				return true;
-			}
+        rotationDegrees.setEnabled(!newValue.equals("Random"));
+        randomRange.setEnabled(newValue.contains("(Range)"));
+        rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
+        rotationCenterPointY.setEnabled(newValue.equals("Around Adjustable Center"));
+    }
 
-		});
+    public void handleDropShadowTypeSelection(final DROP_SHADOW_TYPE type) {
+        final Preference dropShadowColor = findPreference(Settings.KEY_PATTERN_DROPSHADOW_COLOR);
+        dropShadowColor.setEnabled(type.equals(DROP_SHADOW_TYPE.SELECT));
+        final Preference dropShadowDarkness = findPreference(Settings.KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST);
+        dropShadowDarkness.setEnabled(type.equals(DROP_SHADOW_TYPE.DARKER));
+        final InlineSeekBarPreference dropShadowRadiusAdjustment = (InlineSeekBarPreference) findPreference("dropShadowRadiusAdjustment");
+        dropShadowRadiusAdjustment.setEnabled(!type.equals(DROP_SHADOW_TYPE.NO));
+        final InlineSeekBarPreference dropShadowOffsetX = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_X);
+        dropShadowOffsetX.setEnabled(!type.equals(DROP_SHADOW_TYPE.NO));
+        final InlineSeekBarPreference dropShadowOffsetY = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_Y);
+        dropShadowOffsetY.setEnabled(!type.equals(DROP_SHADOW_TYPE.NO));
 
-		reflectionStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+    }
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleReflectionStyleSelect((String) newValue);
-				return true;
-			}
-		});
+    private void handlePatternSelect(final String newPattern) {
+        final ListPreference textDrawStyle = (ListPreference) findPreference(Settings.KEY_PATTERN_TEXT_DRAW_STYLE);
+        final ListPreference filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
+        final InlineSeekBarPreference numberOfLeafs = (InlineSeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
+        final CheckBoxPreference randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
+        final EditTextPreference textPattern = (EditTextPreference) findPreference(Settings.KEY_PATTERN_TEXT);
 
-		glowStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
+        textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
+        textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
+        numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
+        randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleGlowStyleSelect((String) newValue);
-				return true;
-			}
-		});
+        patternSelection.setSummary(newPattern);
 
-		patternSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        // Pattern Variants
+        patternVariantSelection.setEnabled(PatternPropertyStore.hasPatternVariants(newPattern));
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handlePatternSelect((String) newValue);
-				return true;
-			}
-		});
+        if (PatternPropertyStore.hasPatternVariants(newPattern)) {
+            final CharSequence[] patternVariants = PatternPropertyStore.getPatternVariants(newPattern);
+            // for (final CharSequence charSequence : patternVariants) {
+            // Log.i("GEITH", "Setting Pattern..." + newPattern + " variants = " + charSequence);
+            // }
+            patternVariantSelection.setEntries(patternVariants);
+            patternVariantSelection.setEntryValues(patternVariants);
+            if (!newPattern.equals(patternSelection.getValue())) {
+                patternVariantSelection.setValueIndex(0);
+                final String variant = patternVariantSelection.getValue();
+                Log.i("GEITH", "Setting PatternVariant on new Pattern..." + variant);
+                patternVariantSelection.setDefaultValue(variant);
+            }
+            final String variant = patternVariantSelection.getValue();
+            Log.i("GEITH", "Setting PatternVariant..." + variant);
+            patternVariantSelection.setSummary(variant);
 
-		patternVariantSelection.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        } else {
+            patternVariantSelection.setEntries(null);
+            patternVariantSelection.setEntryValues(null);
+            patternVariantSelection.setSummary("not available");
+        }
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handlePatternVariantSelect((String) newValue);
-				return true;
-			}
-		});
+        // Screens enablen oder disablen
+        final PreferenceScreen glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
+        glossyScreen.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
+        final PreferenceScreen ratatingScreen = (PreferenceScreen) findPreference("ratatingScreen");
+        ratatingScreen.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
+        final PreferenceScreen outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
+        outlineScreen.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
+        final PreferenceScreen assortedScreen = (PreferenceScreen) findPreference("assortedScreen");
+        assortedScreen.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern) //
+                || PatternPropertyStore.hasPatternFilledOption(newPattern)//
+                || PatternPropertyStore.hasNumberOfLeafsOption(newPattern)//
+        );
 
-		filledOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        // Special Pattern Settings enabel or disable
+        addSpecialPreferences(newPattern, patternVariantSelection.getValue());
+    }
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleFilledOptionSelected((String) newValue);
-				return true;
-			}
-		});
+    private void addSpecialPreferences(final String pattern, final String variant) {
+        Log.i("GEITH", "addSpecialPreferences..." + pattern + "-" + variant);
 
-		tailOption.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleTailOptionSelected((String) newValue);
-				return true;
-			}
-		});
+        // Special Pattern Settings enabel or disable
+        if (pattern.equalsIgnoreCase("Jellyfish")) {
+            getPreferenceScreen().addPreference(jellyfishOptions);
+        } else {
+            getPreferenceScreen().removePreference(jellyfishOptions);
+        }
+        if (pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable")) {
+            getPreferenceScreen().addPreference(jellyfishTopviewOptions);
+        } else {
+            getPreferenceScreen().removePreference(jellyfishTopviewOptions);
+        }
+        if (pattern.equalsIgnoreCase("Scenes") && variant.equals("Rain")) {
+            getPreferenceScreen().addPreference(sceneRainOptions);
+        } else {
+            getPreferenceScreen().removePreference(sceneRainOptions);
+        }
 
-		textDrawStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+    }
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleTextDrawStyleSelected((String) newValue);
-				return true;
-			}
-		});
+    protected void handlePatternVariantSelect(final String newVariant) {
+        Log.i("GEITH", "Setting PatternVariant..." + newVariant);
+        addSpecialPreferences(Settings.getSelectedPattern(), newVariant);
+    }
 
-		rotatingStyle.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+    private void enableProFeatures() {}
 
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleRotatingStyleSelected((String) newValue);
-				return true;
-			}
+    @Override
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+        if (key == null) {
+            return;
+        }
+        switch (key) {
+            default:
+                break;
+            case Settings.KEY_PATTERN_DROPSHADOW_TYPE:
+                handleDropShadowTypeSelection(Settings.getDropShadowType());
+                break;
+            case Settings.KEY_ROTATING_STYLE:
+                handleRotatingStyleSelected(Settings.getRotationStyle());
+                break;
+            // case Settings.KEY_PATTERN_PATTERN_PICKER:
+            // handlePatternSelect(Settings.getSelectedPattern());
+            // break;
+            // case Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER:
+            // handlePatternVariantSelect(Settings.getSelectedPatternVariant());
+            // break;
+        }
 
-		});
-
-		dropShadowType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleDropShadowTypeSelection((String) newValue);
-				return true;
-			}
-
-		});
-		radiusType.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-			@Override
-			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleRadiusTypeSelection((String) newValue);
-				return true;
-			}
-
-		});
-
-		handleGlowStyleSelect(Settings.getGlossyGlowStyleString());
-		handleReflectionStyleSelect(Settings.getGlossyReflectionStyleString());
-		handlePatternSelect(Settings.getSelectedPattern());
-		handleFilledOptionSelected(Settings.getFilledOption());
-		handleTailOptionSelected(Settings.getTailOption());
-		handleDropShadowTypeSelection(Settings.getDropShadowTypeString());
-		handleRadiusTypeSelection(Settings.getRadiusTypeString());
-		handlePatternTextChanged(Settings.getText());
-		handleTextDrawStyleSelected(Settings.getTextDrawStyle());
-		handleRotatingStyleSelected(Settings.getRotationStyle());
-		enableProFeatures();
-	}
-
-	private void handleRotatingStyleSelected(final String newValue) {
-		rotatingStyle.setSummary(newValue);
-		rotationDegrees.setEnabled(!newValue.equals("Random"));
-		randomRange.setEnabled(newValue.contains("(Range)"));
-		rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
-		rotationCenterPointY.setEnabled(newValue.equals("Around Adjustable Center"));
-	}
-
-	protected void handleTextDrawStyleSelected(final String newValue) {
-		textDrawStyle.setSummary(newValue);
-	}
-
-	protected void handleReflectionStyleSelect(final String newValue) {
-		reflectionStyle.setSummary(newValue);
-	}
-
-	protected void handleGlowStyleSelect(final String newValue) {
-		glowStyle.setSummary(newValue);
-	}
-
-	private void handlePatternTextChanged(final String newValue) {
-		textPattern.setSummary(newValue);
-	}
-
-	private void handleFilledOptionSelected(final String value) {
-		filledOption.setSummary(value);
-	}
-
-	private void handleTailOptionSelected(final String value) {
-		tailOption.setSummary(value);
-	}
-
-	public void handleRadiusTypeSelection(final String newValue) {
-		radiusType.setSummary(newValue);
-	}
-
-	public void handleDropShadowTypeSelection(final String newValue) {
-		dropShadowType.setSummary(newValue);
-		final Preference dropShadowColor = findPreference(Settings.KEY_PATTERN_DROPSHADOW_COLOR);
-		dropShadowColor.setEnabled(newValue.equals("Select"));
-		final Preference dropShadowDarkness = findPreference(Settings.KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST);
-		dropShadowDarkness.setEnabled(newValue.equals("Darker"));
-		final InlineSeekBarPreference dropShadowRadiusAdjustment = (InlineSeekBarPreference) findPreference("dropShadowRadiusAdjustment");
-		dropShadowRadiusAdjustment.setEnabled(!newValue.equals("No"));
-		final InlineSeekBarPreference dropShadowOffsetX = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_X);
-		dropShadowOffsetX.setEnabled(!newValue.equals("No"));
-		final InlineSeekBarPreference dropShadowOffsetY = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_Y);
-		dropShadowOffsetY.setEnabled(!newValue.equals("No"));
-
-	}
-
-	private void handlePatternSelect(final String newPattern) {
-		patternSelection.setSummary(newPattern);
-		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
-		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
-		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
-		numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
-		randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
-
-		// Pattern Variants
-		patternVariantSelection.setEnabled(PatternPropertyStore.hasPatternVariants(newPattern));
-
-		if (PatternPropertyStore.hasPatternVariants(newPattern)) {
-			Log.i("GEITH", "Setting Pattern...");
-			final CharSequence[] patternVariants = PatternPropertyStore.getPatternVariants(newPattern);
-			patternVariantSelection.setEntries(patternVariants);
-			patternVariantSelection.setEntryValues(patternVariants);
-			if (!newPattern.equals(patternSelection.getValue())) {
-				patternVariantSelection.setValueIndex(0);
-				patternVariantSelection.setDefaultValue(patternVariantSelection.getValue());
-			}
-			// patternVariantSelection.setValueIndex(0);
-			// patternVariantSelection.setDefaultValue(patternVariantSelection.getValue());
-			patternVariantSelection.setSummary(patternVariantSelection.getValue());
-
-		} else {
-			patternVariantSelection.setEntries(null);
-			patternVariantSelection.setEntryValues(null);
-			patternVariantSelection.setSummary("not available");
-		}
-
-		// Screens enablen oder disablen
-		final PreferenceScreen glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
-		glossyScreen.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
-		final PreferenceScreen ratatingScreen = (PreferenceScreen) findPreference("ratatingScreen");
-		ratatingScreen.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
-		final PreferenceScreen outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
-		outlineScreen.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		final PreferenceScreen assortedScreen = (PreferenceScreen) findPreference("assortedScreen");
-		assortedScreen.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern) //
-				|| PatternPropertyStore.hasPatternFilledOption(newPattern)//
-				|| PatternPropertyStore.hasNumberOfLeafsOption(newPattern)//
-		);
-
-		// Special Pattern Settings enabel or disable
-		handlePatterSelection(newPattern, Settings.getSelectedPatternVariant());
-	}
-
-	private void handlePatterSelection(final String pattern, final String variant) {
-		// Special Pattern Settings enabel or disable
-		if (pattern.equalsIgnoreCase("Jellyfish")) {
-			getPreferenceScreen().addPreference(jellyfishOptions);
-		} else {
-			getPreferenceScreen().removePreference(jellyfishOptions);
-		}
-		if (pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable")) {
-			getPreferenceScreen().addPreference(jellyfishTopviewOptions);
-		} else {
-			getPreferenceScreen().removePreference(jellyfishTopviewOptions);
-		}
-		if (pattern.equalsIgnoreCase("Scenes") && variant.equals("Rain")) {
-			getPreferenceScreen().addPreference(sceneRainOptions);
-		} else {
-			getPreferenceScreen().removePreference(sceneRainOptions);
-		}
-
-	}
-
-	protected void handlePatternVariantSelect(final String newVariant) {
-		patternVariantSelection.setSummary(newVariant);
-		handlePatterSelection(Settings.getSelectedPattern(), newVariant);
-	}
-
-	private void enableProFeatures() {
-	}
-
-	@Override
-	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
-		switch (key) {
-		default:
-			break;
-		}
-
-	}
+    }
 
 }

@@ -42,6 +42,7 @@ public class SizePreferencesFragment extends PreferenceFragment implements OnSha
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
                 final String s = (String) newValue;
+                sizeSelection.setSummary(s);
                 bWidth.setEnabled(s.equals("customSize"));
                 bHeight.setEnabled(s.equals("customSize"));
                 return true;

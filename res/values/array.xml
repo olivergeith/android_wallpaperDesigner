@@ -78,7 +78,8 @@
         <item >Blue</item>
         <item >Brown</item>
         <item >Lime</item>
-    </string-array>
+        <item >Pink</item>
+        </string-array>
 
     <string-array name="reflectionstyle">
         <item >Diagonal</item>

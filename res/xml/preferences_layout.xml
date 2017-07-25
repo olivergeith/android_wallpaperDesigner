@@ -4,14 +4,14 @@
 
     <PreferenceCategory android:title="Layout" />
 
-    <de.geithonline.android.basics.preferences.CoolListPreference
+    <ListPreference
         android:defaultValue="Random Layout"
         android:dialogTitle="@string/mainlayouts"
         android:entries="@array/mainlayouts"
         android:entryValues="@array/mainlayouts"
         android:key="mainlayouts"
         android:title="@string/mainlayouts" />
-    <de.geithonline.android.basics.preferences.CoolListPreference
+    <ListPreference
         android:dialogTitle="@string/mainlayoutVariants"
         android:key="mainlayoutVariants"
         android:title="@string/mainlayoutVariants" />

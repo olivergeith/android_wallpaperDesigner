@@ -339,9 +339,11 @@ public class Settings {
             case "Blue":
                 return R.style.Theme_BatteryLWP;
             case "Brown":
-                return R.style.Theme_BatteryLWPBrown;
+                return R.style.Theme_BatteryLWPAmberBrown;
             case "Lime":
                 return R.style.Theme_BatteryLWPLime;
+            case "Pink":
+                return R.style.Theme_BatteryLWPPink;
         }
     }
 
@@ -701,7 +703,7 @@ public class Settings {
 
     // ###################################################################
     // Options Pattern Style (DropShadow)
-    public static String getDropShadowTypeString() {
+    private static String getDropShadowTypeString() {
         return readStringPref(KEY_PATTERN_DROPSHADOW_TYPE, "Darker");
     }
 
