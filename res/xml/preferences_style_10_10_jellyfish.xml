@@ -8,7 +8,7 @@
         android:key="jellyfishOptions"
         android:title="Jellyfish Options..." >
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="With Tail"
             android:dialogTitle="Tail Option"
             android:entries="@array/tail"

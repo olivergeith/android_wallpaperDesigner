@@ -116,11 +116,11 @@
        <de.geithonline.android.basics.preferences.CoolListPreference
             android:summary=""
 	        android:defaultValue="4"
-	        android:dialogTitle="@string/anzColors"
+	        android:dialogTitle="Number of Colors"
 	        android:entries="@array/anzColors"
 	        android:entryValues="@array/anzColorsValues"
 	        android:key="anzColors"
-	        android:title="@string/anzColors" />
+	        android:title="Number of Colors" />
 	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="1"
 	        android:dialogMessage="@string/colorRepeats"

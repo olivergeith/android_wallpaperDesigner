@@ -9,7 +9,7 @@
         android:title="Rotating..." >
         <PreferenceCategory android:title="Rotating" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Fixed"
             android:dialogTitle="@string/rotatingStyle"
             android:entries="@array/rotatingStyle"

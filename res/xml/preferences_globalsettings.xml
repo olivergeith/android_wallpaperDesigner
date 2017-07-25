@@ -3,7 +3,7 @@
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
     <PreferenceCategory android:title="General Options"/>
-		<ListPreference
+		<de.geithonline.android.basics.preferences.CoolListPreference
 	        android:key="sortOrder"
 	        android:title="@string/sortOrder" 
 	        android:dialogTitle="@string/sortOrder"
@@ -48,16 +48,16 @@
 		    android:title="Load size from Designs"
 		    android:summary="If you dont want the wallpaper-size to be overwritten every time you load a design, disable this option!" 
             />
-        
-        <ListPreference
+       
+        <de.geithonline.android.basics.preferences.CoolListPreference
 	        android:key="appTheme"
 	        android:title="@string/appTheme" 
 	        android:dialogTitle="@string/appTheme"
-	        android:defaultValue="Dark"
+	        android:defaultValue="Blue"
 	        android:entries="@array/theme"
 	        android:entryValues="@array/theme"
 	        />
-
+ 
     <PreferenceCategory android:title="Rendering Animation"/>
         <CheckBoxPreference 
 		    android:key="showRenderingProcess"
@@ -79,7 +79,7 @@
         
         
     <PreferenceCategory android:title="Wallpaper saving"/>
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
 	        android:key="imageFormat"
 	        android:title="@string/imageFormat" 
 	        android:dialogTitle="@string/imageFormat"

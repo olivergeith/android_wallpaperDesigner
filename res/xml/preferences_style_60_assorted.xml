@@ -10,7 +10,7 @@
         android:title="Assorted Options..." >
         <PreferenceCategory android:title="Assorted Options" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Not filled"
             android:dialogTitle="@string/filledOption"
             android:entries="@array/hole"
@@ -26,7 +26,7 @@
             android:key="textPattern"
             android:title="@string/textPattern" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Round"
             android:dialogTitle="@string/textDrawStyle"
             android:entries="@array/textDrawStyle"

@@ -4,14 +4,14 @@
 
     <PreferenceCategory android:title="Layout" />
 
-    <ListPreference
+    <de.geithonline.android.basics.preferences.CoolListPreference
         android:defaultValue="Random Layout"
         android:dialogTitle="@string/mainlayouts"
         android:entries="@array/mainlayouts"
         android:entryValues="@array/mainlayouts"
         android:key="mainlayouts"
         android:title="@string/mainlayouts" />
-    <ListPreference
+    <de.geithonline.android.basics.preferences.CoolListPreference
         android:dialogTitle="@string/mainlayoutVariants"
         android:key="mainlayoutVariants"
         android:title="@string/mainlayoutVariants" />
@@ -51,7 +51,7 @@
         android:key="upsideDown"
         android:title="@string/upsideDown" />
 
-    <ListPreference
+    <de.geithonline.android.basics.preferences.CoolListPreference
         android:dialogTitle="@string/limit2Canvas"
         android:key="limit2Canvas"
         android:entries="@array/limit2Canvas"

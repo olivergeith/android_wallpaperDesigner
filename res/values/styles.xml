@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="Theme.BatteryLWP" parent="@android:style/Theme.DeviceDefault.Wallpaper">
-    	<item name="android:windowBackground">@color/COLOR_BLACK_NOTTRANSPARENT</item>
-    </style>
-    
-        <style name="AppThemeLight" parent="android:Theme.Holo.Light">
+    <style name="AppThemeLight" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
     </style>
         <style name="AppThemeDark" parent="android:Theme.Holo">
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.BatteryLWP" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:navigationBarColor">@color/primary_dark</item>
+ 		<item name="android:windowBackground">@color/window_bg</item> 
+ 		<item name="android:textColorHighlight">@color/text_primary</item> 
+ 		</style>
+
+    <style name="Theme.BatteryLWPBrown" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">@color/brown_primary</item>
+        <item name="android:colorPrimaryDark">@color/brown_primary_dark</item>
+        <item name="android:colorAccent">@color/brown_accent</item>
+        <item name="android:navigationBarColor">@color/brown_primary_dark</item>
+ 		<item name="android:windowBackground">@color/brown_window_bg</item> 
+    </style>
+
+    <style name="Theme.BatteryLWPLime" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">@color/lime_primary</item>
+        <item name="android:colorPrimaryDark">@color/lime_primary_dark</item>
+        <item name="android:colorAccent">@color/lime_accent</item>
+        <item name="android:navigationBarColor">@color/lime_primary_dark</item>
+ 		<item name="android:windowBackground">@color/lime_window_bg</item> 
+    </style>
+    
+    
+    <style name="Theme.Recycler" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:colorBackground">@color/primary_dark</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:navigationBarColor">@color/primary_dark</item>
+ 		<item name="android:windowBackground">@color/window_bg</item> 
+    </style>
+        
+        
         
 </resources>

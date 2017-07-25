@@ -11,7 +11,7 @@
         android:title="Dropshadow..." >
         <PreferenceCategory android:title="DropShadow" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Darker"
             android:dialogTitle="Dropshadow Style"
             android:entries="@array/dropShadowType"

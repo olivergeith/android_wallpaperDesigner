@@ -17,7 +17,7 @@
             android:title="@string/glossy" />
         <PreferenceCategory android:title="Glow Options" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Center"
             android:dependency="glossy"
             android:dialogTitle="@string/glowStyle"
@@ -49,7 +49,7 @@
 
         <PreferenceCategory android:title="Reflection Options" />
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="Diagonal"
             android:dependency="glossy"
             android:dialogTitle="@string/reflectionStyle"

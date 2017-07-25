@@ -4,14 +4,14 @@
 
     <PreferenceCategory android:title="Pattern" />
 
-    <ListPreference
+    <de.geithonline.android.basics.preferences.CoolListPreference
         android:defaultValue="Stars"
         android:dialogTitle="@string/patternPicker"
         android:entries="@array/pattern"
         android:entryValues="@array/pattern"
         android:key="pattern_patternPicker"
         android:title="@string/patternPicker" />
-    <ListPreference
+    <de.geithonline.android.basics.preferences.CoolListPreference
         android:dialogTitle="@string/patternVariantPicker"
         android:key="pattern_patternVariantPicker"
         android:title="@string/patternVariantPicker" />

@@ -9,7 +9,7 @@
         android:summary="Size of pattern and range of randomization of size"
         android:title="Sizes of Patterns..." >
         
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
             android:defaultValue="random"
             android:dialogTitle="Radius Calculating-Style"
             android:entries="@array/radiusTypes"

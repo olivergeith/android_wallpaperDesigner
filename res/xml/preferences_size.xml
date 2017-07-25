@@ -4,7 +4,7 @@
     <PreferenceCategory 
         android:title="@string/category_size">
 
-        <ListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
 	        android:defaultValue="2560x1600"
 	        android:title="@string/sizeSelection" 
             android:summary="@string/sizeSelection_summary" 

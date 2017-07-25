@@ -75,8 +75,9 @@
     
     
     <string-array name="theme">
-        <item >Dark</item>
-        <item >Light</item>
+        <item >Blue</item>
+        <item >Brown</item>
+        <item >Lime</item>
     </string-array>
 
     <string-array name="reflectionstyle">
