@@ -16,6 +16,8 @@
         android:key="mainlayoutVariants"
         android:title="@string/mainlayoutVariants" />
 
+    <PreferenceCategory android:title="Layout Options" />
+    
     <de.geithonline.android.basics.preferences.InlineSeekBarPreference
         android:defaultValue="50"
         android:dialogMessage="@string/overlapping"
@@ -50,7 +52,12 @@
         android:defaultValue="false"
         android:key="upsideDown"
         android:title="@string/upsideDown" />
-
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="ramdomStartWinkel"
+        android:summary="@string/ramdomStartWinkelSummary"
+        android:title="@string/ramdomStartWinkel" />
+    
     <de.geithonline.android.basics.preferences.CoolListPreference
         android:dialogTitle="@string/limit2Canvas"
         android:key="limit2Canvas"
@@ -68,7 +75,9 @@
         seekbarpreference:maxValue="3000"
         seekbarpreference:minValue="0"
         seekbarpreference:stepValue="20" />
-
+    
+    <PreferenceCategory android:title="Blurring" />
+    
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="blurPatterns"
@@ -173,11 +182,6 @@
 		    		    		    
     </PreferenceScreen>
     
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="ramdomStartWinkel"
-        android:summary="@string/ramdomStartWinkelSummary"
-        android:title="@string/ramdomStartWinkel" />
     
     
     <!--
