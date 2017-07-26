@@ -75,14 +75,15 @@
     
     
     <string-array name="theme">
+        <item >Gray (orange)</item>
+        <item >Gray (blue)</item>
+        <item >Gray (pink)</item>
         <item >Blue</item>
         <item >Brown</item>
         <item >Lime</item>
         <item >Pink</item>
         <item >Orange</item>
         <item >Purple</item>
-        <item >Gray</item>
-        <item >Gray (orange)</item>
         </string-array>
 
     <string-array name="reflectionstyle">

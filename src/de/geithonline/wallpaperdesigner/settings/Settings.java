@@ -336,6 +336,8 @@ public class Settings {
     public static int getTheme() {
         switch (getAppTheme()) {
             default:
+            case "Gray (orange)":
+                return R.style.Theme_BatteryLWPGrayOrange;
             case "Blue":
                 return R.style.Theme_BatteryLWP;
             case "Brown":
@@ -348,10 +350,10 @@ public class Settings {
                 return R.style.Theme_BatteryLWPOrange;
             case "Purple":
                 return R.style.Theme_BatteryLWPPurple;
-            case "Gray":
-                return R.style.Theme_BatteryLWPGray;
-            case "Gray (orange)":
-                return R.style.Theme_BatteryLWPGrayOrange;
+            case "Gray (pink)":
+                return R.style.Theme_BatteryLWPGrayPink;
+            case "Gray (blue)":
+                return R.style.Theme_BatteryLWPGrayBlue;
         }
     }
 
