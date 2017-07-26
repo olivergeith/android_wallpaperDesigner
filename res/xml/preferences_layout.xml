@@ -73,7 +73,7 @@
         android:defaultValue="false"
         android:key="blurPatterns"
         android:title="@string/blurPatterns" />
-
+<!-- 
     <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
 	        android:dialogMessage="Testing"
 	        android:dependency="blurPatterns"
@@ -99,8 +99,7 @@
         seekbarpreference:maxValue="16"
         seekbarpreference:minValue="0"
         seekbarpreference:stepValue="1" />
-    
-    
+-->    
     
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -53,7 +53,7 @@
 	        android:key="appTheme"
 	        android:title="@string/appTheme" 
 	        android:dialogTitle="@string/appTheme"
-	        android:defaultValue="Blue"
+	        android:defaultValue="Gray (orange)"
 	        android:entries="@array/theme"
 	        android:entryValues="@array/theme"
 	        />
