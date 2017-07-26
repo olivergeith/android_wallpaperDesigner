@@ -339,11 +339,15 @@ public class Settings {
             case "Blue":
                 return R.style.Theme_BatteryLWP;
             case "Brown":
-                return R.style.Theme_BatteryLWPAmberBrown;
+                return R.style.Theme_BatteryLWPBrown;
             case "Lime":
                 return R.style.Theme_BatteryLWPLime;
             case "Pink":
                 return R.style.Theme_BatteryLWPPink;
+            case "Orange":
+                return R.style.Theme_BatteryLWPOrange;
+            case "Purple":
+                return R.style.Theme_BatteryLWPPurple;
         }
     }
 

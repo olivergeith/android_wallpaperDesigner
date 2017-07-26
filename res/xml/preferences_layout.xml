@@ -74,6 +74,34 @@
         android:key="blurPatterns"
         android:title="@string/blurPatterns" />
 
+    <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+	        android:dialogMessage="Testing"
+	        android:dependency="blurPatterns"
+	        android:title="Testing"
+	        android:key="testing"
+	        seekbarpreference:keyMinValue="mintesting"
+	        seekbarpreference:keyMaxValue="maxtesting"
+	        android:summary="%1$s testing"
+	        android:defaultValue="128-225"
+	        seekbarpreference:absoluteMaxValue="255"
+	        seekbarpreference:absoluteMinValue="0"
+	        seekbarpreference:defaultMaxValue="255"
+	        seekbarpreference:defaultMinValue="128"
+	        seekbarpreference:step="1" 
+	        />
+     <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+        android:defaultValue="8"
+        android:dependency="blurPatterns"
+        android:dialogMessage="Testing2"
+        android:key="testing2"
+        android:summary="testing2"
+        android:title="Testing2"
+        seekbarpreference:maxValue="16"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="1" />
+    
+    
+    
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"

@@ -24,8 +24,26 @@
         <item name="android:colorAccent">@color/brown_accent</item>
         <item name="android:navigationBarColor">@color/brown_primary_dark</item>
         <item name="android:windowBackground">@color/brown_window_bg</item>
+        <item name="android:textColorHighlight">@color/text_primary</item>
     </style>
-
+    <style name="Theme.BatteryLWPPurple" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">@color/purple_primary</item>
+        <item name="android:colorPrimaryDark">@color/purple_primary_dark</item>
+        <item name="android:colorAccent">@color/purple_accent</item>
+        <item name="android:navigationBarColor">@color/purple_primary_dark</item>
+        <item name="android:windowBackground">@color/purple_window_bg</item>
+        <item name="android:textColorHighlight">@color/text_primary</item>
+    </style>
+    
+    <style name="Theme.BatteryLWPOrange" parent="@android:style/Theme.Material">
+        <item name="android:colorPrimary">@color/orange_primary</item>
+        <item name="android:colorPrimaryDark">@color/orange_primary_dark</item>
+        <item name="android:colorAccent">@color/orange_accent</item>
+        <item name="android:navigationBarColor">@color/orange_primary_dark</item>
+        <item name="android:windowBackground">@color/orange_window_bg</item>
+        <item name="android:textColorHighlight">@color/text_primary</item>
+    </style>
+    
     <style name="Theme.BatteryLWPLime" parent="@android:style/Theme.Material">
         <item name="android:colorPrimary">@color/lime_primary</item>
         <item name="android:colorPrimaryDark">@color/lime_primary_dark</item>
@@ -42,15 +60,6 @@
         <item name="android:navigationBarColor">@color/pink_primary_dark</item>
         <item name="android:windowBackground">@color/pink_window_bg</item>
         <item name="android:textColorHighlight">@color/text_primary</item>
-    </style>
-
-    <style name="Theme.BatteryLWPAmberBrown" parent="@android:style/Theme.Material">
-        <item name="android:colorPrimary">@color/amber_brown_primary</item>
-        <item name="android:colorPrimaryDark">@color/amber_brown_primary_dark</item>
-        <item name="android:colorAccent">@color/amber_brown_accent</item>
-        <item name="android:navigationBarColor">@color/amber_brown_primary_dark</item>
-        <item name="android:windowBackground">@color/pink_window_bg</item>
-        <item name="android:textColorHighlight">@color/amber_brown_accent</item>
     </style>
 
     <style name="Theme.Recycler" parent="@style/Theme.AppCompat.NoActionBar">

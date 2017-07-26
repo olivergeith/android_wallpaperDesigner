@@ -31,10 +31,16 @@
     <color name="pink_primary_dark">#6f113b</color>
     <color name="pink_accent">#e7096c</color>
 
-    <color name="amber_brown_primary">#c67900</color>
-    <color name="amber_brown_primary_dark">#503830</color>
-    <color name="amber_brown_primary_light">#795548</color>
-    <color name="amber_brown_accent">#FFC107</color>
+    <color name="orange_window_bg">#421c00</color>
+    <color name="orange_primary">#c85500</color>
+    <color name="orange_primary_dark">#a04400</color>
+    <color name="orange_accent">#b5d600</color>
+    
+    <color name="purple_window_bg">#3f0040</color>
+    <color name="purple_primary">#ba00bc</color>
+    <color name="purple_primary_dark">#79007a</color>
+    <color name="purple_accent">#6f29ff</color>
+    
     
     <color name="white">#FFFFFFFF</color>
     <color name="white_128">#80FFFFFF</color>
