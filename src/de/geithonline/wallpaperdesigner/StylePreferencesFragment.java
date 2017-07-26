@@ -176,6 +176,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		} else {
 			getPreferenceScreen().removePreference(sceneRainOptions);
 		}
+		// // some precausions
+		// if (pattern.equalsIgnoreCase("Jellyfish Topview") && Settings.getAnzahlPatterns() > 300) {
+		// Settings.prefs.edit().putInt(Settings.KEY_PATTERN_ANZAHL_PATTERNS, 300).commit();
+		// }
 
 	}
 
