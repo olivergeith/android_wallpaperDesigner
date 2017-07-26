@@ -348,6 +348,10 @@ public class Settings {
                 return R.style.Theme_BatteryLWPOrange;
             case "Purple":
                 return R.style.Theme_BatteryLWPPurple;
+            case "Gray":
+                return R.style.Theme_BatteryLWPGray;
+            case "Gray (orange)":
+                return R.style.Theme_BatteryLWPGrayOrange;
         }
     }
 

@@ -36,10 +36,19 @@
     <color name="orange_primary_dark">#a04400</color>
     <color name="orange_accent">#b5d600</color>
     
-    <color name="purple_window_bg">#3f0040</color>
-    <color name="purple_primary">#ba00bc</color>
-    <color name="purple_primary_dark">#79007a</color>
-    <color name="purple_accent">#6f29ff</color>
+    <color name="purple_window_bg">#440020</color>
+    <color name="purple_primary">#880e4f</color>
+    <color name="purple_primary_dark">#560027</color>
+    <color name="purple_accent">#f50057</color>
+
+    <color name="gray_window_bg">#272727</color>
+    <color name="gray_primary">#373737</color>
+    <color name="gray_primary_dark">#494949</color>
+    <color name="gray_accent_blue">#42a5f5</color>
+    <color name="gray_accent_orange">#ffc107</color>
+    
+
+    
     
     
     <color name="white">#FFFFFFFF</color>
