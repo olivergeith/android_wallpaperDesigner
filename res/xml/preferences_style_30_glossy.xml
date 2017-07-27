@@ -35,7 +35,10 @@
             android:title="@string/glossyCenterGlowBrightness"
             seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
-            seekbarpreference:stepValue="4" />
+            seekbarpreference:stepValue="4" 
+            seekbarpreference:maxZoomValue="32"
+        	seekbarpreference:minZoomValue="-32"
+       	 	seekbarpreference:stepZoomValue="1"/>
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="-32"
             android:dependency="glossy"

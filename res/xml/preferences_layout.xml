@@ -74,7 +74,10 @@
         android:title="@string/pattern_anzahlPatterns"
         seekbarpreference:maxValue="3000"
         seekbarpreference:minValue="0"
-        seekbarpreference:stepValue="20" />
+        seekbarpreference:stepValue="20"
+        seekbarpreference:maxZoomValue="300"
+        seekbarpreference:minZoomValue="0"
+        seekbarpreference:stepZoomValue="5" />
     
     <PreferenceCategory android:title="Blurring" />
     
