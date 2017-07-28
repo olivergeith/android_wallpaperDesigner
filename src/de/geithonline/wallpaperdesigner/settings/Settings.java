@@ -943,7 +943,7 @@ public class Settings {
     }
 
     public static boolean isHexValueEnabled() {
-        return readBooleanPref(KEY_HEX_VALUES, false);
+        return readBooleanPref(KEY_HEX_VALUES, true);
     }
 
     public static boolean isShowSetWallpaperButton() {

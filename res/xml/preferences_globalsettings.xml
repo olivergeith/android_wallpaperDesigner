@@ -26,7 +26,7 @@
     
         <CheckBoxPreference 
 		    android:key="hexValues"
-    		android:defaultValue="false"
+    		android:defaultValue="true"
 		    android:title="HexValues in Color-Picker"
 		    android:summary="Enable Hexvalue Input in Colorpicker" 
             />
