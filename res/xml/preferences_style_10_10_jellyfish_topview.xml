@@ -12,7 +12,6 @@
             android:icon="@android:drawable/ic_menu_edit"
             android:key="jellyfishBubbleOptions"
             android:title="Bubble Tail Options..." >
-
             <PreferenceCategory android:title="Number of Bubble-Tails and Positioning" />
 
             <de.geithonline.android.basics.preferences.InlineSeekBarPreference
@@ -33,6 +32,16 @@
                 android:summary=""
                 android:title="Rotation Type" />
 
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="TailOptionsBubbles.randomFlip"
+                android:title="Ramdomly flipped" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="TailOptionsBubbles.colorful"
+                android:summary="Each tail has its own random color"
+                android:title="Colorful" />
+
             <PreferenceCategory android:title="The Bubble itself" />
 
             <de.geithonline.android.basics.preferences.CoolListPreference
@@ -43,7 +52,6 @@
                 android:key="TailOptionsBubbles.sinusObjectType"
                 android:summary=""
                 android:title="Bubble Type" />
-            
             <de.geithonline.android.basics.preferences.CoolListPreference
                 android:defaultValue="Decreasing"
                 android:dialogTitle="Bubble Sizing Type"
@@ -52,7 +60,7 @@
                 android:key="TailOptionsBubbles.sinusObjectSizingType"
                 android:summary=""
                 android:title="Bubble Sizing Type" />
-            
+
             <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="10"
                 android:dialogMessage="Maximum Bubble radius"
@@ -61,7 +69,6 @@
                 seekbarpreference:maxValue="50"
                 seekbarpreference:minValue="5"
                 seekbarpreference:stepValue="5" />
-            
             <de.geithonline.android.basics.preferences.InlineSeekBarPreference
                 android:defaultValue="100"
                 android:dialogMessage="Percentage of Bubbles to draw"
@@ -70,11 +77,9 @@
                 seekbarpreference:maxValue="100"
                 seekbarpreference:minValue="50"
                 seekbarpreference:stepValue="1" />
-            
-            
-            
+
             <PreferenceCategory android:title="The Tail itself" />
-            
+
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Sine Halfwaves"
                 android:key="TailOptionsBubbles.sinusRepeats"
@@ -109,7 +114,6 @@
                 seekbarpreference:keyMaxValue="TailOptionsBubbles.maxAmplitude"
                 seekbarpreference:keyMinValue="TailOptionsBubbles.minAmplitude"
                 seekbarpreference:step="1" />
-
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Length"
                 android:key="TailOptionsBubbles.length"
@@ -122,14 +126,6 @@
                 seekbarpreference:keyMaxValue="TailOptionsBubbles.maxLength"
                 seekbarpreference:keyMinValue="TailOptionsBubbles.minLength"
                 seekbarpreference:step="5" />
-
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="TailOptionsBubbles.colorful"
-                android:title="Colorful" 
-                android:summary="Each tail has its own random color"
-                />
-
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Brightness Randomization"
                 android:key="TailOptionsBubbles.brightness"
@@ -142,18 +138,12 @@
                 seekbarpreference:keyMaxValue="TailOptionsBubbles.maxBrightness"
                 seekbarpreference:keyMinValue="TailOptionsBubbles.minBrightness"
                 seekbarpreference:step="5" />
-            
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="TailOptionsBubbles.randomFlip"
-                android:title="Ramdomly flipped" />
-            </PreferenceScreen>
+        </PreferenceScreen>
         <PreferenceScreen
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:icon="@android:drawable/ic_menu_edit"
             android:key="jellyfishLineOptions"
             android:title="Line Tail Options..." >
-
             <PreferenceCategory android:title="Line Tail Options" />
 
             <de.geithonline.android.basics.preferences.InlineSeekBarPreference
@@ -174,8 +164,22 @@
                 android:summary=""
                 android:title="Rotation Type" />
 
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="TailOptionsLine.randomFlip"
+                android:title="Ramdomly flipped" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="TailOptionsLine.colorful"
+                android:summary="Each tail has its own random color"
+                android:title="Colorful" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="TailOptionsLine.outline"
+                android:title="Outline" />
+
             <PreferenceCategory android:title="The Tail itself" />
-            
+
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Sine Halfwaves"
                 android:key="TailOptionsLine.sinusRepeats"
@@ -231,15 +235,7 @@
                 seekbarpreference:maxValue="20"
                 seekbarpreference:minValue="3"
                 seekbarpreference:stepValue="1" />
-            
-            
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="TailOptionsLine.colorful"
-                android:title="Colorful" 
-                android:summary="Each tail has its own random color"
-                />
-            
+
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Brightness Randomization"
                 android:key="TailOptionsLine.brightness"
@@ -252,24 +248,12 @@
                 seekbarpreference:keyMaxValue="TailOptionsLine.maxBrightness"
                 seekbarpreference:keyMinValue="TailOptionsLine.minBrightness"
                 seekbarpreference:step="5" />
-            
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="TailOptionsLine.randomFlip"
-                android:title="Ramdomly flipped" />
-            
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="TailOptionsLine.outline"
-                android:title="Outline" />
-            
         </PreferenceScreen>
         <PreferenceScreen
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:icon="@android:drawable/ic_menu_edit"
             android:key="jellyfishEyeOptions"
             android:title="Eye Options..." >
-        
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Brightness Randomization"
                 android:key="EyeOptions.brightness"
@@ -282,7 +266,6 @@
                 seekbarpreference:keyMaxValue="EyeOptions.maxBrightness"
                 seekbarpreference:keyMinValue="EyeOptions.minBrightness"
                 seekbarpreference:step="5" />
-
             <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
                 android:dialogMessage="Number of Eyes"
                 android:key="EyeOptions.anzEyes"
@@ -295,11 +278,7 @@
                 seekbarpreference:keyMaxValue="EyeOptions.maxAnzEyes"
                 seekbarpreference:keyMinValue="EyeOptions.minAnzEyes"
                 seekbarpreference:step="1" />
-            
-            
-        
         </PreferenceScreen>
-            
     </PreferenceScreen>
 
 </PreferenceScreen>
