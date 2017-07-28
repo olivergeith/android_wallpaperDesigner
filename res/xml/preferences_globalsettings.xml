@@ -33,7 +33,7 @@
 
         <CheckBoxPreference 
 		    android:key="showSetWallpaperButton"
-    		android:defaultValue="true"
+    		android:defaultValue="false"
 		    android:title="Show Set-Wallpaper-Button"
 		    android:summary="Remove the Button if it gets in your way...." 
             />
@@ -73,7 +73,7 @@
 		    seekbarpreference:minValue="0"
 		    seekbarpreference:stepValue="5"
 		    seekbarpreference:maxValue="100"
-		    android:defaultValue="1"
+		    android:defaultValue="10"
 		    android:summary="Show rendering every %1$d frames" 
 		    android:dialogMessage="Rendering Progress Frames"
 		    android:dependency="showRenderingProcess"

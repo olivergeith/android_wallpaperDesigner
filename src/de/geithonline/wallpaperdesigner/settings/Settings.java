@@ -947,7 +947,7 @@ public class Settings {
     }
 
     public static boolean isShowSetWallpaperButton() {
-        return readBooleanPref(KEY_SHOW_SET_WALLPAPER_BUTTON, true);
+        return readBooleanPref(KEY_SHOW_SET_WALLPAPER_BUTTON, false);
     }
 
     public static boolean isRestoreSizeFromDesign() {
@@ -963,7 +963,7 @@ public class Settings {
     }
 
     public static int getRenderingProcessFrames() {
-        return Math.max(1, readIntegerPref(KEY_RENDERING_PROCESS_FRAMES, 1));
+        return Math.max(1, readIntegerPref(KEY_RENDERING_PROCESS_FRAMES, 10));
     }
 
     public static boolean isRenderingOnStartingApp() {
