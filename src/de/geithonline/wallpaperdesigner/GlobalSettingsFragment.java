@@ -1,6 +1,9 @@
 
 package de.geithonline.wallpaperdesigner;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -9,7 +12,7 @@ import android.preference.PreferenceFragment;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
-public class GlobalSettingsFragment extends PreferenceFragment {
+public class GlobalSettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
     private Preference imageFormat;
     private EditTextPreference shareText;
@@ -20,6 +23,7 @@ public class GlobalSettingsFragment extends PreferenceFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_globalsettings);
+        Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 
         jpgCompression = findPreference(Settings.KEY_JPG_COMPRESSION);
 
@@ -81,4 +85,22 @@ public class GlobalSettingsFragment extends PreferenceFragment {
         imageFormat.setSummary(newValue);
         jpgCompression.setEnabled(newValue.equals("jpg"));
     }
+
+    @Override
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+        switch (key) {
+            case Settings.KEY_APP_THEME:
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    getActivity().setTheme(Settings.getTheme());
+                    getActivity().recreate();
+                }
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
 }

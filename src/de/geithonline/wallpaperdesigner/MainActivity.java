@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -61,7 +62,7 @@ import de.geithonline.wallpaperdesigner.utils.Toaster;
  * @author Oliver
  * 
  */
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnSharedPreferenceChangeListener {
     // Konstanten
     private static final int REQUEST_CODE_PREFERENCES = 1;
     private static final int MY_PERMISSIONS_REQUEST_INT = 99;
@@ -82,6 +83,7 @@ public class MainActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Settings.initPrefs(prefs, getApplicationContext(), this);
+        Settings.prefs.registerOnSharedPreferenceChangeListener(this);
         setTheme(Settings.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -671,6 +673,20 @@ public class MainActivity extends Activity {
     protected void onPause() {
         mSensorManager.unregisterListener(mSensorListener);
         super.onPause();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+        switch (key) {
+            case Settings.KEY_APP_THEME:
+                setTheme(Settings.getTheme());
+                recreate();
+                break;
+
+            default:
+                break;
+        }
+
     }
 
 }

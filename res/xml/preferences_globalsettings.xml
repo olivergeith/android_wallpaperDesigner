@@ -2,8 +2,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
  xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
  
-    <PreferenceCategory android:title="General Options"/>
-		<de.geithonline.android.basics.preferences.CoolListPreference
+    <PreferenceCategory android:title="Theming"/>
+       <de.geithonline.android.basics.preferences.CoolListPreference
+	        android:key="appTheme"
+	        android:title="Theme" 
+	        android:dialogTitle="Theme"
+	        android:defaultValue="Gray (orange)"
+	        android:entries="@array/theme"
+	        android:entryValues="@array/theme"
+	        />
+
+       <PreferenceCategory android:title="General Options"/>
+       
+       
+       <de.geithonline.android.basics.preferences.CoolListPreference
 	        android:key="sortOrder"
 	        android:title="@string/sortOrder" 
 	        android:dialogTitle="@string/sortOrder"
@@ -40,8 +52,6 @@
 		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
             />
 
-  
-        
         <CheckBoxPreference 
 		    android:key="restoreWallpaperSize"
     		android:defaultValue="true"
@@ -49,15 +59,7 @@
 		    android:summary="If you dont want the wallpaper-size to be overwritten every time you load a design, disable this option!" 
             />
        
-        <de.geithonline.android.basics.preferences.CoolListPreference
-	        android:key="appTheme"
-	        android:title="@string/appTheme" 
-	        android:dialogTitle="@string/appTheme"
-	        android:defaultValue="Gray (orange)"
-	        android:entries="@array/theme"
-	        android:entryValues="@array/theme"
-	        />
- 
+  
     <PreferenceCategory android:title="Rendering Animation"/>
         <CheckBoxPreference 
 		    android:key="showRenderingProcess"
@@ -79,7 +81,7 @@
         
         
     <PreferenceCategory android:title="Wallpaper saving"/>
-        <de.geithonline.android.basics.preferences.CoolListPreference
+        <ListPreference
 	        android:key="imageFormat"
 	        android:title="@string/imageFormat" 
 	        android:dialogTitle="@string/imageFormat"

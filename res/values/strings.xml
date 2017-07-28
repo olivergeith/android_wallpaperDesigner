@@ -102,7 +102,6 @@
     <string name="shareText">Text when sharing a wallpaper</string>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
-    <string name="appTheme">Theme (restart APP after changing)</string>
     <string name="sameBackgroundAsPatternGradient">Background like Color for Patterns</string>
     <string name="category_background">Color for Patterns</string>
     <string name="dropShadowOffsetX">X-Offset of Dropshadow</string>
