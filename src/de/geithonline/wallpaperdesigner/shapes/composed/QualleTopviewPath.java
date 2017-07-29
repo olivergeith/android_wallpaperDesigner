@@ -18,11 +18,17 @@ public class QualleTopviewPath extends ComposedPath {
 	public Path inner = new Path();
 	public ComposedPath tail = new ComposedPath();
 	public ComposedPath bubbletail = new ComposedPath();
+	public final TailOptionsLine tailOptions;
+	public final TailOptionsBubbles bubbleOptions;
+	public final EyeOptions eyeOptions;
 
 	public QualleTopviewPath(final PointF center, final float radius, //
 			final TailOptionsLine tailOptions, //
 			final TailOptionsBubbles bubbleOptions, //
 			final EyeOptions eyeOptions) {
+		this.tailOptions = tailOptions;
+		this.bubbleOptions = bubbleOptions;
+		this.eyeOptions = eyeOptions;
 		drawQualle(center, radius);
 		drawInnerQualleV2(center, radius, eyeOptions);
 		drawTail(center, radius, tailOptions);

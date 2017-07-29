@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -13,9 +14,11 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.BmpRenderer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
+import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
 /**
  * This fragment shows the preferences for the first header.
@@ -27,6 +30,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen jellyfishOptions;
 	private PreferenceScreen jellyfishTopviewOptions;
 	private PreferenceScreen sceneRainOptions;
+
+	private static BmpRenderer bmpRenderer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -70,6 +75,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		handlePatternVariantSelect(Settings.getSelectedPatternVariant());
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
 		handleRotatingStyleSelected(Settings.getRotationStyle());
+		setIcon(Settings.getSelectedPattern(), Settings.getSelectedPatternVariant());
 		enableProFeatures();
 	}
 
@@ -129,6 +135,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				final String variant = patternVariantSelection.getValue();
 				Log.i("GEITH", "Setting PatternVariant on new Pattern..." + variant);
 				patternVariantSelection.setDefaultValue(variant);
+				Settings.prefs.edit().putString(patternVariantSelection.getKey(), variant).commit();
 			}
 			final String variant = patternVariantSelection.getValue();
 			Log.i("GEITH", "Setting PatternVariant..." + variant);
@@ -187,6 +194,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		Log.i("GEITH", "Setting PatternVariant..." + newVariant);
 		patternVariantSelection.setSummary(newVariant);
 		addSpecialPreferences(Settings.getSelectedPattern(), newVariant);
+
+		// final Bitmap drawIcon = bmpRenderer.drawIcon(128);
+		// patternVariantSelection.setIcon(BitmapHelper.bitmapToIcon(drawIcon));
 	}
 
 	private void enableProFeatures() {
@@ -206,13 +216,18 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		case Settings.KEY_ROTATING_STYLE:
 			handleRotatingStyleSelected(Settings.getRotationStyle());
 			break;
-		// case Settings.KEY_PATTERN_PATTERN_PICKER:
-		// handlePatternSelect(Settings.getSelectedPattern());
-		// break;
-		// case Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER:
-		// handlePatternVariantSelect(Settings.getSelectedPatternVariant());
-		// break;
+		case Settings.KEY_PATTERN_PATTERN_PICKER:
+		case Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER:
+			setIcon(Settings.getSelectedPattern(), Settings.getSelectedPatternVariant());
+			break;
 		}
+
+	}
+
+	private void setIcon(final String pattern, final String variant) {
+
+		final Bitmap drawIcon = bmpRenderer.drawIcon(128, pattern, variant);
+		patternVariantSelection.setIcon(BitmapHelper.bitmapToIcon(drawIcon));
 
 	}
 
