@@ -108,7 +108,7 @@ public class PatternDrawer {
 	// ----------------
 	// #########################################################################################
 	private void drawNormalPattern(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
@@ -121,7 +121,7 @@ public class PatternDrawer {
 	}
 
 	private void drawNormalPatternRandomFlipping(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
@@ -134,7 +134,7 @@ public class PatternDrawer {
 	}
 
 	private void drawLinePattern(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		OutlineDrawer.setupPaintForOutline(paint, radius);
 		bitmapCanvas.drawPath(path, paint);
@@ -163,7 +163,7 @@ public class PatternDrawer {
 	}
 
 	private void drawScene(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		bitmapCanvas.drawPath(path, paint);
 		glossyDrawer.draw(x, y, paint, radius, path);
@@ -180,7 +180,7 @@ public class PatternDrawer {
 
 	private void drawQualle(final int x, final int y, final int radius, final String pattern, final String variant) {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
-		final QuallePath path = (QuallePath) PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final QuallePath path = (QuallePath) PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path.qualle, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.inner, rotationDegrees);
 		PathHelper.rotateComposedPath(x, y, path.tail, rotationDegrees);
@@ -232,7 +232,7 @@ public class PatternDrawer {
 
 	private void drawQualleTopview(final int x, final int y, final int radius, final String pattern, final String variant) {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
-		final QualleTopviewPath path = (QualleTopviewPath) PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final QualleTopviewPath path = (QualleTopviewPath) PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		final TailOptionsBubbles tailOptionsBubbles = path.bubbleOptions;
 		final EyeOptions eyeOptions = path.eyeOptions;
 		final TailOptionsLine tailOptionsLine = path.tailOptions;
@@ -297,7 +297,7 @@ public class PatternDrawer {
 	// #########################################################################################
 	private void drawPenguin(final int x, final int y, final int radius, final String pattern, final String variant) {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
-		final PenguinPath path = (PenguinPath) PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final PenguinPath path = (PenguinPath) PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 
 		PathHelper.rotatePath(x, y, path.body, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.bauch, rotationDegrees);
@@ -430,7 +430,7 @@ public class PatternDrawer {
 	}
 
 	private void drawMaterial(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		bitmapCanvas.drawPath(path, paint);
 		outlineDrawer.draw(paint, radius, path);
 	}

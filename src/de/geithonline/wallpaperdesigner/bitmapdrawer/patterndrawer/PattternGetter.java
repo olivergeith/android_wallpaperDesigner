@@ -153,11 +153,11 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset03Spi
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset04Heart;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class PathGetter {
+public class PattternGetter {
 
 	public static Bitmap drawIconBitmap(final int initialSize, final String pattern, final String variant) {
 		final float radius = initialSize;
-		final Path path = PathGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
+		final Path path = PattternGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);
 		Log.i("Bounds", "=" + bounds);
