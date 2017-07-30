@@ -29,7 +29,7 @@ import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class NewPatternDrawer {
+public class PatternDrawer {
 
 	private final Canvas bitmapCanvas;
 	private final GlossyDrawer glossyDrawer;
@@ -44,7 +44,7 @@ public class NewPatternDrawer {
 
 	private final PointF prevPoint = new PointF(0, 0);
 
-	public NewPatternDrawer(final Canvas bitmapCanvas, final PaintManager pm) {
+	public PatternDrawer(final Canvas bitmapCanvas, final PaintManager pm) {
 		this.bitmapCanvas = bitmapCanvas;
 		this.pm = pm;
 		paint = pm.paint;

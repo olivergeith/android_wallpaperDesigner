@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer.BackgroundDrawer;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.NewPatternDrawer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternDrawer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.RadiusCalculator;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.AbstractRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
@@ -21,7 +21,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 	private final String layout;
 	private final String layoutVariante;
 	protected Canvas bitmapCanvas;
-	private NewPatternDrawer patternDrawer;
+	private PatternDrawer patternDrawer;
 	private int bWidth;
 	private int bHeight;
 
@@ -52,7 +52,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 
 		// Pattern Drawer Object bauen
 		final PaintManager pm = new PaintManager(bWidth, bHeight);
-		patternDrawer = new NewPatternDrawer(bitmapCanvas, pm);
+		patternDrawer = new PatternDrawer(bitmapCanvas, pm);
 
 		// initializing some values depending on BitmapSize
 		int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
