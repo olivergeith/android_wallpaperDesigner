@@ -142,8 +142,10 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset01;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset02;
@@ -220,8 +222,8 @@ public class PathGetter {
 			return drawHeart(x, y, radius, variant);
 		case "Invertable Shapes":
 			return drawInvertable(x, y, radius, variant);
-		// case "Jellyfish":
-		// return drawQualle(x, y, radius, variant);
+		case "Jellyfish":
+			return drawQualle(x, y, radius, variant);
 		case "Jellyfish Topview":
 			return drawQualleTopview(x, y, radius, variant);
 		case "Penguin":
@@ -1140,103 +1142,24 @@ public class PathGetter {
 		}
 	}
 
-	// // #########################################################################################
-	// // ----------------
-	// // #########################################################################################
-	// private static Path drawQualle(final int x, final int y, final int radius, final int index) {
-	// String variant = this.variant;
-	// if (variant.equalsIgnoreCase("Mixed")) {
-	// final int nr = Randomizer.getRandomInt(1, 13);
-	// variant = "V" + nr;
-	// }
-	// return drawQualle(x, y, radius, variant);
-	// }
-	//
-	// private static Path drawQualle(final int x, final int y, final int radius, String variant) {
-	// final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
-	// Path qualle = null, innerQualle = null;
-	// ComposedPath bubbleTail = null, tail = null;
-	//
-	// switch (variant) {
-	// default:
-	// case "V1":
-	// case "V1 (Half Circle)":
-	// case "Jellyfish":
-	// qualle new QuallePath(new PointF(x, y), radius, EQualleType.qualle);
-	// tail = new QuallePath(new PointF(x, y), radius, EQualleType.tail);
-	// bubbleTail = new QuallePath(new PointF(x, y), radius, EQualleType.bubbletail);
-	//
-	// case "V2":
-	// case "V2 (UFO)":
-	// case "Jellyfish 2":
-	// qualle new QuallePath2(new PointF(x, y), radius, EQualleType.qualle);
-	// tail = new QuallePath2(new PointF(x, y), radius, EQualleType.tail);
-	// innerQualle = new QuallePath2(new PointF(x, y), radius, EQualleType.inner_qualle);
-	// bubbleTail = new QuallePath2(new PointF(x, y), radius, EQualleType.bubbletail);
-	//
-	// case "V3":
-	// case "V3 (Oval)":
-	// case "Jellyfish 3":
-	// return new QuallePath3(new PointF(x, y), radius, EQualleType.qualle);
-	// tail = new QuallePath3(new PointF(x, y), radius, EQualleType.tail);
-	// innerQualle = new QuallePath3(new PointF(x, y), radius, EQualleType.inner_qualle);
-	// bubbleTail = new QuallePath3(new PointF(x, y), radius, EQualleType.bubbletail);
-	//
-	// }
-	// PathHelper.rotatePath(x, y, path, rotationDegrees);
-	// PathHelper.rotatePath(x, y, innerQualle, rotationDegrees);
-	// PathHelper.rotateComposedPath(x, y, tail, rotationDegrees);
-	// PathHelper.rotateComposedPath(x, y, bubbleTail, rotationDegrees);
-	//
-	// // qualle
-	// bitmapCanvas.drawPath(path, paint);
-	// outlineDrawer.draw(paint, radius, path);
-	// glossyDrawer.draw(x, y, paint, radius, path);
-	//
-	// // inner oval
-	// pm.initFillPaint();
-	// if (innerQualle != null && Settings.getFilledBoolean() == true) {
-	// pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-	// pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), 90));
-	// bitmapCanvas.drawPath(innerQualle, paint);
-	// }
-	// // bubble tail
-	// if (bubbleTail != null) {
-	// if (Settings.isColorfulDrawing()) {
-	// for (final Path p : bubbleTail.getPathElements()) {
-	// pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-	// pm.setupDropShadowForPatternDark(pm.getCurrentColor());
-	// pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
-	// bitmapCanvas.drawPath(p, paint);
-	// }
-	// } else {
-	// pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-	// pm.setupDropShadowForPatternDark(pm.getCurrentColor());
-	// pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
-	// bitmapCanvas.drawPath(bubbleTail, paint);
-	// }
-	// }
-	// // tail
-	// if (tail != null && Settings.getTailBoolean()) {
-	// if (!Settings.isClosedSineTrail()) {
-	// OutlineDrawer.setupPaintForStroke(paint, radius);
-	// }
-	// if (Settings.isColorfulDrawing()) {
-	// for (final Path p : tail.getPathElements()) {
-	// pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-	// pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
-	// bitmapCanvas.drawPath(p, paint);
-	// }
-	// } else {
-	// // making tail even brighter
-	// pm.randomizeColorAccordingToSettings(pm.getInitialColor());
-	// pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
-	// bitmapCanvas.drawPath(tail, paint);
-	// }
-	// }
-	// // bitmapCanvas.drawLine(x, y, prevPoint.x, prevPoint.y, paint);
-	// }
+	private static Path drawQualle(final int x, final int y, final int radius, final String variant) {
 
+		switch (variant) {
+		default:
+		case "V1":
+		case "V1 (Half Circle)":
+		case "Jellyfish":
+			return new QuallePath(new PointF(x, y), radius, EQualleType.v1);
+		case "V2":
+		case "V2 (UFO)":
+		case "Jellyfish 2":
+			return new QuallePath(new PointF(x, y), radius, EQualleType.v2);
+		case "V3":
+		case "V3 (Oval)":
+		case "Jellyfish 3":
+			return new QuallePath(new PointF(x, y), radius, EQualleType.v3);
+		}
+	}
 	// #########################################################################################
 	// ----------------
 	// #########################################################################################

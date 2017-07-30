@@ -23,6 +23,7 @@ import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath;
 import de.geithonline.wallpaperdesigner.shapes.TrailStarPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
@@ -78,6 +79,9 @@ public class NewPatternDrawer {
 
 		case "Penguin":
 			drawPenguin(x, y, radius, pattern, variant);
+			break;
+		case "Jellyfish":
+			drawQualle(x, y, radius, pattern, variant);
 			break;
 
 		case "Jellyfish Topview":
@@ -172,6 +176,58 @@ public class NewPatternDrawer {
 					GLOSSY_REFLECTIONS_STYLE.NONE, GLOSSY_GLOW_STYLE.VERTICAL, true);
 		}
 
+	}
+
+	private void drawQualle(final int x, final int y, final int radius, final String pattern, final String variant) {
+		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
+		final QuallePath path = (QuallePath) PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		PathHelper.rotatePath(x, y, path.qualle, rotationDegrees);
+		PathHelper.rotatePath(x, y, path.inner, rotationDegrees);
+		PathHelper.rotateComposedPath(x, y, path.tail, rotationDegrees);
+		PathHelper.rotateComposedPath(x, y, path.bubbletail, rotationDegrees);
+
+		// qualle
+		bitmapCanvas.drawPath(path.qualle, paint);
+		outlineDrawer.draw(paint, radius, path.qualle);
+		glossyDrawer.draw(x, y, paint, radius, path.qualle);
+
+		// inner oval
+		pm.initFillPaint();
+		pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), 90));
+		bitmapCanvas.drawPath(path.inner, paint);
+		// bubble tail
+		if (Settings.isColorfulDrawing()) {
+			for (final Path p : path.bubbletail.getPathElements()) {
+				pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+				pm.setupDropShadowForPatternDark(pm.getCurrentColor());
+				pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
+				bitmapCanvas.drawPath(p, paint);
+			}
+		} else {
+			pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+			pm.setupDropShadowForPatternDark(pm.getCurrentColor());
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
+			bitmapCanvas.drawPath(path.bubbletail, paint);
+		}
+		// tail
+		if (Settings.getTailBoolean()) {
+			if (!Settings.isClosedSineTrail()) {
+				OutlineDrawer.setupPaintForStroke(paint, radius);
+			}
+			if (Settings.isColorfulDrawing()) {
+				for (final Path p : path.tail.getPathElements()) {
+					pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+					pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
+					bitmapCanvas.drawPath(p, paint);
+				}
+			} else {
+				// making tail even brighter
+				pm.randomizeColorAccordingToSettings(pm.getInitialColor());
+				pm.setColor(ColorHelper.adjustColorBrightness(pm.getCurrentColor(), Randomizer.getRandomInt(40, 90)));
+				bitmapCanvas.drawPath(path.tail, paint);
+			}
+		}
 	}
 
 	private void drawQualleTopview(final int x, final int y, final int radius, final String pattern, final String variant) {
