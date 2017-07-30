@@ -18,6 +18,4 @@ public interface IBmpRenderer {
 
 	public Bitmap getBitmap();
 
-	public Bitmap drawIcon(int size, String pattern, String variant);
-
 }

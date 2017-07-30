@@ -3,14 +3,9 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.RectF;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.MainActivity.BitmapWorkerTask;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer.BackgroundDrawer;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PathGetter;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternDrawer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.RadiusCalculator;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.AbstractRaster;
@@ -40,75 +35,6 @@ public class BmpRenderer extends BaseBmpRenderer {
 		task = bitmapWorkerTask;
 		return drawBitmap(Settings.getWidth(), Settings.getHeight());
 	}
-
-	@Override
-	public Bitmap drawIcon(final int initialSize, final String pattern, final String variant) {
-		final float radius = initialSize;
-		final Path path = PathGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
-		final RectF bounds = new RectF();
-		path.computeBounds(bounds, true);
-		Log.i("Bounds", "=" + bounds);
-		final float wi = bounds.right - bounds.left;
-		final float hi = bounds.bottom - bounds.top;
-		if (wi > hi) {
-			bitmap = Bitmap.createBitmap((int) wi, (int) wi, Bitmap.Config.ARGB_8888);
-		} else {
-			bitmap = Bitmap.createBitmap((int) hi, (int) hi, Bitmap.Config.ARGB_8888);
-		}
-
-		bitmapCanvas = new Canvas(bitmap);
-		final PaintManager pm = new PaintManager(bWidth, bHeight);
-		pm.initPaintForPattern(Color.RED);
-
-		// final RectF r = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
-		// bitmapCanvas.drawRect(r, pm.paint);
-
-		// Iconfarbe
-		final int pcolor = Color.LTGRAY;
-		pm.setColor(pcolor);
-		// setting up paint
-		pm.paint.setShadowLayer(0, 0, 0, Color.BLACK);
-		bitmapCanvas.translate(-bounds.left, -bounds.top);
-		bitmapCanvas.drawPath(path, pm.paint);
-		return bitmap;
-	}
-	//
-	// public Bitmap drawIcon3(final int size, final String pattern, final String variant) {
-	// float radius = size / 3;
-	// Path path = PathGetter.getPath(size / 2, size / 2, (int) radius, size, size, pattern, variant);
-	// final RectF bounds = new RectF();
-	// path.computeBounds(bounds, true);
-	// Log.i("Bounds", "=" + bounds);
-	// final float wi = bounds.right - bounds.left;
-	// final float hi = bounds.bottom - bounds.top;
-	// if (wi > 128) {
-	// final float factor = wi / size;
-	// radius = radius / factor;
-	// path = PathGetter.getPath(size / 2, size / 2, (int) radius, size, size, pattern, variant);
-	// } else if (hi > 128) {
-	// final float factor = hi / size;
-	// radius = radius / factor;
-	// path = PathGetter.getPath(size / 2, size / 2, (int) radius, size, size, pattern, variant);
-	// }
-	//
-	// final int h = size;
-	// final int w = size;
-	// bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-	// bitmapCanvas = new Canvas(bitmap);
-	// final PaintManager pm = new PaintManager(bWidth, bHeight);
-	// pm.setColor(Color.DKGRAY);
-	//
-	// final RectF r = new RectF(0, 0, size, size);
-	// bitmapCanvas.drawRect(r, pm.paint);
-	//
-	// // davon die aktuelle Farbe
-	// final int pcolor = Color.LTGRAY;
-	// // setting up paint
-	// pm.initPaintForPattern(pcolor);
-	// pm.paint.setShadowLayer(0, 0, 0, Color.BLACK);
-	// bitmapCanvas.drawPath(path, pm.paint);
-	// return bitmap;
-	// }
 
 	@Override
 	public synchronized Bitmap drawBitmap(final int width, final int height) {

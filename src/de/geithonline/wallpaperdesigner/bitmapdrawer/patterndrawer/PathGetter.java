@@ -1,10 +1,17 @@
 
 package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.RectF;
+import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
@@ -141,6 +148,40 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset04Hea
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class PathGetter {
+
+	public static Bitmap drawIconBitmap(final int initialSize, final String pattern, final String variant) {
+		final float radius = initialSize;
+		final Path path = PathGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
+		final RectF bounds = new RectF();
+		path.computeBounds(bounds, true);
+		Log.i("Bounds", "=" + bounds);
+		final float wi = bounds.right - bounds.left;
+		final float hi = bounds.bottom - bounds.top;
+		Bitmap bitmap;
+		if (wi > hi) {
+			bitmap = Bitmap.createBitmap((int) wi, (int) wi, Bitmap.Config.ARGB_8888);
+		} else {
+			bitmap = Bitmap.createBitmap((int) hi, (int) hi, Bitmap.Config.ARGB_8888);
+		}
+		final Canvas bitmapCanvas = new Canvas(bitmap);
+		bitmapCanvas.translate(-bounds.left, -bounds.top);
+
+		final Paint paint = new Paint();
+		paint.setAntiAlias(true);
+		paint.setColor(Color.LTGRAY);
+		if (pattern.contains("Lines")) {
+			paint.setStyle(Style.STROKE);
+			paint.setStrokeWidth(2f);
+		} else {
+			paint.setStyle(Style.FILL_AND_STROKE);
+		}
+		bitmapCanvas.drawPath(path, paint);
+		final Bitmap b = Bitmap.createScaledBitmap(bitmap, initialSize, initialSize, true);
+		if (!b.equals(bitmap)) {
+			bitmap.recycle();
+		}
+		return b;
+	}
 
 	// private final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	private static int bWidth;

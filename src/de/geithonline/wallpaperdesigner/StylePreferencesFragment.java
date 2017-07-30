@@ -14,7 +14,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.BmpRenderer;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PathGetter;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
@@ -30,8 +30,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen jellyfishOptions;
 	private PreferenceScreen jellyfishTopviewOptions;
 	private PreferenceScreen sceneRainOptions;
-
-	private static BmpRenderer bmpRenderer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -226,7 +224,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void setIcon(final String pattern, final String variant) {
 
-		final Bitmap drawIcon = bmpRenderer.drawIcon(128, pattern, variant);
+		final Bitmap drawIcon = PathGetter.drawIconBitmap(128, pattern, variant);
 		patternVariantSelection.setIcon(BitmapHelper.bitmapToIcon(drawIcon));
 
 	}
