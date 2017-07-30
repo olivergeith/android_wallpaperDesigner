@@ -95,6 +95,7 @@ public class PreferenceIO {
 					repairColorRandomizing(prefs, keySet);
 					repairLayoutPicker(prefs, keySet);
 					repairRandomRotate(prefs, keySet);
+					repairRain(prefs, keySet);
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
@@ -218,6 +219,17 @@ public class PreferenceIO {
 			}
 		}
 		deleteKeyFromPref(prefs, "randomRotate");
+	}
+
+	private static void repairRain(final SharedPreferences prefs, final Set<String> keySet) {
+		// Spezialbehandlung für Rain
+		final String pattern = prefs.getString(Settings.KEY_PATTERN_PATTERN_PICKER, "");
+		final String variant = prefs.getString(Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER, "");
+		Log.i(LOG_TAG, "Check Repairing Rain" + pattern + "-" + variant);
+		if (pattern.equals("Scenes") && variant.equals("Rain")) {
+			Log.i(LOG_TAG, "Repairing Rain!!!!!");
+			prefs.edit().putString(Settings.KEY_PATTERN_PATTERN_PICKER, "Rain").commit();
+		}
 	}
 
 	private static void repairLayoutPicker(final SharedPreferences prefs, final Set<String> keySet) {

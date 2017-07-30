@@ -14,13 +14,14 @@ import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.PaintManager;
 import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_GLOW_STYLE;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
-import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath.HEART_TRAIL_TYPE;
-import de.geithonline.wallpaperdesigner.shapes.TrailStarPath.TRAIL_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath;
+import de.geithonline.wallpaperdesigner.shapes.TrailStarPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPath;
 import de.geithonline.wallpaperdesigner.utils.ColorHelper;
@@ -32,7 +33,6 @@ public class NewPatternDrawer {
 	private final Canvas bitmapCanvas;
 	private final GlossyDrawer glossyDrawer;
 	private final OutlineDrawer outlineDrawer;
-	private final SceneDrawer sceneDrawer;
 	private final Rotator rotator;
 	private final int bWidth;
 	private final int bHeight;
@@ -52,7 +52,6 @@ public class NewPatternDrawer {
 		glossyDrawer = new GlossyDrawer(bitmapCanvas);
 		outlineDrawer = new OutlineDrawer(bitmapCanvas);
 		rotator = new Rotator(bWidth, bHeight);
-		sceneDrawer = new SceneDrawer(bitmapCanvas, glossyDrawer, outlineDrawer, rotator);
 	}
 
 	public void drawPattern(final int x, final int y, final int radius, final int index) {
@@ -91,7 +90,10 @@ public class NewPatternDrawer {
 			drawMaterial(x, y, radius, pattern, variant);
 			break;
 		case "Scenes":
-			drawScene(x, y, radius, index);
+			drawScene(x, y, radius, pattern, variant);
+			break;
+		case "Rain":
+			drawRain(x, y, radius, pattern, variant);
 			break;
 		}
 		prevPoint.x = x;
@@ -142,15 +144,7 @@ public class NewPatternDrawer {
 		outlineDrawer.draw(paint, radius, path);
 	}
 
-	// #########################################################################################
-	// ----------------
-	// #########################################################################################
-	private void drawScene(final int x, final int y, final int radius, final int index) {
-		final String variant = Settings.getSelectedPatternVariant();
-		drawScene(x, y, radius, variant, index);
-	}
-
-	public void drawScene(final int x, final int y, final int radius, final String variant, final int index) {
+	public void drawRain(final int x, final int y, final int radius, final String pattern, final String variant) {
 		switch (variant) {
 		default:
 		case "Rain":
@@ -160,28 +154,24 @@ public class NewPatternDrawer {
 				// Rain
 				drawLinePattern(x, y, radius, "Lines (Directed)", "Straight Line");
 			}
-			break;
-		case "Trail Of Stars":
-		case "Trail of Stars":
-			sceneDrawer.drawStarWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), TRAIL_TYPE.Stars);
-			break;
-		case "Trail of Hearts":
-			sceneDrawer.drawHeartWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Hearts);
-			break;
-		case "Sine Trail Of Stars":
-		case "Sine Trail of Stars":
-			sceneDrawer.drawStarWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), TRAIL_TYPE.Sinus);
-			break;
-		case "Sine Trail of Hearts":
-			sceneDrawer.drawHeartWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Sinus);
-			break;
-		case "Trail Of Stars (getting Bigger)":
-		case "Trail of Stars (getting Bigger)":
-			sceneDrawer.drawStarWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
-			break;
-		case "Experiemental":
-			break;
+			return;
 		}
+	}
+
+	private void drawScene(final int x, final int y, final int radius, final String pattern, final String variant) {
+		final Path path = PathGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+		bitmapCanvas.drawPath(path, paint);
+		glossyDrawer.draw(x, y, paint, radius, path);
+		outlineDrawer.draw(paint, radius, path);
+		if (path instanceof TrailStarPath) {
+			glossyDrawer.draw(x, y, paint, radius, ((TrailStarPath) path).trailPath, //
+					GLOSSY_REFLECTIONS_STYLE.NONE, GLOSSY_GLOW_STYLE.VERTICAL, true);
+		} else if (path instanceof TrailHeartPath) {
+			glossyDrawer.draw(x, y, paint, radius, ((TrailHeartPath) path).trailPath, //
+					GLOSSY_REFLECTIONS_STYLE.NONE, GLOSSY_GLOW_STYLE.VERTICAL, true);
+		}
+
 	}
 
 	private void drawQualleTopview(final int x, final int y, final int radius, final String pattern, final String variant) {

@@ -123,6 +123,10 @@ import de.geithonline.wallpaperdesigner.shapes.StarwarsPath;
 import de.geithonline.wallpaperdesigner.shapes.StarwarsPath.STARWARS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.SunPath.SUN_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath;
+import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath.HEART_TRAIL_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailStarPath;
+import de.geithonline.wallpaperdesigner.shapes.TrailStarPath.TRAIL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -262,8 +266,10 @@ public class PathGetter {
 			return drawMaterial(x, y, radius, variant);
 		case "Rectangles":
 			return drawRect(x, y, radius, variant);
-		// case "Scenes":
-		// return drawScene(x, y, radius, variant);
+		case "Rain":
+			return drawRain(x, y, radius, variant);
+		case "Scenes":
+			return drawScene(x, y, radius, variant);
 		case "Shells":
 			return drawShell(x, y, radius, variant);
 		case "Sonic":
@@ -1098,47 +1104,41 @@ public class PathGetter {
 		}
 	}
 
-	// // #########################################################################################
-	// // ----------------
-	// // #########################################################################################
-	// private static Path drawScene(final int x, final int y, final int radius, final int index) {
-	// String variant = this.variant;
-	// return drawScene(x, y, radius, variant);
-	// }
-	//
-	// public Path drawScene(final int x, final int y, final int radius, String variant, final int index) {
-	// switch (variant) {
-	// default:
-	// case "Rain":
-	// if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
-	// drawBubble(x, y, radius / 3);
-	// } else {
-	// // Rain
-	// drawLinesDirected(x, y, radius, "Straight Line");
-	// }
-	//
-	// case "Trail Of Stars":
-	// case "Trail of Stars":
-	// sceneDrawer.drawStarWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), TRAIL_TYPE.Stars);
-	//
-	// case "Trail of Hearts":
-	// sceneDrawer.drawHeartWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Hearts);
-	//
-	// case "Sine Trail Of Stars":
-	// case "Sine Trail of Stars":
-	// sceneDrawer.drawStarWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), TRAIL_TYPE.Sinus);
-	//
-	// case "Sine Trail of Hearts":
-	// sceneDrawer.drawHeartWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Sinus);
-	//
-	// case "Trail Of Stars (getting Bigger)":
-	// case "Trail of Stars (getting Bigger)":
-	// sceneDrawer.drawStarWithTrail(x, y, paint, radius, Settings.getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
-	//
-	// case "Experiemental":
-	//
-	// }
-	// }
+	// #########################################################################################
+	// ----------------
+
+	public static Path drawRain(final int x, final int y, final int radius, final String variant) {
+		switch (variant) {
+		default:
+		case "Rain":
+			// this is just for icon drawing
+			return drawBubble(x, y, radius / 3, "V1");
+		}
+	}
+
+	public static Path drawScene(final int x, final int y, final int radius, final String variant) {
+		switch (variant) {
+		default:
+		case "Rain":
+			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.Stars);
+		case "Trail Of Stars":
+		case "Trail of Stars":
+			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.Stars);
+		case "Trail of Hearts":
+			return new TrailHeartPath(new PointF(x, y), radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Hearts);
+
+		case "Sine Trail Of Stars":
+		case "Sine Trail of Stars":
+			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.Sinus);
+
+		case "Sine Trail of Hearts":
+			return new TrailHeartPath(new PointF(x, y), radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Sinus);
+
+		case "Trail Of Stars (getting Bigger)":
+		case "Trail of Stars (getting Bigger)":
+			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
+		}
+	}
 
 	// // #########################################################################################
 	// // ----------------
