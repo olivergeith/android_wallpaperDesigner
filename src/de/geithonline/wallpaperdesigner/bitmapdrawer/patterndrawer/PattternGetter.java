@@ -179,7 +179,7 @@ public class PattternGetter {
 			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(2f);
 		} else {
-			paint.setStyle(Style.FILL_AND_STROKE);
+			paint.setStyle(Style.FILL);
 		}
 		bitmapCanvas.drawPath(path, paint);
 		final Bitmap b = Bitmap.createScaledBitmap(bitmap, initialSize, initialSize, true);

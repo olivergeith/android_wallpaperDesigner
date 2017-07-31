@@ -219,6 +219,14 @@ public class PreferenceIO {
 			}
 		}
 		deleteKeyFromPref(prefs, "randomRotate");
+		// Flipping
+		if (!keySet.contains(Settings.KEY_FLIP_RANDOM_LEFT_RIGHT)) {
+			prefs.edit().putBoolean(Settings.KEY_FLIP_RANDOM_LEFT_RIGHT, false);
+		}
+		if (!keySet.contains(Settings.KEY_FLIP_RANDOM_UP_DOWN)) {
+			prefs.edit().putBoolean(Settings.KEY_FLIP_RANDOM_UP_DOWN, false);
+		}
+
 	}
 
 	private static void repairRain(final SharedPreferences prefs, final Set<String> keySet) {

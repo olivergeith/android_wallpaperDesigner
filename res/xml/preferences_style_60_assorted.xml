@@ -18,22 +18,6 @@
             android:key="filledOption"
             android:title="@string/filledOption" />
 
-        <PreferenceCategory android:title="Custom Text Options" />
-
-        <EditTextPreference
-            android:defaultValue="The Wallpaper Designer"
-            android:dialogTitle="@string/textPattern"
-            android:key="textPattern"
-            android:title="@string/textPattern" />
-
-        <de.geithonline.android.basics.preferences.CoolListPreference
-            android:defaultValue="Round"
-            android:dialogTitle="@string/textDrawStyle"
-            android:entries="@array/textDrawStyle"
-            android:entryValues="@array/textDrawStyle"
-            android:key="textDrawStyle"
-            android:title="@string/textDrawStyle" />
-
         <PreferenceCategory android:title="Leafs-Arms Options" />
 
         <CheckBoxPreference

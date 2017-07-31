@@ -70,7 +70,7 @@ public class PatternDrawer {
 
 		case "Lines":
 		case "Lines (Directed)":
-			drawLinePattern(index, y, radius, pattern, variant);
+			drawLinePattern(x, y, radius, pattern, variant);
 			break;
 
 		case "Bubbles":
@@ -110,21 +110,13 @@ public class PatternDrawer {
 	private void drawNormalPattern(final int x, final int y, final int radius, final String pattern, final String variant) {
 		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
+		if (Settings.isRandomLeftRightFlipping()//
+				&& Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
 		}
-		bitmapCanvas.drawPath(path, paint);
-		if (PatternPropertyStore.hasPatternGlossyEffect(pattern)) {
-			glossyDrawer.draw(x, y, paint, radius, path);
-		}
-		outlineDrawer.draw(paint, radius, path);
-	}
-
-	private void drawNormalPatternRandomFlipping(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PattternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-		if (Settings.isRandomRotate() && Randomizer.getRandomBoolean()) {
-			PathHelper.mirrorPathLeftRight(x, y, path);
+		if (Settings.isRandomUpDownFlipping()//
+				&& Randomizer.getRandomBoolean()) {
+			PathHelper.mirrorPathUpDown(x, y, path);
 		}
 		bitmapCanvas.drawPath(path, paint);
 		if (PatternPropertyStore.hasPatternGlossyEffect(pattern)) {
@@ -141,7 +133,6 @@ public class PatternDrawer {
 	}
 
 	private void drawBubble(final int x, final int y, final int radius) {
-		// Bubble
 		final Path path = new CirclePath(new PointF(x, y), radius, radius / 2, true, CIRCLE_STYLE.CIRCLE);
 		bitmapCanvas.drawCircle(x, y, radius, paint);
 		glossyDrawer.draw(x, y, paint, radius, path, GLOSSY_REFLECTIONS_STYLE.BIG_OVAL);

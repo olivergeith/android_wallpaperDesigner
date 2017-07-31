@@ -17,6 +17,17 @@
             android:key="rotatingStyle"
             android:title="@string/rotatingStyle" />
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="flipRandomLeftRight"
+            android:summary="Random left-right-flipping (before any rotation)"
+            android:title="Left-Right-flipping" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="flipRandomUpDown"
+            android:summary="Random up-down-flipping (before any rotation)"
+            android:title="Up-Down-flipping" />
+        
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="0"
             android:dialogMessage="@string/rotationDegrees"
