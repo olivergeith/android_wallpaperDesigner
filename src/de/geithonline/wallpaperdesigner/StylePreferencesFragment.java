@@ -34,6 +34,15 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen outlineScreen;
 	private PreferenceScreen glossyScreen;
 	private PreferenceScreen ratatingScreen;
+	private Preference dropShadowColor;
+	private Preference dropShadowDarkness;
+	private InlineSeekBarPreference dropShadowRadiusAdjustment;
+	private InlineSeekBarPreference dropShadowOffsetX;
+	private InlineSeekBarPreference dropShadowOffsetY;
+	private InlineSeekBarPreference rotationDegrees;
+	private InlineSeekBarPreference randomRange;
+	private InlineSeekBarPreference rotationCenterPointX;
+	private InlineSeekBarPreference rotationCenterPointY;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -80,6 +89,15 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
 		glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
 		ratatingScreen = (PreferenceScreen) findPreference("ratatingScreen");
+		dropShadowColor = findPreference(Settings.KEY_PATTERN_DROPSHADOW_COLOR);
+		dropShadowDarkness = findPreference(Settings.KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST);
+		dropShadowRadiusAdjustment = (InlineSeekBarPreference) findPreference("dropShadowRadiusAdjustment");
+		dropShadowOffsetX = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_X);
+		dropShadowOffsetY = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_Y);
+		rotationDegrees = (InlineSeekBarPreference) findPreference("rotationDegrees");
+		randomRange = (InlineSeekBarPreference) findPreference("randomRange");
+		rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
+		rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
 
 		handlePatternSelect(Settings.getSelectedPattern());
 		handlePatternVariantSelect(Settings.getSelectedPatternVariant());
@@ -90,10 +108,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	}
 
 	private void handleRotatingStyleSelected(final String newValue) {
-		final InlineSeekBarPreference rotationDegrees = (InlineSeekBarPreference) findPreference("rotationDegrees");
-		final InlineSeekBarPreference randomRange = (InlineSeekBarPreference) findPreference("randomRange");
-		final InlineSeekBarPreference rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
-		final InlineSeekBarPreference rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
 		rotationDegrees.setEnabled(!newValue.equals("Random"));
 		randomRange.setEnabled(newValue.contains("(Range)"));
 		rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
@@ -101,15 +115,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	}
 
 	public void handleDropShadowTypeSelection(final DROP_SHADOW_TYPE type) {
-		final Preference dropShadowColor = findPreference(Settings.KEY_PATTERN_DROPSHADOW_COLOR);
 		dropShadowColor.setEnabled(type.equals(DROP_SHADOW_TYPE.SELECT));
-		final Preference dropShadowDarkness = findPreference(Settings.KEY_PATTERN_DROPSHADOW_DARKNESS_ADJUST);
 		dropShadowDarkness.setEnabled(type.equals(DROP_SHADOW_TYPE.DARKER));
-		final InlineSeekBarPreference dropShadowRadiusAdjustment = (InlineSeekBarPreference) findPreference("dropShadowRadiusAdjustment");
 		dropShadowRadiusAdjustment.setEnabled(!type.equals(DROP_SHADOW_TYPE.NO));
-		final InlineSeekBarPreference dropShadowOffsetX = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_X);
 		dropShadowOffsetX.setEnabled(!type.equals(DROP_SHADOW_TYPE.NO));
-		final InlineSeekBarPreference dropShadowOffsetY = (InlineSeekBarPreference) findPreference(Settings.KEY_DROP_SHADOW_OFFSET_Y);
 		dropShadowOffsetY.setEnabled(!type.equals(DROP_SHADOW_TYPE.NO));
 
 	}
@@ -196,9 +205,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		Log.i("GEITH", "Setting PatternVariant..." + newVariant);
 		patternVariantSelection.setSummary(newVariant);
 		addSpecialPreferences(Settings.getSelectedPattern(), newVariant);
-
-		// final Bitmap drawIcon = bmpRenderer.drawIcon(128);
-		// patternVariantSelection.setIcon(BitmapHelper.bitmapToIcon(drawIcon));
 	}
 
 	private void enableProFeatures() {
@@ -227,10 +233,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	}
 
 	private void setIcon(final String pattern, final String variant) {
-
 		final Bitmap drawIcon = PatternGetter.drawIconBitmap(128, pattern, variant);
 		patternVariantSelection.setIcon(BitmapHelper.bitmapToIcon(drawIcon));
-
 	}
 
 }
