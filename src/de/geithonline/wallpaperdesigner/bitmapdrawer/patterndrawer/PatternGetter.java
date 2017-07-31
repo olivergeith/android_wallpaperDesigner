@@ -123,6 +123,7 @@ import de.geithonline.wallpaperdesigner.shapes.StarwarsPath;
 import de.geithonline.wallpaperdesigner.shapes.StarwarsPath.STARWARS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.SunPath.SUN_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TextPath;
 import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath;
 import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath.HEART_TRAIL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.TrailStarPath;
@@ -153,11 +154,11 @@ import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset03Spi
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPreset04Heart;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class PattternGetter {
+public class PatternGetter {
 
 	public static Bitmap drawIconBitmap(final int initialSize, final String pattern, final String variant) {
 		final float radius = initialSize;
-		final Path path = PattternGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
+		final Path path = PatternGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);
 		Log.i("Bounds", "=" + bounds);
@@ -254,8 +255,8 @@ public class PattternGetter {
 			return drawStar(x, y, radius, variant);
 		case "Square":
 			return drawSquare(x, y, radius, variant);
-		// case "Text":
-		// return drawText(x, y, radius * 2);
+		case "Text":
+			return drawText(x, y, radius, variant);
 		case "Fish":
 			return drawFisch(x, y, radius, variant);
 		case "Flowers":
@@ -760,6 +761,10 @@ public class PattternGetter {
 			return new InvertablePath(new Point(x, y), radius, radius / 2, Settings.getFilledBoolean(), "Crown");
 
 		}
+	}
+
+	private static Path drawText(final int x, final int y, final int radius, final String variant) {
+		return new TextPath(new PointF(x, y), radius);
 	}
 
 	// #########################################################################################

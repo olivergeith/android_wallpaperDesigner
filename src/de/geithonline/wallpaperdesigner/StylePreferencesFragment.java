@@ -15,7 +15,7 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PattternGetter;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternGetter;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
@@ -231,7 +231,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 	private void setIcon(final String pattern, final String variant) {
 
-		final Bitmap drawIcon = PattternGetter.drawIconBitmap(128, pattern, variant);
+		final Bitmap drawIcon = PatternGetter.drawIconBitmap(128, pattern, variant);
 		patternVariantSelection.setIcon(BitmapHelper.bitmapToIcon(drawIcon));
 
 	}
