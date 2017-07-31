@@ -3,33 +3,51 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
+import de.geithonline.wallpaperdesigner.shapes.HeartPath.HEART_SHAPE;
 import de.geithonline.wallpaperdesigner.shapes.StarPath.STAR_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPath;
+import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class TrailStarPath extends Path {
+public class TrailObjectPath extends ComposedPath {
 
 	public enum TRAIL_TYPE {
-		Stars, Lines, StarsGettingBigger, Sinus;
+		Objects, Lines, ObjectsGettingBigger, Sinus;
 	}
 
+	public enum TRAIL_OBJECT_TYPE {
+		Stars, Heart;
+	}
+
+	public Path main;
 	public Path trailPath = new Path();
+	private final TRAIL_OBJECT_TYPE objectType;
 
-	public TrailStarPath(final PointF center, final float radius, final boolean filled, final TRAIL_TYPE type) {
+	public TrailObjectPath(final PointF center, final float radius, final boolean filled, //
+			final TRAIL_TYPE type, final TRAIL_OBJECT_TYPE objectType) {
 		super();
+		this.objectType = objectType;
+		switch (objectType) {
+		case Heart:
+			main = new HeartPath(center, radius, false, HEART_SHAPE.Lovely);
+			break;
+		default:
+		case Stars:
+			main = new StarPath(5, center, radius, STAR_TYPE.NORMAL, true);
+			break;
 
-		addPath(new StarPath(5, center, radius, STAR_TYPE.NORMAL, true));
-		// addPath(new KochSnowFlakePath(center, radius, true, 3));
+		}
+		addPath(main);
 		if (filled) {
-			// if (Randomizer.getRandomInt(0, 5) == 1) {
 			switch (type) {
 			default:
-			case Stars:
-				createTrailOfStars(center, radius, filled);
+			case Objects:
+				createTrailOfObject(center, radius, filled);
 				break;
 			case Sinus:
 				createSinusTrailOfStars(center, radius, filled);
 				break;
-			case StarsGettingBigger:
+			case ObjectsGettingBigger:
 				createTrailOfStarsGettingBigger(center, radius, filled);
 				break;
 			case Lines:
@@ -37,11 +55,11 @@ public class TrailStarPath extends Path {
 				break;
 			}
 		}
+		addPath(trailPath);
 
 	}
 
-	private void createTrailOfStars(final PointF center, final float radius, final boolean filled) {
-
+	private void createTrailOfObject(final PointF center, final float radius, final boolean filled) {
 		// Trail ony when filled
 		final float distanceToTop = center.y - 5;
 		final float trailRadius = radius / 5;
@@ -53,7 +71,17 @@ public class TrailStarPath extends Path {
 			pos.y = 5 + distance * trailRadius * i;
 			final float randRadius = Randomizer.getRandomFloat(trailRadius / 2, trailRadius * 2);
 			if (Randomizer.getRandomInt(1, 5) != 1) {
-				trailPath.addPath(new StarPath(5, pos, randRadius, STAR_TYPE.NORMAL, true));
+				switch (objectType) {
+				case Heart:
+					final Path p = new HeartPath(pos, randRadius, false, HEART_SHAPE.Lovely);
+					PathHelper.rotatePath(pos.x, pos.y, p, Randomizer.getRandomFloat(-19, +19));
+					trailPath.addPath(p);
+					break;
+				default:
+				case Stars:
+					trailPath.addPath(new StarPath(5, pos, randRadius, STAR_TYPE.NORMAL, true));
+					break;
+				}
 			}
 		}
 	}
@@ -73,7 +101,17 @@ public class TrailStarPath extends Path {
 			pos.y = 5 + distance * trailRadius * i;
 			final float randRadius = Randomizer.getRandomFloat(trailRadius / 2, trailRadius * 2);
 			if (Randomizer.getRandomInt(1, 5) != 1) {
-				trailPath.addPath(new StarPath(5, pos, randRadius, STAR_TYPE.NORMAL, true));
+				switch (objectType) {
+				case Heart:
+					final Path p = new HeartPath(pos, randRadius, false, HEART_SHAPE.Lovely);
+					PathHelper.rotatePath(pos.x, pos.y, p, Randomizer.getRandomFloat(-19, +19));
+					trailPath.addPath(p);
+					break;
+				default:
+				case Stars:
+					trailPath.addPath(new StarPath(5, pos, randRadius, STAR_TYPE.NORMAL, true));
+					break;
+				}
 			}
 		}
 	}
@@ -94,7 +132,17 @@ public class TrailStarPath extends Path {
 					+ Randomizer.getRandomFloat(0, 0.7f * trailRadius);
 
 			if (Randomizer.getRandomInt(1, 6) != 1) {
-				trailPath.addPath(new StarPath(5, pos, starRadius, STAR_TYPE.NORMAL, true));
+				switch (objectType) {
+				case Heart:
+					final Path p = new HeartPath(pos, starRadius, false, HEART_SHAPE.Lovely);
+					PathHelper.rotatePath(pos.x, pos.y, p, Randomizer.getRandomFloat(-19, +19));
+					trailPath.addPath(p);
+					break;
+				default:
+				case Stars:
+					trailPath.addPath(new StarPath(5, pos, starRadius, STAR_TYPE.NORMAL, true));
+					break;
+				}
 			}
 		}
 	}

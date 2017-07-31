@@ -124,10 +124,9 @@ import de.geithonline.wallpaperdesigner.shapes.StarwarsPath.STARWARS_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.SunPath;
 import de.geithonline.wallpaperdesigner.shapes.SunPath.SUN_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.TextPath;
-import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath;
-import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath.HEART_TRAIL_TYPE;
-import de.geithonline.wallpaperdesigner.shapes.TrailStarPath;
-import de.geithonline.wallpaperdesigner.shapes.TrailStarPath.TRAIL_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath;
+import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath.TRAIL_OBJECT_TYPE;
+import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath.TRAIL_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath;
 import de.geithonline.wallpaperdesigner.shapes.UfoPath.UFO_TYPE;
 import de.geithonline.wallpaperdesigner.shapes.VirusPath;
@@ -158,7 +157,7 @@ public class PatternGetter {
 
 	public static Bitmap drawIconBitmap(final int initialSize, final String pattern, final String variant) {
 		final float radius = initialSize;
-		final Path path = PatternGetter.getPath(0, 0, (int) radius, initialSize, initialSize, pattern, variant);
+		final Path path = PatternGetter.getPath(initialSize / 2, initialSize, (int) radius, initialSize, initialSize, pattern, variant);
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);
 		Log.i("Bounds", "=" + bounds);
@@ -1127,23 +1126,29 @@ public class PatternGetter {
 		switch (variant) {
 		default:
 		case "Rain":
-			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.Stars);
+			return new TrailObjectPath(new PointF(x, y), radius, Settings.getFilledBoolean(), //
+					TRAIL_TYPE.Objects, TRAIL_OBJECT_TYPE.Stars);
 		case "Trail Of Stars":
 		case "Trail of Stars":
-			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.Stars);
+			return new TrailObjectPath(new PointF(x, y), radius, Settings.getFilledBoolean(), //
+					TRAIL_TYPE.Objects, TRAIL_OBJECT_TYPE.Stars);
 		case "Trail of Hearts":
-			return new TrailHeartPath(new PointF(x, y), radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Hearts);
+			return new TrailObjectPath(new PointF(x, y), radius, Settings.getFilledBoolean(), //
+					TRAIL_TYPE.Objects, TRAIL_OBJECT_TYPE.Heart);
 
 		case "Sine Trail Of Stars":
 		case "Sine Trail of Stars":
-			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.Sinus);
+			return new TrailObjectPath(new PointF(x, y), radius, Settings.getFilledBoolean(), //
+					TRAIL_TYPE.Sinus, TRAIL_OBJECT_TYPE.Stars);
 
 		case "Sine Trail of Hearts":
-			return new TrailHeartPath(new PointF(x, y), radius, Settings.getFilledBoolean(), HEART_TRAIL_TYPE.Sinus);
+			return new TrailObjectPath(new PointF(x, y), radius, Settings.getFilledBoolean(), //
+					TRAIL_TYPE.Sinus, TRAIL_OBJECT_TYPE.Heart);
 
 		case "Trail Of Stars (getting Bigger)":
 		case "Trail of Stars (getting Bigger)":
-			return new TrailStarPath(new PointF(x, y), radius, Settings.getFilledBoolean(), TRAIL_TYPE.StarsGettingBigger);
+			return new TrailObjectPath(new PointF(x, y), radius, Settings.getFilledBoolean(), //
+					TRAIL_TYPE.ObjectsGettingBigger, TRAIL_OBJECT_TYPE.Stars);
 		}
 	}
 

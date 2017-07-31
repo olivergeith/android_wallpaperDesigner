@@ -20,8 +20,7 @@ import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
-import de.geithonline.wallpaperdesigner.shapes.TrailHeartPath;
-import de.geithonline.wallpaperdesigner.shapes.TrailStarPath;
+import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPath;
@@ -154,19 +153,17 @@ public class PatternDrawer {
 	}
 
 	private void drawScene(final int x, final int y, final int radius, final String pattern, final String variant) {
-		final Path path = PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
-		bitmapCanvas.drawPath(path, paint);
-		glossyDrawer.draw(x, y, paint, radius, path);
-		outlineDrawer.draw(paint, radius, path);
-		if (path instanceof TrailStarPath) {
-			glossyDrawer.draw(x, y, paint, radius, ((TrailStarPath) path).trailPath, //
-					GLOSSY_REFLECTIONS_STYLE.NONE, GLOSSY_GLOW_STYLE.VERTICAL, true);
-		} else if (path instanceof TrailHeartPath) {
-			glossyDrawer.draw(x, y, paint, radius, ((TrailHeartPath) path).trailPath, //
+		final Path p = PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		PathHelper.rotatePath(x, y, p, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+		if (p instanceof TrailObjectPath) {
+			final TrailObjectPath path = (TrailObjectPath) p;
+			PathHelper.rotatePath(x, y, path.main, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+			bitmapCanvas.drawPath(path.main, paint);
+			glossyDrawer.draw(x, y, paint, radius, path.main);
+			outlineDrawer.draw(paint, radius, p);
+			glossyDrawer.draw(x, y, paint, radius, path.trailPath, //
 					GLOSSY_REFLECTIONS_STYLE.NONE, GLOSSY_GLOW_STYLE.VERTICAL, true);
 		}
-
 	}
 
 	private void drawQualle(final int x, final int y, final int radius, final String pattern, final String variant) {
