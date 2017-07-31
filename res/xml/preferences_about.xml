@@ -27,7 +27,7 @@
 	    </Preference>
 	    
 	    <Preference 
-	        android:title="Beta-Tester" 
+	        android:title="Be a Beta-Tester" 
 	        android:summary="You wanna be a Beta-Tester for this APP? ... " 
 	        android:icon="@drawable/googleplaytester"
 	        >
@@ -37,24 +37,6 @@
 	    
 	    
 	    	    
-<!-- 
-        <Preference 
-	        android:title="The Rom Fumbler on XDA" 
-	        android:summary="My other Tool on XDA..."
-	        android:icon="@drawable/xda"
-	        >
-	        <intent android:action="android.intent.action.VIEW"
-	            android:data="http://forum.xda-developers.com/showthread.php?t=1918500" />
-	    </Preference>
-	    <Preference 
-	        android:title="The Rom Fumbler on Google+" 
-	        android:summary="My other Tool on Google+..."
-	        android:icon="@drawable/googleplus"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://plus.google.com/u/0/communities/102052013997299900088" />
-        </Preference>
-	  -->   
 	    <Preference 
 	        android:title="Visit me on Twitter" 
 	        android:icon="@drawable/twitter"
@@ -63,7 +45,14 @@
                 android:data="https://twitter.com/OliverGeith" />
         </Preference>
 	    <Preference 
-	        android:title="Contact developer" 
+	        android:title="Visit me on Google+" 
+	        android:icon="@drawable/googleplus"
+	        >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://plus.google.com/+OliverGeith" />
+        </Preference>
+	    <Preference 
+	        android:title="Mail me" 
 	        android:icon="@drawable/email"
 	        >
             <intent android:action="android.intent.action.VIEW"
