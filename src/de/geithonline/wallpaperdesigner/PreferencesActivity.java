@@ -4,6 +4,7 @@ package de.geithonline.wallpaperdesigner;
 import java.util.List;
 
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -15,7 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
-public class PreferencesActivity extends PreferenceActivity {
+public class PreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
 	private BillingManager billingManager;
 	public static SharedPreferences prefs;
@@ -49,6 +50,7 @@ public class PreferencesActivity extends PreferenceActivity {
 		// initialize Settings if not already done
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
+		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		setTheme(Settings.getTheme());
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,6 +86,20 @@ public class PreferencesActivity extends PreferenceActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		billingManager.onDestroy();
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+		switch (key) {
+		case Settings.KEY_APP_THEME:
+			setTheme(Settings.getTheme());
+			recreate();
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 }

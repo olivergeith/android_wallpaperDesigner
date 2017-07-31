@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -14,8 +12,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternGetter;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
@@ -31,6 +29,11 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen jellyfishTopviewOptions;
 	private PreferenceScreen sceneRainOptions;
 	private PreferenceScreen textOptions;
+	private PreferenceScreen leafOptions;
+	private PreferenceScreen filledOptions;
+	private PreferenceScreen outlineScreen;
+	private PreferenceScreen glossyScreen;
+	private PreferenceScreen ratatingScreen;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -44,7 +47,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style_30_glossy);
 		addPreferencesFromResource(R.xml.preferences_style_40_rotating);
 		addPreferencesFromResource(R.xml.preferences_style_50_outline);
-		addPreferencesFromResource(R.xml.preferences_style_60_assorted);
+		addPreferencesFromResource(R.xml.preferences_style_60_assorted_leafs);
+		addPreferencesFromResource(R.xml.preferences_style_60_assorted_filled);
 		addPreferencesFromResource(R.xml.preferences_style_70_size);
 
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
@@ -71,6 +75,11 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		jellyfishTopviewOptions = (PreferenceScreen) findPreference("jellyfishOptions2");
 		sceneRainOptions = (PreferenceScreen) findPreference("sceneRainOptions");
 		textOptions = (PreferenceScreen) findPreference("textOptions");
+		leafOptions = (PreferenceScreen) findPreference("leafOptions");
+		filledOptions = (PreferenceScreen) findPreference("filledOptions");
+		outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
+		glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
+		ratatingScreen = (PreferenceScreen) findPreference("ratatingScreen");
 
 		handlePatternSelect(Settings.getSelectedPattern());
 		handlePatternVariantSelect(Settings.getSelectedPatternVariant());
@@ -106,21 +115,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	}
 
 	private void handlePatternSelect(final String newPattern) {
-		final ListPreference textDrawStyle = (ListPreference) findPreference(Settings.KEY_PATTERN_TEXT_DRAW_STYLE);
-		final ListPreference filledOption = (ListPreference) findPreference(Settings.KEY_PATTERN_FILLED_OPTION);
-		final InlineSeekBarPreference numberOfLeafs = (InlineSeekBarPreference) findPreference(Settings.KEY_NUMBER_OF_LEAFS);
-		final CheckBoxPreference randomLeafCount = (CheckBoxPreference) findPreference(Settings.KEY_RANDOM_LEAF_COUNT);
-		final EditTextPreference textPattern = (EditTextPreference) findPreference(Settings.KEY_PATTERN_TEXT);
-
-		filledOption.setEnabled(PatternPropertyStore.hasPatternFilledOption(newPattern));
-		textPattern.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
-		textDrawStyle.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern));
-		numberOfLeafs.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
-		randomLeafCount.setEnabled(PatternPropertyStore.hasNumberOfLeafsOption(newPattern));
-
 		patternSelection.setSummary(newPattern);
-
-		// Pattern Variants
 		patternVariantSelection.setEnabled(PatternPropertyStore.hasPatternVariants(newPattern));
 
 		if (PatternPropertyStore.hasPatternVariants(newPattern)) {
@@ -147,19 +142,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			patternVariantSelection.setSummary("not available");
 		}
 
-		// Screens enablen oder disablen
-		final PreferenceScreen glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
-		glossyScreen.setEnabled(PatternPropertyStore.hasPatternGlossyEffect(newPattern));
-		final PreferenceScreen ratatingScreen = (PreferenceScreen) findPreference("ratatingScreen");
-		ratatingScreen.setEnabled(PatternPropertyStore.hasPatternRandomRotate(newPattern));
-		final PreferenceScreen outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
-		outlineScreen.setEnabled(PatternPropertyStore.hasPatternOutlineEffect(newPattern));
-		final PreferenceScreen assortedScreen = (PreferenceScreen) findPreference("assortedScreen");
-		assortedScreen.setEnabled(PatternPropertyStore.hasPatternTextOption(newPattern) //
-				|| PatternPropertyStore.hasPatternFilledOption(newPattern)//
-				|| PatternPropertyStore.hasNumberOfLeafsOption(newPattern)//
-		);
-
 		// Special Pattern Settings enabel or disable
 		addSpecialPreferences(newPattern, patternVariantSelection.getValue());
 	}
@@ -168,31 +150,46 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		Log.i("GEITH", "addSpecialPreferences..." + pattern + "-" + variant);
 
 		// Special Pattern Settings enabel or disable
-		if (pattern.equalsIgnoreCase("Jellyfish")) {
-			getPreferenceScreen().addPreference(jellyfishOptions);
-		} else {
-			getPreferenceScreen().removePreference(jellyfishOptions);
-		}
-		if (pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable")) {
-			getPreferenceScreen().addPreference(jellyfishTopviewOptions);
-		} else {
-			getPreferenceScreen().removePreference(jellyfishTopviewOptions);
-		}
-		if (pattern.equalsIgnoreCase("Rain") && variant.equals("Rain")) {
-			getPreferenceScreen().addPreference(sceneRainOptions);
-		} else {
-			getPreferenceScreen().removePreference(sceneRainOptions);
-		}
-		if (pattern.equalsIgnoreCase("Text")) {
-			getPreferenceScreen().addPreference(textOptions);
-		} else {
-			getPreferenceScreen().removePreference(textOptions);
-		}
+		addOrRemoveScreen(jellyfishOptions, //
+				pattern.equalsIgnoreCase("Jellyfish"));
+
+		addOrRemoveScreen(jellyfishTopviewOptions, //
+				pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable"));
+
+		addOrRemoveScreen(sceneRainOptions, //
+				pattern.equalsIgnoreCase("Rain") && variant.equals("Rain"));
+
+		addOrRemoveScreen(textOptions, //
+				pattern.equalsIgnoreCase("Text"));
+
+		// removing unused stuff
+		addOrRemoveScreen(leafOptions, //
+				PatternPropertyStore.hasNumberOfLeafsOption(pattern));
+		// removing unused stuff
+		addOrRemoveScreen(filledOptions, //
+				PatternPropertyStore.hasPatternFilledOption(pattern));
+
+		addOrRemoveScreen(outlineScreen, //
+				PatternPropertyStore.hasPatternOutlineEffect(pattern));
+
+		addOrRemoveScreen(glossyScreen, //
+				PatternPropertyStore.hasPatternGlossyEffect(pattern));
+		addOrRemoveScreen(ratatingScreen, //
+				PatternPropertyStore.hasPatternRandomRotate(pattern));
+
 		// // some precausions
 		// if (pattern.equalsIgnoreCase("Jellyfish Topview") && Settings.getAnzahlPatterns() > 300) {
 		// Settings.prefs.edit().putInt(Settings.KEY_PATTERN_ANZAHL_PATTERNS, 300).commit();
 		// }
 
+	}
+
+	private void addOrRemoveScreen(final Preference preference, final boolean visible) {
+		if (visible) {
+			getPreferenceScreen().addPreference(preference);
+		} else {
+			getPreferenceScreen().removePreference(preference);
+		}
 	}
 
 	protected void handlePatternVariantSelect(final String newVariant) {

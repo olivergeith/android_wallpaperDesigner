@@ -5,20 +5,9 @@
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:key="assortedScreen"
-        android:summary="Filling, Text, Number of leafs/arms ..."
-        android:title="Assorted Options..." >
-        <PreferenceCategory android:title="Assorted Options" />
-
-        <de.geithonline.android.basics.preferences.CoolListPreference
-            android:defaultValue="Not filled"
-            android:dialogTitle="@string/filledOption"
-            android:entries="@array/hole"
-            android:entryValues="@array/hole"
-            android:key="filledOption"
-            android:title="@string/filledOption" />
-
-        <PreferenceCategory android:title="Leafs-Arms Options" />
+        android:key="leafOptions"
+        android:summary="Configure number of Arms/Leafs..."
+        android:title="Leaf Options..." >
 
         <CheckBoxPreference
             android:defaultValue="false"

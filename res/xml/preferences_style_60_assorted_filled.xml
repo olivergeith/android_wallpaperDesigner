@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:key="filledOptions"
+        android:title="Filling Options..." >
+
+        <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="Not filled"
+            android:dialogTitle="@string/filledOption"
+            android:entries="@array/hole"
+            android:entryValues="@array/hole"
+            android:key="filledOption"
+            android:title="@string/filledOption" />
+
+
+    </PreferenceScreen>
+
+
+</PreferenceScreen>
