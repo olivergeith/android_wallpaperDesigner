@@ -146,23 +146,19 @@
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_RED"
         android:key="color_plain_bgrnd"
-        android:summary="1. Color"
-        android:title="@string/color" />
+        android:title="1. Color" />
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_ORANGE"
         android:key="color2_plain_bgrnd"
-        android:summary="2. Color"
-        android:title="@string/color" />
+        android:title="2. Color" />
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_GREEN"
         android:key="color3_plain_bgrnd"
-        android:summary="3. Color"
-        android:title="@string/color" />
+        android:title="3. Color" />
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_BLACK"
         android:key="color4_plain_bgrnd"
-        android:summary="4. Color"
-        android:title="@string/color" />
+        android:title="4. Color" />
 
         <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -262,14 +258,12 @@
         android:defaultValue="@integer/COLOR_DARKGRAY"
         android:dependency="sameBackgroundAsPatternGradient"
         android:key="bgrnd_color1"
-        android:summary="1. Background Color"
-        android:title="@string/color" />
+        android:title="1. Background Color" />
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_BLACK"
         android:dependency="sameBackgroundAsPatternGradient"
         android:key="bgrnd_color2"
-        android:summary="2. Background Color"
-        android:title="@string/color" />
+        android:title="2. Background Color" />
 
     <PreferenceCategory android:title="Advanced" />
     <Preference
