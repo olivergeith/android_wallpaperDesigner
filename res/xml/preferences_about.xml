@@ -27,7 +27,7 @@
 	    </Preference>
 	    
 	    <Preference 
-	        android:title="Be a Beta-Tester" 
+	        android:title="To be a Beta-Tester..." 
 	        android:summary="You wanna be a Beta-Tester for this APP? ... " 
 	        android:icon="@drawable/googleplaytester"
 	        >
