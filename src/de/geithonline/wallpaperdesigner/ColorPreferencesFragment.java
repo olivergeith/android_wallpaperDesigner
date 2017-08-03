@@ -39,7 +39,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 
 	private Preference backgroundPicker;
 	private final int PICK_IMAGE = 1;
-	public static final String BACKGROUND_PICKER_KEY = "backgroundPicker";
 
 	private ListPreference gradientDirection;
 	private ListPreference anzColors;
@@ -61,6 +60,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen linearGradientSettings;
 	private PreferenceScreen vierColorGradientCornerSettings;
 	private PreferenceScreen vierColorCornerSettings;
+	private ColorPickerPreference bkgrd_color1;
+	private ColorPickerPreference bkgrd_color2;
 
 	@Override
 	public void onDestroy() {
@@ -99,7 +100,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 		prefs.registerOnSharedPreferenceChangeListener(this);
 
-		backgroundPicker = findPreference(BACKGROUND_PICKER_KEY);
+		backgroundPicker = findPreference(Settings.KEY_BACKGROUND_PICKER);
 		backgroundPicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(final Preference preference) {
@@ -116,11 +117,15 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		color2 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR2);
 		color3 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR3);
 		color4 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR4);
+		bkgrd_color1 = (ColorPickerPreference) findPreference(Settings.KEY_BGRND_COLOR1);
+		bkgrd_color2 = (ColorPickerPreference) findPreference(Settings.KEY_BGRND_COLOR2);
 
 		color1.setHexValueEnabled(Settings.isHexValueEnabled());
 		color2.setHexValueEnabled(Settings.isHexValueEnabled());
 		color3.setHexValueEnabled(Settings.isHexValueEnabled());
 		color4.setHexValueEnabled(Settings.isHexValueEnabled());
+		bkgrd_color1.setHexValueEnabled(Settings.isHexValueEnabled());
+		bkgrd_color2.setHexValueEnabled(Settings.isHexValueEnabled());
 
 		gradientDirection = (ListPreference) findPreference(Settings.KEY_COLOR_GRADIENT_DIRECTION);
 		sameBackgroundAsPatternGradient = (CheckBoxPreference) findPreference(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT);
@@ -174,8 +179,11 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 				backgroundPicker.setIcon(dr);
 			} else {
 				backgroundPicker.setSummary("Choose custom background");
-				backgroundPicker.setIcon(R.drawable.icon);
+				backgroundPicker.setIcon(R.drawable.background);
 			}
+		} else {
+			backgroundPicker.setSummary("Choose custom background");
+			backgroundPicker.setIcon(R.drawable.background);
 		}
 	}
 
@@ -184,8 +192,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		Log.i("ColorPreferenceFragment", "onPreference Change for " + key);
 		if (keys.contains(key)) {
 			Log.i("ColorPreferenceFragment", "drawing BackgroundIcon ");
-			drawPreviewImages();
 			handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
+			drawPreviewImages();
 		}
 	}
 
@@ -241,6 +249,12 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		} else {
 			getPreferenceScreen().addPreference(tornadoSettings);
 		}
+		if (!Settings.isCustomBackground(selection)) {
+			getPreferenceScreen().removePreference(backgroundPicker);
+		} else {
+			getPreferenceScreen().addPreference(backgroundPicker);
+			enableColors(0);
+		}
 		if (!Settings.isLinearGradient(selection)) {
 			getPreferenceScreen().removePreference(linearGradientSettings);
 		} else {
@@ -262,16 +276,28 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
+		case 0:
+			color1.setEnabled(false);
+			color2.setEnabled(false);
+			color3.setEnabled(false);
+			color4.setEnabled(false);
+			break;
 		case 2:
+			color1.setEnabled(true);
+			color2.setEnabled(true);
 			color3.setEnabled(false);
 			color4.setEnabled(false);
 			break;
 		case 3:
+			color1.setEnabled(true);
+			color2.setEnabled(true);
 			color3.setEnabled(true);
 			color4.setEnabled(false);
 			break;
 		default:
 		case 4:
+			color1.setEnabled(true);
+			color2.setEnabled(true);
 			color3.setEnabled(true);
 			color4.setEnabled(true);
 			break;
@@ -311,6 +337,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 
 		// Summaries usw updaten
 		setBackgroundPickerData();
+		drawPreviewImages();
 	}
 
 }

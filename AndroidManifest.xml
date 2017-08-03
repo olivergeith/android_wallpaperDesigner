@@ -27,6 +27,7 @@
     </uses-feature>
 
     <application
+        android:name="de.geithonline.wallpaperdesigner.WallpaperDesigner"
         android:allowBackup="true"
         android:description="@string/wallpaper_description"
         android:icon="@drawable/icon"

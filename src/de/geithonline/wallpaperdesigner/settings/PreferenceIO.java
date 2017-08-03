@@ -272,7 +272,6 @@ public class PreferenceIO {
 		deleteKeyFromPref(prefs, "layoutPicker");
 	}
 
-	@SuppressWarnings("deprecation")
 	private static void repairSomeDefaultValues(final SharedPreferences prefs, final Set<String> keySet) {
 		if (!keySet.contains(Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT)) {
 			setDefaultBooleanValue(prefs, Settings.KEY_SAME_BACKGROUND_AS_PATTERN_GRADIENT, true);
@@ -293,7 +292,7 @@ public class PreferenceIO {
 		if (!keySet.contains(Settings.KEY_OUTLINE_THICKNESS_LIMIT)) {
 			setDefaultIntValue(prefs, Settings.KEY_OUTLINE_THICKNESS_LIMIT, 3);
 		}
-		if (!keySet.contains(Settings.OLD_KEY_COLOR_RANDOMIZING_TYPE)) {
+		if (!keySet.contains(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE)) {
 			setDefaultStringValue(prefs, ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
 		}
 		if (!keySet.contains(Settings.KEY_LIMIT_2_CANVAS)) {

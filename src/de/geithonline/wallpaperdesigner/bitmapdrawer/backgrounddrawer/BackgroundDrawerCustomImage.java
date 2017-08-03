@@ -3,8 +3,11 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer;
 import java.io.File;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.R;
+import de.geithonline.wallpaperdesigner.WallpaperDesigner;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
@@ -22,14 +25,18 @@ public class BackgroundDrawerCustomImage {
 			}
 			canvas.drawBitmap(bitmap, 0, 0, null); // null = no Paint()
 		} else {
-			drawBitmapFromResource();
+			drawBitmapFromResource(canvas);
 		}
 
 	}
 
-	private static void drawBitmapFromResource() {
-		// TODO Auto-generated method stub
-
+	private static void drawBitmapFromResource(final Canvas canvas) {
+		final Bitmap bgInput = BitmapFactory.decodeResource(WallpaperDesigner.getContext().getResources(), R.drawable.background);
+		final Bitmap bitmap = Bitmap.createScaledBitmap(bgInput, canvas.getWidth(), canvas.getHeight(), true);
+		if (!bitmap.equals(bgInput)) {
+			bgInput.recycle();
+		}
+		canvas.drawBitmap(bitmap, 0, 0, null); // null = no Paint()
 	}
 
 }

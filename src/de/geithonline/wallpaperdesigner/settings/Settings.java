@@ -919,6 +919,10 @@ public class Settings {
 		return test.startsWith("4-Color Tornado");
 	}
 
+	public static boolean isCustomBackground(final String test) {
+		return test.startsWith("Custom Image");
+	}
+
 	public static int getTornadoArms() {
 		return readIntegerPref(KEY_TORNADO_ARMS, 1);
 	}
