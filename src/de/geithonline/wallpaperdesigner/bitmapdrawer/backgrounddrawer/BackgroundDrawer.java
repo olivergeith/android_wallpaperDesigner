@@ -33,6 +33,9 @@ public class BackgroundDrawer {
 				BackgroundDrawerTornado.draw4ColorTornado(canvas, Settings.getTornadoRings(), Settings.getTornadoArms(), center);
 				break;
 			}
+			case "Custom Image":
+				BackgroundDrawerCustomImage.draw(canvas);
+				break;
 			}
 		} else {
 			drawSimpleBackground(canvas);

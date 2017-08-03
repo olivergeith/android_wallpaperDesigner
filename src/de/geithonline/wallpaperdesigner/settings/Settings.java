@@ -19,6 +19,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class Settings {
+	public static final String KEY_BACKGROUND_PICKER = "backgroundPicker";
 	public static final String KEY_FLIP_RANDOM_LEFT_RIGHT = "flipRandomLeftRight";
 	public static final String KEY_FLIP_RANDOM_UP_DOWN = "flipRandomUpDown";
 	public static final String KEY_SCENE_PERCENTAGE_OF_CIRCLES = "scenePercentageOfCircles";
@@ -1061,5 +1062,19 @@ public class Settings {
 			prefs.edit().putInt(KEY_BLURR_STAGE_2, 70).commit();
 			prefs.edit().putInt(KEY_BLURR_STAGE_3, 80).commit();
 		}
+	}
+
+	public static String getCustomBackgroundFilePath() {
+		if (prefs == null) {
+			return "aaa";
+		}
+		final String filePath = prefs.getString(KEY_BACKGROUND_PICKER, "aaa");
+		return filePath;
+	}
+
+	public static void setCustomBackgroundFilePath(final String filePath) {
+		final SharedPreferences.Editor editor = prefs.edit();
+		editor.putString(KEY_BACKGROUND_PICKER, filePath);
+		editor.commit();
 	}
 }

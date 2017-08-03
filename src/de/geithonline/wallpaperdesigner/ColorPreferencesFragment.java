@@ -1,14 +1,18 @@
 
 package de.geithonline.wallpaperdesigner;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -25,11 +29,17 @@ import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.utils.DisplayHelper;
+import de.geithonline.wallpaperdesigner.utils.Toaster;
+import de.geithonline.wallpaperdesigner.utils.URIHelper;
 
 /**
  * This fragment shows the preferences for the first header.
  */
 public class ColorPreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+
+	private Preference backgroundPicker;
+	private final int PICK_IMAGE = 1;
+	public static final String BACKGROUND_PICKER_KEY = "backgroundPicker";
 
 	private ListPreference gradientDirection;
 	private ListPreference anzColors;
@@ -89,6 +99,19 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 		prefs.registerOnSharedPreferenceChangeListener(this);
 
+		backgroundPicker = findPreference(BACKGROUND_PICKER_KEY);
+		backgroundPicker.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(final Preference preference) {
+				final Intent intent = new Intent();
+				intent.setType("image/*");
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				startActivityForResult(Intent.createChooser(intent, "Select custom Background"), PICK_IMAGE);
+				return true;
+			}
+		});
+		setBackgroundPickerData();
+
 		color1 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR1);
 		color2 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR2);
 		color3 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR3);
@@ -138,6 +161,22 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		vierColorCornerSettings = (PreferenceScreen) findPreference("vierColorCornerSettings");
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
 		drawPreviewImages();
+	}
+
+	private void setBackgroundPickerData() {
+		final String filePath = Settings.getCustomBackgroundFilePath();
+		final File f = new File(filePath);
+		if (f.exists()) {
+			final Bitmap b = BitmapHelper.getCustomImageSampled(filePath, 128, 128);
+			if (b != null) {
+				final Drawable dr = BitmapHelper.resizeToIcon128(b);
+				backgroundPicker.setSummary(filePath);
+				backgroundPicker.setIcon(dr);
+			} else {
+				backgroundPicker.setSummary("Choose custom background");
+				backgroundPicker.setIcon(R.drawable.icon);
+			}
+		}
 	}
 
 	@Override
@@ -237,6 +276,41 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			color4.setEnabled(true);
 			break;
 		}
+	}
+
+	@Override
+	public void onActivityResult(final int requestCode, final int resultCode, final Intent resultData) {
+		super.onActivityResult(requestCode, resultCode, resultData);
+		if (resultData == null) {
+			Log.e(this.getClass().getSimpleName(), "onActivityResult: Data Recieved was null !!");
+			return;
+		}
+		Log.i(this.getClass().getSimpleName(), "onActivityResult: Data Recieved: " + resultData.toString());
+
+		if (resultCode != Activity.RESULT_OK) {
+			Log.i(this.getClass().getSimpleName(), "No ImagePath Received -> Cancel");
+			return;
+		}
+		if (requestCode != PICK_IMAGE) {
+			Log.i(this.getClass().getSimpleName(), "No ImagePath Received -> RequestCode wrong...: " + requestCode);
+			return;
+		}
+
+		final Uri selectedImage = resultData.getData();
+
+		// Pfad zum Image suchen
+		final String filePath = URIHelper.getPath(getActivity().getApplicationContext(), selectedImage);
+		Log.i(this.getClass().getSimpleName(), "ImagePath Received via URIHelper! " + filePath);
+
+		// und in die SharedPreferences schreiben
+		Settings.setCustomBackgroundFilePath(filePath);
+		Log.i(this.getClass().getSimpleName(), "ImagePath written to preferences: " + filePath);
+		if (Settings.isDebuggingMessages()) {
+			Toaster.showInfoToast(getActivity(), "SetBG to " + filePath);
+		}
+
+		// Summaries usw updaten
+		setBackgroundPickerData();
 	}
 
 }

@@ -3,145 +3,134 @@
     xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
 
     <PreferenceCategory android:title="@string/category_background" />
-   <!--
+    <!--
     ###########################################################################
     ################################################################################
-    ############################################################################
+    ############################################################################
     -->
-    
+
     <de.geithonline.android.basics.preferences.CoolListPreference
-        android:summary=""
         android:defaultValue="4-Color Gradient from corners"
         android:dialogTitle="@string/gradientDirection"
         android:entries="@array/directions"
         android:entryValues="@array/directions"
         android:key="gradientDirection"
+        android:summary=""
         android:title="@string/gradientDirection" />
+
+    <Preference
+        android:key="backgroundPicker"
+        android:summary="Choose a custom background"
+        android:title="Custom Background" />
 
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="TornadoSettings"
         android:title="Tornado Settings..." >
-	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="1"
-	        android:dialogMessage="@string/tornadoRings"
-	        android:key="tornadoRings"
-	        android:summary="%1$d Rings"
-	        android:title="@string/tornadoRings"
-	        seekbarpreference:maxValue="5"
-	        seekbarpreference:minValue="1"
-	        seekbarpreference:stepValue="1" />
-	    
-	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="1"
-	        android:dialogMessage="@string/tornadoArms"
-	        android:key="tornadoArms"
-	        android:summary="%1$d Arms"
-	        android:title="@string/tornadoArms"
-	        seekbarpreference:maxValue="3"
-	        seekbarpreference:minValue="1"
-	        seekbarpreference:stepValue="1" />
-	    
-	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="50"
-	        android:dialogMessage="Rotation Center X-Axis"
-	        android:key="tornadoCenterPointX"
-	        android:summary="%1$d Percent of width"
-	        android:title="Center Position X-Axis"
-	        seekbarpreference:maxValue="100"
-	        seekbarpreference:minValue="0"
-	        seekbarpreference:stepValue="1" />
-	
-	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="50"
-	        android:dialogMessage="Rotation Center Y-Axis"
-	        android:key="tornadoCenterPointY"
-	        android:summary="%1$d Percent of height"
-	        android:title="Rotation Center Position Y-Axis"
-	        seekbarpreference:maxValue="100"
-	        seekbarpreference:minValue="0"
-	        seekbarpreference:stepValue="1" />
-	    
-        <CheckBoxPreference
-	        android:defaultValue="false"
-	        android:key="reverseColors"
-	        android:summary="Reverse the color order (color 1-2-3-4 to 4-3-2-1)"
-	        android:title="@string/reverseColors" />
-	    
-    </PreferenceScreen>
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="1"
+            android:dialogMessage="@string/tornadoRings"
+            android:key="tornadoRings"
+            android:summary="%1$d Rings"
+            android:title="@string/tornadoRings"
+            seekbarpreference:maxValue="5"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="1"
+            android:dialogMessage="@string/tornadoArms"
+            android:key="tornadoArms"
+            android:summary="%1$d Arms"
+            android:title="@string/tornadoArms"
+            seekbarpreference:maxValue="3"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="50"
+            android:dialogMessage="Rotation Center X-Axis"
+            android:key="tornadoCenterPointX"
+            android:summary="%1$d Percent of width"
+            android:title="Center Position X-Axis"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="1" />
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="50"
+            android:dialogMessage="Rotation Center Y-Axis"
+            android:key="tornadoCenterPointY"
+            android:summary="%1$d Percent of height"
+            android:title="Rotation Center Position Y-Axis"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="1" />
 
-    
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="reverseColors"
+            android:summary="Reverse the color order (color 1-2-3-4 to 4-3-2-1)"
+            android:title="@string/reverseColors" />
+    </PreferenceScreen>
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="vierColorGradientCornerSettings"
         android:title="Gradient Settings..." >
-
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="100"
-	        android:dialogMessage="Gradient Levels"
-	        android:key="cornerGradientLevels"
-	        android:summary="%1$d"
-	        android:title="Gradient Levels"
-	        seekbarpreference:maxValue="100"
-	        seekbarpreference:minValue="3"
-	        seekbarpreference:stepValue="1" />
+            android:defaultValue="100"
+            android:dialogMessage="Gradient Levels"
+            android:key="cornerGradientLevels"
+            android:summary="%1$d"
+            android:title="Gradient Levels"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="3"
+            seekbarpreference:stepValue="1" />
     </PreferenceScreen>
-
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="vierColorCornerSettings"
         android:title="Gradient Settings..." >
-
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="1"
-	        android:dialogMessage="Repeats"
-	        android:key="cornerRepeats"
-	        android:summary="%1$d"
-	        android:title="Repeats"
-	        seekbarpreference:maxValue="10"
-	        seekbarpreference:minValue="1"
-	        seekbarpreference:stepValue="1" />
+            android:defaultValue="1"
+            android:dialogMessage="Repeats"
+            android:key="cornerRepeats"
+            android:summary="%1$d"
+            android:title="Repeats"
+            seekbarpreference:maxValue="10"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
     </PreferenceScreen>
-    
-    
-    
     <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="LinearGradientSettings"
         android:title="Gradient Settings..." >
-       <de.geithonline.android.basics.preferences.CoolListPreference
+        <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="4"
+            android:dialogTitle="Number of Colors"
+            android:entries="@array/anzColors"
+            android:entryValues="@array/anzColorsValues"
+            android:key="anzColors"
             android:summary=""
-	        android:defaultValue="4"
-	        android:dialogTitle="Number of Colors"
-	        android:entries="@array/anzColors"
-	        android:entryValues="@array/anzColorsValues"
-	        android:key="anzColors"
-	        android:title="Number of Colors" />
-	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-	        android:defaultValue="1"
-	        android:dialogMessage="@string/colorRepeats"
-	        android:key="colorRepeats"
-	        android:summary="%1$d Repeats"
-	        android:title="@string/colorRepeats"
-	        seekbarpreference:maxValue="6"
-	        seekbarpreference:minValue="1"
-	        seekbarpreference:stepValue="1" />
-    	<CheckBoxPreference
-	        android:defaultValue="false"
-	        android:key="reverseColors"
-	        android:summary="Reverse the color order (color 1-2-3-4 to 4-3-2-1)"
-	        android:title="@string/reverseColors" />
-	    	    	    
-   
+            android:title="Number of Colors" />
+
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="1"
+            android:dialogMessage="@string/colorRepeats"
+            android:key="colorRepeats"
+            android:summary="%1$d Repeats"
+            android:title="@string/colorRepeats"
+            seekbarpreference:maxValue="6"
+            seekbarpreference:minValue="1"
+            seekbarpreference:stepValue="1" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="reverseColors"
+            android:summary="Reverse the color order (color 1-2-3-4 to 4-3-2-1)"
+            android:title="@string/reverseColors" />
     </PreferenceScreen>
-    
-    
-    
-    
 
     <de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference
         android:defaultValue="@integer/COLOR_RED"
@@ -160,7 +149,7 @@
         android:key="color4_plain_bgrnd"
         android:title="4. Color" />
 
-        <PreferenceScreen
+    <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_preferences"
         android:key="ColorRandomizingSettings"
@@ -168,83 +157,75 @@
         <PreferenceCategory android:title="Color Randomizing..." />
 
         <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="full RGB"
+            android:dialogTitle="Type of Color-Randomizing"
+            android:entries="@array/colorRandomizingType"
+            android:entryValues="@array/colorRandomizingType"
+            android:key="Color.colorRandomizingType"
             android:summary=""
-        	android:defaultValue="full RGB"
-	        android:dialogTitle="Type of Color-Randomizing"
-	        android:entries="@array/colorRandomizingType"
-	        android:entryValues="@array/colorRandomizingType"
-	        android:key="Color.colorRandomizingType"
-	        android:title="Type of Color-Randomizing" />
-        
+            android:title="Type of Color-Randomizing" />
+
         <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
-	        android:dialogMessage="Color Randomization Range"
-	        android:title="Color Randomization Range"
-	        android:key="Color.colorRange"
-	        seekbarpreference:keyMinValue="Color.minColorRange"
-	        seekbarpreference:keyMaxValue="Color.maxColorRange"
-	        android:summary="%1$s"
-	        android:defaultValue="-32 - 32"
-	        seekbarpreference:absoluteMaxValue="192"
-	        seekbarpreference:absoluteMinValue="-192"
-	        seekbarpreference:defaultMaxValue="32"
-	        seekbarpreference:defaultMinValue="-32"
-	        seekbarpreference:step="4" 
-	        />
+            android:defaultValue="-32 - 32"
+            android:dialogMessage="Color Randomization Range"
+            android:key="Color.colorRange"
+            android:summary="%1$s"
+            android:title="Color Randomization Range"
+            seekbarpreference:absoluteMaxValue="192"
+            seekbarpreference:absoluteMinValue="-192"
+            seekbarpreference:defaultMaxValue="32"
+            seekbarpreference:defaultMinValue="-32"
+            seekbarpreference:keyMaxValue="Color.maxColorRange"
+            seekbarpreference:keyMinValue="Color.minColorRange"
+            seekbarpreference:step="4" />
 
         <PreferenceCategory android:title="Brightness, Saturation ..." />
-        
-        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
-	        android:dialogMessage="Brightness Randomization Range"
-	        android:title="Brightness Randomization Range"
-	        android:key="Color.brightnessRange"
-	        seekbarpreference:keyMinValue="Color.minBrightnessRange"
-	        seekbarpreference:keyMaxValue="Color.maxBrightnessRange"
-	        android:summary="%1$s"
-	        android:defaultValue="-30 - 30"
-	        seekbarpreference:absoluteMaxValue="192"
-	        seekbarpreference:absoluteMinValue="-192"
-	        seekbarpreference:defaultMaxValue="32"
-	        seekbarpreference:defaultMinValue="-32"
-	        seekbarpreference:step="4" 
-	        />
 
         <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
-	        android:dialogMessage="Saturation Randomization Range"
-	        android:title="Saturation Randomization Range"
-	        android:key="Color.saturationRange"
-	        seekbarpreference:keyMinValue="Color.minSaturationRange"
-	        seekbarpreference:keyMaxValue="Color.maxSaturationRange"
-	        android:summary="%1$s"
-	        android:defaultValue="0"
-	        seekbarpreference:absoluteMaxValue="100"
-	        seekbarpreference:absoluteMinValue="-100"
-	        seekbarpreference:defaultMaxValue="0"
-	        seekbarpreference:defaultMinValue="0"
-	        seekbarpreference:step="5" 
-	        />
-        
-        <PreferenceCategory android:title="Opacity Randomizing..." />
-  
+            android:defaultValue="-30 - 30"
+            android:dialogMessage="Brightness Randomization Range"
+            android:key="Color.brightnessRange"
+            android:summary="%1$s"
+            android:title="Brightness Randomization Range"
+            seekbarpreference:absoluteMaxValue="192"
+            seekbarpreference:absoluteMinValue="-192"
+            seekbarpreference:defaultMaxValue="32"
+            seekbarpreference:defaultMinValue="-32"
+            seekbarpreference:keyMaxValue="Color.maxBrightnessRange"
+            seekbarpreference:keyMinValue="Color.minBrightnessRange"
+            seekbarpreference:step="4" />
         <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
-	        android:dialogMessage="Opacity Range"
-	        android:title="Opacity Range"
-	        android:key="opacity"
-	        seekbarpreference:keyMinValue="minOpacity"
-	        seekbarpreference:keyMaxValue="maxOpacity"
-	        android:summary="%1$s Opacity"
-	        android:defaultValue="128-225"
-	        seekbarpreference:absoluteMaxValue="255"
-	        seekbarpreference:absoluteMinValue="0"
-	        seekbarpreference:defaultMaxValue="255"
-	        seekbarpreference:defaultMinValue="128"
-	        seekbarpreference:step="1" 
-	        />
-        
+            android:defaultValue="0"
+            android:dialogMessage="Saturation Randomization Range"
+            android:key="Color.saturationRange"
+            android:summary="%1$s"
+            android:title="Saturation Randomization Range"
+            seekbarpreference:absoluteMaxValue="100"
+            seekbarpreference:absoluteMinValue="-100"
+            seekbarpreference:defaultMaxValue="0"
+            seekbarpreference:defaultMinValue="0"
+            seekbarpreference:keyMaxValue="Color.maxSaturationRange"
+            seekbarpreference:keyMinValue="Color.minSaturationRange"
+            seekbarpreference:step="5" />
+
+        <PreferenceCategory android:title="Opacity Randomizing..." />
+
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+            android:defaultValue="128-225"
+            android:dialogMessage="Opacity Range"
+            android:key="opacity"
+            android:summary="%1$s Opacity"
+            android:title="Opacity Range"
+            seekbarpreference:absoluteMaxValue="255"
+            seekbarpreference:absoluteMinValue="0"
+            seekbarpreference:defaultMaxValue="255"
+            seekbarpreference:defaultMinValue="128"
+            seekbarpreference:keyMaxValue="maxOpacity"
+            seekbarpreference:keyMinValue="minOpacity"
+            seekbarpreference:step="1" />
     </PreferenceScreen>
-    
-    <!-- 
-    <de.geithonline.android.basics.preferences.IconOnlyPreference android:key="colorPreview" />
-     -->
+
+<!--     <de.geithonline.android.basics.preferences.IconOnlyPreference android:key="colorPreview" /> -->
     <PreferenceCategory android:title="Image Background Color" />
 
     <CheckBoxPreference
@@ -266,10 +247,11 @@
         android:title="2. Background Color" />
 
     <PreferenceCategory android:title="Advanced" />
+
     <Preference
         android:icon="@android:drawable/ic_menu_set_as"
         android:key="loadColors"
         android:summary="@string/loadColorsSummary"
         android:title="@string/loadColors" />
- 
+
 </PreferenceScreen>

@@ -1,6 +1,5 @@
 package de.geithonline.wallpaperdesigner.utils;
 
-import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,9 +12,8 @@ import android.provider.MediaStore;
 public class URIHelper {
 
 	/**
-	 * Get a file path from a Uri. This will get the the path for Storage Access
-	 * Framework Documents, as well as the _data field for the MediaStore and
-	 * other file-based ContentProviders.
+	 * Get a file path from a Uri. This will get the the path for Storage Access Framework Documents, as well as the _data field for the MediaStore and other
+	 * file-based ContentProviders.
 	 * 
 	 * @param context
 	 *            The context.
@@ -23,7 +21,6 @@ public class URIHelper {
 	 *            The Uri to query.
 	 * @author paulburke
 	 */
-	@SuppressLint("NewApi")
 	public static String getPath(final Context context, final Uri uri) {
 
 		final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -90,8 +87,7 @@ public class URIHelper {
 	}
 
 	/**
-	 * Get the value of the data column for this Uri. This is useful for
-	 * MediaStore Uris, and other file-based ContentProviders.
+	 * Get the value of the data column for this Uri. This is useful for MediaStore Uris, and other file-based ContentProviders.
 	 * 
 	 * @param context
 	 *            The context.
