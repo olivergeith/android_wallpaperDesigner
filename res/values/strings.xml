@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_version">6.1</string>
-    <string name="app_name">WPDesigner V6.1</string>
-    <string name="wallpaper_description">WP Designer V6.1</string>
+    <string name="app_version">6.2</string>
+    <string name="app_name">WPDesigner V6.2</string>
+    <string name="wallpaper_description">WP Designer V6.2</string>
     <string name="premium_only">Premium Version only</string>
     <string name="about">About</string>
     <string name="Copyright">Copyright by Oliver Geith</string>
