@@ -111,7 +111,6 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 				return true;
 			}
 		});
-		setBackgroundPickerData();
 
 		color1 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR1);
 		color2 = (ColorPickerPreference) findPreference(Settings.KEY_COLOR2);
@@ -165,6 +164,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		vierColorGradientCornerSettings = (PreferenceScreen) findPreference("vierColorGradientCornerSettings");
 		vierColorCornerSettings = (PreferenceScreen) findPreference("vierColorCornerSettings");
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
+		setBackgroundPickerData();
 		drawPreviewImages();
 	}
 
