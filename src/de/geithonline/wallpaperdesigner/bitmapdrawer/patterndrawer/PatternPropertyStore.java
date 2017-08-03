@@ -80,7 +80,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Blitz", "Crickle Crackle", "Maze", "Spirals", "Streamers", "Mixed" }));
 
 		patternProperties.put("Lines (Directed)", new PatternProperties(false, true, false, true, true, false, //
-				new CharSequence[] { "Straight Line", "Sinus", "Sinus (one)", "Sinus Tail", "Zig-Zag", "Bow", "Blitz", "Mixed" }));
+				new CharSequence[] { "Straight Line", "Sinus", "Sinus (one)", "Sinus Tail", "Zig-Zag", "Bow", "Blitz", "Sound", "Mixed" }));
 
 		patternProperties.put("Logos", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Resurrection Remix", "Resurrection Remix V2", "Resurrection Remix V3", "Resurrection Remix V4", "Resurrection Remix V5",
@@ -122,14 +122,14 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
 		patternProperties.put("Rain", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { //
-						"Rain" //
+						"Rain", "Rectangle Rain"//
 				}));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Random Ratio", "Random Ratio (Rounded)", "Random Ratio (Mixed)", //
 						"Golden Ratio", "Golden Ratio (Rounded)", "Golden Ratio (Mixed)", //
 						"4-3 Ratio", "4-3 Ratio (Rounded)", "4-3 Ratio (Mixed)", //
-						"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)" }));
+						"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)", "HalfCircle End (random hight)" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Mixed" }));

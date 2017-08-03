@@ -166,7 +166,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable"));
 
 		addOrRemoveScreen(sceneRainOptions, //
-				pattern.equalsIgnoreCase("Rain") && variant.equals("Rain"));
+				pattern.equalsIgnoreCase("Rain"));
 
 		addOrRemoveScreen(textOptions, //
 				pattern.equalsIgnoreCase("Text"));

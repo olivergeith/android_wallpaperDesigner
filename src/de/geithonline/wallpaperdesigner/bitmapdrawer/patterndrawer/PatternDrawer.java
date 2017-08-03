@@ -148,7 +148,15 @@ public class PatternDrawer {
 				// Rain
 				drawLinePattern(x, y, radius, "Lines (Directed)", "Straight Line");
 			}
-			return;
+			break;
+		case "Rectangle Rain":
+			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
+				drawNormalPattern(x, y, radius, "Rectangles", "HalfCircle End (random hight)");
+			} else {
+				// Rain
+				drawLinePattern(x, y, radius, "Lines (Directed)", "Straight Line");
+			}
+			break;
 		}
 	}
 

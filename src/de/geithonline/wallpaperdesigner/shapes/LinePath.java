@@ -9,7 +9,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 public class LinePath extends Path {
 
 	public enum LINE_STYLE {
-		straight, zigzag, bow, blitz;
+		straight, zigzag, bow, blitz, sound;
 	}
 
 	public LinePath(final PointF center, final float radius, final LINE_STYLE style, final boolean filled) {
@@ -27,6 +27,9 @@ public class LinePath extends Path {
 			break;
 		case bow:
 			drawBow(center, radius, filled);
+			break;
+		case sound:
+			drawSound(center, radius, filled);
 			break;
 		}
 
@@ -58,6 +61,30 @@ public class LinePath extends Path {
 			final float x = l + i * (r - l) / points;
 			final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
 			final float y = mitteY + (float) (sinradius * Math.sin(angle));
+			lineTo(x, y);
+		}
+	}
+
+	private void drawSound(final PointF center, final float radius, final boolean filled) {
+		final float l = center.x - radius;
+		final float r = center.x + radius;
+		final float mitteY = center.y;
+		// nach links
+		final float sinradius1 = radius * Randomizer.getRandomFloat(0.05f, 0.25f);
+		final float sinradius2 = radius * Randomizer.getRandomFloat(0.05f, 0.25f);
+		final float sinradius3 = radius * Randomizer.getRandomFloat(0.05f, 0.25f);
+		final int sinRepeats1 = Randomizer.getRandomInt(2, 25);
+		final int sinRepeats2 = Randomizer.getRandomInt(5, 25);
+		final int sinRepeats3 = Randomizer.getRandomInt(10, 25);
+		moveTo(l, mitteY);
+		// und nun der Sinus
+		final int points = 150;
+		for (int i = 1; i <= points; i++) {
+			final float x = l + i * (r - l) / points;
+			final float angle1 = (float) ((float) i / points * Math.PI * sinRepeats1);
+			final float angle2 = (float) ((float) i / points * Math.PI * sinRepeats2);
+			final float angle3 = (float) ((float) i / points * Math.PI * sinRepeats3);
+			final float y = mitteY + (float) (sinradius1 * Math.sin(angle1) + sinradius2 * Math.sin(angle2) + sinradius3 * Math.sin(angle3));
 			lineTo(x, y);
 		}
 	}

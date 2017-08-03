@@ -1073,7 +1073,7 @@ public class PatternGetter {
 
 	private static Path drawLinesDirected(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 5);
+			final int nr = Randomizer.getRandomInt(1, 8);
 			variant = "V" + nr;
 		}
 
@@ -1107,6 +1107,10 @@ public class PatternGetter {
 		case "Sinus Tail":
 			return new MultiSinusLinesPath(new PointF(x, y), radius, radius * 0.7f, radius * 2, 2 + Settings.getAnzahlFlowerLeafs(5, 15), 0);
 
+		case "V8":
+		case "Sound":
+			return new LinePath(new PointF(x, y), radius, LINE_STYLE.sound, Settings.getFilledBoolean());
+
 		}
 	}
 
@@ -1119,6 +1123,9 @@ public class PatternGetter {
 		case "Rain":
 			// this is just for icon drawing
 			return drawBubble(x, y, radius / 3, "V1");
+		case "Rectangle Rain":
+			// this is just for icon drawing
+			return new RectanglePath(new PointF(x, y), radius, radius / 4, true);
 		}
 	}
 
@@ -1483,51 +1490,55 @@ public class PatternGetter {
 		default:
 		case "V1":
 		case "Random Ratio":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.RANDOM);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.RANDOM);
 
 		case "V2":
 		case "Random Ratio (Rounded)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.RANDOM);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.RANDOM);
 
 		case "V3":
 		case "Random Ratio (Mixed)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.RANDOM);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.RANDOM);
 
 		case "V4":
 		case "4-3 Ratio":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_3_4);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_3_4);
 
 		case "V5":
 		case "4-3 Ratio (Rounded)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_3_4);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_3_4);
 
 		case "V6":
 		case "4-3 Ratio (Mixed)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_3_4);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_3_4);
 
 		case "V7":
 		case "1-2 Ratio":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_1_2);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_1_2);
 
 		case "V8":
 		case "1-2 Ratio (Rounded)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_1_2);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_1_2);
 
 		case "V9":
 		case "1-2 Ratio (Mixed)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_1_2);
 
 		case "V10":
 		case "Golden Ratio":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.NORMAL, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 
 		case "V11":
 		case "Golden Ratio (Rounded)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.ROUNDED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
 
 		case "V12":
 		case "Golden Ratio (Mixed)":
-			return new RectanglePath(new Point(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+			return new RectanglePath(new PointF(x, y), radius, Settings.getFilledBoolean(), RECT_ROUNDED.MIXED, RECT_ASPECT.ASPECT_GOLDEN_CUT);
+
+		case "V13":
+		case "HalfCircle End (random hight)":
+			return new RectanglePath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(0.05f, 0.25f), Settings.getFilledBoolean());
 
 		}
 	}
