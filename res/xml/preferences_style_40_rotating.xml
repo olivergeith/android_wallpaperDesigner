@@ -36,10 +36,7 @@
             android:title="@string/rotationDegrees"
             seekbarpreference:maxValue="180"
             seekbarpreference:minValue="-180"
-            seekbarpreference:stepValue="1"
-            seekbarpreference:maxZoomValue="25"
-            seekbarpreference:minZoomValue="-25"
-            seekbarpreference:stepZoomValue="1" />
+            seekbarpreference:stepValue="1"/>
         
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="180"

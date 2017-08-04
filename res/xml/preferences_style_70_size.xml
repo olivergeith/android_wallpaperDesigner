@@ -25,10 +25,7 @@
             android:title="@string/patternSizeAdjust"
             seekbarpreference:maxValue="700"
             seekbarpreference:minValue="10"
-            seekbarpreference:stepValue="5"
-            seekbarpreference:maxZoomValue="100"
-            seekbarpreference:minZoomValue="10"
-            seekbarpreference:stepZoomValue="5" />      
+            seekbarpreference:stepValue="5" />      
            
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="10"
