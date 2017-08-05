@@ -11,6 +11,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.util.Log;
 
 public class BitmapBlurrer {
 
@@ -76,7 +77,11 @@ public class BitmapBlurrer {
 		if (radius < 1) {
 			return (null);
 		}
-
+		// Fix possible nullpointer
+		if (bitmap == null) {
+			Log.i("Error in doBlurr()", "bitmap was null...this should not happen!!!");
+			return sentBitmap;
+		}
 		final int w = bitmap.getWidth();
 		final int h = bitmap.getHeight();
 
