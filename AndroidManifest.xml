@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="25" />
+        android:targetSdkVersion="26" />
 
     <!-- For downloading Settings from Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
