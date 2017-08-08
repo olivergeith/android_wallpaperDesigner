@@ -19,6 +19,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class Settings {
+	public static final String KEY_COUNTER_CLOCKWISE = "counterClockwise";
 	public static final String KEY_BACKGROUND_PICKER = "backgroundPicker";
 	public static final String KEY_FLIP_RANDOM_LEFT_RIGHT = "flipRandomLeftRight";
 	public static final String KEY_FLIP_RANDOM_UP_DOWN = "flipRandomUpDown";
@@ -453,8 +454,8 @@ public class Settings {
 		return readBooleanPref("ramdomStartWinkel", true);
 	}
 
-	public static boolean isUpsideDown() {
-		return readBooleanPref("upsideDown", false);
+	public static boolean isCounterClockwise() {
+		return readBooleanPref(KEY_COUNTER_CLOCKWISE, false);
 	}
 
 	// ###################################################################

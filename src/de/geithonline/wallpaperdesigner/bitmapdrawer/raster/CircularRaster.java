@@ -80,7 +80,10 @@ public class CircularRaster extends AbstractRaster {
 		for (int ring = 1; ring <= anzRinge; ring++) {
 			final float r = ring * radiusStep;
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep;
-			final float winkelProEcke = (float) (Math.PI / ecken) * 2;
+			float winkelProEcke = (float) (Math.PI / ecken) * 2;
+			if (Settings.isCounterClockwise()) {
+				winkelProEcke = winkelProEcke * -1f;
+			}
 			// Log.i("Half Ring RASTER", "Anzahl Rcken = " + ecken);
 			float startWinkel = (float) (Math.PI / 2);
 			if (Settings.isRandomStartwinkel()) {
@@ -114,7 +117,7 @@ public class CircularRaster extends AbstractRaster {
 			final float r = ring * radiusStep;
 			final int ecken = (int) (Math.PI * 2 * r) / radiusStep + Math.max(anzRinge - ring * ring, 0);
 			float winkelProEcke = (float) (Math.PI * 2 / (ecken));
-			if (Settings.isUpsideDown()) {
+			if (Settings.isCounterClockwise()) {
 				winkelProEcke = winkelProEcke * -1f;
 			}
 			// Log.i("CIRCULAR RASTER", "Anzahl Punkte = " + ecken);

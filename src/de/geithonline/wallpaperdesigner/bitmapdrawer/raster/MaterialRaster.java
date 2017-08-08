@@ -32,17 +32,19 @@ public class MaterialRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-			case RANDOM:
-				return drawRandomPoint();
-			default:
-			case TOWER:
-				return drawNextTowerPoint();
-			case CENTER:
-				return drawNextCenterPoint();
-			case BOOK:
-				return drawNextBookPoint();
-			case BOOK_REVERSE:
-				return drawNextBookPointReverse();
+		case RANDOM:
+			return drawRandomPoint();
+		default:
+		case TOWER:
+			return drawNextTowerPoint();
+		case CENTER:
+			return drawNextCenterPoint();
+		case TOPMOST:
+		case BOOK:
+			return drawNextBookPoint();
+		case BOTTOMMOST:
+		case BOOK_REVERSE:
+			return drawNextBookPointReverse();
 		}
 	}
 

@@ -50,8 +50,8 @@
     
     <CheckBoxPreference
         android:defaultValue="false"
-        android:key="upsideDown"
-        android:title="@string/upsideDown" />
+        android:key="counterClockwise"
+        android:title="Counter Clockwise" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="ramdomStartWinkel"

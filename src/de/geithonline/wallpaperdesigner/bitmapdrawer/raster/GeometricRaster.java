@@ -7,8 +7,7 @@ public class GeometricRaster extends AbstractRaster {
 	private final int height;
 	private final int width;
 
-	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
-			final boolean upsidedown) {
+	public GeometricRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
 		super(patternRadius, overlap);
 		this.width = width;
 		this.height = height;
@@ -17,6 +16,16 @@ public class GeometricRaster extends AbstractRaster {
 
 		final int anzW = width / abstand + 2 * WIDE_CANVAS_LIMIT + 1;
 		final int anzH = height / abstand + 2 * WIDE_CANVAS_LIMIT + 1;
+		boolean upsidedown = true;
+		switch (positioning) {
+		case BOTTOMMOST:
+		case TOPMOST:
+			upsidedown = false;
+			break;
+		default:
+			upsidedown = true;
+			break;
+		}
 
 		if (!upsidedown) {
 			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {
@@ -44,12 +53,18 @@ public class GeometricRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
+		default:
 		case RANDOM:
 			return drawRandomPoint();
-		default:
-		case BOOK:
+		// case BOOK:
+		// return drawNextBookPoint();
+		// case BOOK_REVERSE:
+		// return drawNextBookPointReverse();
+		case LEFTMOST:
+		case TOPMOST:
 			return drawNextBookPoint();
-		case BOOK_REVERSE:
+		case RIGHTMOST:
+		case BOTTOMMOST:
 			return drawNextBookPointReverse();
 		case INNER:
 			return drawPointNearestToGeometricCenter(width, height);

@@ -92,7 +92,6 @@
     <string name="overlapping">Overlap-faktor for patterns</string>
     <string name="sortOrder">Sort-Order for Designs-List</string>
     <string name="dropShadowRadiusAdjustment">Dropshadow Radius Adjustment</string>
-    <string name="upsideDown">Ordering Rows (clicked) or Columns</string>
     <string name="rotatingStyle">Rotating Style</string>
     <string name="imageFormat">Image-Format</string>
     <string name="jpgCompression">Compression-Rate of JPGs</string>

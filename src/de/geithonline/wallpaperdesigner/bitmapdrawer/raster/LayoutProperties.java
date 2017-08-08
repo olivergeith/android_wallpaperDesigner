@@ -4,30 +4,30 @@ public class LayoutProperties {
 	private final boolean anzahlPatterns;
 	private final boolean blurring;
 	private final boolean overlap;
-	private final boolean upsideDown;
+	private final boolean counterClockwise;
 
 	private final CharSequence[] variants;
 	private final boolean randomStartWinkel;
 	private boolean adjustableCenter = false;
 
-	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean upsideDown,
+	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean counterClockwise,
 			final boolean randomStartWinkel, final CharSequence[] variants) {
 		super();
 		this.anzahlPatterns = anzahlPatterns;
 		this.blurring = blurring;
 		this.overlap = overlap;
-		this.upsideDown = upsideDown;
+		this.counterClockwise = counterClockwise;
 		this.variants = variants;
 		this.randomStartWinkel = randomStartWinkel;
 	}
 
-	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean upsideDown,
+	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean counterClockwise,
 			final boolean randomStartWinkel, final boolean adjustableCenter, final CharSequence[] variants) {
 		super();
 		this.anzahlPatterns = anzahlPatterns;
 		this.blurring = blurring;
 		this.overlap = overlap;
-		this.upsideDown = upsideDown;
+		this.counterClockwise = counterClockwise;
 		this.adjustableCenter = adjustableCenter;
 		this.variants = variants;
 		this.randomStartWinkel = randomStartWinkel;
@@ -49,8 +49,8 @@ public class LayoutProperties {
 		return overlap;
 	}
 
-	public boolean hasUpsideDown() {
-		return upsideDown;
+	public boolean hasCounterClockwise() {
+		return counterClockwise;
 	}
 
 	public boolean hasVariants() {

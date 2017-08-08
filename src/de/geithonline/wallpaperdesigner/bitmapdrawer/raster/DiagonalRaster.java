@@ -7,18 +7,27 @@ public class DiagonalRaster extends AbstractRaster {
 	private final int width;
 	private final int height;
 
-	public DiagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning random,
-			final boolean upsidedown) {
+	public DiagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
 		super(patternRadius, overlap);
 		this.width = width;
 		this.height = height;
 		final int abstandX = Math.round(patternRadius * 2 * overlap);
 		final int abstandY = abstandX / 2;
-		setPositioning(random);
+		setPositioning(positioning);
 
 		final int anzW = width / abstandX + 2 * WIDE_CANVAS_LIMIT + 1;
 		final int anzH = height / abstandY + 2 * WIDE_CANVAS_LIMIT + 1;
 
+		boolean upsidedown = true;
+		switch (positioning) {
+		case BOTTOMMOST:
+		case TOPMOST:
+			upsidedown = false;
+			break;
+		default:
+			upsidedown = true;
+			break;
+		}
 		if (!upsidedown) {
 			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {
 				for (int w = -WIDE_CANVAS_LIMIT; w < anzW; w++) {
@@ -45,12 +54,18 @@ public class DiagonalRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
+		default:
 		case RANDOM:
 			return drawRandomPoint();
-		default:
-		case BOOK:
+		// case BOOK:
+		// return drawNextBookPoint();
+		// case BOOK_REVERSE:
+		// return drawNextBookPointReverse();
+		case LEFTMOST:
+		case TOPMOST:
 			return drawNextBookPoint();
-		case BOOK_REVERSE:
+		case RIGHTMOST:
+		case BOTTOMMOST:
 			return drawNextBookPointReverse();
 		case INNER:
 			return drawPointNearestToGeometricCenter(width, height);
