@@ -8,7 +8,7 @@ public class LayoutProperties {
 
 	private final CharSequence[] variants;
 	private final boolean randomStartWinkel;
-	private boolean adjustableCenter = false;
+	private final boolean adjustableCenter;
 
 	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean counterClockwise,
 			final boolean randomStartWinkel, final CharSequence[] variants) {
@@ -19,6 +19,7 @@ public class LayoutProperties {
 		this.counterClockwise = counterClockwise;
 		this.variants = variants;
 		this.randomStartWinkel = randomStartWinkel;
+		adjustableCenter = false;
 	}
 
 	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean counterClockwise,
