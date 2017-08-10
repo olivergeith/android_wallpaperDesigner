@@ -12,7 +12,7 @@ public class PatternPropertyStore {
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Assorted Shapes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Lemon", "YingYang", "Crop Circles", "Roses", "Pillows", "Android", "Ikae Robot", "Footprint", "Pentagram", "4Sails",
-						"Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Sonic", "Iron Cross", "Iron Cross (round)", "Mixed" }));
+						"Dice", "Drop", "Hedgehog", "Dandelion", "Deathstar", "R2D2", "Iron Cross", "Iron Cross (round)", "Mixed" }));
 
 		patternProperties.put("Bubbles", new PatternProperties(true, false, false, false, false, true, //
 				new CharSequence[] { "Bubble" }));
@@ -49,7 +49,7 @@ public class PatternPropertyStore {
 						"Arrow" }));
 
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
-				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Long Cone", "Cone", "Mixed" }));
+				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Cube (random height)", "Long Cone", "Cone", "Mixed" }));
 
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //

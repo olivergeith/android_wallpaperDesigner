@@ -704,6 +704,10 @@ public class PatternGetter {
 		case "Cone":
 			return new Asymetric3DPath(new PointF(x, y), radius, radius * 3, ASYMETRIC_3D_STYLE.CONE);
 
+		case "V7":
+		case "Cube (random height)":
+			return new Asymetric3DPath(new PointF(x, y), radius, radius * Randomizer.getRandomInt(3, 8), ASYMETRIC_3D_STYLE.CUBE);
+
 		}
 
 	}
