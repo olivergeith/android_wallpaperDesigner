@@ -228,6 +228,10 @@ public class PreferenceIO {
 			Log.i(LOG_TAG, Settings.KEY_FLIP_RANDOM_UP_DOWN + " not found - Putting ---> false");
 			prefs.edit().putBoolean(Settings.KEY_FLIP_RANDOM_UP_DOWN, false).commit();
 		}
+		if (!keySet.contains(Settings.KEY_RANDOM_DEGREES_ADDING)) {
+			Log.i(LOG_TAG, Settings.KEY_RANDOM_DEGREES_ADDING + " not found - Putting ---> 0");
+			prefs.edit().putInt(Settings.KEY_RANDOM_DEGREES_ADDING, 0).commit();
+		}
 
 	}
 

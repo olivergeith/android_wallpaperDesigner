@@ -20,14 +20,15 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="flipRandomLeftRight"
-            android:summary="Random left-right-flipping (before any rotation)"
+            android:summary="Random left-right-flipping"
             android:title="Left-Right-flipping" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="flipRandomUpDown"
-            android:summary="Random up-down-flipping (before any rotation)"
+            android:summary="Random up-down-flipping"
             android:title="Up-Down-flipping" />
-        
+
+ 
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="0"
             android:dialogMessage="@string/rotationDegrees"
@@ -67,7 +68,16 @@
 	        seekbarpreference:minValue="0"
 	        seekbarpreference:stepValue="1" />
         
-        
+   	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+	        android:defaultValue="0"
+	        android:dialogMessage="Random Degrees adding"
+	        android:key="randomDegreesAdding"
+	        android:summary="%1$d° added randomly"
+	        android:title="Random Degrees adding"
+	        seekbarpreference:maxValue="180"
+	        seekbarpreference:minValue="-180"
+	        seekbarpreference:stepValue="5" />
+	    
     </PreferenceScreen>
 
 </PreferenceScreen>
