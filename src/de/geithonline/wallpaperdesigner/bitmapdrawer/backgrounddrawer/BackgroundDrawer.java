@@ -159,7 +159,8 @@ public class BackgroundDrawer {
 	}
 
 	private static void initSweepPaint(final int width, final int height, final Paint paint) {
-		paint.setShader(new SweepGradient(width / 2, height / 2, GradientColorManager.getColorsSweep(), null));
+		final PointF center = new PointF(width * Settings.getSweepCenterPointX(), height * Settings.getSweepCenterPointY());
+		paint.setShader(new SweepGradient(center.x, center.y, GradientColorManager.getColorsSweep(), null));
 	}
 
 	private static void initSweepGradientPaintFromCorner(final int width, final int height, final Paint paint) {
@@ -171,45 +172,6 @@ public class BackgroundDrawer {
 		Settings.prefs.edit().putBoolean(Settings.KEY_REVERSE_COLORS, reverse).commit();
 		Settings.prefs.edit().putInt(Settings.KEY_COLOR_REPEATS, repeats).commit();
 	}
-
-	// private static void draw4ColorCornerGradientBackgroundV2(final Canvas canvas) {
-	// final int cWidth = canvas.getWidth();
-	// final int cHeight = canvas.getHeight();
-	// final int c1 = Settings.getPatternColor1();
-	// final int c2 = Settings.getPatternColor2();
-	// final int c3 = Settings.getPatternColor3();
-	// final int c4 = Settings.getPatternColor4();
-	// final Paint paint = new Paint();
-	// paint.setAntiAlias(true);
-	// paint.setColor(c1);
-	// final Rect r = new Rect();
-	// r.left = 0;
-	// r.top = 0;
-	// r.right = cWidth;
-	// r.bottom = cHeight;
-	// final int radius = (int) (Math.sqrt(cWidth * cWidth + cHeight * cHeight));
-	// // if (cWidth < cHeight) {
-	// // radius = cHeight;
-	// // } else {
-	// // radius = cWidth;
-	// // }
-	//
-	// final int offset = cWidth / 15;
-	// setSpotlightShader(offset, offset, c1, paint, radius);
-	// canvas.drawRect(r, paint);
-	// setSpotlightShader(cWidth - offset, offset, c2, paint, radius);
-	// canvas.drawRect(r, paint);
-	// setSpotlightShader(cWidth - offset, cHeight - offset, c3, paint, radius);
-	// canvas.drawRect(r, paint);
-	// setSpotlightShader(offset, cHeight - offset, c4, paint, radius);
-	// canvas.drawRect(r, paint);
-	// }
-	//
-	// private static void setSpotlightShader(final int x, final int y, final int color, final Paint paint, final int radius) {
-	// final int transparent = Color.argb(0, Color.red(color), Color.green(color), Color.blue(color));
-	// paint.setShader(new RadialGradient(x, y, radius, color, transparent, TileMode.CLAMP));
-	//
-	// }
 
 	public static Bitmap blurrIfNessesary(Bitmap bitmap) {
 		if (Settings.getGradientDirection().startsWith("4-Color Tornado")) {

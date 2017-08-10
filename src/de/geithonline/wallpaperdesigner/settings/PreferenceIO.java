@@ -321,6 +321,10 @@ public class PreferenceIO {
 			setDefaultIntValue(prefs, Settings.KEY_TORNADO_CENTER_POINT_X, 50);
 			setDefaultIntValue(prefs, Settings.KEY_TORNADO_CENTER_POINT_Y, 50);
 		}
+		if (!keySet.contains(Settings.KEY_SWEEP_CENTER_POINT_X)) {
+			setDefaultIntValue(prefs, Settings.KEY_SWEEP_CENTER_POINT_X, 50);
+			setDefaultIntValue(prefs, Settings.KEY_SWEEP_CENTER_POINT_Y, 50);
+		}
 		if (!keySet.contains(Settings.KEY_RADIUS_TYPE)) {
 			setDefaultStringValue(prefs, Settings.KEY_RADIUS_TYPE, "Random");
 		}

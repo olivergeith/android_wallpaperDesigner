@@ -38,6 +38,8 @@ public class Settings {
 	public static final String KEY_SHOW_RENDERING_PROCESS = "showRenderingProcess";
 	public static final String KEY_TORNADO_CENTER_POINT_Y = "tornadoCenterPointY";
 	public static final String KEY_TORNADO_CENTER_POINT_X = "tornadoCenterPointX";
+	public static final String KEY_SWEEP_CENTER_POINT_Y = "sweepCenterPointY";
+	public static final String KEY_SWEEP_CENTER_POINT_X = "sweepCenterPointX";
 	public static final String KEY_CORNER_REPEATS = "cornerRepeats";
 	public static final String KEY_CORNER_GRADIENT_LEVELS = "cornerGradientLevels";
 	public static final String KEY_RENDER_ON_APP_STARTUP = "renderOnAppStartup";
@@ -421,6 +423,14 @@ public class Settings {
 
 	public static float getTornadoCenterPointX() {
 		return readIntegerPref(KEY_TORNADO_CENTER_POINT_X, 50) / 100f;
+	}
+
+	public static float getSweepCenterPointY() {
+		return readIntegerPref(KEY_SWEEP_CENTER_POINT_Y, 50) / 100f;
+	}
+
+	public static float getSweepCenterPointX() {
+		return readIntegerPref(KEY_SWEEP_CENTER_POINT_X, 50) / 100f;
 	}
 
 	public static boolean isBlurPatterns() {
@@ -910,7 +920,11 @@ public class Settings {
 	}
 
 	public static boolean isLinearGradient(final String test) {
-		return test.startsWith("Linear") || test.startsWith("Radial") || test.startsWith("Sweep Gradient");
+		return (test.startsWith("Linear") || test.startsWith("Radial") || test.startsWith("Sweep Gradient")) && !test.equals("Sweep Gradient (++)");
+	}
+
+	public static boolean isSweepGradientPlusPlus(final String test) {
+		return test.equals("Sweep Gradient (++)");
 	}
 
 	public static boolean is4ColorCornerGradient(final String test) {

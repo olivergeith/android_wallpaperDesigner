@@ -58,6 +58,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	// private InlineSeekBarPreference tornadoArms;
 	private PreferenceScreen tornadoSettings;
 	private PreferenceScreen linearGradientSettings;
+	private PreferenceScreen sweepGradientSettings;
 	private PreferenceScreen vierColorGradientCornerSettings;
 	private PreferenceScreen vierColorCornerSettings;
 	private ColorPickerPreference bkgrd_color1;
@@ -92,6 +93,8 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		keys.add(Settings.KEY_REVERSE_COLORS);
 		keys.add(Settings.KEY_TORNADO_CENTER_POINT_X);
 		keys.add(Settings.KEY_TORNADO_CENTER_POINT_Y);
+		keys.add(Settings.KEY_SWEEP_CENTER_POINT_X);
+		keys.add(Settings.KEY_SWEEP_CENTER_POINT_Y);
 		keys.add(Settings.KEY_CORNER_GRADIENT_LEVELS);
 		keys.add(Settings.KEY_CORNER_REPEATS);
 		super.onCreate(savedInstanceState);
@@ -161,6 +164,7 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 		// tornadoArms = (InlineSeekBarPreference) findPreference("tornadoArms");
 		tornadoSettings = (PreferenceScreen) findPreference("TornadoSettings");
 		linearGradientSettings = (PreferenceScreen) findPreference("LinearGradientSettings");
+		sweepGradientSettings = (PreferenceScreen) findPreference("sweepGradientSettings");
 		vierColorGradientCornerSettings = (PreferenceScreen) findPreference("vierColorGradientCornerSettings");
 		vierColorCornerSettings = (PreferenceScreen) findPreference("vierColorCornerSettings");
 		handleSelection(Settings.getGradientDirection(), Settings.getAnzahlGradientColors());
@@ -259,6 +263,11 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 			getPreferenceScreen().removePreference(linearGradientSettings);
 		} else {
 			getPreferenceScreen().addPreference(linearGradientSettings);
+		}
+		if (!Settings.isSweepGradientPlusPlus(selection)) {
+			getPreferenceScreen().removePreference(sweepGradientSettings);
+		} else {
+			getPreferenceScreen().addPreference(sweepGradientSettings);
 		}
 		if (!Settings.is4ColorCornerGradient(selection)) {
 			getPreferenceScreen().removePreference(vierColorGradientCornerSettings);
