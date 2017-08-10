@@ -674,7 +674,7 @@ public class PatternGetter {
 
 	private static Path draw3DLongShape(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 6);
+			final int nr = Randomizer.getRandomInt(1, 7);
 			variant = "V" + nr;
 		}
 
