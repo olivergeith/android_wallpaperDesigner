@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_add"
+        android:key="cubeOptions"
+        android:title="Cube Options..." >
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+            android:dialogMessage="Length of Cube"
+            android:key="CubeOptions.length"
+            android:summary="%1$s"
+            android:title="Length of Cube"
+            seekbarpreference:absoluteMaxValue="100"
+            seekbarpreference:absoluteMinValue="5"
+            seekbarpreference:defaultMaxValue="30"
+            seekbarpreference:defaultMinValue="10"
+            seekbarpreference:keyMaxValue="CubeOptions.maxLength"
+            seekbarpreference:keyMinValue="CubeOptions.minLength"
+            seekbarpreference:step="5" />
+
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="-36"
+            android:dialogMessage="Brightness Side1"
+            android:key="CubeOptions.brightnessSide1"
+            android:summary="%1$d"
+            android:title="Brightness Side1"
+            seekbarpreference:maxValue="128"
+            seekbarpreference:minValue="-128"
+            seekbarpreference:stepValue="4" />
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="-24"
+            android:dialogMessage="Brightness Side2"
+            android:key="CubeOptions.brightnessSide2"
+            android:summary="%1$d"
+            android:title="Brightness Side2"
+            seekbarpreference:maxValue="128"
+            seekbarpreference:minValue="-128"
+            seekbarpreference:stepValue="4" />
+        </PreferenceScreen>
+
+</PreferenceScreen>

@@ -12,6 +12,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.settings.CubeOptions;
 import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
@@ -19,6 +20,7 @@ import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
+import de.geithonline.wallpaperdesigner.shapes.Asymetric3DCubePath;
 import de.geithonline.wallpaperdesigner.shapes.Asymetric3DPath;
 import de.geithonline.wallpaperdesigner.shapes.Asymetric3DPath.ASYMETRIC_3D_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath;
@@ -214,6 +216,8 @@ public class PatternGetter {
 			return drawGeometricLong(x, y, radius, variant);
 		case "3D (long) Shapes":
 			return draw3DLongShape(x, y, radius, variant);
+		case "3D Cubes":
+			return draw3DCubes(x, y, radius, variant);
 		case "Rings":
 			return drawRing(x, y, radius, variant);
 		case "Bubbles":
@@ -666,6 +670,25 @@ public class PatternGetter {
 			return new AsymetricLongPath(new PointF(x, y), radius, radius * 5, Settings.getFilledBoolean(), ASYMETRIC_STYLE.RITUAL_AXE);
 
 		}
+	}
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
+
+	private static Path draw3DCubes(final int x, final int y, final int radius, String variant) {
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = Randomizer.getRandomInt(1, 1);
+			variant = "V" + nr;
+		}
+		final CubeOptions cubeOptions = Settings.getCubeOptions();
+
+		switch (variant) {
+		default:
+		case "V1":
+		case "Cube":
+			return new Asymetric3DCubePath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
+		}
+
 	}
 
 	// #########################################################################################

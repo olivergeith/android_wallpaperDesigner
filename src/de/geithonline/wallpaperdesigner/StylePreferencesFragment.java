@@ -28,6 +28,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen jellyfishOptions;
 	private PreferenceScreen jellyfishTopviewOptions;
 	private PreferenceScreen sceneRainOptions;
+	private PreferenceScreen cubeOptions;
 	private PreferenceScreen textOptions;
 	private PreferenceScreen leafOptions;
 	private PreferenceScreen filledOptions;
@@ -52,6 +53,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style_10_10_jellyfish_topview);
 		addPreferencesFromResource(R.xml.preferences_style_10_11_scene_rain);
 		addPreferencesFromResource(R.xml.preferences_style_10_12_textoptions);
+		addPreferencesFromResource(R.xml.preferences_style_10_13_3d_cube);
 		addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
 		addPreferencesFromResource(R.xml.preferences_style_30_glossy);
 		addPreferencesFromResource(R.xml.preferences_style_40_rotating);
@@ -83,6 +85,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		jellyfishOptions = (PreferenceScreen) findPreference("jellyfishOptions");
 		jellyfishTopviewOptions = (PreferenceScreen) findPreference("jellyfishOptions2");
 		sceneRainOptions = (PreferenceScreen) findPreference("sceneRainOptions");
+		cubeOptions = (PreferenceScreen) findPreference("cubeOptions");
 		textOptions = (PreferenceScreen) findPreference("textOptions");
 		leafOptions = (PreferenceScreen) findPreference("leafOptions");
 		filledOptions = (PreferenceScreen) findPreference("filledOptions");
@@ -167,6 +170,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		addOrRemoveScreen(sceneRainOptions, //
 				pattern.equalsIgnoreCase("Rain"));
+
+		addOrRemoveScreen(cubeOptions, //
+				pattern.equalsIgnoreCase("3D Cubes"));
 
 		addOrRemoveScreen(textOptions, //
 				pattern.equalsIgnoreCase("Text"));

@@ -496,6 +496,18 @@ public class Settings {
 		return readStringPref(KEY_TAIL_OPTION, "With Tail");
 	}
 
+	private final static CubeOptions cubeOptions = new CubeOptions();
+
+	public static CubeOptions getCubeOptions() {
+		cubeOptions.minLength = readIntegerPref("CubeOptions.minLength", 10) / 10f;
+		cubeOptions.maxLength = readIntegerPref("CubeOptions.maxLength", 30) / 10f;
+		cubeOptions.brightnessSide1 = readIntegerPref("CubeOptions.brightnessSide1", -36);
+		cubeOptions.brightnessSide2 = readIntegerPref("CubeOptions.brightnessSide2", -24);
+		return cubeOptions;
+	}
+
+	// ************************************************************************
+
 	private final static TailOptionsLine lineOptions = new TailOptionsLine();
 	private final static EyeOptions eyeOptions = new EyeOptions();
 

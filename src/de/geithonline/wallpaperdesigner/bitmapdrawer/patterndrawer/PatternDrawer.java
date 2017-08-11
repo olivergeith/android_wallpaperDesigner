@@ -12,12 +12,14 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.PaintManager;
+import de.geithonline.wallpaperdesigner.settings.CubeOptions;
 import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_GLOW_STYLE;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
+import de.geithonline.wallpaperdesigner.shapes.Asymetric3DCubePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath;
@@ -67,6 +69,10 @@ public class PatternDrawer {
 			drawNormalPattern(x, y, radius, pattern, variant);
 			break;
 
+		case "3D Cubes":
+			draw3DCube(x, y, radius, pattern, variant);
+			break;
+
 		case "Lines":
 		case "Lines (Directed)":
 			drawLinePattern(x, y, radius, pattern, variant);
@@ -101,6 +107,35 @@ public class PatternDrawer {
 		}
 		prevPoint.x = x;
 		prevPoint.y = y;
+	}
+
+	private void draw3DCube(final int x, final int y, final int radius, final String pattern, final String variant) {
+		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
+		final CubeOptions cubeOptions = Settings.getCubeOptions();
+
+		final Asymetric3DCubePath path = (Asymetric3DCubePath) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		PathHelper.rotatePath(x, y, path, rotationDegrees);
+		PathHelper.rotatePath(x, y, path.deckel, rotationDegrees);
+		PathHelper.rotatePath(x, y, path.seite1, rotationDegrees);
+		PathHelper.rotatePath(x, y, path.seite2, rotationDegrees);
+
+		// deckel
+		bitmapCanvas.drawPath(path.deckel, paint);
+		glossyDrawer.draw(x, y, paint, radius, path.deckel);
+		outlineDrawer.draw(paint, radius, path.deckel);
+		// Seiten
+		pm.initFillPaint();
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
+		bitmapCanvas.drawPath(path.seite1, paint);
+		glossyDrawer.draw(x, y, paint, radius, path.seite1);
+		outlineDrawer.draw(paint, radius, path.seite1);
+
+		pm.initFillPaint();
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));
+		bitmapCanvas.drawPath(path.seite2, paint);
+		glossyDrawer.draw(x, y, paint, radius, path.seite2);
+		outlineDrawer.draw(paint, radius, path.seite2);
+
 	}
 
 	// #########################################################################################
