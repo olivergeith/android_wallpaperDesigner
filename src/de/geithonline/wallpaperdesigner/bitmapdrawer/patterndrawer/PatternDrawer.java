@@ -119,21 +119,22 @@ public class PatternDrawer {
 		PathHelper.rotatePath(x, y, path.seite1, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.seite2, rotationDegrees);
 
-		// deckel
+		// erstmal die Flaechen
 		bitmapCanvas.drawPath(path.deckel, paint);
-		glossyDrawer.draw(x, y, paint, radius, path.deckel);
-		outlineDrawer.draw(paint, radius, path.deckel);
-		// Seiten
-		pm.initFillPaint();
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
 		bitmapCanvas.drawPath(path.seite1, paint);
-		glossyDrawer.draw(x, y, paint, radius, path.seite1);
-		outlineDrawer.draw(paint, radius, path.seite1);
-
-		pm.initFillPaint();
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));
 		bitmapCanvas.drawPath(path.seite2, paint);
-		glossyDrawer.draw(x, y, paint, radius, path.seite2);
+
+		// dann glossy und outline
+		glossyDrawer.draw(x, y, paint, radius, path);
+		// glossyDrawer.draw(x, y, paint, radius, path.deckel);
+		// glossyDrawer.draw(x, y, paint, radius, path.seite1);
+		// glossyDrawer.draw(x, y, paint, radius, path.seite2);
+		outlineDrawer.draw(paint, radius, path.deckel);
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
+		outlineDrawer.draw(paint, radius, path.seite1);
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));
 		outlineDrawer.draw(paint, radius, path.seite2);
 
 	}
