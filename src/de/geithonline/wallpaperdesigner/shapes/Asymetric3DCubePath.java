@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.util.Log;
 import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPath;
 
 public class Asymetric3DCubePath extends ComposedPath {
@@ -27,7 +26,7 @@ public class Asymetric3DCubePath extends ComposedPath {
 			final PointF p = new PointF();
 			p.x = (float) (c.x + Math.cos(winkel) * radius);
 			p.y = (float) (c.y + Math.sin(winkel) * radius);
-			Log.i("Point", "Point = " + p);
+			// Log.i("Point", "Point = " + p);
 			points.add(p);
 		}
 
