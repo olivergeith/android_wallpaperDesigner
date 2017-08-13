@@ -172,7 +172,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				pattern.equalsIgnoreCase("Rain"));
 
 		addOrRemoveScreen(cubeOptions, //
-				pattern.equalsIgnoreCase("3D Cubes"));
+				pattern.equalsIgnoreCase("3D Objects"));
 
 		addOrRemoveScreen(textOptions, //
 				pattern.equalsIgnoreCase("Text"));

@@ -1,6 +1,5 @@
 package de.geithonline.wallpaperdesigner.shapes;
 
-import android.graphics.Path;
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.HexagonalRaster;
 
@@ -41,14 +40,6 @@ public class D3ImpossibleTrianglePath extends D3Path {
 		seite2.close();
 		addPath(seite2);
 
-	}
-
-	public void lineTo(final Path path, final PointF p) {
-		path.lineTo(p.x, p.y);
-	}
-
-	public void moveTo(final Path path, final PointF p) {
-		path.moveTo(p.x, p.y);
 	}
 
 }
