@@ -96,6 +96,7 @@ public class PreferenceIO {
 					repairLayoutPicker(prefs, keySet);
 					repairRandomRotate(prefs, keySet);
 					repairRain(prefs, keySet);
+					repairOldPatterns(prefs, keySet);
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
@@ -203,6 +204,19 @@ public class PreferenceIO {
 	private static void deleteKeyFromPref(final SharedPreferences prefs, final String key) {
 		Log.i("Deleting key from pref", key);
 		prefs.edit().remove(key).commit();
+	}
+
+	private static void repairOldPatterns(final SharedPreferences prefs, final Set<String> keySet) {
+		final String pattern = prefs.getString(Settings.KEY_PATTERN_PATTERN_PICKER, "");
+		switch (pattern) {
+		default:
+			break;
+		case "3D Cubes":
+			Log.i(LOG_TAG, " old pattern found --> " + pattern + ")");
+			setStringValue(prefs, Settings.KEY_PATTERN_PATTERN_PICKER, "3D Objects");
+			break;
+
+		}
 	}
 
 	private static void repairRandomRotate(final SharedPreferences prefs, final Set<String> keySet) {
@@ -332,6 +346,11 @@ public class PreferenceIO {
 
 	private static void setDefaultStringValue(final SharedPreferences prefs, final String key, final String value) {
 		Log.i(LOG_TAG, "Key not contained-> setting it to default: " + key + " = " + value);
+		prefs.edit().putString(key, value).commit();
+	}
+
+	private static void setStringValue(final SharedPreferences prefs, final String key, final String value) {
+		Log.i(LOG_TAG, "Setting value: " + key + " = " + value);
 		prefs.edit().putString(key, value).commit();
 	}
 

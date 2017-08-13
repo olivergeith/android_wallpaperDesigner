@@ -20,7 +20,6 @@ import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
-import de.geithonline.wallpaperdesigner.shapes.Asymetric3DCubePath;
 import de.geithonline.wallpaperdesigner.shapes.Asymetric3DPath;
 import de.geithonline.wallpaperdesigner.shapes.Asymetric3DPath.ASYMETRIC_3D_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AsymetricLongPath;
@@ -30,6 +29,8 @@ import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
+import de.geithonline.wallpaperdesigner.shapes.D3CubePath;
+import de.geithonline.wallpaperdesigner.shapes.D3ImpossibleTrianglePath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DicePath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
@@ -216,6 +217,7 @@ public class PatternGetter {
 			return drawGeometricLong(x, y, radius, variant);
 		case "3D (long) Shapes":
 			return draw3DLongShape(x, y, radius, variant);
+		case "3D Objects":
 		case "3D Cubes":
 			return draw3DCubes(x, y, radius, variant);
 		case "Rings":
@@ -677,7 +679,7 @@ public class PatternGetter {
 
 	private static Path draw3DCubes(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 1);
+			final int nr = Randomizer.getRandomInt(1, 2);
 			variant = "V" + nr;
 		}
 		final CubeOptions cubeOptions = Settings.getCubeOptions();
@@ -686,7 +688,10 @@ public class PatternGetter {
 		default:
 		case "V1":
 		case "Cube":
-			return new Asymetric3DCubePath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
+			return new D3CubePath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
+		case "V2":
+		case "Impossible Triangle":
+			return new D3ImpossibleTrianglePath(new PointF(x, y), radius);
 		}
 
 	}

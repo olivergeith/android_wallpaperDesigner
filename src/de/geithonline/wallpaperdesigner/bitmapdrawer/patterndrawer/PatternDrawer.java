@@ -19,9 +19,9 @@ import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_GLOW_STYLE;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
 import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
-import de.geithonline.wallpaperdesigner.shapes.Asymetric3DCubePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.D3Path;
 import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
@@ -70,6 +70,7 @@ public class PatternDrawer {
 			break;
 
 		case "3D Cubes":
+		case "3D Objects":
 			draw3DCube(x, y, radius, pattern, variant);
 			break;
 
@@ -113,14 +114,14 @@ public class PatternDrawer {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
 		final CubeOptions cubeOptions = Settings.getCubeOptions();
 
-		final Asymetric3DCubePath path = (Asymetric3DCubePath) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+		final D3Path path = (D3Path) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		PathHelper.rotatePath(x, y, path, rotationDegrees);
-		PathHelper.rotatePath(x, y, path.deckel, rotationDegrees);
+		PathHelper.rotatePath(x, y, path.seite0, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.seite1, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.seite2, rotationDegrees);
 
 		// erstmal die Flaechen
-		bitmapCanvas.drawPath(path.deckel, paint);
+		bitmapCanvas.drawPath(path.seite0, paint);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
 		bitmapCanvas.drawPath(path.seite1, paint);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));
@@ -131,7 +132,7 @@ public class PatternDrawer {
 		// glossyDrawer.draw(x, y, paint, radius, path.deckel);
 		// glossyDrawer.draw(x, y, paint, radius, path.seite1);
 		// glossyDrawer.draw(x, y, paint, radius, path.seite2);
-		outlineDrawer.draw(paint, radius, path.deckel);
+		outlineDrawer.draw(paint, radius, path.seite0);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
 		outlineDrawer.draw(paint, radius, path.seite1);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));

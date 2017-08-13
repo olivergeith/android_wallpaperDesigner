@@ -51,8 +51,8 @@ public class PatternPropertyStore {
 		patternProperties.put("3D (long) Shapes", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Cube (random height)", "Long Cone", "Cone", "Mixed" }));
 
-		patternProperties.put("3D Cubes", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Cube", "Mixed" }));
+		patternProperties.put("3D Objects", new PatternProperties(true, true, false, false, false, true, //
+				new CharSequence[] { "Cube", "Impossible Triangle", "Mixed" }));
 
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
 		patternProperties.put("Hearts", new PatternProperties(true, true, false, false, false, true, //

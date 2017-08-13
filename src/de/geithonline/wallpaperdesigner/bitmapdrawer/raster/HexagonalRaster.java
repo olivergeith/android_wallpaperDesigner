@@ -1,6 +1,7 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 
 public class HexagonalRaster extends AbstractRaster {
 
@@ -85,6 +86,29 @@ public class HexagonalRaster extends AbstractRaster {
 			return drawQuadStepPoint();
 
 		}
+	}
+
+	public static PointF[][] getHexRasterPoints(final PointF center, final float radius, final int raster) {
+		final float width = 2 * radius;
+		final float height = 2 * radius;
+
+		final float abstandX = width / raster;
+		final int abstandY = (int) Math.sqrt(abstandX * abstandX - (abstandX / 2) * (abstandX / 2));
+		final int anzX = raster + 1;
+		final int anzY = Math.round(height / abstandY);
+		final PointF[][] array = new PointF[anzX][anzY];
+
+		final PointF obereLinkeEcke = new PointF(center.x - radius, center.y - radius);
+		for (int y = 0; y < anzY; y++) {
+			for (int x = 0; x < anzX; x++) {
+				final PointF p = new PointF();
+
+				p.x = obereLinkeEcke.x + x * abstandX + (y % 2) * abstandX / 2;
+				p.y = obereLinkeEcke.y + y * abstandY;
+				array[x][y] = p;
+			}
+		}
+		return array;
 	}
 
 }

@@ -3,17 +3,11 @@ package de.geithonline.wallpaperdesigner.shapes;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.graphics.Path;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPath;
 
-public class Asymetric3DCubePath extends ComposedPath {
+public class D3CubePath extends D3Path {
 
-	public Path deckel = new Path();
-	public Path seite1 = new Path();
-	public Path seite2 = new Path();
-
-	public Asymetric3DCubePath(final PointF center, final float radius, final float height) {
+	public D3CubePath(final PointF center, final float radius, final float height) {
 		drawWuerfel(center, radius, height);
 	}
 
@@ -30,12 +24,12 @@ public class Asymetric3DCubePath extends ComposedPath {
 			points.add(p);
 		}
 
-		deckel.moveTo(c.x, c.y);
-		deckel.lineTo(points.get(0).x, points.get(0).y);
-		deckel.lineTo(points.get(1).x, points.get(1).y);
-		deckel.lineTo(points.get(2).x, points.get(2).y);
-		deckel.close();
-		addPath(deckel);
+		seite0.moveTo(c.x, c.y);
+		seite0.lineTo(points.get(0).x, points.get(0).y);
+		seite0.lineTo(points.get(1).x, points.get(1).y);
+		seite0.lineTo(points.get(2).x, points.get(2).y);
+		seite0.close();
+		addPath(seite0);
 
 		seite1.moveTo(c.x, c.y);
 		seite1.lineTo(points.get(0).x, points.get(0).y);
