@@ -503,6 +503,7 @@ public class Settings {
 		cubeOptions.maxLength = readIntegerPref("CubeOptions.maxLength", 30) / 10f;
 		cubeOptions.brightnessSide1 = readIntegerPref("CubeOptions.brightnessSide1", -36);
 		cubeOptions.brightnessSide2 = readIntegerPref("CubeOptions.brightnessSide2", -24);
+		cubeOptions.individualDropShadow = readBooleanPref("CubeOptions.individualDropShadow", false);
 		return cubeOptions;
 	}
 

@@ -121,12 +121,13 @@ public class PatternDrawer {
 		PathHelper.rotatePath(x, y, path.seite1, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.seite2, rotationDegrees);
 
-		// erstmal kompletten Path mit Schatten
-		bitmapCanvas.drawPath(path, paint);
-		// dropshado entfernen
-		paint.setShadowLayer(0, 0, 0, Color.BLACK);
+		if (cubeOptions.individualDropShadow == false) {
+			// erstmal kompletten Path mit Schatten
+			bitmapCanvas.drawPath(path, paint);
+			// dropshado entfernen
+			paint.setShadowLayer(0, 0, 0, Color.BLACK);
+		}
 		// seiten malen
-
 		bitmapCanvas.drawPath(path.seite0, paint);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
 		bitmapCanvas.drawPath(path.seite1, paint);

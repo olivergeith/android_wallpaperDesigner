@@ -7,4 +7,6 @@ public class CubeOptions {
 
 	public int brightnessSide1 = -24;
 	public int brightnessSide2 = -36;
+
+	public boolean individualDropShadow = false;
 }

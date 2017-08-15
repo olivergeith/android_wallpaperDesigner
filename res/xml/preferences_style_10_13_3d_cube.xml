@@ -6,9 +6,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_add"
         android:key="cubeOptions"
-        android:title="Cube Options..." >
+        android:title="3D Object Options..." >
         <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
-            android:dialogMessage="Length of Cube"
+            android:dialogMessage="Length of Object"
             android:key="CubeOptions.length"
             android:summary="%1$s"
             android:title="Length of Cube"
@@ -38,6 +38,17 @@
             seekbarpreference:maxValue="128"
             seekbarpreference:minValue="-128"
             seekbarpreference:stepValue="4" />
+        
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="CubeOptions.individualDropShadow"
+	        android:summary="Each side drops its own Shadow"
+            android:title="Individual DropShadow" />
+        
+        
         </PreferenceScreen>
+        
+    	
 
 </PreferenceScreen>
