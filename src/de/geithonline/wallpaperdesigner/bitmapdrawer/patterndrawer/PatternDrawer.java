@@ -4,6 +4,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 import java.util.Locale;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
@@ -120,7 +121,12 @@ public class PatternDrawer {
 		PathHelper.rotatePath(x, y, path.seite1, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.seite2, rotationDegrees);
 
-		// erstmal die Flaechen
+		// erstmal die Flaechen mit Schatten
+		bitmapCanvas.drawPath(path, paint);
+		// dropshado entfernen
+		paint.setShadowLayer(0, 0, 0, Color.BLACK);
+		// seiten malen
+
 		bitmapCanvas.drawPath(path.seite0, paint);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
 		bitmapCanvas.drawPath(path.seite1, paint);

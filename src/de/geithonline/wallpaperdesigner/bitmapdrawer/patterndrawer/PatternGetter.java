@@ -32,6 +32,7 @@ import de.geithonline.wallpaperdesigner.shapes.CloudPath;
 import de.geithonline.wallpaperdesigner.shapes.D3CubePath;
 import de.geithonline.wallpaperdesigner.shapes.D3ImpossibleTrianglePath;
 import de.geithonline.wallpaperdesigner.shapes.D3PyramidePath;
+import de.geithonline.wallpaperdesigner.shapes.D3ZylinderPath;
 import de.geithonline.wallpaperdesigner.shapes.DandelionPath;
 import de.geithonline.wallpaperdesigner.shapes.DicePath;
 import de.geithonline.wallpaperdesigner.shapes.DotSpiralPath;
@@ -680,7 +681,7 @@ public class PatternGetter {
 
 	private static Path draw3DCubes(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 3);
+			final int nr = Randomizer.getRandomInt(1, 4);
 			variant = "V" + nr;
 		}
 		final CubeOptions cubeOptions = Settings.getCubeOptions();
@@ -694,6 +695,9 @@ public class PatternGetter {
 		case "Pyramide":
 			return new D3PyramidePath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
 		case "V3":
+		case "Zylinder":
+			return new D3ZylinderPath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
+		case "V4":
 		case "Impossible Triangle":
 			return new D3ImpossibleTrianglePath(new PointF(x, y), radius);
 		}

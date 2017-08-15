@@ -15,6 +15,10 @@ public class RectanglePath extends Path {
 		RANDOM, ASPECT_3_4, ASPECT_1_2, ASPECT_GOLDEN_CUT;
 	}
 
+	public RectanglePath(final RectF rect, final float radiusX, final float radiusY) {
+		addRoundRect(rect, radiusY, radiusY, Direction.CW);
+	}
+
 	public RectanglePath(final PointF center, final float radiusX, final float radiusY, final boolean filled) {
 		final RectF rect = new RectF();
 		rect.right = center.x + radiusX;
