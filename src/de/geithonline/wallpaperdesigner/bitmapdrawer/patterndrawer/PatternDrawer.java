@@ -121,7 +121,7 @@ public class PatternDrawer {
 		PathHelper.rotatePath(x, y, path.seite1, rotationDegrees);
 		PathHelper.rotatePath(x, y, path.seite2, rotationDegrees);
 
-		// erstmal die Flaechen mit Schatten
+		// erstmal kompletten Path mit Schatten
 		bitmapCanvas.drawPath(path, paint);
 		// dropshado entfernen
 		paint.setShadowLayer(0, 0, 0, Color.BLACK);
@@ -135,9 +135,6 @@ public class PatternDrawer {
 
 		// dann glossy und outline
 		glossyDrawer.draw(x, y, paint, radius, path);
-		// glossyDrawer.draw(x, y, paint, radius, path.deckel);
-		// glossyDrawer.draw(x, y, paint, radius, path.seite1);
-		// glossyDrawer.draw(x, y, paint, radius, path.seite2);
 		outlineDrawer.draw(paint, radius, path.seite0);
 		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
 		outlineDrawer.draw(paint, radius, path.seite1);
