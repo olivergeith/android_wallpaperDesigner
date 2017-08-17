@@ -24,6 +24,7 @@ import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.D3Path;
 import de.geithonline.wallpaperdesigner.shapes.TrailObjectPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QuallePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.QualleTopviewPath;
@@ -70,6 +71,10 @@ public class PatternDrawer {
 			drawNormalPattern(x, y, radius, pattern, variant);
 			break;
 
+		case "Circular Maze":
+			drawCircularMaze(x, y, radius, pattern, variant);
+			break;
+
 		case "3D Cubes":
 		case "3D Objects":
 			draw3DCube(x, y, radius, pattern, variant);
@@ -111,6 +116,24 @@ public class PatternDrawer {
 		prevPoint.y = y;
 	}
 
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
+	private void drawCircularMaze(final int x, final int y, final int radius, final String pattern, final String variant) {
+		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
+		final ComposedPath path = (ComposedPath) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
+
+		PathHelper.rotateComposedPath(x, y, path, rotationDegrees);
+
+		for (final Path p : path.getPathElements()) {
+			pm.initFillPaint();
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), Randomizer.getRandomInt(-64, 64)));
+			bitmapCanvas.drawPath(p, paint);
+		}
+		glossyDrawer.draw(x, y, paint, radius, path);
+		outlineDrawer.draw(paint, radius, path);
+	}
+
 	private void draw3DCube(final int x, final int y, final int radius, final String pattern, final String variant) {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
 		final CubeOptions cubeOptions = Settings.getCubeOptions();
@@ -129,17 +152,17 @@ public class PatternDrawer {
 		}
 		// seiten malen
 		bitmapCanvas.drawPath(path.seite0, paint);
-		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), cubeOptions.brightnessSide1));
 		bitmapCanvas.drawPath(path.seite1, paint);
-		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), cubeOptions.brightnessSide2));
 		bitmapCanvas.drawPath(path.seite2, paint);
 
 		// dann glossy und outline
 		glossyDrawer.draw(x, y, paint, radius, path);
 		outlineDrawer.draw(paint, radius, path.seite0);
-		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide1));
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), cubeOptions.brightnessSide1));
 		outlineDrawer.draw(paint, radius, path.seite1);
-		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialColor(), cubeOptions.brightnessSide2));
+		pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), cubeOptions.brightnessSide2));
 		outlineDrawer.draw(paint, radius, path.seite2);
 
 	}

@@ -20,6 +20,9 @@ public class PatternPropertyStore {
 		patternProperties.put("Chess", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Heart", "Arrow", "Triangle", "Mixed" }));
 
+		patternProperties.put("Circular Maze", new PatternProperties(true, true, false, false, false, true, //
+				new CharSequence[] { "Normal", "Mixed" }));
+
 		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "V1", "V2", "Shark V1", "Shark V2", "Mixed" }));
 
@@ -52,7 +55,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Long Pyramide", "Pyramide", "Long Cube", "Cube", "Cube (random height)", "Long Cone", "Cone", "Mixed" }));
 
 		patternProperties.put("3D Objects", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Cube", "Pyramide", "Zylinder", //
+				new CharSequence[] { "Cube", "Pyramide", "Zylinder", "Brick", //
 						"Impossible Triangle", "Mixed" }));
 
 		// new PatternProperties(outline, randomrotate, text, filled, leaf, glossy)
@@ -160,8 +163,8 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Rocket V1", "Rocket V2", "Rocket V3", "Rocket V4", "Rocket V5", "Rocket V6", "Ufo V1", "Ufo V2", "Satellite", "Spaceship",
 						"Mixed Rockets", "Mixed" }));
 
-		patternProperties.put("Splatter", new PatternProperties(true, true, false, true, true, true, //
-				new CharSequence[] { "Cloud", "Cloud with Holes", "Drop", "Bacteria", "Square", "Triangle", "Mixed" }));
+		patternProperties.put("Splatter", new PatternProperties(true, true, false, true, false, true, //
+				new CharSequence[] { "Cloud", "Cloud with Holes", "Drop", "Bacteria", "Square", "Triangle", "Circular Maze", "Mixed" }));
 
 		patternProperties.put("Spooky", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "Skull", "Bat V1 (Aarons Cute Design)", "Bat V2", "Bat V3", "Bat V4", "Ghost V1", "Ghost V2", "Owl V1", "Owl V2", "Owl V3",

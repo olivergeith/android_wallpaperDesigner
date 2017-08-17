@@ -29,6 +29,7 @@ import de.geithonline.wallpaperdesigner.shapes.BlitzPath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.CloudPath;
+import de.geithonline.wallpaperdesigner.shapes.D3BrickPath;
 import de.geithonline.wallpaperdesigner.shapes.D3CubePath;
 import de.geithonline.wallpaperdesigner.shapes.D3ImpossibleTrianglePath;
 import de.geithonline.wallpaperdesigner.shapes.D3PyramidePath;
@@ -147,6 +148,8 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
@@ -203,6 +206,8 @@ public class PatternGetter {
 		bHeight = h;
 		switch (pattern) {
 
+		case "Circular Maze":
+			return drawCircularMaze(x, y, radius, variant);
 		case "Gears-Saws":
 			return drawGearSaw(x, y, radius, variant);
 		case "Spooky":
@@ -324,6 +329,22 @@ public class PatternGetter {
 			final int zahn = 15 + Settings.getAnzahlFlowerLeafs(1, 10);
 			return new StarPath(zahn, new PointF(x, y), radius, radius * 0.8f, Settings.getFilledBoolean());
 		}
+		}
+	}
+
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
+	private static Path drawCircularMaze(final int x, final int y, final int radius, String variant) {
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = Randomizer.getRandomInt(1, 1);
+			variant = "V" + nr;
+		}
+		switch (variant) {
+		default:
+		case "V1":
+		case "Normal":
+			return new CircularMazePath(new PointF(x, y), radius, MazeType.segmented);
 		}
 	}
 
@@ -698,6 +719,9 @@ public class PatternGetter {
 		case "Zylinder":
 			return new D3ZylinderPath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
 		case "V4":
+		case "Brick":
+			return new D3BrickPath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(cubeOptions.minLength, cubeOptions.maxLength));
+		case "V5":
 		case "Impossible Triangle":
 			return new D3ImpossibleTrianglePath(new PointF(x, y), radius);
 		}
@@ -901,7 +925,7 @@ public class PatternGetter {
 
 	private static Path drawSplatter(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 6);
+			final int nr = Randomizer.getRandomInt(1, 7);
 			variant = "V" + nr;
 		}
 
@@ -930,6 +954,9 @@ public class PatternGetter {
 		case "V6":
 		case "Cloud with Holes":
 			return new SplatterPath(new PointF(x, y), radius, Settings.getFilledBoolean(), SPLATTER_TYPE.CloudWithHoles);
+		case "V7":
+		case "Circular Maze":
+			return new SplatterPath(new PointF(x, y), radius, Settings.getFilledBoolean(), SPLATTER_TYPE.CircularMaze);
 
 		}
 	}

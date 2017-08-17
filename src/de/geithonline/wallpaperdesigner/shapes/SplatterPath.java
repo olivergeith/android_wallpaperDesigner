@@ -6,13 +6,15 @@ import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.Rotator;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class SplatterPath extends Path {
 
 	public enum SPLATTER_TYPE {
-		Cloud, Drop, Bacteria, Square, Triangle, CloudWithHoles;
+		Cloud, Drop, Bacteria, Square, Triangle, CloudWithHoles, CircularMaze;
 	}
 
 	/**
@@ -44,6 +46,9 @@ public class SplatterPath extends Path {
 			break;
 		case Triangle:
 			drawTriangle(center, radius);
+			break;
+		case CircularMaze:
+			drawCircularMaze(center, radius);
 			break;
 		}
 
@@ -118,6 +123,10 @@ public class SplatterPath extends Path {
 			final Path path = new XEckPath(3, c, circleRadius, Randomizer.getRandomFloat(0, (float) Math.PI), true);
 			op(path, Op.UNION);
 		}
+	}
+
+	private void drawCircularMaze(final PointF center, final float radius) {
+		addPath(new CircularMazePath(center, radius, MazeType.normal));
 	}
 
 }
