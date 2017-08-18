@@ -13,10 +13,10 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.CubeOptions;
-import de.geithonline.wallpaperdesigner.settings.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
-import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.EyeOptions;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsBubbles;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath;
 import de.geithonline.wallpaperdesigner.shapes.AndroidPath.ROBOT_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.AnkerPath;
@@ -149,7 +149,6 @@ import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
-import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
@@ -344,7 +343,7 @@ public class PatternGetter {
 		default:
 		case "V1":
 		case "Normal":
-			return new CircularMazePath(new PointF(x, y), radius, MazeType.segmented);
+			return new CircularMazePath(new PointF(x, y), radius, Settings.getCircularMazeOptions());
 		}
 	}
 

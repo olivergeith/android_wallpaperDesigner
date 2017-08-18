@@ -1,5 +1,5 @@
 
-package de.geithonline.wallpaperdesigner.settings;
+package de.geithonline.wallpaperdesigner.settings.specialoptions;
 
 public class TailOptions {
 

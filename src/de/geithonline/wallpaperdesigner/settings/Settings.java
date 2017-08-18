@@ -10,8 +10,12 @@ import android.graphics.Color;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.settings.ColorRandOptions.COLOR_RANDOMIZING_TYPE;
-import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
-import de.geithonline.wallpaperdesigner.settings.TailOptions.TailRotationType;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOptions;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.EyeOptions;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.SinusAmplitudeType;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.TailRotationType;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsBubbles;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsSizingType;
 import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsType;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
@@ -505,6 +509,17 @@ public class Settings {
 		cubeOptions.brightnessSide2 = readIntegerPref("CubeOptions.brightnessSide2", -24);
 		cubeOptions.individualDropShadow = readBooleanPref("CubeOptions.individualDropShadow", false);
 		return cubeOptions;
+	}
+
+	private final static CircularMazeOptions circularMazeOptions = new CircularMazeOptions();
+
+	public static CircularMazeOptions getCircularMazeOptions() {
+		circularMazeOptions.anzArcs = readIntegerPref("CMazeOptions.anzArcs", 15);
+		circularMazeOptions.minSweep = readIntegerPref("CMazeOptions.minSweep", 90);
+		circularMazeOptions.maxSweep = readIntegerPref("CMazeOptions.maxSweep", 270);
+		circularMazeOptions.minThickness = readIntegerPref("CMazeOptions.minThickness", 2) / 100f;
+		circularMazeOptions.maxThickness = readIntegerPref("CMazeOptions.maxThickness", 20) / 100f;
+		return circularMazeOptions;
 	}
 
 	// ************************************************************************

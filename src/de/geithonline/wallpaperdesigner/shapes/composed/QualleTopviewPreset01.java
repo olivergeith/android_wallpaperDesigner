@@ -1,11 +1,11 @@
 
 package de.geithonline.wallpaperdesigner.shapes.composed;
 
-import de.geithonline.wallpaperdesigner.settings.EyeOptions;
-import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
-import de.geithonline.wallpaperdesigner.settings.TailOptions.TailRotationType;
-import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
-import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.EyeOptions;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsBubbles;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsLine;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.SinusAmplitudeType;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.TailRotationType;
 
 public class QualleTopviewPreset01 {
 

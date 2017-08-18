@@ -3,7 +3,7 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.settings.TailOptions.SinusAmplitudeType;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.SinusAmplitudeType;
 
 public class SinusPath extends Path {
 

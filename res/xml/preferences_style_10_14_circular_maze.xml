@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_add"
+        android:key="cMazeOptions"
+        android:title="Maze Options..." >
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="15"
+            android:key="CMazeOptions.anzArcs"
+            android:summary="%1$d"
+            android:title="Number of Arcs"
+            seekbarpreference:maxValue="50"
+            seekbarpreference:minValue="5"
+            seekbarpreference:stepValue="1" />
+
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+            android:dialogMessage="Sweep"
+            android:key="CMazeOptions.sweep"
+            android:summary="%1$s Degrees"
+            android:title="Sweep"
+            seekbarpreference:absoluteMaxValue="360"
+            seekbarpreference:absoluteMinValue="0"
+            seekbarpreference:defaultMaxValue="270"
+            seekbarpreference:defaultMinValue="90"
+            seekbarpreference:keyMaxValue="CMazeOptions.maxSweep"
+            seekbarpreference:keyMinValue="CMazeOptions.minSweep"
+            seekbarpreference:step="5" />
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+            android:dialogMessage="Arc Thickness"
+            android:key="CMazeOptions.thickness"
+            android:summary="%1$s"
+            android:title="Arc Thickness"
+            seekbarpreference:absoluteMaxValue="50"
+            seekbarpreference:absoluteMinValue="1"
+            seekbarpreference:defaultMaxValue="20"
+            seekbarpreference:defaultMinValue="2"
+            seekbarpreference:keyMaxValue="CMazeOptions.maxThickness"
+            seekbarpreference:keyMinValue="CMazeOptions.minThickness"
+            seekbarpreference:step="1" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

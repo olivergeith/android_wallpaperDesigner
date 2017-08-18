@@ -31,6 +31,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private PreferenceScreen cubeOptions;
 	private PreferenceScreen textOptions;
 	private PreferenceScreen leafOptions;
+	private PreferenceScreen cMazeOptions;
 	private PreferenceScreen filledOptions;
 	private PreferenceScreen outlineScreen;
 	private PreferenceScreen glossyScreen;
@@ -54,6 +55,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addPreferencesFromResource(R.xml.preferences_style_10_11_scene_rain);
 		addPreferencesFromResource(R.xml.preferences_style_10_12_textoptions);
 		addPreferencesFromResource(R.xml.preferences_style_10_13_3d_cube);
+		addPreferencesFromResource(R.xml.preferences_style_10_14_circular_maze);
 		addPreferencesFromResource(R.xml.preferences_style_20_dropshadow);
 		addPreferencesFromResource(R.xml.preferences_style_30_glossy);
 		addPreferencesFromResource(R.xml.preferences_style_40_rotating);
@@ -88,6 +90,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		cubeOptions = (PreferenceScreen) findPreference("cubeOptions");
 		textOptions = (PreferenceScreen) findPreference("textOptions");
 		leafOptions = (PreferenceScreen) findPreference("leafOptions");
+		cMazeOptions = (PreferenceScreen) findPreference("cMazeOptions");
 		filledOptions = (PreferenceScreen) findPreference("filledOptions");
 		outlineScreen = (PreferenceScreen) findPreference("outlineScreen");
 		glossyScreen = (PreferenceScreen) findPreference("glossyScreen");
@@ -178,6 +181,9 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 				pattern.equalsIgnoreCase("Text"));
 
 		// removing unused stuff
+		addOrRemoveScreen(cMazeOptions, //
+				pattern.equalsIgnoreCase("Circular Maze"));
+
 		addOrRemoveScreen(leafOptions, //
 				PatternPropertyStore.hasNumberOfLeafsOption(pattern));
 		// removing unused stuff

@@ -3,10 +3,10 @@ package de.geithonline.wallpaperdesigner.shapes.composed;
 
 import android.graphics.Path;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.settings.EyeOptions;
-import de.geithonline.wallpaperdesigner.settings.TailOptions;
-import de.geithonline.wallpaperdesigner.settings.TailOptionsBubbles;
-import de.geithonline.wallpaperdesigner.settings.TailOptionsLine;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.EyeOptions;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsBubbles;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsLine;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath;
 import de.geithonline.wallpaperdesigner.shapes.SinusPath;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
