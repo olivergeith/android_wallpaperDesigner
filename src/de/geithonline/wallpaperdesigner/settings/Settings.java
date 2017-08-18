@@ -519,6 +519,8 @@ public class Settings {
 		circularMazeOptions.maxSweep = readIntegerPref("CMazeOptions.maxSweep", 270);
 		circularMazeOptions.minThickness = readIntegerPref("CMazeOptions.minThickness", 2) / 100f;
 		circularMazeOptions.maxThickness = readIntegerPref("CMazeOptions.maxThickness", 20) / 100f;
+		circularMazeOptions.minBrightness = readIntegerPref("CMazeOptions.minBrightness", -48);
+		circularMazeOptions.maxBrightness = readIntegerPref("CMazeOptions.maxBrightness", 48);
 		return circularMazeOptions;
 	}
 

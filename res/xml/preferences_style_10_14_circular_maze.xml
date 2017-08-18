@@ -40,6 +40,18 @@
             seekbarpreference:keyMaxValue="CMazeOptions.maxThickness"
             seekbarpreference:keyMinValue="CMazeOptions.minThickness"
             seekbarpreference:step="1" />
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+            android:dialogMessage="Brightness Randomization"
+            android:key="CMazeOptions.brightness"
+            android:summary="%1$s Brightness range"
+            android:title="Brightness Randomization"
+            seekbarpreference:absoluteMaxValue="192"
+            seekbarpreference:absoluteMinValue="-192"
+            seekbarpreference:defaultMaxValue="48"
+            seekbarpreference:defaultMinValue="-48"
+            seekbarpreference:keyMaxValue="CMazeOptions.maxBrightness"
+            seekbarpreference:keyMinValue="CMazeOptions.minBrightness"
+            seekbarpreference:step="2" />
     </PreferenceScreen>
 
 </PreferenceScreen>

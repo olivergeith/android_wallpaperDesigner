@@ -23,4 +23,7 @@ public class CircularMazeOptions {
 	public float minThickness = 0.01f;
 	public float maxThickness = 0.2f;
 
+	public int minBrightness = -48;
+	public int maxBrightness = 48;
+
 }

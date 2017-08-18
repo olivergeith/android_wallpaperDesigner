@@ -17,6 +17,7 @@ import de.geithonline.wallpaperdesigner.settings.CubeOptions;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_GLOW_STYLE;
 import de.geithonline.wallpaperdesigner.settings.Settings.GLOSSY_REFLECTIONS_STYLE;
+import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOptions;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsBubbles;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsLine;
@@ -122,12 +123,13 @@ public class PatternDrawer {
 	private void drawCircularMaze(final int x, final int y, final int radius, final String pattern, final String variant) {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
 		final ComposedPath path = (ComposedPath) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
-
+		final CircularMazeOptions options = Settings.getCircularMazeOptions();
 		PathHelper.rotateComposedPath(x, y, path, rotationDegrees);
 
 		for (final Path p : path.getPathElements()) {
 			pm.initFillPaint();
-			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), Randomizer.getRandomInt(-64, 64)));
+			final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
 			bitmapCanvas.drawPath(p, paint);
 		}
 		glossyDrawer.draw(x, y, paint, radius, path);
