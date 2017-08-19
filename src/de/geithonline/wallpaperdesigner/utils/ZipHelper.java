@@ -69,6 +69,7 @@ public class ZipHelper {
 
 		context.getFilesDir().mkdirs();
 		final String outPath = StorageHelper.getDesignsDir();
+		Log.i("Raw Unzipping", "unzipping Design to " + outPath);
 
 		try {
 			stream = context.getResources().openRawResource(fileResID);
@@ -104,7 +105,6 @@ public class ZipHelper {
 		} catch (final IOException e) {
 			throw new RuntimeException("Cannot unzip '" + fileResID + "'", e);
 		}
-
 	}
 
 	// private static void zipFolder(String inputFolderPath, String outZipPath)
@@ -135,8 +135,7 @@ public class ZipHelper {
 
 	/**
 	 * 
-	 * Zips a file at a location and places the resulting zip file at the toLocation Example:
-	 * zipFileAtPath("downloads/myfolder", "downloads/myFolder.zip");
+	 * Zips a file at a location and places the resulting zip file at the toLocation Example: zipFileAtPath("downloads/myfolder", "downloads/myFolder.zip");
 	 */
 	public static boolean zipFiles(final List<String> files, final String toLocation) {
 		final int BUFFER = 2048;
@@ -167,8 +166,7 @@ public class ZipHelper {
 
 	/**
 	 * 
-	 * Zips a file at a location and places the resulting zip file at the toLocation Example:
-	 * zipFileAtPath("downloads/myfolder", "downloads/myFolder.zip");
+	 * Zips a file at a location and places the resulting zip file at the toLocation Example: zipFileAtPath("downloads/myfolder", "downloads/myFolder.zip");
 	 */
 	public static boolean zipFileAtPath(final String sourcePath, final String toLocation) {
 		// ArrayList<String> contentList = new ArrayList<String>();

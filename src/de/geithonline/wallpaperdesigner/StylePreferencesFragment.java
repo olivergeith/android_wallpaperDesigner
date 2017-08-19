@@ -182,7 +182,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 
 		// removing unused stuff
 		addOrRemoveScreen(cMazeOptions, //
-				pattern.equalsIgnoreCase("Circular Maze"));
+				pattern.equalsIgnoreCase("Circular"));
 
 		addOrRemoveScreen(leafOptions, //
 				PatternPropertyStore.hasNumberOfLeafsOption(pattern));

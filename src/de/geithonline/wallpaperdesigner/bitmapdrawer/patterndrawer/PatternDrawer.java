@@ -72,7 +72,7 @@ public class PatternDrawer {
 			drawNormalPattern(x, y, radius, pattern, variant);
 			break;
 
-		case "Circular Maze":
+		case "Circular":
 			drawCircularMaze(x, y, radius, pattern, variant);
 			break;
 

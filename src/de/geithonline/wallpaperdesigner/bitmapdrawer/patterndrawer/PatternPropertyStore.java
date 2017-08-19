@@ -20,8 +20,8 @@ public class PatternPropertyStore {
 		patternProperties.put("Chess", new PatternProperties(true, true, false, false, false, false, //
 				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Heart", "Arrow", "Triangle", "Mixed" }));
 
-		patternProperties.put("Circular Maze", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Normal", "Mixed" }));
+		patternProperties.put("Circular", new PatternProperties(true, true, false, false, false, true, //
+				new CharSequence[] { "Maze", "Beam", "Mixed" }));
 
 		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "V1", "V2", "Shark V1", "Shark V2", "Mixed" }));

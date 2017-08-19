@@ -6,7 +6,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:icon="@android:drawable/ic_menu_add"
         android:key="cMazeOptions"
-        android:title="Maze Options..." >
+        android:title="Circular Options..." >
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="15"
             android:key="CMazeOptions.anzArcs"
@@ -33,7 +33,7 @@
             android:key="CMazeOptions.thickness"
             android:summary="%1$s"
             android:title="Arc Thickness"
-            seekbarpreference:absoluteMaxValue="50"
+            seekbarpreference:absoluteMaxValue="100"
             seekbarpreference:absoluteMinValue="1"
             seekbarpreference:defaultMaxValue="20"
             seekbarpreference:defaultMinValue="2"
@@ -52,6 +52,18 @@
             seekbarpreference:keyMaxValue="CMazeOptions.maxBrightness"
             seekbarpreference:keyMinValue="CMazeOptions.minBrightness"
             seekbarpreference:step="2" />
-    </PreferenceScreen>
+        <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
+            android:dialogMessage="Number of Segments"
+            android:key="CMazeOptions.segments"
+            android:summary="%1$s"
+            android:title="Number of Segments"
+            seekbarpreference:absoluteMaxValue="50"
+            seekbarpreference:absoluteMinValue="1"
+            seekbarpreference:defaultMaxValue="1"
+            seekbarpreference:defaultMinValue="1"
+            seekbarpreference:keyMaxValue="CMazeOptions.maxSegments"
+            seekbarpreference:keyMinValue="CMazeOptions.minSegments"
+            seekbarpreference:step="1" />
+        </PreferenceScreen>
 
 </PreferenceScreen>

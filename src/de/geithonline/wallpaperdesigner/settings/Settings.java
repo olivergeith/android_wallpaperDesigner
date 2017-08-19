@@ -21,6 +21,7 @@ import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsType;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
+import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
 	public static final String KEY_RANDOM_DEGREES_ADDING = "randomDegreesAdding";
@@ -521,6 +522,8 @@ public class Settings {
 		circularMazeOptions.maxThickness = readIntegerPref("CMazeOptions.maxThickness", 20) / 100f;
 		circularMazeOptions.minBrightness = readIntegerPref("CMazeOptions.minBrightness", -48);
 		circularMazeOptions.maxBrightness = readIntegerPref("CMazeOptions.maxBrightness", 48);
+		circularMazeOptions.minSegments = readIntegerPref("CMazeOptions.minSegments", 1);
+		circularMazeOptions.maxSegments = readIntegerPref("CMazeOptions.maxSegments", 1);
 		return circularMazeOptions;
 	}
 
@@ -1119,6 +1122,16 @@ public class Settings {
 			prefs.edit().putInt(KEY_BLURR_STAGE_1, 60).commit();
 			prefs.edit().putInt(KEY_BLURR_STAGE_2, 70).commit();
 			prefs.edit().putInt(KEY_BLURR_STAGE_3, 80).commit();
+		}
+	}
+
+	public static void inflateAssets(final Context ctx, final boolean force) {
+		if (readBooleanPref("assetsInflated", false) == false || force == true) {
+			Log.i("GEITH", "Inflating Designs ...");
+			ZipHelper.unzipResourceRawFiles(ctx, R.raw.circular_maze_design1);
+			ZipHelper.unzipResourceRawFiles(ctx, R.raw.brick3d_design1);
+			ZipHelper.unzipResourceRawFiles(ctx, R.raw.squares_design1);
+			prefs.edit().putBoolean("assetsInflated", true).commit();
 		}
 	}
 
