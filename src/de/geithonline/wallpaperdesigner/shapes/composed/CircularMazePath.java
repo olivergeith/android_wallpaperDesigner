@@ -33,12 +33,8 @@ public class CircularMazePath extends ComposedPath {
 			final int anzSegmente) {
 		final ComposedPath bogen = new ComposedPath();
 		if (anzSegmente > 1) {
-			int additional = 1;
-			if (anzSegmente > 5) {
-				additional = 2;
-			}
-			final float sweepProSegment = sweep / (anzSegmente + additional);
 			final float winkelProSegment = sweep / anzSegmente;
+			final float sweepProSegment = winkelProSegment * 0.9f;
 			for (int a = 0; a < anzSegmente; a++) {
 				final float segmentStartingAngle = startingAngle + a * winkelProSegment;
 				final Path arc = new LevelArcPath(center, innerRad + dicke, innerRad, segmentStartingAngle, sweepProSegment);

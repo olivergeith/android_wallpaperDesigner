@@ -124,16 +124,37 @@ public class PatternDrawer {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
 		final ComposedPath path = (ComposedPath) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		final CircularMazeOptions options = Settings.getCircularMazeOptions();
-		PathHelper.rotateComposedPath(x, y, path, rotationDegrees);
+		PathHelper.rotateComposedPath(x, y, path, rotationDegrees, options.recurseRotating);
 
 		for (final Path p : path.getPathElements()) {
 			pm.initFillPaint();
-			final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
-			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
-			bitmapCanvas.drawPath(p, paint);
+			if (p instanceof ComposedPath) {
+				final ComposedPath cp = (ComposedPath) p;
+				if (options.differentColorEachSegment == true) {
+					int brightness = options.minBrightness;
+					final int anz = cp.getPathElements().size();
+					final int brightnessStep = (options.maxBrightness - options.minBrightness) / anz;
+					for (final Path pp : cp.getPathElements()) {
+						pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
+						brightness = brightness + brightnessStep;
+						bitmapCanvas.drawPath(pp, paint);
+					}
+				} else {
+					final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
+					pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
+					for (final Path pp : cp.getPathElements()) {
+						bitmapCanvas.drawPath(pp, paint);
+					}
+				}
+			} else {
+				final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
+				pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
+				bitmapCanvas.drawPath(p, paint);
+			}
 		}
 		glossyDrawer.draw(x, y, paint, radius, path);
 		outlineDrawer.draw(paint, radius, path);
+
 	}
 
 	private void draw3DCube(final int x, final int y, final int radius, final String pattern, final String variant) {

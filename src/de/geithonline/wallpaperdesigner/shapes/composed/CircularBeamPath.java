@@ -35,15 +35,8 @@ public class CircularBeamPath extends ComposedPath {
 			final int anzSegmente) {
 		final ComposedPath bogen = new ComposedPath();
 		if (anzSegmente > 1) {
-			float additional = 1f;
-			if (anzSegmente <= 3) {
-				additional = 0.5f;
-			}
-			if (anzSegmente > 5) {
-				additional = 2f;
-			}
 			final float abstandProSegment = dicke / anzSegmente;
-			final float dickeProSegment = dicke / (anzSegmente + additional);
+			final float dickeProSegment = abstandProSegment * 0.9f;
 			for (int a = 0; a < anzSegmente; a++) {
 				final float inner = innerRad + a * abstandProSegment;
 				bogen.addPath(new LevelArcPath(center, inner + dickeProSegment, inner, segmentStartingAngle, swee));

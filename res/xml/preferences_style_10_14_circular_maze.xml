@@ -64,6 +64,15 @@
             seekbarpreference:keyMaxValue="CMazeOptions.maxSegments"
             seekbarpreference:keyMinValue="CMazeOptions.minSegments"
             seekbarpreference:step="1" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="CMazeOptions.differentColorEachSegment"
+            android:title="Different Color each Segment" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="CMazeOptions.recurseRotating"
+            android:title="Recurse Rotating" />
         </PreferenceScreen>
 
 </PreferenceScreen>

@@ -33,7 +33,7 @@ public class PathHelper {
 		rotatePath(center.x, center.y, path, rotate);
 	}
 
-	public static void rotateComposedPath(final float x, final float y, final ComposedPath path, final float rotate) {
+	public static void rotateComposedPath(final float x, final float y, final ComposedPath path, final float rotate, final boolean recurse) {
 		if (path == null) {
 			return;
 		}
@@ -41,11 +41,22 @@ public class PathHelper {
 		// und nun die einzelelemente drehen
 		for (final Path p : path.getPathElements()) {
 			rotatePath(x, y, p, rotate);
+			if (p instanceof ComposedPath && recurse == true) {
+				rotateComposedPath(x, y, (ComposedPath) p, rotate, true);
+			}
 		}
 	}
 
+	public static void rotateComposedPath(final float x, final float y, final ComposedPath path, final float rotate) {
+		rotateComposedPath(x, y, path, rotate, false);
+	}
+
 	public static void rotateComposedPath(final PointF center, final ComposedPath path, final float rotate) {
-		rotateComposedPath(center.x, center.y, path, rotate);
+		rotateComposedPath(center.x, center.y, path, rotate, false);
+	}
+
+	public static void rotateComposedPath(final PointF center, final ComposedPath path, final float rotate, final boolean recurse) {
+		rotateComposedPath(center.x, center.y, path, rotate, recurse);
 	}
 
 	/**

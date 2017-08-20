@@ -524,6 +524,8 @@ public class Settings {
 		circularMazeOptions.maxBrightness = readIntegerPref("CMazeOptions.maxBrightness", 48);
 		circularMazeOptions.minSegments = readIntegerPref("CMazeOptions.minSegments", 1);
 		circularMazeOptions.maxSegments = readIntegerPref("CMazeOptions.maxSegments", 1);
+		circularMazeOptions.differentColorEachSegment = readBooleanPref("CMazeOptions.differentColorEachSegment", false);
+		circularMazeOptions.recurseRotating = readBooleanPref("CMazeOptions.recurseRotating", true);
 		return circularMazeOptions;
 	}
 
