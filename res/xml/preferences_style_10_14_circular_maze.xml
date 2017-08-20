@@ -69,10 +69,15 @@
             android:defaultValue="false"
             android:key="CMazeOptions.differentColorEachSegment"
             android:title="Different Color each Segment" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="CMazeOptions.recurseRotating"
-            android:title="Recurse Rotating" />
-        </PreferenceScreen>
+
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="0"
+            android:key="CMazeOptions.outlineShift"
+            android:summary="%1$d"
+            android:title="Outline Shift"
+            seekbarpreference:maxValue="180"
+            seekbarpreference:minValue="-180"
+            seekbarpreference:stepValue="10" />
+    </PreferenceScreen>
 
 </PreferenceScreen>

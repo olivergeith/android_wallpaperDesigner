@@ -16,6 +16,6 @@ public class CircularMazeOptions {
 	public int maxSegments = 1;
 
 	public boolean differentColorEachSegment = false;
-	public boolean recurseRotating = true;
+	public int outlineShift = 0;
 
 }

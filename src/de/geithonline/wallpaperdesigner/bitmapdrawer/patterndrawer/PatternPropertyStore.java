@@ -21,7 +21,7 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Square", "Star", "Circle", "Pillow", "Heart", "Arrow", "Triangle", "Mixed" }));
 
 		patternProperties.put("Circular", new PatternProperties(true, true, false, false, false, true, //
-				new CharSequence[] { "Maze", "Beam", "Mixed" }));
+				new CharSequence[] { "Maze", "Maze V2", "Beam" }));
 
 		patternProperties.put("Fish", new PatternProperties(true, true, false, false, false, true, //
 				new CharSequence[] { "V1", "V2", "Shark V1", "Shark V2", "Mixed" }));

@@ -124,35 +124,31 @@ public class PatternDrawer {
 		final float rotationDegrees = rotator.getRotationDegrees(0, 360, new Point(x, y));
 		final ComposedPath path = (ComposedPath) PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
 		final CircularMazeOptions options = Settings.getCircularMazeOptions();
-		PathHelper.rotateComposedPath(x, y, path, rotationDegrees, options.recurseRotating);
+		PathHelper.rotateComposedPath(x, y, path, rotationDegrees);
 
-		for (final Path p : path.getPathElements()) {
+		for (final Path arc : path.getPathElements()) {
 			pm.initFillPaint();
-			if (p instanceof ComposedPath) {
-				final ComposedPath cp = (ComposedPath) p;
-				if (options.differentColorEachSegment == true) {
-					int brightness = options.minBrightness;
-					final int anz = cp.getPathElements().size();
-					final int brightnessStep = (options.maxBrightness - options.minBrightness) / anz;
-					for (final Path pp : cp.getPathElements()) {
-						pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
-						brightness = brightness + brightnessStep;
-						bitmapCanvas.drawPath(pp, paint);
-					}
-				} else {
-					final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
+			// rising color
+			if (options.differentColorEachSegment == true) {
+				final ComposedPath cp = (ComposedPath) arc;
+				int brightness = options.minBrightness;
+				final int anz = cp.getPathElements().size();
+				final int brightnessStep = (options.maxBrightness - options.minBrightness) / anz;
+				for (final Path segment : cp.getPathElements()) {
 					pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
-					for (final Path pp : cp.getPathElements()) {
-						bitmapCanvas.drawPath(pp, paint);
-					}
+					brightness = brightness + brightnessStep;
+					bitmapCanvas.drawPath(segment, paint);
 				}
 			} else {
 				final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
 				pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
-				bitmapCanvas.drawPath(p, paint);
+				bitmapCanvas.drawPath(arc, paint);
 			}
 		}
 		glossyDrawer.draw(x, y, paint, radius, path);
+		if (options.outlineShift != 0) {
+			PathHelper.rotateComposedPath(x, y, path, options.outlineShift);
+		}
 		outlineDrawer.draw(paint, radius, path);
 
 	}

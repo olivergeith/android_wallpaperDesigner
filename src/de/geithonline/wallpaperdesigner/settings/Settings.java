@@ -525,7 +525,7 @@ public class Settings {
 		circularMazeOptions.minSegments = readIntegerPref("CMazeOptions.minSegments", 1);
 		circularMazeOptions.maxSegments = readIntegerPref("CMazeOptions.maxSegments", 1);
 		circularMazeOptions.differentColorEachSegment = readBooleanPref("CMazeOptions.differentColorEachSegment", false);
-		circularMazeOptions.recurseRotating = readBooleanPref("CMazeOptions.recurseRotating", true);
+		circularMazeOptions.outlineShift = readIntegerPref("CMazeOptions.outlineShift", 0);
 		return circularMazeOptions;
 	}
 

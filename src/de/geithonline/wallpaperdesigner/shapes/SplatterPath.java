@@ -8,6 +8,7 @@ import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOpti
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -126,7 +127,7 @@ public class SplatterPath extends Path {
 	}
 
 	private void drawCircularMaze(final PointF center, final float radius) {
-		addPath(new CircularMazePath(center, radius, new CircularMazeOptions()));
+		addPath(new CircularMazePath(center, radius, new CircularMazeOptions(), MazeType.V1));
 	}
 
 }

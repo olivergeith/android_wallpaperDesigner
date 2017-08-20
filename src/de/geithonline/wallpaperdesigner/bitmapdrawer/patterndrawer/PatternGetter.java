@@ -150,6 +150,7 @@ import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeamPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
 import de.geithonline.wallpaperdesigner.shapes.composed.MultiSinusLinesPath;
 import de.geithonline.wallpaperdesigner.shapes.composed.PenguinPath;
@@ -337,15 +338,18 @@ public class PatternGetter {
 	// #########################################################################################
 	private static Path drawCircularMaze(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 2);
+			final int nr = Randomizer.getRandomInt(1, 3);
 			variant = "V" + nr;
 		}
 		switch (variant) {
 		default:
 		case "V1":
 		case "Maze":
-			return new CircularMazePath(new PointF(x, y), radius, Settings.getCircularMazeOptions());
+			return new CircularMazePath(new PointF(x, y), radius, Settings.getCircularMazeOptions(), MazeType.V1);
 		case "V2":
+		case "Maze V2":
+			return new CircularMazePath(new PointF(x, y), radius, Settings.getCircularMazeOptions(), MazeType.V2);
+		case "V3":
 		case "Beam":
 			return new CircularBeamPath(new PointF(x, y), radius, Settings.getCircularMazeOptions());
 		}
