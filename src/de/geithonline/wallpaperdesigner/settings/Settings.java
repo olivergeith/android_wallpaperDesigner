@@ -16,6 +16,7 @@ import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.Sinu
 import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.TailRotationType;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsBubbles;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptionsLine;
+import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPathColoringType;
 import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsSizingType;
 import de.geithonline.wallpaperdesigner.shapes.composed.ESinusObjectsType;
 import de.geithonline.wallpaperdesigner.utils.FileIOHelper.SORT_ORDER;
@@ -524,7 +525,7 @@ public class Settings {
 		circularMazeOptions.maxBrightness = readIntegerPref("CMazeOptions.maxBrightness", 48);
 		circularMazeOptions.minSegments = readIntegerPref("CMazeOptions.minSegments", 1);
 		circularMazeOptions.maxSegments = readIntegerPref("CMazeOptions.maxSegments", 1);
-		circularMazeOptions.differentColorEachSegment = readBooleanPref("CMazeOptions.differentColorEachSegment", false);
+		circularMazeOptions.coloringType = ComposedPathColoringType.enumForName(readStringPref("CMazeOptions.coloringType", "Normal"));
 		circularMazeOptions.outlineShift = readIntegerPref("CMazeOptions.outlineShift", 0);
 		return circularMazeOptions;
 	}

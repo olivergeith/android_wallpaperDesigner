@@ -272,6 +272,13 @@
         <item >Depending on BlurrStage (decreasing)</item>
         </string-array>
     
+    <string-array name="composedPathColoringType">
+        <item >Normal</item>
+        <item >Random</item>
+        <item >Increasing</item>
+        <item >Decreasing</item>
+        <item >Random In- or Decreasing</item>
+        </string-array>
     
     
 </resources>

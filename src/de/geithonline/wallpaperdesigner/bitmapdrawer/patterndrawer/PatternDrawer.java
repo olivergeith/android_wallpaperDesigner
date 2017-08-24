@@ -129,20 +129,32 @@ public class PatternDrawer {
 		for (final Path arc : path.getPathElements()) {
 			pm.initFillPaint();
 			// rising color
-			if (options.differentColorEachSegment == true) {
-				final ComposedPath cp = (ComposedPath) arc;
-				int brightness = options.minBrightness;
-				final int anz = cp.getPathElements().size();
-				final int brightnessStep = (options.maxBrightness - options.minBrightness) / anz;
-				for (final Path segment : cp.getPathElements()) {
-					pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
-					brightness = brightness + brightnessStep;
-					bitmapCanvas.drawPath(segment, paint);
-				}
-			} else {
+			switch (options.coloringType) {
+			default:
+			case normal:
 				final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
 				pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
 				bitmapCanvas.drawPath(arc, paint);
+				break;
+
+			case random:
+				drawArcRandomBrightness(options, (ComposedPath) arc);
+				break;
+
+			case increasing:
+				drawArcIncreasingBrightness(options, (ComposedPath) arc);
+				break;
+
+			case decreasing:
+				drawArcDecreasingBrightness(options, (ComposedPath) arc);
+				break;
+			case randomcreasing:
+				if (Randomizer.getRandomBoolean()) {
+					drawArcIncreasingBrightness(options, (ComposedPath) arc);
+				} else {
+					drawArcDecreasingBrightness(options, (ComposedPath) arc);
+				}
+				break;
 			}
 		}
 		glossyDrawer.draw(x, y, paint, radius, path);
@@ -151,6 +163,36 @@ public class PatternDrawer {
 		}
 		outlineDrawer.draw(paint, radius, path);
 
+	}
+
+	private void drawArcRandomBrightness(final CircularMazeOptions options, final ComposedPath cp) {
+		for (final Path segment : cp.getPathElements()) {
+			final int brightness = Randomizer.getRandomInt(options.minBrightness, options.maxBrightness);
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
+			bitmapCanvas.drawPath(segment, paint);
+		}
+	}
+
+	private void drawArcIncreasingBrightness(final CircularMazeOptions options, final ComposedPath cp) {
+		int brightness = options.minBrightness;
+		final int anz = cp.getPathElements().size();
+		final int brightnessStep = (options.maxBrightness - options.minBrightness) / anz;
+		for (final Path segment : cp.getPathElements()) {
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
+			brightness = brightness + brightnessStep;
+			bitmapCanvas.drawPath(segment, paint);
+		}
+	}
+
+	private void drawArcDecreasingBrightness(final CircularMazeOptions options, final ComposedPath cp) {
+		int brightness = options.maxBrightness;
+		final int anz = cp.getPathElements().size();
+		final int brightnessStep = (options.maxBrightness - options.minBrightness) / anz;
+		for (final Path segment : cp.getPathElements()) {
+			pm.setColor(ColorHelper.adjustColorBrightness(pm.getInitialRandomizedColor(), brightness));
+			brightness = brightness - brightnessStep;
+			bitmapCanvas.drawPath(segment, paint);
+		}
 	}
 
 	private void draw3DCube(final int x, final int y, final int radius, final String pattern, final String variant) {

@@ -1,5 +1,7 @@
 package de.geithonline.wallpaperdesigner.settings.specialoptions;
 
+import de.geithonline.wallpaperdesigner.shapes.composed.ComposedPathColoringType;
+
 public class CircularMazeOptions {
 
 	public int anzArcs = 15;
@@ -15,7 +17,7 @@ public class CircularMazeOptions {
 	public int minSegments = 1;
 	public int maxSegments = 1;
 
-	public boolean differentColorEachSegment = false;
+	public ComposedPathColoringType coloringType = ComposedPathColoringType.normal;
 	public int outlineShift = 0;
 
 }

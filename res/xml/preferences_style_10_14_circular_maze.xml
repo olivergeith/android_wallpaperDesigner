@@ -65,10 +65,14 @@
             seekbarpreference:keyMinValue="CMazeOptions.minSegments"
             seekbarpreference:step="1" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="CMazeOptions.differentColorEachSegment"
-            android:title="Different Color each Segment" />
+        <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="Normal"
+            android:dialogTitle="Coloring Type"
+            android:entries="@array/composedPathColoringType"
+            android:entryValues="@array/composedPathColoringType"
+            android:key="CMazeOptions.coloringType"
+            android:summary=""
+            android:title="Coloring Type" />
 
         <de.geithonline.android.basics.preferences.InlineSeekBarPreference
             android:defaultValue="0"
