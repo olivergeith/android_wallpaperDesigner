@@ -1233,7 +1233,11 @@ public class PatternGetter {
 		}
 	}
 
-	private static Path drawQualle(final int x, final int y, final int radius, final String variant) {
+	private static Path drawQualle(final int x, final int y, final int radius, String variant) {
+		if (variant.equalsIgnoreCase("Mixed")) {
+			final int nr = Randomizer.getRandomInt(1, 5);
+			variant = "V" + nr;
+		}
 
 		switch (variant) {
 		default:
