@@ -6,11 +6,11 @@ import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOpti
 import de.geithonline.wallpaperdesigner.shapes.LevelArcPath;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class CircularBeamPath extends ComposedPath {
+public class CircularBeam1Path extends ComposedPath {
 
 	private final CircularMazeOptions options;
 
-	public CircularBeamPath(final PointF center, final float radius, final CircularMazeOptions options) {
+	public CircularBeam1Path(final PointF center, final float radius, final CircularMazeOptions options) {
 
 		this.options = options;
 		draw(center, radius);

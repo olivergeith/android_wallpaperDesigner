@@ -150,7 +150,7 @@ import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam2Path;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam3Path;
-import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeamPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam1Path;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
@@ -353,7 +353,7 @@ public class PatternGetter {
 			return new CircularMazePath(new PointF(x, y), radius, Settings.getCircularMazeOptions(), MazeType.V2);
 		case "V3":
 		case "Beam":
-			return new CircularBeamPath(new PointF(x, y), radius, Settings.getCircularMazeOptions());
+			return new CircularBeam1Path(new PointF(x, y), radius, Settings.getCircularMazeOptions());
 		case "V4":
 		case "Beam V2":
 			return new CircularBeam2Path(new PointF(x, y), radius, Settings.getCircularMazeOptions());
