@@ -6,11 +6,11 @@ import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOpti
 import de.geithonline.wallpaperdesigner.shapes.LevelArcPath;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
-public class CircularBeamPath extends ComposedPath {
+public class CircularBeam2Path extends ComposedPath {
 
 	private final CircularMazeOptions options;
 
-	public CircularBeamPath(final PointF center, final float radius, final CircularMazeOptions options) {
+	public CircularBeam2Path(final PointF center, final float radius, final CircularMazeOptions options) {
 
 		this.options = options;
 		draw(center, radius);
@@ -22,7 +22,7 @@ public class CircularBeamPath extends ComposedPath {
 
 		for (int i = 0; i < options.anzArcs; i++) {
 			final float segmentStartingAngle = i * winkelProSegment;
-			final float sweepProSegment = winkelProSegment * Randomizer.getRandomFloat(options.minSweep, options.maxSweep) / 360f;
+			final float sweepProSegment = Randomizer.getRandomFloat(options.minSweep, options.maxSweep);
 			final float dicke = radius * Randomizer.getRandomFloat(0.02f, 1f);
 			final float innerRad = 0.02f * radius;
 			final int anzSegmente = Randomizer.getRandomInt(options.minSegments, options.maxSegments);
