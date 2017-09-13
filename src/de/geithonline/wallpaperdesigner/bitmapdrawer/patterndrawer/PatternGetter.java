@@ -148,9 +148,11 @@ import de.geithonline.wallpaperdesigner.shapes.XEckPath;
 import de.geithonline.wallpaperdesigner.shapes.XmasTreePath;
 import de.geithonline.wallpaperdesigner.shapes.YingYangPath;
 import de.geithonline.wallpaperdesigner.shapes.ZitronePath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularArcsRotated2Path;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularArcsRotatedPath;
+import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam1Path;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam2Path;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam3Path;
-import de.geithonline.wallpaperdesigner.shapes.composed.CircularBeam1Path;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
 import de.geithonline.wallpaperdesigner.shapes.composed.EQualleType;
@@ -340,7 +342,7 @@ public class PatternGetter {
 	// #########################################################################################
 	private static Path drawCircularMaze(final int x, final int y, final int radius, String variant) {
 		if (variant.equalsIgnoreCase("Mixed")) {
-			final int nr = Randomizer.getRandomInt(1, 4);
+			final int nr = Randomizer.getRandomInt(1, 7);
 			variant = "V" + nr;
 		}
 		switch (variant) {
@@ -360,6 +362,12 @@ public class PatternGetter {
 		case "V5":
 		case "Beam V3":
 			return new CircularBeam3Path(new PointF(x, y), radius, Settings.getCircularMazeOptions());
+		case "V6":
+		case "Arcs rotated":
+			return new CircularArcsRotatedPath(new PointF(x, y), radius, Settings.getCircularMazeOptions());
+		case "V7":
+		case "Arcs rotated evenly":
+			return new CircularArcsRotated2Path(new PointF(x, y), radius, Settings.getCircularMazeOptions());
 		}
 	}
 

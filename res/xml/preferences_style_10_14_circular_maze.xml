@@ -13,7 +13,7 @@
             android:summary="%1$d"
             android:title="Number of Arcs"
             seekbarpreference:maxValue="50"
-            seekbarpreference:minValue="5"
+            seekbarpreference:minValue="1"
             seekbarpreference:stepValue="1" />
 
         <de.geithonline.android.basics.preferences.InlineRangeSeekBarPreference
