@@ -293,10 +293,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		task.execute();
 		dialog = new ProgressDialog(this);
 		dialog.setCancelable(false);
-		dialog.setMessage("Rendering...");
-		dialog.setIndeterminate(false);
+		dialog.setMessage("Rendering Background...");
+		dialog.setIndeterminate(true);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		dialog.setProgress(0);
+		// dialog.setProgress(0);
 
 		if (Settings.isShowRenderingProcess()) {
 			dialog.getWindow().setGravity(Gravity.BOTTOM);
@@ -458,6 +458,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
 		private final WeakReference<TouchImageView> imageViewReference;
 		private Bitmap bitmap;
+		private String message = "Rendering...";
 
 		public BitmapWorkerTask(final TouchImageView imageView) {
 			// Use a WeakReference to ensure the ImageView can be garbage
@@ -486,9 +487,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 			this.bitmap = bitmap;
 		}
 
-		public void settingProgress(final int p, final Bitmap bitmap) {
+		public void settingProgress(final int p, final Bitmap bitmap, final String message) {
+			this.message = message;
 			this.bitmap = bitmap;
-			publishProgress(p);
+			publishProgress(p + 1);
 		}
 
 		// Once complete, see if ImageView is still around and set bitmap.
@@ -534,6 +536,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		protected void onProgressUpdate(final Integer... values) {
 			// Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
 			if (dialog != null) {
+				if (dialog.isIndeterminate()) {
+					dialog.setIndeterminate(false);
+				}
+				dialog.setMessage(message);
 				dialog.setProgress(values[0]);
 			}
 

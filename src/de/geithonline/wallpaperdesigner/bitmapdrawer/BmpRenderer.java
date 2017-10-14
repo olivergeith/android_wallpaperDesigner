@@ -91,7 +91,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 			if (i % 100 == 0) {
 				System.gc();
 			}
-			task.settingProgress(i, bitmap);
+			task.settingProgress(i, bitmap, "Rendering Patterns ...");
 			// getting Radius
 			final int radius = radiusCalculator.getRadius(i);
 
@@ -110,16 +110,19 @@ public class BmpRenderer extends BaseBmpRenderer {
 
 			if (Settings.isBlurPatterns()) {
 				if (i == blurLevel1 && Settings.getBlurrAmount1() > 0) {
+					task.settingProgress(i, bitmap, "Blurring Image (Stage 1) ...");
 					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount1(), true);
 					System.gc();
 				}
 				if (i == blurLevel2 && Settings.getBlurrAmount2() > 0) {
+					task.settingProgress(i, bitmap, "Blurring Image (Stage 2) ...");
 					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount2(), true);
 					System.gc();
 				}
 				if (i == blurLevel3 && Settings.getBlurrAmount3() > 0) {
+					task.settingProgress(i, bitmap, "Blurring Image (Stage 3) ...");
 					System.gc();
 					bitmap = BitmapBlurrer.doBlur(bitmap, Settings.getBlurrAmount3(), true);
 					System.gc();
