@@ -74,7 +74,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 
 		final int blurLevel1 = raster.getAnzahlPatterns() * Settings.getBlurrStage1() / 100;
 		final int blurLevel2 = raster.getAnzahlPatterns() * Settings.getBlurrStage2() / 100;
-		final int blurLevel3 = raster.getAnzahlPatterns() * Settings.getBlurrStage3() / 100;
+		final int blurLevel3 = raster.getAnzahlPatterns() * Settings.getBlurrStage3() / 100 - 1;
 		final int anzahlPatterns = raster.getAnzahlPatterns();
 
 		final RadiusCalculator radiusCalculator = new RadiusCalculator(anzahlPatterns, minRadius, maxRadius, Settings.getRadiusType());
