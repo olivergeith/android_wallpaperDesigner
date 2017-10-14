@@ -292,16 +292,39 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		final BitmapWorkerTask task = new BitmapWorkerTask(wallpaperView);
 		task.execute();
 		dialog = new ProgressDialog(this);
-		dialog.setCancelable(false);
 		dialog.setMessage("Rendering Background...");
 		dialog.setIndeterminate(true);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		// dialog.setProgress(0);
+		dialog.setCancelable(false);
+		// ############################################################
+		// this will enable cancle on back button!
+		// ############################################################
+		// dialog.setCancelable(true);
+		// dialog.setOnCancelListener(new OnCancelListener() {
+		//
+		// @Override
+		// public void onCancel(final DialogInterface dialog) {
+		// task.cancel(true);
+		// }
+		// });
+		// ############################################################
+
+		// Put a cancel button in progress dialog
+		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+			// Set a click listener for progress dialog cancel button
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				// dismiss the progress dialog
+				dialog.dismiss();
+				task.cancel(true);
+			}
+		});
+		// dialog.setProgress(0); // not needed
 
 		if (Settings.isShowRenderingProcess()) {
 			dialog.getWindow().setGravity(Gravity.BOTTOM);
 		}
-
+		// show the dialog ... must be last call after adding buttons
 		dialog.show();
 	}
 
@@ -530,6 +553,12 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 					imageView.fit2Screen();
 				}
 			}
+		}
+
+		@Override
+		protected void onCancelled(final Bitmap result) {
+			showBitmap(result);
+			super.onCancelled(result);
 		}
 
 		@Override

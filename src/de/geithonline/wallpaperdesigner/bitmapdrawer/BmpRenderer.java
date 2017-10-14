@@ -88,6 +88,10 @@ public class BmpRenderer extends BaseBmpRenderer {
 
 		// Zeichnen
 		for (int i = 0; i < anzahlPatterns; i++) {
+			if (task.isCancelled()) {
+				// stopping Progress...is task was canceled
+				i = anzahlPatterns;
+			}
 			if (i % 100 == 0) {
 				System.gc();
 			}
