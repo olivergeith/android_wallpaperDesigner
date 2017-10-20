@@ -232,8 +232,15 @@ public class PatternDrawer {
 	// ----------------
 	// #########################################################################################
 	private void drawNormalPattern(final int x, final int y, final int radius, final String pattern, final String variant) {
+		drawNormalPattern(x, y, radius, pattern, variant, 0);
+	}
+
+	// #########################################################################################
+	// ----------------
+	// #########################################################################################
+	private void drawNormalPattern(final int x, final int y, final int radius, final String pattern, final String variant, final float extraRotate) {
 		final Path path = PatternGetter.getPath(x, y, radius, bWidth, bHeight, pattern, variant);
-		PathHelper.rotatePath(x, y, path, rotator.getRotationDegrees(0, 360, new Point(x, y)));
+		PathHelper.rotatePath(x, y, path, extraRotate + rotator.getRotationDegrees(0, 360, new Point(x, y)));
 		if (Settings.isRandomLeftRightFlipping()//
 				&& Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathLeftRight(x, y, path);
@@ -277,6 +284,14 @@ public class PatternDrawer {
 		case "Rectangle Rain":
 			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
 				drawNormalPattern(x, y, radius, "Rectangles", "HalfCircle End (random hight)");
+			} else {
+				// Rain
+				drawLinePattern(x, y, radius, "Lines (Directed)", "Straight Line");
+			}
+			break;
+		case "Drop":
+			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
+				drawNormalPattern(x, y, (int) (radius * 0.65f), "Assorted Shapes", "Drop", 90); // extra 90° rotating
 			} else {
 				// Rain
 				drawLinePattern(x, y, radius, "Lines (Directed)", "Straight Line");

@@ -127,9 +127,10 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
 		patternProperties.put("Puzzle (Square Connector)", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Manneken", "Top-Right", "Cross", "All", "Mixed" }));
+
 		patternProperties.put("Rain", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { //
-						"Rain", "Rectangle Rain"//
+						"Rain", "Rectangle Rain", "Drop"//
 				}));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, true, //

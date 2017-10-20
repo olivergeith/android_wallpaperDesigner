@@ -1207,7 +1207,7 @@ public class PatternGetter {
 	// #########################################################################################
 	// ----------------
 
-	public static Path drawRain(final int x, final int y, final int radius, final String variant) {
+	private static Path drawRain(final int x, final int y, final int radius, final String variant) {
 		switch (variant) {
 		default:
 		case "Rain":
@@ -1216,10 +1216,13 @@ public class PatternGetter {
 		case "Rectangle Rain":
 			// this is just for icon drawing
 			return new RectanglePath(new PointF(x, y), radius, radius / 4, true);
+		case "Drop":
+			// this is just for icon drawing
+			return new DropPath(new PointF(x, y), radius);
 		}
 	}
 
-	public static Path drawScene(final int x, final int y, final int radius, final String variant) {
+	private static Path drawScene(final int x, final int y, final int radius, final String variant) {
 		switch (variant) {
 		default:
 		case "Rain":
