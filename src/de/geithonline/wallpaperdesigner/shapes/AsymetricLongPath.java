@@ -16,7 +16,7 @@ public class AsymetricLongPath extends Path {
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
 		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2, IRON_CROSS, //
-		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE, IRON_CROSS_ROUND;
+		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE, IRON_CROSS_ROUND, TRIANGLE_RANDOM_HEIGHT;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -37,6 +37,9 @@ public class AsymetricLongPath extends Path {
 			break;
 		case TRIANGLE:
 			drawTriangle(center, radius, height, filled);
+			break;
+		case TRIANGLE_RANDOM_HEIGHT:
+			drawTriangle(center, Randomizer.getRandomFloat(radius * 0.05f, radius), height, filled);
 			break;
 		case LENSE:
 			drawLense(center, radius, height, filled);

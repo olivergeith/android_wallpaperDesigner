@@ -579,6 +579,9 @@ public class PatternGetter {
 		case "Triangle":
 			return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE);
 
+		case "Triangle (random height)":
+			return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE_RANDOM_HEIGHT);
+
 		case "Oval":
 			return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.OVAL);
 
@@ -1219,6 +1222,9 @@ public class PatternGetter {
 		case "Drop":
 			// this is just for icon drawing
 			return new DropPath(new PointF(x, y), radius);
+		case "Triangle Rain":
+			// this is just for icon drawing
+			return new AsymetricLongPath(new PointF(x, y), radius * 0.3f, radius, true, ASYMETRIC_STYLE.TRIANGLE_RANDOM_HEIGHT);
 		}
 	}
 
