@@ -54,8 +54,8 @@
 	        android:key="rotationCenterPointX"
 	        android:summary="%1$d Percent of width"
 	        android:title="Center X-Axis"
-	        seekbarpreference:maxValue="100"
-	        seekbarpreference:minValue="0"
+	        seekbarpreference:maxValue="150"
+	        seekbarpreference:minValue="-50"
 	        seekbarpreference:stepValue="1" />
 	
 	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
@@ -64,8 +64,8 @@
 	        android:key="rotationCenterPointY"
 	        android:summary="%1$d Percent of height"
 	        android:title="Center Y-Axis"
-	        seekbarpreference:maxValue="100"
-	        seekbarpreference:minValue="0"
+	        seekbarpreference:maxValue="150"
+	        seekbarpreference:minValue="-50"
 	        seekbarpreference:stepValue="1" />
         
    	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference

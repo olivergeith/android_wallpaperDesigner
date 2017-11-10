@@ -291,7 +291,8 @@ public class PatternDrawer {
 			break;
 		case "Drop":
 			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
-				drawNormalPattern(x, y, (int) (radius * 0.65f), "Assorted Shapes", "Drop", 90); // extra 90° rotating
+				// drawNormalPattern(x, y, (int) (radius * 0.65f), "Assorted Shapes", "Drop", 90); // extra 90° rotating
+				drawNormalPattern(x, y, (int) (radius * 0.3f), "Geometrical (long) Shapes", "Drop", -90); // extra 90° rotating
 			} else {
 				// Rain
 				drawLinePattern(x, y, radius, "Lines (Directed)", "Straight Line");
