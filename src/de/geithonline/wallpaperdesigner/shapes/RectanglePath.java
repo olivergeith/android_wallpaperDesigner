@@ -31,7 +31,7 @@ public class RectanglePath extends Path {
 			rect.left = center.x - radiusX * 0.75f;
 			rect.bottom = center.y + radiusY * 0.75f;
 			rect.top = center.y - radiusY * 0.75f;
-			addRoundRect(rect, radiusY, radiusY, Direction.CCW);
+			addRoundRect(rect, radiusY * 0.75f, radiusY * 0.75f, Direction.CCW);
 		}
 	}
 
