@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
+    
+    <PreferenceCategory android:title="Blurring" />
+    
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="blurPatterns"
+        android:title="@string/blurPatterns" />
+    
+    <PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:dependency="blurPatterns"
+        android:key="blurrScreen"
+        android:title="Blurring Options..." >
+        <PreferenceCategory android:title="Blurring Strength" />
+    
+		    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="8"
+		        android:key="blurrAmount1"
+		        android:summary="%1$d (the bigger the number, the more blurring)"
+		        android:title="Strength on 1. Stage"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+		
+		    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="3"
+		        android:key="blurrAmount2"
+		        android:summary="%1$d (the bigger the number, the more blurring)"
+		        android:title="Strength on 2. Stage"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+
+		    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="3"
+		        android:key="blurrAmount3"
+		        android:summary="%1$d (the bigger the number, the more blurring)"
+		        android:title="Strength on 3. Stage"
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+        
+        <PreferenceCategory android:title="Blurring Stages" />
+		    		    
+		    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="60"
+		        android:key="blurrStage1"
+		        android:summary="...after drawing %1$d percent of the patterns"
+		        android:title="1. Stage ..."
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+
+		    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="70"
+		        android:key="blurrStage2"
+		        android:summary="...after drawing %1$d percent of the patterns"
+		        android:title="2. Stage..."
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+		    
+		    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+		        android:dependency="blurPatterns"
+		        android:defaultValue="80"
+		        android:key="blurrStage3"
+		        android:summary="...after drawing %1$d percent of the patterns"
+		        android:title="3. Stage..."
+		        seekbarpreference:maxValue="100"
+		        seekbarpreference:minValue="0"
+		        seekbarpreference:stepValue="1" />
+		    		    		    
+    </PreferenceScreen>
+
+</PreferenceScreen>

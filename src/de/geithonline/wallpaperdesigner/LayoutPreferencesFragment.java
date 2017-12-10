@@ -25,6 +25,7 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_layout);
+		addPreferencesFromResource(R.xml.preferences_layout_blurring);
 		mainlayouts = (ListPreference) findPreference("mainlayouts");
 		mainlayoutVariants = (ListPreference) findPreference("mainlayoutVariants");
 		limit2Canvas = (ListPreference) findPreference("limit2Canvas");
