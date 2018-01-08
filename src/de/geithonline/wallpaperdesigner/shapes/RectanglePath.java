@@ -19,22 +19,6 @@ public class RectanglePath extends Path {
 		addRoundRect(rect, radiusY, radiusY, Direction.CW);
 	}
 
-	public RectanglePath(final PointF center, final float radiusX, final float radiusY, final boolean filled) {
-		final RectF rect = new RectF();
-		rect.right = center.x + radiusX;
-		rect.left = center.x - radiusX;
-		rect.bottom = center.y + radiusY;
-		rect.top = center.y - radiusY;
-		addRoundRect(rect, radiusY, radiusY, Direction.CW);
-		if (!filled) {
-			rect.right = center.x + radiusX * 0.75f;
-			rect.left = center.x - radiusX * 0.75f;
-			rect.bottom = center.y + radiusY * 0.75f;
-			rect.top = center.y - radiusY * 0.75f;
-			addRoundRect(rect, radiusY * 0.75f, radiusY * 0.75f, Direction.CCW);
-		}
-	}
-
 	public RectanglePath(final PointF center, final float radius, final boolean filled, final RECT_ROUNDED round, final RECT_ASPECT aspect) {
 		super();
 

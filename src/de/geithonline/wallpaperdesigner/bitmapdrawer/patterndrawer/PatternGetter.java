@@ -94,6 +94,8 @@ import de.geithonline.wallpaperdesigner.shapes.RectangleAsymetricPath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ASPECT;
 import de.geithonline.wallpaperdesigner.shapes.RectanglePath.RECT_ROUNDED;
+import de.geithonline.wallpaperdesigner.shapes.RectangleRoundEndPath;
+import de.geithonline.wallpaperdesigner.shapes.RectangleRoundEndPath.RECT_ROUNDEDEND_FILL_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.RingPath;
 import de.geithonline.wallpaperdesigner.shapes.RocketPath;
 import de.geithonline.wallpaperdesigner.shapes.RosePath;
@@ -1218,13 +1220,13 @@ public class PatternGetter {
 			return drawBubble(x, y, radius / 3, "V1");
 		case "Rectangle Rain":
 			// this is just for icon drawing
-			return new RectanglePath(new PointF(x, y), radius, radius / 4, true);
+			return new RectangleRoundEndPath(new PointF(x, y), radius, radius / 4, Settings.getFilledBoolean(), RECT_ROUNDEDEND_FILL_STYLE.RECT);
 		case "Drop":
 			// this is just for icon drawing
 			return new DropPath(new PointF(x, y), radius);
 		case "Triangle Rain":
 			// this is just for icon drawing
-			return new AsymetricLongPath(new PointF(x, y), radius * 0.3f, radius, true, ASYMETRIC_STYLE.TRIANGLE_RANDOM_HEIGHT);
+			return new AsymetricLongPath(new PointF(x, y), radius * 0.3f, radius, Settings.getFilledBoolean(), ASYMETRIC_STYLE.TRIANGLE_RANDOM_HEIGHT);
 		}
 	}
 
@@ -1641,7 +1643,13 @@ public class PatternGetter {
 
 		case "V13":
 		case "HalfCircle End (random hight)":
-			return new RectanglePath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(0.05f, 0.25f), Settings.getFilledBoolean());
+			return new RectangleRoundEndPath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(0.05f, 0.25f), Settings.getFilledBoolean(),
+					RECT_ROUNDEDEND_FILL_STYLE.RECT);
+
+		case "V14":
+		case "HalfCircle End (random hight - circle filling)":
+			return new RectangleRoundEndPath(new PointF(x, y), radius, radius * Randomizer.getRandomFloat(0.05f, 0.25f), Settings.getFilledBoolean(),
+					RECT_ROUNDEDEND_FILL_STYLE.CIRCLE);
 
 		}
 	}

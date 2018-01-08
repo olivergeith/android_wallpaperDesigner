@@ -138,7 +138,8 @@ public class PatternPropertyStore {
 				new CharSequence[] { "Random Ratio", "Random Ratio (Rounded)", "Random Ratio (Mixed)", //
 						"Golden Ratio", "Golden Ratio (Rounded)", "Golden Ratio (Mixed)", //
 						"4-3 Ratio", "4-3 Ratio (Rounded)", "4-3 Ratio (Mixed)", //
-						"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)", "HalfCircle End (random hight)" }));
+						"1-2 Ratio", "1-2 Ratio (Rounded)", "1-2 Ratio (Mixed)", "HalfCircle End (random hight)",
+						"HalfCircle End (random hight - circle filling)" }));
 
 		patternProperties.put("Rings", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Rings V1 (Flange)", "Rings V2 (Asymetric)", "Rings V3 (Concentric)", "Rings V4 (Dizzy)", "Mixed" }));
