@@ -86,14 +86,14 @@ public class SinusObjectsPath extends ComposedPath {
 		for (int i = 1; i < points; i++) {
 			final float a = calculateAmplitude(amplitude, amplitudeType, points, i);
 			// nicht immer einen bubble zeichnen...
-			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(prozentToDraw)) {
 				final float bubbleRadius = Randomizer.getRandomFloat(0, maxBubbleRadius);
 				final float x = l + i * (r - l) / points;
 				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
 				final float y = mitteY + (float) (a * Math.sin(angle));
 				final PointF c = new PointF(x, y);
 				addPath(getObject(bubbleRadius, c));
-			} else if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
+			} else if (Randomizer.getRandomBooleanTrueInPercentOfCases(5)) {
 				// manchmal einen fetten Bubble zeichnen
 				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius * 1.5f, maxBubbleRadius * 2);
 				final float x = l + i * (r - l) / points;
@@ -116,14 +116,14 @@ public class SinusObjectsPath extends ComposedPath {
 		for (int i = 1; i < points; i++) {
 			final float a = calculateAmplitude(amplitude, amplitudeType, points, i);
 			// nicht immer einen bubble zeichnen...
-			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(prozentToDraw)) {
 				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius / 2, maxBubbleRadius);
 				final float x = l + i * (r - l) / points;
 				final float angle = (float) ((float) i / points * Math.PI * sinRepeats);
 				final float y = mitteY + (float) (a * Math.sin(angle));
 				final PointF c = new PointF(x, y);
 				addPath(getObject(bubbleRadius, c));
-			} else if (Randomizer.getRandomBooleanInPercentOfCases(5)) {
+			} else if (Randomizer.getRandomBooleanTrueInPercentOfCases(5)) {
 				// manchmal einen fetten Bubble zeichnen
 				final float bubbleRadius = Randomizer.getRandomFloat(maxBubbleRadius, maxBubbleRadius * 3);
 				final float x = l + i * (r - l) / points;
@@ -145,7 +145,7 @@ public class SinusObjectsPath extends ComposedPath {
 		final int anzahlBubbles = (int) (2 * radius / (maxBubbleRadius * 1.6f));
 		for (int i = 1; i < anzahlBubbles; i++) {
 			// nicht immer einen bubble zeichnen...
-			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(prozentToDraw)) {
 				final float bubbleRadius = (anzahlBubbles - (float) i) * (maxBubbleRadius / anzahlBubbles); // Randomizer.getRandomFloat(0,
 				// maxBubbleRadius);
 				final float x = l + i * (r - l) / anzahlBubbles;
@@ -168,7 +168,7 @@ public class SinusObjectsPath extends ComposedPath {
 		final int anzahlBubbles = (int) (2 * radius / (maxBubbleRadius * 1.6f));
 		for (int i = 1; i < anzahlBubbles; i++) {
 			// nicht immer einen bubble zeichnen...
-			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(prozentToDraw)) {
 				final float bubbleRadius = i * (maxBubbleRadius / anzahlBubbles); // Randomizer.getRandomFloat(0,
 				// maxBubbleRadius);
 				final float x = l + i * (r - l) / anzahlBubbles;
@@ -191,7 +191,7 @@ public class SinusObjectsPath extends ComposedPath {
 		final int anzahlBubbles = (int) (2 * radius / (maxBubbleRadius * 1.6f));
 		for (int i = 1; i < anzahlBubbles; i++) {
 			// nicht immer einen bubble zeichnen...
-			if (Randomizer.getRandomBooleanInPercentOfCases(prozentToDraw)) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(prozentToDraw)) {
 				float bubbleRadius = (anzahlBubbles - (float) i) * (maxBubbleRadius / anzahlBubbles);
 				if (i + 1 == anzahlBubbles) {
 					bubbleRadius = maxBubbleRadius * 2;

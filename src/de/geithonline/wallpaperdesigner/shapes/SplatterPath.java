@@ -62,7 +62,7 @@ public class SplatterPath extends Path {
 			final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.5f);
 			final Path c = new CirclePath(new PointF(x, y), circleRadius, 0, true, CIRCLE_STYLE.CIRCLE);
 			if (withHoles) {
-				if (Randomizer.getRandomBooleanInPercentOfCases(80)) {
+				if (Randomizer.getRandomBooleanTrueInPercentOfCases(80)) {
 					op(c, Op.UNION);
 				} else {
 					op(c, Op.DIFFERENCE);
@@ -91,7 +91,7 @@ public class SplatterPath extends Path {
 			final float y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
 			final float circleRadius = Randomizer.getRandomFloat(radius * 0.05f, radius * 0.5f);
 			final Path c;
-			if (Randomizer.getRandomBooleanInPercentOfCases(70)) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(70)) {
 				c = new VirusPath(new PointF(x, y), circleRadius, true);
 			} else {
 				c = new CirclePath(new PointF(x, y), circleRadius, 0, true, CIRCLE_STYLE.CIRCLE);

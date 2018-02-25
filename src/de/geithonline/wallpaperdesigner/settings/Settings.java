@@ -112,6 +112,7 @@ public class Settings {
 	public static final String KEY_PATTERN_FILLED_OPTION = "filledOption";
 	public static final String KEY_PATTERN_RANDOM_ROTATE = "randomRotate";
 	public static final String KEY_PATTERN_OUTLINE = "outline";
+	public static final String KEY_PERCENTAGE_OF_OUTLINE_ONLY = "percentageOfOutlineOnly";
 	public static final String KEY_PATTERN_GLOSSY = "glossy";
 	public static final String KEY_PATTERN_PATTERN_PICKER = "pattern_patternPicker";
 	public static final String KEY_PATTERN_PATTERN_VARIANT_PICKER = "pattern_patternVariantPicker";
@@ -736,6 +737,18 @@ public class Settings {
 		return readBooleanPref(KEY_PATTERN_OUTLINE_NEVER_TRANSPARENT, false);
 	}
 
+	public static boolean isOutlineOnly() {
+		if (isOutline()) {
+			return Randomizer.getRandomBooleanTrueInPercentOfCases(Settings.getPercentageOfOutlineOnly());
+		} else {
+			return false;
+		}
+	}
+
+	public static int getPercentageOfOutlineOnly() {
+		return readIntegerPref(KEY_PERCENTAGE_OF_OUTLINE_ONLY, 0);
+	}
+
 	public static boolean isCustomOutlineColor() {
 		return readBooleanPref("customOutlineColor", false);
 	}
@@ -1151,4 +1164,5 @@ public class Settings {
 		editor.putString(KEY_BACKGROUND_PICKER, filePath);
 		editor.commit();
 	}
+
 }

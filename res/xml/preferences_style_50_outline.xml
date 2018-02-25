@@ -15,6 +15,19 @@
             android:key="outline"
             android:title="@string/outline"
             android:summary="@string/outlineSummary" />
+
+        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+            android:defaultValue="0"
+            android:dependency="outline"
+            android:dialogMessage="Percentage of outline only patterns"
+            android:key="percentageOfOutlineOnly"
+            android:summary="%1$d percent"
+            android:title="Percentage of outline only patterns"
+            seekbarpreference:maxValue="100"
+            seekbarpreference:minValue="0"
+            seekbarpreference:stepValue="1" />
+        
+        
         <CheckBoxPreference
             android:defaultValue="false"
             android:dependency="outline"

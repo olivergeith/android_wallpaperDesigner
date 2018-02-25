@@ -319,6 +319,9 @@ public class PreferenceIO {
 		if (!keySet.contains(Settings.KEY_PATTERN_BLUR)) {
 			setDefaultBooleanValue(prefs, Settings.KEY_PATTERN_BLUR, false);
 		}
+		if (!keySet.contains(Settings.KEY_PERCENTAGE_OF_OUTLINE_ONLY)) {
+			setDefaultIntValue(prefs, Settings.KEY_PERCENTAGE_OF_OUTLINE_ONLY, 0);
+		}
 		if (!keySet.contains(Settings.KEY_COLOR_REPEATS)) {
 			setDefaultIntValue(prefs, Settings.KEY_COLOR_REPEATS, 1);
 		}

@@ -249,9 +249,11 @@ public class PatternDrawer {
 				&& Randomizer.getRandomBoolean()) {
 			PathHelper.mirrorPathUpDown(x, y, path);
 		}
-		bitmapCanvas.drawPath(path, paint);
-		if (PatternPropertyStore.hasPatternGlossyEffect(pattern)) {
-			glossyDrawer.draw(x, y, paint, radius, path);
+		if (!Settings.isOutlineOnly()) {
+			bitmapCanvas.drawPath(path, paint);
+			if (PatternPropertyStore.hasPatternGlossyEffect(pattern)) {
+				glossyDrawer.draw(x, y, paint, radius, path);
+			}
 		}
 		outlineDrawer.draw(paint, radius, path);
 	}
@@ -274,7 +276,7 @@ public class PatternDrawer {
 		switch (variant) {
 		default:
 		case "Rain":
-			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(Settings.getScenePercentageOfCircles())) {
 				drawBubble(x, y, radius / 3);
 			} else {
 				// Rain
@@ -282,7 +284,7 @@ public class PatternDrawer {
 			}
 			break;
 		case "Rectangle Rain":
-			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(Settings.getScenePercentageOfCircles())) {
 				drawNormalPattern(x, y, radius, "Rectangles", "HalfCircle End (random hight)");
 			} else {
 				// Rain
@@ -290,7 +292,7 @@ public class PatternDrawer {
 			}
 			break;
 		case "Triangle Rain":
-			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(Settings.getScenePercentageOfCircles())) {
 				drawNormalPattern(x, y, (int) (radius * 0.3f), "Geometrical (long) Shapes", "Triangle (random height)", -90);
 			} else {
 				// Rain
@@ -298,7 +300,7 @@ public class PatternDrawer {
 			}
 			break;
 		case "Drop":
-			if (Randomizer.getRandomBooleanInPercentOfCases(Settings.getScenePercentageOfCircles())) {
+			if (Randomizer.getRandomBooleanTrueInPercentOfCases(Settings.getScenePercentageOfCircles())) {
 				// drawNormalPattern(x, y, (int) (radius * 0.65f), "Assorted Shapes", "Drop", 90); // extra 90° rotating
 				drawNormalPattern(x, y, (int) (radius * 0.3f), "Geometrical (long) Shapes", "Drop", -90); // extra 90° rotating
 			} else {
