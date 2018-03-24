@@ -1,118 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
- xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences">
- 
-    <PreferenceCategory android:title="Theming"/>
-       <de.geithonline.android.basics.preferences.CoolListPreference
-	        android:key="appTheme"
-	        android:title="Theme" 
-	        android:dialogTitle="Theme"
-	        android:defaultValue="Gray (orange)"
-	        android:entries="@array/theme"
-	        android:entryValues="@array/theme"
-	        />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekbarpreference="http://schemas.android.com/apk/lib/de.geithonline.android.basics.preferences" >
 
-       <PreferenceCategory android:title="General Options"/>
-       
-       
-       <de.geithonline.android.basics.preferences.CoolListPreference
-	        android:key="sortOrder"
-	        android:title="@string/sortOrder" 
-	        android:dialogTitle="@string/sortOrder"
-	        android:defaultValue="Last Modified"
-	        android:entries="@array/sortOrder"
-	        android:entryValues="@array/sortOrder"
-	        />
+    <PreferenceCategory android:title="Theming" />
+
+    <de.geithonline.android.basics.preferences.CoolListPreference
+        android:defaultValue="Gray (orange)"
+        android:dialogTitle="Theme"
+        android:entries="@array/theme"
+        android:entryValues="@array/theme"
+        android:key="appTheme"
+        android:title="Theme" />
+
+    <PreferenceCategory android:title="General Options" />
+
+    <de.geithonline.android.basics.preferences.CoolListPreference
+        android:defaultValue="Last Modified"
+        android:dialogTitle="@string/sortOrder"
+        android:entries="@array/sortOrder"
+        android:entryValues="@array/sortOrder"
+        android:key="sortOrder"
+        android:title="@string/sortOrder" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="hexValues"
+        android:summary="Enable Hexvalue Input in Colorpicker"
+        android:title="HexValues in Color-Picker" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="showSetWallpaperButton"
+        android:summary="Remove the Button if it gets in your way...."
+        android:title="Show Set-Wallpaper-Button" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="renderOnSettingsExit"
+        android:summary="When turning this off, you have to start the rendering manually by clicking the &apos;dice&apos;"
+        android:title="New image, on leaving settings" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="renderOnAppStartup"
+        android:summary="When turning this off, you have to start the rendering manually by clicking the &apos;dice&apos;"
+        android:title="New image, on starting App" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="restoreWallpaperSize"
+        android:summary="If you dont want the wallpaper-size to be overwritten every time you load a design, disable this option!"
+        android:title="Load size from Designs" />
+
+    <PreferenceCategory android:title="Rendering Animation" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="showRenderingProcess"
+        android:summary="See how the image is rendered..."
+        android:title="Show rendering in progress" />
+
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+        android:defaultValue="10"
+        android:dependency="showRenderingProcess"
+        android:dialogMessage="Rendering Progress Frames"
+        android:key="renderingProcessFrames"
+        android:summary="Show rendering every %1$d frames"
+        android:title="Rendering Progress Frames"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="0"
+        seekbarpreference:stepValue="5" />
+
+    <PreferenceCategory android:title="Wallpaper saving" />
+
+    <ListPreference
+        android:defaultValue="png"
+        android:dialogTitle="@string/imageFormat"
+        android:entries="@array/imageFormat"
+        android:entryValues="@array/imageFormat"
+        android:key="imageFormat"
+        android:title="@string/imageFormat" />
+
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+        android:defaultValue="95"
+        android:dialogMessage="@string/jpgCompression"
+        android:key="jpgCompression"
+        android:summary="%1$d (Bigger number = better quality)"
+        android:title="@string/jpgCompression"
+        seekbarpreference:maxValue="100"
+        seekbarpreference:minValue="50"
+        seekbarpreference:stepValue="1" />
+
+    <PreferenceCategory android:title="Sharing Options" />
+
+    <EditTextPreference
+        android:defaultValue="Shared from the Wallpaper Designer"
+        android:dialogTitle="@string/shareSubject"
+        android:key="shareSubject"
+        android:title="@string/shareSubject" />
+    <EditTextPreference
+        android:defaultValue="Created with &apos;The Wallpaper Designer&apos; : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner"
+        android:dialogTitle="@string/shareText"
+        android:key="shareText"
+        android:title="@string/shareText" />
+
+    <PreferenceCategory android:title="More . . . " />
     
-        <CheckBoxPreference 
-		    android:key="hexValues"
-    		android:defaultValue="true"
-		    android:title="HexValues in Color-Picker"
-		    android:summary="Enable Hexvalue Input in Colorpicker" 
-            />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="expertMode"
+        android:summary="Enable expert options (Can you spot them?)"
+        android:title="Expert Mode" />
 
-        <CheckBoxPreference 
-		    android:key="showSetWallpaperButton"
-    		android:defaultValue="false"
-		    android:title="Show Set-Wallpaper-Button"
-		    android:summary="Remove the Button if it gets in your way...." 
-            />
-        
-        
-        <CheckBoxPreference 
-		    android:key="renderOnSettingsExit"
-    		android:defaultValue="true"
-		    android:title="New image, on leaving settings"
-		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
-            />
-        <CheckBoxPreference 
-		    android:key="renderOnAppStartup"
-    		android:defaultValue="true"
-		    android:title="New image, on starting App"
-		    android:summary="When turning this off, you have to start the rendering manually by clicking the 'dice'" 
-            />
-
-        <CheckBoxPreference 
-		    android:key="restoreWallpaperSize"
-    		android:defaultValue="true"
-		    android:title="Load size from Designs"
-		    android:summary="If you dont want the wallpaper-size to be overwritten every time you load a design, disable this option!" 
-            />
-       
-  
-    <PreferenceCategory android:title="Rendering Animation"/>
-        <CheckBoxPreference 
-		    android:key="showRenderingProcess"
-    		android:defaultValue="false"
-		    android:title="Show rendering in progress"
-		    android:summary="See how the image is rendered..." 
-            />
-        <de.geithonline.android.basics.preferences.InlineSeekBarPreference
-            android:key="renderingProcessFrames"
-	        android:title="Rendering Progress Frames" 
-		    seekbarpreference:minValue="0"
-		    seekbarpreference:stepValue="5"
-		    seekbarpreference:maxValue="100"
-		    android:defaultValue="10"
-		    android:summary="Show rendering every %1$d frames" 
-		    android:dialogMessage="Rendering Progress Frames"
-		    android:dependency="showRenderingProcess"
-		    />
-        
-        
-    <PreferenceCategory android:title="Wallpaper saving"/>
-        <ListPreference
-	        android:key="imageFormat"
-	        android:title="@string/imageFormat" 
-	        android:dialogTitle="@string/imageFormat"
-	        android:defaultValue="png"
-	        android:entries="@array/imageFormat"
-	        android:entryValues="@array/imageFormat"
-	        />
-     	<de.geithonline.android.basics.preferences.InlineSeekBarPreference
-            android:key="jpgCompression"
-	        android:title="@string/jpgCompression" 
-		    seekbarpreference:minValue="50"
-		    seekbarpreference:stepValue="1"
-		    seekbarpreference:maxValue="100"
-		    android:defaultValue="95"
-		    android:summary="%1$d (Bigger number = better quality)" 
-		    android:dialogMessage="@string/jpgCompression" 
-		    />
-        
-    <PreferenceCategory android:title="Sharing Options"/>
-        <EditTextPreference
-		    android:key="shareSubject"
-    		android:defaultValue="Shared from the Wallpaper Designer"
-		    android:title="@string/shareSubject" 
-    		android:dialogTitle="@string/shareSubject"
-         	/>
-        <EditTextPreference
-		    android:key="shareText"
-    		android:defaultValue="Created with 'The Wallpaper Designer' : https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner"
-		    android:title="@string/shareText" 
-    		android:dialogTitle="@string/shareText"
-         	/>
-        
-         
 </PreferenceScreen>

@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
+	public static final String KEY_EXPERT_MODE = "expertMode";
 	public static final String KEY_INCREMENTING_DEGREES_ADDING = "incrementingDegreesAdding";
 	public static final String KEY_RANDOM_DEGREES_ADDING = "randomDegreesAdding";
 	public static final String KEY_COUNTER_CLOCKWISE = "counterClockwise";
@@ -1035,6 +1036,10 @@ public class Settings {
 
 	public static boolean isHexValueEnabled() {
 		return readBooleanPref(KEY_HEX_VALUES, true);
+	}
+
+	public static boolean isExpertMode() {
+		return readBooleanPref(KEY_EXPERT_MODE, false);
 	}
 
 	public static boolean isShowSetWallpaperButton() {

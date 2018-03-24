@@ -27,6 +27,7 @@ public class PreferenceIO {
 	private static List<String> sizeKeys = new ArrayList<>();
 
 	static {
+		ignoreKeys.add(Settings.KEY_EXPERT_MODE);
 		ignoreKeys.add(Settings.KEY_MUIMERP);
 		ignoreKeys.add(Settings.KEY_SORT_ORDER);
 		ignoreKeys.add(Settings.KEY_IMAGE_FORMAT);

@@ -48,6 +48,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private InlineSeekBarPreference randomRange;
 	private InlineSeekBarPreference rotationCenterPointX;
 	private InlineSeekBarPreference rotationCenterPointY;
+	private InlineSeekBarPreference percentageOfOutlineOnly;
 	private CheckBoxPreference flipRandomLeftRight;
 	private CheckBoxPreference flipRandomUpDown;
 
@@ -109,6 +110,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		randomRange = (InlineSeekBarPreference) findPreference("randomRange");
 		rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
 		rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
+		percentageOfOutlineOnly = (InlineSeekBarPreference) findPreference("percentageOfOutlineOnly");
 		incrementingDegreesAdding = (InlineSeekBarPreference) findPreference("incrementingDegreesAdding");
 		randomDegreesAdding = (InlineSeekBarPreference) findPreference("randomDegreesAdding");
 		flipRandomUpDown = (CheckBoxPreference) findPreference("flipRandomUpDown");
@@ -118,7 +120,7 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
 		handleRotatingStyleSelected(Settings.getRotationStyle());
 		setIcon(Settings.getSelectedPattern(), Settings.getSelectedPatternVariant());
-		enableProFeatures();
+		enableProOrExpertFeatures();
 	}
 
 	private void handleRotatingStyleSelected(final String newValue) {
@@ -127,14 +129,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addOrRemoveFromScreen(ratatingScreen, rotationCenterPointX, newValue.equals("Around Adjustable Center"));
 		addOrRemoveFromScreen(ratatingScreen, rotationCenterPointY, newValue.equals("Around Adjustable Center"));
 		addOrRemoveFromScreen(ratatingScreen, rotationDegrees, !newValue.equals("Random"));
-		addOrRemoveFromScreen(ratatingScreen, incrementingDegreesAdding, !newValue.equals("Random"));
+		addOrRemoveFromScreen(ratatingScreen, incrementingDegreesAdding, !newValue.equals("Random") && Settings.isExpertMode());
 		addOrRemoveFromScreen(ratatingScreen, randomDegreesAdding, !newValue.equals("Random"));
-		addOrRemoveFromScreen(ratatingScreen, flipRandomUpDown, !newValue.equals("Random"));
-		addOrRemoveFromScreen(ratatingScreen, flipRandomLeftRight, !newValue.equals("Random"));
-		// rotationDegrees.setEnabled(!newValue.equals("Random"));
-		// randomRange.setEnabled(newValue.contains("(Range)"));
-		// rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
-		// rotationCenterPointY.setEnabled(newValue.equals("Around Adjustable Center"));
+		addOrRemoveFromScreen(ratatingScreen, flipRandomUpDown, !newValue.equals("Random") && Settings.isExpertMode());
+		addOrRemoveFromScreen(ratatingScreen, flipRandomLeftRight, !newValue.equals("Random") && Settings.isExpertMode());
 	}
 
 	public void handleDropShadowTypeSelection(final DROP_SHADOW_TYPE type) {
@@ -244,7 +242,8 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		addSpecialPreferences(Settings.getSelectedPattern(), newVariant);
 	}
 
-	private void enableProFeatures() {
+	private void enableProOrExpertFeatures() {
+		addOrRemoveFromScreen(outlineScreen, percentageOfOutlineOnly, Settings.isExpertMode());
 	}
 
 	@Override
