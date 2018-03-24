@@ -11,6 +11,8 @@ public class Rotator {
 	private final int bWidth;
 	private final int bHeight;
 
+	private float incrementingDegrees = 0;
+
 	public Rotator(final int bWidth, final int bHeight) {
 		this.bWidth = bWidth;
 		this.bHeight = bHeight;
@@ -20,12 +22,12 @@ public class Rotator {
 		switch (Settings.getRotationStyle()) {
 		default:
 		case "Fixed":
-			return Settings.getFixedRotationDegrees() + getRandom90Degrees();
+			return Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
 		case "Random":
 			return Randomizer.getRandomFloat(randomMin - 1, randomMax);
 		case "Random (Range)":
 			return Randomizer.getRandomFloat(Settings.getFixedRotationDegrees() - Settings.getrandomRangeDegrees(), //
-					Settings.getFixedRotationDegrees() + Settings.getrandomRangeDegrees()) + getRandom90Degrees();
+					Settings.getFixedRotationDegrees() + Settings.getrandomRangeDegrees()) + getRandom90Degrees() + getIncrementingDegrees();
 
 		case "Around Adjustable Point":
 		case "Around Adjustable Center": {
@@ -37,7 +39,7 @@ public class Rotator {
 			if (center.x <= bWidth * Settings.getRotationCenterPointX()) {
 				winkel = winkel + 180;
 			}
-			return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees();
+			return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
 		}
 		case "Around Center":
 		case "Around Point": {
@@ -49,7 +51,7 @@ public class Rotator {
 			if (center.x <= bWidth / 2) {
 				winkel = winkel + 180;
 			}
-			return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees();
+			return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
 		}
 		case "Around Point (Range)": {
 			final float distTCenterX = bWidth / 2 - center.x;
@@ -62,7 +64,7 @@ public class Rotator {
 			}
 			final float rand = Randomizer.getRandomFloat(-Settings.getrandomRangeDegrees(), //
 					+Settings.getrandomRangeDegrees());
-			return winkel + 90 + Settings.getFixedRotationDegrees() + rand + getRandom90Degrees();
+			return winkel + 90 + Settings.getFixedRotationDegrees() + rand + getRandom90Degrees() + getIncrementingDegrees();
 		}
 		case "Around Bottom": {
 			final float distTCenterX = bWidth / 2 - center.x;
@@ -73,9 +75,20 @@ public class Rotator {
 			if (center.x <= bWidth / 2) {
 				winkel = winkel + 180;
 			}
-			return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees();
+			return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
 		}
 		}
+	}
+
+	public float getIncrementingDegrees() {
+		incrementingDegrees += Settings.getIncrementingDegreesAddingAmount();
+		if (incrementingDegrees > 180) {
+			incrementingDegrees = -180 + (incrementingDegrees - 180);
+		}
+		if (incrementingDegrees < -180) {
+			incrementingDegrees = 180 - (incrementingDegrees + 180);
+		}
+		return incrementingDegrees;
 	}
 
 	public int getRandom90Degrees() {

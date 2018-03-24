@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -42,9 +43,13 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	private InlineSeekBarPreference dropShadowOffsetX;
 	private InlineSeekBarPreference dropShadowOffsetY;
 	private InlineSeekBarPreference rotationDegrees;
+	private InlineSeekBarPreference incrementingDegreesAdding;
+	private InlineSeekBarPreference randomDegreesAdding;
 	private InlineSeekBarPreference randomRange;
 	private InlineSeekBarPreference rotationCenterPointX;
 	private InlineSeekBarPreference rotationCenterPointY;
+	private CheckBoxPreference flipRandomLeftRight;
+	private CheckBoxPreference flipRandomUpDown;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -104,7 +109,10 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		randomRange = (InlineSeekBarPreference) findPreference("randomRange");
 		rotationCenterPointX = (InlineSeekBarPreference) findPreference("rotationCenterPointX");
 		rotationCenterPointY = (InlineSeekBarPreference) findPreference("rotationCenterPointY");
-
+		incrementingDegreesAdding = (InlineSeekBarPreference) findPreference("incrementingDegreesAdding");
+		randomDegreesAdding = (InlineSeekBarPreference) findPreference("randomDegreesAdding");
+		flipRandomUpDown = (CheckBoxPreference) findPreference("flipRandomUpDown");
+		flipRandomLeftRight = (CheckBoxPreference) findPreference("flipRandomLeftRight");
 		handlePatternSelect(Settings.getSelectedPattern());
 		handlePatternVariantSelect(Settings.getSelectedPatternVariant());
 		handleDropShadowTypeSelection(Settings.getDropShadowType());
@@ -114,10 +122,19 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 	}
 
 	private void handleRotatingStyleSelected(final String newValue) {
-		rotationDegrees.setEnabled(!newValue.equals("Random"));
-		randomRange.setEnabled(newValue.contains("(Range)"));
-		rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
-		rotationCenterPointY.setEnabled(newValue.equals("Around Adjustable Center"));
+
+		addOrRemoveFromScreen(ratatingScreen, randomRange, newValue.contains("(Range)"));
+		addOrRemoveFromScreen(ratatingScreen, rotationCenterPointX, newValue.equals("Around Adjustable Center"));
+		addOrRemoveFromScreen(ratatingScreen, rotationCenterPointY, newValue.equals("Around Adjustable Center"));
+		addOrRemoveFromScreen(ratatingScreen, rotationDegrees, !newValue.equals("Random"));
+		addOrRemoveFromScreen(ratatingScreen, incrementingDegreesAdding, !newValue.equals("Random"));
+		addOrRemoveFromScreen(ratatingScreen, randomDegreesAdding, !newValue.equals("Random"));
+		addOrRemoveFromScreen(ratatingScreen, flipRandomUpDown, !newValue.equals("Random"));
+		addOrRemoveFromScreen(ratatingScreen, flipRandomLeftRight, !newValue.equals("Random"));
+		// rotationDegrees.setEnabled(!newValue.equals("Random"));
+		// randomRange.setEnabled(newValue.contains("(Range)"));
+		// rotationCenterPointX.setEnabled(newValue.equals("Around Adjustable Center"));
+		// rotationCenterPointY.setEnabled(newValue.equals("Around Adjustable Center"));
 	}
 
 	public void handleDropShadowTypeSelection(final DROP_SHADOW_TYPE type) {
@@ -210,6 +227,14 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 			getPreferenceScreen().addPreference(preference);
 		} else {
 			getPreferenceScreen().removePreference(preference);
+		}
+	}
+
+	private void addOrRemoveFromScreen(final PreferenceScreen screen, final Preference preference, final boolean visible) {
+		if (visible) {
+			screen.addPreference(preference);
+		} else {
+			screen.removePreference(preference);
 		}
 	}
 

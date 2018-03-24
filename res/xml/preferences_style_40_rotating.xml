@@ -77,7 +77,17 @@
 	        seekbarpreference:maxValue="180"
 	        seekbarpreference:minValue="-180"
 	        seekbarpreference:stepValue="5" />
-	    
+	
+   	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+	        android:defaultValue="0"
+	        android:dialogMessage="Incrementing Degrees adding"
+	        android:key="incrementingDegreesAdding"
+	        android:summary="%1$d° added for each pattern"
+	        android:title="Incrementing Degrees adding"
+	        seekbarpreference:maxValue="30"
+	        seekbarpreference:minValue="-30"
+	        seekbarpreference:stepValue="1" />
+   	    
     </PreferenceScreen>
 
 </PreferenceScreen>

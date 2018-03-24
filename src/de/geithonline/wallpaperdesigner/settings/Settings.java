@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
+	public static final String KEY_INCREMENTING_DEGREES_ADDING = "incrementingDegreesAdding";
 	public static final String KEY_RANDOM_DEGREES_ADDING = "randomDegreesAdding";
 	public static final String KEY_COUNTER_CLOCKWISE = "counterClockwise";
 	public static final String KEY_BACKGROUND_PICKER = "backgroundPicker";
@@ -668,6 +669,10 @@ public class Settings {
 
 	public static int getRandomDegreesAddingAmount() {
 		return readIntegerPref(KEY_RANDOM_DEGREES_ADDING, 0);
+	}
+
+	public static float getIncrementingDegreesAddingAmount() {
+		return readIntegerPref(KEY_INCREMENTING_DEGREES_ADDING, 0) * 0.1f;
 	}
 
 	public static boolean isRandomRotate() {

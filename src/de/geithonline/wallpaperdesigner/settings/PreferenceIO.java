@@ -345,6 +345,9 @@ public class PreferenceIO {
 		if (!keySet.contains(Settings.KEY_RADIUS_TYPE)) {
 			setDefaultStringValue(prefs, Settings.KEY_RADIUS_TYPE, "Random");
 		}
+		if (!keySet.contains(Settings.KEY_INCREMENTING_DEGREES_ADDING)) {
+			setDefaultIntValue(prefs, Settings.KEY_INCREMENTING_DEGREES_ADDING, 0);
+		}
 	}
 
 	private static void setDefaultStringValue(final SharedPreferences prefs, final String key, final String value) {
