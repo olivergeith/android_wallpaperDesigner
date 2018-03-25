@@ -14,6 +14,7 @@
             android:key="scenePercentageOfCircles"
             android:summary="%1$d percent"
             android:title="Percentage of circles"
+	        seekbarpreference:unit="%"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="1"
             seekbarpreference:stepValue="1" />

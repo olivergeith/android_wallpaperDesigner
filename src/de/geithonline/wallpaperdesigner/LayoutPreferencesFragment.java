@@ -7,6 +7,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
@@ -20,6 +21,13 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 	private ListPreference mainlayouts;
 	private ListPreference mainlayoutVariants;
 	private ListPreference limit2Canvas;
+	private InlineSeekBarPreference overlapping;
+	private InlineSeekBarPreference centerPointX;
+	private InlineSeekBarPreference centerPointY;
+	private InlineSeekBarPreference anzahlPatterns;
+	private CheckBoxPreference blurring;
+	private CheckBoxPreference counterClockwise;
+	private CheckBoxPreference randomStartWinkel;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -29,6 +37,13 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 		mainlayouts = (ListPreference) findPreference("mainlayouts");
 		mainlayoutVariants = (ListPreference) findPreference("mainlayoutVariants");
 		limit2Canvas = (ListPreference) findPreference("limit2Canvas");
+		overlapping = (InlineSeekBarPreference) findPreference("overlapping");
+		centerPointX = (InlineSeekBarPreference) findPreference("centerPointX");
+		centerPointY = (InlineSeekBarPreference) findPreference("centerPointY");
+		anzahlPatterns = (InlineSeekBarPreference) findPreference("anzahlPatterns");
+		blurring = (CheckBoxPreference) findPreference("blurPatterns");
+		counterClockwise = (CheckBoxPreference) findPreference(Settings.KEY_COUNTER_CLOCKWISE);
+		randomStartWinkel = (CheckBoxPreference) findPreference("ramdomStartWinkel");
 
 		mainlayouts.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
@@ -68,24 +83,26 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 
 	private void handleMainLayoutSelect(final String selectedLayout) {
 		mainlayouts.setSummary(selectedLayout);
-		final InlineSeekBarPreference overlapping = (InlineSeekBarPreference) findPreference("overlapping");
-		final InlineSeekBarPreference centerPointX = (InlineSeekBarPreference) findPreference("centerPointX");
-		final InlineSeekBarPreference centerPointY = (InlineSeekBarPreference) findPreference("centerPointY");
-		final InlineSeekBarPreference anzahlPatterns = (InlineSeekBarPreference) findPreference("anzahlPatterns");
-		final CheckBoxPreference blurring = (CheckBoxPreference) findPreference("blurPatterns");
-		final CheckBoxPreference counterClockwise = (CheckBoxPreference) findPreference(Settings.KEY_COUNTER_CLOCKWISE);
-		final CheckBoxPreference randomStartWinkel = (CheckBoxPreference) findPreference("ramdomStartWinkel");
-		overlapping.setEnabled(RasterFactory.hasLayoutOverlap(selectedLayout));
-		anzahlPatterns.setEnabled(RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
-		blurring.setEnabled(RasterFactory.hasLayoutBlurring(selectedLayout));
-		counterClockwise.setEnabled(RasterFactory.hasCounterClockwise(selectedLayout));
-		randomStartWinkel.setEnabled(RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
 
-		centerPointX.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		centerPointY.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		addOrRemove(overlapping, RasterFactory.hasLayoutOverlap(selectedLayout));
+		addOrRemove(anzahlPatterns, RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
+		addOrRemove(blurring, RasterFactory.hasLayoutBlurring(selectedLayout));
+		addOrRemove(counterClockwise, RasterFactory.hasCounterClockwise(selectedLayout));
+		addOrRemove(randomStartWinkel, RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
+		addOrRemove(centerPointX, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		addOrRemove(centerPointY, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		addOrRemove(mainlayoutVariants, RasterFactory.hasLayoutVariants(selectedLayout));
 
-		// Pattern Variants
-		mainlayoutVariants.setEnabled(RasterFactory.hasLayoutVariants(selectedLayout));
+		// overlapping.setEnabled(RasterFactory.hasLayoutOverlap(selectedLayout));
+		// anzahlPatterns.setEnabled(RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
+		// blurring.setEnabled(RasterFactory.hasLayoutBlurring(selectedLayout));
+		// counterClockwise.setEnabled(RasterFactory.hasCounterClockwise(selectedLayout));
+		// randomStartWinkel.setEnabled(RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
+		// centerPointX.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		// centerPointY.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		//
+		// // Pattern Variants
+		// mainlayoutVariants.setEnabled(RasterFactory.hasLayoutVariants(selectedLayout));
 
 		if (RasterFactory.hasLayoutVariants(selectedLayout)) {
 			Log.i("Layout", "Setting Layout Variants...");
@@ -111,6 +128,18 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 
 	private void handleMainLayoutVariantSelect(final String variante) {
 		mainlayoutVariants.setSummary(variante);
+	}
+
+	private void addOrRemove(final Preference preference, final boolean visible) {
+		addOrRemoveFromScreen(getPreferenceScreen(), preference, visible);
+	}
+
+	private void addOrRemoveFromScreen(final PreferenceScreen screen, final Preference preference, final boolean visible) {
+		if (visible) {
+			screen.addPreference(preference);
+		} else {
+			screen.removePreference(preference);
+		}
 	}
 
 }

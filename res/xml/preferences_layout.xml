@@ -24,6 +24,7 @@
         android:key="overlapping"
         android:summary="%1$d (smaler number means more overlapping)"
         android:title="@string/overlapping"
+        seekbarpreference:unit="%"
         seekbarpreference:maxValue="200"
         seekbarpreference:minValue="10"
         seekbarpreference:stepValue="2" />
@@ -34,6 +35,7 @@
         android:key="centerPointX"
         android:summary="%1$d Percent of width)"
         android:title="Center Position X-Axis"
+        seekbarpreference:unit="%"
         seekbarpreference:maxValue="100"
         seekbarpreference:minValue="0"
         seekbarpreference:stepValue="1" />
@@ -44,6 +46,7 @@
         android:key="centerPointY"
         android:summary="%1$d Percent of height)"
         android:title="Center Position Y-Axis"
+        seekbarpreference:unit="%"
         seekbarpreference:maxValue="100"
         seekbarpreference:minValue="0"
         seekbarpreference:stepValue="1" />

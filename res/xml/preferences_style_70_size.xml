@@ -23,6 +23,7 @@
             android:key="patternSizeAdjust"
             android:summary="%1$d percent"
             android:title="@string/patternSizeAdjust"
+	        seekbarpreference:unit="%"
             seekbarpreference:maxValue="700"
             seekbarpreference:minValue="10"
             seekbarpreference:stepValue="5" />      
@@ -33,6 +34,7 @@
             android:key="patternMinSizeAdjust"
             android:summary="Minimum Pattern size is %1$d percent of maximum Pattern Size"
             android:title="@string/patternMinSizeAdjust"
+	        seekbarpreference:unit="%"
             seekbarpreference:maxValue="100"
             seekbarpreference:minValue="5"
             seekbarpreference:stepValue="5" />

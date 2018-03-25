@@ -35,6 +35,7 @@
             android:key="rotationDegrees"
             android:summary="%1$d°"
             android:title="@string/rotationDegrees"
+	        seekbarpreference:unit="°"
             seekbarpreference:maxValue="180"
             seekbarpreference:minValue="-180"
             seekbarpreference:stepValue="1"/>
@@ -45,6 +46,7 @@
             android:key="randomRange"
             android:summary="between -%1$d° and +%1$d°"
             android:title="@string/randomRange"
+	        seekbarpreference:unit="°"
             seekbarpreference:maxValue="180"
             seekbarpreference:minValue="0"
             seekbarpreference:stepValue="1" />
@@ -54,6 +56,7 @@
 	        android:key="rotationCenterPointX"
 	        android:summary="%1$d Percent of width"
 	        android:title="Center X-Axis"
+	        seekbarpreference:unit="%"
 	        seekbarpreference:maxValue="150"
 	        seekbarpreference:minValue="-50"
 	        seekbarpreference:stepValue="1" />
@@ -64,6 +67,7 @@
 	        android:key="rotationCenterPointY"
 	        android:summary="%1$d Percent of height"
 	        android:title="Center Y-Axis"
+	        seekbarpreference:unit="%"
 	        seekbarpreference:maxValue="150"
 	        seekbarpreference:minValue="-50"
 	        seekbarpreference:stepValue="1" />
@@ -74,6 +78,7 @@
 	        android:key="randomDegreesAdding"
 	        android:summary="%1$d° added randomly"
 	        android:title="Random Degrees adding"
+	        seekbarpreference:unit="°"
 	        seekbarpreference:maxValue="180"
 	        seekbarpreference:minValue="-180"
 	        seekbarpreference:stepValue="5" />
@@ -84,6 +89,9 @@
 	        android:key="incrementingDegreesAdding"
 	        android:summary="%1$d° added for each pattern"
 	        android:title="Incrementing Degrees adding"
+	        seekbarpreference:unit="°"
+	        seekbarpreference:interpreteAsFloat="true"
+	        seekbarpreference:interpreteAsFloatFactor="10"
 	        seekbarpreference:maxValue="30"
 	        seekbarpreference:minValue="-30"
 	        seekbarpreference:stepValue="1" />

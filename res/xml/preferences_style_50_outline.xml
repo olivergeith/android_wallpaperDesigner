@@ -23,6 +23,7 @@
             android:key="percentageOfOutlineOnly"
             android:summary="%1$d percent"
             android:title="Percentage of outline only patterns"
+	        seekbarpreference:unit="%"
             seekbarpreference:maxValue="100"
             seekbarpreference:minValue="0"
             seekbarpreference:stepValue="1" />
@@ -42,6 +43,7 @@
             android:key="outlineThicknessAdjust"
             android:summary="%1$d percent"
             android:title="@string/outlineThicknessAdjust"
+	        seekbarpreference:unit="%"
             seekbarpreference:maxValue="800"
             seekbarpreference:minValue="10"
             seekbarpreference:stepValue="5" />
@@ -53,6 +55,7 @@
             android:key="outlineThicknessLimit"
             android:summary="%1$d pixel (outline will never be thicken than this)"
             android:title="@string/outlineThicknessLimit"
+	        seekbarpreference:unit=" pixel"
             seekbarpreference:maxValue="25"
             seekbarpreference:minValue="1"
             seekbarpreference:stepValue="1" />

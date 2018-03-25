@@ -32,6 +32,7 @@
             android:dialogMessage="Radius Adjustment"
             android:key="dropShadowRadiusAdjustment"
             android:title="Radius Adjustment"
+	        seekbarpreference:unit="%"
             seekbarpreference:maxValue="1000"
             seekbarpreference:minValue="10"
             seekbarpreference:stepValue="10" />
@@ -40,6 +41,7 @@
             android:dialogMessage="Offset-X"
             android:key="dropShadowOffsetX"
             android:title="Offset-X"
+	        seekbarpreference:unit=" pixel"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="-50"
             seekbarpreference:stepValue="1" />
@@ -48,6 +50,7 @@
             android:dialogMessage="Offset-Y"
             android:key="dropShadowOffsetY"
             android:title="Offset-Y"
+	        seekbarpreference:unit=" pixel"
             seekbarpreference:maxValue="50"
             seekbarpreference:minValue="-50"
             seekbarpreference:stepValue="1" />
