@@ -9,7 +9,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
@@ -22,7 +21,7 @@ import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 /**
  * This fragment shows the preferences for the first header.
  */
-public class StylePreferencesFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+public class StylePreferencesFragment extends AbstractPreferenceFragment implements OnSharedPreferenceChangeListener {
 
 	private ListPreference patternSelection;
 	private ListPreference patternVariantSelection;
@@ -180,37 +179,37 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		Log.i("GEITH", "addSpecialPreferences..." + pattern + "-" + variant);
 
 		// Special Pattern Settings enabel or disable
-		addOrRemoveScreen(jellyfishOptions, //
+		addOrRemoveFromMainScreen(jellyfishOptions, //
 				pattern.equalsIgnoreCase("Jellyfish"));
 
-		addOrRemoveScreen(jellyfishTopviewOptions, //
+		addOrRemoveFromMainScreen(jellyfishTopviewOptions, //
 				pattern.equalsIgnoreCase("Jellyfish Topview") && variant.equals("Fully customizable"));
 
-		addOrRemoveScreen(sceneRainOptions, //
+		addOrRemoveFromMainScreen(sceneRainOptions, //
 				pattern.equalsIgnoreCase("Rain"));
 
-		addOrRemoveScreen(cubeOptions, //
+		addOrRemoveFromMainScreen(cubeOptions, //
 				pattern.equalsIgnoreCase("3D Objects"));
 
-		addOrRemoveScreen(textOptions, //
+		addOrRemoveFromMainScreen(textOptions, //
 				pattern.equalsIgnoreCase("Text"));
 
 		// removing unused stuff
-		addOrRemoveScreen(cMazeOptions, //
+		addOrRemoveFromMainScreen(cMazeOptions, //
 				pattern.equalsIgnoreCase("Circular"));
 
-		addOrRemoveScreen(leafOptions, //
+		addOrRemoveFromMainScreen(leafOptions, //
 				PatternPropertyStore.hasNumberOfLeafsOption(pattern));
 		// removing unused stuff
-		addOrRemoveScreen(filledOptions, //
+		addOrRemoveFromMainScreen(filledOptions, //
 				PatternPropertyStore.hasPatternFilledOption(pattern));
 
-		addOrRemoveScreen(outlineScreen, //
+		addOrRemoveFromMainScreen(outlineScreen, //
 				PatternPropertyStore.hasPatternOutlineEffect(pattern));
 
-		addOrRemoveScreen(glossyScreen, //
+		addOrRemoveFromMainScreen(glossyScreen, //
 				PatternPropertyStore.hasPatternGlossyEffect(pattern));
-		addOrRemoveScreen(ratatingScreen, //
+		addOrRemoveFromMainScreen(ratatingScreen, //
 				PatternPropertyStore.hasPatternRandomRotate(pattern));
 
 		// // some precausions
@@ -218,22 +217,6 @@ public class StylePreferencesFragment extends PreferenceFragment implements OnSh
 		// Settings.prefs.edit().putInt(Settings.KEY_PATTERN_ANZAHL_PATTERNS, 300).commit();
 		// }
 
-	}
-
-	private void addOrRemoveScreen(final Preference preference, final boolean visible) {
-		if (visible) {
-			getPreferenceScreen().addPreference(preference);
-		} else {
-			getPreferenceScreen().removePreference(preference);
-		}
-	}
-
-	private void addOrRemoveFromScreen(final PreferenceScreen screen, final Preference preference, final boolean visible) {
-		if (visible) {
-			screen.addPreference(preference);
-		} else {
-			screen.removePreference(preference);
-		}
 	}
 
 	protected void handlePatternVariantSelect(final String newVariant) {

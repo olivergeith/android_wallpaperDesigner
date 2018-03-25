@@ -6,8 +6,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
@@ -16,7 +14,7 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
 /**
  * This fragment shows the preferences for the first header.
  */
-public class LayoutPreferencesFragment extends PreferenceFragment {
+public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
 	private ListPreference mainlayouts;
 	private ListPreference mainlayoutVariants;
@@ -84,14 +82,14 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 	private void handleMainLayoutSelect(final String selectedLayout) {
 		mainlayouts.setSummary(selectedLayout);
 
-		addOrRemove(overlapping, RasterFactory.hasLayoutOverlap(selectedLayout));
-		addOrRemove(anzahlPatterns, RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
-		addOrRemove(blurring, RasterFactory.hasLayoutBlurring(selectedLayout));
-		addOrRemove(counterClockwise, RasterFactory.hasCounterClockwise(selectedLayout));
-		addOrRemove(randomStartWinkel, RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
-		addOrRemove(centerPointX, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		addOrRemove(centerPointY, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		addOrRemove(mainlayoutVariants, RasterFactory.hasLayoutVariants(selectedLayout));
+		addOrRemoveFromMainScreen(overlapping, RasterFactory.hasLayoutOverlap(selectedLayout));
+		addOrRemoveFromMainScreen(anzahlPatterns, RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
+		addOrRemoveFromMainScreen(blurring, RasterFactory.hasLayoutBlurring(selectedLayout));
+		addOrRemoveFromMainScreen(counterClockwise, RasterFactory.hasCounterClockwise(selectedLayout));
+		addOrRemoveFromMainScreen(randomStartWinkel, RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
+		addOrRemoveFromMainScreen(centerPointX, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		addOrRemoveFromMainScreen(centerPointY, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
+		addOrRemoveFromMainScreen(mainlayoutVariants, RasterFactory.hasLayoutVariants(selectedLayout));
 
 		// overlapping.setEnabled(RasterFactory.hasLayoutOverlap(selectedLayout));
 		// anzahlPatterns.setEnabled(RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
@@ -128,18 +126,6 @@ public class LayoutPreferencesFragment extends PreferenceFragment {
 
 	private void handleMainLayoutVariantSelect(final String variante) {
 		mainlayoutVariants.setSummary(variante);
-	}
-
-	private void addOrRemove(final Preference preference, final boolean visible) {
-		addOrRemoveFromScreen(getPreferenceScreen(), preference, visible);
-	}
-
-	private void addOrRemoveFromScreen(final PreferenceScreen screen, final Preference preference, final boolean visible) {
-		if (visible) {
-			screen.addPreference(preference);
-		} else {
-			screen.removePreference(preference);
-		}
 	}
 
 }
