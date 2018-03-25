@@ -42,6 +42,8 @@ public class PreferenceIO {
 		ignoreKeys.add(Settings.KEY_RESTORE_WALLPAPER_SIZE);
 		ignoreKeys.add(Settings.KEY_CREATE_GIF);
 		ignoreKeys.add(Settings.KEY_CREATE_GIF_SIZE);
+		ignoreKeys.add(Settings.KEY_CREATE_GIF_QUALITY);
+		ignoreKeys.add(Settings.KEY_CREATE_GIF_LENGTH);
 
 		ignoreKeys.add("debug");
 

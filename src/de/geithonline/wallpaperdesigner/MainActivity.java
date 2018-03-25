@@ -58,7 +58,6 @@ import de.geithonline.wallpaperdesigner.utils.AnimatedGifEncoder;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.utils.DebugHelper;
-import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
@@ -355,7 +354,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
-		dialog.setMessage("Saving Animated Gif...");
+		dialog.setMessage("Saving Animated Gif \n(" + aniBitmaps.size() + " Frames)");
 		dialog.show();
 		Toaster.showInfoToast(this, "Gifs are saved to: " + StorageHelper.getWallpaperGifDir());
 	}
@@ -692,25 +691,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		@Override
 		protected Integer doInBackground(final Void... params) {
 			if (Settings.isCreateGif()) {
-				if (aniBitmaps != null && !aniBitmaps.isEmpty()) {
-					// Create final animated gif
-					final AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-					final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-					encoder.setQuality(5);
-					encoder.start(bos);
-					encoder.setDelay(100);
-					encoder.setRepeat(0);
-					encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
-					for (final Bitmap bmp : aniBitmaps) {
-						encoder.addFrame(bmp);
-					}
-					encoder.setDelay(1000);
-					BitmapFileIO.saveAnimatedGif(bos, StorageHelper.getWallpaperGifDir() + "WPD_AnimatedGif_" + FileIOHelper.getTimeStampForFile() + ".gif");
-					encoder.finish();
-					for (final Bitmap bmp : aniBitmaps) {
-						bmp.recycle();
-					}
-				}
+				BitmapFileIO.saveGif(aniBitmaps);
 			}
 			return 0;
 		}
