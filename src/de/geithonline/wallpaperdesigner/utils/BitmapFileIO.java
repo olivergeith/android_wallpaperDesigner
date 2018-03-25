@@ -5,10 +5,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.settings.Settings;
 
 public class BitmapFileIO {
 
@@ -120,7 +122,7 @@ public class BitmapFileIO {
 		return inSampleSize;
 	}
 
-	public static void saveAnimatedGif(final ByteArrayOutputStream bos, final String path) {
+	private static void saveAnimatedGif(final ByteArrayOutputStream bos, final String path) {
 		FileOutputStream outStream = null;
 		try {
 			Log.i("GIF", "saving Animated Gif to " + path);
@@ -129,6 +131,26 @@ public class BitmapFileIO {
 			outStream.close();
 		} catch (final Exception e) {
 			Log.e("GIF", "Error Saving Gif", e);
+		}
+	}
+
+	public static void saveGif(final List<Bitmap> aniBitmaps) {
+		// Create final animated gif
+		final AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		encoder.start(bos);
+		encoder.setQuality(Settings.getGifQuality());
+		encoder.setRepeat(0);
+		encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
+		encoder.setDelay(100);
+		for (final Bitmap bmp : aniBitmaps) {
+			encoder.addFrame(bmp);
+		}
+		encoder.setDelay(1000);
+		saveAnimatedGif(bos, StorageHelper.getWallpaperGifDir() + "WPD_AnimatedGif_" + FileIOHelper.getTimeStampForFile() + ".gif");
+		encoder.finish();
+		for (final Bitmap bmp : aniBitmaps) {
+			bmp.recycle();
 		}
 
 	}

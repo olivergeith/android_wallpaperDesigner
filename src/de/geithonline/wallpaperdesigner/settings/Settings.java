@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
+	public static final String KEY_CREATE_GIF_QUALITY = "createGifQuality";
 	public static final String KEY_CREATE_GIF_SIZE = "createGifSize";
 	public static final String KEY_CREATE_GIF = "createGif";
 	public static final String KEY_EXPERT_MODE = "expertMode";
@@ -1066,6 +1067,10 @@ public class Settings {
 
 	public static int getGifSize() {
 		return readIntegerPref(KEY_CREATE_GIF_SIZE, 500);
+	}
+
+	public static int getGifQuality() {
+		return readIntegerPref(KEY_CREATE_GIF_QUALITY, 10);
 	}
 
 	public static int getRenderingProcessFrames() {
