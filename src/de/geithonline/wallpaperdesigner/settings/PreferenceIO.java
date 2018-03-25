@@ -39,6 +39,8 @@ public class PreferenceIO {
 		ignoreKeys.add(Settings.KEY_SHARE_SUBJECT);
 		ignoreKeys.add(Settings.KEY_SHARE_TEXT);
 		ignoreKeys.add(Settings.KEY_APP_THEME);
+		ignoreKeys.add(Settings.KEY_RESTORE_WALLPAPER_SIZE);
+
 		ignoreKeys.add("debug");
 
 		colorKeys.add(Settings.KEY_COLOR1);

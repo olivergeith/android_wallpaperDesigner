@@ -85,10 +85,10 @@
 	
    	    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
 	        android:defaultValue="0"
-	        android:dialogMessage="Incrementing Degrees adding"
+	        android:dialogMessage="Adding degrees for each pattern"
 	        android:key="incrementingDegreesAdding"
 	        android:summary="%1$d° added for each pattern"
-	        android:title="Incrementing Degrees adding"
+	        android:title="Adding degrees for each pattern"
 	        seekbarpreference:unit="°"
 	        seekbarpreference:interpreteAsFloat="true"
 	        seekbarpreference:interpreteAsFloatFactor="10"
