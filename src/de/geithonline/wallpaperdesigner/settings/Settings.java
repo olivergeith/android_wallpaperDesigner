@@ -25,6 +25,8 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
+	public static final String KEY_CREATE_GIF_SIZE = "createGifSize";
+	public static final String KEY_CREATE_GIF = "createGif";
 	public static final String KEY_EXPERT_MODE = "expertMode";
 	public static final String KEY_INCREMENTING_DEGREES_ADDING = "incrementingDegreesAdding";
 	public static final String KEY_RANDOM_DEGREES_ADDING = "randomDegreesAdding";
@@ -1056,6 +1058,14 @@ public class Settings {
 
 	public static boolean isShowRenderingProcess() {
 		return readBooleanPref(KEY_SHOW_RENDERING_PROCESS, false);
+	}
+
+	public static boolean isCreateGif() {
+		return isShowRenderingProcess() && readBooleanPref(KEY_CREATE_GIF, false);
+	}
+
+	public static int getGifSize() {
+		return readIntegerPref(KEY_CREATE_GIF_SIZE, 500);
 	}
 
 	public static int getRenderingProcessFrames() {

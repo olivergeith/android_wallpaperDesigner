@@ -18,6 +18,9 @@ public class StorageHelper {
 	private final static String imagesDir = DIR_SDCARD + File.separator + "Pictures" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File imagesDirFile = new File(imagesDir);
 
+	private final static String gifDir = DIR_SDCARD + File.separator + "Pictures" + File.separator + "WallpaperDesignerGifs" + File.separator;
+	private final static File gifDirFile = new File(gifDir);
+
 	private final static String designsDir = DIR_SDCARD + File.separator + "data" + File.separator + "WallpaperDesigner" + File.separator;
 	private final static File designsDirFile = new File(designsDir);
 
@@ -41,6 +44,7 @@ public class StorageHelper {
 	static {
 		createDirs(uploadDirFile);
 		createDirs(imagesDirFile);
+		createDirs(gifDirFile);
 		createDirs(designsDirFile);
 		createDirs(downloadDirFile);
 		createDirs(backupDirFile);
@@ -78,6 +82,10 @@ public class StorageHelper {
 
 	public static String getWallpaperImagesDir() {
 		return imagesDir;
+	}
+
+	public static String getWallpaperGifDir() {
+		return gifDir;
 	}
 
 	// extStorage/data/WallpaperDesigner

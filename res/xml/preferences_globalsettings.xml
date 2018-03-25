@@ -66,7 +66,26 @@
         seekbarpreference:maxValue="100"
         seekbarpreference:minValue="0"
         seekbarpreference:stepValue="5" />
+    
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:dependency="showRenderingProcess"
+        android:key="createGif"
+        android:summary="Creates an Animated Gif from the Rendering Progress each time you save an Image...ATTENTION: This may slow down the rendering/saving and cause APP crashes!"
+        android:title="Animated Gif" />
 
+    <de.geithonline.android.basics.preferences.InlineSeekBarPreference
+        android:defaultValue="500"
+        android:dependency="createGif"
+        android:dialogMessage="Size Of Gif (width)"
+        android:key="createGifSize"
+        android:summary="Width Of Gif"
+        android:title="Size Of Gif (width)"
+        seekbarpreference:unit=" pixel"
+        seekbarpreference:maxValue="1000"
+        seekbarpreference:minValue="500"
+        seekbarpreference:stepValue="100" />
+    
     <PreferenceCategory android:title="Wallpaper saving" />
 
     <ListPreference

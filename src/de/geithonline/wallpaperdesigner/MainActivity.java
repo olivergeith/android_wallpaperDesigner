@@ -1,11 +1,13 @@
 
 package de.geithonline.wallpaperdesigner;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.Manifest;
@@ -52,8 +54,11 @@ import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
+import de.geithonline.wallpaperdesigner.utils.AnimatedGifEncoder;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
+import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.utils.DebugHelper;
+import de.geithonline.wallpaperdesigner.utils.FileIOHelper;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
@@ -78,6 +83,8 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
+	private final List<Bitmap> aniBitmaps = new ArrayList<>();
+	private MenuItem gifMenuItem;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -86,6 +93,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
 		setTheme(Settings.getTheme());
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_main);
 		// prefs.registerOnSharedPreferenceChangeListener(this);
 		wallpaperView = (TouchImageView) findViewById(R.id.wallpaperview);
@@ -164,6 +172,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 				setWallpaper();
 			}
 		});
+
 		initSensors();
 		requestPermission();
 	}
@@ -265,6 +274,13 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 			if (!Settings.isShowSetWallpaperButton()) {
 				setWallButton.setVisibility(View.INVISIBLE);
 			}
+			if (gifMenuItem != null) {
+				if (!Settings.isCreateGif()) {
+					gifMenuItem.setVisible(false);
+				} else {
+					gifMenuItem.setVisible(true);
+				}
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -333,6 +349,17 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		task.execute();
 	}
 
+	public synchronized void saveGif() {
+		final GifSaverTask task = new GifSaverTask();
+		task.execute();
+		dialog = new ProgressDialog(this);
+		dialog.setIndeterminate(true);
+		dialog.setCancelable(false);
+		dialog.setMessage("Saving Animated Gif...");
+		dialog.show();
+		Toaster.showInfoToast(this, "Gifs are saved to: " + StorageHelper.getWallpaperGifDir());
+	}
+
 	public synchronized void save() {
 		final BitmapSaverTask task = new BitmapSaverTask();
 		task.execute();
@@ -382,10 +409,23 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	}
 
 	@Override
+	public boolean onPrepareOptionsMenu(final Menu menu) {
+		Log.i("GIF", "onPrepareOptionsMenu");
+		if (!Settings.isCreateGif()) {
+			gifMenuItem.setVisible(false);
+		} else {
+			gifMenuItem.setVisible(true);
+		}
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
+
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_menu, menu);
 
+		gifMenuItem = menu.findItem(R.id.action_save_gif);
 		// Locate MenuItem with ShareActionProvider
 		final MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 		// Fetch and store ShareActionProvider
@@ -415,6 +455,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		Log.i("Geith", "id=" + id);
 		if (id == R.id.action_save) {
 			save();
+			return true;
+		}
+		if (id == R.id.action_save_gif) {
+			saveGif();
 			return true;
 		}
 		if (id == R.id.action_save_settings) {
@@ -483,6 +527,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		private Bitmap bitmap;
 		private String message = "Rendering...";
 
+		AnimatedGifEncoder encoder = null;
+		ByteArrayOutputStream bos;
+
 		public BitmapWorkerTask(final TouchImageView imageView) {
 			// Use a WeakReference to ensure the ImageView can be garbage
 			// collected
@@ -492,10 +539,10 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		// Decode image in background.
 		@Override
 		protected Bitmap doInBackground(final Integer... params) {
+			aniBitmaps.clear();
 			drawer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
 			// drawer.recycleBitmap();
 			Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
-
 			final Bitmap bitmap = drawer.drawBitmap(this);
 			return bitmap;
 		}
@@ -552,6 +599,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 					}
 					imageView.fit2Screen();
 				}
+			}
+			if (Settings.isCreateGif()) {
+				aniBitmaps.add(BitmapHelper.scallToWidth(bitmap, Settings.getGifSize()));
 			}
 		}
 
@@ -620,6 +670,47 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		protected Integer doInBackground(final Void... params) {
 			if (drawer != null) {
 				drawer.save(getApplicationContext(), false);
+			}
+			return 0;
+		}
+
+		@Override
+		protected void onPostExecute(final Integer i) {
+			if (dialog != null) {
+				dialog.cancel();
+			}
+		}
+
+	}
+
+	// ##########################################################
+	class GifSaverTask extends AsyncTask<Void, Void, Integer> {
+
+		public GifSaverTask() {
+		}
+
+		@Override
+		protected Integer doInBackground(final Void... params) {
+			if (Settings.isCreateGif()) {
+				if (aniBitmaps != null && !aniBitmaps.isEmpty()) {
+					// Create final animated gif
+					final AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+					final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+					encoder.setQuality(5);
+					encoder.start(bos);
+					encoder.setDelay(100);
+					encoder.setRepeat(0);
+					encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
+					for (final Bitmap bmp : aniBitmaps) {
+						encoder.addFrame(bmp);
+					}
+					encoder.setDelay(1000);
+					BitmapFileIO.saveAnimatedGif(bos, StorageHelper.getWallpaperGifDir() + "WPD_AnimatedGif_" + FileIOHelper.getTimeStampForFile() + ".gif");
+					encoder.finish();
+					for (final Bitmap bmp : aniBitmaps) {
+						bmp.recycle();
+					}
+				}
 			}
 			return 0;
 		}
