@@ -37,7 +37,7 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Oval",
-						"Oval (random width)", "Oval (random)", "Half Circle", "Mixed", "Mixed (with Circle)" }));
+						"Oval (random width)", "Oval (random)", "Lense", "Half Circle", "Mixed", "Mixed (with Circle)" }));
 
 		patternProperties.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", //
@@ -131,7 +131,7 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Rain", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { //
-						"Rain", "Rectangle Rain", "Triangle Rain", "Drop"//
+						"Rain", "Rectangle Rain", "Triangle Rain", "Drop", "Lense"//
 				}));
 
 		patternProperties.put("Rectangles", new PatternProperties(true, true, false, true, false, true, //

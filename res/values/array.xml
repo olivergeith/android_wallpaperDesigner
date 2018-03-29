@@ -279,6 +279,13 @@
         <item >Decreasing</item>
         <item >Random In- or Decreasing</item>
         </string-array>
+   
+    <string-array name="linestyle">
+        <item >Straight Line</item>
+        <item >Bow</item>
+        <item >Sinus</item>
+        <item >Zig-Zag</item>
+    </string-array>
     
     
 </resources>

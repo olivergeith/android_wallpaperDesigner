@@ -25,6 +25,7 @@ import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.ZipHelper;
 
 public class Settings {
+	public static final String KEY_RAIN_LINE_STYLE = "rainLineStyle";
 	public static final String KEY_CREATE_GIF_LENGTH = "createGifLength";
 	public static final String KEY_CREATE_GIF_QUALITY = "createGifQuality";
 	public static final String KEY_CREATE_GIF_SIZE = "createGifSize";
@@ -651,6 +652,10 @@ public class Settings {
 
 	public static int getScenePercentageOfCircles() {
 		return readIntegerPref(KEY_SCENE_PERCENTAGE_OF_CIRCLES, 5);
+	}
+
+	public static String getRainLineStyle() {
+		return readStringPref(KEY_RAIN_LINE_STYLE, "Straight Line");
 	}
 
 	// ###################################################################

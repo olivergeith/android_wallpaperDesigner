@@ -307,42 +307,16 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	}
 
 	public synchronized void generate() {
-		final BitmapWorkerTask task = new BitmapWorkerTask(wallpaperView);
-		task.execute();
 		dialog = new ProgressDialog(this);
 		dialog.setMessage("Rendering Background...");
 		dialog.setIndeterminate(true);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		dialog.setCancelable(false);
-		// ############################################################
-		// this will enable cancle on back button!
-		// ############################################################
-		// dialog.setCancelable(true);
-		// dialog.setOnCancelListener(new OnCancelListener() {
-		//
-		// @Override
-		// public void onCancel(final DialogInterface dialog) {
-		// task.cancel(true);
-		// }
-		// });
-		// ############################################################
-
-		// Put a cancel button in progress dialog
-		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-			// Set a click listener for progress dialog cancel button
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				// dismiss the progress dialog
-				dialog.dismiss();
-				task.cancel(true);
-			}
-		});
-		// dialog.setProgress(0); // not needed
-
+		final BitmapWorkerTask task = new BitmapWorkerTask(wallpaperView);
+		task.execute();
+		addCancleButtton(dialog, task);
 		if (Settings.isShowRenderingProcess()) {
 			dialog.getWindow().setGravity(Gravity.BOTTOM);
 		}
-		// show the dialog ... must be last call after adding buttons
 		dialog.show();
 	}
 
@@ -357,10 +331,38 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setCancelable(false);
 		dialog.setMessage("Saving Animated Gif \n(" + aniBitmaps.size() + " Frames)");
+		dialog.setCancelable(false);
 		final GifSaverTask task = new GifSaverTask(dialog, aniBitmaps);
 		task.execute();
+		addCancleButtton(dialog, task);
 		dialog.show();
 		Toaster.showInfoToast(this, "Gifs are saved to: " + StorageHelper.getWallpaperGifDir());
+	}
+
+	private void addCancleButtton(final ProgressDialog dialog, final AsyncTask<?, ?, ?> task) {
+		dialog.setCancelable(false);
+		// ############################################################
+		// this will enable cancle on back button!
+		// ############################################################
+		// dialog.setCancelable(true);
+		// dialog.setOnCancelListener(new OnCancelListener() {
+		//
+		// @Override
+		// public void onCancel(final DialogInterface dialog) {
+		// task.cancel(true);
+		// }
+		// });
+		// ############################################################
+		// Put a cancel button in progress dialog
+		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+			// Set a click listener for progress dialog cancel button
+			@Override
+			public void onClick(final DialogInterface dialog, final int which) {
+				// dismiss the progress dialog
+				dialog.dismiss();
+				task.cancel(true);
+			}
+		});
 	}
 
 	public synchronized void save() {

@@ -19,5 +19,16 @@
             seekbarpreference:minValue="1"
             seekbarpreference:stepValue="1" />
        
+        <de.geithonline.android.basics.preferences.CoolListPreference
+            android:defaultValue="Straight Line"
+            android:dialogTitle="Line Style"
+            android:entries="@array/linestyle"
+            android:entryValues="@array/linestyle"
+            android:key="rainLineStyle"
+            android:summary="........"
+            android:title="Line Style" />
+        
+        
+        
     </PreferenceScreen>
 </PreferenceScreen>
