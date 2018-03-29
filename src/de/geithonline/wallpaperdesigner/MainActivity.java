@@ -53,6 +53,9 @@ import de.geithonline.wallpaperdesigner.settings.Design;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.tasks.BitmapAndSetttingsSaverTask;
+import de.geithonline.wallpaperdesigner.tasks.BitmapSaverTask;
+import de.geithonline.wallpaperdesigner.tasks.GifSaverTask;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.AnimatedGifEncoder;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
@@ -349,36 +352,36 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	}
 
 	public synchronized void saveGif() {
-		final GifSaverTask task = new GifSaverTask();
-		task.execute();
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
+		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setCancelable(false);
 		dialog.setMessage("Saving Animated Gif \n(" + aniBitmaps.size() + " Frames)");
+		final GifSaverTask task = new GifSaverTask(dialog, aniBitmaps);
+		task.execute();
 		dialog.show();
 		Toaster.showInfoToast(this, "Gifs are saved to: " + StorageHelper.getWallpaperGifDir());
 	}
 
 	public synchronized void save() {
-		final BitmapSaverTask task = new BitmapSaverTask();
-		task.execute();
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
 		dialog.setMessage("Saving Image...");
+		final BitmapSaverTask task = new BitmapSaverTask(dialog, drawer, getApplicationContext());
+		task.execute();
 		dialog.show();
 		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getWallpaperImagesDir());
 	}
 
 	public synchronized void saveWithSettings() {
-		final BitmapAndSetttingsSaverTask task = new BitmapAndSetttingsSaverTask();
-		task.execute();
 		dialog = new ProgressDialog(this);
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
 		dialog.setMessage("Saving Image and Settings...");
+		final BitmapAndSetttingsSaverTask task = new BitmapAndSetttingsSaverTask(dialog, drawer, getApplicationContext());
+		task.execute();
 		dialog.show();
-		Toaster.showInfoToast(this, "Wallpapers are saved to: " + StorageHelper.getWallpaperImagesDir());
 		updateDrawer();
 	}
 
@@ -429,19 +432,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		final MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 		// Fetch and store ShareActionProvider
 		mShareActionProvider = (ShareActionProvider) shareItem.getActionProvider();
-		// if (mShareActionProvider != null) {
-		// final Intent shareIntent = new Intent();
-		// // shareIntent.setAction(Intent.ACTION_SEND);
-		// // shareIntent.setType("text/plain");
-		// // // shareIntent.putExtra(Intent.EXTRA_SUBJECT,
-		// "Shared from the Wallpaper Designer");
-		// // shareIntent.putExtra(Intent.EXTRA_TEXT,
-		// "https://play.google.com/store/apps/details?id=de.geithonline.wallpaperdesigner");
-		// shareIntent.setAction(Intent.ACTION_SEND);
-		// // shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-		// shareIntent.setType("image/jpeg");
-		// mShareActionProvider.setShareIntent(shareIntent);
-		// }
 		return true;
 	}
 
@@ -660,52 +650,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 	}
 
 	// ##########################################################
-	class BitmapSaverTask extends AsyncTask<Void, Void, Integer> {
-
-		public BitmapSaverTask() {
-		}
-
-		@Override
-		protected Integer doInBackground(final Void... params) {
-			if (drawer != null) {
-				drawer.save(getApplicationContext(), false);
-			}
-			return 0;
-		}
-
-		@Override
-		protected void onPostExecute(final Integer i) {
-			if (dialog != null) {
-				dialog.cancel();
-			}
-		}
-
-	}
-
-	// ##########################################################
-	class GifSaverTask extends AsyncTask<Void, Void, Integer> {
-
-		public GifSaverTask() {
-		}
-
-		@Override
-		protected Integer doInBackground(final Void... params) {
-			if (Settings.isCreateGif()) {
-				BitmapFileIO.saveGif(aniBitmaps);
-			}
-			return 0;
-		}
-
-		@Override
-		protected void onPostExecute(final Integer i) {
-			if (dialog != null) {
-				dialog.cancel();
-			}
-		}
-
-	}
-
-	// ##########################################################
 	public class DesignsLoaderTask extends AsyncTask<Void, Void, List<Design>> {
 		private final WeakReference<ListView> weekListViewRef;
 
@@ -735,29 +679,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 				dialog.cancel();
 			}
 		}
-	}
-
-	// ##########################################################
-	class BitmapAndSetttingsSaverTask extends AsyncTask<Void, Void, Integer> {
-
-		public BitmapAndSetttingsSaverTask() {
-		}
-
-		@Override
-		protected Integer doInBackground(final Void... params) {
-			if (drawer != null) {
-				drawer.save(getApplicationContext(), true);
-			}
-			return 0;
-		}
-
-		@Override
-		protected void onPostExecute(final Integer i) {
-			if (dialog != null) {
-				dialog.cancel();
-			}
-		}
-
 	}
 
 	// ##########################################################

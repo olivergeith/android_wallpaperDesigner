@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.tasks.GifSaverTask;
 
 public class BitmapFileIO {
 
@@ -134,7 +135,7 @@ public class BitmapFileIO {
 		}
 	}
 
-	public static void saveGif(final List<Bitmap> aniBitmaps) {
+	public static void saveGif(final List<Bitmap> aniBitmaps, final GifSaverTask gifSaverTask) {
 		// Create final animated gif
 		if (aniBitmaps != null && !aniBitmaps.isEmpty()) {
 			int delay = (Settings.getGifLength()) / aniBitmaps.size();
@@ -148,9 +149,14 @@ public class BitmapFileIO {
 			encoder.setRepeat(0);
 			encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
 			encoder.setDelay(delay);
+			int i = 0;
 			for (final Bitmap bmp : aniBitmaps) {
+				if (gifSaverTask != null) {
+					gifSaverTask.settingProgress(i);
+				}
 				encoder.addFrame(bmp);
 				encoder.setDelay(delay);
+				i++;
 			}
 			encoder.setDelay(2000); // Last Frame Delay!
 			encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
@@ -162,5 +168,4 @@ public class BitmapFileIO {
 			}
 		}
 	}
-
 }
