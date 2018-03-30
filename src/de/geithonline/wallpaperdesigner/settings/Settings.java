@@ -1083,8 +1083,24 @@ public class Settings {
 		return readIntegerPref(KEY_CREATE_GIF_QUALITY, 10);
 	}
 
-	public static int getRenderingProcessFrames() {
-		return Math.max(1, readIntegerPref(KEY_RENDERING_PROCESS_FRAMES, 10));
+	// public static int getRenderingProcessFrames() {
+	// return Math.max(1, readIntegerPref(KEY_RENDERING_PROCESS_FRAMES, 10));
+	// }
+
+	/**
+	 * calculates the rate after how many patterns the image has to be refreshed. <br>
+	 * Lets sys 3000 Patterns... settings value is 50: 3000/50 = 60 <br>
+	 * So every 60 patterns the image is refreshed.
+	 * 
+	 * @param maxPatterns
+	 * @return
+	 */
+	private static int getRenderingProcessFramesDynamic(final int maxPatterns) {
+		return Math.max(1, maxPatterns / readIntegerPref(KEY_RENDERING_PROCESS_FRAMES, 10));
+	}
+
+	public static boolean isShowProgressBitmap(final int maxPatterns, final int step) {
+		return step % getRenderingProcessFramesDynamic(maxPatterns) == 0;
 	}
 
 	public static boolean isRenderingOnStartingApp() {

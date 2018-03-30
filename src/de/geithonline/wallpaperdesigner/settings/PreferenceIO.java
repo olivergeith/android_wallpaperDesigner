@@ -355,6 +355,9 @@ public class PreferenceIO {
 		if (!keySet.contains(Settings.KEY_INCREMENTING_DEGREES_ADDING)) {
 			setDefaultIntValue(prefs, Settings.KEY_INCREMENTING_DEGREES_ADDING, 0);
 		}
+		if (!keySet.contains(Settings.KEY_RAIN_LINE_STYLE)) {
+			setDefaultStringValue(prefs, Settings.KEY_RAIN_LINE_STYLE, "Straight Line");
+		}
 	}
 
 	private static void setDefaultStringValue(final SharedPreferences prefs, final String key, final String value) {

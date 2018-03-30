@@ -59,13 +59,11 @@
     <de.geithonline.android.basics.preferences.InlineSeekBarPreference
         android:defaultValue="10"
         android:dependency="showRenderingProcess"
-        android:dialogMessage="Rendering Progress Frames"
         android:key="renderingProcessFrames"
-        android:summary="Show rendering every %1$d frames"
-        android:title="Rendering Progress Frames"
+        android:title="Number of Progress-Frames"
         seekbarpreference:maxValue="100"
-        seekbarpreference:minValue="0"
-        seekbarpreference:stepValue="5" />
+        seekbarpreference:minValue="5"
+        seekbarpreference:stepValue="1" />
     
     <CheckBoxPreference
         android:defaultValue="false"

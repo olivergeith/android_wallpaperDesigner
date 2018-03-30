@@ -613,8 +613,12 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 				dialog.setProgress(values[0]);
 			}
 
+			// if (Settings.isShowRenderingProcess() //
+			// && values[0].intValue() % Settings.getRenderingProcessFrames() == 0) {
+			// showBitmap(bitmap);
+			// }
 			if (Settings.isShowRenderingProcess() //
-					&& values[0].intValue() % Settings.getRenderingProcessFrames() == 0) {
+					&& Settings.isShowProgressBitmap(dialog.getMax(), values[0].intValue())) {
 				showBitmap(bitmap);
 			}
 		}

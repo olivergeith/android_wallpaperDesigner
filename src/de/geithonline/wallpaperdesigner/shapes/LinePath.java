@@ -49,9 +49,7 @@ public class LinePath extends Path {
 		// nach links
 		float sinradius = radius * 0.4f;
 		if (filled) {
-			sinradius = Randomizer.getRandomFloat(0, radius * 0.4f);
-		} else {
-			sinradius = Randomizer.getRandomFloat(-radius * 0.4f, 0);
+			sinradius = Randomizer.getRandomFloat(-radius * 0.4f, radius * 0.4f);
 		}
 		final int sinRepeats = 1;
 		moveTo(l, mitteY);
