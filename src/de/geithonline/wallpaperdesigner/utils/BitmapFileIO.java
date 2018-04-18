@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.tasks.AsyncTaskWithProgress;
-import de.geithonline.wallpaperdesigner.tasks.GifSaverTask;
 
 public class BitmapFileIO {
 
@@ -134,41 +133,7 @@ public class BitmapFileIO {
         }
     }
 
-    public static void saveGif(final List<Bitmap> aniBitmaps, final GifSaverTask gifSaverTask) {
-        // Create final animated gif
-        if (aniBitmaps != null && !aniBitmaps.isEmpty()) {
-            int delay = (Settings.getGifLength()) / aniBitmaps.size();
-            if (delay < 10) {
-                delay = 10;
-            }
-            final AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-            final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            encoder.start(bos);
-            encoder.setQuality(Settings.getGifQuality());
-            encoder.setRepeat(0);
-            encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
-            encoder.setDelay(delay);
-            int i = 0;
-            for (final Bitmap bmp : aniBitmaps) {
-                if (gifSaverTask != null) {
-                    gifSaverTask.settingProgress(i);
-                }
-                encoder.addFrame(bmp);
-                encoder.setDelay(delay);
-                i++;
-            }
-            encoder.setDelay(2000); // Last Frame Delay!
-            encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
-            encoder.setDelay(2000); // Last Frame Delay!
-            saveAnimatedGif(bos, StorageHelper.getWallpaperGifDir() + "WPD_AnimatedGif_" + FileIOHelper.getTimeStampForFile() + ".gif");
-            encoder.finish();
-            for (final Bitmap bmp : aniBitmaps) {
-                bmp.recycle();
-            }
-        }
-    }
-
-    public static void saveGifNew(final List<Bitmap> aniBitmaps, final AsyncTaskWithProgress task) {
+    public static void saveGif(final List<Bitmap> aniBitmaps, final AsyncTaskWithProgress task) {
         // Create final animated gif
         if (aniBitmaps != null && !aniBitmaps.isEmpty()) {
             int delay = (Settings.getGifLength()) / aniBitmaps.size();

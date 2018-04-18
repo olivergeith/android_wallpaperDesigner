@@ -93,9 +93,8 @@ public class BitmapGeneratorTask extends AsyncTask<Integer, Integer, Bitmap> imp
     @Override
     protected void onPostExecute(final Bitmap bitmap) {
         showBitmap(bitmap);
-        if (dialog != null) {
-            dialog.cancel();
-        }
+        dialog.cancel();
+        dialog.dismiss();
     }
 
     private void showBitmap(final Bitmap bitmap) {

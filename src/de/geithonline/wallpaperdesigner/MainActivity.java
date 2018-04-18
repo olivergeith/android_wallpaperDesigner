@@ -3,16 +3,12 @@ package de.geithonline.wallpaperdesigner;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +20,6 @@ import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -46,15 +41,15 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.BmpRenderer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IBmpRenderer;
-import de.geithonline.wallpaperdesigner.settings.CustomAdapter;
-import de.geithonline.wallpaperdesigner.settings.Design;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.tasks.BitmapAndSetttingsSaverTask;
-import de.geithonline.wallpaperdesigner.tasks.BitmapSaverTask;
 import de.geithonline.wallpaperdesigner.tasks.BitmapGeneratorTask;
+import de.geithonline.wallpaperdesigner.tasks.BitmapSaverTask;
+import de.geithonline.wallpaperdesigner.tasks.DesignsLoaderTask;
 import de.geithonline.wallpaperdesigner.tasks.GifSaverTaskWithDialog;
+import de.geithonline.wallpaperdesigner.tasks.WallpaperSettingTask;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
@@ -69,7 +64,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     // Konstanten
     private static final int REQUEST_CODE_PREFERENCES = 1;
     private static final int MY_PERMISSIONS_REQUEST_INT = 99;
-    private ProgressDialog dialog;
     private TouchImageView wallpaperView;
     private IBmpRenderer drawer;
     private SensorManager mSensorManager;
@@ -283,23 +277,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onDestroy() {
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
-        }
-        super.onDestroy();
-    }
-
     public synchronized void setWallpaper() {
-        final WallpaperSettingTask task = new WallpaperSettingTask();
+        final WallpaperSettingTask task = new WallpaperSettingTask(drawer, this);
         task.execute();
-        dialog = new ProgressDialog(this);
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.setMessage("Setting Wallpaper...");
-        dialog.show();
     }
 
     public synchronized void generate() {
@@ -309,7 +289,7 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     }
 
     public synchronized void updateDrawer() {
-        final DesignsLoaderTask task = new DesignsLoaderTask(mDrawerList);
+        final DesignsLoaderTask task = new DesignsLoaderTask(mDrawerList, this);
         task.execute();
     }
 
@@ -333,13 +313,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
         updateDrawer();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see android.app.Activity#onMenuOpened(int, android.view.Menu)
-     * 
-     * Wird gebraucht um im overflow Menu die Icons anzuzeigen!!!
-     */
     @Override
     public boolean onMenuOpened(final int featureId, final Menu menu) {
         if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
@@ -456,176 +429,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     private void startSettings() {
         final Intent intent = new Intent(PreferencesActivity.class.getCanonicalName());
         startActivityForResult(intent, REQUEST_CODE_PREFERENCES);
-    }
-
-    // ##########################################################
-    // public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
-    // private final WeakReference<TouchImageView> imageViewReference;
-    // private Bitmap bitmap;
-    // private String message = "Rendering...";
-    //
-    // AnimatedGifEncoder encoder = null;
-    // ByteArrayOutputStream bos;
-    //
-    // public BitmapWorkerTask(final TouchImageView imageView) {
-    // // Use a WeakReference to ensure the ImageView can be garbage
-    // // collected
-    // imageViewReference = new WeakReference<>(imageView);
-    // }
-    //
-    // // Decode image in background.
-    // @Override
-    // protected Bitmap doInBackground(final Integer... params) {
-    // aniBitmaps.clear();
-    // drawer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
-    // // drawer.recycleBitmap();
-    // Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
-    // final Bitmap bitmap = drawer.drawBitmap(this);
-    // return bitmap;
-    // }
-    //
-    // public void settingMax(final int max) {
-    // if (dialog != null) {
-    // dialog.setMax(max);
-    // }
-    // }
-    //
-    // public void settingProgress(final int p, final Bitmap bitmap, final String message) {
-    // this.message = message;
-    // this.bitmap = bitmap;
-    // publishProgress(p + 1);
-    // }
-    //
-    // // Once complete, see if ImageView is still around and set bitmap.
-    // @Override
-    // protected void onPostExecute(final Bitmap bitmap) {
-    // showBitmap(bitmap);
-    // if (dialog != null) {
-    // dialog.cancel();
-    // if (Settings.isDebugging()) {
-    // shakeHint.setText(DebugHelper.getMemoryInfo());
-    // }
-    // }
-    // }
-    //
-    // private void showBitmap(final Bitmap bitmap) {
-    // if (imageViewReference != null && bitmap != null) {
-    // final TouchImageView imageView = imageViewReference.get();
-    // if (imageView != null) {
-    // final int w = bitmap.getWidth();
-    // final int h = bitmap.getHeight();
-    // // if bitmap ist too big for open GL GL_MAX_TEXTURE_SIZE
-    // final int maxTexturesize = 2048;
-    // if (w <= maxTexturesize && h <= maxTexturesize) {
-    // imageView.setImageBitmap(bitmap);
-    // } else {
-    // // Log.i("SCALING Image for view", "Image bigger than GL_MAX_TEXTURE_SIZE -> resizing it");
-    // if (w > h) {
-    // final int nh = bitmap.getHeight() * maxTexturesize / bitmap.getWidth();
-    // final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxTexturesize, nh, true);
-    // imageView.setImageBitmap(scaled);
-    // } else {
-    // final int nw = bitmap.getWidth() * maxTexturesize / bitmap.getHeight();
-    // final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, nw, maxTexturesize, true);
-    // imageView.setImageBitmap(scaled);
-    // }
-    // }
-    // imageView.fit2Screen();
-    // }
-    // }
-    // if (Settings.isCreateGif()) {
-    // aniBitmaps.add(BitmapHelper.scallToWidth(bitmap, Settings.getGifSize()));
-    // }
-    // }
-    //
-    // @Override
-    // protected void onCancelled(final Bitmap result) {
-    // showBitmap(result);
-    // super.onCancelled(result);
-    // }
-    //
-    // @Override
-    // protected void onProgressUpdate(final Integer... values) {
-    // // Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
-    // if (dialog != null) {
-    // if (dialog.isIndeterminate()) {
-    // dialog.setIndeterminate(false);
-    // }
-    // dialog.setMessage(message);
-    // dialog.setProgress(values[0]);
-    // }
-    //
-    // // if (Settings.isShowRenderingProcess() //
-    // // && values[0].intValue() % Settings.getRenderingProcessFrames() == 0) {
-    // // showBitmap(bitmap);
-    // // }
-    // if (Settings.isShowRenderingProcess() //
-    // && Settings.isShowProgressBitmap(dialog.getMax(), values[0].intValue())) {
-    // showBitmap(bitmap);
-    // }
-    // }
-    // }
-
-    private void exit() {
-        finish();
-    }
-
-    // ##########################################################
-    class WallpaperSettingTask extends AsyncTask<Void, Void, Integer> {
-
-        public WallpaperSettingTask() {}
-
-        @Override
-        protected Integer doInBackground(final Void... params) {
-            final Bitmap bitmap = wallpaperView.getBitmap();
-            final WallpaperManager wallpaperManager = WallpaperManager.getInstance(MainActivity.this);
-            try {
-                wallpaperManager.setBitmap(bitmap);
-            } catch (final IOException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        }
-
-        @Override
-        protected void onPostExecute(final Integer i) {
-            if (dialog != null) {
-                dialog.cancel();
-            }
-            exit();
-        }
-    }
-
-    // ##########################################################
-    public class DesignsLoaderTask extends AsyncTask<Void, Void, List<Design>> {
-        private final WeakReference<ListView> weekListViewRef;
-
-        public DesignsLoaderTask(final ListView imageView) {
-            // Use a WeakReference to ensure the ImageView can be garbage
-            // collected
-            weekListViewRef = new WeakReference<>(imageView);
-        }
-
-        // Load List background.
-        @Override
-        protected List<Design> doInBackground(final Void... params) {
-            final List<Design> savedPreferencesList = DesignIO.getSavedPreferencesList();
-            return savedPreferencesList;
-        }
-
-        // Once complete.....
-        @Override
-        protected void onPostExecute(final List<Design> savedPreferencesList) {
-            if (weekListViewRef != null && savedPreferencesList != null) {
-                final ListView list = weekListViewRef.get();
-                if (list != null) {
-                    list.setAdapter(new CustomAdapter(MainActivity.this, savedPreferencesList));
-                }
-            }
-            if (dialog != null) {
-                dialog.cancel();
-            }
-        }
     }
 
     // ##########################################################

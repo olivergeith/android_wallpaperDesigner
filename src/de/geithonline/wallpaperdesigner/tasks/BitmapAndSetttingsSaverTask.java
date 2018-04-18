@@ -37,6 +37,7 @@ public class BitmapAndSetttingsSaverTask extends AsyncTask<Void, Void, Integer> 
     @Override
     protected void onPostExecute(final Integer i) {
         dialog.cancel();
+        dialog.dismiss();
     }
 
 }

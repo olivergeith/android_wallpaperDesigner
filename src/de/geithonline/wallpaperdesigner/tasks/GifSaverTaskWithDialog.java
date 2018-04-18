@@ -44,7 +44,7 @@ public class GifSaverTaskWithDialog extends AsyncTask<Integer, Integer, Integer>
     @Override
     protected Integer doInBackground(final Integer... params) {
         if (!aniBitmaps.isEmpty()) {
-            BitmapFileIO.saveGifNew(aniBitmaps, this);
+            BitmapFileIO.saveGif(aniBitmaps, this);
         }
         return 0;
     }
@@ -52,6 +52,7 @@ public class GifSaverTaskWithDialog extends AsyncTask<Integer, Integer, Integer>
     @Override
     protected void onPostExecute(final Integer i) {
         dialog.cancel();
+        dialog.dismiss();
     }
 
     @Override
