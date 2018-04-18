@@ -33,18 +33,16 @@ public class GifSaverTaskWithDialog extends AsyncTask<Integer, Integer, Integer>
                 cancel(true);
             }
         });
+        dialog.show();
     }
 
     @Override
-    public void settingProgress(final int p) {
+    public void settingProgress(final int p, final String message) {
         publishProgress(p + 1);
     }
 
     @Override
     protected Integer doInBackground(final Integer... params) {
-        if (dialog != null) {
-            dialog.show();
-        }
         if (!aniBitmaps.isEmpty()) {
             BitmapFileIO.saveGifNew(aniBitmaps, this);
         }
@@ -53,17 +51,18 @@ public class GifSaverTaskWithDialog extends AsyncTask<Integer, Integer, Integer>
 
     @Override
     protected void onPostExecute(final Integer i) {
-        if (dialog != null) {
-            dialog.cancel();
-        }
+        dialog.cancel();
     }
 
     @Override
     protected void onProgressUpdate(final Integer... values) {
         // Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
-        if (dialog != null) {
-            dialog.setProgress(values[0]);
-        }
+        dialog.setProgress(values[0]);
+    }
+
+    @Override
+    public void settingMax(final int max) {
+        dialog.setMax(max);
     }
 
 }

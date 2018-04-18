@@ -185,7 +185,7 @@ public class BitmapFileIO {
             int i = 0;
             for (final Bitmap bmp : aniBitmaps) {
                 if (task != null) {
-                    task.settingProgress(i);
+                    task.settingProgress(i, "");
                 }
                 encoder.addFrame(bmp);
                 encoder.setDelay(delay);

@@ -20,11 +20,11 @@ public class BitmapSaverTask extends AsyncTask<Void, Void, Integer> {
         dialog.setMessage("Saving Image...");
         this.drawer = drawer;
         this.context = context.getApplicationContext();
+        dialog.show();
     }
 
     @Override
     protected Integer doInBackground(final Void... params) {
-        dialog.show();
         if (drawer != null) {
             drawer.save(context, false);
         }
@@ -33,9 +33,7 @@ public class BitmapSaverTask extends AsyncTask<Void, Void, Integer> {
 
     @Override
     protected void onPostExecute(final Integer i) {
-        if (dialog != null) {
-            dialog.cancel();
-        }
+        dialog.cancel();
     }
 
 }

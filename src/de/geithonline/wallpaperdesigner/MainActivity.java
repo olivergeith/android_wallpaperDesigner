@@ -1,7 +1,6 @@
 
 package de.geithonline.wallpaperdesigner;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +34,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,12 +53,10 @@ import de.geithonline.wallpaperdesigner.settings.PreferenceIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.tasks.BitmapAndSetttingsSaverTask;
 import de.geithonline.wallpaperdesigner.tasks.BitmapSaverTask;
+import de.geithonline.wallpaperdesigner.tasks.BitmapGeneratorTask;
 import de.geithonline.wallpaperdesigner.tasks.GifSaverTaskWithDialog;
 import de.geithonline.wallpaperdesigner.utils.Alerter;
-import de.geithonline.wallpaperdesigner.utils.AnimatedGifEncoder;
 import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
-import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
-import de.geithonline.wallpaperdesigner.utils.DebugHelper;
 import de.geithonline.wallpaperdesigner.utils.ShakeEventListener;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
@@ -307,17 +303,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     }
 
     public synchronized void generate() {
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("Rendering Background...");
-        dialog.setIndeterminate(true);
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        final BitmapWorkerTask task = new BitmapWorkerTask(wallpaperView);
+        drawer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
+        final BitmapGeneratorTask task = new BitmapGeneratorTask(wallpaperView, aniBitmaps, this, drawer);
         task.execute();
-        addCancleButtton(dialog, task);
-        if (Settings.isShowRenderingProcess()) {
-            dialog.getWindow().setGravity(Gravity.BOTTOM);
-        }
-        dialog.show();
     }
 
     public synchronized void updateDrawer() {
@@ -331,32 +319,6 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
             task.execute();
             Toaster.showInfoToast(this, "Gifs are saved to: " + StorageHelper.getWallpaperGifDir());
         }
-    }
-
-    private void addCancleButtton(final ProgressDialog dialog, final AsyncTask<?, ?, ?> task) {
-        dialog.setCancelable(false);
-        // ############################################################
-        // this will enable cancle on back button!
-        // ############################################################
-        // dialog.setCancelable(true);
-        // dialog.setOnCancelListener(new OnCancelListener() {
-        //
-        // @Override
-        // public void onCancel(final DialogInterface dialog) {
-        // task.cancel(true);
-        // }
-        // });
-        // ############################################################
-        // Put a cancel button in progress dialog
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            // Set a click listener for progress dialog cancel button
-            @Override
-            public void onClick(final DialogInterface dialog, final int which) {
-                // dismiss the progress dialog
-                dialog.dismiss();
-                task.cancel(true);
-            }
-        });
     }
 
     public synchronized void save() {
@@ -497,116 +459,112 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
     }
 
     // ##########################################################
-    public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
-        private final WeakReference<TouchImageView> imageViewReference;
-        private Bitmap bitmap;
-        private String message = "Rendering...";
-
-        AnimatedGifEncoder encoder = null;
-        ByteArrayOutputStream bos;
-
-        public BitmapWorkerTask(final TouchImageView imageView) {
-            // Use a WeakReference to ensure the ImageView can be garbage
-            // collected
-            imageViewReference = new WeakReference<>(imageView);
-        }
-
-        // Decode image in background.
-        @Override
-        protected Bitmap doInBackground(final Integer... params) {
-            aniBitmaps.clear();
-            drawer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
-            // drawer.recycleBitmap();
-            Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
-            final Bitmap bitmap = drawer.drawBitmap(this);
-            return bitmap;
-        }
-
-        public void settingMax(final int max) {
-            if (dialog != null) {
-                dialog.setMax(max);
-            }
-        }
-
-        public void settingBitmap(final Bitmap bitmap) {
-            this.bitmap = bitmap;
-        }
-
-        public void settingProgress(final int p, final Bitmap bitmap, final String message) {
-            this.message = message;
-            this.bitmap = bitmap;
-            publishProgress(p + 1);
-        }
-
-        // Once complete, see if ImageView is still around and set bitmap.
-        @Override
-        protected void onPostExecute(final Bitmap bitmap) {
-            showBitmap(bitmap);
-            if (dialog != null) {
-                dialog.cancel();
-                if (Settings.isDebugging()) {
-                    shakeHint.setText(DebugHelper.getMemoryInfo());
-                }
-            }
-        }
-
-        private void showBitmap(final Bitmap bitmap) {
-            if (imageViewReference != null && bitmap != null) {
-                final TouchImageView imageView = imageViewReference.get();
-                if (imageView != null) {
-                    final int w = bitmap.getWidth();
-                    final int h = bitmap.getHeight();
-                    // if bitmap ist too big for open GL GL_MAX_TEXTURE_SIZE
-                    final int maxTexturesize = 2048;
-                    if (w <= maxTexturesize && h <= maxTexturesize) {
-                        imageView.setImageBitmap(bitmap);
-                    } else {
-                        // Log.i("SCALING Image for view", "Image bigger than GL_MAX_TEXTURE_SIZE -> resizing it");
-                        if (w > h) {
-                            final int nh = bitmap.getHeight() * maxTexturesize / bitmap.getWidth();
-                            final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxTexturesize, nh, true);
-                            imageView.setImageBitmap(scaled);
-                        } else {
-                            final int nw = bitmap.getWidth() * maxTexturesize / bitmap.getHeight();
-                            final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, nw, maxTexturesize, true);
-                            imageView.setImageBitmap(scaled);
-                        }
-                    }
-                    imageView.fit2Screen();
-                }
-            }
-            if (Settings.isCreateGif()) {
-                aniBitmaps.add(BitmapHelper.scallToWidth(bitmap, Settings.getGifSize()));
-            }
-        }
-
-        @Override
-        protected void onCancelled(final Bitmap result) {
-            showBitmap(result);
-            super.onCancelled(result);
-        }
-
-        @Override
-        protected void onProgressUpdate(final Integer... values) {
-            // Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
-            if (dialog != null) {
-                if (dialog.isIndeterminate()) {
-                    dialog.setIndeterminate(false);
-                }
-                dialog.setMessage(message);
-                dialog.setProgress(values[0]);
-            }
-
-            // if (Settings.isShowRenderingProcess() //
-            // && values[0].intValue() % Settings.getRenderingProcessFrames() == 0) {
-            // showBitmap(bitmap);
-            // }
-            if (Settings.isShowRenderingProcess() //
-                    && Settings.isShowProgressBitmap(dialog.getMax(), values[0].intValue())) {
-                showBitmap(bitmap);
-            }
-        }
-    }
+    // public class BitmapWorkerTask extends AsyncTask<Integer, Integer, Bitmap> {
+    // private final WeakReference<TouchImageView> imageViewReference;
+    // private Bitmap bitmap;
+    // private String message = "Rendering...";
+    //
+    // AnimatedGifEncoder encoder = null;
+    // ByteArrayOutputStream bos;
+    //
+    // public BitmapWorkerTask(final TouchImageView imageView) {
+    // // Use a WeakReference to ensure the ImageView can be garbage
+    // // collected
+    // imageViewReference = new WeakReference<>(imageView);
+    // }
+    //
+    // // Decode image in background.
+    // @Override
+    // protected Bitmap doInBackground(final Integer... params) {
+    // aniBitmaps.clear();
+    // drawer = new BmpRenderer(Settings.getSelectedMainLayout(), Settings.getSelectedMainLayoutVariante());
+    // // drawer.recycleBitmap();
+    // Log.i("Geith", "Drawing " + Settings.getSelectedMainLayout() + " (" + Settings.getSelectedMainLayoutVariante() + ")");
+    // final Bitmap bitmap = drawer.drawBitmap(this);
+    // return bitmap;
+    // }
+    //
+    // public void settingMax(final int max) {
+    // if (dialog != null) {
+    // dialog.setMax(max);
+    // }
+    // }
+    //
+    // public void settingProgress(final int p, final Bitmap bitmap, final String message) {
+    // this.message = message;
+    // this.bitmap = bitmap;
+    // publishProgress(p + 1);
+    // }
+    //
+    // // Once complete, see if ImageView is still around and set bitmap.
+    // @Override
+    // protected void onPostExecute(final Bitmap bitmap) {
+    // showBitmap(bitmap);
+    // if (dialog != null) {
+    // dialog.cancel();
+    // if (Settings.isDebugging()) {
+    // shakeHint.setText(DebugHelper.getMemoryInfo());
+    // }
+    // }
+    // }
+    //
+    // private void showBitmap(final Bitmap bitmap) {
+    // if (imageViewReference != null && bitmap != null) {
+    // final TouchImageView imageView = imageViewReference.get();
+    // if (imageView != null) {
+    // final int w = bitmap.getWidth();
+    // final int h = bitmap.getHeight();
+    // // if bitmap ist too big for open GL GL_MAX_TEXTURE_SIZE
+    // final int maxTexturesize = 2048;
+    // if (w <= maxTexturesize && h <= maxTexturesize) {
+    // imageView.setImageBitmap(bitmap);
+    // } else {
+    // // Log.i("SCALING Image for view", "Image bigger than GL_MAX_TEXTURE_SIZE -> resizing it");
+    // if (w > h) {
+    // final int nh = bitmap.getHeight() * maxTexturesize / bitmap.getWidth();
+    // final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, maxTexturesize, nh, true);
+    // imageView.setImageBitmap(scaled);
+    // } else {
+    // final int nw = bitmap.getWidth() * maxTexturesize / bitmap.getHeight();
+    // final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, nw, maxTexturesize, true);
+    // imageView.setImageBitmap(scaled);
+    // }
+    // }
+    // imageView.fit2Screen();
+    // }
+    // }
+    // if (Settings.isCreateGif()) {
+    // aniBitmaps.add(BitmapHelper.scallToWidth(bitmap, Settings.getGifSize()));
+    // }
+    // }
+    //
+    // @Override
+    // protected void onCancelled(final Bitmap result) {
+    // showBitmap(result);
+    // super.onCancelled(result);
+    // }
+    //
+    // @Override
+    // protected void onProgressUpdate(final Integer... values) {
+    // // Log.d("ANDRO_ASYNC", "Prograss Bitmap " + values[0]);
+    // if (dialog != null) {
+    // if (dialog.isIndeterminate()) {
+    // dialog.setIndeterminate(false);
+    // }
+    // dialog.setMessage(message);
+    // dialog.setProgress(values[0]);
+    // }
+    //
+    // // if (Settings.isShowRenderingProcess() //
+    // // && values[0].intValue() % Settings.getRenderingProcessFrames() == 0) {
+    // // showBitmap(bitmap);
+    // // }
+    // if (Settings.isShowRenderingProcess() //
+    // && Settings.isShowProgressBitmap(dialog.getMax(), values[0].intValue())) {
+    // showBitmap(bitmap);
+    // }
+    // }
+    // }
 
     private void exit() {
         finish();
