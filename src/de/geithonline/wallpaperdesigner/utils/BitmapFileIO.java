@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -133,7 +134,7 @@ public class BitmapFileIO {
         }
     }
 
-    public static void saveGif(final List<Bitmap> aniBitmaps, final AsyncTaskWithProgress task) {
+    public static void saveGif(final List<Bitmap> aniBitmaps, final AsyncTaskWithProgress task, final Activity activity) {
         // Create final animated gif
         if (aniBitmaps != null && !aniBitmaps.isEmpty()) {
             int delay = (Settings.getGifLength()) / aniBitmaps.size();
@@ -159,11 +160,14 @@ public class BitmapFileIO {
             encoder.setDelay(2000); // Last Frame Delay!
             encoder.addFrame(aniBitmaps.get(aniBitmaps.size() - 1));
             encoder.setDelay(2000); // Last Frame Delay!
-            saveAnimatedGif(bos, StorageHelper.getWallpaperGifDir() + "WPD_AnimatedGif_" + FileIOHelper.getTimeStampForFile() + ".gif");
+
+            final String gifFilePath = StorageHelper.getWallpaperGifDir() + "WPD_AnimatedGif_" + FileIOHelper.getTimeStampForFile() + ".gif";
+            saveAnimatedGif(bos, gifFilePath);
             encoder.finish();
             for (final Bitmap bmp : aniBitmaps) {
                 bmp.recycle();
             }
+            MediaScannerHelper.rescanMedia(activity, gifFilePath);
         }
     }
 

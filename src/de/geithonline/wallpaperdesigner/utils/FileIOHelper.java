@@ -1,3 +1,4 @@
+
 package de.geithonline.wallpaperdesigner.utils;
 
 import java.io.File;
@@ -14,126 +15,172 @@ import android.util.Log;
 
 public class FileIOHelper {
 
-	public enum SORT_ORDER {
-		ALPHA, LAST_MODIFIED, LAST_MODIFIED_DESCENDING, FILENAME_TIMESTAMP;
-	}
+    public enum SORT_ORDER {
+        ALPHA, LAST_MODIFIED, LAST_MODIFIED_DESCENDING, FILENAME_TIMESTAMP;
+    }
 
-	public static void sortFileArray(final SORT_ORDER sortOrder, final File[] fileArray) {
-		switch (sortOrder) {
-		default:
-		case LAST_MODIFIED:
-			// Sort by Modyfied
-			Arrays.sort(fileArray, new Comparator<File>() {
-				@Override
-				public int compare(final File f1, final File f2) {
-					return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-				}
-			});
-			break;
-		case LAST_MODIFIED_DESCENDING:
-			// Sort by Modyfied
-			Arrays.sort(fileArray, new Comparator<File>() {
-				@Override
-				public int compare(final File f1, final File f2) {
-					return (int) (f2.lastModified() - f1.lastModified());
-				}
-			});
-			break;
-		case ALPHA:
-			// Sort by Name
-			Arrays.sort(fileArray, new Comparator<File>() {
-				@Override
-				public int compare(final File f1, final File f2) {
-					return f1.getName().compareTo(f2.getName());
-				}
-			});
-			break;
-		case FILENAME_TIMESTAMP:
-			// Sort by Name
-			Arrays.sort(fileArray, new Comparator<File>() {
-				@Override
-				public int compare(final File f1, final File f2) {
-					final String t1 = getTimestampInFileName(f1.getName());
-					final String t2 = getTimestampInFileName(f2.getName());
+    public static void sortFileArray(final SORT_ORDER sortOrder, final File[] fileArray) {
+        switch (sortOrder) {
+            default:
+            case LAST_MODIFIED:
+                // Sort by Modyfied
+                Arrays.sort(fileArray, new Comparator<File>() {
+                    @Override
+                    public int compare(final File f1, final File f2) {
+                        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                    }
+                });
+                break;
+            case LAST_MODIFIED_DESCENDING:
+                // Sort by Modyfied
+                Arrays.sort(fileArray, new Comparator<File>() {
+                    @Override
+                    public int compare(final File f1, final File f2) {
+                        return (int) (f2.lastModified() - f1.lastModified());
+                    }
+                });
+                break;
+            case ALPHA:
+                // Sort by Name
+                Arrays.sort(fileArray, new Comparator<File>() {
+                    @Override
+                    public int compare(final File f1, final File f2) {
+                        return f1.getName().compareTo(f2.getName());
+                    }
+                });
+                break;
+            case FILENAME_TIMESTAMP:
+                // Sort by Name
+                Arrays.sort(fileArray, new Comparator<File>() {
+                    @Override
+                    public int compare(final File f1, final File f2) {
+                        final String t1 = getTimestampInFileName(f1.getName());
+                        final String t2 = getTimestampInFileName(f2.getName());
 
-					return -t1.compareTo(t2);
-				}
-			});
-			break;
-		}
-	}
+                        return -t1.compareTo(t2);
+                    }
+                });
+                break;
+        }
+    }
 
-	public static final String MARKER = " (+++)_";
+    public static final String MARKER = " (+++)_";
 
-	public static String getTimestampInFileName(final String filename) {
-		String out;
-		final int pos = filename.indexOf(MARKER);
-		if (pos == -1) {
-			// EXtension nicht gefunden
-			out = filename;
-		} else {
-			out = filename.substring(pos);
-		}
-		return out;
+    public static String getTimestampInFileName(final String filename) {
+        String out;
+        final int pos = filename.indexOf(MARKER);
+        if (pos == -1) {
+            // EXtension nicht gefunden
+            out = filename;
+        } else {
+            out = filename.substring(pos);
+        }
+        return out;
 
-	}
+    }
 
-	/**
-	 * Get a list of all preference filenames
-	 * 
-	 * @param activity
-	 * @return
-	 */
-	public static List<File> getFileList(final File dir, final String extension, final SORT_ORDER sortOrder) {
-		final List<File> fileList = new ArrayList<File>();
-		Log.i("FileList", "Dir = " + dir);
-		if (dir != null && dir.exists() && dir.isDirectory()) {
-			Log.i("FileList", "ScanningDir = " + dir);
-			// Extension angegeben...dann filtern...
-			File[] files;
-			if (extension != null) {
-				files = dir.listFiles(new FilenameFilter() {
+    /**
+     * Get a list of all preference filenames
+     * 
+     * @param activity
+     * @return
+     */
+    public static List<File> getFileList(final File dir, final String extension, final SORT_ORDER sortOrder) {
+        final List<File> fileList = new ArrayList<File>();
+        Log.i("FileList", "Dir = " + dir);
+        if (dir != null && dir.exists() && dir.isDirectory()) {
+            Log.i("FileList", "ScanningDir = " + dir);
+            // Extension angegeben...dann filtern...
+            File[] files;
+            if (extension != null) {
+                files = dir.listFiles(new FilenameFilter() {
 
-					@Override
-					public boolean accept(final File file, final String name) {
-						return name.endsWith(extension);
-					}
-				});
-			} else {
-				files = dir.listFiles();
-			}
+                    @Override
+                    public boolean accept(final File file, final String name) {
+                        return name.endsWith(extension);
+                    }
+                });
+            } else {
+                files = dir.listFiles();
+            }
 
-			// Sort Files
-			if (files != null && sortOrder != null) {
-				FileIOHelper.sortFileArray(sortOrder, files);
-			}
+            // Sort Files
+            if (files != null && sortOrder != null) {
+                FileIOHelper.sortFileArray(sortOrder, files);
+            }
 
-			// Putting it into a List
-			for (final File fi : files) {
-				fileList.add(fi);
-			}
-			Log.i("FileList", "Found = " + fileList.size());
-		}
-		return fileList;
-	}
+            // Putting it into a List
+            for (final File fi : files) {
+                fileList.add(fi);
+            }
+            Log.i("FileList", "Found = " + fileList.size());
+        }
+        return fileList;
+    }
 
-	public static String replaceExtension(final String filename, final String extension, final String newExtension) {
-		String bmpFilename;
-		final int pos = filename.indexOf(extension);
-		if (pos == -1) {
-			// EXtension nicht gefunden
-			bmpFilename = filename + newExtension;
-		} else {
-			bmpFilename = filename.substring(0, pos) + newExtension;
-		}
-		return bmpFilename;
-	}
+    /**
+     * Get a list of all preference filenames
+     * 
+     * @param activity
+     * @return
+     */
+    public static List<File> getFileList(final File dir) {
+        final List<File> fileList = new ArrayList<File>();
+        if (dir != null && dir.exists() && dir.isDirectory()) {
+            Log.i("FileList", "ScanningDir = " + dir);
+            // Extension angegeben...dann filtern...
+            final File[] files = dir.listFiles();
+            // Putting it into a List
+            for (final File fi : files) {
+                if (fi.isFile() && fi.exists()) {
+                    fileList.add(fi);
+                }
+            }
+            Log.i("FileList", "Found = " + fileList.size());
+        }
+        return fileList;
+    }
 
-	public static String getTimeStampForFile() {
-		final Date date = new Date();
-		final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
-		final String timeStamp = dt.format(date);
-		return timeStamp;
-	}
+    /**
+     * Get a list of all preference filenames
+     * 
+     * @param activity
+     * @return
+     */
+    public static List<File> getSubDirList(final File dir) {
+        final List<File> fileList = new ArrayList<File>();
+        if (dir != null && dir.exists() && dir.isDirectory()) {
+            Log.i("FileList", "ScanningDir = " + dir);
+            // Extension angegeben...dann filtern...
+            final File[] files = dir.listFiles();
+            // Putting it into a List
+            for (final File fi : files) {
+                if (fi.isDirectory() && fi.exists()) {
+                    fileList.add(fi);
+                }
+            }
+            Log.i("FileList", "Found SubDirs = " + fileList.size());
+        }
+        return fileList;
+    }
+
+    public static String replaceExtension(final String filename, final String extension, final String newExtension) {
+        String bmpFilename;
+        final int pos = filename.indexOf(extension);
+        if (pos == -1) {
+            // EXtension nicht gefunden
+            bmpFilename = filename + newExtension;
+        } else {
+            bmpFilename = filename.substring(0, pos) + newExtension;
+        }
+        return bmpFilename;
+    }
+
+    public static String getTimeStampForFile() {
+        final Date date = new Date();
+        final SimpleDateFormat dt = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        final String timeStamp = dt.format(date);
+        return timeStamp;
+    }
 
 }

@@ -14,10 +14,12 @@ import de.geithonline.wallpaperdesigner.utils.BitmapFileIO;
 public class GifSaverTaskWithDialog extends AsyncTask<Integer, Integer, Integer> implements AsyncTaskWithProgress {
     private final ProgressDialog dialog;
     private final List<Bitmap> aniBitmaps;
+    private final Activity activity;
 
-    public GifSaverTaskWithDialog(final Activity parentActivity, final List<Bitmap> aniBitmaps) {
+    public GifSaverTaskWithDialog(final Activity activity, final List<Bitmap> aniBitmaps) {
+        this.activity = activity;
         this.aniBitmaps = aniBitmaps;
-        dialog = new ProgressDialog(parentActivity);
+        dialog = new ProgressDialog(activity);
         dialog.setIndeterminate(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setCancelable(false);
@@ -44,7 +46,7 @@ public class GifSaverTaskWithDialog extends AsyncTask<Integer, Integer, Integer>
     @Override
     protected Integer doInBackground(final Integer... params) {
         if (!aniBitmaps.isEmpty()) {
-            BitmapFileIO.saveGif(aniBitmaps, this);
+            BitmapFileIO.saveGif(aniBitmaps, this, activity);
         }
         return 0;
     }
