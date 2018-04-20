@@ -7,6 +7,7 @@ import android.graphics.Point;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer.BackgroundDrawer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternDrawer;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.RadiusCalculator;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.Rotator;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.AbstractRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
@@ -24,6 +25,7 @@ public class BmpRenderer extends BaseBmpRenderer {
     private PatternDrawer patternDrawer;
     private int bWidth;
     private int bHeight;
+    private Rotator rotator;
 
     public BmpRenderer(final String layout, final String layoutVariante) {
         this.layout = layout;
@@ -50,10 +52,6 @@ public class BmpRenderer extends BaseBmpRenderer {
         BackgroundDrawer.drawBackground(refbitmapCanvas, true);
         bitmap = BackgroundDrawer.blurrIfNessesary(bitmap);
 
-        // Pattern Drawer Object bauen
-        final PaintManager pm = new PaintManager(bWidth, bHeight);
-        patternDrawer = new PatternDrawer(bitmapCanvas, pm);
-
         // initializing some values depending on BitmapSize
         int maxRadius = Math.round(bWidth * 0.04f * Settings.getPatternSizeFactor());
         if (maxRadius < 10) {
@@ -64,10 +62,13 @@ public class BmpRenderer extends BaseBmpRenderer {
             minRadius = 5;
         }
 
+        // Pattern Drawer Object bauen
         final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, width, height, maxRadius, Settings.getOverlapping());
-
+        final PaintManager pm = new PaintManager(bWidth, bHeight);
+        rotator = new Rotator(bWidth, bHeight);
+        patternDrawer = new PatternDrawer(bitmapCanvas, pm, rotator);
         task.settingMax(raster.getAnzahlPatterns());
-
+        rotator.settingMax(raster.getAnzahlPatterns());
         if (Settings.getSelectedPattern().equalsIgnoreCase("Material")) {
             MaterialPath.initFlippy();
         }
@@ -85,7 +86,6 @@ public class BmpRenderer extends BaseBmpRenderer {
             case "Scene":
                 break;
         }
-
         // Zeichnen
         for (int i = 0; i < anzahlPatterns; i++) {
             if (task.isCancelled()) {
@@ -95,6 +95,7 @@ public class BmpRenderer extends BaseBmpRenderer {
             if (i % 100 == 0) {
                 System.gc();
             }
+            rotator.settingProgress(i);
             task.settingProgress(i, "Rendering Patterns ...");
             // getting Radius
             final int radius = radiusCalculator.getRadius(i);

@@ -47,7 +47,7 @@ public class PatternDrawer {
 
     private final PointF prevPoint = new PointF(0, 0);
 
-    public PatternDrawer(final Canvas bitmapCanvas, final PaintManager pm) {
+    public PatternDrawer(final Canvas bitmapCanvas, final PaintManager pm, final Rotator rotator) {
         this.bitmapCanvas = bitmapCanvas;
         this.pm = pm;
         paint = pm.paint;
@@ -55,7 +55,7 @@ public class PatternDrawer {
         bHeight = bitmapCanvas.getHeight();
         glossyDrawer = new GlossyDrawer(bitmapCanvas);
         outlineDrawer = new OutlineDrawer(bitmapCanvas);
-        rotator = new Rotator(bWidth, bHeight);
+        this.rotator = rotator;
     }
 
     public void drawPattern(final int x, final int y, final int radius, final int index) {

@@ -12,6 +12,11 @@ public class Rotator {
 
     private float incrementingDegrees = 0;
 
+    @SuppressWarnings("unused")
+    private int index = 0;
+    @SuppressWarnings("unused")
+    private int anzahlPatterns;
+
     public Rotator(final int bWidth, final int bHeight) {
         this.bWidth = bWidth;
         this.bHeight = bHeight;
@@ -19,7 +24,6 @@ public class Rotator {
 
     public float getRotationDegrees(final int randomMin, final int randomMax, final PointF center) {
         final PointF rotationCenter = new PointF(bWidth / 2f, bHeight / 2f);
-
         switch (Settings.getRotationStyle()) {
             default:
             case "Fixed":
@@ -116,22 +120,11 @@ public class Rotator {
         return 0;
     }
 
-    // /**
-    // * Returns the Winkel (0-360) between the two points
-    // *
-    // * @param center
-    // * @param location
-    // * @return
-    // */
-    // public static float getDegreesToCenter(final PointF rotationCenter, final PointF location) {
-    // final float distTCenterX = rotationCenter.x - location.x;
-    // final float distTCenterY = rotationCenter.y - location.y;
-    // final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-    // float winkel = (float) (alpha * 180 / Math.PI);
-    // // Log.i("Winkel", "Winkel = " + winkel + "(" + alpha + ")");
-    // if (location.x <= rotationCenter.x) {
-    // winkel = winkel + 180;
-    // }
-    // return winkel;
-    // }
+    public void settingProgress(final int i) {
+        index = i;
+    }
+
+    public void settingMax(final int anzahlPatterns) {
+        this.anzahlPatterns = anzahlPatterns;
+    }
 }
