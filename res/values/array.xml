@@ -134,6 +134,7 @@
         <item >Around Point (Range)</item>
         <item >Around Bottom</item>
         <item >Around Corners</item>
+        <item >Around 2 random Centerpoints</item>
         </string-array>
     
     

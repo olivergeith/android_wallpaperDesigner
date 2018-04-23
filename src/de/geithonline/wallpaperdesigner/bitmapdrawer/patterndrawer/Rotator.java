@@ -3,6 +3,7 @@ package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.GeometrieHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class Rotator {
@@ -16,6 +17,8 @@ public class Rotator {
     private int index = 0;
     @SuppressWarnings("unused")
     private int anzahlPatterns;
+    private PointF rc1;
+    private PointF rc2;
 
     public Rotator(final int bWidth, final int bHeight) {
         this.bWidth = bWidth;
@@ -80,6 +83,18 @@ public class Rotator {
                 final float winkel = calcWinkel(center, rotationCenter);
                 return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
             }
+            case "Around 2 random Centerpoints": {
+
+                if (GeometrieHelper.calcDistance(rc1, center) < GeometrieHelper.calcDistance(rc2, center)) {
+                    rotationCenter.x = rc1.x;
+                    rotationCenter.y = rc1.y;
+                } else {
+                    rotationCenter.x = rc2.x;
+                    rotationCenter.y = rc2.y;
+                }
+                final float winkel = calcWinkel(center, rotationCenter);
+                return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
+            }
         }
     }
 
@@ -125,6 +140,10 @@ public class Rotator {
     }
 
     public void settingMax(final int anzahlPatterns) {
+        rc1 = new PointF(Randomizer.getRandomFloat(0, bWidth * 0.45f), Randomizer.getRandomInt(0, bHeight));
+        rc2 = new PointF(Randomizer.getRandomFloat(bWidth * 0.55f, bWidth), Randomizer.getRandomInt(0, bHeight));
+        // Log.i("Center", "Center1 = " + rc1);
+        // Log.i("Center", "Center2 = " + rc2);
         this.anzahlPatterns = anzahlPatterns;
     }
 }
