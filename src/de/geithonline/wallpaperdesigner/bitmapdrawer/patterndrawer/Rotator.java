@@ -1,6 +1,9 @@
 
 package de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer;
 
+import java.util.Arrays;
+import java.util.List;
+
 import android.graphics.PointF;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.utils.GeometrieHelper;
@@ -17,16 +20,33 @@ public class Rotator {
     private int index = 0;
     @SuppressWarnings("unused")
     private int anzahlPatterns;
-    private PointF rc1;
-    private PointF rc2;
+    private final PointF randomCenter;
+    private final PointF randomCenter1;
+    private final PointF randomCenter2;
+    private final PointF obenLinks;
+    private final PointF obenRechts;
+    private final PointF untenRechts;
+    private final PointF untenLinks;
+    private final PointF bildMitte;
+    private final PointF untenRandMitte;
+    private final PointF adjustableMitte;
 
-    public Rotator(final int bWidth, final int bHeight) {
-        this.bWidth = bWidth;
-        this.bHeight = bHeight;
+    public Rotator(final int w, final int h) {
+        bWidth = w;
+        bHeight = h;
+        randomCenter = new PointF(Randomizer.getRandomInt(0, bWidth), Randomizer.getRandomInt(0, bHeight));
+        randomCenter1 = new PointF(Randomizer.getRandomFloat(0, bWidth * 0.45f), Randomizer.getRandomInt(0, bHeight));
+        randomCenter2 = new PointF(Randomizer.getRandomFloat(bWidth * 0.55f, bWidth), Randomizer.getRandomInt(0, bHeight));
+        obenLinks = new PointF(0, 0);
+        obenRechts = new PointF(bWidth, 0);
+        untenRechts = new PointF(bWidth, bHeight);
+        untenLinks = new PointF(0, bHeight);
+        bildMitte = new PointF(bWidth / 2f, bHeight / 2f);
+        untenRandMitte = new PointF(bWidth / 2f, bHeight);
+        adjustableMitte = new PointF(bWidth * Settings.getRotationCenterPointX(), bHeight * Settings.getRotationCenterPointY());
     }
 
     public float getRotationDegrees(final int randomMin, final int randomMax, final PointF center) {
-        final PointF rotationCenter = new PointF(bWidth / 2f, bHeight / 2f);
         switch (Settings.getRotationStyle()) {
             default:
             case "Fixed":
@@ -39,81 +59,60 @@ public class Rotator {
 
             case "Around Adjustable Point":
             case "Around Adjustable Center": {
-                rotationCenter.x = bWidth * Settings.getRotationCenterPointX();
-                rotationCenter.y = bHeight * Settings.getRotationCenterPointY();
-                final float winkel = calcWinkel(center, rotationCenter);
+                final float winkel = GeometrieHelper.calcWinkel(center, adjustableMitte);
                 return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
             }
             case "Around Center":
             case "Around Point": {
-                final float winkel = calcWinkel(center, rotationCenter);
+                final float winkel = GeometrieHelper.calcWinkel(center, bildMitte);
                 return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
             }
             case "Around Point (Range)":
             case "Around Center (Range)": {
-                final float winkel = calcWinkel(center, rotationCenter);
+                final float winkel = GeometrieHelper.calcWinkel(center, bildMitte);
                 final float rand = Randomizer.getRandomFloat(-Settings.getrandomRangeDegrees(), //
                         +Settings.getrandomRangeDegrees());
                 return winkel + 90 + Settings.getFixedRotationDegrees() + rand + getRandom90Degrees() + getIncrementingDegrees();
             }
             case "Around Bottom": {
-                rotationCenter.x = bWidth / 2f;
-                rotationCenter.y = bHeight;
-                final float winkel = calcWinkel(center, rotationCenter);
+                final float winkel = GeometrieHelper.calcWinkel(center, untenRandMitte);
                 return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
             }
             case "Around Corners": {
-                if (center.x < bWidth / 2) {
-                    if (center.y < bHeight / 2) {
-                        rotationCenter.x = 0;
-                        rotationCenter.y = 0;
-                    } else {
-                        rotationCenter.x = 0;
-                        rotationCenter.y = bHeight;
-                    }
-                } else {
-                    if (center.y < bHeight / 2) {
-                        rotationCenter.x = bWidth;
-                        rotationCenter.y = 0;
-                    } else {
-                        rotationCenter.x = bWidth;
-                        rotationCenter.y = bHeight;
-                    }
-                }
-                final float winkel = calcWinkel(center, rotationCenter);
+                final List<PointF> points = Arrays.asList(obenLinks, obenRechts, untenRechts, untenLinks);
+                final PointF rotationCenter = GeometrieHelper.findNearestPoint(points, center);
+                final float winkel = GeometrieHelper.calcWinkel(center, rotationCenter);
+                return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
+            }
+            case "Around random Center": {
+                final float winkel = GeometrieHelper.calcWinkel(center, randomCenter);
                 return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
             }
             case "Around 2 random Centerpoints": {
-
-                if (GeometrieHelper.calcDistance(rc1, center) < GeometrieHelper.calcDistance(rc2, center)) {
-                    rotationCenter.x = rc1.x;
-                    rotationCenter.y = rc1.y;
-                } else {
-                    rotationCenter.x = rc2.x;
-                    rotationCenter.y = rc2.y;
-                }
-                final float winkel = calcWinkel(center, rotationCenter);
+                final List<PointF> points = Arrays.asList(randomCenter1, randomCenter2);
+                final PointF rotationCenter = GeometrieHelper.findNearestPoint(points, center);
+                final float winkel = GeometrieHelper.calcWinkel(center, rotationCenter);
                 return winkel + 90 + Settings.getFixedRotationDegrees() + getRandom90Degrees() + getIncrementingDegrees();
             }
         }
     }
 
-    /**
-     * @param point
-     *            the point outside the center....
-     * @param rotationCenter
-     * @return
-     */
-    public static float calcWinkel(final PointF point, final PointF rotationCenter) {
-        final float distTCenterX = rotationCenter.x - point.x;
-        final float distTCenterY = rotationCenter.y - point.y;
-        final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
-        float winkel = (float) (alpha * 180 / Math.PI);
-        if (point.x <= rotationCenter.x) {
-            winkel = winkel + 180;
-        }
-        return winkel;
-    }
+    // /**
+    // * @param point
+    // * the point outside the center....
+    // * @param rotationCenter
+    // * @return
+    // */
+    // public static float calcWinkel(final PointF point, final PointF rotationCenter) {
+    // final float distTCenterX = rotationCenter.x - point.x;
+    // final float distTCenterY = rotationCenter.y - point.y;
+    // final float alpha = (float) Math.atan(distTCenterY / distTCenterX);
+    // float winkel = (float) (alpha * 180 / Math.PI);
+    // if (point.x <= rotationCenter.x) {
+    // winkel = winkel + 180;
+    // }
+    // return winkel;
+    // }
 
     public float getIncrementingDegrees() {
         incrementingDegrees += Settings.getIncrementingDegreesAddingAmount();
@@ -140,10 +139,6 @@ public class Rotator {
     }
 
     public void settingMax(final int anzahlPatterns) {
-        rc1 = new PointF(Randomizer.getRandomFloat(0, bWidth * 0.45f), Randomizer.getRandomInt(0, bHeight));
-        rc2 = new PointF(Randomizer.getRandomFloat(bWidth * 0.55f, bWidth), Randomizer.getRandomInt(0, bHeight));
-        // Log.i("Center", "Center1 = " + rc1);
-        // Log.i("Center", "Center2 = " + rc2);
         this.anzahlPatterns = anzahlPatterns;
     }
 }

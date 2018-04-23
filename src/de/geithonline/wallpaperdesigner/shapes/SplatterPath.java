@@ -3,12 +3,12 @@ package de.geithonline.wallpaperdesigner.shapes;
 
 import android.graphics.Path;
 import android.graphics.PointF;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.Rotator;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOptions;
 import de.geithonline.wallpaperdesigner.shapes.CirclePath.CIRCLE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.SquarePath.SQUARE_STYLE;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath;
 import de.geithonline.wallpaperdesigner.shapes.composed.CircularMazePath.MazeType;
+import de.geithonline.wallpaperdesigner.utils.GeometrieHelper;
 import de.geithonline.wallpaperdesigner.utils.PathHelper;
 import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
@@ -109,7 +109,7 @@ public class SplatterPath extends Path {
             c.y = center.y + Randomizer.getRandomFloat(-radius / 2, radius / 2);
             final float circleRadius = Randomizer.getRandomFloat(radius * 0.15f, radius * 0.5f);
             final Path path = new DropPath(c, circleRadius);
-            final float winkel = Rotator.calcWinkel(c, center) - 90;
+            final float winkel = GeometrieHelper.calcWinkel(c, center) - 90;
             PathHelper.rotatePath(c, path, winkel);
             op(path, Op.UNION);
         }
