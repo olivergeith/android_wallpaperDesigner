@@ -19,6 +19,8 @@ public class AbstractRaster {
 
 	protected final Point pointTopLeft;
 	protected final Point pointTopRight;
+	protected final Point pointBottomLeft;
+	protected final Point pointBottomRight;
 	protected final Point pointCenter;
 
 	public AbstractRaster(final int radius, final float overlap, final int width, final int height) {
@@ -28,6 +30,8 @@ public class AbstractRaster {
 		this.radius = radius;
 		pointTopRight = new Point(bWidth, 0);
 		pointTopLeft = new Point(0, 0);
+		pointBottomRight = new Point(bWidth, bHeight);
+		pointBottomLeft = new Point(0, bHeight);
 		pointCenter = new Point(bWidth / 2, bHeight / 2);
 	}
 
@@ -56,7 +60,7 @@ public class AbstractRaster {
 			case DUO_CENTER:
 				return drawDuoCenterPoint();
 			case TOWER:
-				return drawNextTowerPoint();
+				return drawTowerPoint();
 			case TRISTEP:
 				return drawTriStepPoint();
 			case QUADSTEP:
@@ -71,6 +75,13 @@ public class AbstractRaster {
 				return drawNearestPoint(pointTopLeft);
 			case TOP_RIGHT_2_BOTTOM_LEFT:
 				return drawNearestPoint(pointTopRight);
+
+			case ALTERNATING_TOP_LEFT_BOTTOM_RIGHT:
+				return drawAlternatingPoint(pointTopLeft, pointBottomRight);
+			case ALTERNATING_TOP_RIGHT_BOTTOM_LEFT:
+				return drawAlternatingPoint(pointTopRight, pointBottomLeft);
+			case ALTERNATING:
+				return drawAlternatingPoint(pointTopRight, pointTopLeft, pointBottomLeft, pointBottomRight);
 		}
 	}
 
@@ -267,7 +278,7 @@ public class AbstractRaster {
 
 	private boolean top = true;
 
-	protected Point drawNextTowerPoint() {
+	protected Point drawTowerPoint() {
 		final int size = points.size();
 		if (size == 0) {
 			return new Point(0, 0);
@@ -348,6 +359,44 @@ public class AbstractRaster {
 		}
 		final Point p = points.remove(location);
 		return p;
+	}
+
+	protected Point drawAlternatingPoint(final Point p1, final Point p2) {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		switch (state) {
+			default:
+			case 0:
+				state = 1;
+				return drawNearestPoint(p1);
+			case 1:
+				state = 0;
+				return drawNearestPoint(p2);
+		}
+	}
+
+	protected Point drawAlternatingPoint(final Point p1, final Point p2, final Point p3, final Point p4) {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		switch (state) {
+			default:
+			case 0:
+				state = 1;
+				return drawNearestPoint(p1);
+			case 1:
+				state = 2;
+				return drawNearestPoint(p2);
+			case 2:
+				state = 3;
+				return drawNearestPoint(p3);
+			case 3:
+				state = 0;
+				return drawNearestPoint(p4);
+		}
 	}
 
 	protected Point drawQuadStepPoint() {
