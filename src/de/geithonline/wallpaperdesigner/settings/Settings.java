@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.settings.ColorRandOptions.COLOR_RANDOMIZING_TYPE;
+import de.geithonline.wallpaperdesigner.settings.enums.EGlossyGlowStyle;
+import de.geithonline.wallpaperdesigner.settings.enums.EGlossyReflectionStyle;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.CircularMazeOptions;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.EyeOptions;
 import de.geithonline.wallpaperdesigner.settings.specialoptions.TailOptions.SinusAmplitudeType;
@@ -137,72 +139,14 @@ public class Settings {
 
 		public static IMAGE_OUTPUT_FORMAT enumForName(final String name) {
 			switch (name) {
-			default:
-			case "jpg":
-				return IMAGE_OUTPUT_FORMAT.JPG;
-			case "png":
-				return IMAGE_OUTPUT_FORMAT.PNG;
+				default:
+				case "jpg":
+					return IMAGE_OUTPUT_FORMAT.JPG;
+				case "png":
+					return IMAGE_OUTPUT_FORMAT.PNG;
 			}
 		}
 
-	}
-
-	public enum GLOSSY_REFLECTIONS_STYLE {
-		SMALL_OVAL, BIG_OVAL, DIAGONAL, TOP_LEFT, NONE, DIAGONAL_CURVED, DIAGONAL_45GRAD, CURVED_FROM_TOP, DIAGONAL_FLIPPED, DIAGONAL_45GRAD_FLIPPED, TOP_GLOW, BOTTOM_GLOW, DIAGONAL_CURVED_V2, TOP_LEFT_V2, FULL_OVAL;
-
-		public static GLOSSY_REFLECTIONS_STYLE enumForName(final String name) {
-			switch (name) {
-			default:
-			case "Diagonal":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL;
-			case "Diagonal (flipped)":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_FLIPPED;
-			case "Diagonal 45°":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD;
-			case "Diagonal 45° (flipped)":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_45GRAD_FLIPPED;
-			case "Diagonal (curved)":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED;
-			case "Diagonal (curved) V2":
-				return GLOSSY_REFLECTIONS_STYLE.DIAGONAL_CURVED_V2;
-			case "Curved from top":
-				return GLOSSY_REFLECTIONS_STYLE.CURVED_FROM_TOP;
-			case "Topleft":
-				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT;
-			case "Topleft V2":
-				return GLOSSY_REFLECTIONS_STYLE.TOP_LEFT_V2;
-			case "Full Oval":
-				return GLOSSY_REFLECTIONS_STYLE.FULL_OVAL;
-			case "Big Oval":
-				return GLOSSY_REFLECTIONS_STYLE.BIG_OVAL;
-			case "Small Oval":
-				return GLOSSY_REFLECTIONS_STYLE.SMALL_OVAL;
-			case "Top Glow":
-				return GLOSSY_REFLECTIONS_STYLE.TOP_GLOW;
-			case "None":
-				return GLOSSY_REFLECTIONS_STYLE.NONE;
-			}
-		}
-	}
-
-	public enum GLOSSY_GLOW_STYLE {
-		CENTER, HORIZONTAL, VERTICAL, VERTICAL_WHITE, VERTICAL_RAINBOW;
-
-		public static GLOSSY_GLOW_STYLE enumForName(final String name) {
-			switch (name) {
-			default:
-			case "Center":
-				return GLOSSY_GLOW_STYLE.CENTER;
-			case "Horizontal":
-				return GLOSSY_GLOW_STYLE.HORIZONTAL;
-			case "Vertical":
-				return GLOSSY_GLOW_STYLE.VERTICAL;
-			case "Vertical Rainbow":
-				return GLOSSY_GLOW_STYLE.VERTICAL_RAINBOW;
-			case "Vertical (White)":
-				return GLOSSY_GLOW_STYLE.VERTICAL_WHITE;
-			}
-		}
 	}
 
 	public enum DROP_SHADOW_TYPE {
@@ -210,17 +154,17 @@ public class Settings {
 
 		public static DROP_SHADOW_TYPE enumForName(final String name) {
 			switch (name) {
-			default:
-			case "No":
-				return DROP_SHADOW_TYPE.NO;
-			case "Random":
-				return DROP_SHADOW_TYPE.RANDOM;
-			case "Opposite":
-				return DROP_SHADOW_TYPE.OPPOSITE;
-			case "Darker":
-				return DROP_SHADOW_TYPE.DARKER;
-			case "Select":
-				return DROP_SHADOW_TYPE.SELECT;
+				default:
+				case "No":
+					return DROP_SHADOW_TYPE.NO;
+				case "Random":
+					return DROP_SHADOW_TYPE.RANDOM;
+				case "Opposite":
+					return DROP_SHADOW_TYPE.OPPOSITE;
+				case "Darker":
+					return DROP_SHADOW_TYPE.DARKER;
+				case "Select":
+					return DROP_SHADOW_TYPE.SELECT;
 			}
 		}
 	}
@@ -230,21 +174,21 @@ public class Settings {
 
 		public static CANVAS_LIMT enumForName(final String name) {
 			switch (name) {
-			default:
-			case "small tolerance":
-				return CANVAS_LIMT.small;
-			case "wide tolerance":
-				return CANVAS_LIMT.wide;
-			case "double wide tolerance":
-				return CANVAS_LIMT.double_wide;
-			case "strict":
-				return CANVAS_LIMT.strict;
-			case "small inset":
-				return CANVAS_LIMT.small_inset;
-			case "wide inset":
-				return CANVAS_LIMT.wide_inset;
-			case "no limit":
-				return CANVAS_LIMT.no_limit;
+				default:
+				case "small tolerance":
+					return CANVAS_LIMT.small;
+				case "wide tolerance":
+					return CANVAS_LIMT.wide;
+				case "double wide tolerance":
+					return CANVAS_LIMT.double_wide;
+				case "strict":
+					return CANVAS_LIMT.strict;
+				case "small inset":
+					return CANVAS_LIMT.small_inset;
+				case "wide inset":
+					return CANVAS_LIMT.wide_inset;
+				case "no limit":
+					return CANVAS_LIMT.no_limit;
 			}
 		}
 	}
@@ -254,18 +198,18 @@ public class Settings {
 
 		public static RADIUS_TYPE enumForName(final String name) {
 			switch (name) {
-			default:
-			case "random":
-			case "Random":
-				return RADIUS_TYPE.random;
-			case "Increasing":
-				return RADIUS_TYPE.increasing;
-			case "Decreasing":
-				return RADIUS_TYPE.decreasing;
-			case "Depending on BlurrStage (increasing)":
-				return RADIUS_TYPE.dependingOnBlurrStage_increasing;
-			case "Depending on BlurrStage (decreasing)":
-				return RADIUS_TYPE.dependingOnBlurrStage_decreasing;
+				default:
+				case "random":
+				case "Random":
+					return RADIUS_TYPE.random;
+				case "Increasing":
+					return RADIUS_TYPE.increasing;
+				case "Decreasing":
+					return RADIUS_TYPE.decreasing;
+				case "Depending on BlurrStage (increasing)":
+					return RADIUS_TYPE.dependingOnBlurrStage_increasing;
+				case "Depending on BlurrStage (decreasing)":
+					return RADIUS_TYPE.dependingOnBlurrStage_decreasing;
 			}
 		}
 	}
@@ -354,25 +298,25 @@ public class Settings {
 
 	public static int getTheme() {
 		switch (getAppTheme()) {
-		default:
-		case "Gray (orange)":
-			return R.style.Theme_BatteryLWPGrayOrange;
-		case "Blue":
-			return R.style.Theme_BatteryLWP;
-		case "Brown":
-			return R.style.Theme_BatteryLWPBrown;
-		case "Lime":
-			return R.style.Theme_BatteryLWPLime;
-		case "Pink":
-			return R.style.Theme_BatteryLWPPink;
-		case "Orange":
-			return R.style.Theme_BatteryLWPOrange;
-		case "Purple":
-			return R.style.Theme_BatteryLWPPurple;
-		case "Gray (pink)":
-			return R.style.Theme_BatteryLWPGrayPink;
-		case "Gray (blue)":
-			return R.style.Theme_BatteryLWPGrayBlue;
+			default:
+			case "Gray (orange)":
+				return R.style.Theme_BatteryLWPGrayOrange;
+			case "Blue":
+				return R.style.Theme_BatteryLWP;
+			case "Brown":
+				return R.style.Theme_BatteryLWPBrown;
+			case "Lime":
+				return R.style.Theme_BatteryLWPLime;
+			case "Pink":
+				return R.style.Theme_BatteryLWPPink;
+			case "Orange":
+				return R.style.Theme_BatteryLWPOrange;
+			case "Purple":
+				return R.style.Theme_BatteryLWPPurple;
+			case "Gray (pink)":
+				return R.style.Theme_BatteryLWPGrayPink;
+			case "Gray (blue)":
+				return R.style.Theme_BatteryLWPGrayBlue;
 		}
 	}
 
@@ -380,15 +324,15 @@ public class Settings {
 		// return "Random Layout";
 		final String sort = getSortOrder();
 		switch (sort) {
-		default:
-		case "Last Modified":
-			return SORT_ORDER.LAST_MODIFIED;
-		case "Last Modified (Descending)":
-			return SORT_ORDER.LAST_MODIFIED_DESCENDING;
-		case "Alphabetically":
-			return SORT_ORDER.ALPHA;
-		case "Timestamp in Filename":
-			return SORT_ORDER.FILENAME_TIMESTAMP;
+			default:
+			case "Last Modified":
+				return SORT_ORDER.LAST_MODIFIED;
+			case "Last Modified (Descending)":
+				return SORT_ORDER.LAST_MODIFIED_DESCENDING;
+			case "Alphabetically":
+				return SORT_ORDER.ALPHA;
+			case "Timestamp in Filename":
+				return SORT_ORDER.FILENAME_TIMESTAMP;
 		}
 	}
 
@@ -611,16 +555,16 @@ public class Settings {
 	public static boolean getFilledBoolean() {
 		boolean filled;
 		switch (Settings.getFilledOption()) {
-		default:
-		case "Not filled":
-			filled = false;
-			break;
-		case "Filled":
-			filled = true;
-			break;
-		case "Randomly mixed":
-			filled = Randomizer.getRandomBoolean();
-			break;
+			default:
+			case "Not filled":
+				filled = false;
+				break;
+			case "Filled":
+				filled = true;
+				break;
+			case "Randomly mixed":
+				filled = Randomizer.getRandomBoolean();
+				break;
 		}
 		return filled;
 	}
@@ -628,16 +572,16 @@ public class Settings {
 	public static boolean getTailBoolean() {
 		boolean filled;
 		switch (Settings.getTailOption()) {
-		case "No Tail":
-			filled = false;
-			break;
-		default:
-		case "With Tail":
-			filled = true;
-			break;
-		case "Randomly mixed":
-			filled = Randomizer.getRandomBoolean();
-			break;
+			case "No Tail":
+				filled = false;
+				break;
+			default:
+			case "With Tail":
+				filled = true;
+				break;
+			case "Randomly mixed":
+				filled = Randomizer.getRandomBoolean();
+				break;
 		}
 		return filled;
 	}
@@ -716,16 +660,16 @@ public class Settings {
 		return readIntegerPref(KEY_GLOSSY_REFLECTION_BRIGHTNESS, 64);
 	}
 
-	public static GLOSSY_REFLECTIONS_STYLE getGlossyReflectionStyle() {
-		return GLOSSY_REFLECTIONS_STYLE.enumForName(getGlossyReflectionStyleString());
+	public static EGlossyReflectionStyle getGlossyReflectionStyle() {
+		return EGlossyReflectionStyle.enumForName(getGlossyReflectionStyleString());
 	}
 
 	public static String getGlossyReflectionStyleString() {
 		return readStringPref(KEY_GLOSSY_REFLECTION_STYLE, "Diagonal");
 	}
 
-	public static GLOSSY_GLOW_STYLE getGlossyGlowStyle() {
-		return GLOSSY_GLOW_STYLE.enumForName(getGlossyGlowStyleString());
+	public static EGlossyGlowStyle getGlossyGlowStyle() {
+		return EGlossyGlowStyle.enumForName(getGlossyGlowStyleString());
 	}
 
 	public static String getGlossyGlowStyleString() {
@@ -902,10 +846,10 @@ public class Settings {
 	public static int getWidth() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getCustomWidth();
-		default:
-			return getWidthFromSizeString(s);
+			case "customSize":
+				return getCustomWidth();
+			default:
+				return getWidthFromSizeString(s);
 		}
 	}
 
@@ -943,10 +887,10 @@ public class Settings {
 	public static int getHeight() {
 		final String s = getSizeSelection();
 		switch (s) {
-		case "customSize":
-			return getCustomHeight();
-		default:
-			return getHeightFromSizeString(s);
+			case "customSize":
+				return getCustomHeight();
+			default:
+				return getHeightFromSizeString(s);
 		}
 	}
 
