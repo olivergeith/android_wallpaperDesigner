@@ -91,17 +91,6 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 		addOrRemoveFromMainScreen(centerPointY, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
 		addOrRemoveFromMainScreen(mainlayoutVariants, RasterFactory.hasLayoutVariants(selectedLayout));
 
-		// overlapping.setEnabled(RasterFactory.hasLayoutOverlap(selectedLayout));
-		// anzahlPatterns.setEnabled(RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
-		// blurring.setEnabled(RasterFactory.hasLayoutBlurring(selectedLayout));
-		// counterClockwise.setEnabled(RasterFactory.hasCounterClockwise(selectedLayout));
-		// randomStartWinkel.setEnabled(RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
-		// centerPointX.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		// centerPointY.setEnabled(RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		//
-		// // Pattern Variants
-		// mainlayoutVariants.setEnabled(RasterFactory.hasLayoutVariants(selectedLayout));
-
 		if (RasterFactory.hasLayoutVariants(selectedLayout)) {
 			Log.i("Layout", "Setting Layout Variants...");
 			final CharSequence[] variants = RasterFactory.getLayoutVariants(selectedLayout);
@@ -111,8 +100,6 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 				mainlayoutVariants.setValueIndex(0);
 				mainlayoutVariants.setDefaultValue(mainlayoutVariants.getValue());
 			}
-			// patternVariantSelection.setValueIndex(0);
-			// patternVariantSelection.setDefaultValue(patternVariantSelection.getValue());
 			mainlayoutVariants.setSummary(mainlayoutVariants.getValue());
 
 		} else {

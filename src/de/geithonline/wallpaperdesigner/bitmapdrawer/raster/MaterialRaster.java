@@ -7,11 +7,11 @@ public class MaterialRaster extends AbstractRaster {
 		RANDOM, TOWER, CENTER, BOOK, BOOK_REVERSE;
 	}
 
-	public MaterialRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
-		super(patternRadius, overlap);
+	public MaterialRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning) {
+		super(radius, overlap, width, height);
 
 		setPositioning(positioning);
-		final int abstand = Math.round(patternRadius * 2 * overlap);
+		final int abstand = Math.round(radius * 2 * overlap);
 
 		final int anzW = width / abstand + 2;
 		final int anzH = height / abstand + 2;
@@ -32,19 +32,12 @@ public class MaterialRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-		case RANDOM:
-			return drawRandomPoint();
-		default:
-		case TOWER:
-			return drawNextTowerPoint();
-		case CENTER:
-			return drawNextCenterPoint();
-		case TOPMOST:
-		case BOOK:
-			return drawNextBookPoint();
-		case BOTTOMMOST:
-		case BOOK_REVERSE:
-			return drawNextBookPointReverse();
+			default:
+				return super.drawNextPoint();
+			case TOPMOST:
+				return drawFirstPoint();
+			case BOTTOMMOST:
+				return drawLastPoint();
 		}
 	}
 

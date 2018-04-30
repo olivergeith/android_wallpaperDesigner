@@ -14,37 +14,37 @@ public class CircularRaster extends AbstractRaster {
 
 	public CircularRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
 			final CIRCLE_TYPE circleType) {
-		super(radius, overlap);
+		super(radius, overlap, width, height);
 
 		setPositioning(positioning);
 
 		switch (circleType) {
-		default:
-		case CIRCLE_CENTER_BOTTOM: {
-			final PointF center = new PointF(width / 2, height);
-			calculateRings(width, height, radius, overlap, center);
-			break;
-		}
-		case CIRCLE_ADJUSTABLE_CENTER: {
-			final PointF center = new PointF(width * Settings.getCenterPointX(), height * Settings.getCenterPointY());
-			calculateRings(width, height, radius, overlap, center);
-			break;
-		}
-		case CIRCLE: {
-			final PointF center = new PointF(width / 2, height / 2);
-			calculateRings(width, height, radius, overlap, center);
-			break;
-		}
-		case SPIRAL: {
-			final PointF center = new PointF(width / 2, height / 2);
-			calculateSpiral(width, height, radius, overlap, center);
-			break;
-		}
-		case SPIRAL_ADJUSTABLE_CENTER: {
-			final PointF center = new PointF(width * Settings.getCenterPointX(), height * Settings.getCenterPointY());
-			calculateSpiral(width, height, radius, overlap, center);
-			break;
-		}
+			default:
+			case CIRCLE_CENTER_BOTTOM: {
+				final PointF center = new PointF(width / 2, height);
+				calculateRings(width, height, radius, overlap, center);
+				break;
+			}
+			case CIRCLE_ADJUSTABLE_CENTER: {
+				final PointF center = new PointF(width * Settings.getCenterPointX(), height * Settings.getCenterPointY());
+				calculateRings(width, height, radius, overlap, center);
+				break;
+			}
+			case CIRCLE: {
+				final PointF center = new PointF(width / 2, height / 2);
+				calculateRings(width, height, radius, overlap, center);
+				break;
+			}
+			case SPIRAL: {
+				final PointF center = new PointF(width / 2, height / 2);
+				calculateSpiral(width, height, radius, overlap, center);
+				break;
+			}
+			case SPIRAL_ADJUSTABLE_CENTER: {
+				final PointF center = new PointF(width * Settings.getCenterPointX(), height * Settings.getCenterPointY());
+				calculateSpiral(width, height, radius, overlap, center);
+				break;
+			}
 		}
 	}
 
@@ -135,31 +135,12 @@ public class CircularRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-		default:
-		case INNER:
-			return drawNextBookPoint();
-		case OUTER:
-			return drawNextBookPointReverse();
-		case TOPMOST:
-			return drawTopmostPoint();
-		case BOTTOMMOST:
-			return drawBottommostPoint();
-		case LEFTMOST:
-			return drawLeftmostPoint();
-		case RIGHTMOST:
-			return drawRightmostPoint();
-		case RANDOM:
-			return drawRandomPoint();
-		case CENTER:
-			return drawNextCenterPoint();
-		case DUO_CENTER:
-			return drawDuoCenterPoint();
-		case TOWER:
-			return drawNextTowerPoint();
-		case TRISTEP:
-			return drawTriStepPoint();
-		case QUADSTEP:
-			return drawQuadStepPoint();
+			default:
+				return super.drawNextPoint();
+			case INNER:
+				return drawFirstPoint();
+			case OUTER:
+				return drawLastPoint();
 		}
 	}
 

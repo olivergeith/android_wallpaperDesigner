@@ -4,14 +4,9 @@ import android.graphics.Point;
 
 public class DiagonalRaster extends AbstractRaster {
 
-	private final int width;
-	private final int height;
-
-	public DiagonalRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning) {
-		super(patternRadius, overlap);
-		this.width = width;
-		this.height = height;
-		final int abstandX = Math.round(patternRadius * 2 * overlap);
+	public DiagonalRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning) {
+		super(radius, overlap, width, height);
+		final int abstandX = Math.round(radius * 2 * overlap);
 		final int abstandY = abstandX / 2;
 		setPositioning(positioning);
 
@@ -20,13 +15,13 @@ public class DiagonalRaster extends AbstractRaster {
 
 		boolean upsidedown = true;
 		switch (positioning) {
-		case BOTTOMMOST:
-		case TOPMOST:
-			upsidedown = false;
-			break;
-		default:
-			upsidedown = true;
-			break;
+			case BOTTOMMOST:
+			case TOPMOST:
+				upsidedown = false;
+				break;
+			default:
+				upsidedown = true;
+				break;
 		}
 		if (!upsidedown) {
 			for (int h = -WIDE_CANVAS_LIMIT; h < anzH; h++) {
@@ -54,34 +49,14 @@ public class DiagonalRaster extends AbstractRaster {
 	@Override
 	public Point drawNextPoint() {
 		switch (getPositioning()) {
-		default:
-		case RANDOM:
-			return drawRandomPoint();
-		// case BOOK:
-		// return drawNextBookPoint();
-		// case BOOK_REVERSE:
-		// return drawNextBookPointReverse();
-		case LEFTMOST:
-		case TOPMOST:
-			return drawNextBookPoint();
-		case RIGHTMOST:
-		case BOTTOMMOST:
-			return drawNextBookPointReverse();
-		case INNER:
-			return drawPointNearestToGeometricCenter(width, height);
-		case OUTER:
-			return drawPointFarmostToGeometricCenter(width, height);
-		case CENTER:
-			return drawNextCenterPoint();
-		case DUO_CENTER:
-			return drawDuoCenterPoint();
-		case TOWER:
-			return drawNextTowerPoint();
-		case TRISTEP:
-			return drawTriStepPoint();
-		case QUADSTEP:
-			return drawQuadStepPoint();
-
+			default:
+				return super.drawNextPoint();
+			case LEFTMOST:
+			case TOPMOST:
+				return drawFirstPoint();
+			case RIGHTMOST:
+			case BOTTOMMOST:
+				return drawLastPoint();
 		}
 	}
 

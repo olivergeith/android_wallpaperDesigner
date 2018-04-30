@@ -5,15 +5,15 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class SinewaveRaster extends AbstractRaster {
 
-	public SinewaveRaster(final int width, final int height, final int patternRadius, final float overlap, final RasterPositioning positioning,
+	public SinewaveRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
 			final int numberOfWaves) {
-		super(patternRadius, overlap);
+		super(radius, overlap, width, height);
 
 		setPositioning(positioning);
 		for (int n = 0; n < numberOfWaves; n++) {
 
 			final double frequency = Randomizer.getRandomFloat(1, 10); // 1 will bin one sinuswawe from left to right
-			final int abstand = (int) Math.round(patternRadius * 2 * overlap / frequency);
+			final int abstand = (int) Math.round(radius * 2 * overlap / frequency);
 			final int anzW = width / abstand + 2;
 
 			int amplitude = 0;
@@ -37,19 +37,7 @@ public class SinewaveRaster extends AbstractRaster {
 
 	@Override
 	public Point drawNextPoint() {
-		switch (getPositioning()) {
-			case RANDOM:
-				return drawRandomPoint();
-			default:
-			case BOOK:
-				return drawNextBookPoint();
-			case BOOK_REVERSE:
-				return drawNextBookPointReverse();
-			case TOWER:
-				return drawNextTowerPoint();
-			case CENTER:
-				return drawNextCenterPoint();
-		}
+		return super.drawNextPoint();
 	}
 
 }
