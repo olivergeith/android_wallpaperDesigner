@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutSubVariant;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutVariant;
 import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 
@@ -104,6 +106,7 @@ public class PreferenceIO {
 					repairRandomRotate(prefs, keySet);
 					repairRain(prefs, keySet);
 					repairOldPatterns(prefs, keySet);
+					repairSubLayoutVariant(prefs, keySet);
 				}
 				Toaster.showInfoToast(activity, "Design/Colors restored from " + stripTimestamp(filename));
 				return settings;
@@ -138,66 +141,66 @@ public class PreferenceIO {
 			editor.putInt(ColorRandOptions.KEY_COLOR_MAX_SATURATION_RANGE, oldSaturationRange);
 
 			switch (Settings.getOldColorRandomizingString()) {
-			case "full RGB":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
+				case "full RGB":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "full RGB");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
 
-			case "only RED":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only RED");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
-			case "pull RED":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only RED");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 0);
-				break;
-			case "push RED":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only RED");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, 0);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+				case "only RED":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only RED");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
+				case "pull RED":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only RED");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 0);
+					break;
+				case "push RED":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only RED");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, 0);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
 
-				break;
+					break;
 
-			case "only GREEN":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only GREEN");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
-			case "pull GREEN":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only GREEN");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 0);
-				break;
-			case "push GREEN":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only GRENN");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, 0);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
+				case "only GREEN":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only GREEN");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
+				case "pull GREEN":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only GREEN");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 0);
+					break;
+				case "push GREEN":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only GRENN");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, 0);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
 
-			case "only BLUE":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only BLUE");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
-			case "pull BLUE":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only BLUE");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 0);
-				break;
-			case "push BLUE":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only BLUE");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, 0);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
+				case "only BLUE":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only BLUE");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
+				case "pull BLUE":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only BLUE");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, 0);
+					break;
+				case "push BLUE":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "only BLUE");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, 0);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
 
-			case "hue":
-				editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "hue");
-				editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
-				editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
-				break;
+				case "hue":
+					editor.putString(ColorRandOptions.KEY_COLOR_RANDOMIZING_TYPE, "hue");
+					editor.putInt(ColorRandOptions.KEY_COLOR_MIN_COLOR_RANGE, -oldColorRange);
+					editor.putInt(ColorRandOptions.KEY_COLOR_MAX_COLOR_RANGE, oldColorRange);
+					break;
 			}
 			editor.commit();
 
@@ -216,13 +219,92 @@ public class PreferenceIO {
 	private static void repairOldPatterns(final SharedPreferences prefs, final Set<String> keySet) {
 		final String pattern = prefs.getString(Settings.KEY_PATTERN_PATTERN_PICKER, "");
 		switch (pattern) {
-		default:
-			break;
-		case "3D Cubes":
-			Log.i(LOG_TAG, " old pattern found --> " + pattern + ")");
-			setStringValue(prefs, Settings.KEY_PATTERN_PATTERN_PICKER, "3D Objects");
-			break;
+			default:
+				break;
+			case "3D Cubes":
+				Log.i(LOG_TAG, " old pattern found --> " + pattern + ")");
+				setStringValue(prefs, Settings.KEY_PATTERN_PATTERN_PICKER, "3D Objects");
+				break;
 
+		}
+	}
+
+	private static void repairLayoutVariante(final SharedPreferences prefs, final Set<String> keySet) {
+		final String layout = prefs.getString(Settings.KEY_MAINLAYOUTS, "");
+		switch (layout) {
+			default:
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.GEOMETRICAL_DIRECTED.getName());
+				break;
+			case "Circular":
+			case "Circular Adjustable Center":
+			case "Spiral":
+			case "Spiral Adjustable Center":
+			case "Half Circle":
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.LOGICAL_DIRECTED.getName());
+				break;
+		}
+	}
+
+	private static void repairSubLayoutVariant(final SharedPreferences prefs, final Set<String> keySet) {
+		final String variante = prefs.getString(Settings.KEY_MAINLAYOUT_VARIANTS, "");
+		switch (variante) {
+			default:
+				break;
+			case "DuoCenter":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.LOGICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.DUO_CENTER.getName());
+				break;
+			case "QuadStep":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.LOGICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.QUADSTEP.getName());
+				break;
+			case "TriStep":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.LOGICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.TRISTEP.getName());
+				break;
+			case "Center":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.LOGICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.CENTER.getName());
+				break;
+			case "Tower":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.LOGICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.TOWER.getName());
+				break;
+			case "Inner to Outer":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				repairLayoutVariante(prefs, keySet); // unclear delegated to other method
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.INNER.getName());
+				break;
+			case "Outer to Inner":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				repairLayoutVariante(prefs, keySet);// unclear delegated to other method
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.OUTER.getName());
+				break;
+			case "Top to Bottom":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.GEOMETRICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.TOP_BOTTOM.getName());
+				break;
+			case "Left to Right":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.GEOMETRICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.LEFT_RIGHT.getName());
+				break;
+			case "Bottom to Top":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.GEOMETRICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.BOTTOM_TOP.getName());
+				break;
+			case "Right to Left":
+				Log.i(LOG_TAG, " old variante found --> " + variante + ")");
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.GEOMETRICAL_DIRECTED.getName());
+				setStringValue(prefs, Settings.KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.RIGHT_LEFT.getName());
+				break;
 		}
 	}
 

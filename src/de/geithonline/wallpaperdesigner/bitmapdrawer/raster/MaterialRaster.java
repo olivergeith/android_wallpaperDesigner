@@ -7,10 +7,13 @@ public class MaterialRaster extends AbstractRaster {
 		RANDOM, TOWER, CENTER, BOOK, BOOK_REVERSE;
 	}
 
-	public MaterialRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning) {
+	public MaterialRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning,
+			final ELayoutSubVariant subVariant) {
 		super(radius, overlap, width, height);
 
 		setPositioning(positioning);
+		setSubVariant(subVariant);
+
 		final int abstand = Math.round(radius * 2 * overlap);
 
 		final int anzW = width / abstand + 2;
@@ -26,18 +29,6 @@ public class MaterialRaster extends AbstractRaster {
 					addPoint2List(width, height, p);
 				}
 			}
-		}
-	}
-
-	@Override
-	public Point drawNextPoint() {
-		switch (getPositioning()) {
-			default:
-				return super.drawNextPoint();
-			case TOPMOST:
-				return drawFirstPoint();
-			case BOTTOMMOST:
-				return drawLastPoint();
 		}
 	}
 

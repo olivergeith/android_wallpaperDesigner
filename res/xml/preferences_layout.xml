@@ -15,7 +15,11 @@
         android:dialogTitle="@string/mainlayoutVariants"
         android:key="mainlayoutVariants"
         android:title="@string/mainlayoutVariants" />
-
+    <ListPreference
+        android:dialogTitle="@string/mainlayoutSubVariants"
+        android:key="mainlayoutSubVariants"
+        android:title="@string/mainlayoutSubVariants" />
+    
     <PreferenceCategory android:title="Layout Options" />
     
     <de.geithonline.android.basics.preferences.InlineSeekBarPreference

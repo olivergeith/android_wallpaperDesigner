@@ -10,6 +10,7 @@ import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.RadiusCalcula
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.Rotator;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.AbstractRaster;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayout;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutSubVariant;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutVariant;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
 import de.geithonline.wallpaperdesigner.settings.Settings;
@@ -28,10 +29,12 @@ public class BmpRenderer extends BaseBmpRenderer {
 	private int bWidth;
 	private int bHeight;
 	private Rotator rotator;
+	private final ELayoutSubVariant subVariant;
 
-	public BmpRenderer(final ELayout eLayout, final ELayoutVariant eLayoutVariant) {
+	public BmpRenderer(final ELayout eLayout, final ELayoutVariant eLayoutVariant, final ELayoutSubVariant eSubVariant) {
 		layout = eLayout;
 		layoutVariante = eLayoutVariant;
+		subVariant = eSubVariant;
 	}
 
 	@Override
@@ -65,7 +68,7 @@ public class BmpRenderer extends BaseBmpRenderer {
 		}
 
 		// Pattern Drawer Object bauen
-		final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, width, height, maxRadius, Settings.getOverlapping());
+		final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, subVariant, width, height, maxRadius, Settings.getOverlapping());
 		final PaintManager pm = new PaintManager(bWidth, bHeight);
 		rotator = new Rotator(bWidth, bHeight);
 		patternDrawer = new PatternDrawer(bitmapCanvas, pm, rotator);

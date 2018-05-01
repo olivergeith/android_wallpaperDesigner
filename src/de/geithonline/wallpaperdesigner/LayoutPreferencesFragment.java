@@ -9,6 +9,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayout;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutVariant;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -26,6 +27,7 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 	private CheckBoxPreference blurring;
 	private CheckBoxPreference counterClockwise;
 	private CheckBoxPreference randomStartWinkel;
+	private ListPreference mainlayoutSubVariants;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 		addPreferencesFromResource(R.xml.preferences_layout_blurring);
 		mainlayouts = (ListPreference) findPreference("mainlayouts");
 		mainlayoutVariants = (ListPreference) findPreference("mainlayoutVariants");
+		mainlayoutSubVariants = (ListPreference) findPreference("mainlayoutSubVariants");
 		limit2Canvas = (ListPreference) findPreference("limit2Canvas");
 		overlapping = (InlineSeekBarPreference) findPreference("overlapping");
 		centerPointX = (InlineSeekBarPreference) findPreference("centerPointX");
@@ -60,6 +63,15 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 			}
 		});
 
+		mainlayoutSubVariants.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+			@Override
+			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+				handleMainLayoutSubVariantSelect((String) newValue);
+				return true;
+			}
+		});
+
 		limit2Canvas.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
@@ -72,6 +84,7 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 		handleLimit2Canvas(Settings.getCanvasLimitString());
 		handleMainLayoutSelect(Settings.getSelectedMainLayoutString());
 		handleMainLayoutVariantSelect(Settings.getSelectedMainLayoutVarianteString());
+		handleMainLayoutSubVariantSelect(Settings.getSelectedMainLayoutSubVarianteString());
 	}
 
 	protected void handleLimit2Canvas(final String newValue) {
@@ -114,6 +127,25 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
 	private void handleMainLayoutVariantSelect(final String string) {
 		mainlayoutVariants.setSummary(string);
+
+		final ELayoutVariant variante = ELayoutVariant.getEnumForName(string);
+		addOrRemoveFromMainScreen(mainlayoutSubVariants, variante.hasSubVariants());
+		if (variante.hasSubVariants()) {
+			Log.i("Layout", "Setting Layout SubVariants...");
+			final CharSequence[] subVariants = variante.getSubVariants();
+			mainlayoutSubVariants.setEntries(subVariants);
+			mainlayoutSubVariants.setEntryValues(subVariants);
+			if (!string.equals(mainlayoutVariants.getValue())) {
+				mainlayoutSubVariants.setValueIndex(0);
+				mainlayoutSubVariants.setDefaultValue(mainlayoutSubVariants.getValue());
+			}
+			mainlayoutSubVariants.setSummary(mainlayoutSubVariants.getValue());
+		}
+	}
+
+	private void handleMainLayoutSubVariantSelect(final String string) {
+		mainlayoutSubVariants.setSummary(string);
+
 	}
 
 }

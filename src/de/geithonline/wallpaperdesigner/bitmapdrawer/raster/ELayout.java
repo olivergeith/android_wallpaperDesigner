@@ -17,6 +17,12 @@ public enum ELayout {
 
 	private String name;
 	private final boolean anzahlPatterns;
+	private final boolean blurring;
+	private final boolean overlap;
+	private final boolean counterClockwise;
+	private final boolean randomStartWinkel;
+	private final boolean adjustableCenter;
+	private final List<ELayoutVariant> variants;
 
 	public boolean hasAnzahlPatterns() {
 		return anzahlPatterns;
@@ -57,13 +63,6 @@ public enum ELayout {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
-	private final boolean blurring;
-	private final boolean overlap;
-	private final boolean counterClockwise;
-	private final boolean randomStartWinkel;
-	private final boolean adjustableCenter;
-	private final List<ELayoutVariant> variants;
 
 	public String getName() {
 		return name;

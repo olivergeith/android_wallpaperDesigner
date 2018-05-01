@@ -13,10 +13,11 @@ public class CircularRaster extends AbstractRaster {
 	}
 
 	public CircularRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning,
-			final CIRCLE_TYPE circleType) {
+			final ELayoutSubVariant subVariant, final CIRCLE_TYPE circleType) {
 		super(radius, overlap, width, height);
 
 		setPositioning(positioning);
+		setSubVariant(subVariant);
 
 		switch (circleType) {
 			default:
@@ -129,18 +130,6 @@ public class CircularRaster extends AbstractRaster {
 				// Limitieren auf punkte innerhalb des Canvas
 				addPoint2List(width, height, p);
 			}
-		}
-	}
-
-	@Override
-	public Point drawNextPoint() {
-		switch (getPositioning()) {
-			default:
-				return super.drawNextPoint();
-			case INNER:
-				return drawFirstPoint();
-			case OUTER:
-				return drawLastPoint();
 		}
 	}
 

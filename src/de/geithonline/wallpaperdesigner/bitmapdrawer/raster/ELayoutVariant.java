@@ -1,39 +1,65 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum ELayoutVariant {
-	RANDOM("Random"), //
-	INNER("Inner to Outer"), //
-	OUTER("Outer to Inner"), //
-	TOPMOST("Top to Bottom"), //
-	LEFTMOST("Left to Right"), //
-	BOTTOMMOST("Bottom to Top"), //
-	RIGHTMOST("Right to Left"), //
-	TOWER("Tower"), //
-	CENTER("Center"), //
-	TRISTEP("TriStep"), //
-	QUADSTEP("QuadStep"), //
-	DUO_CENTER("DuoCenter"), //
-	DUO_STEP_INNER_2_OUTER("DuoStep Inner2Outer"), //
-	DUO_STEP_OUTER_2_INNER("DuoStep Outer2Inner"), //
-	TOP_LEFT_2_BOTTOM_RIGHT("Top-L to Bottom-R"), //
-	TOP_RIGHT_2_BOTTOM_LEFT("Top-R to Bottom-L"), //
-	ALTERNATING("Alternating"), //
-	ALTERNATING_V2("Alternating T/L/B/R"), //
-	ALTERNATING_LEFT_RIGHT("Alternating L/R"), //
-	ALTERNATING_TOP_BOTTOM("Alternating T/B"), //
-	ALTERNATING_TOP_LEFT_BOTTOM_RIGHT("Alternating T-L / B-R"), //
-	ALTERNATING_TOP_RIGHT_BOTTOM_LEFT("Alternating T-R / B-L"), //
-	ALTERNATING_TOP_RIGHT_TOP_LEFT("Alternating T-R / T-L"), //
-	ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT("Alternating B-R / B-L");//
+	RANDOM("Random", Arrays.asList(ELayoutSubVariant.NONE)), //
+
+	LOGICAL_DIRECTED("Logical", Arrays.asList( //
+			ELayoutSubVariant.INNER, //
+			ELayoutSubVariant.OUTER, //
+			ELayoutSubVariant.TOWER, //
+			ELayoutSubVariant.CENTER, //
+			ELayoutSubVariant.TRISTEP, //
+			ELayoutSubVariant.QUADSTEP, //
+			ELayoutSubVariant.DUO_CENTER, //
+			ELayoutSubVariant.DUO_STEP_INNER_2_OUTER, //
+			ELayoutSubVariant.DUO_STEP_OUTER_2_INNER //
+	)), //
+
+	// INNER("Inner to Outer", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// OUTER("Outer to Inner", Arrays.asList(ELayoutSubVariant.NONE)), //
+	//
+	// DUO_STEP_INNER_2_OUTER("DuoStep Inner2Outer", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// DUO_STEP_OUTER_2_INNER("DuoStep Outer2Inner", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// TOWER("Tower", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// CENTER("Center", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// TRISTEP("TriStep", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// QUADSTEP("QuadStep", Arrays.asList(ELayoutSubVariant.NONE)), //
+	// DUO_CENTER("DuoCenter", Arrays.asList(ELayoutSubVariant.NONE)), //
+
+	GEOMETRICAL_DIRECTED("Directed", Arrays.asList( //
+			ELayoutSubVariant.INNER, //
+			ELayoutSubVariant.OUTER, //
+			ELayoutSubVariant.LEFT_RIGHT, //
+			ELayoutSubVariant.RIGHT_LEFT, //
+			ELayoutSubVariant.TOP_BOTTOM, //
+			ELayoutSubVariant.BOTTOM_TOP, //
+			ELayoutSubVariant.TOP_LEFT_BOTTOM_RIGHT, //
+			ELayoutSubVariant.TOP_RIGHT_BOTTOM_LEFT //
+	)), //
+	ALTERNATING("Alternating", Arrays.asList( //
+			ELayoutSubVariant.ALL_CORNERS, //
+			ELayoutSubVariant.ALL_SIDES, //
+			ELayoutSubVariant.LEFT_RIGHT, //
+			ELayoutSubVariant.TOP_BOTTOM, //
+			ELayoutSubVariant.TOP_LEFT_BOTTOM_RIGHT, //
+			ELayoutSubVariant.TOP_RIGHT_BOTTOM_LEFT, //
+			ELayoutSubVariant.TOP_RIGHT_TOP_LEFT, //
+			ELayoutSubVariant.BOTTOM_RIGHT_BOTTOM_LEFT //
+	));//
 
 	private String name;
+	private List<ELayoutSubVariant> subVariants;
 
 	public String getName() {
 		return name;
 	}
 
-	private ELayoutVariant(final String name) {
+	private ELayoutVariant(final String name, final List<ELayoutSubVariant> subVariants) {
 		this.name = name;
+		this.subVariants = subVariants;
 	}
 
 	public static ELayoutVariant getEnumForName(final String search) {
@@ -43,6 +69,22 @@ public enum ELayoutVariant {
 			}
 		}
 		return RANDOM;
+	}
+
+	public List<ELayoutSubVariant> getESubVariants() {
+		return subVariants;
+	}
+
+	public CharSequence[] getSubVariants() {
+		final CharSequence[] sequence = new CharSequence[subVariants.size()];
+		for (int i = 0; i < subVariants.size(); i++) {
+			sequence[i] = subVariants.get(i).getName();
+		}
+		return sequence;
+	}
+
+	public boolean hasSubVariants() {
+		return subVariants != null && subVariants.size() > 1;
 	}
 
 }

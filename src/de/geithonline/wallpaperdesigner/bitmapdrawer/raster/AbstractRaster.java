@@ -51,58 +51,70 @@ public class AbstractRaster {
 			case RANDOM:
 				return drawRandomPoint();
 
-			case LEFTMOST:
-				return drawLeftmostPoint();
-			case TOPMOST:
-				return drawTopmostPoint();
-			case RIGHTMOST:
-				return drawRightmostPoint();
-			case BOTTOMMOST:
-				return drawBottommostPoint();
+			case LOGICAL_DIRECTED:
+				switch (getSubVariant()) {
+					default:
+					case INNER:
+						return drawFirstPoint();
+					case OUTER:
+						return drawLastPoint();
+					case CENTER:
+						return drawCenterPoint();
+					case DUO_CENTER:
+						return drawDuoCenterPoint();
+					case TOWER:
+						return drawTowerPoint();
+					case TRISTEP:
+						return drawTriStepPoint();
+					case QUADSTEP:
+						return drawQuadStepPoint();
+					case DUO_STEP_INNER_2_OUTER:
+						return drawDuoStepInner2OuterPoint();
+					case DUO_STEP_OUTER_2_INNER:
+						return drawDuoStepOuter2InnerPoint();
+				}
 
-			case INNER:
-				return drawNearestPoint(pointCenter);
-			case OUTER:
-				return drawFarestPoint(pointCenter);
-
-			case CENTER:
-				return drawCenterPoint();
-			case DUO_CENTER:
-				return drawDuoCenterPoint();
-			case TOWER:
-				return drawTowerPoint();
-			case TRISTEP:
-				return drawTriStepPoint();
-			case QUADSTEP:
-				return drawQuadStepPoint();
-
-			case DUO_STEP_INNER_2_OUTER:
-				return drawDuoStepInner2OuterPoint();
-			case DUO_STEP_OUTER_2_INNER:
-				return drawDuoStepOuter2InnerPoint();
-
-			case TOP_LEFT_2_BOTTOM_RIGHT:
-				return drawNearestPoint(pointTopLeft);
-			case TOP_RIGHT_2_BOTTOM_LEFT:
-				return drawNearestPoint(pointTopRight);
-
-			case ALTERNATING_TOP_LEFT_BOTTOM_RIGHT:
-				return drawAlternatingPoint(pointTopLeft, pointBottomRight);
-			case ALTERNATING_TOP_RIGHT_BOTTOM_LEFT:
-				return drawAlternatingPoint(pointTopRight, pointBottomLeft);
-			case ALTERNATING_TOP_RIGHT_TOP_LEFT:
-				return drawAlternatingPoint(pointTopRight, pointTopLeft);
-			case ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT:
-				return drawAlternatingPoint(pointBottomRight, pointBottomLeft);
-			case ALTERNATING_LEFT_RIGHT:
-				return drawAlternatingPoint(pointCenterLeft, pointCenterRight);
-			case ALTERNATING_TOP_BOTTOM:
-				return drawAlternatingPoint(pointCenterTop, pointCenterBottom);
+			case GEOMETRICAL_DIRECTED:
+				switch (getSubVariant()) {
+					default:
+					case INNER:
+						return drawNearestPoint(pointCenter);
+					case OUTER:
+						return drawFarestPoint(pointCenter);
+					case LEFT_RIGHT:
+						return drawLeftmostPoint();
+					case TOP_BOTTOM:
+						return drawTopmostPoint();
+					case RIGHT_LEFT:
+						return drawRightmostPoint();
+					case BOTTOM_TOP:
+						return drawBottommostPoint();
+					case TOP_LEFT_BOTTOM_RIGHT:
+						return drawNearestPoint(pointTopLeft);
+					case TOP_RIGHT_BOTTOM_LEFT:
+						return drawNearestPoint(pointTopRight);
+				}
 
 			case ALTERNATING:
-				return drawAlternatingPoint(pointTopRight, pointTopLeft, pointBottomLeft, pointBottomRight);
-			case ALTERNATING_V2:
-				return drawAlternatingPoint(pointCenterTop, pointCenterRight, pointCenterBottom, pointCenterLeft);
+				switch (getSubVariant()) {
+					default:
+					case ALL_CORNERS:
+						return drawAlternatingPoint(pointTopRight, pointTopLeft, pointBottomLeft, pointBottomRight);
+					case ALL_SIDES:
+						return drawAlternatingPoint(pointCenterTop, pointCenterLeft, pointCenterBottom, pointCenterRight);
+					case LEFT_RIGHT:
+						return drawAlternatingPoint(pointCenterLeft, pointCenterRight);
+					case TOP_BOTTOM:
+						return drawAlternatingPoint(pointCenterTop, pointCenterBottom);
+					case TOP_LEFT_BOTTOM_RIGHT:
+						return drawAlternatingPoint(pointTopLeft, pointBottomRight);
+					case TOP_RIGHT_BOTTOM_LEFT:
+						return drawAlternatingPoint(pointTopRight, pointBottomLeft);
+					case TOP_RIGHT_TOP_LEFT:
+						return drawAlternatingPoint(pointTopRight, pointTopLeft);
+					case BOTTOM_RIGHT_BOTTOM_LEFT:
+						return drawAlternatingPoint(pointBottomRight, pointBottomLeft);
+				}
 		}
 	}
 
@@ -314,6 +326,7 @@ public class AbstractRaster {
 	}
 
 	private int state = 0;
+	private ELayoutSubVariant subVariant;
 
 	protected Point drawTriStepPoint() {
 		final int size = points.size();
@@ -514,6 +527,14 @@ public class AbstractRaster {
 
 	public void setPositioning(final ELayoutVariant positioning) {
 		this.positioning = positioning;
+	}
+
+	public ELayoutSubVariant getSubVariant() {
+		return subVariant;
+	}
+
+	public void setSubVariant(final ELayoutSubVariant subVariant) {
+		this.subVariant = subVariant;
 	}
 
 	public int getSmallTolerance() {

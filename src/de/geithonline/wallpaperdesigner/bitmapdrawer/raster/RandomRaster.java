@@ -7,9 +7,12 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class RandomRaster extends AbstractRaster {
 
-	public RandomRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning) {
+	public RandomRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning,
+			final ELayoutSubVariant subVariant) {
 		super(radius, overlap, width, height);
 		setPositioning(positioning);
+		setSubVariant(subVariant);
+
 		final int anzahlPatterns = Settings.getAnzahlPatterns();
 		Log.i("Random Raster", "anz = " + anzahlPatterns);
 		for (int w = 0; w < anzahlPatterns; w++) {

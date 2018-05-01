@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayout;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutSubVariant;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutVariant;
 import de.geithonline.wallpaperdesigner.settings.ColorRandOptions.COLOR_RANDOMIZING_TYPE;
 import de.geithonline.wallpaperdesigner.settings.enums.EGlossyGlowStyle;
@@ -107,6 +108,7 @@ public class Settings {
 	public static final String KEY_HEX_VALUES = "hexValues";
 	public static final String KEY_APP_THEME = "appTheme";
 	public static final String KEY_MAINLAYOUT_VARIANTS = "mainlayoutVariants";
+	public static final String KEY_MAINLAYOUT_SUB_VARIANTS = "mainlayoutSubVariants";
 	public static final String KEY_MAINLAYOUTS = "mainlayouts";
 	public static final String KEY_SORT_ORDER = "sortOrder";
 	public static final String KEY_IMAGE_FORMAT = "imageFormat";
@@ -359,6 +361,14 @@ public class Settings {
 
 	public static String getSelectedMainLayoutVarianteString() {
 		return readStringPref(KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.RANDOM.getName());
+	}
+
+	public static ELayoutSubVariant getSelectedMainLayoutSubVariante() {
+		return ELayoutSubVariant.getEnumForName(getSelectedMainLayoutSubVarianteString());
+	}
+
+	public static String getSelectedMainLayoutSubVarianteString() {
+		return readStringPref(KEY_MAINLAYOUT_SUB_VARIANTS, ELayoutSubVariant.NONE.getName());
 	}
 
 	public static int getAnzahlPatterns() {
