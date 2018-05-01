@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 import de.geithonline.wallpaperdesigner.R;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayout;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayoutVariant;
 import de.geithonline.wallpaperdesigner.settings.ColorRandOptions.COLOR_RANDOMIZING_TYPE;
 import de.geithonline.wallpaperdesigner.settings.enums.EGlossyGlowStyle;
 import de.geithonline.wallpaperdesigner.settings.enums.EGlossyReflectionStyle;
@@ -343,12 +345,20 @@ public class Settings {
 	// ###################################################################
 	// Options Layout Selection
 
-	public static String getSelectedMainLayout() {
-		return readStringPref(KEY_MAINLAYOUTS, "Random Layout");
+	public static ELayout getSelectedMainLayout() {
+		return ELayout.getEnumForName(getSelectedMainLayoutString());
 	}
 
-	public static String getSelectedMainLayoutVariante() {
-		return readStringPref(KEY_MAINLAYOUT_VARIANTS, "Random");
+	public static String getSelectedMainLayoutString() {
+		return readStringPref(KEY_MAINLAYOUTS, ELayout.RANDOM.getName());
+	}
+
+	public static ELayoutVariant getSelectedMainLayoutVariante() {
+		return ELayoutVariant.getEnumForName(getSelectedMainLayoutVarianteString());
+	}
+
+	public static String getSelectedMainLayoutVarianteString() {
+		return readStringPref(KEY_MAINLAYOUT_VARIANTS, ELayoutVariant.RANDOM.getName());
 	}
 
 	public static int getAnzahlPatterns() {

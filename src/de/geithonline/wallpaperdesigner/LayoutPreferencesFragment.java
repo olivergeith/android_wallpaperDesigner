@@ -8,7 +8,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
-import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.RasterFactory;
+import de.geithonline.wallpaperdesigner.bitmapdrawer.raster.ELayout;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 
 /**
@@ -70,8 +70,8 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 		});
 
 		handleLimit2Canvas(Settings.getCanvasLimitString());
-		handleMainLayoutSelect(Settings.getSelectedMainLayout());
-		handleMainLayoutVariantSelect(Settings.getSelectedMainLayoutVariante());
+		handleMainLayoutSelect(Settings.getSelectedMainLayoutString());
+		handleMainLayoutVariantSelect(Settings.getSelectedMainLayoutVarianteString());
 	}
 
 	protected void handleLimit2Canvas(final String newValue) {
@@ -79,24 +79,25 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
 	}
 
-	private void handleMainLayoutSelect(final String selectedLayout) {
-		mainlayouts.setSummary(selectedLayout);
+	private void handleMainLayoutSelect(final String string) {
+		mainlayouts.setSummary(string);
+		final ELayout enumForName = ELayout.getEnumForName(string);
 
-		addOrRemoveFromMainScreen(overlapping, RasterFactory.hasLayoutOverlap(selectedLayout));
-		addOrRemoveFromMainScreen(anzahlPatterns, RasterFactory.hasLayoutAnzahlPattern(selectedLayout));
-		addOrRemoveFromMainScreen(blurring, RasterFactory.hasLayoutBlurring(selectedLayout));
-		addOrRemoveFromMainScreen(counterClockwise, RasterFactory.hasCounterClockwise(selectedLayout));
-		addOrRemoveFromMainScreen(randomStartWinkel, RasterFactory.hasLayoutRandomStartwinkel(selectedLayout));
-		addOrRemoveFromMainScreen(centerPointX, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		addOrRemoveFromMainScreen(centerPointY, RasterFactory.hasLayoutAdjustableCenter(selectedLayout));
-		addOrRemoveFromMainScreen(mainlayoutVariants, RasterFactory.hasLayoutVariants(selectedLayout));
+		addOrRemoveFromMainScreen(overlapping, enumForName.hasOverlap());
+		addOrRemoveFromMainScreen(anzahlPatterns, enumForName.hasAnzahlPatterns());
+		addOrRemoveFromMainScreen(blurring, enumForName.hasBlurring());
+		addOrRemoveFromMainScreen(counterClockwise, enumForName.hasCounterClockwise());
+		addOrRemoveFromMainScreen(randomStartWinkel, enumForName.hasRandomStartWinkel());
+		addOrRemoveFromMainScreen(centerPointX, enumForName.hasAdjustableCenter());
+		addOrRemoveFromMainScreen(centerPointY, enumForName.hasAdjustableCenter());
+		addOrRemoveFromMainScreen(mainlayoutVariants, enumForName.hasVariants());
 
-		if (RasterFactory.hasLayoutVariants(selectedLayout)) {
+		if (enumForName.hasVariants()) {
 			Log.i("Layout", "Setting Layout Variants...");
-			final CharSequence[] variants = RasterFactory.getLayoutVariants(selectedLayout);
+			final CharSequence[] variants = enumForName.getVariants();
 			mainlayoutVariants.setEntries(variants);
 			mainlayoutVariants.setEntryValues(variants);
-			if (!selectedLayout.equals(mainlayouts.getValue())) {
+			if (!string.equals(mainlayouts.getValue())) {
 				mainlayoutVariants.setValueIndex(0);
 				mainlayoutVariants.setDefaultValue(mainlayoutVariants.getValue());
 			}
@@ -111,8 +112,8 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
 	}
 
-	private void handleMainLayoutVariantSelect(final String variante) {
-		mainlayoutVariants.setSummary(variante);
+	private void handleMainLayoutVariantSelect(final String string) {
+		mainlayoutVariants.setSummary(string);
 	}
 
 }
