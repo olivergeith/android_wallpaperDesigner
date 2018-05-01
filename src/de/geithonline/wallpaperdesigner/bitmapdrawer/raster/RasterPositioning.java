@@ -18,8 +18,13 @@ public enum RasterPositioning {
 	TOP_LEFT_2_BOTTOM_RIGHT("Top-L to Bottom-R"), //
 	TOP_RIGHT_2_BOTTOM_LEFT("Top-R to Bottom-L"), //
 	ALTERNATING("Alternating"), //
-	ALTERNATING_TOP_LEFT_BOTTOM_RIGHT("Altern. Top-L / Bottom-R"), //
-	ALTERNATING_TOP_RIGHT_BOTTOM_LEFT("Altern. Top-R / Bottom-L");
+	ALTERNATING_V2("Alternating T/L/B/R"), //
+	ALTERNATING_LEFT_RIGHT("Alternating L/R"), //
+	ALTERNATING_TOP_BOTTOM("Alternating T/B"), //
+	ALTERNATING_TOP_LEFT_BOTTOM_RIGHT("Alternating T-L / B-R"), //
+	ALTERNATING_TOP_RIGHT_BOTTOM_LEFT("Alternating T-R / B-L"), //
+	ALTERNATING_TOP_RIGHT_TOP_LEFT("Alternating T-R / T-L"), //
+	ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT("Alternating B-R / B-L");//
 
 	private String name;
 

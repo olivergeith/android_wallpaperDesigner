@@ -22,6 +22,10 @@ public class AbstractRaster {
 	protected final Point pointBottomLeft;
 	protected final Point pointBottomRight;
 	protected final Point pointCenter;
+	private final Point pointCenterTop;
+	private final Point pointCenterLeft;
+	private final Point pointCenterBottom;
+	private final Point pointCenterRight;
 
 	public AbstractRaster(final int radius, final float overlap, final int width, final int height) {
 		bWidth = width;
@@ -33,6 +37,12 @@ public class AbstractRaster {
 		pointBottomRight = new Point(bWidth, bHeight);
 		pointBottomLeft = new Point(0, bHeight);
 		pointCenter = new Point(bWidth / 2, bHeight / 2);
+
+		pointCenterTop = new Point(bWidth / 2, 0);
+		pointCenterLeft = new Point(0, bHeight / 2);
+		pointCenterBottom = new Point(bWidth / 2, bHeight);
+		pointCenterRight = new Point(bWidth, bHeight / 2);
+
 	}
 
 	public Point drawNextPoint() {
@@ -80,8 +90,19 @@ public class AbstractRaster {
 				return drawAlternatingPoint(pointTopLeft, pointBottomRight);
 			case ALTERNATING_TOP_RIGHT_BOTTOM_LEFT:
 				return drawAlternatingPoint(pointTopRight, pointBottomLeft);
+			case ALTERNATING_TOP_RIGHT_TOP_LEFT:
+				return drawAlternatingPoint(pointTopRight, pointTopLeft);
+			case ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT:
+				return drawAlternatingPoint(pointBottomRight, pointBottomLeft);
+			case ALTERNATING_LEFT_RIGHT:
+				return drawAlternatingPoint(pointCenterLeft, pointCenterRight);
+			case ALTERNATING_TOP_BOTTOM:
+				return drawAlternatingPoint(pointCenterTop, pointCenterBottom);
+
 			case ALTERNATING:
 				return drawAlternatingPoint(pointTopRight, pointTopLeft, pointBottomLeft, pointBottomRight);
+			case ALTERNATING_V2:
+				return drawAlternatingPoint(pointCenterTop, pointCenterRight, pointCenterBottom, pointCenterLeft);
 		}
 	}
 

@@ -20,8 +20,13 @@ public class RasterFactory {
 			RasterPositioning.TOP_LEFT_2_BOTTOM_RIGHT.getName(), //
 			RasterPositioning.TOP_RIGHT_2_BOTTOM_LEFT.getName(), //
 			RasterPositioning.ALTERNATING.getName(), //
+			RasterPositioning.ALTERNATING_V2.getName(), //
 			RasterPositioning.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT.getName(), //
 			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_TOP_RIGHT_TOP_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_LEFT_RIGHT.getName(), //
+			RasterPositioning.ALTERNATING_TOP_BOTTOM.getName(), //
 			RasterPositioning.CENTER.getName(), //
 			RasterPositioning.DUO_CENTER.getName(), //
 			RasterPositioning.TOWER.getName(), //
@@ -43,8 +48,13 @@ public class RasterFactory {
 			RasterPositioning.TOP_LEFT_2_BOTTOM_RIGHT.getName(), //
 			RasterPositioning.TOP_RIGHT_2_BOTTOM_LEFT.getName(), //
 			RasterPositioning.ALTERNATING.getName(), //
+			RasterPositioning.ALTERNATING_V2.getName(), //
 			RasterPositioning.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT.getName(), //
 			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_TOP_RIGHT_TOP_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_LEFT_RIGHT.getName(), //
+			RasterPositioning.ALTERNATING_TOP_BOTTOM.getName(), //
 			RasterPositioning.CENTER.getName(), //
 			RasterPositioning.DUO_CENTER.getName(), //
 			RasterPositioning.TOWER.getName(), //
@@ -63,8 +73,13 @@ public class RasterFactory {
 			RasterPositioning.TOP_LEFT_2_BOTTOM_RIGHT.getName(), //
 			RasterPositioning.TOP_RIGHT_2_BOTTOM_LEFT.getName(), //
 			RasterPositioning.ALTERNATING.getName(), //
+			RasterPositioning.ALTERNATING_V2.getName(), //
+			RasterPositioning.ALTERNATING_LEFT_RIGHT.getName(), //
+			RasterPositioning.ALTERNATING_TOP_BOTTOM.getName(), //
 			RasterPositioning.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName() //
+			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_TOP_RIGHT_TOP_LEFT.getName(), //
+			RasterPositioning.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT.getName() //
 	};
 
 	private static CharSequence materialGridVariants[] = new CharSequence[] { //
