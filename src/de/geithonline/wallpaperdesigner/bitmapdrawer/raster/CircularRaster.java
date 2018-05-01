@@ -12,7 +12,7 @@ public class CircularRaster extends AbstractRaster {
 		CIRCLE_CENTER_BOTTOM, CIRCLE, SPIRAL, CIRCLE_ADJUSTABLE_CENTER, SPIRAL_ADJUSTABLE_CENTER;
 	}
 
-	public CircularRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
+	public CircularRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning,
 			final CIRCLE_TYPE circleType) {
 		super(radius, overlap, width, height);
 

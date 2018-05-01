@@ -5,7 +5,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class SinewaveRaster extends AbstractRaster {
 
-	public SinewaveRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning,
+	public SinewaveRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning,
 			final int numberOfWaves) {
 		super(radius, overlap, width, height);
 

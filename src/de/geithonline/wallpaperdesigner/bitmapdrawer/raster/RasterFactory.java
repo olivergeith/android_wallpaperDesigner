@@ -1,6 +1,8 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.util.Log;
@@ -10,85 +12,85 @@ public class RasterFactory {
 
 	private static final Map<String, LayoutProperties> layoutProperties = new HashMap<>();
 
-	private static CharSequence circularVariants[] = new CharSequence[] { //
-			RasterPositioning.INNER.getName(), //
-			RasterPositioning.OUTER.getName(), //
-			RasterPositioning.TOPMOST.getName(), //
-			RasterPositioning.BOTTOMMOST.getName(), //
-			RasterPositioning.LEFTMOST.getName(), //
-			RasterPositioning.RIGHTMOST.getName(), //
-			RasterPositioning.TOP_LEFT_2_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.TOP_RIGHT_2_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING.getName(), //
-			RasterPositioning.ALTERNATING_V2.getName(), //
-			RasterPositioning.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_TOP_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_LEFT_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_BOTTOM.getName(), //
-			RasterPositioning.CENTER.getName(), //
-			RasterPositioning.DUO_CENTER.getName(), //
-			RasterPositioning.TOWER.getName(), //
-			RasterPositioning.TRISTEP.getName(), //
-			RasterPositioning.QUADSTEP.getName(), //
-			RasterPositioning.DUO_STEP_INNER_2_OUTER.getName(), //
-			RasterPositioning.DUO_STEP_OUTER_2_INNER.getName(), //
-			RasterPositioning.RANDOM.getName() //
-	};
+	private static List<ELayoutVariant> circularVariants = Arrays.asList( //
+			ELayoutVariant.INNER, //
+			ELayoutVariant.OUTER, //
+			ELayoutVariant.TOPMOST, //
+			ELayoutVariant.BOTTOMMOST, //
+			ELayoutVariant.LEFTMOST, //
+			ELayoutVariant.RIGHTMOST, //
+			ELayoutVariant.TOP_LEFT_2_BOTTOM_RIGHT, //
+			ELayoutVariant.TOP_RIGHT_2_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.ALTERNATING_V2, //
+			ELayoutVariant.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT, //
+			ELayoutVariant.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING_TOP_RIGHT_TOP_LEFT, //
+			ELayoutVariant.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING_LEFT_RIGHT, //
+			ELayoutVariant.ALTERNATING_TOP_BOTTOM, //
+			ELayoutVariant.CENTER, //
+			ELayoutVariant.DUO_CENTER, //
+			ELayoutVariant.TOWER, //
+			ELayoutVariant.TRISTEP, //
+			ELayoutVariant.QUADSTEP, //
+			ELayoutVariant.DUO_STEP_INNER_2_OUTER, //
+			ELayoutVariant.DUO_STEP_OUTER_2_INNER, //
+			ELayoutVariant.RANDOM //
+	);
 
-	private static CharSequence geoGridVariants[] = new CharSequence[] { //
-			RasterPositioning.RANDOM.getName(), //
-			RasterPositioning.INNER.getName(), //
-			RasterPositioning.OUTER.getName(), //
-			RasterPositioning.TOPMOST.getName(), //
-			RasterPositioning.BOTTOMMOST.getName(), //
-			RasterPositioning.LEFTMOST.getName(), //
-			RasterPositioning.RIGHTMOST.getName(), //
-			RasterPositioning.TOP_LEFT_2_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.TOP_RIGHT_2_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING.getName(), //
-			RasterPositioning.ALTERNATING_V2.getName(), //
-			RasterPositioning.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_TOP_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_LEFT_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_BOTTOM.getName(), //
-			RasterPositioning.CENTER.getName(), //
-			RasterPositioning.DUO_CENTER.getName(), //
-			RasterPositioning.TOWER.getName(), //
-			RasterPositioning.TRISTEP.getName(), //
-			RasterPositioning.QUADSTEP.getName() //
-	};
+	private static List<ELayoutVariant> geoGridVariants = Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.INNER, //
+			ELayoutVariant.OUTER, //
+			ELayoutVariant.TOPMOST, //
+			ELayoutVariant.BOTTOMMOST, //
+			ELayoutVariant.LEFTMOST, //
+			ELayoutVariant.RIGHTMOST, //
+			ELayoutVariant.TOP_LEFT_2_BOTTOM_RIGHT, //
+			ELayoutVariant.TOP_RIGHT_2_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.ALTERNATING_V2, //
+			ELayoutVariant.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT, //
+			ELayoutVariant.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING_TOP_RIGHT_TOP_LEFT, //
+			ELayoutVariant.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING_LEFT_RIGHT, //
+			ELayoutVariant.ALTERNATING_TOP_BOTTOM, //
+			ELayoutVariant.CENTER, //
+			ELayoutVariant.DUO_CENTER, //
+			ELayoutVariant.TOWER, //
+			ELayoutVariant.TRISTEP, //
+			ELayoutVariant.QUADSTEP //
+	);
 
-	private static CharSequence randomGridVariants[] = new CharSequence[] { //
-			RasterPositioning.RANDOM.getName(), //
-			RasterPositioning.INNER.getName(), //
-			RasterPositioning.OUTER.getName(), //
-			RasterPositioning.TOPMOST.getName(), //
-			RasterPositioning.BOTTOMMOST.getName(), //
-			RasterPositioning.LEFTMOST.getName(), //
-			RasterPositioning.RIGHTMOST.getName(), //
-			RasterPositioning.TOP_LEFT_2_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.TOP_RIGHT_2_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING.getName(), //
-			RasterPositioning.ALTERNATING_V2.getName(), //
-			RasterPositioning.ALTERNATING_LEFT_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_BOTTOM.getName(), //
-			RasterPositioning.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_TOP_RIGHT_TOP_LEFT.getName(), //
-			RasterPositioning.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT.getName() //
-	};
+	private static List<ELayoutVariant> randomGridVariants = Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.INNER, //
+			ELayoutVariant.OUTER, //
+			ELayoutVariant.TOPMOST, //
+			ELayoutVariant.BOTTOMMOST, //
+			ELayoutVariant.LEFTMOST, //
+			ELayoutVariant.RIGHTMOST, //
+			ELayoutVariant.TOP_LEFT_2_BOTTOM_RIGHT, //
+			ELayoutVariant.TOP_RIGHT_2_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.ALTERNATING_V2, //
+			ELayoutVariant.ALTERNATING_LEFT_RIGHT, //
+			ELayoutVariant.ALTERNATING_TOP_BOTTOM, //
+			ELayoutVariant.ALTERNATING_TOP_LEFT_BOTTOM_RIGHT, //
+			ELayoutVariant.ALTERNATING_TOP_RIGHT_BOTTOM_LEFT, //
+			ELayoutVariant.ALTERNATING_TOP_RIGHT_TOP_LEFT, //
+			ELayoutVariant.ALTERNATING_BOTTOM_RIGHT_BOTTOM_LEFT //
+	);
 
-	private static CharSequence materialGridVariants[] = new CharSequence[] { //
-			RasterPositioning.RANDOM.getName(), //
-			RasterPositioning.TOPMOST.getName(), //
-			RasterPositioning.BOTTOMMOST.getName(), //
-			RasterPositioning.TOWER.getName(), //
-			RasterPositioning.CENTER.getName() //
-	};
+	private static List<ELayoutVariant> materialGridVariants = Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.TOPMOST, //
+			ELayoutVariant.BOTTOMMOST, //
+			ELayoutVariant.TOWER, //
+			ELayoutVariant.CENTER //
+	);
 
 	static {
 		// new LayoutProperties(anzahlPatterns, blurring, overlap, counterClockwise, randomstartwinkel)
@@ -108,7 +110,7 @@ public class RasterFactory {
 			final float overlap) {
 
 		final String key = layout;
-		final RasterPositioning rPos = RasterPositioning.getEnumForName(variante);
+		final ELayoutVariant rPos = ELayoutVariant.getEnumForName(variante);
 		Log.i("Layout", "Layout = " + key);
 		switch (key) {
 			default:

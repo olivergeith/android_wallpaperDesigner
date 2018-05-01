@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 public class DiagonalRaster extends AbstractRaster {
 
-	public DiagonalRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning) {
+	public DiagonalRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning) {
 		super(radius, overlap, width, height);
 		final int abstandX = Math.round(radius * 2 * overlap);
 		final int abstandY = abstandX / 2;

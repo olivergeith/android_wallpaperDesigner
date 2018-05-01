@@ -10,7 +10,7 @@ import de.geithonline.wallpaperdesigner.utils.Randomizer;
 
 public class AbstractRaster {
 	protected static final int WIDE_CANVAS_LIMIT = 3;
-	private RasterPositioning positioning;
+	private ELayoutVariant positioning;
 	private int abstand;
 	protected final List<Point> points = new ArrayList<>();
 	private final int radius;
@@ -508,11 +508,11 @@ public class AbstractRaster {
 		return p;
 	}
 
-	public RasterPositioning getPositioning() {
+	public ELayoutVariant getPositioning() {
 		return positioning;
 	}
 
-	public void setPositioning(final RasterPositioning positioning) {
+	public void setPositioning(final ELayoutVariant positioning) {
 		this.positioning = positioning;
 	}
 

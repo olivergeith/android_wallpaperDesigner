@@ -4,7 +4,7 @@ import android.graphics.Point;
 
 public class GeometricRaster extends AbstractRaster {
 
-	public GeometricRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning) {
+	public GeometricRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning) {
 		super(radius, overlap, width, height);
 		setPositioning(positioning);
 		final int abstand = Math.round(radius * 2 * overlap);

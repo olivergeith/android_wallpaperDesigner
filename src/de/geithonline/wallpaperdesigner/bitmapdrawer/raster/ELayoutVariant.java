@@ -1,6 +1,6 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
-public enum RasterPositioning {
+public enum ELayoutVariant {
 	RANDOM("Random"), //
 	INNER("Inner to Outer"), //
 	OUTER("Outer to Inner"), //
@@ -32,12 +32,12 @@ public enum RasterPositioning {
 		return name;
 	}
 
-	private RasterPositioning(final String name) {
+	private ELayoutVariant(final String name) {
 		this.name = name;
 	}
 
-	public static RasterPositioning getEnumForName(final String search) {
-		for (final RasterPositioning e : RasterPositioning.values()) {
+	public static ELayoutVariant getEnumForName(final String search) {
+		for (final ELayoutVariant e : ELayoutVariant.values()) {
 			if (search != null && search.equals(e.getName())) {
 				return e;
 			}

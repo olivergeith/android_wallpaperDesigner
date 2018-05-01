@@ -5,7 +5,7 @@ import android.graphics.PointF;
 
 public class HexagonalRaster extends AbstractRaster {
 
-	public HexagonalRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning) {
+	public HexagonalRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning) {
 		super(radius, overlap, width, height);
 		boolean upsidedown = true;
 		setPositioning(positioning);

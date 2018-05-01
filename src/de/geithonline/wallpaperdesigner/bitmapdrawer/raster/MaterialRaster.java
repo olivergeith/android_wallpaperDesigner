@@ -7,7 +7,7 @@ public class MaterialRaster extends AbstractRaster {
 		RANDOM, TOWER, CENTER, BOOK, BOOK_REVERSE;
 	}
 
-	public MaterialRaster(final int width, final int height, final int radius, final float overlap, final RasterPositioning positioning) {
+	public MaterialRaster(final int width, final int height, final int radius, final float overlap, final ELayoutVariant positioning) {
 		super(radius, overlap, width, height);
 
 		setPositioning(positioning);

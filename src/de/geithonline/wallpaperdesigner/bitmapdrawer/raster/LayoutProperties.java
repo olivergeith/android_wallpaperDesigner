@@ -1,17 +1,19 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
+import java.util.List;
+
 public class LayoutProperties {
 	private final boolean anzahlPatterns;
 	private final boolean blurring;
 	private final boolean overlap;
 	private final boolean counterClockwise;
 
-	private final CharSequence[] variants;
+	private final List<ELayoutVariant> variants;
 	private final boolean randomStartWinkel;
 	private final boolean adjustableCenter;
 
 	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean counterClockwise,
-			final boolean randomStartWinkel, final CharSequence[] variants) {
+			final boolean randomStartWinkel, final List<ELayoutVariant> variants) {
 		super();
 		this.anzahlPatterns = anzahlPatterns;
 		this.blurring = blurring;
@@ -23,7 +25,7 @@ public class LayoutProperties {
 	}
 
 	public LayoutProperties(final boolean anzahlPatterns, final boolean blurring, final boolean overlap, final boolean counterClockwise,
-			final boolean randomStartWinkel, final boolean adjustableCenter, final CharSequence[] variants) {
+			final boolean randomStartWinkel, final boolean adjustableCenter, final List<ELayoutVariant> variants) {
 		super();
 		this.anzahlPatterns = anzahlPatterns;
 		this.blurring = blurring;
@@ -59,6 +61,14 @@ public class LayoutProperties {
 	}
 
 	public CharSequence[] getVariants() {
+		final CharSequence[] sequence = new CharSequence[variants.size()];
+		for (int i = 0; i < variants.size(); i++) {
+			sequence[i] = variants.get(i).getName();
+		}
+		return sequence;
+	}
+
+	public List<ELayoutVariant> getEVariants() {
 		return variants;
 	}
 
