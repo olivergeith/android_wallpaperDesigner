@@ -1,19 +1,68 @@
 package de.geithonline.wallpaperdesigner.bitmapdrawer.raster;
 
+import java.util.Arrays;
 import java.util.List;
 
 public enum ELayout {
 
-	RANDOM("Random Layout", true, true, false, false, false, false, RasterFactory.randomGridVariants), //
-	GEOMETRIC_GRID("Geometric Grid", false, true, true, false, false, false, RasterFactory.geoGridVariants), //
-	HEX_GRID("Hex Grid", false, true, true, false, false, false, RasterFactory.geoGridVariants), //
-	DIAGONAL_GRID("Diagonal Grid", false, true, true, false, false, false, RasterFactory.geoGridVariants), //
-	MATERIAL_GRID("Material Grid", false, false, true, false, false, false, RasterFactory.materialGridVariants), //
-	CIRCULAR_GRID("Circular", false, true, true, true, true, false, RasterFactory.circularVariants), //
-	CIRCULAR_GRID_ADJUSTABLE_CENTER("Circular Adjustable Center", false, true, true, true, true, true, RasterFactory.circularVariants), //
-	SPIRAL_GRID("Spiral", false, true, true, true, true, false, RasterFactory.circularVariants), //
-	SPIRAL_GRID_ADJUSTABLE_CENTER("Spiral Adjustable Center", false, true, true, true, true, true, RasterFactory.circularVariants), //
-	HALF_CIRCLE_GRID("Half Circle", false, true, true, true, true, false, RasterFactory.circularVariants);
+	RANDOM("Random Layout", true, true, false, false, false, false, Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING //
+	)), //
+	GEOMETRIC_GRID("Geometric Grid", false, true, true, false, false, false, Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING //
+	)), //
+	HEX_GRID("Hex Grid", false, true, true, false, false, false, Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING //
+	)), //
+	DIAGONAL_GRID("Diagonal Grid", false, true, true, false, false, false, Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING //
+	)), //
+	MATERIAL_GRID("Material Grid", false, false, true, false, false, false, Arrays.asList( //
+			ELayoutVariant.RANDOM, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.LOGICAL_DIRECTED //
+	)), //
+	CIRCULAR_GRID("Circular", false, true, true, true, true, false, Arrays.asList( //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.RANDOM //
+	)), //
+	CIRCULAR_GRID_ADJUSTABLE_CENTER("Circular Adjustable Center", false, true, true, true, true, true, Arrays.asList( //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.RANDOM //
+	)), //
+	SPIRAL_GRID("Spiral", false, true, true, true, true, false, Arrays.asList( //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.RANDOM //
+	)), //
+	SPIRAL_GRID_ADJUSTABLE_CENTER("Spiral Adjustable Center", false, true, true, true, true, true, Arrays.asList( //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.RANDOM //
+	)), //
+	HALF_CIRCLE_GRID("Half Circle", false, true, true, true, true, false, Arrays.asList( //
+			ELayoutVariant.LOGICAL_DIRECTED, //
+			ELayoutVariant.GEOMETRICAL_DIRECTED, //
+			ELayoutVariant.ALTERNATING, //
+			ELayoutVariant.RANDOM //
+	));
 
 	private String name;
 	private final boolean anzahlPatterns;

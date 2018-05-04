@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum ELayoutVariant {
-	RANDOM("Random", Arrays.asList(ELayoutSubVariant.NONE)), //
+	RANDOM("Random", Arrays.asList(//
+			ELayoutSubVariant.NONE//
+	)), //
 
 	LOGICAL_DIRECTED("Logical", Arrays.asList( //
 			ELayoutSubVariant.INNER, //
@@ -17,17 +19,6 @@ public enum ELayoutVariant {
 			ELayoutSubVariant.DUO_STEP_INNER_2_OUTER, //
 			ELayoutSubVariant.DUO_STEP_OUTER_2_INNER //
 	)), //
-
-	// INNER("Inner to Outer", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// OUTER("Outer to Inner", Arrays.asList(ELayoutSubVariant.NONE)), //
-	//
-	// DUO_STEP_INNER_2_OUTER("DuoStep Inner2Outer", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// DUO_STEP_OUTER_2_INNER("DuoStep Outer2Inner", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// TOWER("Tower", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// CENTER("Center", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// TRISTEP("TriStep", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// QUADSTEP("QuadStep", Arrays.asList(ELayoutSubVariant.NONE)), //
-	// DUO_CENTER("DuoCenter", Arrays.asList(ELayoutSubVariant.NONE)), //
 
 	GEOMETRICAL_DIRECTED("Directed", Arrays.asList( //
 			ELayoutSubVariant.INNER, //
@@ -84,7 +75,7 @@ public enum ELayoutVariant {
 	}
 
 	public boolean hasSubVariants() {
-		return subVariants != null && subVariants.size() > 1;
+		return subVariants != null;
 	}
 
 }

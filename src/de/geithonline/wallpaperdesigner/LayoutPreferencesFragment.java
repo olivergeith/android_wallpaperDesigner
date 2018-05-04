@@ -17,8 +17,8 @@ import de.geithonline.wallpaperdesigner.settings.Settings;
  */
 public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
-	private ListPreference mainlayouts;
-	private ListPreference mainlayoutVariants;
+	private ListPreference layouts;
+	private ListPreference layoutVariants;
 	private ListPreference limit2Canvas;
 	private InlineSeekBarPreference overlapping;
 	private InlineSeekBarPreference centerPointX;
@@ -27,16 +27,16 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 	private CheckBoxPreference blurring;
 	private CheckBoxPreference counterClockwise;
 	private CheckBoxPreference randomStartWinkel;
-	private ListPreference mainlayoutSubVariants;
+	private ListPreference layoutSubVariants;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences_layout);
 		addPreferencesFromResource(R.xml.preferences_layout_blurring);
-		mainlayouts = (ListPreference) findPreference("mainlayouts");
-		mainlayoutVariants = (ListPreference) findPreference("mainlayoutVariants");
-		mainlayoutSubVariants = (ListPreference) findPreference("mainlayoutSubVariants");
+		layouts = (ListPreference) findPreference("mainlayouts");
+		layoutVariants = (ListPreference) findPreference("mainlayoutVariants");
+		layoutSubVariants = (ListPreference) findPreference("mainlayoutSubVariants");
 		limit2Canvas = (ListPreference) findPreference("limit2Canvas");
 		overlapping = (InlineSeekBarPreference) findPreference("overlapping");
 		centerPointX = (InlineSeekBarPreference) findPreference("centerPointX");
@@ -46,24 +46,24 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 		counterClockwise = (CheckBoxPreference) findPreference(Settings.KEY_COUNTER_CLOCKWISE);
 		randomStartWinkel = (CheckBoxPreference) findPreference("ramdomStartWinkel");
 
-		mainlayouts.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		layouts.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleMainLayoutSelect((String) newValue);
+				handleLayoutSelect((String) newValue);
 				return true;
 			}
 		});
-		mainlayoutVariants.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		layoutVariants.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleMainLayoutVariantSelect((String) newValue);
+				handleLayoutVariantSelect((String) newValue, true);
 				return true;
 			}
 		});
 
-		mainlayoutSubVariants.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		layoutSubVariants.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
@@ -82,8 +82,8 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 		});
 
 		handleLimit2Canvas(Settings.getCanvasLimitString());
-		handleMainLayoutSelect(Settings.getSelectedMainLayoutString());
-		handleMainLayoutVariantSelect(Settings.getSelectedMainLayoutVarianteString());
+		handleLayoutSelect(Settings.getSelectedMainLayoutString());
+		handleLayoutVariantSelect(Settings.getSelectedMainLayoutVarianteString(), false);
 		handleMainLayoutSubVariantSelect(Settings.getSelectedMainLayoutSubVarianteString());
 	}
 
@@ -92,59 +92,51 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
 	}
 
-	private void handleMainLayoutSelect(final String string) {
-		mainlayouts.setSummary(string);
-		final ELayout enumForName = ELayout.getEnumForName(string);
+	private void handleLayoutSelect(final String newLayout) {
+		layouts.setSummary(newLayout);
+		final ELayout enumLayout = ELayout.getEnumForName(newLayout);
 
-		addOrRemoveFromMainScreen(overlapping, enumForName.hasOverlap());
-		addOrRemoveFromMainScreen(anzahlPatterns, enumForName.hasAnzahlPatterns());
-		addOrRemoveFromMainScreen(blurring, enumForName.hasBlurring());
-		addOrRemoveFromMainScreen(counterClockwise, enumForName.hasCounterClockwise());
-		addOrRemoveFromMainScreen(randomStartWinkel, enumForName.hasRandomStartWinkel());
-		addOrRemoveFromMainScreen(centerPointX, enumForName.hasAdjustableCenter());
-		addOrRemoveFromMainScreen(centerPointY, enumForName.hasAdjustableCenter());
-		addOrRemoveFromMainScreen(mainlayoutVariants, enumForName.hasVariants());
+		addOrRemoveFromMainScreen(overlapping, enumLayout.hasOverlap());
+		addOrRemoveFromMainScreen(anzahlPatterns, enumLayout.hasAnzahlPatterns());
+		addOrRemoveFromMainScreen(blurring, enumLayout.hasBlurring());
+		addOrRemoveFromMainScreen(counterClockwise, enumLayout.hasCounterClockwise());
+		addOrRemoveFromMainScreen(randomStartWinkel, enumLayout.hasRandomStartWinkel());
+		addOrRemoveFromMainScreen(centerPointX, enumLayout.hasAdjustableCenter());
+		addOrRemoveFromMainScreen(centerPointY, enumLayout.hasAdjustableCenter());
+		// addOrRemoveFromMainScreen(layoutVariants, enumForName.hasVariants());
 
-		if (enumForName.hasVariants()) {
-			Log.i("Layout", "Setting Layout Variants...");
-			final CharSequence[] variants = enumForName.getVariants();
-			mainlayoutVariants.setEntries(variants);
-			mainlayoutVariants.setEntryValues(variants);
-			if (!string.equals(mainlayouts.getValue())) {
-				mainlayoutVariants.setValueIndex(0);
-				mainlayoutVariants.setDefaultValue(mainlayoutVariants.getValue());
-			}
-			mainlayoutVariants.setSummary(mainlayoutVariants.getValue());
-
-		} else {
-			Log.i("Layout", "Setting Layout Variants to not avialable...");
-			mainlayoutVariants.setEntries(null);
-			mainlayoutVariants.setEntryValues(null);
-			mainlayoutVariants.setSummary("not available");
+		Log.i("Layout", "Setting Layout Variants...");
+		final CharSequence[] variants = enumLayout.getVariants();
+		layoutVariants.setEntries(variants);
+		layoutVariants.setEntryValues(variants);
+		// den ersten Eintrag in den Varianten wählen, wenn ein neues layout (ungleich dem alten) ausgewählt wurde
+		if (!newLayout.equals(layouts.getValue())) {
+			layoutVariants.setValueIndex(0);
+			layoutVariants.setDefaultValue(layoutVariants.getValue());
+			handleLayoutVariantSelect(layoutVariants.getValue(), true);
 		}
-
+		handleLayoutVariantSelect(layoutVariants.getValue(), false);
 	}
 
-	private void handleMainLayoutVariantSelect(final String string) {
-		mainlayoutVariants.setSummary(string);
+	private void handleLayoutVariantSelect(final String newLayoutvariante, final boolean forcereset) {
+		layoutVariants.setSummary(newLayoutvariante);
 
-		final ELayoutVariant variante = ELayoutVariant.getEnumForName(string);
-		addOrRemoveFromMainScreen(mainlayoutSubVariants, variante.hasSubVariants());
-		if (variante.hasSubVariants()) {
+		final ELayoutVariant enumLayoutVariante = ELayoutVariant.getEnumForName(newLayoutvariante);
+		if (enumLayoutVariante.hasSubVariants()) {
 			Log.i("Layout", "Setting Layout SubVariants...");
-			final CharSequence[] subVariants = variante.getSubVariants();
-			mainlayoutSubVariants.setEntries(subVariants);
-			mainlayoutSubVariants.setEntryValues(subVariants);
-			if (!string.equals(mainlayoutVariants.getValue())) {
-				mainlayoutSubVariants.setValueIndex(0);
-				mainlayoutSubVariants.setDefaultValue(mainlayoutSubVariants.getValue());
+			final CharSequence[] subVariants = enumLayoutVariante.getSubVariants();
+			layoutSubVariants.setEntries(subVariants);
+			layoutSubVariants.setEntryValues(subVariants);
+			if (!newLayoutvariante.equals(layoutVariants.getValue()) || forcereset) {
+				layoutSubVariants.setValueIndex(0);
+				layoutSubVariants.setDefaultValue(layoutSubVariants.getValue());
 			}
-			mainlayoutSubVariants.setSummary(mainlayoutSubVariants.getValue());
+			handleMainLayoutSubVariantSelect(layoutSubVariants.getValue());
 		}
 	}
 
 	private void handleMainLayoutSubVariantSelect(final String string) {
-		mainlayoutSubVariants.setSummary(string);
+		layoutSubVariants.setSummary(string);
 
 	}
 
