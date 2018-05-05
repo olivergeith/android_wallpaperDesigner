@@ -41,11 +41,15 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", //
-						"Triangle", "Triangle (random height)", "Oval", "Diamond", "Dragon", "Dragon (upsidedown)", "Drop", "Drop (upsidedown)", "Lense",
-						"Lense V2", "Lense V3", //
+						"Triangle", "Triangle (random height)", "Oval", "Diamond", //
+						"Dragon", "Dragon (upsidedown)", //
+						"Drop (Sharp)", "Drop", "Drop (upsidedown)", //
+						"Lense", "Lense V2", "Lense V3", //
 						"Tag", "Knife", "Knife V2", "Knife V3", //
-						"Cross", "Cross (Sharp)", "Cross (Split)", "Cross (Split 2)", //
-						"Cross (Slim)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", //
+						"Cross", "Cross (Upsidedown)", //
+						"Cross (Sharp)", //
+						"Cross (Split)", "Cross (Split - Upsidedown)", "Cross (Split 2)", //
+						"Cross (Slim)", "Cross (Slim - Upsidedown)", "Cross (Slim V2)", "Cross (Slim V3)", "Cross (Slim-Double)", //
 						"Spiky Cross", "Double Cross", "Sperm", //
 						"Virus", "Virus V2", "Virus V3", //
 						"Long Heart", "Square Chain", "Circle Chain", "Circle Chain (upsidedown)", "Spear", "Iron Cross", "Iron Cross (round)", //
