@@ -58,7 +58,7 @@ public class LayoutPreferencesFragment extends AbstractPreferenceFragment {
 
 			@Override
 			public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-				handleLayoutVariantSelect((String) newValue, true);
+				handleLayoutVariantSelect((String) newValue, false);
 				return true;
 			}
 		});
