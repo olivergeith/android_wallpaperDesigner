@@ -27,6 +27,7 @@ public enum ELayoutVariant {
 			ELayoutSubVariant.RIGHT_LEFT, //
 			ELayoutSubVariant.TOP_BOTTOM, //
 			ELayoutSubVariant.BOTTOM_TOP, //
+			ELayoutSubVariant.ALL_SIDES, //
 			ELayoutSubVariant.TOP_LEFT_BOTTOM_RIGHT, //
 			ELayoutSubVariant.TOP_RIGHT_BOTTOM_LEFT //
 	)), //

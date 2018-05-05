@@ -89,6 +89,8 @@ public class AbstractRaster {
 						return drawRightmostPoint();
 					case BOTTOM_TOP:
 						return drawBottommostPoint();
+					case ALL_SIDES:
+						return drawAlternatingLeftRightTopBottomMost();
 					case TOP_LEFT_BOTTOM_RIGHT:
 						return drawNearestPoint(pointTopLeft);
 					case TOP_RIGHT_BOTTOM_LEFT:
@@ -430,6 +432,28 @@ public class AbstractRaster {
 			case 3:
 				state = 0;
 				return drawNearestPoint(p4);
+		}
+	}
+
+	private Point drawAlternatingLeftRightTopBottomMost() {
+		final int size = points.size();
+		if (size == 0) {
+			return new Point(0, 0);
+		}
+		switch (state) {
+			default:
+			case 0:
+				state = 1;
+				return drawTopmostPoint();
+			case 1:
+				state = 2;
+				return drawRightmostPoint();
+			case 2:
+				state = 3;
+				return drawBottommostPoint();
+			case 3:
+				state = 0;
+				return drawLeftmostPoint();
 		}
 	}
 
