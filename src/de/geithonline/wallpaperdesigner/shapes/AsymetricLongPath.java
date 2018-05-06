@@ -389,7 +389,6 @@ public class AsymetricLongPath extends Path {
 
 	// ##################################################################################
 	private void drawLenseSharp(final PointF center, final float radius, final float height, final boolean filled) {
-
 		final PointF c = new PointF(center.x + height / 2, center.y);
 		final LenseWithSharpEndsPath lens = new LenseWithSharpEndsPath(c, height / 2, radius * 0.7f);
 		addPath(lens);
@@ -401,7 +400,6 @@ public class AsymetricLongPath extends Path {
 
 	// ##################################################################################
 	private void drawWave(final PointF center, final float radius, final float height, final boolean filled) {
-
 		final PointF c = new PointF(center.x + height / 2, center.y);
 		final SinusCosinusWavePath lens = new SinusCosinusWavePath(c, height / 2, radius * 0.7f);
 		addPath(lens);
