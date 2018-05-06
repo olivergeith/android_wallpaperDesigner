@@ -37,14 +37,14 @@ public class PatternPropertyStore {
 
 		patternProperties.put("Geometrical Shapes", new PatternProperties(true, true, false, true, false, true, //
 				new CharSequence[] { "Triangle", "Square", "Square (rounded)", "Square (Mixed)", "Pentagon", "Hexagon", "Octagon", "Circle", "Oval",
-						"Oval (random width)", "Oval (random)", "Lense", "Half Circle", "Mixed", "Mixed (with Circle)" }));
+						"Oval (random width)", "Oval (random)", "Lense", "Lense (sharp)", "Wave", "Half Circle", "Mixed", "Mixed (with Circle)" }));
 
 		patternProperties.put("Geometrical (long) Shapes", new PatternProperties(true, true, false, true, false, false, //
 				new CharSequence[] { "Rectangle", "Rectangle (rounded)", "Rectangle (Mixed)", //
 						"Triangle", "Triangle (random height)", "Oval", "Diamond", //
 						"Dragon", "Dragon (upsidedown)", //
 						"Drop (Sharp)", "Drop", "Drop (upsidedown)", //
-						"Lense", "Lense V2", "Lense V3", //
+						"Lense", "Lense V2", "Lense V3", "Lense (Sharp)", "Wave", //
 						"Tag", "Knife", "Knife V2", "Knife V3", //
 						"Cross", "Cross (Upsidedown)", //
 						"Cross (Sharp)", //

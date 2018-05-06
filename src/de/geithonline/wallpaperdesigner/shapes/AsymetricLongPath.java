@@ -16,7 +16,7 @@ public class AsymetricLongPath extends Path {
 		CROSS, DOUBLE_CROSS, SPERM, VIRUS, VIRUS_V2, LONG_HEART, CHAIN_CIRCLE, CHAIN_CIRCLE_UPSIDEDOWN, SPIKY_CROSS, //
 		SPEAR1, BIRD, CROSS_SLIM, GOLF_PIN, PIN, CROSS_SLIM_DOUBLE, TULIP_NORMAL, PLANE, ARROW, CROSS_SLIM_V2, CROSS_SLIM_V3, //
 		TULIP_FAT, TULIP_SLIM, BIRD_V2, SPACESHIP, CROSS_SHARP, DROP_REVERSE, VIRUS_V3, CROSS_SPLIT, CROSS_SPLIT2, IRON_CROSS, //
-		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE, IRON_CROSS_ROUND, TRIANGLE_RANDOM_HEIGHT, CROSS_SLIM_UPSIDE_DOWN, CROSS_UPSIDE_DOWN, CROSS_SPLIT_UPSIDE_DOWN, DROP_SHARP;
+		SPACESHIP_V2, SQUARE_CHAIN, RITUAL_AXE, IRON_CROSS_ROUND, TRIANGLE_RANDOM_HEIGHT, CROSS_SLIM_UPSIDE_DOWN, CROSS_UPSIDE_DOWN, CROSS_SPLIT_UPSIDE_DOWN, DROP_SHARP, LENSE_SHARP, WAVE;
 	}
 
 	public AsymetricLongPath(final PointF center, final float radius, final float height, final boolean filled, final ASYMETRIC_STYLE style) {
@@ -49,6 +49,12 @@ public class AsymetricLongPath extends Path {
 				break;
 			case LENSE_V3:
 				drawLenseV3(center, radius, height, filled);
+				break;
+			case LENSE_SHARP:
+				drawLenseSharp(center, radius, height, filled);
+				break;
+			case WAVE:
+				drawWave(center, radius, height, filled);
 				break;
 			case DROP_SHARP:
 				drawSharpDrop(center, radius, height, filled);
@@ -379,6 +385,30 @@ public class AsymetricLongPath extends Path {
 			addCircle(center.x, center.y - radius, radius * 2 / 3, Direction.CCW);
 		}
 
+	}
+
+	// ##################################################################################
+	private void drawLenseSharp(final PointF center, final float radius, final float height, final boolean filled) {
+
+		final PointF c = new PointF(center.x + height / 2, center.y);
+		final LenseWithSharpEndsPath lens = new LenseWithSharpEndsPath(c, height / 2, radius * 0.7f);
+		addPath(lens);
+		if (!filled) {
+			addCircle(center.x + height / 2, center.y, radius / 2, Direction.CCW);
+		}
+		PathHelper.rotatePath(center, this, -90);
+	}
+
+	// ##################################################################################
+	private void drawWave(final PointF center, final float radius, final float height, final boolean filled) {
+
+		final PointF c = new PointF(center.x + height / 2, center.y);
+		final SinusCosinusWavePath lens = new SinusCosinusWavePath(c, height / 2, radius * 0.7f);
+		addPath(lens);
+		if (!filled) {
+			addCircle(center.x + height / 2, center.y, radius / 2, Direction.CCW);
+		}
+		PathHelper.rotatePath(center, this, -90);
 	}
 
 	// ##################################################################################

@@ -75,7 +75,9 @@ public class PatternGetter {
 
 	public static Bitmap drawIconBitmap(final int initialSize, final String pattern, final String variant) {
 		final float radius = initialSize;
-		final Path path = PatternGetter.getPath(initialSize / 2, initialSize, (int) radius, initialSize, initialSize, pattern, variant);
+		final int x = initialSize / 2;
+		final int y = initialSize / 2;
+		final Path path = PatternGetter.getPath(x, y, (int) radius, initialSize, initialSize, pattern, variant);
 		final RectF bounds = new RectF();
 		path.computeBounds(bounds, true);
 		Log.i("Bounds", "=" + bounds);
@@ -100,6 +102,11 @@ public class PatternGetter {
 			paint.setStyle(Style.FILL);
 		}
 		bitmapCanvas.drawPath(path, paint);
+		// draw red dot in center
+		if (Settings.isExpertMode()) {
+			paint.setColor(Color.RED);
+			bitmapCanvas.drawCircle(x, x, radius / 7, paint);
+		}
 		final Bitmap b = Bitmap.createScaledBitmap(bitmap, initialSize, initialSize, true);
 		if (!b.equals(bitmap)) {
 			bitmap.recycle();
@@ -370,6 +377,12 @@ public class PatternGetter {
 			case "V13":
 			case "Lense":
 				return new LensePath(new PointF(x, y), radius, radius / 2, Direction.CW);
+			case "V14":
+			case "Lense (sharp)":
+				return new LenseWithSharpEndsPath(new PointF(x, y), radius, radius / 2);
+			case "V15":
+			case "Wave":
+				return new SinusCosinusWavePath(new PointF(x, y), radius, radius / 2);
 		}
 	}
 
@@ -511,12 +524,14 @@ public class PatternGetter {
 
 			case "Lense":
 				return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.LENSE);
-
 			case "Lense V2":
 				return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V2);
-
 			case "Lense V3":
 				return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.LENSE_V3);
+			case "Lense (Sharp)":
+				return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.LENSE_SHARP);
+			case "Wave":
+				return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.WAVE);
 
 			case "Tag":
 				return new AsymetricLongPath(new PointF(x, y), radius, radius * 6, Settings.getFilledBoolean(), ASYMETRIC_STYLE.TAG);
