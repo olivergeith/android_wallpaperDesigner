@@ -21,15 +21,17 @@ public class ZipHelper {
 		if (!outPath.endsWith(File.separator)) {
 			outPath = outPath + File.separator;
 		}
-		try {
-			final FileInputStream fin = new FileInputStream(zipFile);
-			final ZipInputStream zis = new ZipInputStream(fin);
+		try (final FileInputStream fin = new FileInputStream(zipFile); final ZipInputStream zis = new ZipInputStream(fin)) {
 			ZipEntry entry = null;
 
 			while ((entry = zis.getNextEntry()) != null) {
 				Log.v("Decompress", "Unzipping " + entry.getName());
+				final File f = new File(outPath, entry.getName());
+				final String canonicalPath = f.getCanonicalPath();
+				if (!canonicalPath.startsWith(outPath)) {
+					throw new SecurityException("Illegal Path in Zipfile: " + canonicalPath);
+				}
 				if (entry.isDirectory()) {
-					final File f = new File(outPath, entry.getName());
 					if (!f.exists()) {
 						f.mkdirs();
 					}
@@ -37,7 +39,6 @@ public class ZipHelper {
 					int size;
 					final byte[] buffer = new byte[2048];
 
-					final File f = new File(outPath, entry.getName());
 					final FileOutputStream fos = new FileOutputStream(f);
 					final BufferedOutputStream bos = new BufferedOutputStream(fos, buffer.length);
 
@@ -49,8 +50,6 @@ public class ZipHelper {
 				}
 			}
 
-			zis.close();
-			fin.close();
 		} catch (final Exception e) {
 			Log.e("Decompress", "unzip", e);
 		}
@@ -81,16 +80,19 @@ public class ZipHelper {
 			ZipEntry entry;
 
 			while ((entry = zis.getNextEntry()) != null) {
+				final File f = new File(outPath, entry.getName());
+				final String canonicalPath = f.getCanonicalPath();
+				if (!canonicalPath.startsWith(outPath)) {
+					throw new SecurityException("Illegal Path in Zipfile: " + canonicalPath);
+				}
+
 				if (entry.isDirectory()) {
-					final File f = new File(outPath, entry.getName());
 					if (!f.exists()) {
 						f.mkdirs();
 					}
 				} else {
 					int size;
 					final byte[] buffer = new byte[2048];
-
-					final File f = new File(outPath, entry.getName());
 					final FileOutputStream fos = new FileOutputStream(f);
 					final BufferedOutputStream bos = new BufferedOutputStream(fos, buffer.length);
 
@@ -101,6 +103,8 @@ public class ZipHelper {
 					bos.close();
 				}
 			}
+		} catch (final SecurityException e) {
+			Log.i("Security", e.getMessage());
 
 		} catch (final IOException e) {
 			throw new RuntimeException("Cannot unzip '" + fileResID + "'", e);

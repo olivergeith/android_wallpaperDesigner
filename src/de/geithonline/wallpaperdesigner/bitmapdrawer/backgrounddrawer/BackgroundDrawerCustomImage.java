@@ -6,10 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
+import de.geithonline.android.basics.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.R;
 import de.geithonline.wallpaperdesigner.WallpaperDesigner;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
 public class BackgroundDrawerCustomImage {
 

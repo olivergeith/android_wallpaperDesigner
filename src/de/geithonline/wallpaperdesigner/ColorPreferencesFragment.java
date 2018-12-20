@@ -24,10 +24,10 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.colorpicker.ColorPickerPreference;
+import de.geithonline.android.basics.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.backgrounddrawer.BackgroundDrawer;
 import de.geithonline.wallpaperdesigner.settings.DesignIO;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.utils.DisplayHelper;
 import de.geithonline.wallpaperdesigner.utils.Toaster;
 import de.geithonline.wallpaperdesigner.utils.URIHelper;
@@ -285,31 +285,31 @@ public class ColorPreferencesFragment extends PreferenceFragment implements OnSh
 	private void enableColors(final int anzahl) {
 		switch (anzahl) {
 
-		case 0:
-			color1.setEnabled(false);
-			color2.setEnabled(false);
-			color3.setEnabled(false);
-			color4.setEnabled(false);
-			break;
-		case 2:
-			color1.setEnabled(true);
-			color2.setEnabled(true);
-			color3.setEnabled(false);
-			color4.setEnabled(false);
-			break;
-		case 3:
-			color1.setEnabled(true);
-			color2.setEnabled(true);
-			color3.setEnabled(true);
-			color4.setEnabled(false);
-			break;
-		default:
-		case 4:
-			color1.setEnabled(true);
-			color2.setEnabled(true);
-			color3.setEnabled(true);
-			color4.setEnabled(true);
-			break;
+			case 0:
+				color1.setEnabled(false);
+				color2.setEnabled(false);
+				color3.setEnabled(false);
+				color4.setEnabled(false);
+				break;
+			case 2:
+				color1.setEnabled(true);
+				color2.setEnabled(true);
+				color3.setEnabled(false);
+				color4.setEnabled(false);
+				break;
+			case 3:
+				color1.setEnabled(true);
+				color2.setEnabled(true);
+				color3.setEnabled(true);
+				color4.setEnabled(false);
+				break;
+			default:
+			case 4:
+				color1.setEnabled(true);
+				color2.setEnabled(true);
+				color3.setEnabled(true);
+				color4.setEnabled(true);
+				break;
 		}
 	}
 

@@ -12,11 +12,11 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import de.geithonline.android.basics.preferences.InlineSeekBarPreference;
+import de.geithonline.android.basics.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternGetter;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.patterndrawer.PatternPropertyStore;
 import de.geithonline.wallpaperdesigner.settings.Settings;
 import de.geithonline.wallpaperdesigner.settings.Settings.DROP_SHADOW_TYPE;
-import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
 /**
  * This fragment shows the preferences for the first header.
@@ -235,18 +235,18 @@ public class StylePreferencesFragment extends AbstractPreferenceFragment impleme
 			return;
 		}
 		switch (key) {
-		default:
-			break;
-		case Settings.KEY_PATTERN_DROPSHADOW_TYPE:
-			handleDropShadowTypeSelection(Settings.getDropShadowType());
-			break;
-		case Settings.KEY_ROTATING_STYLE:
-			handleRotatingStyleSelected(Settings.getRotationStyle());
-			break;
-		case Settings.KEY_PATTERN_PATTERN_PICKER:
-		case Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER:
-			setIcon(Settings.getSelectedPattern(), Settings.getSelectedPatternVariant());
-			break;
+			default:
+				break;
+			case Settings.KEY_PATTERN_DROPSHADOW_TYPE:
+				handleDropShadowTypeSelection(Settings.getDropShadowType());
+				break;
+			case Settings.KEY_ROTATING_STYLE:
+				handleRotatingStyleSelected(Settings.getRotationStyle());
+				break;
+			case Settings.KEY_PATTERN_PATTERN_PICKER:
+			case Settings.KEY_PATTERN_PATTERN_VARIANT_PICKER:
+				setIcon(Settings.getSelectedPattern(), Settings.getSelectedPatternVariant());
+				break;
 		}
 
 	}

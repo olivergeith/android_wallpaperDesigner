@@ -12,11 +12,11 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
+import de.geithonline.android.basics.utils.AnimatedGifEncoder;
+import de.geithonline.android.basics.utils.BitmapHelper;
 import de.geithonline.wallpaperdesigner.TouchImageView;
 import de.geithonline.wallpaperdesigner.bitmapdrawer.IBmpRenderer;
 import de.geithonline.wallpaperdesigner.settings.Settings;
-import de.geithonline.wallpaperdesigner.utils.AnimatedGifEncoder;
-import de.geithonline.wallpaperdesigner.utils.BitmapHelper;
 
 public class BitmapGeneratorTask extends AsyncTask<Integer, Integer, Bitmap> implements AsyncTaskWithProgress {
 	private final WeakReference<TouchImageView> imageViewReference;

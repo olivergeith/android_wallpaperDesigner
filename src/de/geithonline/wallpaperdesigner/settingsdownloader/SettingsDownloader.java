@@ -147,27 +147,29 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 		if (!outPath.endsWith(File.separator)) {
 			outPath = outPath + File.separator;
 		}
-		try {
-			final FileInputStream fin = new FileInputStream(zipFile);
-			final ZipInputStream zis = new ZipInputStream(fin);
+		try (final FileInputStream fin = new FileInputStream(zipFile); final ZipInputStream zis = new ZipInputStream(fin)) {
+			// final FileInputStream fin = new FileInputStream(zipFile);
+			// final ZipInputStream zis = new ZipInputStream(fin);
 			ZipEntry entry = null;
 
 			while ((entry = zis.getNextEntry()) != null) {
 				dialog.setMessage("Unzipping " + entry.getName());
 				Log.v("Decompress", "Unzipping " + entry.getName());
+
+				final File f = new File(outPath, entry.getName());
+				final String canonicalPath = f.getCanonicalPath();
+				if (!canonicalPath.startsWith(outPath)) {
+					throw new SecurityException("Illegal Path in Zipfile");
+				}
 				if (entry.isDirectory()) {
-					final File f = new File(outPath, entry.getName());
 					if (!f.exists()) {
 						f.mkdirs();
 					}
 				} else {
 					int size;
 					final byte[] buffer = new byte[2048];
-
-					final File f = new File(outPath, entry.getName());
 					final FileOutputStream fos = new FileOutputStream(f);
 					final BufferedOutputStream bos = new BufferedOutputStream(fos, buffer.length);
-
 					while ((size = zis.read(buffer, 0, buffer.length)) != -1) {
 						bos.write(buffer, 0, size);
 					}
@@ -176,8 +178,8 @@ public class SettingsDownloader extends AsyncTask<String, String, String> {
 				}
 			}
 
-			zis.close();
-			fin.close();
+			// zis.close();
+			// fin.close();
 		} catch (final Exception e) {
 			Log.e("Decompress", "unzip", e);
 		}
