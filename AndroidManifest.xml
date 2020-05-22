@@ -5,8 +5,8 @@
     android:versionName="6.7" >
 
     <uses-sdk
-        android:minSdkVersion="21"
-        android:targetSdkVersion="27" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="28" />
 
     <!-- For downloading Settings from Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,40 +31,41 @@
         android:allowBackup="true"
         android:description="@string/wallpaper_description"
         android:icon="@drawable/icon"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
-        android:largeHeap="true" 
-       > 
+        android:largeHeap="true" >
+
         <activity
             android:name=".PreferencesActivity"
             android:exported="true"
             android:label="@string/app_name"
-			android:theme="@style/Theme.BatteryLWPGrayOrange"
-             >
+            android:theme="@style/Theme.BatteryLWPGrayOrange" >
             <intent-filter>
                 <action android:name="de.geithonline.wallpaperdesigner.PreferencesActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" 
-			android:theme="@style/Theme.BatteryLWPGrayOrange"            
-            >
+            android:label="@string/app_name"
+            android:theme="@style/Theme.BatteryLWPGrayOrange" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".HelpPageWebView"
-			android:theme="@style/Theme.BatteryLWPGrayOrange" 
-            android:label="Help-Page" >
+            android:label="Help-Page"
+            android:theme="@style/Theme.BatteryLWPGrayOrange" >
         </activity>
         <activity
             android:name=".ExampleSettingsUserView"
-            android:theme="@style/Theme.BatteryLWPGrayOrange"
-            android:label="@string/title_activity_user_settings_view" >
+            android:label="@string/title_activity_user_settings_view"
+            android:theme="@style/Theme.BatteryLWPGrayOrange" >
         </activity>
-        </application>
+    </application>
 
 </manifest>
