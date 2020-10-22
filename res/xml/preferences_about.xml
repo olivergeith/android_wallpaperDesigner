@@ -26,38 +26,6 @@
 	            android:data="https://play.google.com/store/apps/developer?id=Oliver+Geith" />
 	    </Preference>
 	    
-	    <Preference 
-	        android:title="To be a Beta-Tester..." 
-	        android:summary="You wanna be a Beta-Tester for this APP? ... " 
-	        android:icon="@drawable/googleplaytester"
-	        >
-	        <intent android:action="android.intent.action.VIEW"
-	            android:data="https://play.google.com/apps/testing/de.geithonline.wallpaperdesigner" />
-	    </Preference>
-	    
-	    
-	    	    
-	    <Preference 
-	        android:title="Visit me on Twitter" 
-	        android:icon="@drawable/twitter"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://twitter.com/OliverGeith" />
-        </Preference>
-	    <Preference 
-	        android:title="Visit me on Google+" 
-	        android:icon="@drawable/googleplus"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="https://plus.google.com/+OliverGeith" />
-        </Preference>
-	    <Preference 
-	        android:title="Mail me" 
-	        android:icon="@drawable/email"
-	        >
-            <intent android:action="android.intent.action.VIEW"
-                android:data="mailto:oliver.geith@gmail.com?subject=WallpaperDesigner-Mail" />
-        </Preference>
 	    </PreferenceCategory>
 	    
     <PreferenceCategory android:title="Internal Options">
