@@ -3,12 +3,14 @@ package de.geithonline.wallpaperdesigner.utils;
 import java.io.File;
 import java.io.IOException;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
 public class StorageHelper {
+
 	public final static String DIR_SDCARD = Environment.getExternalStorageDirectory().toString();
-	public final static File PATH_SDCARD = Environment.getExternalStorageDirectory();
 
 	private final static String muimerpDir = DIR_SDCARD + File.separator + "data" + File.separator + "muimerp.txt";
 	private final static File muimerpFile = new File(muimerpDir);
@@ -42,6 +44,22 @@ public class StorageHelper {
 	private final static File dataDirFile = new File(dataDir);
 
 	static {
+		createDirs(uploadDirFile);
+		createDirs(imagesDirFile);
+		createDirs(gifDirFile);
+		createDirs(designsDirFile);
+		createDirs(downloadDirFile);
+		createDirs(backupDirFile);
+		// Nomedia anlegen
+		createNomedia(designsDirNoMedia);
+		createNomedia(backupDirNomedia);
+		createNomedia(uploadDirNomedia);
+	}
+
+	public static void init(final Context ctx, final Activity activity) {
+
+		final File externalFilesDir = ctx.getExternalFilesDir(null);
+
 		createDirs(uploadDirFile);
 		createDirs(imagesDirFile);
 		createDirs(gifDirFile);

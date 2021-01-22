@@ -15,6 +15,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import de.geithonline.wallpaperdesigner.settings.Settings;
+import de.geithonline.wallpaperdesigner.utils.StorageHelper;
 
 public class PreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
@@ -37,10 +38,10 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-		// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			finish();
-			return true;
+			// Respond to the action bar's Up/Home button
+			case android.R.id.home:
+				finish();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -51,6 +52,9 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+
+		StorageHelper.init(getApplicationContext(), this);
+
 		setTheme(Settings.getTheme());
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,13 +95,13 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	@Override
 	public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
 		switch (key) {
-		case Settings.KEY_APP_THEME:
-			setTheme(Settings.getTheme());
-			recreate();
-			break;
+			case Settings.KEY_APP_THEME:
+				setTheme(Settings.getTheme());
+				recreate();
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 
 	}

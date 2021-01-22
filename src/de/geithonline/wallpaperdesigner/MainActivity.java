@@ -83,6 +83,9 @@ public class MainActivity extends Activity implements OnSharedPreferenceChangeLi
 		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		Settings.initPrefs(prefs, getApplicationContext(), this);
 		Settings.prefs.registerOnSharedPreferenceChangeListener(this);
+
+		StorageHelper.init(getApplicationContext(), this);
+
 		setTheme(Settings.getTheme());
 		super.onCreate(savedInstanceState);
 
