@@ -31,7 +31,8 @@ public class BmpRenderer extends BaseBmpRenderer {
 	private Rotator rotator;
 	private final ELayoutSubVariant subVariant;
 
-	public BmpRenderer(final ELayout eLayout, final ELayoutVariant eLayoutVariant, final ELayoutSubVariant eSubVariant) {
+	public BmpRenderer(final ELayout eLayout, final ELayoutVariant eLayoutVariant,
+			final ELayoutSubVariant eSubVariant) {
 		layout = eLayout;
 		layoutVariante = eLayoutVariant;
 		subVariant = eSubVariant;
@@ -68,7 +69,8 @@ public class BmpRenderer extends BaseBmpRenderer {
 		}
 
 		// Pattern Drawer Object bauen
-		final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, subVariant, width, height, maxRadius, Settings.getOverlapping());
+		final AbstractRaster raster = RasterFactory.getRaster(layout, layoutVariante, subVariant, width, height,
+				maxRadius, Settings.getOverlapping());
 		final PaintManager pm = new PaintManager(bWidth, bHeight);
 		rotator = new Rotator(bWidth, bHeight);
 		patternDrawer = new PatternDrawer(bitmapCanvas, pm, rotator);
@@ -83,13 +85,14 @@ public class BmpRenderer extends BaseBmpRenderer {
 		final int blurLevel3 = raster.getAnzahlPatterns() * Settings.getBlurrStage3() / 100 - 1;
 		final int anzahlPatterns = raster.getAnzahlPatterns();
 
-		final RadiusCalculator radiusCalculator = new RadiusCalculator(anzahlPatterns, minRadius, maxRadius, Settings.getRadiusType());
+		final RadiusCalculator radiusCalculator = new RadiusCalculator(anzahlPatterns, minRadius, maxRadius,
+				Settings.getRadiusType());
 
 		switch (Settings.getSelectedPattern()) {
-			default:
-				break;
-			case "Scene":
-				break;
+		default:
+			break;
+		case "Scene":
+			break;
 		}
 		// Zeichnen
 		for (int i = 0; i < anzahlPatterns; i++) {
@@ -141,9 +144,16 @@ public class BmpRenderer extends BaseBmpRenderer {
 
 		}
 
-		drawNonPremiumText(bitmapCanvas, Settings.getSelectedPattern() + "/" + Settings.getSelectedPatternVariant());
 		refbitmap.recycle();
 		return bitmap;
+	}
+
+	private int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
+		int xx = Math.min(x, bWidth - 1);
+		int yy = Math.min(y, bHeight - 1);
+		xx = Math.max(xx, 0);
+		yy = Math.max(yy, 0);
+		return refbmp.getPixel(xx, yy);
 	}
 
 	// #########################################################################################
@@ -158,14 +168,6 @@ public class BmpRenderer extends BaseBmpRenderer {
 		final int sy = Randomizer.getRandomInt(0, bHeight - 1);
 		final int scolor = getColorFromBitmap(bitmap, refbmp, sx, sy);
 		return scolor;
-	}
-
-	private int getColorFromBitmap(final Bitmap bmp, final Bitmap refbmp, final int x, final int y) {
-		int xx = Math.min(x, bWidth - 1);
-		int yy = Math.min(y, bHeight - 1);
-		xx = Math.max(xx, 0);
-		yy = Math.max(yy, 0);
-		return refbmp.getPixel(xx, yy);
 	}
 
 }
